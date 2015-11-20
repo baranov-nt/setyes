@@ -1,5 +1,5 @@
 # yii console command
-/common/config/auth.php
+# /common/config/auth.php
 
 # yii console command
 /yii

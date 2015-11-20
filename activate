@@ -1,0 +1,67 @@
+cd boyar
+composer install
+php init
+yii migrate
+yii rbac/init
+
+------------------------------------------------------------------------------------------------------------------------
+GitHub:
+------------------------------------------------------------------------------------------------------------------------
+
+echo # setyes >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/baranov-nt/setyes.git
+git push -u origin master
+
+------------------------------------------------------------------------------------------------------------------------
+Hosts:
+------------------------------------------------------------------------------------------------------------------------
+
+	127.0.0.1       setyes.dev
+	127.0.0.1       www.setyes.dev
+	127.0.0.1       admin.setyes.dev
+	127.0.0.1       www.admin.setyes.dev
+
+------------------------------------------------------------------------------------------------------------------------
+Virtual hosts:
+------------------------------------------------------------------------------------------------------------------------
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot "c:/Server/data/htdocs/setyes.dev/www/setyes/frontend/web"
+    ServerName setyes.dev
+    ServerAlias www.setyes.dev
+    ErrorLog "c:/Server/data/htdocs/setyes.dev/www/logs/localhost-error.log"
+    CustomLog "c:/Server/data/htdocs/setyes.dev/www/logs/localhost-access.log" common
+    <Directory />
+    	Options FollowSymLinks
+    	AllowOverride All
+    </Directory>
+    <Directory "c:/Server/data/htdocs/setyes.dev/www/setyes/frontend/web">
+    	Options All
+    	AllowOverride All
+    	Order allow,deny
+    	allow from all
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot "c:/Server/data/htdocs/setyes.dev/www/setyes/backend/web"
+    ServerName admin.setyes.dev
+    ServerAlias www.admin.setyes.dev
+    ErrorLog "c:/Server/data/htdocs/setyes.dev/www/logs/localhost-error.log"
+    CustomLog "c:/Server/data/htdocs/setyes.dev/www/logs/localhost-access.log" common
+    <Directory />
+    	Options FollowSymLinks
+    	AllowOverride All
+    </Directory>
+    <Directory "c:/Server/data/htdocs/setyes.dev/www/setyes/backend/web">
+    	Options All
+    	AllowOverride All
+    	Order allow,deny
+    	allow from all
+    </Directory>
+</VirtualHost>

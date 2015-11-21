@@ -13,6 +13,9 @@ use yii\widgets\Breadcrumbs;
  */
 /* @var $content string
  * @var $this \yii\web\View */
+/* @var \common\models\User $user */
+$user = Yii::$app->user->identity;
+
 AppAsset::register($this);
 $this->beginPage();
 ?>
@@ -51,7 +54,9 @@ $this->beginPage();
             ]
         );
 
-        if(Yii::$app->user->can('Редактор')):
+
+
+        /*if(Yii::$app->user->can('Редактор')):
             $menuItems = [
                 [
                     'label' => 'Управление контентом <span class="glyphicon glyphicon-th-list"></span>',
@@ -61,29 +66,42 @@ $this->beginPage();
                     ]
                 ],
             ];
-        endif;
+        endif;*/
 
         if(Yii::$app->user->can('Администратор')):
+            $menuItems[] =
+                [
+                    'label' => 'Работа с DB',
+                    'items' => [
+                        [
+                            'label' => 'Рабата с Query',
+                            'url' => ['/db/query']
+                        ],
+                        [
+                            'label' => 'Рабата с DAO',
+                            'url' => ['/db/dao']
+                        ]
+                    ]
+                ];
             $menuItems[] =
                 [
                     'label' => 'Управление приложением <span class="glyphicon glyphicon-cog"></span>',
                     'items' => [
                         '<li class="dropdown-header">Выбрать раздел </li>',
                         '<li class="divider"></li>',
-                            [
-                                'label' => 'Управление пользователями',
-                                'url' => ['/user/index']
-                            ],
+                        [
+                            'label' => 'Управление пользователями',
+                            'url' => ['/user/index']
+                        ],
                     ]
-            ];
+                ];
         endif;
-
 
         if (Yii::$app->user->isGuest) {
             $menuItems[] = ['label' => 'Войти', 'url' => ['/site/login']];
         } else {
             $menuItems[] = [
-                'label' => 'Выйти (' . Yii::$app->user->identity->email . ')',
+                'label' => 'Выйти (' . $user->email . ')',
                 'url' => ['/site/logout'],
                 'linkOptions' => ['data-method' => 'post']
             ];

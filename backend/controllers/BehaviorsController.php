@@ -76,6 +76,12 @@ class BehaviorsController extends Controller {
                         'actions' => ['index', 'view', 'create', 'update' , 'delete', 'save-image', 'autoload-image', 'delete-image'],
                         'allow' => true,
                         'roles' => ['Администратор']
+                    ],
+                    [
+                        'controllers' => ['db'],
+                        'actions' => ['dao', 'query'],
+                        'allow' => true,
+                        'roles' => ['Администратор']
                     ]
                 ]
             ],

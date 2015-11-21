@@ -23,11 +23,7 @@ use common\rbac\models\Role;
  *
  * @property Carousel[] $carousels
  * @property ImagesOfObject[] $imagesOfObjects
- * @property Order[] $orders
- * @property Product[] $products
  * @property Profile $profile
- * @property Rating[] $ratings
- * @property Sale[] $sales
  * @property mixed role
  */
 class User extends ActiveRecord implements IdentityInterface

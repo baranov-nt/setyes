@@ -53,6 +53,14 @@ class DbController extends BehaviorsController
             ->from(['u' => 'user', 'p' => 'profile'])
             ->all();*/
 
+        // использование с подзапросом
+        /*$subQuery = (new Query())->from('profile')->where('images_num=1');
+
+        $model = (new \yii\db\Query())
+            ->select(['p.first_name', 'p.second_name', 'p.user_id'])
+            ->from(['p' => $subQuery])
+            ->all();*/
+
         // where() определяет фрагмент WHERE SQL выражения
         // where(['u.id' => [1, 3, 7], 'u.status' => 10]) - выбрать данных у которых все данные соответствуют значениям
         /*$model = (new \yii\db\Query())
@@ -65,13 +73,25 @@ class DbController extends BehaviorsController
             ->all();*/
 
         // where(['LIKE', 'email', 'user']) - означает WHERE `email` LIKE '%user%'
-        $model = (new \yii\db\Query())
+        /*$model = (new \yii\db\Query())
             ->select(['u.id'])
             ->from(['u' => 'user'])
             ->where([
                 'u.id' => [1, 3, 7]
             ])
             ->andWhere(['LIKE', 'email', 'user'])
+            ->all();*/
+
+        // использование с подзапросом
+
+        $userQuery = (new Query())->select('id')->from('user');
+
+        $model = (new \yii\db\Query())
+            ->select(['id', 'u.email'])
+            ->from(['u' => 'user'])
+            ->where([
+                'id' => $userQuery
+            ])
             ->all();
 
         return $this->render(
@@ -175,7 +195,7 @@ class DbController extends BehaviorsController
         } catch(\Exception $e) {
             $transaction->rollBack();
             //throw $e;                         // исключение при ошибке
-            $model = $e;                        // вывод исключения
+            $model = $e;                        // вывод исключения в представлении
         }
 
         return $this->render(

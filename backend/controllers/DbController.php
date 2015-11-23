@@ -10,6 +10,47 @@ class DbController extends BehaviorsController
     /**
      * @return string
      */
+    public function actionQueryJoin()
+    {
+        // -------------------------------------------------------------------------------------------------------------
+        // Метод JOIN
+        // Принимает чатыре параметра:
+        // $type -  INNER JOIN (извлекает строки, которые обязательно присутствую во всех объединяемых таблицах)
+        //          LEFT JOIN (дополняет данные одной таблицы из второй)
+        //          RIGHT JOIN (дополняет данные второй таблицы из первой)
+        // $table - имя таблицы, которая должна быть присоединена
+        // $on - условие объединения (необязательно)
+        // $params - необязательные параметры присоединяемые к условию объединения
+
+        // SELECT column_name(s)
+        // FROM table1
+        // LEFT JOIN table2
+        // ON table1.column_name=table2.column_name;
+
+        // Создает запрос SELECT * FROM `auth_assignment` `a` LEFT JOIN `user` ON a.user_id = user.id
+        /*$model = (new \yii\db\Query())
+            ->from(['a' => 'auth_assignment'])
+            ->join('LEFT JOIN', 'user', 'a.user_id = user.id')
+            ->all();*/
+
+        // Объединение с несколькими таблицами
+        $model = (new \yii\db\Query())
+            ->from(['a' => 'auth_assignment'])
+            ->join('LEFT JOIN', 'user', 'a.user_id = user.id')
+            ->join('LEFT JOIN', 'auth_item', 'a.item_name = auth_item.name')
+            ->all();
+
+        return $this->render(
+            'index',
+            [
+                'model' => $model
+            ]
+        );
+    }
+
+    /**
+     * @return string
+     */
     public function actionQuery()
     {
         /* -------------------------------------------------------------------------------------------------------------------------------------
@@ -88,6 +129,16 @@ class DbController extends BehaviorsController
             ->andWhere(['like', 'email', 'user'])
             ->all();*/
 
+        // Создает следующий запрос - (`u`.`id` IN (1, 3, 7)) AND (`emails` LIKE '%user%' AND `email` LIKE '%.com%')
+        /*$model = (new \yii\db\Query())
+            ->select(['u.id'])
+            ->from(['u' => 'user'])
+            ->where([
+                'u.id' => [1, 3, 7]
+            ])
+            ->andWhere(['like', 'email', ['user', '.com']])
+            ->all();*/
+
         // where(['NOT LIKE', 'email', 'user']) - означает WHERE `email` NOT LIKE '%user%'
         /*$model = (new \yii\db\Query())
             ->select(['u.id'])
@@ -96,6 +147,20 @@ class DbController extends BehaviorsController
                 'u.id' => [1, 3, 7]
             ])
             ->andWhere(['not like', 'email', 'user'])
+            ->all();*/
+
+        // Создает следующий запрос - `email` LIKE '%user%' OR `emaild` LIKE '%v@%'
+        /*$model = (new \yii\db\Query())
+            ->select(['u.id'])
+            ->from(['u' => 'user'])
+            ->where(['or like', 'email', ['user', 'v@']])
+            ->all();*/
+
+        // `email` NOT LIKE '%user3%' AND `email` NOT LIKE
+        /*$model = (new \yii\db\Query())
+            ->select(['u.id'])
+            ->from(['u' => 'user'])
+            ->where(['not like', 'email', ['user3', 'v@v.com']])
             ->all();*/
 
         // where() - использование с подзапросом, должен быть строкой
@@ -154,13 +219,108 @@ class DbController extends BehaviorsController
 
         // Создает следующий запрос - `user_id` NOT BETWEEN 5 AND 10
         // Достанет все 'user_id', кроме от 5 до 10
-        $model = (new \yii\db\Query())
+        /*$model = (new \yii\db\Query())
             ->select(['a.user_id'])
             ->from(['a' => 'auth_assignment'])
             ->where(['not between', 'user_id', 5, 10])
+            ->all();*/
+
+        // Оператор IN
+
+        // ['in', 'id', [1, 2]] - cоздает следующий запрос - `id` IN (1, 2)
+        // или с доп запросом
+        /*$assignment = (new Query())->select('user_id')->from('auth_assignment');
+        $model = (new \yii\db\Query())
+            ->select(['u.id'])
+            ->from(['u' => 'user'])
+            ->where(['in', 'id', $assignment])
+            ->all();*/
+
+        // ['not in', 'id', [1, 2]] - cоздает следующий запрос - `id` NOT IN (1, 2)
+        /*$model = (new \yii\db\Query())
+            ->select(['u.id'])
+            ->from(['u' => 'user'])
+            ->where(['not in', 'id', [1, 2]])
+            ->all();*/
+
+        // Оператор EXISTS
+
+        // Выполняет запрос, если проходит подзапрос
+        /*$assignment = (new Query())->select('user_id')->from('auth_assignment')->where(['item_name' => 'Администратор']);
+        $model = (new \yii\db\Query())
+            ->select(['u.id'])
+            ->from(['u' => 'user'])
+            ->where(['exists', $assignment])
+            ->all();*/
+
+        // Выполняет запрос, если НЕ проходит подзапрос
+        /*$assignment = (new Query())->select('user_id')->from('auth_assignment')->where(['item_name' => 'Администратор']);
+        $model = (new \yii\db\Query())
+            ->select(['u.id'])
+            ->from(['u' => 'user'])
+            ->where(['not exists', $assignment])
+            ->all();*/
+
+        // Добавление условий
+        /*$model = (new \yii\db\Query())
+            ->select(['u.id'])
+            ->from(['u' => 'user'])
+            ->where(['id' => [2,3]])
+            ->andWhere(['status' => 10])
+            ->orWhere(['email' => 'v@v.com'])
+            ->all();*/
+
+        // filterWhere() - игнорирует пустые значения
+        //$firstName = 'dfg';
+        /*$secondName = 'dfgdfgdfg';
+
+        $model = (new \yii\db\Query())
+            ->select(['p.user_id'])
+            ->from(['p' => 'profile'])
+            ->filterWhere(['first_name' => $firstName, 'second_name' => $secondName])
+            ->all();*/
+
+        // Оператор ORDER BY
+        // orderBy() - сортировка
+
+        /*$model = (new \yii\db\Query())
+            ->from(['p' => 'profile'])
+            ->orderBy(['first_name' => SORT_DESC, 'second_name' => SORT_ASC])
+            ->all();*/
+
+        // Оператор GROUP BY
+        // groupBy() - группировка
+        /*$model = (new \yii\db\Query())
+            ->from(['a' => 'auth_assignment'])
+            ->groupBy(['item_name', 'user_id'])
+            ->all();*/
+
+        // Оператор HAVING
+        // having() - !!! используется при наличии groupBy(), сразу после него. Иначе лучше использовать where() !!!
+        // andHaving() и orHaving() - дополнительные условия
+        /*$model = (new \yii\db\Query())
+            ->from(['a' => 'auth_assignment'])
+            ->groupBy(['item_name', 'user_id'])
+            ->having(['item_name' => 'Администратор'])
+            ->andHaving(['<', 'user_id', 5])
+            ->all();*/
+
+        // Оператор LIMIT
+        // limit() - максимальное кол-во записей, которые нужно достать
+        /*$model = (new \yii\db\Query())
+            ->from(['a' => 'auth_assignment'])
+            ->groupBy(['user_id'])
+            ->limit(5)
+            ->all();*/
+
+        // Оператор OFFSET
+        // offset() - смещение относитьно первого элемента
+        $model = (new \yii\db\Query())
+            ->from(['a' => 'auth_assignment'])
+            ->groupBy(['user_id'])
+            ->limit(5)
+            ->offset(5)
             ->all();
-
-
 
         return $this->render(
             'index',

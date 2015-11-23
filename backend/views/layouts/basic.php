@@ -74,6 +74,10 @@ $this->beginPage();
                     'label' => 'Работа с DB',
                     'items' => [
                         [
+                            'label' => 'Рабата с Query используя Join',
+                            'url' => ['/db/query-join']
+                        ],
+                        [
                             'label' => 'Рабата с Query',
                             'url' => ['/db/query']
                         ],

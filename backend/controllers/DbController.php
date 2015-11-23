@@ -54,10 +54,16 @@ class DbController extends BehaviorsController
             ->all();*/
 
         // использование с подзапросом
-        /*$subQuery = (new Query())->from('profile')->where('images_num=1');
+        /*$subQuery = (new Query())
+            ->select([
+                'f_name' => 'first_name',
+                's_name' => 'second_name',
+                'user_id'])
+            ->from('profile')
+            ->where('images_num=1');
 
         $model = (new \yii\db\Query())
-            ->select(['p.first_name', 'p.second_name', 'p.user_id'])
+            ->select(['f_name', 's_name', 'p.user_id'])
             ->from(['p' => $subQuery])
             ->all();*/
 
@@ -79,20 +85,82 @@ class DbController extends BehaviorsController
             ->where([
                 'u.id' => [1, 3, 7]
             ])
-            ->andWhere(['LIKE', 'email', 'user'])
+            ->andWhere(['like', 'email', 'user'])
             ->all();*/
 
-        // использование с подзапросом
-
-        $userQuery = (new Query())->select('id')->from('user');
-
-        $model = (new \yii\db\Query())
-            ->select(['id', 'u.email'])
+        // where(['NOT LIKE', 'email', 'user']) - означает WHERE `email` NOT LIKE '%user%'
+        /*$model = (new \yii\db\Query())
+            ->select(['u.id'])
             ->from(['u' => 'user'])
             ->where([
-                'id' => $userQuery
+                'u.id' => [1, 3, 7]
             ])
+            ->andWhere(['not like', 'email', 'user'])
+            ->all();*/
+
+        // where() - использование с подзапросом, должен быть строкой
+        // $userQuery - Подзапрос. Достает id из таблицы user, где email равен user3@user3.com
+        // Запрос достает назвение ролей пользователя из таблицы auth_assignment, где user_id будет равен найденному id в подзапросе
+
+        /*$userQuery = (new Query())->select('id')->from('user')->where(['email' => 'user3@user3.com']);
+
+        $model = (new \yii\db\Query())
+            ->select(['item_name'])
+            ->from(['a' => 'auth_assignment'])
+            ->where([
+                'user_id' => $userQuery
+            ])
+            ->all();*/
+
+        // ОПЕРАТОРЫ
+        // Оператор AND
+
+        // Создает следующий запрос - (item_name='Администратор') AND (user_id=2)
+        // Достанет 'user_id' => '2'
+        /*$model = (new \yii\db\Query())
+            ->select(['a.user_id'])
+            ->from(['a' => 'auth_assignment'])
+            ->where(['and', 'item_name=\'Администратор\'', 'user_id=2'])
+            ->all();*/
+
+        // Создает следующий запрос - (item_name='Создатель') AND ((user_id=1) OR (user_id=2) OR (user_id=3))
+        // Достанет 'user_id' => '1'
+        /*$model = (new \yii\db\Query())
+            ->select(['a.user_id'])
+            ->from(['a' => 'auth_assignment'])
+            ->where(['and', 'item_name=\'Создатель\'', ['or', 'user_id=1', 'user_id=2', 'user_id=3']])
+            ->all();*/
+
+        // Оператор OR
+
+        // Создает следующий запрос - (item_name='Администратор') OR (item_name='Создатель')
+        // Достанет 'user_id' => '2', 'user_id' => '8', 'user_id' => '1'
+        /*$model = (new \yii\db\Query())
+            ->select(['a.user_id'])
+            ->from(['a' => 'auth_assignment'])
+            ->where(['or', 'item_name=\'Администратор\'', 'item_name=\'Создатель\''])
+            ->all();*/
+
+        // Оператор BETWEEN
+
+        // Создает следующий запрос - `user_id` BETWEEN 5 AND 10
+        // Достанет 'user_id' от 5 до 10
+
+        /*$model = (new \yii\db\Query())
+            ->select(['a.user_id'])
+            ->from(['a' => 'auth_assignment'])
+            ->where(['between', 'user_id', 5, 10])
+            ->all();*/
+
+        // Создает следующий запрос - `user_id` NOT BETWEEN 5 AND 10
+        // Достанет все 'user_id', кроме от 5 до 10
+        $model = (new \yii\db\Query())
+            ->select(['a.user_id'])
+            ->from(['a' => 'auth_assignment'])
+            ->where(['not between', 'user_id', 5, 10])
             ->all();
+
+
 
         return $this->render(
             'index',

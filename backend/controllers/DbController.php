@@ -13,10 +13,11 @@ class DbController extends BehaviorsController
     public function actionQueryJoin()
     {
         // -------------------------------------------------------------------------------------------------------------
+        // http://www.sitepoint.com/understanding-sql-joins-mysql-database/
         // Метод JOIN
         // Принимает чатыре параметра:
-        // $type -  INNER JOIN (извлекает строки, которые обязательно присутствую во всех объединяемых таблицах)
-        //          LEFT JOIN (дополняет данные одной таблицы из второй)
+        // $type -  INNER JOIN (извлекает строки, которые обязательно присутствую во всех объединяемых таблицах) - вытаскивает объединенные данные
+        //          LEFT JOIN (дополняет данные одной таблицы из второй) - вытаскивает все
         //          RIGHT JOIN (дополняет данные второй таблицы из первой)
         // $table - имя таблицы, которая должна быть присоединена
         // $on - условие объединения (необязательно)
@@ -34,10 +35,16 @@ class DbController extends BehaviorsController
             ->all();*/
 
         // Объединение с несколькими таблицами
-        $model = (new \yii\db\Query())
+        /*$model = (new \yii\db\Query())
             ->from(['a' => 'auth_assignment'])
             ->join('LEFT JOIN', 'user', 'a.user_id = user.id')
             ->join('LEFT JOIN', 'auth_item', 'a.item_name = auth_item.name')
+            ->all();*/
+
+        $model = (new \yii\db\Query())
+            ->from(['a' => 'auth_assignment'])
+            ->join('INNER JOIN', 'user', 'a.user_id = user.id')
+            ->join('INNER JOIN', 'auth_item', 'a.item_name = auth_item.name')
             ->all();
 
         return $this->render(

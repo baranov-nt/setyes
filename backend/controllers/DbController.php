@@ -55,13 +55,16 @@ class DbController extends BehaviorsController
         ])->all();*/
 
         // получить данные много ко многим через модель см getImages() которая использует getImagesOfObjects() в модели Profile
-        $model = Profile::find()
+        /*$model = Profile::find()
             ->where(['user_id' => 1])
             //->innerJoinWith([                         // если найдет images, тогда достанет пользователя
             ->joinWith([                                // достанет пользователя, даже если не найдет images
             'images' => function ($query) {
             },
-        ])->one();
+        ])->one();*/
+
+        // или
+        $model = Profile::findOne(1);
 
         // получить данные много ко многим через модель см getImages() которая использует getImagesOfObjects() в модели Profile
         d($model->images);

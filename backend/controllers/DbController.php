@@ -4,15 +4,266 @@ namespace backend\controllers;
 
 use Yii;
 use yii\db\Query;
+use common\models\User;
+use common\models\Profile;
+use yii\db\ActiveRecord;
 
 class DbController extends BehaviorsController
 {
     /**
      * @return string
      */
+    public function actionActiveRecordJoin()
+    {
+        // Работа с Active Record используя Join
+
+        // SELECT `customer`.* FROM `customer`
+        // LEFT JOIN `order` ON `order`.`customer_id` = `customer`.`id`
+        // WHERE `order`.`status` = 1
+        //
+        // SELECT * FROM `order` WHERE `customer_id` IN (...)
+        /*$model = Profile::find()
+            ->select('profile.*')
+            ->leftJoin('auth_assignment', '`auth_assignment`.`user_id` = `profile`.`user_id`')                          // условие, достать только с ролью "Пользователь"
+            ->where(['auth_assignment.item_name' => 'Создатель'])                                                       // условие, достать только с ролью "Пользователь"
+            ->with(['user', 'imagesOfObjects'])                                                                         // здесь дополнительная связь к таблицам, которые нужно вытащить
+            ->all();*/
+
+        // Лучше так
+        /*$model = Profile::find()
+            ->select('profile.*')
+            ->innerJoinWith('user', '`user`.`id` = `profile`.`user_id`')                          // условие, достать только с ролью "Пользователь"
+            ->where(['user.email' => 'v@v.com'])                                                  // условие, достать только с ролью "Пользователь"
+            ->with(['imagesOfObjects.image'])                                                     // здесь дополнительная связь к таблицам, которые нужно вытащить
+            ->all();*/
+
+        // или так
+        /*$model = Profile::find()->joinWith([
+            'user' => function ($query) {
+                $query->andWhere(['<', 'id', 5])
+                ->select(['user.id', 'user.email', 'user.phone']);                                 // выборочные поля из user
+            },
+        ])->with(['imagesOfObjects.image'])
+            ->all();*/
+
+        // или так
+        /*$model = Profile::find()->innerJoinWith([
+            'user' => function ($query) {
+                $query->andWhere(['<', 'id', 5])
+                    ->select(['user.id', 'user.email', 'user.phone']);                                 // выборочные поля из user
+            },
+        ])->all();*/
+
+        // получить данные много ко многим через модель см getImages() которая использует getImagesOfObjects() в модели Profile
+        $model = Profile::find()
+            ->where(['user_id' => 1])
+            //->innerJoinWith([                         // если найдет images, тогда достанет пользователя
+            ->joinWith([                                // достанет пользователя, даже если не найдет images
+            'images' => function ($query) {
+            },
+        ])->one();
+
+        // получить данные много ко многим через модель см getImages() которая использует getImagesOfObjects() в модели Profile
+        d($model->images);
+
+        return $this->render(
+            'index',
+            [
+                'model' => $model
+            ]
+        );
+
+        // SELECT `customer`.* FROM `customer`
+        // LEFT JOIN `order` ON `order`.`customer_id` = `customer`.`id`
+        // WHERE `order`.`status` = 1
+        //
+        // SELECT * FROM `order` WHERE `customer_id` IN (...)
+        /*$model = Profile::find()
+            ->select('profile.*')
+            ->leftJoin('auth_assignment', '`auth_assignment`.`user_id` = `profile`.`user_id`')
+            ->where(['auth_assignment.item_name' => 'Создатель'])                                   // достать только с ролью "Пользователь"
+            ->with('imagesOfObjects.image')                                                         // объеденить со связями
+            ->all();*/
+
+        // Лучше использовать имеющиеся связи
+        // Возможные join - innerJoinWith() joinWith() (LEFT JOIN)
+        /*$model = User::find()
+            ->innerJoinWith('profile', false)                                                       // второй параметр не загружает жадно
+            ->where(['like', 'second_name', 'dfg'])                                                 // Достать пользователь у которых в фамилии имеется %dfg%
+            ->all();*/
+
+        /*$model = User::find()
+            ->innerJoinWith('profile')                     // второй параметр не загружает жадно
+            ->where(['like', 'second_name', 'dfg'])                                                 // Достать пользователь у которых в фамилии имеется %dfg%
+            ->all();*/
+
+        /*$model = Profile::find()->joinWith([
+            'imagesOfObjects' => function ($query) {
+                $query->onCondition(['label' => 'avatar']);                                         // подтягивает
+            },
+        ])->all();*/
+
+
+        /*return $this->render(
+            'index',
+            [
+                'model' => $model
+            ]
+        );*/
+    }
+
+    /**
+     * @return string
+     */
+    public function actionActiveRecord()
+    {
+        // -------------------------------------------------------------------------------------------------------------
+        // Active Record
+
+        // Получение данных
+        /*$model = User::find()
+            ->where(['id' => [1,2,3]])
+            ->andWhere(['email' => 'user3@user3.com'])
+            ->orWhere(['email' => 'v@v.com'])
+            ->all();*/
+
+        /*$model = User::find()
+            ->where(['id' => [1,2,3]])
+            ->orderBy(['id' => SORT_DESC])
+            ->count();*/
+
+        /*$model = User::findOne([
+            'id' => 1,
+            'status' => User::STATUS_ACTIVE,
+        ]);*/
+
+        // Получение данных в виде массива
+        /*$model = User::find()
+            ->where(['id' => [1,2,3]])
+            ->asArray()
+            ->all();*/
+
+        // Пакетное получение данных
+        // получить 10 покупателей одновременно
+        /*foreach (User::find()->batch(10) as $model) {
+            // $models - это массив, в котором находится 10 или меньше объектов класса User
+        }*/
+
+        // получить одновременно десять покупателей и перебрать их одного за другим
+        /*foreach (User::find()->each(10) as $model) {
+            // $model - это объект класса User
+        }*/
+
+        // пакетная выборка с жадной загрузкой
+        /*foreach (User::find()->with('profile')->each() as $model) {
+            // $model - это объекта класса User
+        }*/
+
+        // вставить новую строку данных
+        /*$model = new User();
+        $model->phone = '9221301818';
+        $model->email = 'james@example.com';
+        $model->save();*/
+
+        // обновить имеющуюся строку данных
+        /*$model = User::findOne(3);
+        $model->email = 'james@newexample.com';
+        $model->save();*/
+
+        // Dirty-атрибуты
+         /*Active Record автоматически поддерживает список dirty-атрибутов. Это достигается за счёт хранения старых значений атрибутов и сравнения их с новыми.
+         * Вы можете вызвать метод yii\db\ActiveRecord::getDirtyAttributes() для получения текущего списка dirty-атрибутов.
+         * Вы также можете вызвать yii\db\ActiveRecord::markAttributeDirty(), чтобы явно пометить атрибут в качестве dirty-атрибута.
+         * Если вам нужны значения атрибутов, какими они были до их изменения, вы можете вызвать getOldAttributes() или getOldAttribute().*/
+
+        // Значения атрибутов по умолчанию
+        /*$model = new Profile();
+        $model->loadDefaultValues();*/
+
+        // Обновление нескольких строк данных
+        // UPDATE `profile` SET `images_num`=2 WHERE `middle_name` LIKE '%@example.com%'
+        // $model = Profile::updateAll(['images_num' => 2], ['like', 'middle_name', '@example.com']);
+
+        // Работа с транзакциями
+        /*$model = Profile::findOne(1);
+
+        $transaction = Profile::getDb()->beginTransaction();
+        try {
+            $model->user_id = 1;
+            $model->birthday = 'sdfsdfsdf';
+            $model->save();
+            // ...другие операции с базой данных...
+            $transaction->commit();
+        } catch(\Exception $e) {
+            $transaction->rollBack();
+            throw $e;
+        }*/
+
+        // Работа со связными данными
+        // Объявление связей в модели
+        /*public function getProfile()
+        {
+            return $this->hasOne(Profile::className(), ['user_id' => 'id']);
+        }*/
+
+        // Доступ к связным данным
+        /*$model = User::findOne(3);
+        $model = $model->profile;*/
+
+        // Динамические запросы связных данных. Смотри в модель Profile
+        // $model = Profile::findOne(1);
+        // SELECT * FROM `order` WHERE `subtotal` > 200 ORDER BY `id`
+        // $model = $model->getRelationTest(10)->all();
+
+        /*public function getRelationTest($value = 10)
+        {
+            return $this->hasOne(User::className(), ['id' => 'user_id'])
+                ->where('status >= :value', [':value' => $value])
+                ->andWhere(['email' => 'v@v.com'])
+                ->orderBy('id');
+        }*/
+
+        /*public function getRelationManyToMany()
+        {
+            return $this->hasMany(ImagesOfObject::className(),
+                [
+                    'object_id' => 'user_id',
+                    'label' => 'images_label'
+                ])
+                ->viaTable('images', ['id' => 'user_id']);
+        }*/
+
+        // жадная загрузка "profile" и "auths" одновременно
+        // $model = User::find()->with('profile', 'auths')->all();
+
+        // жадная загрузка "user" и "ImagesOfObjects.image" одновременно с вложенной связью
+        // $model = Profile::find()->with('user', 'imagesOfObjects.image')->all();
+
+        // найти покупателей и получить их вместе с их странами и активными заказами
+        // SELECT * FROM `profile`
+        // SELECT * FROM `user` WHERE `id` IN (...)
+        // SELECT * FROM `order` WHERE `customer_id` IN (...) AND `status` = 1
+        $model = Profile::find()->with([
+            'user' => function ($query) {
+                $query->andWhere(['status' => User::STATUS_ACTIVE]);
+            },
+        ])->all();
+
+        return $this->render(
+            'index',
+            [
+                'model' => $model
+            ]
+        );
+    }
+
+    /**
+     * @return string
+     */
     public function actionQueryJoin()
     {
         // -------------------------------------------------------------------------------------------------------------
+        // Конструктор запросов
         // http://www.sitepoint.com/understanding-sql-joins-mysql-database/
         // Метод JOIN
         // Принимает чатыре параметра:
@@ -41,11 +292,29 @@ class DbController extends BehaviorsController
             ->join('LEFT JOIN', 'auth_item', 'a.item_name = auth_item.name')
             ->all();*/
 
+        // Объединение с подзапросом
+        /*$subQuery = (new \yii\db\Query())->from('user')->where(['id' => 4]);
+
         $model = (new \yii\db\Query())
-            ->from(['a' => 'auth_assignment'])
-            ->join('INNER JOIN', 'user', 'a.user_id = user.id')
-            ->join('INNER JOIN', 'auth_item', 'a.item_name = auth_item.name')
-            ->all();
+            ->from(['a' => 'profile'])
+            ->innerJoin(['u' => $subQuery], 'u.id = user_id')
+            ->all();*/
+
+        // Пакетная выборка
+        /*$query = (new Query())
+            ->from('user')
+            ->orderBy('id');
+
+        foreach ($query->batch(5) as $users) {
+            // $users это массив из 100 или менее строк из таблицы пользователей
+            d($users);
+        }*/
+
+        // или если вы хотите перебрать все строки по одной
+        /*foreach ($query->each() as $user) {
+            // $user представляет одну строку из выборки
+            d($user);
+        }*/
 
         return $this->render(
             'index',
@@ -62,6 +331,16 @@ class DbController extends BehaviorsController
     {
         /* -------------------------------------------------------------------------------------------------------------------------------------
         * Выполнение запроса через Query (конструктор запросы) */
+
+        // all(): возвращает массив строк, каждая из которых это ассоциативный массив пар ключ-значение.
+        // one(): возвращает первую строку запроса.
+        // column(): возвращает первый столбец результата.
+        // scalar(): возвращает скалярное значение первого столбца первой строки результата.
+        // exists(): возвращает значение указывающее, что выборка содержит результат.
+        // count(): возвращает результат COUNT запроса.
+        // Другие методы агрегирования запросов, включая sum($q), average($q), max($q), min($q). Параметр $q обязателен для этих методов и могут содержать либо имя столбца,
+        // либо выражение БД.
+        //
         // select() - указываются столбцы, которые должны быть выбраны. Если нет select(), будет использоваться *
         // select(['id']) - выбрать поле id из таблицы user
         // select('id AS user_id, email') - выбрать поля id как user_id и email
@@ -322,12 +601,59 @@ class DbController extends BehaviorsController
 
         // Оператор OFFSET
         // offset() - смещение относитьно первого элемента
-        $model = (new \yii\db\Query())
+
+        /*$model = (new \yii\db\Query())
             ->from(['a' => 'auth_assignment'])
             ->groupBy(['user_id'])
             ->limit(5)
             ->offset(5)
-            ->all();
+            ->all();*/
+
+        // Метод UNION
+        /*$query1 = (new \yii\db\Query())
+            ->select(['user_id' => 'id'])
+            ->from('user');
+
+        $query2 = (new \yii\db\Query())
+            ->select(['user_id'])
+            ->from('profile');
+
+        $model = $query1->union($query2)->all();*/
+
+        // Вывод сформированную sql команду
+        /*$command = (new \yii\db\Query())
+            ->select(['id', 'email'])
+            ->from('user')
+            ->where(['phone' => 'Smith'])
+            ->limit(10)
+            ->createCommand();*/
+
+        // показать SQL запрос
+        //d($command->sql);
+        // показать привязываемые параметры
+        //d($command->params);
+
+        // возвращает все строки запроса
+        //$rows = $command->queryAll();
+
+        // Индексация результатов запроса
+        // возвращает [100 => ['id' => 100, 'username' => '...', ...], 101 => [...], 103 => [...], ...]
+        /*$model = (new \yii\db\Query())
+            ->from('user')
+            ->limit(10)
+            ->indexBy('id')
+            ->all();*/
+
+        // Индексация результатов запроса с использование нескольких полей.
+        // Анонимная функция должна принимать параметр $row, который содержит текущую строку запроса и должна
+        // вернуть скалярное значение, которое будет использоваться как значение индекса для текущей строки.
+
+        $model = (new \yii\db\Query())
+        ->from('user')
+        ->indexBy(function ($row) {
+            return $row['id'].' '.$row['email'];
+        })->all();
+
 
         return $this->render(
             'index',

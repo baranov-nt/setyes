@@ -60,14 +60,6 @@ class ImagesOfObject extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getObject0()
-    {
-        return $this->hasOne(Product::className(), ['id' => 'object_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getObject1()
     {
         return $this->hasOne(Profile::className(), ['user_id' => 'object_id']);

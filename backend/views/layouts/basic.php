@@ -74,15 +74,23 @@ $this->beginPage();
                     'label' => 'Работа с DB',
                     'items' => [
                         [
-                            'label' => 'Рабата с Query используя Join',
+                            'label' => 'Работа с Active Record используя Join',
+                            'url' => ['/db/active-record-join']
+                        ],
+                        [
+                            'label' => 'Работа с Active Record',
+                            'url' => ['/db/active-record']
+                        ],
+                        [
+                            'label' => 'Работа с Query используя Join',
                             'url' => ['/db/query-join']
                         ],
                         [
-                            'label' => 'Рабата с Query',
+                            'label' => 'Работа с Query',
                             'url' => ['/db/query']
                         ],
                         [
-                            'label' => 'Рабата с DAO',
+                            'label' => 'Работа с DAO',
                             'url' => ['/db/dao']
                         ]
                     ]

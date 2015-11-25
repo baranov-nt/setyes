@@ -79,7 +79,7 @@ class BehaviorsController extends Controller {
                     ],
                     [
                         'controllers' => ['db'],
-                        'actions' => ['dao', 'query', 'query-join'],
+                        'actions' => ['dao', 'query', 'query-join', 'active-record', 'active-record-join'],
                         'allow' => true,
                         'roles' => ['Администратор']
                     ]

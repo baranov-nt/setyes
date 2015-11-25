@@ -84,6 +84,14 @@ class Profile extends ActiveRecord
             ]);
     }
 
+    // Связь напрямую к картинкам
+    // получить данные много ко многим через модель см getImages() которая использует getImagesOfObjects() в данной модели Profile
+    public function getImages()
+    {
+        return $this->hasMany(Images::className(), ['id' => 'object_id'])
+            ->via('imagesOfObjects');
+    }
+
     public function updateProfile()
     {
         $profile = ($profile = Profile::findOne(Yii::$app->user->id)) ? $profile : new Profile();

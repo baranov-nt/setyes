@@ -2,11 +2,13 @@
 
 namespace backend\controllers;
 
+use common\models\Images;
 use Yii;
 use yii\db\Query;
 use common\models\User;
 use common\models\Profile;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 class DbController extends BehaviorsController
 {
@@ -64,10 +66,44 @@ class DbController extends BehaviorsController
         ])->one();*/
 
         // или
-        $model = Profile::findOne(1);
+        //$model = Profile::findOne(1);
 
         // получить данные много ко многим через модель см getImages() которая использует getImagesOfObjects() в модели Profile
-        d($model->images);
+        //d($model->images);
+
+
+        // Join с дополнительным условием CONDITION (возвращает true, если условие истинно)
+        /*$model = Profile::find()->innerJoinWith([
+            'user' => function ($query) {
+                $query->onCondition(['user.status' => User::STATUS_NOT_ACTIVE]);
+            },
+        ])->all();*/
+
+        // или так
+        /*$model = Profile::find()->joinWith([
+            'user' => function ($query) {
+                $query->onCondition(['user.status' => User::STATUS_NOT_ACTIVE]);        // если условие верно, таблицы объединяются. Отличается от where, который возвращает только
+                                                                                        // один профили с верным условием, тем, что возвращает все профили, а где условие верно
+                                                                                        // добавляет связанную таблицу. Если использовать innerJoinWith(), будет работать как where()
+            },
+        ])->all();*/
+
+        // Обратные связи. Смотри модель User inverseOf() Например есть код:
+        // SELECT * FROM `user` WHERE `id` = 1
+        //$model = User::findOne(1);
+        // SELECT * FROM `profile` WHERE `user_id` = 1
+        //$profile = $model->profile2[0];
+        // SQL-запрос не выполняется
+        //$model2 = $profile->user;
+        // выведет "одинаковы"
+        //echo ($model === $model2) ? 'одинаковы' : 'НЕ одинаковы';
+
+
+        $model = Profile::find()->joinWith([
+            'user' => function ($query) {
+                $query->onCondition(['user.status' => User::STATUS_NOT_ACTIVE]);
+            },
+        ])->all();
 
         return $this->render(
             'index',
@@ -75,44 +111,6 @@ class DbController extends BehaviorsController
                 'model' => $model
             ]
         );
-
-        // SELECT `customer`.* FROM `customer`
-        // LEFT JOIN `order` ON `order`.`customer_id` = `customer`.`id`
-        // WHERE `order`.`status` = 1
-        //
-        // SELECT * FROM `order` WHERE `customer_id` IN (...)
-        /*$model = Profile::find()
-            ->select('profile.*')
-            ->leftJoin('auth_assignment', '`auth_assignment`.`user_id` = `profile`.`user_id`')
-            ->where(['auth_assignment.item_name' => 'Создатель'])                                   // достать только с ролью "Пользователь"
-            ->with('imagesOfObjects.image')                                                         // объеденить со связями
-            ->all();*/
-
-        // Лучше использовать имеющиеся связи
-        // Возможные join - innerJoinWith() joinWith() (LEFT JOIN)
-        /*$model = User::find()
-            ->innerJoinWith('profile', false)                                                       // второй параметр не загружает жадно
-            ->where(['like', 'second_name', 'dfg'])                                                 // Достать пользователь у которых в фамилии имеется %dfg%
-            ->all();*/
-
-        /*$model = User::find()
-            ->innerJoinWith('profile')                     // второй параметр не загружает жадно
-            ->where(['like', 'second_name', 'dfg'])                                                 // Достать пользователь у которых в фамилии имеется %dfg%
-            ->all();*/
-
-        /*$model = Profile::find()->joinWith([
-            'imagesOfObjects' => function ($query) {
-                $query->onCondition(['label' => 'avatar']);                                         // подтягивает
-            },
-        ])->all();*/
-
-
-        /*return $this->render(
-            'index',
-            [
-                'model' => $model
-            ]
-        );*/
     }
 
     /**
@@ -246,11 +244,24 @@ class DbController extends BehaviorsController
         // SELECT * FROM `profile`
         // SELECT * FROM `user` WHERE `id` IN (...)
         // SELECT * FROM `order` WHERE `customer_id` IN (...) AND `status` = 1
-        $model = Profile::find()->with([
-            'user' => function ($query) {
-                $query->andWhere(['status' => User::STATUS_ACTIVE]);
-            },
-        ])->all();
+
+        // Сохранение связных данных
+        /*$user = User::findOne(3);
+        $profile = new Profile();
+        $profile->middle_name = 'Петрович';
+        $profile->link('user', $user);          // link(<связь>,<объект>) - создаст запись в таблице profile и подставит в user_id id связанного объекта*/
+
+        // Использование CASE WHEN
+        //$case_1 = new Expression('CASE WHEN true THEN email ELSE (\'phone\') END');
+        $case_1 = new Expression('CASE WHEN id=1 THEN email ELSE (phone) END');
+        $case_2 = new Expression('CASE WHEN id=2 THEN password_hash ELSE (phone) END');
+
+        $model = User::find()
+            ->select([
+                'case_1' => $case_1,
+                'case_2' => $case_2
+            ])
+            ->all();
 
         return $this->render(
             'index',
@@ -657,6 +668,23 @@ class DbController extends BehaviorsController
             return $row['id'].' '.$row['email'];
         })->all();
 
+        // Использование CASE WHEN
+        //$case_1 = new Expression('CASE WHEN true THEN email ELSE (\'phone\') END');
+        //$case_1 = new Expression('CASE WHEN id=1 THEN email ELSE (phone) END');
+        $case_2 = new Expression('CASE WHEN id=2 THEN password_hash ELSE (phone) END');
+        $case_3 = new Expression('CASE WHEN profile.middle_name IS NULL THEN profile.second_name ELSE profile.middle_name END');
+
+        $model = (new \yii\db\Query())
+            ->select([
+                'id',
+                'user_id',
+                //'case_1' => $case_1,
+                'case_2' => $case_2,
+                'case_3' => $case_3
+            ])
+            ->from(['user', 'profile'])
+            ->groupBy('user_id')
+            ->all();
 
         return $this->render(
             'index',

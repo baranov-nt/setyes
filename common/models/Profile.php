@@ -24,6 +24,8 @@ use yii\db\ActiveRecord;
 
 class Profile extends ActiveRecord
 {
+    public $case_3;
+
     /**
      * @inheritdoc
      */

@@ -33,6 +33,8 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
 
     public $password;
+    public $case_1;
+    public $case_2;
     /**
      * @inheritdoc
      */
@@ -89,6 +91,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function getAuths()
     {
         return $this->hasOne(Auth::className(), ['user_id' => 'id']);
+    }
+
+    // inverseOf() - указывает на обратную связь в модели Profile
+    public function getProfile2()
+    {
+        return $this->hasMany(Profile::className(), ['user_id' => 'id'])->inverseOf('user');
     }
 
     /**

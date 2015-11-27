@@ -18,10 +18,12 @@
         "yiisoft/yii2": ">=2.0.6",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
+        "yiisoft/yii2-authclient": "*",
         "sjaakp/yii2-illustrated-behavior": "dev-master",
         "bower-asset/cropper": "^0.11.1",
-        "rmrevin/yii2-fontawesome": "2.12.*",
-        "yiisoft/yii2-authclient": "*"
+        "bower-asset/fontawesome": "4.5.*",
+        "bower-asset/scroll-to-top": "*",
+        "bower-asset/bootstrap-confirmation2": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

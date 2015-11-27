@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "20f4ca32e6cd3571a2bffeea1a298338",
+    "hash": "80603142675d4c2c0a363b9338fd4e20",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -53,6 +53,43 @@
                 "mobile-first",
                 "responsive",
                 "web"
+            ]
+        },
+        {
+            "name": "bower-asset/bootstrap-confirmation2",
+            "version": "v2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mistic100/Bootstrap-Confirmation.git",
+                "reference": "a0983463491ff8aae50ac32eff1d58c54719ff88"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mistic100/Bootstrap-Confirmation/zipball/a0983463491ff8aae50ac32eff1d58c54719ff88",
+                "reference": "a0983463491ff8aae50ac32eff1d58c54719ff88",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap": ">=3.2.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "bootstrap-confirmation.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "Apache"
+            ],
+            "description": "Bootstrap plugin for on-place confirm boxes using Popover",
+            "keywords": [
+                "confirmation",
+                "popup"
             ]
         },
         {
@@ -119,16 +156,16 @@
         },
         {
             "name": "bower-asset/fontawesome",
-            "version": "v4.4.0",
+            "version": "v4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FortAwesome/Font-Awesome.git",
-                "reference": "e554555d73a44e0a7d11b0361ad7a5325a5f551c"
+                "reference": "dbc8d1b9b67daaab357bcc41dbf549c3684cf5f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/e554555d73a44e0a7d11b0361ad7a5325a5f551c",
-                "reference": "e554555d73a44e0a7d11b0361ad7a5325a5f551c",
+                "url": "https://api.github.com/repos/FortAwesome/Font-Awesome/zipball/dbc8d1b9b67daaab357bcc41dbf549c3684cf5f1",
+                "reference": "dbc8d1b9b67daaab357bcc41dbf549c3684cf5f1",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -304,17 +341,33 @@
             }
         },
         {
-            "name": "bower-asset/yii2-pjax",
-            "version": "v2.0.4",
+            "name": "bower-asset/scroll-to-top",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yiisoft/jquery-pjax.git",
-                "reference": "3f20897307cca046fca5323b318475ae9dac0ca0"
+                "url": "https://github.com/geniuscarrier/scrollToTop.git",
+                "reference": "b689f7345e825e66965ace26f918f4af4bad812e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/3f20897307cca046fca5323b318475ae9dac0ca0",
-                "reference": "3f20897307cca046fca5323b318475ae9dac0ca0",
+                "url": "https://api.github.com/repos/geniuscarrier/scrollToTop/zipball/b689f7345e825e66965ace26f918f4af4bad812e",
+                "reference": "b689f7345e825e66965ace26f918f4af4bad812e",
+                "shasum": ""
+            },
+            "type": "bower-asset-library"
+        },
+        {
+            "name": "bower-asset/yii2-pjax",
+            "version": "v2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/jquery-pjax.git",
+                "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/6818718408086db6bdcf33649cecb86b6b4f9b67",
+                "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67",
                 "shasum": ""
             },
             "require": {
@@ -493,69 +546,17 @@
             "time": "2013-07-10 17:25:36"
         },
         {
-            "name": "rmrevin/yii2-fontawesome",
-            "version": "2.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rmrevin/yii2-fontawesome.git",
-                "reference": "51d33ec9d1d7edab2166f1d42668c1bc8d28c068"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rmrevin/yii2-fontawesome/zipball/51d33ec9d1d7edab2166f1d42668c1bc8d28c068",
-                "reference": "51d33ec9d1d7edab2166f1d42668c1bc8d28c068",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/fontawesome": "4.4.*",
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "2.0.*"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "asset-installer-paths": {
-                    "npm-asset-library": "vendor/npm",
-                    "bower-asset-library": "vendor/bower"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "rmrevin\\yii\\fontawesome\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Roman Revin",
-                    "email": "xgismox@gmail.com",
-                    "homepage": "http://rmrevin.ru/"
-                }
-            ],
-            "description": "Asset Bundle for Yii2 with Font Awesome",
-            "keywords": [
-                "asset",
-                "awesome",
-                "bundle",
-                "font",
-                "yii"
-            ],
-            "time": "2015-08-15 16:50:16"
-        },
-        {
             "name": "sjaakp/yii2-illustrated-behavior",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sjaakp/yii2-illustrated-behavior.git",
-                "reference": "fa1ba40754f10459eb812d233913f79803020b65"
+                "reference": "8be333b608d4e14e8dfbc49658b695395c60da4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sjaakp/yii2-illustrated-behavior/zipball/fa1ba40754f10459eb812d233913f79803020b65",
-                "reference": "fa1ba40754f10459eb812d233913f79803020b65",
+                "url": "https://api.github.com/repos/sjaakp/yii2-illustrated-behavior/zipball/8be333b608d4e14e8dfbc49658b695395c60da4f",
+                "reference": "8be333b608d4e14e8dfbc49658b695395c60da4f",
                 "shasum": ""
             },
             "require": {
@@ -590,7 +591,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2015-06-15 08:44:38"
+            "time": "2015-11-19 21:21:26"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -644,43 +645,6 @@
                 "mailer"
             ],
             "time": "2015-06-06 14:19:39"
-        },
-        {
-            "name": "yii2mod/yii2-timezone",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yii2mod/yii2-timezone.git",
-                "reference": "dbe2b4481fa2f63e94814107b71ca348cdbd12ff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yii2mod/yii2-timezone/zipball/dbe2b4481fa2f63e94814107b71ca348cdbd12ff",
-                "reference": "dbe2b4481fa2f63e94814107b71ca348cdbd12ff",
-                "shasum": ""
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "yii2mod\\timezone\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dmitry Semenov",
-                    "email": "disemx@gmail.com"
-                }
-            ],
-            "description": "Timezone helper",
-            "keywords": [
-                "component",
-                "yii2"
-            ],
-            "time": "2015-06-17 09:40:28"
         },
         {
             "name": "yiisoft/yii2",
@@ -820,21 +784,21 @@
         },
         {
             "name": "yiisoft/yii2-bootstrap",
-            "version": "2.0.4",
+            "version": "2.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap.git",
-                "reference": "1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0"
+                "reference": "1464f93834b1d5edb1f5625f7ffd6c3723fa4923"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0",
-                "reference": "1b6b1e61cf91c3cdd517d6a7e71d30bb212e4af0",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/1464f93834b1d5edb1f5625f7ffd6c3723fa4923",
+                "reference": "1464f93834b1d5edb1f5625f7ffd6c3723fa4923",
                 "shasum": ""
             },
             "require": {
                 "bower-asset/bootstrap": "3.3.* | 3.2.* | 3.1.*",
-                "yiisoft/yii2": ">=2.0.4"
+                "yiisoft/yii2": ">=2.0.6"
             },
             "type": "yii2-extension",
             "extra": {
@@ -866,7 +830,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2015-05-10 22:08:17"
+            "time": "2015-09-23 17:48:24"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -1145,50 +1109,6 @@
             "time": "2015-05-29 06:29:14"
         },
         {
-            "name": "imanilchaudhari/yii2-rrssb",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ImAnilChaudhari/yii2-rrssb.git",
-                "reference": "04e560700924e5b37573c2e0f8e9354cb9434310"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ImAnilChaudhari/yii2-rrssb/zipball/04e560700924e5b37573c2e0f8e9354cb9434310",
-                "reference": "04e560700924e5b37573c2e0f8e9354cb9434310",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "imanilchaudhari\\rrssb\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anil Chaudhari",
-                    "email": "caanil90@gmail.com"
-                }
-            ],
-            "description": "This is a responsive social bar widget for Yii2 projects. ",
-            "keywords": [
-                " extension",
-                " rrssb",
-                " share bar",
-                " social share",
-                "yii2"
-            ],
-            "time": "2015-09-14 16:13:52"
-        },
-        {
             "name": "phpspec/php-diff",
             "version": "v1.0.2",
             "source": {
@@ -1418,8 +1338,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "sjaakp/yii2-illustrated-behavior": 20,
-        "yii2mod/yii2-timezone": 20
+        "sjaakp/yii2-illustrated-behavior": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

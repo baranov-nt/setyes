@@ -25,5 +25,6 @@ class CropperAsset extends AssetBundle
     public $depends = [
         'yii\web\JqueryAsset',
         'common\widgets\ImageLoad\assets\DistAsset',
+        '\common\widgets\FontAwesome\AssetBundle'
     ];
 }

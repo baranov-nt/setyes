@@ -71,6 +71,16 @@ $this->beginPage();
         if(Yii::$app->user->can('Администратор')):
             $menuItems[] =
                 [
+                    'label' => 'Bootstrap <span class="glyphicon glyphicon-cog"></span>',
+                    'items' => [
+                        [
+                            'label' => 'Bootstrap дополнения.',
+                            'url' => ['/bootstrap/index']
+                        ],
+                    ]
+                ];
+            $menuItems[] =
+                [
                     'label' => 'Работа с DB',
                     'items' => [
                         [

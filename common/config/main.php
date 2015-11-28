@@ -36,6 +36,9 @@ return [
             'translations' => [
                 'yii' => [
                     'class' => yii\i18n\DbMessageSource::className()
+                ],
+                'setyes' => [
+                    'class' => yii\i18n\DbMessageSource::className()
                 ]
             ]
         ],

@@ -134,6 +134,8 @@ $this->beginPage();
 
         endif;
 
+        $menuItems[] = \common\widgets\LanguageSelect\LanguageSelect::widget();
+
         echo Nav::widget([
             'items' => $menuItems,
             'activateParents' => true,

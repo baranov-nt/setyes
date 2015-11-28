@@ -21,34 +21,9 @@ else:
     <?php
 endif;
 ?>
-
-
-
-<?php
-$lang = Yii::$app->language;
-switch($lang):
-    case 'en':
-        $current = 'English';
-        break;
-    case 'ru':
-        $current = 'Русский';
-        break;
-    case 'de':
-        $current = "German";
-        break;
-    case 'fr':
-        $current = "French";
-        break;
-endswitch;
-?>
-    <div class="navbar-nav navbar-right nav">
-        <div class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle"><?= $current ?><b class="caret"></b></a>
             <?php
-            echo LanguageDropdown::widget();
+            echo \common\widgets\LanguageSelect\LanguageSelect::widget();
             ?>
-        </div>
-    </div>
 <?php
 
 

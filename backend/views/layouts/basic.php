@@ -56,8 +56,6 @@ $this->beginPage();
             ]
         );
 
-
-
         /*if(Yii::$app->user->can('Редактор')):
             $menuItems = [
                 [
@@ -135,6 +133,8 @@ $this->beginPage();
             ];
         }
 
+        $menuItems[] = \common\widgets\LanguageSelect\LanguageSelect::widget();
+
         echo Nav::widget([
             'items' => $menuItems,
             'activateParents' => true,
@@ -143,6 +143,7 @@ $this->beginPage();
                 'class' => 'navbar-nav navbar-right'
             ]
         ]);
+
         NavBar::end();
            ?>
 

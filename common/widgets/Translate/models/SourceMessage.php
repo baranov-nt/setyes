@@ -83,9 +83,9 @@ class SourceMessage extends ActiveRecord
     {
         /** @var Message $message */
         foreach ($this->messages as $message) {
-            if($message->translation == '') {
+            /*if($message->translation == '') {
                 $message->translation = null;
-            }
+            }*/
             $this->link('messages', $message);
             $message->save();
         }

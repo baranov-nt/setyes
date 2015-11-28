@@ -3,6 +3,7 @@ composer install
 php init
 yii migrate
 yii rbac/init
+php yii i18n/import @common/messages
 
 ------------------------------------------------------------------------------------------------------------------------
 GitHub:

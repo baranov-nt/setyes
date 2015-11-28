@@ -78,6 +78,12 @@ class BehaviorsController extends Controller {
                         'roles' => ['Администратор']
                     ],
                     [
+                        'controllers' => ['translate'],
+                        'actions' => ['index', 'update'],
+                        'allow' => true,
+                        'roles' => ['Администратор']
+                    ],
+                    [
                         'controllers' => ['db', 'bootstrap'],
                         'actions' => ['index', 'confirm', 'semantic', 'dao', 'query', 'query-join', 'active-record', 'active-record-join'],
                         'allow' => true,

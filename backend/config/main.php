@@ -14,7 +14,7 @@ return [
     'bootstrap' => ['log'],
     'layout' => 'basic',
     'modules' => [
-        'i18n' => Zelenin\yii\modules\I18n\Module::className()
+        'i18n' => common\widgets\Translate\Module::className()
     ],
     'components' => [
         'request' => [

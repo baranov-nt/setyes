@@ -27,8 +27,13 @@ return [
             'currencyCode' => 'RUB',
         ],
         'i18n' => [
-            'class' => Zelenin\yii\modules\I18n\components\I18N::className(),
-            'languages' => ['ru-RU', 'de-DE', 'it-IT']
+            'class' =>common\widgets\Translate\components\I18N::className(),
+            'languages' => ['ru', 'de', 'fr'],
+            'translations' => [
+                'yii' => [
+                    'class' => yii\i18n\DbMessageSource::className()
+                ]
+            ]
         ],
     ],
 ];

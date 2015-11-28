@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ebd93ddac1a16e1742e42ec95bba75af",
-    "content-hash": "6474931f910f860bc3bbf5b6522d84b2",
+    "hash": "597c8cf92fdbccca00af6a4d7123c39e",
+    "content-hash": "5b8d84bd38ae72a3e2dcfdc746096123",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -488,6 +488,47 @@
                 "markdown-extra"
             ],
             "time": "2015-03-06 05:28:07"
+        },
+        {
+            "name": "codemix/yii2-localeurls",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codemix/yii2-localeurls.git",
+                "reference": "7c2544e006c4971d29747632985d6401492cd9ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codemix/yii2-localeurls/zipball/7c2544e006c4971d29747632985d6401492cd9ef",
+                "reference": "7c2544e006c4971d29747632985d6401492cd9ef",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "codemix\\localeurls\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Härtl",
+                    "email": "haertl.mike@gmail.com"
+                }
+            ],
+            "description": "Automatic locale/language management for URLs.",
+            "keywords": [
+                "i18n",
+                "locale",
+                "yii2"
+            ],
+            "time": "2015-09-17 07:13:16"
         },
         {
             "name": "ezyang/htmlpurifier",

@@ -1,7 +1,7 @@
 <?php
 return [
     'name' => 'SetYes.Com',
-    'language' => 'ru_RU',
+    'language' => 'en',
     'charset' => 'UTF-8',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
@@ -25,6 +25,10 @@ return [
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'RUB',
+        ],
+        'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+            'languages' => ['en', 'fr', 'de', 'ru'],
         ],
         'i18n' => [
             'class' =>common\widgets\Translate\components\I18N::className(),

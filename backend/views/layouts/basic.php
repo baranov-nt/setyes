@@ -5,6 +5,7 @@ use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use common\widgets\Alert;
 use yii\widgets\Breadcrumbs;
+use common\widgets\LanguageDropdown\LanguageDropdown;
 /**
  * Created by PhpStorm.
  * User: phpNT
@@ -142,7 +143,6 @@ $this->beginPage();
                 'class' => 'navbar-nav navbar-right'
             ]
         ]);
-
         NavBar::end();
            ?>
 

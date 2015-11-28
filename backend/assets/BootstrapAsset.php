@@ -18,6 +18,7 @@ class BootstrapAsset extends AssetBundle
         'yii\web\YiiAsset',
         '\common\widgets\FontAwesome\AssetBundle',                                      // Подключение FontAwesome
         '\common\widgets\BootstrapConfirmation\AssetBundle',                            // Подключение Bootstrap подтверждения окна
-        '\common\widgets\ScrollToTop\AssetBundle',                                      // Подключение Bootstrap подтверждения окна
+        '\common\widgets\ScrollToTop\AssetBundle',                                      // Подключение Bootstrap прокрутка вверх
+        '\common\widgets\Semantic\AssetBundle',                                         // Подключение Semantic http://semantic-ui.com/
     ];
 }

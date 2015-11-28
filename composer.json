@@ -23,7 +23,8 @@
         "bower-asset/cropper": "^0.11.1",
         "bower-asset/fontawesome": "4.5.*",
         "bower-asset/scroll-to-top": "*",
-        "bower-asset/bootstrap-confirmation2": "*"
+        "bower-asset/bootstrap-confirmation2": "*",
+        "bower-asset/semantic": "~2"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

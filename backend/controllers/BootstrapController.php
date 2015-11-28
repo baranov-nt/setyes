@@ -29,4 +29,14 @@ class BootstrapController extends BehaviorsController
 
             ]);
     }
+
+    public function actionSemantic()
+    {
+        Yii::$app->request->get();
+        return $this->render(
+            'semantic',
+            [
+
+            ]);
+    }
 }

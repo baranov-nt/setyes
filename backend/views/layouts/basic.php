@@ -17,6 +17,7 @@ use yii\widgets\Breadcrumbs;
 $user = Yii::$app->user->identity;
 
 AppAsset::register($this);
+
 $this->beginPage();
 ?>
     <!DOCTYPE html>
@@ -76,6 +77,10 @@ $this->beginPage();
                         [
                             'label' => 'Bootstrap дополнения.',
                             'url' => ['/bootstrap/index']
+                        ],
+                        [
+                            'label' => 'Semantic UI.',
+                            'url' => ['/bootstrap/semantic']
                         ],
                     ]
                 ];

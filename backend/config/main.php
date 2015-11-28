@@ -13,7 +13,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'layout' => 'basic',
-    'modules' => [],
+    'modules' => [
+        'i18n' => Zelenin\yii\modules\I18n\Module::className()
+    ],
     'components' => [
         'request' => [
             'baseUrl' => '',

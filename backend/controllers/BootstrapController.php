@@ -49,4 +49,22 @@ class BootstrapController extends BehaviorsController
 
             ]);
     }
+
+    public function actionScrollTo()
+    {
+        return $this->render(
+            'scroll-to',
+            [
+
+            ]);
+    }
+
+    public function actionForm()
+    {
+        return $this->renderPartial(
+            'form-result',
+            [
+                'name' => Yii::$app->request->post('name')
+            ]);
+    }
 }

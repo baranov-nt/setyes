@@ -85,6 +85,10 @@ $this->beginPage();
                             'label' => 'Animate.css',
                             'url' => ['/bootstrap/animate']
                         ],
+                        [
+                            'label' => 'Scroll To',
+                            'url' => ['/bootstrap/scroll-to']
+                        ],
                     ]
                 ];
             $menuItems[] =

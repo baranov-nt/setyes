@@ -37,7 +37,7 @@ return [
                 'yii' => [
                     'class' => yii\i18n\DbMessageSource::className()
                 ],
-                'setyes' => [
+                'sy' => [
                     'class' => yii\i18n\DbMessageSource::className()
                 ]
             ]

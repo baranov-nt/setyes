@@ -12,7 +12,7 @@ use common\widgets\ScrollToTop\ScrollToTop;
 BootstrapAsset::register($this);
 ?>
 <h1>Bootstrap дополнения</h1>
-<div class="row">
+<div id="my_elem" class="row">
     <div class="col-md-12">
         <h3>Font Awesome</h3>
         <p>
@@ -214,6 +214,60 @@ SCRIPT;
                 ?>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-12">
+        <h3>Mouse Wheel</h3>
+        <p>
+            <?php
+            $js = <<<SCRIPT
+      /*$('#my_elem').on('mousewheel', function(event) {
+    console.log(event.deltaX, event.deltaY, event.deltaFactor);
+});
+
+$('#my_elem').mousewheel(function(event) {
+    console.log(event.deltaX, event.deltaY, event.deltaFactor);
+});*/
+SCRIPT;
+            Yii::$app->view->registerJs($js, \yii\web\View::POS_READY);
+            ?>
+        </p>
+    </div>
+
+    <div class="col-md-12">
+        <h3>Jquery Form</h3>
+        <p>
+            <?php
+            $js = <<<SCRIPT
+      /*$('#myForm').ajaxForm(function() {
+                //alert("Thank you for your comment!");
+            });*/
+            $('#myForm').ajaxForm({
+    target: '#myResultsDiv'
+});
+SCRIPT;
+            Yii::$app->view->registerJs($js, \yii\web\View::POS_READY);
+            ?>
+        <div id="myResultsDiv"></div>
+        <form id="myForm" action="form" method="post">
+            Name: <input type="text" name="name" />
+            <input type="submit" value="Submit Comment" />
+        </form>
+        </p>
+    </div>
+
+    <div class="col-md-12">
+        <h3>Scroll To</h3>
+        <p>
+            <?php
+            $js = <<<SCRIPT
+      $('#myResultsDiv').scrollTo('#my_elem');
+SCRIPT;
+            Yii::$app->view->registerJs($js, \yii\web\View::POS_READY);
+            ?>
+        <div id="myResultsDiv" onclick="$('#my_elem').scrollTo(0, 800, {queue:true});">ddd</div>
+        </p>
+    </div>
 
     <div class="col-md-12">
         <h3>Scroll to top</h3>

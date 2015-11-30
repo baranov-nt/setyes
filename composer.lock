@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4d98f6dadaa1b31bde7752f4a31105b1",
-    "content-hash": "029a8c668f5fd86e05006d56a481d29f",
+    "hash": "8e4c7df97258fa71a413cac7644be752",
+    "content-hash": "dd866bf8e49829ef181bd588f11da4e7",
     "packages": [
         {
             "name": "bower-asset/animate.css",
@@ -323,6 +323,65 @@
             ]
         },
         {
+            "name": "bower-asset/jquery-form",
+            "version": "3.51",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/malsup/form.git",
+                "reference": "6bf24a5f6d8be65f4e5491863180c09356d9dadd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/malsup/form/zipball/6bf24a5f6d8be65f4e5491863180c09356d9dadd",
+                "reference": "6bf24a5f6d8be65f4e5491863180c09356d9dadd",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.5"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "jquery.form.js",
+                "bower-asset-ignore": [
+                    "README.md",
+                    "composer.json",
+                    "form.jquery.json",
+                    "package.json"
+                ]
+            }
+        },
+        {
+            "name": "bower-asset/jquery-mousewheel",
+            "version": "3.1.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jquery/jquery-mousewheel.git",
+                "reference": "67289b6b2aa0066d7d78a5807f520387135ffb22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jquery/jquery-mousewheel/zipball/67289b6b2aa0066d7d78a5807f520387135ffb22",
+                "reference": "67289b6b2aa0066d7d78a5807f520387135ffb22",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.2.2"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./jquery.mousewheel.js",
+                "bower-asset-ignore": [
+                    "*.json",
+                    "*.markdown",
+                    "*.txt",
+                    ".*",
+                    "!LICENSE.txt",
+                    "Gruntfile.js",
+                    "test"
+                ]
+            }
+        },
+        {
             "name": "bower-asset/jquery-ui",
             "version": "1.11.4",
             "source": {
@@ -432,6 +491,50 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/jquery.scrollTo",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flesler/jquery.scrollTo.git",
+                "reference": "d33ae4515be21a76bb7907c94dd8a0ca0de7e49b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flesler/jquery.scrollTo/zipball/d33ae4515be21a76bb7907c94dd8a0ca0de7e49b",
+                "reference": "d33ae4515be21a76bb7907c94dd8a0ca0de7e49b",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.8"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "./jquery.scrollTo.js"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "demo",
+                    "tests",
+                    "CHANGELOG",
+                    "README.md",
+                    "composer.json",
+                    "package.json"
+                ]
+            },
+            "description": "Lightweight, cross-browser and highly customizable animated scrolling with jQuery",
+            "keywords": [
+                "anchors",
+                "animated",
+                "animation",
+                "browser",
+                "jquery",
+                "links",
+                "scroll",
+                "scrolling"
             ]
         },
         {

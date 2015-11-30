@@ -39,4 +39,14 @@ class BootstrapController extends BehaviorsController
 
             ]);
     }
+
+    public function actionAnimate()
+    {
+        Yii::$app->request->get();
+        return $this->render(
+            'animate',
+            [
+
+            ]);
+    }
 }

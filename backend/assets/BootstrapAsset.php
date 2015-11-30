@@ -20,5 +20,10 @@ class BootstrapAsset extends AssetBundle
         '\common\widgets\BootstrapConfirmation\AssetBundle',                            // Подключение Bootstrap подтверждения окна
         '\common\widgets\ScrollToTop\AssetBundle',                                      // Подключение Bootstrap прокрутка вверх
         '\common\widgets\Semantic\AssetBundle',                                         // Подключение Semantic http://semantic-ui.com/
+        '\common\widgets\Animate_css\AssetBundle',                                      // Подключение animate.css https://github.com/daneden/animate.css
+        '\common\widgets\iGrowl\AssetBundle',                                           // Подключение анимированных подсказок http://catc.github.io/iGrowl/#ss-installation
+        '\common\widgets\Chosen\AssetBundle',                                           // Подключение выпадающих списков http://harvesthq.github.io/chosen/
+        '\common\widgets\JsCookie\AssetBundle',                                         // Подключение управление cookie https://github.com/js-cookie/js-cookie
+        '\common\widgets\Easing\AssetBundle',                                           // Подключение управления течением анимации https://github.com/danro/easing-js и http://easings.net/ru
     ];
 }

@@ -22,6 +22,7 @@ class AppAsset extends AssetBundle
         'css/main.css',
         'css/modal.css',
         'css/icon-spin.css',
+        'css/app-igrowl.css',
     ];
     public $js = [
         'js/main.js'

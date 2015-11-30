@@ -81,6 +81,10 @@ $this->beginPage();
                             'label' => 'Semantic UI.',
                             'url' => ['/bootstrap/semantic']
                         ],
+                        [
+                            'label' => 'Animate.css',
+                            'url' => ['/bootstrap/animate']
+                        ],
                     ]
                 ];
             $menuItems[] =

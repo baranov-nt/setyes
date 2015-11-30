@@ -34,8 +34,7 @@ class AssetBundle extends \yii\web\AssetBundle
      */
     public function init()
     {
-        $this->registerJs()
-        ;
+        $this->registerJs();
         parent::init();
     }
 

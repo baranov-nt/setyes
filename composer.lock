@@ -4,9 +4,36 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "597c8cf92fdbccca00af6a4d7123c39e",
-    "content-hash": "5b8d84bd38ae72a3e2dcfdc746096123",
+    "hash": "4d98f6dadaa1b31bde7752f4a31105b1",
+    "content-hash": "029a8c668f5fd86e05006d56a481d29f",
     "packages": [
+        {
+            "name": "bower-asset/animate.css",
+            "version": "3.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/daneden/animate.css.git",
+                "reference": "3e61b0c35c8f7083a06c4e6fecc00c3ebc852f0b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/daneden/animate.css/zipball/3e61b0c35c8f7083a06c4e6fecc00c3ebc852f0b",
+                "reference": "3e61b0c35c8f7083a06c4e6fecc00c3ebc852f0b",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "./animate.css",
+                "bower-asset-ignore": [
+                    ".*",
+                    "src",
+                    "*.yml",
+                    "Gemfile",
+                    "Gemfile.lock",
+                    "*.md"
+                ]
+            }
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.5",
@@ -91,6 +118,49 @@
             "keywords": [
                 "confirmation",
                 "popup"
+            ]
+        },
+        {
+            "name": "bower-asset/chosen",
+            "version": "v1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/harvesthq/bower-chosen.git",
+                "reference": "d7eba35cf214d2416fabee25c5d4619542a23d8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/harvesthq/bower-chosen/zipball/d7eba35cf214d2416fabee25c5d4619542a23d8d",
+                "reference": "d7eba35cf214d2416fabee25c5d4619542a23d8d",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.4.4"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "chosen.jquery.min.js",
+                    "chosen.css",
+                    "chosen-sprite@2x.png",
+                    "chosen-sprite.png"
+                ],
+                "bower-asset-ignore": []
+            },
+            "license": [
+                {
+                    "type": "MIT",
+                    "url": "https://github.com/harvesthq/chosen/blob/master/LICENSE.md"
+                }
+            ],
+            "description": "Chosen is a JavaScript plugin that makes long, unwieldy select boxes much more user-friendly. It is currently available in both jQuery and Prototype flavors.",
+            "keywords": [
+                "dropdown",
+                "form",
+                "input",
+                "multiselect",
+                "select",
+                "ui"
             ]
         },
         {
@@ -193,6 +263,22 @@
             "description": "Font Awesome"
         },
         {
+            "name": "bower-asset/igrowl",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/catc/iGrowl.git",
+                "reference": "5b15c8ea1bb13c4b48008ef836c9e1a31f24ade9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/catc/iGrowl/zipball/5b15c8ea1bb13c4b48008ef836c9e1a31f24ade9",
+                "reference": "5b15c8ea1bb13c4b48008ef836c9e1a31f24ade9",
+                "shasum": ""
+            },
+            "type": "bower-asset-library"
+        },
+        {
             "name": "bower-asset/jquery",
             "version": "2.1.4",
             "source": {
@@ -262,6 +348,41 @@
             }
         },
         {
+            "name": "bower-asset/jquery.easing",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jozefizso/bower-jquery-easing.git",
+                "reference": "7ddc8b25d24c78bbae8d00a3ae43bf3f274ec8b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jozefizso/bower-jquery-easing/zipball/7ddc8b25d24c78bbae8d00a3ae43bf3f274ec8b5",
+                "reference": "7ddc8b25d24c78bbae8d00a3ae43bf3f274ec8b5",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.2.1"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "js/jquery.easing.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "description": "jQuery Easing plugin",
+            "keywords": [
+                "easing",
+                "jquery",
+                "jquery plugin"
+            ]
+        },
+        {
             "name": "bower-asset/jquery.inputmask",
             "version": "3.1.63",
             "source": {
@@ -311,6 +432,41 @@
                 "jquery",
                 "mask",
                 "plugins"
+            ]
+        },
+        {
+            "name": "bower-asset/js-cookie",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/js-cookie/js-cookie.git",
+                "reference": "605b12c6fae112bd484bfa005f144c82872e2a90"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/js-cookie/js-cookie/zipball/605b12c6fae112bd484bfa005f144c82872e2a90",
+                "reference": "605b12c6fae112bd484bfa005f144c82872e2a90",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "src/js.cookie.js"
+                ],
+                "bower-asset-ignore": [
+                    "travis.sh",
+                    "test",
+                    "Gruntfile.js",
+                    "package.json",
+                    ".gitignore",
+                    ".jshintignore",
+                    ".jshintrc",
+                    ".tm_properties",
+                    ".travis.yml"
+                ]
+            },
+            "license": [
+                "MIT"
             ]
         },
         {

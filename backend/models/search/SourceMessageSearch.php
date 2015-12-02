@@ -1,6 +1,6 @@
 <?php
 
-namespace common\widgets\Translate\models\search;
+namespace backend\models\search;
 
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -12,7 +12,7 @@ use yii\helpers\VarDumper;
 use yii\i18n\GettextPoFile;
 use yii\helpers\Json;
 use common\widgets\Translate\Module;
-use common\widgets\Translate\models\SourceMessage;
+use backend\models\SourceMessage;
 use common\widgets\Translate\models\Message;
 
 class SourceMessageSearch extends SourceMessage
@@ -55,6 +55,7 @@ class SourceMessageSearch extends SourceMessage
      */
     public static function getInstance()
     {
+
         if ( null === self::$_instance )
             self::$_instance = new self();
 
@@ -320,11 +321,15 @@ class SourceMessageSearch extends SourceMessage
             throw new Exception('The configuration must specify "sourcePath" and "languages".');
         }
 
+
+
         foreach ($this->config['sourcePath'] as $sourcePath) {
             if (!is_dir($sourcePath)) {
                 throw new Exception("The source path {$sourcePath} is not a valid directory.");
             }
         }
+
+
 
         if (empty($this->config['format']) || !in_array($this->config['format'], ['php', 'po', 'db'])) {
             throw new Exception('Format should be either "php", "po" or "db".');
@@ -336,9 +341,12 @@ class SourceMessageSearch extends SourceMessage
                 throw new Exception("The message path {$this->config['messagePath']} is not a valid directory.");
             }
         }
+
         if (empty($this->config['languages'])) {
             throw new Exception("Languages cannot be empty.");
         }
+
+
 
         $files = [];
         foreach ( $this->config['sourcePath'] as $sourcePath ) {

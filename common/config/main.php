@@ -33,6 +33,12 @@ return [
         'i18n' => [
             'class' =>common\widgets\Translate\components\I18N::className(),
             'languages' => ['ru', 'de', 'fr'],
+            'sourcePath' => [
+                __DIR__ . '/../../frontend',
+                __DIR__ . '/../../backend',
+                __DIR__ . '/../../common',
+            ],
+            'messagePath' => __DIR__  . '/../../common/messages',
             'translations' => [
                 'yii' => [
                     'class' => yii\i18n\DbMessageSource::className()

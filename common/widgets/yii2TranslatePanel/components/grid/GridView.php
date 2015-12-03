@@ -2,7 +2,7 @@
 
 namespace common\widgets\yii2TranslatePanel\components\grid;
 
-use uran1980\yii\modules\i18n\components\widgets\LinkPager;
+use common\widgets\yii2TranslatePanel\components\widgets\LinkPager;
 use yii\helpers\ArrayHelper;
 
 class GridView extends \yii\grid\GridView

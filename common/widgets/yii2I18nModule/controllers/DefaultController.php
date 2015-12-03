@@ -1,15 +1,15 @@
 <?php
 
-namespace Zelenin\yii\modules\I18n\controllers;
+namespace common\widgets\yii2I18nModule\controllers;
 
 use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use Yii;
-use Zelenin\yii\modules\I18n\models\search\SourceMessageSearch;
-use Zelenin\yii\modules\I18n\models\SourceMessage;
-use Zelenin\yii\modules\I18n\Module;
+use common\widgets\yii2I18nModule\models\search\SourceMessageSearch;
+use common\widgets\yii2I18nModule\models\SourceMessage;
+use common\widgets\yii2I18nModule\Module;
 
 class DefaultController extends Controller
 {

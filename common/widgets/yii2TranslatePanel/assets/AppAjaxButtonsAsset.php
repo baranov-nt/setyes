@@ -12,7 +12,7 @@ class AppAjaxButtonsAsset extends \yii\web\AssetBundle
         'yii\web\JqueryAsset',
         //'\common\widgets\FontAwesome\AssetBundle',                                      // Подключение FontAwesome
         '\common\widgets\iGrowl\iGrowlAsset',                                           // Подключение анимированных подсказок http://catc.github.io/iGrowl/#ss-installation
-        'uran1980\yii\widgets\igrowl\IgrowlAsset',
-        'uran1980\yii\bootstrapConfirmation\BootstrapConfirmationAsset',
+        //'uran1980\yii\widgets\igrowl\IgrowlAsset',
+        '\common\widgets\BootstrapConfirmation\AssetBundle',                            // Подключение Bootstrap подтверждения окна
     ];
 }

@@ -8,24 +8,22 @@
 namespace common\widgets\BootstrapConfirmation;
 
 use Yii;
-/**
- * Class AssetBundle
- * @package rmrevin\yii\fontawesome
- */
+
 class AssetBundle extends \yii\web\AssetBundle
 {
-    /**
-     * @inherit
-     */
-    public $sourcePath = '@bower';
+    public $sourcePath = '@bower/bootstrap-confirmation2';
 
-    /**
-     * @inherit
-     */
+    public $css = [
+
+    ];
+
     public $js = [
-        'bootstrap/js/tooltip.js',
-        'bootstrap/js/popover.js',
-        'bootstrap-confirmation2/bootstrap-confirmation.js',
+        'bootstrap-confirmation.min.js',
+    ];
+    public $depends = [
+        'yii\web\JqueryAsset',
+        'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
     ];
 
     /**
@@ -34,7 +32,10 @@ class AssetBundle extends \yii\web\AssetBundle
      */
     public function init()
     {
-        $this->registerJs();
+        $this->registerJs()
+            ->registerCss()
+        ;
+
         parent::init();
     }
 
@@ -47,6 +48,22 @@ class AssetBundle extends \yii\web\AssetBundle
 jQuery('[data-toggle="confirmation"]').confirmation();
 SCRIPT;
         Yii::$app->view->registerJs($js, \yii\web\View::POS_READY);
+
+        return $this;
+    }
+
+    /**
+     * @return BootstrapConfirmationAsset
+     */
+    protected function registerCss()
+    {
+        $css = <<<STYLE
+.popover.confirmation {
+    white-space: nowrap;
+}
+STYLE;
+        Yii::$app->view->registerCss($css);
+
         return $this;
     }
 }

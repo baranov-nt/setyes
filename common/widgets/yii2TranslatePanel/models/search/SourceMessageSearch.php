@@ -11,9 +11,9 @@ use yii\helpers\FileHelper;
 use yii\helpers\VarDumper;
 use yii\i18n\GettextPoFile;
 use yii\helpers\Json;
-use uran1980\yii\modules\i18n\Module;
-use uran1980\yii\modules\i18n\models\SourceMessage;
-use Zelenin\yii\modules\I18n\models\Message;
+use common\widgets\yii2TranslatePanel\Module;
+use common\widgets\yii2TranslatePanel\models\SourceMessage;
+use common\widgets\yii2I18nModule\models\Message;
 
 class SourceMessageSearch extends SourceMessage
 {

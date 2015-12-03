@@ -9,7 +9,7 @@ use common\widgets\yii2TranslatePanel\models\search\SourceMessageSearch;
 use common\widgets\yii2TranslatePanel\helpers\AppHelper;
 use yii\helpers\Html;
 
-class DefaultController extends \Zelenin\yii\modules\I18n\controllers\DefaultController
+class DefaultController extends \common\widgets\yii2I18nModule\controllers\DefaultController
 {
     public function actionIndex()
     {

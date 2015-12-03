@@ -6,8 +6,8 @@
 
 use yii\helpers\Html;
 use yii\web\View;
-use Zelenin\yii\modules\I18n\models\SourceMessage;
-use Zelenin\yii\modules\I18n\Module;
+use common\widgets\yii2I18nModule\models\SourceMessage;
+use common\widgets\yii2I18nModule\Module;
 use Zelenin\yii\SemanticUI\collections\Breadcrumb;
 use Zelenin\yii\SemanticUI\Elements;
 use Zelenin\yii\SemanticUI\widgets\ActiveForm;

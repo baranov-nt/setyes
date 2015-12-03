@@ -1,12 +1,12 @@
 <?php
 
-namespace Zelenin\yii\modules\I18n\models\search;
+namespace common\widgets\yii2I18nModule\models\search;
 
 use yii\data\ActiveDataProvider;
 use Yii;
 use yii\helpers\ArrayHelper;
-use Zelenin\yii\modules\I18n\models\SourceMessage;
-use Zelenin\yii\modules\I18n\Module;
+use common\widgets\yii2I18nModule\models\SourceMessage;
+use common\widgets\yii2I18nModule\Module;
 
 class SourceMessageSearch extends SourceMessage
 {

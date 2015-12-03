@@ -5,9 +5,9 @@ namespace common\widgets\yii2TranslatePanel\models;
 use yii\base\InvalidConfigException;
 use Yii;
 use yii\db\ActiveRecord;
-use uran1980\yii\modules\i18n\Module;
-use uran1980\yii\modules\i18n\models\query\SourceMessageQuery;
-use Zelenin\yii\modules\I18n\models\Message;
+use common\widgets\yii2TranslatePanel\Module;
+use common\widgets\yii2TranslatePanel\models\query\SourceMessageQuery;
+use common\widgets\yii2I18nModule\models\Message;
 
 /**
  * SourceMessage model

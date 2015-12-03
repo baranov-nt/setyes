@@ -1,10 +1,10 @@
 <?php
 
-namespace Zelenin\yii\modules\I18n;
+namespace common\widgets\yii2I18nModule;
 
 use Yii;
 use yii\i18n\MissingTranslationEvent;
-use Zelenin\yii\modules\I18n\models\SourceMessage;
+use common\widgets\yii2I18nModule\models\SourceMessage;
 
 class Module extends \yii\base\Module
 {

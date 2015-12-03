@@ -1,11 +1,11 @@
 <?php
 
-namespace Zelenin\yii\modules\I18n\models;
+namespace common\widgets\yii2I18nModule\models;
 
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
-use Zelenin\yii\modules\I18n\Module;
+use common\widgets\yii2I18nModule\Module;
 
 class Message extends ActiveRecord
 {

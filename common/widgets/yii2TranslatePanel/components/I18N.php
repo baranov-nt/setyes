@@ -2,7 +2,7 @@
 
 namespace common\widgets\yii2TranslatePanel\components;
 
-class I18N extends \Zelenin\yii\modules\I18n\components\I18N
+class I18N extends \common\widgets\yii2I18nModule\components\I18N
 {
     /**
      * String, required, root directory of all source files

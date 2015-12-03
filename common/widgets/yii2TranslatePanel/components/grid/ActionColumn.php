@@ -2,7 +2,7 @@
 
 namespace common\widgets\yii2TranslatePanel\components\grid;
 
-use uran1980\yii\modules\i18n\Module;
+use common\widgets\yii2TranslatePanel\Module;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 

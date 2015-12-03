@@ -2,7 +2,7 @@
 
 namespace common\widgets\yii2TranslatePanel\components\widgets;
 
-use uran1980\yii\modules\i18n\Module;
+use common\widgets\yii2TranslatePanel\Module;
 
 class LinkPager extends \yii\widgets\LinkPager
 {

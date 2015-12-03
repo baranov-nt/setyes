@@ -23,7 +23,7 @@ class AssetBundle extends \yii\web\AssetBundle
      * @inherit
      */
     public $js = [
-        //'app-chosen-select.js',
+        'app-chosen-select.js',
     ];
 
     public $depends = [

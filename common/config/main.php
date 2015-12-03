@@ -1,7 +1,7 @@
 <?php
 return [
     'name' => 'SetYes.Com',
-    'language' => 'en',
+    'language' => 'ru',
     'charset' => 'UTF-8',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
@@ -30,23 +30,28 @@ return [
             'class' => 'codemix\localeurls\UrlManager',
             'languages' => ['en', 'fr', 'de', 'ru'],
         ],
+        /*'urlManager' => [
+            'class'             => yii\web\UrlManager::className(),
+            'enablePrettyUrl'   => true,
+            'showScriptName'    => false, // false - means that index.php will not be part of the URLs
+        ],*/
         'i18n' => [
-            'class' =>common\widgets\Translate\components\I18N::className(),
-            'languages' => ['ru', 'de', 'fr'],
+            'class'      => common\widgets\yii2TranslatePanel\components\I18N::className(),
+            'languages'  => ['en', 'de', 'fr', 'ru'],
+            'format'     => 'db',
             'sourcePath' => [
                 __DIR__ . '/../../frontend',
                 __DIR__ . '/../../backend',
                 __DIR__ . '/../../common',
             ],
-            'messagePath' => __DIR__  . '/../../common/messages',
+            'messagePath' => __DIR__  . '/../../messages',
             'translations' => [
-                'yii' => [
-                    'class' => yii\i18n\DbMessageSource::className()
+                '*' => [
+                    'class'           => yii\i18n\DbMessageSource::className(),
+                    'enableCaching'   => true,
+                    'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
                 ],
-                'sy' => [
-                    'class' => yii\i18n\DbMessageSource::className()
-                ]
-            ]
+            ],
         ],
     ],
 ];

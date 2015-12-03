@@ -25,4 +25,8 @@ class AssetBundle extends \yii\web\AssetBundle
     public $js = [
         'jquery.scrollTo.js',
     ];
+
+    public $depends = [
+        '\common\widgets\Easing\AssetBundle',                                           // Подключение управления течением анимации https://github.com/danro/easing-js и http://easings.net/ru
+    ];
 }

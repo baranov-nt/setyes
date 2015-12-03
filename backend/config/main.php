@@ -14,7 +14,22 @@ return [
     'bootstrap' => ['log'],
     'layout' => 'basic',
     'modules' => [
-        'i18n' => common\widgets\Translate\Module::className()
+        'i18n' => [
+            'class' => common\widgets\yii2TranslatePanel\Module::className(),
+            'controllerMap' => [
+                'default' => common\widgets\yii2TranslatePanel\controllers\DefaultController::className(),
+            ],
+            // example for set access control to module (if required):
+            /*'as access' => [
+                'class' => yii\filters\AccessControl::className(),
+                'rules' => [
+                    'controllers'   => ['i18n/default'],
+                    'actions'       => ['index', 'save', 'update', 'rescan', 'clear-cache', 'delete', 'restore'],
+                    'allow'         => true,
+                    'roles'         => ['translator'],
+                ],
+            ],*/
+        ],
     ],
     'components' => [
         'request' => [

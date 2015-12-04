@@ -12,7 +12,7 @@ class Module extends \yii\base\Module
 
     public static function t($message, $params = [], $language = null)
     {
-        return Yii::t('sy', $message, $params, $language);
+        return Yii::t('yii', $message, $params, $language);
     }
 
     /**

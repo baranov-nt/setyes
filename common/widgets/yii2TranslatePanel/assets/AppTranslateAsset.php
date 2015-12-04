@@ -15,8 +15,6 @@ class AppTranslateAsset extends \yii\web\AssetBundle
         'yii\web\JqueryAsset',
         'backend\assets\JqueryEssentialAsset',
         'common\widgets\yii2TranslatePanel\assets\AppAjaxButtonsAsset',
-        //'uran1980\yii\modules\i18n\assets\AppAjaxButtonsAsset',
-        //'uran1980\yii\widgets\chosen\ChosenSelectAsset',
-        '\common\widgets\Chosen\AssetBundle',                                           // Подключение выпадающих списков http://harvesthq.github.io/chosen/
+        'common\widgets\Chosen\AssetBundle',                                           // Подключение выпадающих списков http://harvesthq.github.io/chosen/
     ];
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace uran1980\yii\modules\i18n;
+namespace common\widgets\yii2TranslatePanel;
 
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\data\Pagination;
-use Zelenin\yii\modules\I18n\console\controllers\I18nController;
+use common\widgets\yii2I18nModule\console\controllers\I18nController;
 
 class Bootstrap implements BootstrapInterface
 {

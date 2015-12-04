@@ -8,8 +8,8 @@
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
-use uran1980\yii\modules\i18n\Module;
-use uran1980\yii\modules\i18n\models\SourceMessage;
+use common\widgets\yii2TranslatePanel\Module;
+use common\widgets\yii2TranslatePanel\models\SourceMessage;
 
 $this->title = Module::t('Update') . ': ' . $model->message;
 $this->params['breadcrumbs'][] = ['label' => Module::t('Translations'), 'url' => ['index']];

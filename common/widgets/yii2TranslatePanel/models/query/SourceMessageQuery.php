@@ -4,12 +4,12 @@ namespace common\widgets\yii2TranslatePanel\models\query;
 
 use Yii;
 use yii\db\ActiveQuery;
-use Zelenin\yii\modules\I18n\models\Message;
+use common\widgets\yii2I18nModule\models\Message;
 
 class SourceMessageQuery extends ActiveQuery
 {
     /**
-     * @return \uran1980\yii\modules\i18n\models\query\SourceMessageQuery
+     * @return \common\widgets\yii2TranslatePanel\models\query\SourceMessageQuery
      */
     public function notTranslated()
     {
@@ -40,7 +40,7 @@ class SourceMessageQuery extends ActiveQuery
     }
 
     /**
-     * @return \uran1980\yii\modules\i18n\models\query\SourceMessageQuery
+     * @return \common\widgets\yii2TranslatePanel\models\query\SourceMessageQuery
      */
     public function translated()
     {
@@ -69,7 +69,7 @@ class SourceMessageQuery extends ActiveQuery
     }
 
     /**
-     * @return \uran1980\yii\modules\i18n\models\query\SourceMessageQuery
+     * @return \common\widgets\yii2TranslatePanel\models\query\SourceMessageQuery
      */
     public function deleted()
     {

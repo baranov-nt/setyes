@@ -12,14 +12,15 @@ use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\Pjax;
-use common\widgets\Translate\models\search\SourceMessageSearch;
-use common\widgets\Translate\Module;
+use common\widgets\yii2I18nModule\models\search\SourceMessageSearch;
+use common\widgets\yii2I18nModule\Module;
 
 $this->title = Module::t('Translations');
 echo Breadcrumbs::widget(['links' => [
     $this->title
 ]]);
 ?>
+<div class="message-index">
     <h3><?= Html::encode($this->title) ?></h3>
     <?php
     Pjax::begin();
@@ -59,3 +60,4 @@ echo Breadcrumbs::widget(['links' => [
     ]);
     Pjax::end();
     ?>
+</div>

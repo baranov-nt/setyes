@@ -34,7 +34,7 @@ return [
             'i18n' => [
                 'class' => \common\widgets\yii2I18nModule\Module::className(),
                 'controllerMap' => [
-                    'default' => \common\widgets\yii2I18nModule\controllers\DefaultController::className(),
+                    'default' => \backend\controllers\TranslatePanelController::className(),
                 ],
             ]
         ],

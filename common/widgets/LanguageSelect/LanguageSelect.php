@@ -20,8 +20,8 @@ class LanguageSelect extends Widget
     /* ใส่ภาษาของคุณที่นี่ */
     public $languages = [
         'en' => 'English',
-        //'de' => 'Deutsch',
-        //'fr' => 'Un Français',
+        'de' => 'Deutsch',
+        'fr' => 'Un Français',
         'ru' => 'Русский',
     ];
 

@@ -6,21 +6,29 @@
 
 use yii\helpers\Html;
 use yii\web\View;
-use common\widgets\Translate\models\SourceMessage;
-use common\widgets\Translate\Module;
-use yii\bootstrap\ActiveForm;
+use common\widgets\yii2I18nModule\models\SourceMessage;
+use common\widgets\yii2I18nModule\Module;
+use yii\widgets\ActiveForm;
 
 $this->title = Module::t('Update') . ': ' . $model->message;
-$this->params['breadcrumbs'][] = ['label' => Module::t('Translations'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $this->title];
+/*echo Breadcrumb::widget(['links' => [
+    ['label' => Module::t('Translations'), 'url' => ['index']],
+    ['label' => $this->title]
+]]);*/
 ?>
-<h2><?= Module::t('Source message') ?></h2>
-<p><?= Html::encode($model->message) ?></p>
-<?php $form = ActiveForm::begin(); ?>
-<?php foreach ($model->messages as $language => $message) : ?>
-    <?= $form->field($model->messages[$language], '[' . $language . ']translation')->label($language) ?>
-<?php endforeach; ?>
-<?= Html::submitButton(Module::t('Update')) ?>
-<?php $form::end(); ?>
-<?php
-//echo Yii::t('newSome', 'Translations');
+<div class="message-update">
+    <div class="message-form">
+        <?php $form = ActiveForm::begin(); ?>
+        <div class="field">
+            <div class="ui grid">
+                <?php foreach ($model->messages as $language => $message) : ?>
+                    <div class="four wide column">
+                        <?= $form->field($model->messages[$language], '[' . $language . ']translation')->label($language) ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?= Html::submitButton(Module::t('Update'), ['class' => 'ui primary button']) ?>
+        <?php $form::end(); ?>
+    </div>
+</div>

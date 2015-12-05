@@ -1,23 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 28.11.2015
- * Time: 13:38
- */
 
 namespace backend\controllers;
 
 use yii\base\Model;
-use backend\controllers\BehaviorsController;
+use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use Yii;
-use common\widgets\Translate\models\search\SourceMessageSearch;
-use common\widgets\Translate\models\SourceMessage;
-use common\widgets\Translate\Module;
+use common\widgets\yii2I18nModule\models\search\SourceMessageSearch;
+use common\widgets\yii2I18nModule\models\SourceMessage;
+use common\widgets\yii2I18nModule\Module;
 
-class TranslateController extends BehaviorsController
+class TranslateController extends Controller
 {
     public function actionIndex()
     {

@@ -1,7 +1,7 @@
 <?php
 return [
     'name' => 'SetYes.Com',
-    'language' => 'ru',
+    'language' => 'en',
     'charset' => 'UTF-8',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
@@ -28,7 +28,7 @@ return [
         ],
         'urlManager' => [
             'class' => 'codemix\localeurls\UrlManager',
-            'languages' => ['en', 'fr', 'de', 'ru'],
+            'languages' => ['ru', 'en', 'de', 'fr'],
         ],
         /*'urlManager' => [
             'class'             => yii\web\UrlManager::className(),
@@ -54,8 +54,22 @@ return [
             ],
         ],*/
         'i18n' => [
-            'class' => \common\widgets\yii2I18nModule\components\I18N::className(),
-            'languages' => ['ru', 'de', 'fr']
+            //'class' => \common\widgets\yii2I18nModule\components\I18N::className(),
+            'class'      => common\widgets\yii2TranslatePanel\components\I18N::className(),
+            'languages' => ['ru', 'de', 'fr'],
+            'sourcePath' => [
+                __DIR__ . '/../../frontend',
+                __DIR__ . '/../../backend',
+                __DIR__ . '/../../common',
+            ],
+            'messagePath' => __DIR__  . '/../../common/messages',
+            'translations' => [
+                '*' => [
+                    'class'           => yii\i18n\DbMessageSource::className(),
+                    'enableCaching'   => true,
+                    'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
+                ],
+            ],
         ],
     ],
 ];

@@ -35,9 +35,9 @@ return [
             'enablePrettyUrl'   => true,
             'showScriptName'    => false, // false - means that index.php will not be part of the URLs
         ],*/
-        /*'i18n' => [
+        'i18n' => [
             'class'      => common\widgets\yii2TranslatePanel\components\I18N::className(),
-            'languages'  => ['en', 'de', 'fr', 'ru'],
+            'languages' => ['ru', 'de', 'fr'],
             'format'     => 'db',
             'sourcePath' => [
                 __DIR__ . '/../../frontend',
@@ -51,9 +51,19 @@ return [
                     'enableCaching'   => true,
                     'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
                 ],
+                'yii' => [
+                    'class'           => yii\i18n\DbMessageSource::className(),
+                    'enableCaching'   => true,
+                    'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
+                ],
+                'sy' => [
+                    'class'           => yii\i18n\DbMessageSource::className(),
+                    'enableCaching'   => true,
+                    'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
+                ],
             ],
-        ],*/
-        'i18n' => [
+        ],
+        /*'i18n' => [
             //'class' => \common\widgets\yii2I18nModule\components\I18N::className(),
             'class'      => common\widgets\yii2TranslatePanel\components\I18N::className(),
             'languages' => ['ru', 'de', 'fr'],
@@ -70,6 +80,6 @@ return [
                     'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
                 ],
             ],
-        ],
+        ],*/
     ],
 ];

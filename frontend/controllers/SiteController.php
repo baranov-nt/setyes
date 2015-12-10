@@ -54,17 +54,17 @@ class SiteController extends Controller
                 $user = $auth->user;
                 if($user->status == User::STATUS_NOT_ACTIVE && $user->email == ''):
                     Yii::$app->getSession()->setFlash('success', [
-                        Yii::t('app', "Для завершения регистрации введите телефон и подтвердите адрес электронной почты."),
+                        Yii::t('app', "To complete registration, enter the phone number and confirm the e-mail address."),
                     ]);
                     return $this->redirectUser($url = Url::to(['/main/finish-reg', 'id' => $user->id]));
                 elseif($user->status == User::STATUS_NOT_ACTIVE && $user->email != ''):
                     Yii::$app->getSession()->setFlash('success', [
-                        Yii::t('app', "Для завершения регистрации введите номер телефона."),
+                        Yii::t('app', "To complete registration, enter a phone number."),
                     ]);
                     return $this->redirectUser($url = Url::to(['/main/finish-reg', 'id' => $user->id]));
                 elseif($user->status == User::STATUS_DELETED):
                     Yii::$app->getSession()->setFlash('error', [
-                        Yii::t('app', "Данный пользователь заблокирован."),
+                        Yii::t('app', "This user is blocked."),
                     ]);
                     return $this->redirectUser($url = Url::to(['/main/index']));
                 endif;
@@ -74,14 +74,14 @@ class SiteController extends Controller
                     // Если пользователь регитрировался ранее через форму регистации.
                     if($user->status == User::STATUS_ACTIVE):
                         Yii::$app->getSession()->setFlash('error',
-                            Yii::t('app', "Авторизация с использованием электронного адреса <strong>".$user->email."</strong> уже успешно прошла через форму регистрации.
-                            Воспользуйте ссылкой <strong>".'"Забыли пароль?"'."</strong> для востанновления пароля."));
+                            Yii::t('app', "Authorization using the email address <strong> {email} </strong> has successfully passed through the registration form.
+                             Click on the link <strong> Forgot your password? </strong> to restore the password.", ['email' => $user->email]));
                         return $this->redirectUser($url = Url::to(['/main/login']));
                     else:
                         Yii::$app->getSession()->setFlash('error', [
-                            Yii::t('app', "Авторизация с использованием электронного адреса <strong>".$user->email."</strong> уже происходила через аккунт <strong>".$user->auths->source."</strong>.
-                            Выполните вход используя аккаунт <strong>".$user->auths->source."</strong> или воспользуйте ссылкой <strong>".'"Забыли пароль?"'."</strong> для востанновления пароля для
-                            пользователя с емайл <strong>".$user->email."</strong>.", ['client' => $title = $client->getTitle()]),
+                            Yii::t('app', "Authorization using the email address <strong> {email} </strong> is already happening through the account <strong> {auths} </strong>.
+                            Log on using the account <strong> {auths} </strong> or use the link <strong> Forgot your password? </strong> for the password to vostannovleniya
+                            user email <strong> {email} </strong>.", ['email' => $user->email, 'auths' => $user->auths->source]),
                         ]);
                         return $this->redirectUser($url = Url::to(['/main/login']));
                     endif;
@@ -148,12 +148,12 @@ class SiteController extends Controller
                                 // если нет емайл, делаем перенаправление на main/finish-reg
                                 if($email == false):
                                     Yii::$app->getSession()->setFlash('success', [
-                                        Yii::t('app', "Для завершения регистрации введите телефон и подтвердите адрес электронной почты."),
+                                        Yii::t('app', "To complete registration, enter the phone number and confirm the e-mail address."),
                                     ]);
                                     return $this->redirectUser($url = Url::to(['/main/finish-reg', 'id' => $user->id]));
                                 endif;
                                 Yii::$app->getSession()->setFlash('success', [
-                                    Yii::t('app', "Для завершения регистрации введите номер телефона."),
+                                    Yii::t('app', "To complete registration, enter a phone number."),
                                 ]);
                                 return $this->redirectUser($url = Url::to(['/main/finish-reg', 'id' => $user->id]));
                                 //Yii::$app->user->login($user);
@@ -167,14 +167,14 @@ class SiteController extends Controller
                         // Если пользователь регитрировался ранее через форму регистации.
                         if($user->status == User::STATUS_ACTIVE):
                             Yii::$app->getSession()->setFlash('error',
-                                Yii::t('app', "Авторизация с использованием электронного адреса <strong>".$user->email."</strong> уже успешно прошла через форму регистрации.
-                                Воспользуйте ссылкой <strong>".'"Забыли пароль?"'."</strong> для востанновления пароля."));
+                                Yii::t('app', "Authorization using the email address <strong> {email} </strong> has successfully passed through the registration form.
+                                 Click on the link <strong> Forgot your password? </strong> to restore the password.", ['email' => $user->email]));
                             return $this->redirectUser($url = Url::to(['/main/login']));
                         else:
                             Yii::$app->getSession()->setFlash('error', [
-                                Yii::t('app', "Авторизация с использованием электронного адреса <strong>".$user->email."</strong> уже происходила через аккунт <strong>".$user->auths->source."</strong>.
-                                Выполните вход используя аккаунт <strong>".$user->auths->source."</strong> или воспользуйте ссылкой <strong>".'"Забыли пароль?"'."</strong> для востанновления пароля для
-                                пользователя с емайл <strong>".$user->email."</strong>.", ['client' => $title = $client->getTitle()]),
+                                Yii::t('app', "Authorization using the email address <strong> {email} </strong> is already happening through the account <strong> {auths} </strong>.
+                            Log on using the account <strong> {auths} </strong> or use the link <strong> Forgot your password? </strong> for the password to vostannovleniya
+                            user email <strong> {email} </strong>.", ['email' => $user->email, 'auths' => $user->auths->source]),
                             ]);
                             return $this->redirectUser($url = Url::to(['/main/login']));
                         endif;

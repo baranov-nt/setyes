@@ -27,10 +27,10 @@ use yii\widgets\MaskedInput;
     <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Войти', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Sign in'), ['class' => 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 
-    <?= Html::a('Забыли пароль?', ['/main/send-email']) ?>
+    <?= Html::a(Yii::t('app', 'Forgot your password?'), ['/main/send-email']) ?>
 
 </div><!-- main-login -->

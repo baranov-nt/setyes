@@ -30,7 +30,7 @@ use yii\authclient\widgets\AuthChoice;
             <div class="form-group">
                 <?= Html::submitButton('Войти', ['class' => 'btn btn-primary']) ?>
             </div>
-            <?= Html::a('Забыли пароль?', ['/main/send-email']) ?>
+            <?= Html::a(Yii::t('app', 'Forgot your password?'), ['/main/send-email']) ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>

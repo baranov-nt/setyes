@@ -37,7 +37,7 @@ use yii\widgets\MaskedInput;
             ?>
 
             <div class="form-group">
-                <?= Html::submitButton(Yii::$app->controller->action->id == 'reg' ? 'Регистрация' : 'Завершить регистрацию',
+                <?= Html::submitButton(Yii::$app->controller->action->id == 'reg' ? Yii::t('app', 'Registration') : Yii::t('app', 'Complete Registration'),
                     [
                         'class' => Yii::$app->controller->action->id == 'reg' ? 'btn btn-primary' : 'btn btn-success'
                     ]
@@ -47,7 +47,7 @@ use yii\widgets\MaskedInput;
             <?php
             if($model->scenario === 'emailActivation' || $model->scenario === 'phoneAndEmailFinish'):
                 ?>
-                <i>*На указанный емайл будет отправлено письмо для активации аккаунта.</i>
+                <i> <?= Yii::t('app', '*A valid email will be sent an email to activate your account.') ?> </i>
                 <?php
             endif;
             ?>

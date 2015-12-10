@@ -126,7 +126,7 @@ $this->beginPage();
                         '<li class="divider"></li>',
                         [
                             'label' => Module::t('Translate Panel'),
-                            'url' => ['/user/index']
+                            'url' => ['/translate-panel/index']
                         ],
                         [
                             'label' => 'Управление пользователями',

@@ -7,8 +7,8 @@ use yii\console\Controller;
 use yii\console\Exception;
 use yii\helpers\FileHelper;
 use yii\helpers\VarDumper;
-use common\widgets\Translate\models\Message;
-use common\widgets\Translate\models\SourceMessage;
+use common\widgets\yii2I18nModule\models\Message;
+use common\widgets\yii2TranslatePanel\models\SourceMessage;
 
 class I18nController extends Controller
 {

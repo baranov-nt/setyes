@@ -19,10 +19,12 @@ class SourceMessageQuery extends ActiveQuery
         $i = 0;
         foreach (Yii::$app->getI18n()->languages as $language) {
             if ($i === 0) {
+
                 $query->andWhere("{$table}.language = :language and {$table}.translation is not null", [
                     ':language' => $language,
                 ]);
             } else {
+                //dd(111);
                 $query->innerJoin("{$table} t{$i}", "t{$i}.id = {$table}.id and t{$i}.language = :language and t{$i}.translation is not null", [
                     ':language' => $language,
                 ]);
@@ -32,7 +34,8 @@ class SourceMessageQuery extends ActiveQuery
 
         $ids = $query->indexBy('id')->all();
         $this
-            ->andWhere(['not in', "{$table}.id", array_keys($ids)])
+            //->andWhere(['not in', "{$table}.id", array_keys($ids)])
+            ->andWhere(['not in', "id", array_keys($ids)])
             ->andWhere(['not like', 'message', '@@'])
         ;
 
@@ -61,7 +64,8 @@ class SourceMessageQuery extends ActiveQuery
         }
         $ids = $query->indexBy('id')->all();
         $this
-            ->andWhere(['in', "{$table}.id", array_keys($ids)])
+            //->andWhere(['in', "{$table}.id", array_keys($ids)])
+            ->andWhere(['in', "id", array_keys($ids)])
             ->andWhere(['not like', 'message', '@@'])
         ;
 

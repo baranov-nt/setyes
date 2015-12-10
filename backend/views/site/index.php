@@ -1,11 +1,6 @@
 <?php
-use yii\bootstrap\Dropdown;
-use common\widgets\LanguageDropdown\LanguageDropdown;
 /* @var $this yii\web\View */
-
 $this->title = 'Управение продуктами';
-
-
 
 if(Yii::$app->user->can('Управлять товарами')):
     ?>
@@ -20,10 +15,6 @@ else:
     <h1>У вас нет прав к данному разделу!!!</h1>
     <?php
 endif;
-?>
-            <?php
-            echo \common\widgets\LanguageSelect\LanguageSelect::widget();
-            ?>
-<?php
+
 
 

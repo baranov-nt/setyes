@@ -58,9 +58,9 @@ class User extends ActiveRecord implements IdentityInterface
             [['status'], 'required'],
             ['email', 'email'],
             ['password', 'required', 'on' => 'create'],
-            ['phone', 'unique', 'message' => 'Этот номер занят.'],
-            ['phone_second', 'unique', 'message' => 'Этот номер занят.'],
-            ['email', 'unique', 'message' => 'Эта почта уже зарегистрирована.'],
+            ['phone', 'unique', 'message' => Yii::t('app', 'This number is already registered.')],
+            ['phone_second', 'unique', 'message' => Yii::t('app', 'This number is already registered.')],
+            ['email', 'unique', 'message' => Yii::t('app', 'This email is already registered.')],
             ['secret_key', 'unique']
         ];
     }
@@ -72,15 +72,15 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'phone' => 'Номер телефона',
-            'phone_second' => 'Дополнительный номер телефона',
-            'email' => 'Email',
+            'phone' => Yii::t('app', 'Phone number.'),
+            'phone_second' => Yii::t('app', 'Additional phone number'),
+            'email' => Yii::t('app', 'Email'),
             'password' => 'Password Hash',
-            'status' => 'Статус',
+            'status' => Yii::t('app', 'Status'),
             'auth_key' => 'Auth Key',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата изменения',
-            'item_name' => 'Роль',
+            'created_at' => Yii::t('app', 'Created at'),
+            'updated_at' => Yii::t('app', 'Updated at'),
+            'item_name' => Yii::t('app', 'Role'),
         ];
     }
 
@@ -262,15 +262,15 @@ class User extends ActiveRecord implements IdentityInterface
 
         if ($status === self::STATUS_DELETED)
         {
-            return "Бан";
+            return Yii::t('app', "Ban");
         }
         elseif ($status === self::STATUS_NOT_ACTIVE)
         {
-            return "Не активирован";
+            return Yii::t('app', "Do not activate");
         }
         else
         {
-            return "Активирован";
+            return Yii::t('app', "Activate");
         }
     }
 
@@ -282,9 +282,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function getStatusList()
     {
         $statusArray = [
-            self::STATUS_ACTIVE     => 'Активирован',
-            self::STATUS_NOT_ACTIVE => 'Не активирован',
-            self::STATUS_DELETED    => 'Бан'
+            self::STATUS_ACTIVE     => Yii::t('app', "Activate"),
+            self::STATUS_NOT_ACTIVE => Yii::t('app', "Do not activate"),
+            self::STATUS_DELETED    => Yii::t('app', "Ban")
         ];
         return $statusArray;
     }

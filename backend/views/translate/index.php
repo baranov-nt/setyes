@@ -13,9 +13,8 @@ use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\Pjax;
 use common\widgets\yii2I18nModule\models\search\SourceMessageSearch;
-use common\widgets\yii2I18nModule\Module;
 
-$this->title = Module::t('Translations');
+$this->title = Yii::t('app', 'Translations');
 echo Breadcrumbs::widget(['links' => [
     $this->title
 ]]);

@@ -5,7 +5,6 @@ namespace common\widgets\yii2TranslatePanel\models;
 use yii\base\InvalidConfigException;
 use Yii;
 use yii\db\ActiveRecord;
-use common\widgets\yii2TranslatePanel\Module;
 use common\widgets\yii2TranslatePanel\models\query\SourceMessageQuery;
 use common\widgets\yii2I18nModule\models\Message;
 
@@ -55,11 +54,11 @@ class SourceMessage extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id'            => Module::t('ID'),
-            'category'      => Module::t('Category'),
-            'message'       => Module::t('Sourse Messages'),
-            'translation'   => Module::t('Message Translations'),
-            'status'        => Module::t('Translation status')
+            'id'            => Yii::t('app', 'ID'),
+            'category'      => Yii::t('app', 'Category'),
+            'message'       => Yii::t('app', 'Sourse Messages'),
+            'translation'   => Yii::t('app', 'Message Translations'),
+            'status'        => Yii::t('app', 'Translation status')
         ];
     }
 

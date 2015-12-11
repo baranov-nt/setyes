@@ -11,7 +11,6 @@ use yii\helpers\FileHelper;
 use yii\helpers\VarDumper;
 use yii\i18n\GettextPoFile;
 use yii\helpers\Json;
-use common\widgets\yii2TranslatePanel\Module;
 use common\widgets\yii2TranslatePanel\models\SourceMessage;
 use common\widgets\yii2I18nModule\models\Message;
 
@@ -219,8 +218,8 @@ class SourceMessageSearch extends SourceMessage
     public static function getStatus($id = null)
     {
         $statuses = [
-            self::STATUS_TRANSLATED => Module::t('Translated'),
-            self::STATUS_NOT_TRANSLATED => Module::t('Not translated'),
+            self::STATUS_TRANSLATED => Yii::t('app', 'Translated'),
+            self::STATUS_NOT_TRANSLATED => Yii::t('app', 'Not translated'),
         ];
         if ($id !== null) {
             return ArrayHelper::getValue($statuses, $id, null);
@@ -278,10 +277,10 @@ class SourceMessageSearch extends SourceMessage
     {
         return [
             'id'        => 'ID',
-            'category'  => Module::t('Category'),
-            'message'   => Module::t('Message'),
-            'status'    => Module::t('Translation status'),
-            'location'  => Module::t('Location'),
+            'category'  => Yii::t('app', 'Category'),
+            'message'   => Yii::t('app', 'Message'),
+            'status'    => Yii::t('app', 'Translation status'),
+            'location'  => Yii::t('app', 'Location'),
         ];
     }
 

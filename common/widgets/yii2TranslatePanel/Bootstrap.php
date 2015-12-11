@@ -5,7 +5,7 @@ namespace common\widgets\yii2TranslatePanel;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\data\Pagination;
-use common\widgets\yii2I18nModule\console\controllers\I18nController;
+use console\controllers\I18nController;
 
 class Bootstrap implements BootstrapInterface
 {

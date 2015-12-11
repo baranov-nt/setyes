@@ -2,7 +2,7 @@
 
 namespace common\widgets\yii2TranslatePanel\components\widgets;
 
-use common\widgets\yii2TranslatePanel\Module;
+use Yii;
 
 class LinkPager extends \yii\widgets\LinkPager
 {
@@ -11,10 +11,10 @@ class LinkPager extends \yii\widgets\LinkPager
      */
     public function init()
     {
-        $this->nextPageLabel  = Module::t('Next') . ' &raquo;';
-        $this->prevPageLabel  = '&laquo; ' . Module::t('Prev.');
-        $this->firstPageLabel = Module::t('First');
-        $this->lastPageLabel  = Module::t('Last');
+        $this->nextPageLabel  = Yii::t('app', 'Next') . ' &raquo;';
+        $this->prevPageLabel  = '&laquo; ' . Yii::t('app', 'Prev.');
+        $this->firstPageLabel = Yii::t('app', 'First');
+        $this->lastPageLabel  = Yii::t('app', 'Last');
 
         parent::init();
     }

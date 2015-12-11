@@ -5,7 +5,6 @@ namespace common\widgets\yii2I18nModule\models;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
-use common\widgets\yii2I18nModule\Module;
 
 class Message extends ActiveRecord
 {
@@ -40,9 +39,9 @@ class Message extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Module::t('ID'),
-            'language' => Module::t('Language'),
-            'translation' => Module::t('Translation')
+            'id' => Yii::t('app', 'ID'),
+            'language' => Yii::t('app', 'Language'),
+            'translation' => Yii::t('app', 'Translation')
         ];
     }
 

@@ -2,7 +2,7 @@
 
 namespace common\widgets\yii2TranslatePanel\components\grid;
 
-use common\widgets\yii2TranslatePanel\Module;
+use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -10,8 +10,8 @@ class ActionColumn extends \yii\grid\ActionColumn
 {
     public function init()
     {
-        $this->header = $this->header ?: Module::t('Actions');
-        $this->footer = $this->footer ?: Module::t('Actions');
+        $this->header = $this->header ?: Yii::t('app', 'Actions');
+        $this->footer = $this->footer ?: Yii::t('app', 'Actions');
         $this->headerOptions = ArrayHelper::merge([
             'class' => 'text-align-center',
             'width' => '100',
@@ -35,7 +35,7 @@ class ActionColumn extends \yii\grid\ActionColumn
             $this->buttons['view'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
                     'class'     => 'btn btn-xs btn-default',
-                    'title'     => Module::t('View'),
+                    'title'     => Yii::t('app', 'View'),
                     'data-pjax' => '0',
                 ]);
             };
@@ -44,16 +44,16 @@ class ActionColumn extends \yii\grid\ActionColumn
             $this->buttons['update'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                     'class'     => 'btn btn-xs btn-default',
-                    'title'     => Module::t('Update'),
+                    'title'     => Yii::t('app', 'Update'),
                     'data-pjax' => '0',
                 ]);
             };
         }
         if ( !isset($this->buttons['save']) ) {
             $this->buttons['save'] = function ($url, $model, $key) {
-                return Html::a('<span class="glyphicon glyphicon-download"></span> ' . Module::t('Save'), $url, [
+                return Html::a('<span class="glyphicon glyphicon-download"></span> ' . Yii::t('app', 'Save'), $url, [
                     'class'     => 'btn btn-xs btn-success',
-                    'title'     => Module::t('Save'),
+                    'title'     => Yii::t('app', 'Save'),
                     'data-pjax' => '0',
                 ]);
             };
@@ -62,8 +62,8 @@ class ActionColumn extends \yii\grid\ActionColumn
             $this->buttons['delete'] = function ($url, $model, $key) {
                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
                     'class'         => 'btn btn-xs btn-danger margin-left-10px',
-                    'title'         => Module::t('Delete'),
-                    'data-confirm'  => Module::t('Are you sure you want to delete this item?'),
+                    'title'         => Yii::t('app', 'Delete'),
+                    'data-confirm'  => Yii::t('app', 'Are you sure you want to delete this item?'),
                     'data-method'   => 'post',
                     'data-pjax'     => '0',
                 ]);

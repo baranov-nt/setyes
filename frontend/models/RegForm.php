@@ -54,9 +54,9 @@ class RegForm extends Model
     public function attributeLabels()
     {
         return [
-            'phone' => Yii::t('app', 'Phone number.'),
+            'phone' => Yii::t('app', 'Phone number'),
             'email' => Yii::t('app', 'Email'),
-            'password' => Yii::t('app', 'Password')
+            'password' => Yii::t('app', 'Password'),
         ];
     }
 

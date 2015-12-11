@@ -1,6 +1,6 @@
 <?php
 
-return [
+/*return [
     'Category' => 'Категория',
     'ID' => 'ID',
     'Language' => 'Язык',
@@ -13,4 +13,4 @@ return [
     'Translations' => 'Переводы',
     'Update' => 'Обновить',
     'Updated' => 'Обновлено',
-];
+];*/

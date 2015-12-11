@@ -6,7 +6,6 @@ use yii\data\ActiveDataProvider;
 use Yii;
 use yii\helpers\ArrayHelper;
 use common\widgets\yii2I18nModule\models\SourceMessage;
-use common\widgets\yii2I18nModule\Module;
 
 class SourceMessageSearch extends SourceMessage
 {
@@ -56,8 +55,8 @@ class SourceMessageSearch extends SourceMessage
     public static function getStatus($id = null)
     {
         $statuses = [
-            self::STATUS_TRANSLATED => Module::t('Translated'),
-            self::STATUS_NOT_TRANSLATED => Module::t('Not translated'),
+            self::STATUS_TRANSLATED => Yii::t('app', 'Translated'),
+            self::STATUS_NOT_TRANSLATED => Yii::t('app', 'Not translated'),
         ];
         if ($id !== null) {
             return ArrayHelper::getValue($statuses, $id, null);

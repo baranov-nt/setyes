@@ -3,7 +3,6 @@
 /**
  * @var View $this
  */
-use common\widgets\yii2TranslatePanel\Module;
 use common\widgets\yii2TranslatePanel\components\grid\GridView;
 use common\widgets\yii2TranslatePanel\components\grid\SerialColumn;
 use common\widgets\yii2TranslatePanel\components\grid\ActionColumn;
@@ -18,7 +17,7 @@ use yii\helpers\Url;
 
 $searchModel = SourceMessageSearch::getInstance();
 
-$this->title = Module::t('Translations');
+$this->title = Yii::t('app', 'Translations');
 $this->params['breadcrumbs'][] = $this->title;
 
 AppTranslateAsset::register($this);
@@ -29,10 +28,10 @@ AppTranslateAsset::register($this);
         <div class="col-lg-12">
             <span class="pull-left btn-group">
             <?php   foreach ( [
-                        SourceMessageSearch::STATUS_ALL             => Module::t('All'),
-                        SourceMessageSearch::STATUS_TRANSLATED      => Module::t('Translated'),
-                        SourceMessageSearch::STATUS_NOT_TRANSLATED  => Module::t('Not Translated'),
-                        SourceMessageSearch::STATUS_DELETED         => Module::t('Deleted'),
+                        SourceMessageSearch::STATUS_ALL             => Yii::t('app', 'All'),
+                        SourceMessageSearch::STATUS_TRANSLATED      => Yii::t('app', 'Translated'),
+                        SourceMessageSearch::STATUS_NOT_TRANSLATED  => Yii::t('app', 'Not Translated'),
+                        SourceMessageSearch::STATUS_DELETED         => Yii::t('app', 'Deleted'),
                     ] as $status => $name ) { ?>
                 <a class="btn btn-default <?php
                     $params = ArrayHelper::merge(Yii::$app->request->getQueryParams(), [
@@ -54,15 +53,15 @@ AppTranslateAsset::register($this);
         <span class="pull-right btn-group">
             <a class="btn btn-success" href="<?php
                 echo Url::to(['/translate-panel/rescan']); ?>"><i class="fa fa-refresh"></i> <?php
-                echo Module::t('Rescan'); ?></a>
+                echo Yii::t('app', 'Rescan'); ?></a>
             <a class="btn btn-warning btn-ajax" action="translation-clear-cache"
-               before-send-title="<?php echo Module::t('Request sent'); ?>"
-               before-send-message="<?php echo Module::t('Please, wait...'); ?>"
-               success-title="<?php echo Module::t('Server Response'); ?>"
-               success-message="<?php echo Module::t('Cache successfully cleared.'); ?>"
+               before-send-title="<?php echo Yii::t('app', 'Request sent'); ?>"
+               before-send-message="<?php echo Yii::t('app', 'Please, wait...'); ?>"
+               success-title="<?php echo Yii::t('app', 'Server Response'); ?>"
+               success-message="<?php echo Yii::t('app', 'Cache successfully cleared.'); ?>"
                href="<?php
                     echo Url::to(['/translate-panel/clear-cache']); ?>"><i class="fa fa-recycle"></i> <?php
-                    echo Module::t('Clear Cache'); ?></a>
+                    echo Yii::t('app', 'Clear Cache'); ?></a>
         </span>
     </h2>
     <?php
@@ -117,7 +116,7 @@ AppTranslateAsset::register($this);
                     'copy' => function ($url, $model, $key) {
                         return Html::a('<i class="fa fa-arrow-right "></i>', '', [
                             'class' => 'btn btn-xs btn-default btn-translation-copy-from-source',
-                            'title' => Module::t('Copy from source message'),
+                            'title' => Yii::t('app', 'Copy from source message'),
                         ]);
                     },
                 ],
@@ -180,14 +179,14 @@ AppTranslateAsset::register($this);
                 'template' => '{save} {fullscreen} {delete}',
                 'buttons' => [
                     'save' => function ($url, $model, $key) {
-                        return Html::a('<i class="glyphicon glyphicon-download"></i> ' . Module::t('Save'), $url, [
+                        return Html::a('<i class="glyphicon glyphicon-download"></i> ' . Yii::t('app', 'Save'), $url, [
                             'class'                 => 'btn btn-xs btn-success btn-translation-save',
                             'action'                => 'translation-save',
-                            'title'                 => Module::t('Save'),
-                            'before-send-title'     => Module::t('Request sent'),
-                            'before-send-message'   => Module::t('Please, wait...'),
-                            'success-title'         => Module::t('Server Response'),
-                            'success-message'       => Module::t('Message successfully saved.'),
+                            'title'                 => Yii::t('app', 'Save'),
+                            'before-send-title'     => Yii::t('app', 'Request sent'),
+                            'before-send-message'   => Yii::t('app', 'Please, wait...'),
+                            'success-title'         => Yii::t('app', 'Server Response'),
+                            'success-message'       => Yii::t('app', 'Message successfully saved.'),
                         ]);
                     },
                     'delete' => function ($url, $model, $key) {
@@ -195,39 +194,39 @@ AppTranslateAsset::register($this);
                             return '<span class="btn-ajax-wrap">' . Html::a('<i class="glyphicon glyphicon-refresh"></i>', str_replace('delete', 'restore', $url), [
                                 'class'                 => 'btn btn-xs btn-info btn-ajax',
                                 'action'                => 'translation-restore',
-//                                'title'                 => Module::t('Restore'),
-//                                'data-confirm'          => Module::t('Are you sure you want to restore this item?'),
+//                                'title'                 => Yii::t('app', 'Restore'),
+//                                'data-confirm'          => Yii::t('app', 'Are you sure you want to restore this item?'),
                                 'data-toggle'           => 'confirmation',
                                 'data-singleton'        => 'true',
                                 'data-placement'        => 'top',
-                                'data-btn-ok-lable'     => Module::t('Yes'),
+                                'data-btn-ok-lable'     => Yii::t('app', 'Yes'),
                                 'data-btn-ok-class'     => 'btn-xs btn-success',
-                                'data-btn-cancel'       => Module::t('No'),
+                                'data-btn-cancel'       => Yii::t('app', 'No'),
                                 'data-btn-cancel-class' => 'btn-xs btn-warning',
                                 'data-popout'           => 'true',
-                                'before-send-title'     => Module::t('Request sent'),
-                                'before-send-message'   => Module::t('Please, wait...'),
-                                'success-title'         => Module::t('Server Response'),
-                                'success-message'       => Module::t('Message successfully restored.'),
+                                'before-send-title'     => Yii::t('app', 'Request sent'),
+                                'before-send-message'   => Yii::t('app', 'Please, wait...'),
+                                'success-title'         => Yii::t('app', 'Server Response'),
+                                'success-message'       => Yii::t('app', 'Message successfully restored.'),
                             ]) . '</span>';
                         } else {
                             return '<span class="btn-ajax-wrap">' . Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
                                 'class'                 => 'btn btn-xs btn-danger btn-ajax',
                                 'action'                => 'translation-delete',
-//                                'title'                 => Module::t('Delete'),
-//                                'data-confirm'          => Module::t('Are you sure you want to delete this item?'),
+//                                'title'                 => Yii::t('app', 'Delete'),
+//                                'data-confirm'          => Yii::t('app', 'Are you sure you want to delete this item?'),
                                 'data-toggle'           => 'confirmation',
                                 'data-singleton'        => 'true',
                                 'data-placement'        => 'top',
-                                'data-btn-ok-lable'     => Module::t('Yes'),
+                                'data-btn-ok-lable'     => Yii::t('app', 'Yes'),
                                 'data-btn-ok-class'     => 'btn-xs btn-success',
-                                'data-btn-cancel'       => Module::t('No'),
+                                'data-btn-cancel'       => Yii::t('app', 'No'),
                                 'data-btn-cancel-class' => 'btn-xs btn-warning',
                                 'data-popout'           => 'true',
-                                'before-send-title'     => Module::t('Request sent'),
-                                'before-send-message'   => Module::t('Please, wait...'),
-                                'success-title'         => Module::t('Server Response'),
-                                'success-message'       => Module::t('Message successfully deleted.'),
+                                'before-send-title'     => Yii::t('app', 'Request sent'),
+                                'before-send-message'   => Yii::t('app', 'Please, wait...'),
+                                'success-title'         => Yii::t('app', 'Server Response'),
+                                'success-message'       => Yii::t('app', 'Message successfully deleted.'),
                             ]) . '</span>';
                         }
                     },

@@ -9,7 +9,6 @@ use yii\web\Response;
 use Yii;
 use common\widgets\yii2I18nModule\models\search\SourceMessageSearch;
 use common\widgets\yii2I18nModule\models\SourceMessage;
-use common\widgets\yii2I18nModule\Module;
 
 class TranslateController extends Controller
 {
@@ -35,7 +34,7 @@ class TranslateController extends Controller
 
         if (Model::loadMultiple($model->messages, Yii::$app->getRequest()->post()) && Model::validateMultiple($model->messages)) {
             $model->saveMessages();
-            Yii::$app->getSession()->setFlash('success', Module::t('Updated'));
+            Yii::$app->getSession()->setFlash('success', Yii::t('app', 'Updated'));
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', ['model' => $model]);
@@ -56,7 +55,7 @@ class TranslateController extends Controller
         if (!empty($models)) {
             return $models;
         } else {
-            throw new NotFoundHttpException(Module::t('The requested page does not exist'));
+            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist'));
         }
     }
 }

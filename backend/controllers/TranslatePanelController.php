@@ -10,7 +10,6 @@ namespace backend\controllers;
 
 use Yii;
 use yii\base\Model;
-use common\widgets\yii2TranslatePanel\Module;
 use common\widgets\yii2TranslatePanel\models\search\SourceMessageSearch;
 use common\widgets\yii2TranslatePanel\helpers\AppHelper;
 use yii\helpers\Html;
@@ -28,10 +27,10 @@ class TranslatePanelController extends TranslateController
         $result = SourceMessageSearch::getInstance()->extract();
 
         // ----------------------- SHOW RESCAN RESULT --------------------------
-        $message  = Module::t('Rescan successfully completed.') . '<br />';
+        $message  = Yii::t('app', 'Rescan successfully completed.') . '<br />';
         $message .= Html::ul([
-            Module::t('New messages:') . ' ' . (isset($result['new']) ? $result['new'] : 0),
-            Module::t('Obsolete messages:') . ' ' . (isset($result['obsolete']) ? $result['obsolete'] : 0),
+            Yii::t('app', 'New messages:') . ' ' . (isset($result['new']) ? $result['new'] : 0),
+            Yii::t('app', 'Obsolete messages:') . ' ' . (isset($result['obsolete']) ? $result['obsolete'] : 0),
         ]);
         AppHelper::showSuccessMessage($message);
 
@@ -57,13 +56,13 @@ class TranslatePanelController extends TranslateController
         // ---------------------- SET DEFAULT RESPONSE -------------------------
         $response = array(
             'status'  => 'error',
-            'message' => Module::t('An unexpected error occured!'),
+            'message' => Yii::t('app', 'An unexpected error occured!'),
         );
 
         // -------------------------- CLEAR CACHE ------------------------------
         if ( SourceMessageSearch::cacheFlush() ) {
             $response['status']  = 'success';
-            $response['message'] = Module::t('Translations cache successfully cleared.');
+            $response['message'] = Yii::t('app', 'Translations cache successfully cleared.');
         }
 
         return $response;
@@ -83,7 +82,7 @@ class TranslatePanelController extends TranslateController
         // --------------------- SET DEFAULT RESPONSE --------------------------
         $response = array(
             'status'  => 'error',
-            'message' => Module::t('An unexpected error occured!'),
+            'message' => Yii::t('app', 'An unexpected error occured!'),
         );
 
         // --------------------- SAVE TRANSLATION BY ID ------------------------
@@ -129,7 +128,7 @@ class TranslatePanelController extends TranslateController
         // --------------------- SET DEFAULT RESPONSE --------------------------
         $response = array(
             'status'  => 'error',
-            'message' => Module::t('An unexpected error occured!'),
+            'message' => Yii::t('app', 'An unexpected error occured!'),
         );
 
         // -------------------- DELETE TRANSLATION BY ID -----------------------
@@ -167,7 +166,7 @@ class TranslatePanelController extends TranslateController
         // --------------------- SET DEFAULT RESPONSE --------------------------
         $response = array(
             'status'  => 'error',
-            'message' => Module::t('An unexpected error occured!'),
+            'message' => Yii::t('app', 'An unexpected error occured!'),
         );
 
         // -------------------- RESTORE TRANSLATION BY ID ----------------------

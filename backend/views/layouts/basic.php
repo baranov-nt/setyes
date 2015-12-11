@@ -5,7 +5,6 @@ use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use common\widgets\Alert;
 use yii\widgets\Breadcrumbs;
-use common\widgets\yii2TranslatePanel\Module;
 
 /**
  * Created by PhpStorm.
@@ -125,7 +124,7 @@ $this->beginPage();
                         '<li class="dropdown-header">Выбрать раздел </li>',
                         '<li class="divider"></li>',
                         [
-                            'label' => Module::t('Translate Panel'),
+                            'label' => Yii::t('app', 'Translate Panel'),
                             'url' => ['/translate-panel/index']
                         ],
                         [

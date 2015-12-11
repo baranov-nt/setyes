@@ -266,11 +266,11 @@ class User extends ActiveRecord implements IdentityInterface
         }
         elseif ($status === self::STATUS_NOT_ACTIVE)
         {
-            return Yii::t('app', "Do not activate");
+            return Yii::t('app', "Not activated");
         }
         else
         {
-            return Yii::t('app', "Activate");
+            return Yii::t('app', "Activated");
         }
     }
 
@@ -282,8 +282,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function getStatusList()
     {
         $statusArray = [
-            self::STATUS_ACTIVE     => Yii::t('app', "Activate"),
-            self::STATUS_NOT_ACTIVE => Yii::t('app', "Do not activate"),
+            self::STATUS_ACTIVE     => Yii::t('app', "Activated"),
+            self::STATUS_NOT_ACTIVE => Yii::t('app', "Not activated"),
             self::STATUS_DELETED    => Yii::t('app', "Ban")
         ];
         return $statusArray;

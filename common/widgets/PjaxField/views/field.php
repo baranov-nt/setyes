@@ -34,11 +34,11 @@ Pjax::begin([
     if($model->$attribute):
         echo Html::encode($model->$attribute);
     else:
-        echo '<span style="color: #c40000;"> (нет данных) </span>';
+        echo '<span style="color: #c40000;">'.Yii::t('app', '(no data)').'</span>';
     endif;
     ?>
     <?= Html::a(
-        $model->$attribute ? 'Изменить' : 'Добавить',
+        $model->$attribute ? Yii::t('app', 'Update') : Yii::t('app', 'Add'),
         ['#'],
         [
             'class' => $model->$attribute ? 'btn btn-xs btn-primary pull-right' : 'btn btn-xs btn-success pull-right',
@@ -93,7 +93,7 @@ endif;
 ?>
 <div class="form-group">
     <?php
-    echo Html::submitButton($model->$attribute ? 'Изменить' : 'Добавить',
+    echo Html::submitButton($model->$attribute ? Yii::t('app', 'Update') : Yii::t('app', 'Add'),
         [
             'class' => $model->$attribute ? 'btn btn-primary' : 'btn btn-success',
 

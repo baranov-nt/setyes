@@ -8,6 +8,7 @@
 
 namespace common\widgets\ImageLoad;
 
+use Yii;
 use yii\web\View;
 use yii\base\Widget;
 use yii\helpers\Json;
@@ -77,6 +78,8 @@ class ImageLoadWidget extends Widget
         $imageContainerClass = $this->classesWidget['imageContainerClass'];
         $formImagesContainerClass = $this->classesWidget['formImagesContainerClass'];
 
+        $deleteMessage = Yii::t('app', 'Delete image?');
+
         $js = <<< JS
             var loadFile = function(event) {                                // Создается объект события, который срабатывает при выборе нового изображения
                 var output = document.getElementById("previewImg-$this->id");         // output - объект, куда будет помещено выбранное изображение
@@ -85,7 +88,7 @@ class ImageLoadWidget extends Widget
             };
 
             var deleteImage = function(event) {                                // Функция для удаления изображения
-                if (confirm("Удалить изображение?")) {                                   // подтверждение удаления
+                if (confirm("$deleteMessage")) {                                   // подтверждение удаления
                     var imageData = JSON.stringify({
                         modelName: "$this->modelName",
                         id: "$this->id",

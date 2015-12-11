@@ -47,7 +47,7 @@ use yii\widgets\MaskedInput;
             <?php
             if($model->scenario === 'emailActivation' || $model->scenario === 'phoneAndEmailFinish'):
                 ?>
-                <i> <?= Yii::t('app', '*A valid email will be sent an email to activate your account.') ?> </i>
+                <i> <?= Yii::t('app', '*A letter will be sent to the entered email to activate your account.') ?> </i>
                 <?php
             endif;
             ?>

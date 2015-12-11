@@ -43,8 +43,8 @@ Modal::begin([
                 <span class="fa fa-rotate-left  gly-spin-left"></span>
             </button>
         </div>
-        <button type="button" class="btn btn-primary crop-submit">Применить</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-primary crop-submit">'.Yii::t('app', 'Apply').'</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">'.Yii::t('app', 'Cancel').'</button>
     ',
     'toggleButton' => false,
     'options' => [

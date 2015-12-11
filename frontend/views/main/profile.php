@@ -25,7 +25,7 @@ use yii\helpers\Url;
                 'images_temp' => 0,       // указываем временной изображение или нет (0 = нет)
                 'imageSmallWidth' => 150,                       // ширина миниатюры
                 'imageSmallHeight' => 150,                      // высота миниатюры
-                'headerModal' => 'Загрузить аватар',            // заголовок в модальном окне
+                'headerModal' => Yii::t('app', 'Upload an avatar'),            // заголовок в модальном окне
                 'sizeModal' => 'modal-md',                      // размер модального окна
                 'baseUrl' => '/images/',                        // основной путь к изображениям
                 'imagePath' => 'avatars/users/'.Yii::$app->user->id.'/', // путь, куда будут записыватся изображения
@@ -97,7 +97,7 @@ use yii\helpers\Url;
             <div class="col-md-3">
                 <?php
                 echo ShareBar::widget([
-                    'title' => 'Title Content',                                     // Название
+                    'title' => Yii::t('app', 'Title Content'),                                     // Название
                     'media' => 'image.jpg',                                         // Медиа контент
                     'url' => ['main/view-profile', 'id' => $modelProfile->user_id],       // Ссылка страницы, с которой делимся
                     'networks' => [

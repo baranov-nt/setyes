@@ -39,7 +39,7 @@ class ImageForm extends Model
     public function attributeLabels()
     {
         return [
-            'image' => 'Изображение',
+            'image' => Yii::t('app', 'Image'),
         ];
     }
 

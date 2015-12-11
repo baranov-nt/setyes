@@ -31,7 +31,7 @@ class RegForm extends Model
             ['password', 'string', 'min' => 6, 'max' => 255],
             ['phone', 'unique',
                 'targetClass' => User::className(),
-                'message' => 'Этот номер уже занят.'],
+                'message' => Yii::t('app', 'This number is already registered.')],
             ['phone', function ($attribute, $params) {
                 $this->phone = str_replace('_', '', $this->phone);
                 if(iconv_strlen($this->phone) != 16):
@@ -41,7 +41,7 @@ class RegForm extends Model
             ['email', 'email'],
             ['email', 'unique',
                 'targetClass' => User::className(),
-                'message' => 'Эта почта уже занята.'],
+                'message' => Yii::t('app', 'This email is already registered.')],
             ['status', 'default', 'value' => User::STATUS_ACTIVE, 'on' => 'default'],
             ['status', 'in', 'range' =>[
                 User::STATUS_NOT_ACTIVE,
@@ -54,9 +54,9 @@ class RegForm extends Model
     public function attributeLabels()
     {
         return [
-            'phone' => 'Телефон',
-            'email' => 'Эл. почта',
-            'password' => 'Пароль'
+            'phone' => Yii::t('app', 'Phone number.'),
+            'email' => Yii::t('app', 'Email'),
+            'password' => Yii::t('app', 'Password')
         ];
     }
 
@@ -115,9 +115,9 @@ class RegForm extends Model
     public function sendActivationEmail($user)
     {
         return Yii::$app->mailer->compose('activationEmail', ['user' => $user])
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name.' (отправлено роботом).'])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::t('app', '{app} (sent a robot).'), ['app' => Yii::$app->name]])
             ->setTo($this->email)
-            ->setSubject('Активация для '.Yii::$app->name)
+            ->setSubject(Yii::t('app', 'Activation for {app}.'), ['app' => Yii::$app->name])
             ->send();
     }
 }

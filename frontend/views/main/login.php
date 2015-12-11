@@ -28,7 +28,7 @@ use yii\authclient\widgets\AuthChoice;
             <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
             <div class="form-group">
-                <?= Html::submitButton('Войти', ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary']) ?>
             </div>
             <?= Html::a(Yii::t('app', 'Forgot your password?'), ['/main/send-email']) ?>
         </div>
@@ -36,7 +36,7 @@ use yii\authclient\widgets\AuthChoice;
     <?php ActiveForm::end(); ?>
     <div class="row" style="margin-top: 20px;">
         <div class="col-md-4 col-md-offset-4">
-            <label class="control-label" for="loginform-email">Войти через социальную сеть</label>
+            <label class="control-label" for="loginform-email"><?= Yii::t('app', 'Login with social network.') ?></label>
             <?php $authAuthChoice = AuthChoice::begin([
                 'baseAuthUrl' => ['site/auth'],
             ]); ?>

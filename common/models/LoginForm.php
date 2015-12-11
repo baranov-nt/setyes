@@ -47,8 +47,8 @@ class LoginForm extends Model
         if (!$this->hasErrors()):
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)):
-                $field = ($this->scenario === 'loginWithEmail') ? 'емайл' : 'телефон';
-                $this->addError($attribute, 'Неправильный '.$field.' или пароль.');
+                $field = ($this->scenario === 'loginWithEmail') ? Yii::t('app', 'email') : Yii::t('app', 'phone');
+                $this->addError($attribute, Yii::t('app', 'Wrong {field} or password.', ['field' => $field]));
             endif;
         endif;
     }
@@ -68,10 +68,10 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'phone' => 'Телефон',
-            'email' => 'Емайл',
-            'password' => 'Пароль',
-            'rememberMe' => 'Запомнить меня'
+            'phone' => Yii::t('app', 'Phone number'),
+            'email' => Yii::t('app', 'Email'),
+            'password' => Yii::t('app', 'Password'),
+            'rememberMe' => Yii::t('app', 'Remember me'),
         ];
     }
 

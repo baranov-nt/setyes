@@ -42,10 +42,10 @@ class Auth extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'source' => 'Source',
-            'source_id' => 'Source ID',
+            'id' => Yii::t('app', 'Auth ID'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'source' => Yii::t('app', 'Source'),
+            'source_id' => Yii::t('app', 'Source ID'),
         ];
     }
 

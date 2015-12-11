@@ -111,11 +111,10 @@ class UserSearch extends User
     public function getStatusList()
     {
         $statusArray = [
-            self::STATUS_ACTIVE     => 'Активирован',
-            self::STATUS_NOT_ACTIVE => 'Не активирован',
-            self::STATUS_DELETED    => 'Бан'
+            self::STATUS_ACTIVE     => Yii::t('app', "Activate"),
+            self::STATUS_NOT_ACTIVE => Yii::t('app', "Do not activate"),
+            self::STATUS_DELETED    => Yii::t('app', "Ban")
         ];
-
         return $statusArray;
     }
 }

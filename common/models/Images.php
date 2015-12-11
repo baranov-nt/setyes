@@ -47,12 +47,12 @@ class Images extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'path_small_image' => 'Path Small Image',
-            'path' => 'Path',
-            'size' => 'Size',
-            'status' => 'Status',
-            'temp' => 'Temp',
+            'id' => Yii::t('app', 'Image ID'),
+            'path_small_image' => Yii::t('app', 'Path Small Image'),
+            'path' => Yii::t('app', 'Path Image'),
+            'size' => Yii::t('app', 'Size Image'),
+            'status' => Yii::t('app', 'Status Image'),
+            'temp' => Yii::t('app', 'Temp Image'),
         ];
     }
 

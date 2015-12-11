@@ -62,14 +62,10 @@ $this->beginPage();
             ]
         );
 
-        if(!Yii::$app->user->isGuest && !Yii::$app->user->can('РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ')):
+        if(!Yii::$app->user->isGuest && !Yii::$app->user->can('Создатель')):
             $menuItems = [
-                /*[
-                    'label' => 'Список продуктов',
-                    'url' => ['/product/index']
-                ],*/
                 [
-                    'label' => 'Правила <span class="glyphicon glyphicon-question-sign"></span>',
+                    'label' => Yii::t('app', 'Rules').'<span class="glyphicon glyphicon-question-sign"></span>',
                     'url' => [
                         '#'
                     ],
@@ -99,11 +95,11 @@ $this->beginPage();
                     '<li class="dropdown-header">'.Yii::$app->user->identity['email'].'</li>',
                     '<li class="divider"></li>',
                     [
-                        'label' => 'Профиль пользователя',
+                        'label' => Yii::t('app', 'Profile'),
                         'url' => Url::to(['/main/profile'])
                     ],
                     [
-                        'label' => 'Выход',
+                        'label' => Yii::t('app', 'Logout'),
                         'url' => Url::to(['/main/logout'])
                     ]
                 ],
@@ -116,14 +112,14 @@ $this->beginPage();
             $menuItems[] = [
                 'label' => '<span class="btn btn-default glyphicon glyphicon-question-sign" style=""></span>',
                 'items' => [
-                    '<li class="dropdown-header">Авторизация</li>',
+                    '<li class="dropdown-header">'.Yii::t('app', 'Authorization').'</li>',
                     '<li class="divider"></li>',
                     [
-                        'label' => 'Войти',
+                        'label' => Yii::t('app', 'Login'),
                         'url' => Url::to(['/main/login'])
                     ],
                     [
-                        'label' => 'Регистрация',
+                        'label' => Yii::t('app', 'Registration'),
                         'url' => Url::to(['/main/reg'])
                     ]
                 ],
@@ -148,14 +144,14 @@ $this->beginPage();
         Modal::begin(
             [
                 'size' => "modal-lg",
-                'header' => '<h2>Подача объявления.</h2>',
+                'header' => '<h2>'.Yii::t('app', 'Feed ads').'</h2>',
                 'id' => 'modal'
             ]
         );
-        echo 'Правила подачи объявления.';
+        echo Yii::t('app', 'Rules');
         Modal::end();
 
-        if(!Yii::$app->user->isGuest && !Yii::$app->user->can('РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ')):
+        if(!Yii::$app->user->isGuest && !Yii::$app->user->can('Создатель')):
             ActiveForm::begin(
                 [
                     'action' => ['/найти'],
@@ -171,7 +167,7 @@ $this->beginPage();
                 'search',
                 '',
                 [
-                    'placeholder' => 'Найти ...',
+                    'placeholder' => Yii::t('app', 'To find ...'),
                     'class' => 'form-control'
                 ]
             );

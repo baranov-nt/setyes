@@ -3,7 +3,6 @@
 namespace common\models;
 
 use Yii;
-use common\widgets\ImageLoad\ImageBehavior;
 use yii\db\ActiveRecord;
 
 /**
@@ -52,15 +51,15 @@ class Profile extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_id' => 'User ID',
-            'images_num' => 'Images Num',
-            'images_label' => 'Images Label',
-            'avatar' => 'Аватар',
-            'first_name' => 'Имя',
-            'second_name' => 'Фамилия',
-            'middle_name' => 'Отчество',
-            'birthday' => 'Дата рождения',
-            'gender' => 'Пол',
+            'user_id' => Yii::t('app', 'User ID'),
+            'images_num' => Yii::t('app', 'Images Num'),
+            'images_label' => Yii::t('app', 'Images Label'),
+            'avatar' => Yii::t('app', 'Avatar'),
+            'first_name' => Yii::t('app', 'First Name'),
+            'second_name' => Yii::t('app', 'Last Name'),
+            'middle_name' => Yii::t('app', 'Middle Name'),
+            'birthday' => Yii::t('app', 'Birthday'),
+            'gender' => Yii::t('app', 'Gender'),
         ];
     }
 

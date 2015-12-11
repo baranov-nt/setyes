@@ -18,7 +18,6 @@ use yii\db\Exception;
  * @property integer $user_id
  * @property integer $temp
  *
- * @property Product $product
  * @property User $user
  * @property mixed imagesOfObjects
  */
@@ -52,23 +51,15 @@ class Carousel extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'images_num' => 'Images Num',
-            'images_label' => 'Images Label',
-            'header' => 'Заголовок',
-            'content' => 'Контент',
-            'product_id' => 'Product ID',
-            'user_id' => 'User ID',
-            'temp' => 'Temp',
+            'id' => Yii::t('app', 'Carousel ID'),
+            'images_num' => Yii::t('app', 'Images Num'),
+            'images_label' => Yii::t('app', 'Images Label'),
+            'header' => Yii::t('app', 'Header Carousel'),
+            'content' => Yii::t('app', 'Content Carousel'),
+            'product_id' => Yii::t('app', 'Ads ID'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'temp' => Yii::t('app', 'Temp'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProduct()
-    {
-        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
     /**

@@ -40,7 +40,6 @@ endif;
 if(!Yii::$app->user->isGuest):
     echo '<br>'.Yii::$app->formatter->asDatetime(Yii::$app->user->identity['created_at']);
     echo '<br>'.Yii::$app->timezone->name;
-    //\Yii::$app->session->remove('timezone');
 endif;
 ?>
 </div>

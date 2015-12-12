@@ -12,7 +12,6 @@
 
 namespace frontend\controllers;
 
-use common\widgets\Timezone\Timezone;
 use common\widgets\Timezone\TimezoneAction;
 use Yii;
 use common\models\Auth;
@@ -31,6 +30,9 @@ class SiteController extends Controller
                 'class' => AuthAction::className(),
                 'successCallback' => [$this, 'onAuthSuccess'],
             ],
+            'timezone' => [
+                'class' => TimezoneAction::className(),
+            ]
         ];
     }
 

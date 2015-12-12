@@ -19,7 +19,7 @@ return [
     'components' => [
         'timezone' => [
             'class' => common\widgets\Timezone\Timezone::className(),
-            'actionRoute' => '/main/timezone.html'
+            'actionRoute' => '/site/timezone.html'
         ],
         'request' => [
             'baseUrl' => '',

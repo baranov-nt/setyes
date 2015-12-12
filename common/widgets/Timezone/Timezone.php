@@ -3,8 +3,7 @@ namespace common\widgets\Timezone;
 use Yii;
 use yii\base\Component;
 use yii\web\Controller;
-use frontend\assets\JsCookieAsset;
-use yii\web\Cookie;
+use frontend\assets\TimeZoneAsset;
 
 /**
  * Class Timezone
@@ -16,7 +15,7 @@ class Timezone extends Component
     /**
      * @var string
      */
-    public $actionRoute = '/main/timezone.html';
+    public $actionRoute = '/site/timezone';
     /**
      * @var timezone name (ex: Europe/Kiev)
      */
@@ -29,6 +28,7 @@ class Timezone extends Component
         //dd($_SERVER);
         //$redirect = $_SERVER['REQUEST_URI'];
         $this->name = \Yii::$app->session->get('timezone');
+        //\Yii::$app->session->remove('timezone');
 
         if ($this->name == null) {
             $this->registerTimezoneScript($this->actionRoute);
@@ -44,27 +44,7 @@ class Timezone extends Component
     {
         \Yii::$app->on(Controller::EVENT_BEFORE_ACTION, function ($event) use ($actionRoute) {
             $view = $event->sender->view;
-            JsCookieAsset::register($view);
-            $js = <<<JS
-                var timezone = '';
-                var timezoneAbbr = '';
-                try {
-                    var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                    var timezoneAbbr = /\((.*)\)/.exec(new Date().toString())[1];
-                    console.log(timezone);
-                }
-                catch(err) {
-                    console.log(err);
-                }
-
-                $.get("$actionRoute", {
-                    //redirect: redirect,
-                    timezone: timezone,
-                    timezoneAbbr: timezoneAbbr,
-                    timezoneOffset: -new Date().getTimezoneOffset() / 60
-                });
-JS;
-            $view->registerJs($js);
+            TimeZoneAsset::register($view);
         });
     }
 }

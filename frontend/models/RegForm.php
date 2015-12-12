@@ -31,7 +31,7 @@ class RegForm extends Model
             ['password', 'string', 'min' => 6, 'max' => 255],
             ['phone', 'unique',
                 'targetClass' => User::className(),
-                'message' => Yii::t('app', 'This number is already registered.')],
+                'message' => Yii::t('app', 'This phone is already registered.')],
             ['phone', function ($attribute, $params) {
                 $this->phone = str_replace('_', '', $this->phone);
                 if(iconv_strlen($this->phone) != 16):

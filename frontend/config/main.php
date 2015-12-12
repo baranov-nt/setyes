@@ -16,13 +16,6 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'layout' => 'basic',
     'defaultRoute' => 'main/index',
-    'modules' => [
-        'modules' => [
-            'i18n' => [
-                'class' => \common\widgets\yii2I18nModule\Module::className(),
-            ]
-        ],
-    ],
     'components' => [
         'timezone' => [
             'class' => 'common\widgets\Timezone\Timezone',

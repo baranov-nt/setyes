@@ -56,30 +56,12 @@ return [
                     'enableCaching'   => true,
                     'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
                 ],
-                'sy' => [
+                'app' => [
                     'class'           => yii\i18n\DbMessageSource::className(),
                     'enableCaching'   => true,
                     'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
                 ],
             ],
         ],
-        /*'i18n' => [
-            //'class' => \common\widgets\yii2I18nModule\components\I18N::className(),
-            'class'      => common\widgets\yii2TranslatePanel\components\I18N::className(),
-            'languages' => ['ru', 'de', 'fr'],
-            'sourcePath' => [
-                __DIR__ . '/../../frontend',
-                __DIR__ . '/../../backend',
-                __DIR__ . '/../../common',
-            ],
-            'messagePath' => __DIR__  . '/../../common/messages',
-            'translations' => [
-                '*' => [
-                    'class'           => yii\i18n\DbMessageSource::className(),
-                    'enableCaching'   => true,
-                    'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
-                ],
-            ],
-        ],*/
     ],
 ];

@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use common\widgets\Timezone\Timezone;
+use common\widgets\Timezone\TimezoneAction;
 use Yii;
 use frontend\models\RegForm;
 use common\models\LoginForm;
@@ -15,7 +17,6 @@ use yii\helpers\Url;
 use frontend\models\AccountActivation;
 use common\models\Carousel;
 use yii\web\ErrorAction;
-use common\widgets\Timezone\TimezoneAction;
 
 class MainController extends BehaviorsController
 {
@@ -28,10 +29,26 @@ class MainController extends BehaviorsController
             'error' => [
                 'class' => ErrorAction::className(),
             ],
-            'timezone' => [
-                'class' => TimezoneAction::className(),
-            ],
         ];
+    }
+
+    public function actionTimezone()
+    {
+
+        $timezone = \Yii::$app->getRequest()->get('timezone', false);
+        $zoneList = \DateTimeZone::listIdentifiers();
+        if (!$timezone || empty($timezone) || !in_array($timezone, $zoneList)) {
+            $timezoneAbbr = \Yii::$app->getRequest()->get('timezoneAbbr');
+            $timezoneOffset = \Yii::$app->getRequest()->get('timezoneOffset');
+            $timezone = timezone_name_from_abbr($timezoneAbbr, $timezoneOffset * 3600);
+        }
+        if (!$timezone || !in_array($timezone, $zoneList)) {
+            $timezone = date_default_timezone_get();
+        }
+        \Yii::$app->session->set('timezone', $timezone);
+
+        return $this->goHome();
+        //return $this->redirect([\Yii::$app->getRequest()->get('redirect')]);
     }
 
     public function actionIndex()

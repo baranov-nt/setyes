@@ -17,6 +17,7 @@ return [
             //'forceCopy' => true,                                  // каждый раз чистит assets
         ],
         'formatter' => [                                            // выводит данные в заданом формате
+            'defaultTimeZone' => 'UTC',
             'dateFormat' => 'full',                               // объем информации о дате (short, medium, long, full)
             //'dateFormat' => 'dd-MM-yyyy',                         // ICU format
             //'dateFormat' => 'php:d mm Y',                           // PHP date()-format
@@ -30,11 +31,6 @@ return [
             'class' => 'codemix\localeurls\UrlManager',
             'languages' => ['ru', 'en', 'de', 'fr'],
         ],
-        /*'urlManager' => [
-            'class'             => yii\web\UrlManager::className(),
-            'enablePrettyUrl'   => true,
-            'showScriptName'    => false, // false - means that index.php will not be part of the URLs
-        ],*/
         'i18n' => [
             'class'      => common\widgets\yii2TranslatePanel\components\I18N::className(),
             'languages' => ['ru', 'de', 'fr'],

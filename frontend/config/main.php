@@ -18,8 +18,8 @@ return [
     'defaultRoute' => 'main/index',
     'components' => [
         'timezone' => [
-            'class' => 'common\widgets\Timezone\Timezone',
-            'actionRoute' => '/site/timezone.html'
+            'class' => common\widgets\Timezone\Timezone::className(),
+            'actionRoute' => '/main/timezone.html'
         ],
         'request' => [
             'baseUrl' => '',

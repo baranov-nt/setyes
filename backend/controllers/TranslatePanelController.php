@@ -107,7 +107,7 @@ class TranslatePanelController extends TranslateController
             }
 
             $response['status']  = 'success';
-            $response['message'] = 'Translation successfuly saved.';
+            $response['message'] = Yii::t('app', 'Translation successfuly saved.');
             $response['params']  = AppHelper::getRequestParams();
         }
 

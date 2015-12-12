@@ -58,7 +58,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['status'], 'required'],
             ['email', 'email'],
             ['password', 'required', 'on' => 'create'],
-            ['phone', 'unique', 'message' => Yii::t('app', 'This number is already registered.')],
+            ['phone', 'unique', 'message' => Yii::t('app', 'This phone is already registered.')],
             ['phone_second', 'unique', 'message' => Yii::t('app', 'This number is already registered.')],
             ['email', 'unique', 'message' => Yii::t('app', 'This email is already registered.')],
             ['secret_key', 'unique']

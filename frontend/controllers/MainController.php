@@ -1,8 +1,6 @@
 <?php
 namespace frontend\controllers;
 
-use common\widgets\Timezone\Timezone;
-use common\widgets\Timezone\TimezoneAction;
 use Yii;
 use frontend\models\RegForm;
 use common\models\LoginForm;
@@ -34,7 +32,6 @@ class MainController extends BehaviorsController
 
     public function actionTimezone()
     {
-
         $timezone = \Yii::$app->getRequest()->get('timezone', false);
         $zoneList = \DateTimeZone::listIdentifiers();
         if (!$timezone || empty($timezone) || !in_array($timezone, $zoneList)) {
@@ -48,7 +45,6 @@ class MainController extends BehaviorsController
         \Yii::$app->session->set('timezone', $timezone);
 
         return $this->goHome();
-        //return $this->redirect([\Yii::$app->getRequest()->get('redirect')]);
     }
 
     public function actionIndex()

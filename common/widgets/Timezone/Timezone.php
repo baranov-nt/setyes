@@ -26,6 +26,8 @@ class Timezone extends Component
      */
     public function init()
     {
+        //dd($_SERVER);
+        //$redirect = $_SERVER['REQUEST_URI'];
         $this->name = \Yii::$app->session->get('timezone');
 
         if ($this->name == null) {
@@ -40,7 +42,6 @@ class Timezone extends Component
      */
     public function registerTimezoneScript($actionRoute)
     {
-
         \Yii::$app->on(Controller::EVENT_BEFORE_ACTION, function ($event) use ($actionRoute) {
             $view = $event->sender->view;
             JsCookieAsset::register($view);
@@ -57,6 +58,7 @@ class Timezone extends Component
                 }
 
                 $.get("$actionRoute", {
+                    //redirect: redirect,
                     timezone: timezone,
                     timezoneAbbr: timezoneAbbr,
                     timezoneOffset: -new Date().getTimezoneOffset() / 60

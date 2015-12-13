@@ -1,2 +1,4 @@
 User-agent: *
-Disallow:
+Disallow: /~*
+Host: setyes.com
+Sitemap: http://setyes.com/sitemap.xml

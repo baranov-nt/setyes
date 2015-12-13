@@ -35,7 +35,8 @@
         "bower-asset/jquery-form": "*",
         "bower-asset/jquery.scrollTo": "*",
         "bower-asset/jquery-cookie": "*",
-        "cybercog/yii2-google-analytics": "^0.3.1"
+        "cybercog/yii2-google-analytics": "^0.3.1",
+        "himiklab/yii2-recaptcha-widget": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

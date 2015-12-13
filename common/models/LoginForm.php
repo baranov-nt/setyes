@@ -17,6 +17,7 @@ class LoginForm extends Model
     public $email;
     public $rememberMe = true;
     public $status;
+    public $reCaptcha;
 
     private $_user = false;
 
@@ -38,7 +39,8 @@ class LoginForm extends Model
             [['email', 'password'], 'required', 'on' => 'loginWithEmail'],
             ['email', 'email'],
             ['rememberMe', 'boolean'],
-            ['password', 'validatePassword']
+            ['password', 'validatePassword'],
+            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LeV9hITAAAAAHPu3iID7cZoO0_RDpfbiHLD-JNm']
         ];
     }
 
@@ -72,6 +74,7 @@ class LoginForm extends Model
             'email' => Yii::t('app', 'Email'),
             'password' => Yii::t('app', 'Password'),
             'rememberMe' => Yii::t('app', 'Remember me'),
+            'reCaptcha' => Yii::t('app', 'Captha')
         ];
     }
 

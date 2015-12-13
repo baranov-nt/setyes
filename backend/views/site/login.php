@@ -26,6 +26,15 @@ use yii\widgets\MaskedInput;
     <?= $form->field($model, 'password')->passwordInput() ?>
     <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
+    <?php
+    if($_SERVER['HTTP_HOST'] == 'admin.setyes.com'):
+        echo $form->field($model, 'reCaptcha')->widget(
+            \himiklab\yii2\recaptcha\ReCaptcha::className(),
+            ['siteKey' => '6LeV9hITAAAAALKZG-l-rfCb-dcclpXzsYQ6Cr0k']
+        );
+    endif;
+    ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Sign in'), ['class' => 'btn btn-primary']) ?>
     </div>

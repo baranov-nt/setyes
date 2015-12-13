@@ -22,6 +22,12 @@ return [
         ]
     ],
     'components' => [
+        'reCaptcha' => [
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => '6LeV9hITAAAAALKZG-l-rfCb-dcclpXzsYQ6Cr0k',
+            'secret' => '6LeV9hITAAAAAHPu3iID7cZoO0_RDpfbiHLD-JNm',
+        ],
         'request' => [
             'baseUrl' => '',
         ],

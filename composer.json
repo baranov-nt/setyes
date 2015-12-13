@@ -34,7 +34,8 @@
         "bower-asset/jquery-mousewheel": "*",
         "bower-asset/jquery-form": "*",
         "bower-asset/jquery.scrollTo": "*",
-        "bower-asset/jquery-cookie": "*"
+        "bower-asset/jquery-cookie": "*",
+        "yii2mod/yii2-timezone": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

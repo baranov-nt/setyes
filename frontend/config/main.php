@@ -18,8 +18,8 @@ return [
     'defaultRoute' => 'main/index',
     'components' => [
         'timezone' => [
-            'class' => common\widgets\Timezone\Timezone::className(),
-            'actionRoute' => '/site/timezone.html'
+            'class' => 'yii2mod\timezone\Timezone',
+            'actionRoute' => '/site/timezone' //optional param - full path to page must be specified
         ],
         'request' => [
             'baseUrl' => '',
@@ -47,6 +47,11 @@ return [
                 [
                     'pattern' => 'site/auth',
                     'route' => 'site/auth',
+                    'suffix' => ''
+                ],
+                [
+                    'pattern' => 'site/timezone',
+                    'route' => 'site/timezone',
                     'suffix' => ''
                 ],
                 [

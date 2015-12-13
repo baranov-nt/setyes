@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a3550e5556010965db53281cca96783f",
-    "content-hash": "405a347eafcc280353fcc2c71df33d03",
+    "hash": "01efd2fece0534282d85c20e484214da",
+    "content-hash": "fa7d742f7591825044cbca71a5c1f126",
     "packages": [
         {
             "name": "bower-asset/animate.css",
@@ -927,7 +927,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sjaakp/yii2-illustrated-behavior/zipball/8be333b608d4e14e8dfbc49658b695395c60da4f",
+                "url": "https://api.github.com/repos/sjaakp/yii2-illustrated-behavior/zipball/1850f6233688bfc89239699ad57ad5c915554145",
                 "reference": "8be333b608d4e14e8dfbc49658b695395c60da4f",
                 "shasum": ""
             },
@@ -1017,6 +1017,43 @@
                 "mailer"
             ],
             "time": "2015-06-06 14:19:39"
+        },
+        {
+            "name": "yii2mod/yii2-timezone",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2mod/yii2-timezone.git",
+                "reference": "dbe2b4481fa2f63e94814107b71ca348cdbd12ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2mod/yii2-timezone/zipball/dbe2b4481fa2f63e94814107b71ca348cdbd12ff",
+                "reference": "dbe2b4481fa2f63e94814107b71ca348cdbd12ff",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii2mod\\timezone\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Semenov",
+                    "email": "disemx@gmail.com"
+                }
+            ],
+            "description": "Timezone helper",
+            "keywords": [
+                "component",
+                "yii2"
+            ],
+            "time": "2015-06-17 09:40:28"
         },
         {
             "name": "yiisoft/yii2",
@@ -1710,7 +1747,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "sjaakp/yii2-illustrated-behavior": 20
+        "sjaakp/yii2-illustrated-behavior": 20,
+        "yii2mod/yii2-timezone": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

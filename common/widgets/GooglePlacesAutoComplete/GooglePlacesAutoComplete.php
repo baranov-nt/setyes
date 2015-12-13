@@ -51,7 +51,7 @@ class GooglePlacesAutoComplete extends InputWidget {
         $view = $this->getView();
         $view->registerJsFile(self::API_URL . http_build_query([
                 'libraries' => $this->libraries,
-                'language' => $this->language
+                'language' => \Yii::$app->language
             ]));
         $view->registerJs(<<<JS
             (function(){

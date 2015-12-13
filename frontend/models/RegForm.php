@@ -58,6 +58,7 @@ class RegForm extends Model
             'phone' => Yii::t('app', 'Phone number'),
             'email' => Yii::t('app', 'Email'),
             'password' => Yii::t('app', 'Password'),
+            'location' => Yii::t('app', 'City')
         ];
     }
 

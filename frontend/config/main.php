@@ -18,7 +18,7 @@ return [
     'defaultRoute' => 'main/index',
     'components' => [
         'timezone' => [
-            'class' => 'yii2mod\timezone\Timezone',
+            'class' => 'common\widgets\TimeZone\Timezone',
             'actionRoute' => '/site/timezone' //optional param - full path to page must be specified
         ],
         'request' => [

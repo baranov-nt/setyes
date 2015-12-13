@@ -7,6 +7,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use common\widgets\Alert;
 use yii\helpers\Url;
+use cybercog\yii\googleanalytics\widgets\GATracking;
 /**
  * Created by PhpStorm.
  * User: phpNT
@@ -33,6 +34,11 @@ $this->beginPage();
         <meta property="og:locale" content="<?= Yii::$app->language ?>" />
         <meta property="fb:app_id" content="<?= Yii::$app->controller->appFbIdMeta ?>" />
         <?php $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1']); ?>
+        <?= GATracking::widget(
+            [
+                'trackingId' => 'UA-61158765-2'
+            ]
+        ) ?>
         <title><?= Yii::$app->name ?></title>
         <?php $this->head() ?>
     </head>

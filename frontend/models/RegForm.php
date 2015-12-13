@@ -20,6 +20,7 @@ class RegForm extends Model
     public $email;
     public $password;
     public $status;
+    public $location;
 
     public function rules()
     {

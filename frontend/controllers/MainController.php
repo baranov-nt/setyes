@@ -88,6 +88,7 @@ class MainController extends BehaviorsController
 
     public function actionReg()
     {
+        //dd(Yii::$app->request->post());
         $emailActivation = Yii::$app->params['emailActivation'];
         $model = $emailActivation ? new RegForm(['scenario' => 'emailActivation']) : new RegForm();
 

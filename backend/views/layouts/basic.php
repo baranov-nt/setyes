@@ -46,7 +46,7 @@ $this->beginPage();
                 'innerContainerOptions' => [
                     'class' => 'container'
                 ],
-                'brandLabel' => 'Управление сайтом',
+                'brandLabel' => Yii::t('app', 'Manage Site'),
                 'brandUrl' => [
                     '/site/index'
                 ],
@@ -119,16 +119,16 @@ $this->beginPage();
                 ];
             $menuItems[] =
                 [
-                    'label' => 'Управление приложением <span class="glyphicon glyphicon-cog"></span>',
+                    'label' => Yii::t('app', 'Managing the application').' <span class="glyphicon glyphicon-cog"></span>',
                     'items' => [
-                        '<li class="dropdown-header">Выбрать раздел </li>',
+                        '<li class="dropdown-header">'.Yii::t('app', 'Select a section').'</li>',
                         '<li class="divider"></li>',
                         [
                             'label' => Yii::t('app', 'Translate Panel'),
                             'url' => ['/translate-panel/index']
                         ],
                         [
-                            'label' => 'Управление пользователями',
+                            'label' => Yii::t('app', 'User management'),
                             'url' => ['/user/index']
                         ],
                     ]

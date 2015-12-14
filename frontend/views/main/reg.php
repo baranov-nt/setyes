@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\MaskedInput;
-use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Profile */
@@ -15,7 +14,7 @@ use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <?php echo $form->field($model, 'location')->input('text', ['class' => 'form-control'])->widget(GooglePlacesAutoComplete::className()); ?>
+
             <?= $form->field($model, 'phone')->widget(MaskedInput::className(),[
                 'name' => 'phone',
                 'mask' => '7 (999) 999-9999',

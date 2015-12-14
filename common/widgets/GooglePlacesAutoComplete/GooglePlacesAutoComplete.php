@@ -38,6 +38,7 @@ class GooglePlacesAutoComplete extends InputWidget {
             //d([$this->model, $this->attribute, $this->options]);
             echo Html::activeTextInput($this->model, $this->attribute, $this->options);
         } else {
+            $this->options['class'] = 'form-control';
             echo Html::textInput($this->name, $this->value, $this->options);
         }
     }

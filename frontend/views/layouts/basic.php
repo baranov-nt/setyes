@@ -8,6 +8,8 @@ use yii\helpers\Html;
 use common\widgets\Alert;
 use yii\helpers\Url;
 use cybercog\yii\googleanalytics\widgets\GATracking;
+use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
+
 /**
  * Created by PhpStorm.
  * User: phpNT
@@ -156,37 +158,39 @@ $this->beginPage();
         );
         echo Yii::t('app', 'Rules');
         Modal::end();
+        ?>
 
-        if(!Yii::$app->user->isGuest && !Yii::$app->user->can('Создатель')):
-            ActiveForm::begin(
-                [
-                    'action' => ['/найти'],
-                    'method' => 'get',
-                    'options' => [
-                        'class' => 'navbar-form navbar-right'
-                    ]
-                ]
-            );
-            echo '<div class="input-group input-group-sm">';
-            echo Html::input(
-                'type: text',
-                'search',
-                '',
-                [
-                    'placeholder' => Yii::t('app', 'To find ...'),
-                    'class' => 'form-control'
-                ]
-            );
+
+        <?php
+        if(!Yii::$app->user->isGuest && Yii::$app->user->can('Создатель')):
+            ActiveForm::begin(['options' => [
+                'class' => 'navbar-right col-md-6',
+                'style' => 'margin: 7px 0 8px 0;'
+            ]]);
+        ?>
+                        <?php
+            echo '<div class="input-group">';
+
+            echo GooglePlacesAutoComplete::widget([
+                'name' => 'place',
+                'value' => ''
+            ]);
+
             echo '<span class="input-group-btn">';
             echo Html::submitButton(
                 '<span class="glyphicon glyphicon-search"></span>',
                 [
                     'class' => 'btn btn-success',
-                    'onClick' => 'window.location.href = this.form.action + "-" + this.form.search.value.replace(/[^\w\а-яё\А-ЯЁ]+/g, "_") + ".html";'
                 ]
             );
             echo '</span></div>';
+        ?>
+            </div>
+        <?php
             ActiveForm::end();
+            ?>
+
+            <?php
         endif;
 
         NavBar::end();

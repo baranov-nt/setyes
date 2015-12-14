@@ -39,8 +39,14 @@ class SiteController extends BehaviorsController
         if (!Yii::$app->user->isGuest):
             return $this->goHome();
         endif;
+
         $loginWithEmail = Yii::$app->params['loginWithEmail'];
         $model = $loginWithEmail ? new LoginForm(['scenario' => 'loginWithEmail']) : new LoginForm();
+
+        if($_SERVER['HTTP_HOST'] == 'admin.setyes.com'):
+            $model = new LoginForm(['scenario' => 'loginWithCaptcha']);
+        endif;
+
         if ($model->load(Yii::$app->request->post()) && $model->login()):
             return $this->goBack();
         endif;

@@ -37,10 +37,14 @@ class LoginForm extends Model
                 endif;
             }],
             [['email', 'password'], 'required', 'on' => 'loginWithEmail'],
+            [['email', 'password'], 'required', 'on' => 'loginWithCaptcha'],
             ['email', 'email'],
             ['rememberMe', 'boolean'],
             ['password', 'validatePassword'],
-            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LcWAxMTAAAAAEZCbXGi-azhHhA8kYRq5WmY9pLg']       //your secret key
+            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(),
+                'secret' => '6LcWAxMTAAAAAEZCbXGi-azhHhA8kYRq5WmY9pLg',
+                'on' => 'loginWithCaptcha' //your secret key
+            ]
         ];
     }
 

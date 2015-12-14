@@ -30,7 +30,7 @@ use yii\widgets\MaskedInput;
     if($_SERVER['HTTP_HOST'] == 'admin.setyes.com'):
         echo $form->field($model, 'reCaptcha')->widget(
             \himiklab\yii2\recaptcha\ReCaptcha::className(),
-            ['siteKey' => '6LeV9hITAAAAALKZG-l-rfCb-dcclpXzsYQ6Cr0k']
+            ['siteKey' => '6LcWAxMTAAAAAD2teUNSJdJ8OwfQuqIUyJJDW79j']               // your siteKey
         );
     endif;
     ?>

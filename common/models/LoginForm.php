@@ -40,7 +40,7 @@ class LoginForm extends Model
             ['email', 'email'],
             ['rememberMe', 'boolean'],
             ['password', 'validatePassword'],
-            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LeV9hITAAAAAHPu3iID7cZoO0_RDpfbiHLD-JNm']
+            [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(), 'secret' => '6LcWAxMTAAAAAEZCbXGi-azhHhA8kYRq5WmY9pLg']       //your secret key
         ];
     }
 

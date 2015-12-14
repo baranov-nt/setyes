@@ -162,14 +162,18 @@ $this->beginPage();
 
 
         <?php
-        if(!Yii::$app->user->isGuest && Yii::$app->user->can('Создатель')):
-            ActiveForm::begin(['options' => [
+        //if(!Yii::$app->user->isGuest && Yii::$app->user->can('Создатель')):
+            ActiveForm::begin([
+                'action' => ['/main/select-city'],
+                'options' => [
                 'class' => 'navbar-right col-md-6',
                 'style' => 'margin: 7px 0 8px 0;'
             ]]);
         ?>
                         <?php
             echo '<div class="input-group">';
+
+
 
             echo GooglePlacesAutoComplete::widget([
                 'name' => 'place',
@@ -185,13 +189,12 @@ $this->beginPage();
             );
             echo '</span></div>';
         ?>
-            </div>
         <?php
             ActiveForm::end();
             ?>
 
             <?php
-        endif;
+        //endif;
 
         NavBar::end();
 

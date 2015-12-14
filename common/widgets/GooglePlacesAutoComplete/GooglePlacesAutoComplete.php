@@ -33,6 +33,9 @@ class GooglePlacesAutoComplete extends InputWidget {
      */
     public function run(){
         $this->registerClientScript();
+
+        $this->value = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
         if ($this->hasModel()) {
             $this->options['class'] = 'form-control';
             //d([$this->model, $this->attribute, $this->options]);
@@ -54,11 +57,22 @@ class GooglePlacesAutoComplete extends InputWidget {
                 'libraries' => $this->libraries,
                 'language' => \Yii::$app->language
             ]));
+
+        $view->registerJs(<<<JS
+        (function(){
+            var input = $('#{$elementId}');
+            input.click(function() {
+                input.val("");
+            });
+        })();
+JS
+            , \yii\web\View::POS_READY);
+
         $view->registerJs(<<<JS
             (function(){
+
                 var input = document.getElementById('{$elementId}');
                 var options = {$scriptOptions};
-
                 var autocomplete = new google.maps.places.Autocomplete(input, options);
             })();
 JS

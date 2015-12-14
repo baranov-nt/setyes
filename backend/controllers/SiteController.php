@@ -29,11 +29,13 @@ class SiteController extends BehaviorsController
                 'hello' => $hello
             ]);
     }
+
     public function actionLogout()
     {
         Yii::$app->user->logout();
         return $this->redirect(['/site/index']);
     }
+
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest):
@@ -43,9 +45,9 @@ class SiteController extends BehaviorsController
         $loginWithEmail = Yii::$app->params['loginWithEmail'];
         $model = $loginWithEmail ? new LoginForm(['scenario' => 'loginWithEmail']) : new LoginForm();
 
-        if($_SERVER['HTTP_HOST'] == 'admin.setyes.com'):
+        /*if($_SERVER['HTTP_HOST'] == 'admin.setyes.com'):
             $model = new LoginForm(['scenario' => 'loginWithCaptcha']);
-        endif;
+        endif;*/
 
         if ($model->load(Yii::$app->request->post()) && $model->login()):
             return $this->goBack();

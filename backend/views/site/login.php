@@ -7,6 +7,7 @@ use yii\widgets\MaskedInput;
 /* @var $this yii\web\View */
 /* @var $model common\models\LoginForm */
 /* @var $form ActiveForm */
+echo $model->scenario;
 ?>
 <div class="main-login">
 

@@ -37,7 +37,6 @@ class LoginForm extends Model
                 endif;
             }],
             [['email', 'password'], 'required', 'on' => 'loginWithEmail'],
-            [['email', 'password'], 'required', 'on' => 'loginWithCaptcha'],
             ['email', 'email'],
             ['rememberMe', 'boolean'],
             ['password', 'validatePassword'],

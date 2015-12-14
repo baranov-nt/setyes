@@ -56,7 +56,7 @@ class BehaviorsController extends Controller {
                     [
                         'allow' => true,
                         'controllers' => ['main'],
-                        'actions' => ['index', 'search', 'send-email', 'reset-password', 'finish-reg', 'login', 'error', 'activate-account', 'view-profile', 'timezone']
+                        'actions' => ['index', 'search', 'send-email', 'reset-password', 'finish-reg', 'login', 'error', 'activate-account', 'view-profile', 'timezone', 'select-city']
                     ],
                     [
                         'allow' => true,

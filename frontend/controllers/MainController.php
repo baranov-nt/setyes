@@ -15,6 +15,7 @@ use yii\helpers\Url;
 use frontend\models\AccountActivation;
 use common\models\Carousel;
 use yii\web\ErrorAction;
+use yii\web\Cookie;
 
 class MainController extends BehaviorsController
 {
@@ -317,6 +318,18 @@ class MainController extends BehaviorsController
                 'modelProfile' => $modelProfile
             ]
         );
+    }
+
+    public function actionSelectCity()
+    {
+        $cookie = new Cookie([
+            'name' => '_city',
+            'value' => Yii::$app->request->post('place'),
+            'expire' => time() + 86400 * 365,
+        ]);
+        \Yii::$app->getResponse()->getCookies()->add($cookie);
+
+        return $this->goBack();
     }
 
     public function actionError()

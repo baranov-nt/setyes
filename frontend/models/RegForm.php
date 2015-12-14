@@ -27,6 +27,7 @@ class RegForm extends Model
         return [
             [['phone', 'email', 'password'],'filter', 'filter' => 'trim'],
             [['phone', 'email', 'password'],'required', 'on' => 'default'],
+            [['phone', 'email', 'password'],'required', 'on' => 'emailActivation'],
             [['phone', 'email'],'required', 'on' => 'phoneAndEmailFinish'],
             [['phone'],'required', 'on' => 'phoneFinish'],
             ['password', 'string', 'min' => 6, 'max' => 255],
@@ -117,9 +118,9 @@ class RegForm extends Model
     public function sendActivationEmail($user)
     {
         return Yii::$app->mailer->compose('activationEmail', ['user' => $user])
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::t('app', '{app} (sent a robot).'), ['app' => Yii::$app->name]])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::t('app', '{app} (sent a robot).')])
             ->setTo($this->email)
-            ->setSubject(Yii::t('app', 'Activation for {app}.'), ['app' => Yii::$app->name])
+            ->setSubject(Yii::t('app', 'Activation for {app}.'))
             ->send();
     }
 }

@@ -15,7 +15,7 @@ use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <?= $form->field($model, 'location')->input('text', ['class' => 'form-control'])->widget(GooglePlacesAutoComplete::className()); ?>
+            <?php echo $form->field($model, 'location')->input('text', ['class' => 'form-control'])->widget(GooglePlacesAutoComplete::className()); ?>
             <?= $form->field($model, 'phone')->widget(MaskedInput::className(),[
                 'name' => 'phone',
                 'mask' => '7 (999) 999-9999',

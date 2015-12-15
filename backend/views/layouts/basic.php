@@ -5,6 +5,8 @@ use yii\bootstrap\Nav;
 use yii\helpers\Html;
 use common\widgets\Alert;
 use yii\widgets\Breadcrumbs;
+use yii\bootstrap\ActiveForm;
+use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 
 /**
  * Created by PhpStorm.
@@ -68,11 +70,17 @@ $this->beginPage();
             ];
         endif;*/
 
+        $menuItems[] = [
+            'label' => Yii::t('add', 'Google maps API'),
+            'url' => ['/maps/index']
+        ];
+
         if(Yii::$app->user->can('Администратор')):
             $menuItems[] =
                 [
                     'label' => 'Bootstrap <span class="glyphicon glyphicon-cog"></span>',
                     'items' => [
+
                         [
                             'label' => 'Bootstrap дополнения.',
                             'url' => ['/bootstrap/index']
@@ -155,6 +163,35 @@ $this->beginPage();
                 'class' => 'navbar-nav navbar-right'
             ]
         ]);
+
+            ActiveForm::begin([
+                'action' => ['/maps/select-city'],
+                'options' => [
+                    'class' => 'navbar-right col-md-6',
+                    'style' => 'margin: 7px 0 8px 0;'
+                ]]);
+        ?>
+        <?php
+        echo '<div class="input-group">';
+
+
+
+        echo GooglePlacesAutoComplete::widget([
+            'name' => 'place',
+            'value' => ''
+        ]);
+
+        echo '<span class="input-group-btn">';
+        echo Html::submitButton(
+            '<span class="glyphicon glyphicon-search"></span>',
+            [
+                'class' => 'btn btn-success',
+            ]
+        );
+        echo '</span></div>';
+        ?>
+        <?php
+        ActiveForm::end();
 
         NavBar::end();
            ?>

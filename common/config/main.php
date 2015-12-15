@@ -5,6 +5,32 @@ return [
     'charset' => 'UTF-8',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
+        // Google Maps Image and Geocode API settings for \Yii::$app->googleApi component
+        'googleApi'   => [
+            'class'             => \common\widgets\GoogleApi\GoogleApiLibrary::className(),
+
+            // API Keys !!!
+            'staticmap_api_key' => 'r5peFAnxyUPVqnsgUBUchHozO10=',
+            'geocode_api_key'   => 'AIzaSyBn0XnEmdPDw9ku7H66JT4_9KN7IXDZfcA',
+
+            // Set basePath
+            'webroot'           => '@webroot',
+
+            // Image path and map iframe settings
+            'map_image_path'    => '/images/google_map',
+            'map_type'          => 'terrain',
+            'map_size'          => '520x350',
+            'map_sensor'        => false,
+            'map_zoom'          => 9,
+            'map_scale'         => 1,
+            'map_marker_color'  => 'red',
+            'map_iframe_width'  => '100%', // %, px, em
+            'map_iframe_height' => '500px',  // %, px, em
+            'map_language'        => 'en',
+
+            // Debug
+            'quiet'             => false
+        ],
         'reCaptcha' => [
             'name' => 'reCaptcha',
             'class' => 'himiklab\yii2\recaptcha\ReCaptcha',

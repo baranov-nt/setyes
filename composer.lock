@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "442c56df4669838bcef731fbef69f082",
-    "content-hash": "845d4bfdb53d643cae99283545659db3",
+    "hash": "c179f92f6f7cff9ba6109d5e86b5119d",
+    "content-hash": "058439513b71d2b4c339a0cc45b0f386",
     "packages": [
         {
             "name": "bower-asset/animate.css",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/daneden/animate.css.git",
-                "reference": "3e61b0c35c8f7083a06c4e6fecc00c3ebc852f0b"
+                "reference": "0a6a8abf551c9abff96de1b97232bf0fd9a48ba2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/daneden/animate.css/zipball/3e61b0c35c8f7083a06c4e6fecc00c3ebc852f0b",
-                "reference": "3e61b0c35c8f7083a06c4e6fecc00c3ebc852f0b",
+                "url": "https://api.github.com/repos/daneden/animate.css/zipball/0a6a8abf551c9abff96de1b97232bf0fd9a48ba2",
+                "reference": "0a6a8abf551c9abff96de1b97232bf0fd9a48ba2",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -26,7 +26,7 @@
                 "bower-asset-main": "./animate.css",
                 "bower-asset-ignore": [
                     ".*",
-                    "src",
+                    "source",
                     "*.yml",
                     "Gemfile",
                     "Gemfile.lock",
@@ -1002,43 +1002,6 @@
             "time": "2013-07-10 17:25:36"
         },
         {
-            "name": "petrabarus/yii2-googleplacesautocomplete",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/petrabarus/yii2-googleplacesautocomplete.git",
-                "reference": "392342335e03bd1d83e42a5e6771b54f8abfba1b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/petrabarus/yii2-googleplacesautocomplete/zipball/392342335e03bd1d83e42a5e6771b54f8abfba1b",
-                "reference": "392342335e03bd1d83e42a5e6771b54f8abfba1b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "yiisoft/yii2": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PetraBarus\\Yii2\\GooglePlacesAutoComplete\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Petra Barus",
-                    "email": "petra.barus@gmail.com"
-                }
-            ],
-            "description": "Google Places Auto Complete input widget for Yii2",
-            "time": "2015-10-26 06:11:43"
-        },
-        {
             "name": "sjaakp/yii2-illustrated-behavior",
             "version": "dev-master",
             "source": {
@@ -1831,8 +1794,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "sjaakp/yii2-illustrated-behavior": 20,
-        "petrabarus/yii2-googleplacesautocomplete": 20
+        "sjaakp/yii2-illustrated-behavior": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

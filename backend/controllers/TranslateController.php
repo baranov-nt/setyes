@@ -2,15 +2,14 @@
 
 namespace backend\controllers;
 
+use Yii;
 use yii\base\Model;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use Yii;
 use common\widgets\yii2I18nModule\models\search\SourceMessageSearch;
 use common\widgets\yii2I18nModule\models\SourceMessage;
 
-class TranslateController extends Controller
+class TranslateController extends BehaviorsController
 {
     public function actionIndex()
     {

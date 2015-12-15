@@ -78,8 +78,8 @@ class BehaviorsController extends Controller {
                         'roles' => ['Администратор']
                     ],
                     [
-                        'controllers' => ['translate', 'default'],
-                        'actions' => ['index', 'update', 'rescan', 'save', 'restore', 'delete'],
+                        'controllers' => ['translate', 'translate-panel'],
+                        'actions' => ['index', 'update', 'rescan', 'save', 'restore', 'delete', 'clear-cache'],
                         'allow' => true,
                         'roles' => ['Администратор']
                     ],

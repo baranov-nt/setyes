@@ -5,6 +5,7 @@
 /* @var $one common\models\Carousel */
 use yii\bootstrap\Carousel;
 use common\widgets\ImageLoad\assets\backendImagesAsset;
+use common\widgets\GoogleMapsMarkers\GoogleMaps;
 
 if (Yii::$app->user->can('Редактор')):
     Yii::$app->assetManager->forceCopy = true;
@@ -44,5 +45,24 @@ if(!Yii::$app->user->isGuest):
 endif;
 ?>
 </div>
+    <div class="container">
+        <?php
+        echo GoogleMaps::widget([
+            'googleMapsUrlOptions' => [
+                //'key' => Yii::$app->googleApi->geocode_api_key,
+                'language' => 'id',
+                'version' => '3.1.18'
+            ],
+            'googleMapsOptions' => [
+                'mapTypeId' => 'roadmap',
+                //'tilt' => 45,
+                'zoom' => 1
+            ]
+        ]);
+
+        //d(Yii::$app->googleApi->geocode_api_key);
+
+        ?>
+    </div>
 
 

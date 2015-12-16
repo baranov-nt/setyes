@@ -45,6 +45,10 @@ class MapsController extends BehaviorsController
             $formattedAddress = $object->formatted_address;
             $idPlace = $object->place_id;
 
+            d($object);
+
+            dd([$formattedAddress, $idPlace]);
+
             if($formattedAddress != null && $idPlace != null):
                 $cookies = Yii::$app->response->cookies;
 

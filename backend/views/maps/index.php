@@ -16,7 +16,7 @@ use common\widgets\GoogleMapsMarkers\GoogleMaps;
 echo GoogleMaps::widget([
     'googleMapsUrlOptions' => [
         //'key' => Yii::$app->googleApi->geocode_api_key,
-        'language' => 'id',
+        'language' => Yii::$app->language,
         'version' => '3.1.18'
     ],
     'googleMapsOptions' => [

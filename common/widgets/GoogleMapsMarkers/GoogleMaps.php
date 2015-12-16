@@ -8,7 +8,6 @@ use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\web\View;
 
 /**
  * GoogleMaps displays a set of user addresses as markers on the map.
@@ -37,6 +36,7 @@ use yii\web\View;
  */
 class GoogleMaps extends Widget
 {
+    public $geocode_api_key;
     /**
      * @var array user locations array
      */
@@ -267,7 +267,6 @@ class GoogleMaps extends Widget
 
     /**
      * @var string google map type
-     */
     public $map_type = 'terrain';
 
     /**
@@ -346,9 +345,9 @@ class GoogleMaps extends Widget
             // query by address string
             $geoCodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
                 . $querystring
-                . '&language=' . \Yii::$app->language
+                . '&language=' . \Yii::$app->language;
                 //.'&result_type=country|street_address'
-                . '&key=' . $this->geocode_api_key;
+                //. '&key=' . $this->geocode_api_key;
 
             // get geocode object
             try {

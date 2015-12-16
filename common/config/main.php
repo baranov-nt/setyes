@@ -10,7 +10,7 @@ return [
             //'class'             => \common\widgets\GoogleApi\GoogleApiLibrary::className(),
             'class'             => \common\widgets\GoogleMapsMarkers\GoogleMaps::className(),
             // API Keys !!!
-            'staticmap_api_key' => 'r5peFAnxyUPVqnsgUBUchHozO10=',
+            //'staticmap_api_key' => 'r5peFAnxyUPVqnsgUBUchHozO10=',
             'geocode_api_key'   => 'AIzaSyBn0XnEmdPDw9ku7H66JT4_9KN7IXDZfcA',
 
             // Set basePath

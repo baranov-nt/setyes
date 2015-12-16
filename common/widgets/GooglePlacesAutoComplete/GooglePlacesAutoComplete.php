@@ -36,10 +36,13 @@ class GooglePlacesAutoComplete extends InputWidget {
 
         $this->value = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
+
+
         if ($this->hasModel()) {
             $this->options['class'] = 'form-control';
             //d([$this->model, $this->attribute, $this->options]);
             echo Html::activeTextInput($this->model, $this->attribute, $this->options);
+            d(1);
         } else {
             $this->options['class'] = 'form-control';
             echo Html::textInput($this->name, $this->value, $this->options);
@@ -55,7 +58,7 @@ class GooglePlacesAutoComplete extends InputWidget {
         $view = $this->getView();
         $view->registerJsFile(self::API_URL . http_build_query([
                 'libraries' => $this->libraries,
-                'language' => \Yii::$app->language
+                'language' => \Yii::$app->language,
             ]));
 
         $view->registerJs(<<<JS

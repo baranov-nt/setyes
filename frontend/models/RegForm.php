@@ -7,12 +7,15 @@
  */
 namespace frontend\models;
 
+use common\models\Country;
 use Yii;
 use yii\base\Model;
 use yii\db\Exception;
 use common\rbac\helpers\RbacHelper;
 use common\models\User;
 use common\models\Profile;
+use yii\helpers\ArrayHelper;
+use yii\bootstrap\Html;
 
 class RegForm extends Model
 {
@@ -21,6 +24,7 @@ class RegForm extends Model
     public $password;
     public $status;
     public $location;
+    public $country;
 
     public function rules()
     {
@@ -28,7 +32,7 @@ class RegForm extends Model
             [['phone', 'email', 'password'],'filter', 'filter' => 'trim'],
             [['phone', 'email', 'password'],'required', 'on' => 'default'],
             [['phone', 'email', 'password'],'required', 'on' => 'emailActivation'],
-            [['phone', 'email'],'required', 'on' => 'phoneAndEmailFinish'],
+            [['phone', 'email', 'country'],'required', 'on' => 'phoneAndEmailFinish'],
             [['phone'],'required', 'on' => 'phoneFinish'],
             ['password', 'string', 'min' => 6, 'max' => 255],
             ['phone', 'unique',
@@ -54,7 +58,8 @@ class RegForm extends Model
             'phone' => Yii::t('app', 'Phone number'),
             'email' => Yii::t('app', 'Email'),
             'password' => Yii::t('app', 'Password'),
-            'location' => Yii::t('app', 'City')
+            'location' => Yii::t('app', 'City'),
+            'country' => Yii::t('app', 'Country')
         ];
     }
 
@@ -108,6 +113,8 @@ class RegForm extends Model
         } catch (Exception $e) {
             $transaction->rollBack();
         }
+
+        return false;
     }
 
     public function sendActivationEmail($user)
@@ -117,5 +124,23 @@ class RegForm extends Model
             ->setTo($this->email)
             ->setSubject(Yii::t('app', 'Activation for {app}.'))
             ->send();
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getCountriesList()
+    {
+        $model = Country::find()->asArray()->all();
+        $countriesArray = ArrayHelper::map($model,
+            'iso2',
+            function($model, $defaultValue) {
+                return Yii::t('app', $model['short_name']).' +'.$model['calling_code'];
+            }
+        );
+
+        return $countriesArray;
     }
 }

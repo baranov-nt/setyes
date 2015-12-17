@@ -34,12 +34,7 @@ class RegForm extends Model
             ['phone', 'unique',
                 'targetClass' => User::className(),
                 'message' => Yii::t('app', 'This phone is already registered.')],
-            ['phone', function ($attribute, $params) {
-                $this->phone = str_replace('_', '', $this->phone);
-                if(iconv_strlen($this->phone) != 16):
-                    $this->addError($attribute, 'Пример: 7 (XXX) XXX-XXXX');
-                endif;
-            }],
+            [['phone'], 'integer'],
             ['email', 'email'],
             ['email', 'unique',
                 'targetClass' => User::className(),

@@ -16,13 +16,7 @@ use yii\authclient\widgets\AuthChoice;
             <?php if($model->scenario === 'loginWithEmail'): ?>
                 <?= $form->field($model, 'email') ?>
             <?php else: ?>
-                <?= $form->field($model, 'phone')->widget(MaskedInput::className(),[
-                    'name' => 'phone',
-                    'mask' => '7 (999) 999-9999',
-                    'options' => [
-                        'placeholder' => '7 (___) ___-____',
-                        'class' => 'form-control'
-                    ]]) ?>
+                <?= $form->field($model, 'phone') ?>
             <?php endif; ?>
             <?= $form->field($model, 'password')->passwordInput() ?>
             <?= $form->field($model, 'rememberMe')->checkbox() ?>

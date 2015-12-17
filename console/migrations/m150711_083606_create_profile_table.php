@@ -16,6 +16,8 @@ class m150711_083606_create_profile_table extends Migration
                 'first_name' => Schema::TYPE_STRING.'(32)',
                 'second_name' => Schema::TYPE_STRING.'(32)',
                 'middle_name' => Schema::TYPE_STRING.'(32)',
+                'phone_second' => Schema::TYPE_INTEGER.'(11) NULL',
+                'phone_third' => Schema::TYPE_INTEGER.'(11) NULL',
                 'birthday' => Schema::TYPE_INTEGER,
                 'gender' => Schema::TYPE_SMALLINT
             ]

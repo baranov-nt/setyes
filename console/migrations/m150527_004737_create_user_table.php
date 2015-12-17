@@ -9,8 +9,7 @@ class m150527_004737_create_user_table extends Migration
     {
         $this->createTable('user', [
             'id' => Schema::TYPE_PK,
-            'phone' => Schema::TYPE_STRING.'(32) NOT NULL',
-            'phone_second' => Schema::TYPE_STRING,
+            'phone' => Schema::TYPE_INTEGER.'(11) NOT NULL',
             'email' => Schema::TYPE_STRING.' NOT NULL',
             'password_hash' => Schema::TYPE_STRING.' NOT NULL',
             'status' => Schema::TYPE_SMALLINT.' NOT NULL',

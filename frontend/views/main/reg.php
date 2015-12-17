@@ -15,13 +15,7 @@ use yii\widgets\MaskedInput;
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
 
-            <?= $form->field($model, 'phone')->widget(MaskedInput::className(),[
-                'name' => 'phone',
-                'mask' => '7 (999) 999-9999',
-                'options' => [
-                    'placeholder' => '7 (___) ___-____',
-                    'class' => 'form-control'
-                ]]) ?>
+            <?= $form->field($model, 'phone') ?>
             <?php
             if(($model->scenario === 'emailActivation' || $model->scenario === 'phoneAndEmailFinish') || Yii::$app->controller->action->id == 'reg'):
                 ?>

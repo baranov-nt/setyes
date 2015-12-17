@@ -14,6 +14,8 @@ use yii\db\ActiveRecord;
  * @property string $first_name
  * @property string $second_name
  * @property string $middle_name
+ * @property integer $phone_second
+ * @property integer $phone_third
  * @property integer $birthday
  * @property integer $gender
  *
@@ -39,7 +41,7 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            [['images_num', 'birthday', 'gender'], 'integer'],
+            [['images_num', 'birthday', 'gender', 'phone_second', 'phone_third'], 'integer'],
             [['images_label', 'first_name', 'second_name', 'middle_name'], 'string', 'max' => 32]
         ];
     }

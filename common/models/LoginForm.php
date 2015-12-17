@@ -25,17 +25,7 @@ class LoginForm extends Model
     {
         return [
             [['phone', 'password'], 'required', 'on' => 'default'],
-            ['phone',
-                /**
-                 * @param $attribute
-                 * @param $params
-                 */
-                function ($attribute, $params) {
-                $this->phone = str_replace('_', '', $this->phone);
-                if(iconv_strlen($this->phone) != 16):
-                    $this->addError($attribute, 'Пример: 7 (XXX) XXX-XXXX');
-                endif;
-            }],
+            [['phone'], 'integer'],
             [['email', 'password'], 'required', 'on' => 'loginWithEmail'],
             ['email', 'email'],
             ['rememberMe', 'boolean'],

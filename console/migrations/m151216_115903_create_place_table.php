@@ -34,17 +34,6 @@ class m151216_115903_create_place_table extends Migration
         $this->dropTable('country');
         $this->dropTable('place');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }
 
 /*

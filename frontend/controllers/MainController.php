@@ -446,6 +446,7 @@ class MainController extends BehaviorsController
         $cookies->remove('_cityId');
         $cookies->remove('_cityPlaceId');
         $cookies->remove('_regionId');
+        Yii::$app->session->remove('_cityId');
     }
 
     public function actionError()

@@ -24,11 +24,13 @@ class CityUrlRule extends UrlRule {
 
     public function createUrl($manager, $route, $params)
     {
+        /* Формируем url если есть сессия  */
         $citySession = Yii::$app->session->get('_cityId');
         if($citySession):
             return $citySession.'/'.$route;
         endif;
 
+        /* Формируем url если есть куки  */
         $cityCookie = \Yii::$app->getRequest()->getCookies()->getValue('_cityId');
         if($cityCookie):
             return $cityCookie.'/'.$route;

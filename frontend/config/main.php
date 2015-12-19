@@ -35,6 +35,11 @@ return [
                     'suffix' => ''
                 ],
                 [
+                    'pattern' => 'main/index',
+                    'route' => 'main/index',
+                    'suffix' => ''
+                ],
+                [
                     'pattern' => '',
                     'route' => 'main/index',
                     'suffix' => ''
@@ -57,7 +62,7 @@ return [
                 [
                     'pattern' => '<city:\d+>/<controller>/<action>',
                     'route' => '<controller>/<action>',
-                    'suffix' => '.html'
+                    'suffix' => ''
                 ],
                 [
                     'pattern' => '<controller>/<action>/<id:\d+>',

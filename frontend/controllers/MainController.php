@@ -355,6 +355,7 @@ class MainController extends BehaviorsController
             if($modelCity):
                 // если город найден выставляем куки и переходим на главную страницу с get переменной city
                 $this->setCookie($formattedAddress, $modelCity);
+                Yii::$app->session->set('_cityId', $modelCity->id);
                 return $this->redirect(Url::to(['/main/index', 'city' => $modelCity->id]));
             else:
                 // если город не найден, находим регион
@@ -370,6 +371,7 @@ class MainController extends BehaviorsController
                     // добавляем новый город к найденному региону, пишем куки и переходим на главную страницу с get переменной city
                     $modelCity = $modelCity->createCity($modelRegion, $cityId);
                     $this->setCookie($formattedAddress, $modelCity);
+                    Yii::$app->session->set('_cityId', $modelCity->id);
                     return $this->redirect(Url::to(['/main/index', 'city' => $modelCity->id]));
                 else:
                     // если регион не найден, находим страну
@@ -385,6 +387,7 @@ class MainController extends BehaviorsController
                         // Добавляем новый регион и город, пишем куки и переходим на главную страницу с get переменной city
                         $modelCity = $modelRegion->createRegionAndCity($modelCountry, $regionId, $cityId);
                         $this->setCookie($formattedAddress, $modelCity);
+                        Yii::$app->session->set('_cityId', $modelCity->id);
                         return $this->redirect(Url::to(['/main/index', 'city' => $modelCity->id]));
                     endif;
                 endif;

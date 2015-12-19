@@ -13,6 +13,8 @@ use yii\web\UrlRule;
 
 class CityUrlRule extends UrlRule {
 
+    public $connectionID = 'db';
+
     public function init()
     {
         if ($this->name === null) {
@@ -22,17 +24,15 @@ class CityUrlRule extends UrlRule {
 
     public function createUrl($manager, $route, $params)
     {
-        //dd(Yii::$app->request->get());
-        //$city = Yii::$app->session->get('citywww');
+        $citySession = Yii::$app->session->get('_cityId');
+        if($citySession):
+            return $citySession.'/'.$route;
+        endif;
 
-        //$city = Yii::$app->request->get('city');
-
-        //dd($city);
-
-        /*if($city):
-            return $route.'?city='.$city;
-            //Yii::$app->session->get('city_id');
-        endif;*/
+        $cityCookie = \Yii::$app->getRequest()->getCookies()->getValue('_cityId');
+        if($cityCookie):
+            return $cityCookie.'/'.$route;
+        endif;
 
         return false;
     }

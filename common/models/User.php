@@ -16,6 +16,7 @@ use common\rbac\models\Role;
  * @property string $email
  * @property string $password_hash
  * @property integer $status
+ * @property integer $country_id                            // Данные о стране пользователя
  * @property string $auth_key
  * @property integer $created_at
  * @property integer $updated_at
@@ -24,6 +25,7 @@ use common\rbac\models\Role;
  * @property Carousel[] $carousels
  * @property ImagesOfObject[] $imagesOfObjects
  * @property Profile $profile
+ * @property Country $country
  * @property mixed role
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -55,7 +57,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['phone', 'email', 'password'], 'filter', 'filter' => 'trim'],
-            [['status'], 'required'],
+            [['status', 'country_id'], 'required'],
             ['email', 'email'],
             ['password', 'required', 'on' => 'create'],
             ['phone', 'unique', 'message' => Yii::t('app', 'This phone is already registered.')],
@@ -104,6 +106,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function getProfile()
     {
         return $this->hasOne(Profile::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCountry()
+    {
+        return $this->hasOne(Country::className(), ['id' => 'country_id']);
     }
 
     /* Поведения */

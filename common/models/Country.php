@@ -19,8 +19,10 @@ use yii\db\ActiveRecord;
  * @property string $calling_code
  * @property string $cctld
  * @property integer $phone_number_digits_code
+ * @property string $currency
  *
- * @property Place $place
+ * @property Region[] $regions
+ * @property User[] $users
  */
 class Country extends ActiveRecord
 {
@@ -42,7 +44,7 @@ class Country extends ActiveRecord
             [['phone_number_digits_code'], 'integer'],
             [['iso2'], 'string', 'max' => 2],
             [['short_name', 'long_name'], 'string', 'max' => 80],
-            [['iso3'], 'string', 'max' => 3],
+            [['iso3', 'currency'], 'string', 'max' => 3],
             [['numcode'], 'string', 'max' => 6],
             [['un_member'], 'string', 'max' => 12],
             [['calling_code'], 'string', 'max' => 8],
@@ -66,15 +68,24 @@ class Country extends ActiveRecord
             'calling_code' => Yii::t('app', 'Calling Code'),
             'cctld' => Yii::t('app', 'Cctld'),
             'phone_number_digits_code' => Yii::t('app', 'Phone Number Digits Code'),
+            'currency' => Yii::t('app', 'Currency'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPlace()
+    public function getRegions()
     {
-        return $this->hasOne(Place::className(), ['id' => 'id']);
+        return $this->hasMany(Region::className(), ['country_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['country_id' => 'id']);
     }
 
     /**

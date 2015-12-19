@@ -15,6 +15,9 @@ use yii\helpers\Url;
 use frontend\models\AccountActivation;
 use common\models\Carousel;
 use yii\web\ErrorAction;
+use common\models\City;
+use common\models\Region;
+use common\models\Country;
 
 class MainController extends BehaviorsController
 {
@@ -324,68 +327,114 @@ class MainController extends BehaviorsController
         $place = Yii::$app->request->post('place');
         $object = \Yii::$app->googleApi->getGeoCodeObject($place, null);
 
+        /* Если вернулся объект города */
         if(isset($object)):
             $city = '';
+            $region = '';
+            $country = '';
             foreach($object->address_components as $one):
                 if($one->types[0] == 'locality'):
-                    $city .= $one->short_name.' ';
+                    $city = $one->short_name;
                 endif;
-                /*if($one->types[0] == 'administrative_area_level_2'):
-                    $city .= $one->short_name.' ';
-                endif;*/
-                if($one->types[0] == 'administrative_area_level_1'):
-                    $city .= $one->short_name.' ';
+                if($one->types[0] == 'administrative_area_level_1'):            // ищем облать-регион
+                    $region = $one->short_name;
                 endif;
-                if($one->types[0] == 'country'):
-                    $city .= $one->short_name.' ';
-                endif;
-            endforeach;
-            $object = \Yii::$app->googleApi->getGeoCodeObject($city, null);
-            $formattedAddress = $object->formatted_address;
-            $idPlace = $object->place_id;
-
-            $country = '';
-
-            foreach($object->address_components as $one):
                 if($one->types[0] == 'country'):
                     $country = $one->short_name;
                 endif;
             endforeach;
 
-            if($formattedAddress != null && $idPlace != null && $country != null):
-                $cookies = Yii::$app->response->cookies;
+            $object = \Yii::$app->googleApi->getGeoCodeObject($city.' '.$region.' '.$country, null);
+            $formattedAddress = $object->formatted_address;            // форматированный адрес (строка)
+            $cityId = $object->place_id;                               // идентификатор города
 
-                $cookies->add(new \yii\web\Cookie([
-                    'name' => '_city',
-                    'value' => $formattedAddress,
-                    'expire' => time() + 86400 * 365,
-                ]));
+            /* Находим введенный город в базе по place_id */
+            /* @var $modelCity \common\models\City */
+            $modelCity = City::findOne(['place_id' => $cityId]);
 
-                $cookies->add(new \yii\web\Cookie([
-                    'name' => '_country',
-                    'value' => $country,
-                    'expire' => time() + 86400 * 365,
-                ]));
-
-                $cookies->add(new \yii\web\Cookie([
-                    'name' => '_placeId',
-                    'value' => $idPlace,
-                    'expire' => time() + 86400 * 365,
-                ]));
+            if($modelCity):
+                // если город найден выставляем куки и переходим на главную страницу с get переменной city
+                $this->setCookie($formattedAddress, $modelCity);
+                return $this->redirect(Url::to(['/main/index', 'city' => $modelCity->id]));
             else:
-                $cookies = Yii::$app->response->cookies;
-                $cookies->remove('_city');
-                $cookies->remove('_country');
-                $cookies->remove('_placeId');
+                // если город не найден, находим регион
+                $objectRegion = \Yii::$app->googleApi->getGeoCodeObject($region.' '.$country, null);
+                $regionId = $objectRegion->place_id;
+                // ищем регион в базе
+                /* @var $modelRegion \common\models\Region */
+                $modelRegion = Region::findOne(['place_id' => $regionId]);
+
+                if($modelRegion):
+                    // если регион найден
+                    $modelCity = new City();
+                    // добавляем новый город к найденному региону, пишем куки и переходим на главную страницу с get переменной city
+                    $modelCity = $modelCity->createCity($modelRegion, $cityId);
+                    $this->setCookie($formattedAddress, $modelCity);
+                    return $this->redirect(Url::to(['/main/index', 'city' => $modelCity->id]));
+                else:
+                    // если регион не найден, находим страну
+                    foreach($object->address_components as $one):
+                        if($one->types[0] == 'country'):
+                            $country = $one->short_name;
+                        endif;
+                    endforeach;
+                    $modelCountry = Country::findOne(['iso2' => $country]);
+                    // если страна найдена
+                    if($modelCountry):
+                        $modelRegion = new Region();
+                        // Добавляем новый регион и город, пишем куки и переходим на главную страницу с get переменной city
+                        $modelCity = $modelRegion->createRegionAndCity($modelCountry, $regionId, $cityId);
+                        $this->setCookie($formattedAddress, $modelCity);
+                        return $this->redirect(Url::to(['/main/index', 'city' => $modelCity->id]));
+                    endif;
+                endif;
             endif;
-        else:
-            $cookies = Yii::$app->response->cookies;
-            $cookies->remove('_city');
-            $cookies->remove('_country');
-            $cookies->remove('_placeId');
         endif;
 
+        /* Если объект не найден, чистим куки в переходим на главную страницу */
+        $this->clearCookie();
+
         return $this->redirect(['index']);
+    }
+
+    public function setCookie($formattedAddress, $modelCity)
+    {
+        $cookies = Yii::$app->response->cookies;
+        $cookies->add(new \yii\web\Cookie([
+            'name' => '_city',
+            'value' => $formattedAddress,
+            'expire' => time() + 86400 * 365,
+        ]));
+
+        /* Страна в iso2 (например RU) */
+        $cookies->add(new \yii\web\Cookie([
+            'name' => '_countryId',
+            'value' => $modelCity->region->country->id,
+            'expire' => time() + 86400 * 365,
+        ]));
+
+        /* place_id города */
+        $cookies->add(new \yii\web\Cookie([
+            'name' => '_cityId',
+            'value' => $modelCity->place_id,
+            'expire' => time() + 86400 * 365,
+        ]));
+
+        /* place_id региона */
+        $cookies->add(new \yii\web\Cookie([
+            'name' => '_regionId',
+            'value' => $modelCity->region->place_id,
+            'expire' => time() + 86400 * 365,
+        ]));
+    }
+
+    public function clearCookie()
+    {
+        $cookies = Yii::$app->response->cookies;
+        $cookies->remove('_city');
+        $cookies->remove('_country');
+        $cookies->remove('_cityId');
+        $cookies->remove('_regionId');
     }
 
     public function actionError()

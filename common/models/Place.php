@@ -9,9 +9,9 @@ use Yii;
  *
  * @property integer $id
  * @property string $place_id
- * @property string $country_id
+ * @property integer $city_id
  *
- * @property Country $id0
+ * @property City $city
  */
 class Place extends \yii\db\ActiveRecord
 {
@@ -29,8 +29,10 @@ class Place extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['place_id', 'country_id'], 'required'],
-            [['place_id', 'country_id'], 'string', 'max' => 32]
+            [['place_id', 'city_id'], 'required'],
+            [['city_id'], 'integer'],
+            [['place_id'], 'string', 'max' => 32],
+            [['place_id'], 'unique']
         ];
     }
 
@@ -42,15 +44,15 @@ class Place extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'place_id' => Yii::t('app', 'Place ID'),
-            'country_id' => Yii::t('app', 'Country ID'),
+            'city_id' => Yii::t('app', 'City ID'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getId0()
+    public function getCity()
     {
-        return $this->hasOne(Country::className(), ['id' => 'id']);
+        return $this->hasOne(City::className(), ['id' => 'city_id']);
     }
 }

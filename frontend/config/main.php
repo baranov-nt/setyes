@@ -30,19 +30,14 @@ return [
             'enableStrictParsing' => true,
             'rules' => [
                 [
-                    'pattern' => '',
+                    'pattern' => '<city:\d+>',
                     'route' => 'main/index',
                     'suffix' => ''
                 ],
                 [
-                    'pattern' => 'найти-<search:\w*>-<year:\d{4}>',
-                    'route' => 'main/search',
-                    'suffix' => '.html'
-                ],
-                [
-                    'pattern' => 'найти-<search:\w*>',
-                    'route' => 'main/search',
-                    'suffix' => '.html'
+                    'pattern' => '',
+                    'route' => 'main/index',
+                    'suffix' => ''
                 ],
                 [
                     'pattern' => 'site/auth',
@@ -58,6 +53,11 @@ return [
                     'pattern' => 'test',
                     'route' => 'test/index',
                     'suffix' => ''
+                ],
+                [
+                    'pattern' => '<city:\d+>/<controller>/<action>',
+                    'route' => '<controller>/<action>',
+                    'suffix' => '.html'
                 ],
                 [
                     'pattern' => '<controller>/<action>/<id:\d+>',

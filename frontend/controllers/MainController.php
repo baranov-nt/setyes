@@ -408,14 +408,14 @@ class MainController extends BehaviorsController
 
         /* Страна в iso2 (например RU) */
         $cookies->add(new \yii\web\Cookie([
-            'name' => '_countryId',
-            'value' => $modelCity->region->country->id,
+            'name' => '_cityId',
+            'value' => $modelCity->id,
             'expire' => time() + 86400 * 365,
         ]));
 
         /* place_id города */
         $cookies->add(new \yii\web\Cookie([
-            'name' => '_cityId',
+            'name' => '_cityPlaceId',
             'value' => $modelCity->place_id,
             'expire' => time() + 86400 * 365,
         ]));
@@ -426,6 +426,13 @@ class MainController extends BehaviorsController
             'value' => $modelCity->region->place_id,
             'expire' => time() + 86400 * 365,
         ]));
+
+        /* Страна в iso2 (например RU) */
+        $cookies->add(new \yii\web\Cookie([
+            'name' => '_countryId',
+            'value' => $modelCity->region->country->id,
+            'expire' => time() + 86400 * 365,
+        ]));
     }
 
     public function clearCookie()
@@ -434,6 +441,7 @@ class MainController extends BehaviorsController
         $cookies->remove('_city');
         $cookies->remove('_country');
         $cookies->remove('_cityId');
+        $cookies->remove('_cityPlaceId');
         $cookies->remove('_regionId');
     }
 

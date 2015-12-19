@@ -68,15 +68,15 @@ use yii\helpers\Url;
             <?php
             echo PjaxFieldWidget::widget([
                 'route' => '/main/user',
-                'model' => $modelUser,
+                'model' => $modelProfile,
                 'id' => Yii::$app->user->id,
-                'attribute' => 'phone',
+                'attribute' => 'phone_second',
             ]);
             echo PjaxFieldWidget::widget([
                 'route' => '/main/user',
-                'model' => $modelUser,
+                'model' => $modelProfile,
                 'id' => Yii::$app->user->id,
-                'attribute' => 'phone_second',
+                'attribute' => 'phone_third',
             ]);
             echo PjaxFieldWidget::widget([
                 'route' => '/main/profile',

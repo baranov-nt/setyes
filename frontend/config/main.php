@@ -55,6 +55,11 @@ return [
                     'suffix' => ''
                 ],
                 [
+                    'pattern' => 'test',
+                    'route' => 'test/index',
+                    'suffix' => ''
+                ],
+                [
                     'pattern' => '<controller>/<action>/<id:\d+>',
                     'route' => '<controller>/<action>',
                     'suffix' => '.html'

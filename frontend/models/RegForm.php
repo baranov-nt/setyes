@@ -25,6 +25,7 @@ class RegForm extends Model
     public $status;
     public $location;
     public $country;
+    public $password_repeat;
 
     public function rules()
     {
@@ -39,6 +40,7 @@ class RegForm extends Model
                 'targetClass' => User::className(),
                 'message' => Yii::t('app', 'This phone is already registered.')],
             [['phone'], 'integer'],
+            [['phone'], 'integer'],
             ['email', 'email'],
             ['email', 'unique',
                 'targetClass' => User::className(),
@@ -49,6 +51,8 @@ class RegForm extends Model
                 User::STATUS_ACTIVE
             ]],
             ['status', 'default', 'value' => User::STATUS_NOT_ACTIVE, 'on' => 'emailActivation'],
+            ['password_repeat', 'required', 'on' => 'default'],
+            ['password_repeat', 'compare', 'compareAttribute'=>'password', 'message'=>"Пароли не совпадают.", 'on' => 'default'],
         ];
     }
 
@@ -59,7 +63,8 @@ class RegForm extends Model
             'email' => Yii::t('app', 'Email'),
             'password' => Yii::t('app', 'Password'),
             'location' => Yii::t('app', 'City'),
-            'country' => Yii::t('app', 'Country')
+            'country' => Yii::t('app', 'Country'),
+            'password_repeat' => Yii::t('app', 'Confirm password')
         ];
     }
 
@@ -88,6 +93,7 @@ class RegForm extends Model
 
     public function reg()
     {
+        dd(Yii::$app->request->post());
         $user = new User();
         $user->phone = $this->phone;
         $user->email = $this->email;

@@ -344,12 +344,26 @@ class MainController extends BehaviorsController
             $formattedAddress = $object->formatted_address;
             $idPlace = $object->place_id;
 
-            if($formattedAddress != null && $idPlace != null):
+            $country = '';
+
+            foreach($object->address_components as $one):
+                if($one->types[0] == 'country'):
+                    $country = $one->short_name;
+                endif;
+            endforeach;
+
+            if($formattedAddress != null && $idPlace != null && $country != null):
                 $cookies = Yii::$app->response->cookies;
 
                 $cookies->add(new \yii\web\Cookie([
                     'name' => '_city',
                     'value' => $formattedAddress,
+                    'expire' => time() + 86400 * 365,
+                ]));
+
+                $cookies->add(new \yii\web\Cookie([
+                    'name' => '_country',
+                    'value' => $country,
                     'expire' => time() + 86400 * 365,
                 ]));
 
@@ -361,16 +375,17 @@ class MainController extends BehaviorsController
             else:
                 $cookies = Yii::$app->response->cookies;
                 $cookies->remove('_city');
+                $cookies->remove('_country');
                 $cookies->remove('_placeId');
             endif;
         else:
             $cookies = Yii::$app->response->cookies;
             $cookies->remove('_city');
+            $cookies->remove('_country');
             $cookies->remove('_placeId');
         endif;
 
         return $this->redirect(['index']);
-        //return $this->goBack();
     }
 
     public function actionError()

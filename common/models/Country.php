@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "country".
@@ -20,7 +22,7 @@ use Yii;
  *
  * @property Place $place
  */
-class Country extends \yii\db\ActiveRecord
+class Country extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -73,5 +75,23 @@ class Country extends \yii\db\ActiveRecord
     public function getPlace()
     {
         return $this->hasOne(Place::className(), ['id' => 'id']);
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getCountriesList()
+    {
+        $model = Country::find()->asArray()->all();
+        $countriesArray = ArrayHelper::map($model,
+            'iso2',
+            function($model, $defaultValue) {
+                return Yii::t('app', $model['short_name']).' +'.$model['calling_code'];
+            }
+        );
+
+        return $countriesArray;
     }
 }

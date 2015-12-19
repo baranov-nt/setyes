@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c179f92f6f7cff9ba6109d5e86b5119d",
-    "content-hash": "058439513b71d2b4c339a0cc45b0f386",
+    "hash": "4b581b3fed8ec309884c77404fe2cb7b",
+    "content-hash": "41b031f8a4e8388655f9db1f6e834799",
     "packages": [
         {
             "name": "bower-asset/animate.css",

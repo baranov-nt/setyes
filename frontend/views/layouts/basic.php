@@ -173,8 +173,6 @@ $this->beginPage();
                         <?php
             echo '<div class="input-group">';
 
-
-
             echo GooglePlacesAutoComplete::widget([
                 'name' => 'place',
                 'value' => ''

@@ -11,11 +11,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?php if($model->scenario === 'loginWithEmail'): ?>
-        <?= $form->field($model, 'email') ?>
-    <?php else: ?>
-        <?= $form->field($model, 'phone') ?>
-    <?php endif; ?>
+    <?= $form->field($model, 'username') ?>
     <?= $form->field($model, 'password')->passwordInput() ?>
     <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
@@ -32,7 +28,4 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton(Yii::t('app', 'Sign in'), ['class' => 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
-
-    <?= Html::a(Yii::t('app', 'Forgot your password?'), ['/main/send-email']) ?>
-
 </div><!-- main-login -->

@@ -12,6 +12,7 @@ use Yii;
 
 class LoginForm extends Model
 {
+    public $username;
     public $phone;
     public $password;
     public $email;
@@ -24,10 +25,7 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            [['phone', 'password'], 'required', 'on' => 'default'],
-            [['phone'], 'integer'],
-            [['email', 'password'], 'required', 'on' => 'loginWithEmail'],
-            ['email', 'email'],
+            ['username', 'required'],
             ['rememberMe', 'boolean'],
             ['password', 'validatePassword'],
             [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(),
@@ -42,8 +40,7 @@ class LoginForm extends Model
         if (!$this->hasErrors()):
             $user = $this->getUser();
             if (!$user || !$user->validatePassword($this->password)):
-                $field = ($this->scenario === 'loginWithEmail') ? Yii::t('app', 'email') : Yii::t('app', 'phone');
-                $this->addError($attribute, Yii::t('app', 'Wrong {field} or password.', ['field' => $field]));
+                $this->addError($attribute, Yii::t('app', 'Wrong phone, email or password.'));
             endif;
         endif;
     }
@@ -51,10 +48,11 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false):
-            if($this->scenario === 'loginWithEmail'):
-                $this->_user = User::findByEmail($this->email);
+            $this->_user = User::findByEmail($this->username);
+            if($this->_user):
+                return $this->_user;
             else:
-                $this->_user = User::findByphone($this->phone);
+                $this->_user = User::findByphone($this->username);
             endif;
         endif;
         return $this->_user;
@@ -63,6 +61,7 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
+            'username' => Yii::t('app', 'Phone or email'),
             'phone' => Yii::t('app', 'Phone number'),
             'email' => Yii::t('app', 'Email'),
             'password' => Yii::t('app', 'Password'),

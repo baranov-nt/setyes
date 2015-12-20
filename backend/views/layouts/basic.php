@@ -58,24 +58,11 @@ $this->beginPage();
             ]
         );
 
-        /*if(Yii::$app->user->can('Редактор')):
-            $menuItems = [
-                [
-                    'label' => 'Управление контентом <span class="glyphicon glyphicon-th-list"></span>',
-                    'items' => [
-                        '<li class="dropdown-header">Выбрать раздел</li>',
-                        '<li class="divider"></li>',
-                    ]
-                ],
-            ];
-        endif;*/
-
-        $menuItems[] = [
-            'label' => Yii::t('add', 'Google maps API'),
-            'url' => ['/maps/index']
-        ];
-
         if(Yii::$app->user->can('Администратор')):
+            $menuItems[] = [
+                'label' => Yii::t('add', 'Google maps API'),
+                'url' => ['/maps/index']
+            ];
             $menuItems[] =
                 [
                     'label' => 'Bootstrap <span class="glyphicon glyphicon-cog"></span>',
@@ -153,7 +140,7 @@ $this->beginPage();
             ];
         }
 
-        $menuItems[] = \common\widgets\LanguageSelect\LanguageSelect::widget();
+        //$menuItems[] = \common\widgets\LanguageSelect\LanguageSelect::widget();
 
         echo Nav::widget([
             'items' => $menuItems,

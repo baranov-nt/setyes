@@ -70,7 +70,7 @@ $this->beginPage();
             ]
         );
 
-        if(!Yii::$app->user->isGuest && !Yii::$app->user->can('Создатель')):
+        if(Yii::$app->user->can('Создатель')):
             $menuItems = [
                 [
                     'label' => Yii::t('app', 'Rules').'<span class="glyphicon glyphicon-question-sign"></span>',

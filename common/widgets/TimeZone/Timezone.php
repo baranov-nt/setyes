@@ -52,9 +52,9 @@ class Timezone extends Component
                     var timezoneAbbr = /\((.*)\)/.exec(new Date().toString())[1];
                 }
                 catch(err) {
-                    console.log(err);
+                    //console.log(err);
                 }
-                console.log(timezone);
+                //console.log(timezone);
                 $.get("$actionRoute", {
                     timezone: timezone,
                     timezoneAbbr: timezoneAbbr,

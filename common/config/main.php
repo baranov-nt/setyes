@@ -65,6 +65,7 @@ return [
                 __DIR__ . '/../../frontend',
                 __DIR__ . '/../../backend',
                 __DIR__ . '/../../common',
+                __DIR__ . '/../../console',
             ],
             'messagePath' => __DIR__  . '/../../messages',
             'translations' => [

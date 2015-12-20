@@ -397,7 +397,7 @@ class MainController extends BehaviorsController
         /* Если объект не найден, чистим куки в переходим на главную страницу */
         $this->clearCookie();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Url::to(['/main/index']));
     }
 
     public function setCookie($formattedAddress, $modelCity)
@@ -442,11 +442,10 @@ class MainController extends BehaviorsController
     {
         $cookies = Yii::$app->response->cookies;
         $cookies->remove('_city');
-        $cookies->remove('_country');
         $cookies->remove('_cityId');
         $cookies->remove('_cityPlaceId');
         $cookies->remove('_regionId');
-        Yii::$app->session->remove('_cityId');
+        $cookies->remove('_countryId');
     }
 
     public function actionError()

@@ -7,7 +7,7 @@ use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 
 ChosenAsset::register($this);
 /* @var $this yii\web\View */
-/* @var $model common\models\Profile */
+/* @var $model frontend\models\RegForm */
 /* @var $modelUser common\models\User */
 /* @var $form ActiveForm */
 ?>
@@ -19,8 +19,8 @@ ChosenAsset::register($this);
             <div class="row">
                 <div class="col-xs-6">
                     <?php
-                    $model->country =  \Yii::$app->getRequest()->getCookies()->getValue('_country');
-                    echo $form->field($model, 'country')->dropDownList($model->countriesList, [
+                    $model->country_id =  \Yii::$app->getRequest()->getCookies()->getValue('_countryId');
+                    echo $form->field($model, 'country_id')->dropDownList($model->countriesList, [
                         'class'  => 'form-control chosen-select',
                         'prompt' => Yii::t('app', 'Select country'),
                     ])

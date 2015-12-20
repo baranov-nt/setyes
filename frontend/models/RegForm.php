@@ -5,17 +5,18 @@
  * Date: 02.05.2015
  * Time: 18:17
  */
+
+/* @property \common\models\Country $modelCountry */
+
 namespace frontend\models;
 
 use common\models\Country;
 use Yii;
 use yii\base\Model;
-use yii\db\Exception;
 use common\rbac\helpers\RbacHelper;
 use common\models\User;
 use common\models\Profile;
 use yii\helpers\ArrayHelper;
-use yii\bootstrap\Html;
 
 class RegForm extends Model
 {
@@ -24,8 +25,8 @@ class RegForm extends Model
     public $password;
     public $status;
     public $location;
-    public $country;
     public $password_repeat;
+    public $country_id;
 
     public function rules()
     {
@@ -33,14 +34,15 @@ class RegForm extends Model
             [['phone', 'email', 'password'],'filter', 'filter' => 'trim'],
             [['phone', 'email', 'password'],'required', 'on' => 'default'],
             [['phone', 'email', 'password'],'required', 'on' => 'emailActivation'],
-            [['phone', 'email', 'country'],'required', 'on' => 'phoneAndEmailFinish'],
+            [['phone', 'email', 'country_id'],'required', 'on' => 'phoneAndEmailFinish'],
             [['phone'],'required', 'on' => 'phoneFinish'],
+            ['phone', 'validatePhone'],
             ['password', 'string', 'min' => 6, 'max' => 255],
-            ['phone', 'unique',
+            /*['phone', 'unique',
                 'targetClass' => User::className(),
-                'message' => Yii::t('app', 'This phone is already registered.')],
+                'message' => Yii::t('app', 'This phone is already registered.')],*/
             [['phone'], 'integer'],
-            [['phone'], 'integer'],
+            [['country_id'], 'integer'],
             ['email', 'email'],
             ['email', 'unique',
                 'targetClass' => User::className(),
@@ -56,6 +58,22 @@ class RegForm extends Model
         ];
     }
 
+    public function validatePhone()
+    {
+        /* @var $modelCountry \common\models\Country */
+        $modelCountry = Country::findOne($this->country_id);
+
+        if ($modelCountry->phone_number_digits_code != strlen($this->phone)) {
+            $this->addError('phone', Yii::t('app', 'Phone should contain {length, number} digits.', ['length' => $modelCountry->phone_number_digits_code]));
+        }
+        $phone = $modelCountry->calling_code.$this->phone;
+        $phone = str_replace([' ', '-', '+'], '', $phone);
+        $modelUser = User::findOne(['phone' => $phone]);
+        if($modelUser):
+            $this->addError('phone', Yii::t('app', 'This phone is already registered.'));
+        endif;
+    }
+
     public function attributeLabels()
     {
         return [
@@ -63,7 +81,7 @@ class RegForm extends Model
             'email' => Yii::t('app', 'Email'),
             'password' => Yii::t('app', 'Password'),
             'location' => Yii::t('app', 'City'),
-            'country' => Yii::t('app', 'Country'),
+            'country_id' => Yii::t('app', 'Country'),
             'password_repeat' => Yii::t('app', 'Confirm password')
         ];
     }
@@ -71,20 +89,26 @@ class RegForm extends Model
     public function finishReg($id)
     {
         /* @var $modelUser \common\models\User */
-        
+        /* @var $modelCountry \common\models\Country */
         $modelUser = User::findOne($id);
+        $modelCountry = Country::findOne($this->country_id);
 
         if($this->scenario === 'phoneFinish'):
-            $modelUser->phone = $this->phone;
+            $phone = $modelCountry->calling_code.$this->phone;
+            $phone = str_replace([' ', '-', '+'], '', $phone);
+            $modelUser->phone = $phone;
             $modelUser->status = User::STATUS_ACTIVE;
             $modelUser->save();
             return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
         elseif($this->scenario === 'phoneAndEmailFinish'):
-            $modelUser->phone = $this->phone;
+            $phone = $modelCountry->calling_code.$this->phone;
+            $phone = str_replace([' ', '-', '+'], '', $phone);
+            $modelUser->phone = $phone;
             $modelUser->email = $this->email;
             $modelUser->setPassword($this->password);
             $modelUser->generateAuthKey();
             $modelUser->generateSecretKey();
+            $modelUser->validate();
             $modelUser->save();
             return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
         endif;
@@ -93,33 +117,26 @@ class RegForm extends Model
 
     public function reg()
     {
-        dd(Yii::$app->request->post());
-        $user = new User();
-        $user->phone = $this->phone;
-        $user->email = $this->email;
-        $user->status = $this->status;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
+        /* @var $modelCountry \common\models\Country */
+        $modelUser = new User();
+        $modelCountry = Country::findOne($this->country_id);
+        $phone = $modelCountry->calling_code.$this->phone;
+        $phone = str_replace([' ', '-', '+'], '', $phone);
+        $modelUser->phone = $phone;
+        $modelUser->email = $this->email;
+        $modelUser->status = $this->status;
+        $modelUser->country_id = $this->country_id;
+        $modelUser->setPassword($this->password);
+        $modelUser->generateAuthKey();
 
         if($this->scenario === 'emailActivation')
-            $user->generateSecretKey();
+            $modelUser->generateSecretKey();
 
-        $transaction = Yii::$app->db->beginTransaction();
-        try {
-            if($user->save()):
-                $modelProfile = new Profile();
-                $modelProfile->user_id = $user->id;
-                if($modelProfile->save()):
-                    $transaction->commit();
-                    return RbacHelper::assignRole($user->getId()) ? $user : null;
-                endif;
-            else:
-                return false;
-            endif;
-        } catch (Exception $e) {
-            $transaction->rollBack();
-        }
-
+        if($modelUser->save()):
+            $modelProfile = new Profile();
+            $modelProfile->link('user', $modelUser);
+            return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
+        endif;
         return false;
     }
 
@@ -141,8 +158,8 @@ class RegForm extends Model
     {
         $model = Country::find()->asArray()->all();
         $countriesArray = ArrayHelper::map($model,
-            'iso2',
-            function($model, $defaultValue) {
+            'id',
+            function($model) {
                 return Yii::t('app', $model['short_name']).' +'.$model['calling_code'];
             }
         );

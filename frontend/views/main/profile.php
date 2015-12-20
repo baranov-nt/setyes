@@ -14,6 +14,16 @@ use yii\helpers\Url;
 <div class="main-profile">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            <div class="form-group">
+                <b>
+                    <?= Yii::t('app', 'Language of the application') ?>
+                </b>
+                <?php
+                echo \common\widgets\LanguageSelect\LanguageSelect::widget();
+                ?>
+            </div>
+        </div>
+        <div class="col-md-6 col-md-offset-3">
             <?php
             echo ImageLoadWidget::widget([
                 'modelName' => 'Profile',
@@ -64,6 +74,7 @@ use yii\helpers\Url;
         </div>
     </div>
     <div class="row">
+
         <div class="col-md-6 col-md-offset-3">
             <?php
             echo PjaxFieldWidget::widget([

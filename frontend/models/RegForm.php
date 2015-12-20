@@ -63,9 +63,22 @@ class RegForm extends Model
         /* @var $modelCountry \common\models\Country */
         $modelCountry = Country::findOne($this->country_id);
 
-        if ($modelCountry->phone_number_digits_code != strlen($this->phone)) {
+        if ($modelCountry->phone_number_digits_code != strlen($this->phone) && $modelCountry->phone_number_digits_code != null) {
             $this->addError('phone', Yii::t('app', 'Phone should contain {length, number} digits.', ['length' => $modelCountry->phone_number_digits_code]));
         }
+
+        if ($modelCountry->phone_number_digits_code == null) {
+            if((strlen($this->phone) < 5) || (strlen($this->phone) > 12)) {
+                $this->addError('phone', Yii::t('app', 'Phone is invalid.'));
+            }
+        }
+
+        if($modelCountry->iso2 == 'RU') {
+            if(substr($this->phone, 0, 1) != '9' && substr($this->phone, 0, 1) != '3') {
+                $this->addError('phone', Yii::t('app', 'Phone is invalid.'));
+            }
+        }
+
         $phone = $modelCountry->calling_code.$this->phone;
         $phone = str_replace([' ', '-', '+'], '', $phone);
         $modelUser = User::findOne(['phone' => $phone]);
@@ -91,19 +104,14 @@ class RegForm extends Model
         /* @var $modelUser \common\models\User */
         /* @var $modelCountry \common\models\Country */
         $modelUser = User::findOne($id);
-        $modelCountry = Country::findOne($this->country_id);
 
         if($this->scenario === 'phoneFinish'):
-            $phone = $modelCountry->calling_code.$this->phone;
-            $phone = str_replace([' ', '-', '+'], '', $phone);
-            $modelUser->phone = $phone;
+            $modelUser->phone = $this->getPhoneNumber();
             $modelUser->status = User::STATUS_ACTIVE;
             $modelUser->save();
             return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
         elseif($this->scenario === 'phoneAndEmailFinish'):
-            $phone = $modelCountry->calling_code.$this->phone;
-            $phone = str_replace([' ', '-', '+'], '', $phone);
-            $modelUser->phone = $phone;
+            $modelUser->phone = $this->getPhoneNumber();
             $modelUser->email = $this->email;
             $modelUser->setPassword($this->password);
             $modelUser->generateAuthKey();
@@ -117,12 +125,9 @@ class RegForm extends Model
 
     public function reg()
     {
-        /* @var $modelCountry \common\models\Country */
+
         $modelUser = new User();
-        $modelCountry = Country::findOne($this->country_id);
-        $phone = $modelCountry->calling_code.$this->phone;
-        $phone = str_replace([' ', '-', '+'], '', $phone);
-        $modelUser->phone = $phone;
+        $modelUser->phone = $this->getPhoneNumber();
         $modelUser->email = $this->email;
         $modelUser->status = $this->status;
         $modelUser->country_id = $this->country_id;
@@ -165,5 +170,19 @@ class RegForm extends Model
         );
 
         return $countriesArray;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getPhoneNumber()
+    {
+        /* @var $modelCountry \common\models\Country */
+        $modelCountry = Country::findOne($this->country_id);
+        $phone = $modelCountry->calling_code.$this->phone;
+        $phone = str_replace([' ', '-', '+'], '', $phone);
+        return $phone;
     }
 }

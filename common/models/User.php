@@ -134,9 +134,23 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByphone($phone)
     {
-        return static::findOne([
+        $phone = str_replace([' ', '-', '+'], '', $phone);
+
+        $user = static::findOne([
             'phone' => $phone
         ]);
+
+        if($user) {
+            return $user;
+        }
+
+        if(substr($phone, 0, 1) == '8' && strlen($phone) == 11) {
+            $phone = substr_replace($phone, '7', 0, 1);
+            $user = static::findOne([
+                'phone' => $phone
+            ]);
+        }
+        return $user;
     }
 
     /* Находит пользователя по емайл */

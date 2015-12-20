@@ -74,14 +74,13 @@ class LanguageSelect extends Widget
                 'items' => $items,
             ],
             'containerOptions' => [
-                'class' => 'navbar-form navbar-left'
+                'class' => 'pull-right'
             ],
             'options' => [
-                'class' => 'btn btn-sm btn-info',
+                'class' => 'btn btn-xs btn-warning',
                 'style' => 'margin-top: 1px;'
             ],
             'tagName' => 'button'
         ]);
     }
-
 }

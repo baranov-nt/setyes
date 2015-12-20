@@ -138,7 +138,7 @@ $this->beginPage();
 
         endif;
 
-        $menuItems[] = \common\widgets\LanguageSelect\LanguageSelect::widget();
+        //$menuItems[] = \common\widgets\LanguageSelect\LanguageSelect::widget();
 
         echo Nav::widget([
             'items' => $menuItems,
@@ -166,7 +166,7 @@ $this->beginPage();
             ActiveForm::begin([
                 'action' => ['/main/select-city'],
                 'options' => [
-                'class' => 'navbar-right col-md-6',
+                'class' => 'navbar-right col-md-5',
                 'style' => 'margin: 7px 0 8px 0;'
             ]]);
         ?>

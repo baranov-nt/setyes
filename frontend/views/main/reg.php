@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use frontend\assets\ChosenAsset;
 use yii\widgets\Pjax;
-use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 
 ChosenAsset::register($this);
 /* @var $this yii\web\View */

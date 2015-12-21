@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use frontend\assets\ChosenAsset;
+use yii\widgets\Pjax;
 use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 
 ChosenAsset::register($this);
@@ -13,7 +14,11 @@ ChosenAsset::register($this);
 ?>
 <div class="main-reg">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php
+    Pjax::begin([
+        'enablePushState' => false,
+    ]);
+    $form = ActiveForm::begin(['options' => ['data-pjax' => true]]); ?>
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -83,5 +88,6 @@ ChosenAsset::register($this);
         </div>
     </div>
     <?php ActiveForm::end(); ?>
+    <?php Pjax::end(); ?>
     <!-- main-reg -->
 </div>

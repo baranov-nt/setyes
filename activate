@@ -6,6 +6,7 @@ yii rbac/init
 php yii i18n/import @common/messages
 (сделать Rescan)
 php yii i18n/export @common/messages (app)
+чистим кеш
 
 ------------------------------------------------------------------------------------------------------------------------
 GitHub:

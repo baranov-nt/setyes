@@ -178,7 +178,7 @@ return [
     'Qatar' => '',
     'Reunion' => '',
     'Romania' => '',
-    'Russia' => '',
+    'Russia' => 'Россия',
     'Rwanda' => '',
     'Saint Barthelemy' => '',
     'Saint Helena' => '',

@@ -1,6 +1,4 @@
 <?php
-
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m151221_104037_create_ads_tables extends Migration
@@ -41,31 +39,32 @@ class m151221_104037_create_ads_tables extends Migration
         /* Таблица категорий объявлений (от этой таблицы идут связи к подробным данным конкретных объявлений) */
         $this->createTable('ads_category', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(32),                                                // Название категории
+            'type_category' => $this->string(32),                                       // Название категории, таблица reference
             'real_estate_id' => $this->integer(),                                       // Категория для недвижемости
             'cars_id' => $this->integer(),                                              // Категория для автотранспорта
-            'dress_id' => $this->integer(),                                             // Категория для одежды
+            'electronics_id' => $this->integer(),                                       // Категория для электроники
+            'clothes_id' => $this->integer(),                                             // Категория для одежды
             'work_id' => $this->integer(),                                              // Категория для работы
             'animals_id' => $this->integer(),                                           // Категория для животных
-            'electronics_id' => $this->integer(),                                       // Категория для электроники
+
         ]);
 
         $this->addForeignKey('ads_category', 'ads', 'categoty_id', 'ads_category', 'id', 'CASCADE');
 
         /* Таблица для категории - недвижемость */
-        $this->createTable('real_estate', [
+        /*$this->createTable('real_estate', [
             'id' => $this->primaryKey(),
             'type_id' => $this->integer()->notNull(),                                   // Тип нежвижемости (квартира, дом, вилла и т.д.), таблица reference
             'deal_id' => $this->integer()->notNull(),                                   // Тип сделки с нежвижемостью (сдать, продать, купить и т.д.), таблица reference
             'area_id' => $this->integer(),                                              // Площадь недвижемости (м2, футы2) area_real_estate
 
-        ]);
+        ]);*/
     }
-
-
 
     public function safeDown()
     {
+        $this->dropForeignKey('ads_category', 'ads_category');
+        $this->dropTable('ads_category');
         $this->dropForeignKey('ads_style', 'ads_style');
         $this->dropTable('ads_style');
         $this->dropForeignKey('ads_user', 'ads');

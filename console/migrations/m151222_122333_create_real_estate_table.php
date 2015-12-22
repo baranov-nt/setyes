@@ -43,6 +43,8 @@ class m151222_122333_create_real_estate_table extends Migration
         $this->addForeignKey('room_period_type_reference', 'ads_category_realestate_room', 'period_type', 'reference', 'id');
     }
 
+
+
     public function safeDown()
     {
         $this->dropForeignKey('room_reference', 'ads_category_realestate_room');

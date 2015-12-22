@@ -35,6 +35,31 @@ class m151222_013751_create_reference_table extends Migration
                 [7, Yii::t('reference', 'Rent property')],                      // сдам недвижимость
                 [7, Yii::t('reference', 'Buy property')],                      // покупка недвижимости
                 [7, Yii::t('reference', 'Renting an apartment')],              // сниму недвижимость
+                /* Этаж недвижемости */
+                [8, Yii::t('reference', 'not first')],                          // не первый
+                [8, Yii::t('reference', 'not last')],                           // не последний
+                [8, Yii::t('reference', 'not the first nor the last')],         // не первый и не последний
+                /* Количество комнат в квартире */
+                [9, Yii::t('reference', '1')],
+                [9, Yii::t('reference', '2')],
+                [9, Yii::t('reference', '3')],
+                [9, Yii::t('reference', '4')],
+                [9, Yii::t('reference', '5')],
+                [9, Yii::t('reference', '6')],
+                [9, Yii::t('reference', 'more than 6')],
+                /* Количество этажей в доме */
+                [10, Yii::t('reference', 'less than 5')],
+                [10, Yii::t('reference', '5-8')],
+                [10, Yii::t('reference', '9-12')],
+                [10, Yii::t('reference', '13-18')],
+                [10, Yii::t('reference', '19-25')],
+                [10, Yii::t('reference', 'more than 25')],
+                /* Тип жилья */
+                [11, Yii::t('reference', 'resale')],
+                [11, Yii::t('reference', 'new building')],
+                /* Срок сдачи за указанную сумму (сутки, месяц) */
+                [12, Yii::t('reference', 'per day')],
+                [12, Yii::t('reference', 'per month')],
             ]);
     }
 

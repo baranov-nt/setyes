@@ -6,7 +6,7 @@ class m151222_122333_create_real_estate_table extends Migration
     public function safeUp()
     {
         /* Таблица категорий объявлений недвижемости */
-        $this->createTable('ads_real_estate', [
+        $this->createTable('ads_category_realestate', [
             'id' => $this->primaryKey(),
             'room_id' => $this->integer(),                                          // Категория для комнат
             'apartament_id' => $this->integer(),                                    // Категория для квартир
@@ -16,22 +16,39 @@ class m151222_122333_create_real_estate_table extends Migration
             'commercial_property_id' => $this->integer(),                          // Категория для коммерческой недвижемости
         ]);
 
-        $this->addForeignKey('ads_category_real_estate', 'ads_category', 'real_estate_id', 'ads_real_estate', 'id', 'CASCADE');
+        $this->addForeignKey('realestate_category_ads', 'ads_category', 'realestate_id', 'ads_category_realestate', 'id', 'CASCADE');
 
         /* Таблица для сделок категории комнаты */
-        $this->createTable('ads_room', [
+        $this->createTable('ads_category_realestate_room', [
             'id' => $this->primaryKey(),
-            'type_deal' => $this->integer(),                                        // Сделка с недвижемостью (Снять, сдать, купить, продать), с таблице reference
+            'deal_type' => $this->integer(),                                        // Сделка с недвижемостью (Снять, сдать, купить, продать), с таблице reference
+            'images_num' => $this->smallInteger()->defaultValue(5),
+            'images_label' => $this->string(32)->defaultValue('room'),
+            'area' => $this->integer(),                                             // Значение площади
+            'area_type' => $this->integer(),                                        // Аттрибут площади (m2 или ft2) из таблицы reference
+            'number_room_type' => $this->integer(),                                 // Количество комнат в квартире (1 - 6)
+            'floor_type' => $this->integer(),                                       // Этаж (не первый, не последний, не первый и не последний) из таблицы reference
+            'number_floor_type' => $this->integer(),                                // Количество этажей в доме  из таблицы reference
+            'period_type' => $this->integer(),                                      // Срок сдачи (сутки, месяц) из таблицы reference
+            'price' => $this->money(10,2),                                          // цена
+            'currency' => $this->string(3)->notNull(),                              // валюта пользователя, который дал объявление
         ]);
 
-        $this->addForeignKey('ads_room_reference', 'ads_room', 'type_deal', 'reference', 'id');
-
+        $this->addForeignKey('room_realestate_category_ads', 'ads_category_realestate', 'room_id', 'ads_category_realestate_room', 'id', 'CASCADE');
+        $this->addForeignKey('room_deal_type_reference', 'ads_category_realestate_room', 'deal_type', 'reference', 'id');
+        $this->addForeignKey('room_area_type_reference', 'ads_category_realestate_room', 'area_type', 'reference', 'id');
+        $this->addForeignKey('room_number_room_type_reference', 'ads_category_realestate_room', 'number_room_type', 'reference', 'id');
+        $this->addForeignKey('room_floor_type_reference', 'ads_category_realestate_room', 'floor_type', 'reference', 'id');
+        $this->addForeignKey('room_number_floor_type_reference', 'ads_category_realestate_room', 'number_floor_type', 'reference', 'id');
+        $this->addForeignKey('room_period_type_reference', 'ads_category_realestate_room', 'period_type', 'reference', 'id');
     }
 
     public function safeDown()
     {
-        $this->dropForeignKey('ads_category_real_estate', 'ads_real_estate');
-        $this->dropTable('ads_real_estate');
+        $this->dropForeignKey('room_reference', 'ads_category_realestate_room');
+        $this->dropForeignKey('room_realestate_category_ads', 'ads_category_realestate_room');
+        $this->dropTable('ads_category_realestate_room');
+        $this->dropTable('ads_category_realestate');
     }
 
     /*

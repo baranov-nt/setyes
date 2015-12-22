@@ -1,7 +1,7 @@
 <?php
 use yii\db\Migration;
 
-class m151221_104037_create_ads_tables extends Migration
+class m151222_083424_create_ads_table extends Migration
 {
     public function safeUp()
     {
@@ -9,6 +9,8 @@ class m151221_104037_create_ads_tables extends Migration
         $this->createTable('ads', [
             'id' => $this->primaryKey(),
             'place_id' => $this->integer()->notNull(),                                   // Место, к которому привязано объявление
+            'price' => $this->money(10,2),                                                 // цена
+            'currency' => $this->string(3)->notNull(),                                   // Валюта пользователя, который дал объявление
             'user_id' => $this->integer()->notNull(),                                    // Пользователь, который добавил объявление
             'style_id' => $this->integer()->notNull()->defaultValue(1),                  // Стиль для объявления (по умолчанию 1)
             'categoty_id' => $this->integer()->notNull(),                                // Категория объявления
@@ -39,26 +41,15 @@ class m151221_104037_create_ads_tables extends Migration
         /* Таблица категорий объявлений (от этой таблицы идут связи к подробным данным конкретных объявлений) */
         $this->createTable('ads_category', [
             'id' => $this->primaryKey(),
-            'type_category' => $this->string(32),                                       // Название категории, таблица reference
             'real_estate_id' => $this->integer(),                                       // Категория для недвижемости
-            'cars_id' => $this->integer(),                                              // Категория для автотранспорта
+            'transport_id' => $this->integer(),                                         // Категория для автотранспорта
             'electronics_id' => $this->integer(),                                       // Категория для электроники
-            'clothes_id' => $this->integer(),                                             // Категория для одежды
+            'clothes_id' => $this->integer(),                                           // Категория для одежды
             'work_id' => $this->integer(),                                              // Категория для работы
             'animals_id' => $this->integer(),                                           // Категория для животных
-
         ]);
 
         $this->addForeignKey('ads_category', 'ads', 'categoty_id', 'ads_category', 'id', 'CASCADE');
-
-        /* Таблица для категории - недвижемость */
-        /*$this->createTable('real_estate', [
-            'id' => $this->primaryKey(),
-            'type_id' => $this->integer()->notNull(),                                   // Тип нежвижемости (квартира, дом, вилла и т.д.), таблица reference
-            'deal_id' => $this->integer()->notNull(),                                   // Тип сделки с нежвижемостью (сдать, продать, купить и т.д.), таблица reference
-            'area_id' => $this->integer(),                                              // Площадь недвижемости (м2, футы2) area_real_estate
-
-        ]);*/
     }
 
     public function safeDown()

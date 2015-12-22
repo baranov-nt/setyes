@@ -6,6 +6,7 @@
 use yii\bootstrap\Carousel;
 use common\widgets\ImageLoad\assets\backendImagesAsset;
 use common\widgets\GoogleMapsMarkers\GoogleMaps;
+use common\widgets\CurrencyConverter\CurrencyConverter;
 
 if (Yii::$app->user->can('Редактор')):
     Yii::$app->assetManager->forceCopy = true;
@@ -44,6 +45,13 @@ if(!Yii::$app->user->isGuest):
     //Yii::$app->session->remove('timezone');
 endif;
 ?>
+</div>
+<div class="container">
+    <?php
+    $converter = new CurrencyConverter();
+    $rate =  $converter->convert('EUR', 'MYR');
+    d($rate);
+    ?>
 </div>
     <div class="container">
         <?php

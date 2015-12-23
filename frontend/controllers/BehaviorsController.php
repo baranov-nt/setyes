@@ -54,6 +54,12 @@ class BehaviorsController extends Controller {
                     ],
                     [
                         'allow' => true,
+                        'controllers' => ['ads/default'],
+                        'actions' => ['index', 'create', 'view', 'update', 'delete'],
+                        'roles' => ['Создатель']
+                    ],
+                    [
+                        'allow' => true,
                         'controllers' => ['main', 'test'],
                         'actions' => ['index', 'search', 'send-email', 'reset-password', 'finish-reg', 'login', 'error', 'activate-account', 'view-profile', 'timezone', 'select-city']
                     ],

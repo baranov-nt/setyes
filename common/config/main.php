@@ -50,12 +50,12 @@ return [
         'urlManager' => [
             'class' => 'codemix\localeurls\UrlManager',
             'languages' => ['ru', 'en', 'de', 'fr'],
-            'rules' => [
+            /*'rules' => [
                 [
                     'class' => 'common\components\CityUrlRule',
                     'connectionID' => 'db'
                 ]
-            ]
+            ]*/
         ],
         'i18n' => [
             'class'      => common\widgets\yii2TranslatePanel\components\I18N::className(),

@@ -10,7 +10,7 @@ class m151222_083424_create_ads_table extends Migration
             'id' => $this->primaryKey(),
             'place_id' => $this->integer()->notNull(),                                   // Место, к которому привязано объявление
             'user_id' => $this->integer()->notNull(),                                    // Пользователь, который добавил объявление
-            'style_id' => $this->integer()->notNull()->defaultValue(1),                  // Стиль для объявления (по умолчанию 1)
+            'style_id' => $this->integer()->defaultValue(1),                  // Стиль для объявления (по умолчанию 1)
             'categoty_id' => $this->integer()->notNull(),                                // Категория объявления
             'checked' => $this->boolean()->defaultValue(false),                          // Проверен
             'created_at' => $this->integer()->notNull(),                                 // Дата создания объявления

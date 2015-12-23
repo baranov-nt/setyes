@@ -54,12 +54,18 @@ class m151222_013751_create_reference_table extends Migration
                 [10, Yii::t('reference', '13-18')],
                 [10, Yii::t('reference', '19-25')],
                 [10, Yii::t('reference', 'more than 25')],
+                /* Метериал здания */
+                [11, Yii::t('reference', 'modular')],                       // Модульный
+                [11, Yii::t('reference', 'wood')],                          // Деревянный
+                [11, Yii::t('reference', 'brick')],                         // Кирпичный
+                [11, Yii::t('reference', 'monolithic')],                    // Монолитный
+                [11, Yii::t('reference', 'panel')],                         // Панельный
                 /* Тип жилья */
-                [11, Yii::t('reference', 'resale')],
-                [11, Yii::t('reference', 'new building')],
+                [12, Yii::t('reference', 'resale')],
+                [12, Yii::t('reference', 'new building')],
                 /* Срок сдачи за указанную сумму (сутки, месяц) */
-                [12, Yii::t('reference', 'per day')],
-                [12, Yii::t('reference', 'per month')],
+                [13, Yii::t('reference', 'per day')],
+                [13, Yii::t('reference', 'per month')],
             ]);
     }
 

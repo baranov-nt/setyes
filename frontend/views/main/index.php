@@ -48,6 +48,8 @@ endif;
 </div>
 <div class="container">
     <?php
+    d(\Yii::$app->getRequest()->getCookies()->getValue('_countryId'));
+
     $converter = new CurrencyConverter();
     $rate =  $converter->convert('EUR', 'MYR');
     d($rate);

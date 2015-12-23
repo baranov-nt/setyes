@@ -87,7 +87,9 @@ $this->beginPage();
         endif;
 
         if (!Yii::$app->user->isGuest):
+
             $user = Yii::$app->user->identity;
+
             /* @var $user common\models\User */
             if($user->profile->imagesOfObjects):
             foreach($user->profile->imagesOfObjects as $one):
@@ -197,6 +199,7 @@ $this->beginPage();
         NavBar::end();
 
         if(Yii::$app->controller->id == 'main' && Yii::$app->controller->action->id == 'index'):
+
             ?>
             <?= $content ?>
             <div class="container">

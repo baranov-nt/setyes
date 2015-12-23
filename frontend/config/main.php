@@ -16,6 +16,11 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'layout' => 'basic',
     'defaultRoute' => 'main/index',
+    'modules' => [
+        'ads' => [
+            'class' => 'frontend\modules\ads\Module',
+        ],
+    ],
     'components' => [
         'timezone' => [
             'class' => 'common\widgets\TimeZone\Timezone',
@@ -75,14 +80,14 @@ return [
                     'suffix' => '.html'
                 ],
                 [
-                    'pattern' => '<module>/<controller>/<action>/<id:\d+>',
+                    'pattern' => '<city:\d+>/<module>/<controller>/<action>/<id:\d+>',
                     'route' => '<module>/<controller>/<action>',
-                    'suffix' => '.html'
+                    'suffix' => ''
                 ],
                 [
-                    'pattern' => '<module>/<controller>/<action>',
+                    'pattern' => '<city:\d+>/<module>/<controller>/<action>',
                     'route' => '<module>/<controller>/<action>',
-                    'suffix' => '.html'
+                    'suffix' => ''
                 ],
             ]
         ],

@@ -24,6 +24,7 @@ class m151222_122333_create_real_estate_table extends Migration
             'deal_type' => $this->integer(),                                        // Сделка с недвижемостью (Снять, сдать, купить, продать), с таблице reference
             'images_num' => $this->smallInteger()->defaultValue(5),
             'images_label' => $this->string(32)->defaultValue('room'),
+            'video' => $this->string(255),
             'area' => $this->integer(),                                             // Значение площади
             'area_type' => $this->integer(),                                        // Аттрибут площади (m2 или ft2) из таблицы reference
             'number_room_type' => $this->integer(),                                 // Количество комнат в квартире (1 - 6)

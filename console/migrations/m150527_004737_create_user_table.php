@@ -5,7 +5,7 @@ use yii\db\Migration;
 
 class m150527_004737_create_user_table extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $this->createTable('user', [
             'id' => Schema::TYPE_PK,
@@ -20,9 +20,19 @@ class m150527_004737_create_user_table extends Migration
             'created_at' => Schema::TYPE_INTEGER.' NOT NULL',
             'updated_at' => Schema::TYPE_INTEGER.' NOT NULL',
         ]);
+
+        /* Таблица для сделок категории комнаты */
+        $this->createTable('premium', [
+            'user_id' => $this->primaryKey(),
+            'images_num' => $this->smallInteger()->defaultValue(5),               // количество изображений по умолчанию
+            'phones' => $this->smallInteger()->defaultValue(1),                   // количество телефонов по умолчанию
+            'vip_style' => $this->boolean()->defaultValue(false),                 // доступ к дополнительным стилям
+        ]);
+
+        $this->addForeignKey('premium_user', 'premium', 'user_id', 'user', 'id', 'CASCADE');
     }
 
-    public function down()
+    public function safeDown()
     {
         $this->dropTable('user');
     }

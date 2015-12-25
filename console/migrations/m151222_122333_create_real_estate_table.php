@@ -21,6 +21,7 @@ class m151222_122333_create_real_estate_table extends Migration
         /* Таблица для сделок категории комнаты */
         $this->createTable('ads_category_realestate_room', [
             'id' => $this->primaryKey(),
+            'place_id' => $this->integer()->notNull(),                                   // Место, к которому привязано объявление
             'deal_type' => $this->integer(),                                        // Сделка с недвижемостью (Снять, сдать, купить, продать), с таблице reference
             'images_num' => $this->smallInteger()->defaultValue(5),
             'images_label' => $this->string(32)->defaultValue('room'),
@@ -37,6 +38,7 @@ class m151222_122333_create_real_estate_table extends Migration
         ]);
 
         $this->addForeignKey('room_realestate_category_ads', 'ads_category_realestate', 'room_id', 'ads_category_realestate_room', 'id', 'CASCADE');
+        $this->addForeignKey('room_place_id_place', 'ads_category_realestate_room', 'place_id', 'place', 'id', 'CASCADE');
         $this->addForeignKey('room_deal_type_reference', 'ads_category_realestate_room', 'deal_type', 'reference', 'id');
         $this->addForeignKey('room_area_type_reference', 'ads_category_realestate_room', 'area_type', 'reference', 'id');
         $this->addForeignKey('room_number_room_type_reference', 'ads_category_realestate_room', 'number_room_type', 'reference', 'id');
@@ -80,10 +82,11 @@ class m151222_122333_create_real_estate_table extends Migration
             ]);
 
         /* Добавляем объявление о сдаче комнаты */
-        $this->batchInsert('ads_category_realestate_room', ['id', 'deal_type', 'area', 'area_type', 'number_room_type', 'floor_type', 'number_floor_type', 'house_type', 'period_type', 'price', 'currency'],
+        $this->batchInsert('ads_category_realestate_room', ['id', 'place_id', 'deal_type', 'area', 'area_type', 'number_room_type', 'floor_type', 'number_floor_type', 'house_type', 'period_type', 'price', 'currency'],
             [
                 [
                     1,
+                    1,  // place_id места, дублируется с place_id из ads
                     11,                             // тип сделки
                     30,                             // площадь
                     8,                             // ед измерения площади площадь

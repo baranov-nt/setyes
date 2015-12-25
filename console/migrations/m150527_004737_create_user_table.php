@@ -13,6 +13,7 @@ class m150527_004737_create_user_table extends Migration
             'email' => Schema::TYPE_STRING.' NOT NULL UNIQUE',
             'password_hash' => Schema::TYPE_STRING.' NOT NULL',
             'status' => Schema::TYPE_SMALLINT.' NOT NULL',
+            'premium' => Schema::TYPE_BOOLEAN,                                  // флаг для премиум пользователя
             'country_id' => Schema::TYPE_INTEGER.' NOT NULL',
             'auth_key' => Schema::TYPE_STRING.'(32) NOT NULL',
             'secret_key' => Schema::TYPE_STRING,

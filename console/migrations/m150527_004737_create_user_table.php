@@ -11,6 +11,7 @@ class m150527_004737_create_user_table extends Migration
             'id' => Schema::TYPE_PK,
             'phone' => Schema::TYPE_STRING.'(32) NOT NULL UNIQUE',
             'email' => Schema::TYPE_STRING.' NOT NULL UNIQUE',
+            'balance' => Schema::TYPE_MONEY.'(10,2)',                           // баланс пользователя
             'password_hash' => Schema::TYPE_STRING.' NOT NULL',
             'status' => Schema::TYPE_SMALLINT.' NOT NULL',
             'premium' => Schema::TYPE_BOOLEAN,                                  // флаг для премиум пользователя

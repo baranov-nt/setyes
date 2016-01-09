@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\widgets\MaskedInput;
 use yii\authclient\widgets\AuthChoice;
 
 /* @var $this yii\web\View */

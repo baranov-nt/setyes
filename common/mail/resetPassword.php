@@ -10,12 +10,15 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $user common\models\User */
+?>
+<div class="password-reset">
+    <p><?= Yii::t('app', 'Hello') ?></p>
 
-echo 'Привет '.Html::encode($user->email).'. ';
-echo Html::a('Для смены пароля перейдите по этой ссылке.',
-    Yii::$app->urlManager->createAbsoluteUrl(
-        [
-            '/main/reset-password',
-            'key' => $user->secret_key
-        ]
-    ));
+    <p><?= Html::a(Yii::t('app', 'Follow the link to reset your password.'),
+            Yii::$app->urlManager->createAbsoluteUrl(
+                [
+                    '/main/reset-password',
+                    'key' => $user->secret_key
+                ]
+            )); ?></p>
+</div>

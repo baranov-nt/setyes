@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use frontend\assets\ChosenAsset;
 use yii\widgets\Pjax;
+use yii\authclient\widgets\AuthChoice;
 
 ChosenAsset::register($this);
 /* @var $this yii\web\View */
@@ -12,7 +13,7 @@ ChosenAsset::register($this);
 /* @var $form ActiveForm */
 ?>
 <div class="main-reg">
-
+    <div class="col-md-6 col-md-offset-3">
     <?php
     Pjax::begin([
         'enablePushState' => false,
@@ -88,5 +89,14 @@ ChosenAsset::register($this);
     </div>
     <?php ActiveForm::end(); ?>
     <?php Pjax::end(); ?>
+            <label class="control-label" for="loginform-email"><?= Yii::t('app', 'Login with social network.') ?></label>
+            <?php $authAuthChoice = AuthChoice::begin([
+                'baseAuthUrl' => ['site/auth'],
+            ]); ?>
+            <?php foreach ($authAuthChoice->getClients() as $client): ?>
+                <div style="width: 40px; float: left; font-size: 0px;"><?php $authAuthChoice->clientLink($client) ?></div>
+            <?php endforeach; ?>
+            <?php AuthChoice::end(); ?>
+    </div>
     <!-- main-reg -->
 </div>

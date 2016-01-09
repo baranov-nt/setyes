@@ -9,7 +9,7 @@ use common\widgets\Alert;
 use yii\helpers\Url;
 use cybercog\yii\googleanalytics\widgets\GATracking;
 use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
-
+use common\widgets\LanguageSelect\LanguageSelect;
 /**
  * Created by PhpStorm.
  * User: phpNT
@@ -70,10 +70,10 @@ $this->beginPage();
             ]
         );
 
-        if(Yii::$app->user->can('Создатель')):
+        if(Yii::$app->user->can('Администратор')):
             $menuItems = [
                 [
-                    'label' => Yii::t('app', 'Rules').'<span class="glyphicon glyphicon-question-sign"></span>',
+                    'label' => Yii::t('app', 'Rules').' <span class="glyphicon glyphicon-question-sign"></span>',
                     'url' => [
                         '#'
                     ],
@@ -85,17 +85,25 @@ $this->beginPage();
                 ],
             ];
         endif;
-
+        if(Yii::$app->user->isGuest):
+            ?>
+            <div class="navbar-nav navbar-right nav">
+                <?php
+                echo LanguageSelect::widget(['container' => ['style' => 'margin: 12px 0 0 15px']]);
+                ?>
+            </div>
+            <?php
+        endif;
         if (!Yii::$app->user->isGuest):
 
             $user = Yii::$app->user->identity;
 
             /* @var $user common\models\User */
             if($user->profile->imagesOfObjects):
-            foreach($user->profile->imagesOfObjects as $one):
-                /* @var $one common\models\ImagesOfObject */
-                $image = Html::img('/images/'.$one->image->path_small_image, ['style' => 'width: 35px; border: 2px solid #ffffff; border-radius: 3px;']);
-            endforeach;
+                foreach($user->profile->imagesOfObjects as $one):
+                    /* @var $one common\models\ImagesOfObject */
+                    $image = Html::img('/images/'.$one->image->path_small_image, ['style' => 'width: 35px; border: 2px solid #ffffff; border-radius: 3px;']);
+                endforeach;
             else:
                 $image = '<span class="btn btn-default glyphicon glyphicon-user" style=""></span>';
             endif;
@@ -162,59 +170,45 @@ $this->beginPage();
         Modal::end();
         ?>
 
-
         <?php
         //if(!Yii::$app->user->isGuest && Yii::$app->user->can('Создатель')):
-            ActiveForm::begin([
-                'action' => ['/main/select-city'],
-                'options' => [
+        ActiveForm::begin([
+            'action' => ['/main/select-city'],
+            'options' => [
                 'class' => 'navbar-right col-md-5',
                 'style' => 'margin: 7px 0 8px 0;'
             ]]);
         ?>
-                        <?php
-            echo '<div class="input-group">';
+        <?php
+        echo '<div class="input-group">';
 
-            echo GooglePlacesAutoComplete::widget([
-                'name' => 'place',
-                'value' => ''
-            ]);
+        echo GooglePlacesAutoComplete::widget([
+            'name' => 'place',
+            'value' => ''
+        ]);
 
-            echo '<span class="input-group-btn">';
-            echo Html::submitButton(
-                '<span class="glyphicon glyphicon-search"></span>',
-                [
-                    'class' => 'btn btn-success',
-                ]
-            );
-            echo '</span></div>';
+        echo '<span class="input-group-btn">';
+        echo Html::submitButton(
+            '<span class="glyphicon glyphicon-search"></span>',
+            [
+                'class' => 'btn btn-success',
+            ]
+        );
+        echo '</span></div>';
         ?>
         <?php
-            ActiveForm::end();
-            ?>
+        ActiveForm::end();
+        ?>
 
-            <?php
+        <?php
         //endif;
 
         NavBar::end();
-
-        if(Yii::$app->controller->id == 'main' && Yii::$app->controller->action->id == 'index'):
-
-            ?>
-            <?= $content ?>
-            <div class="container">
-                <?= Alert::widget() ?>
-            </div>
-            <?php
-        else:
-            ?>
-            <div class="container">
-                <?= Alert::widget() ?>
-                <?= $content ?>
-            </div>
-            <?php
-        endif;
         ?>
+        <div class="container">
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </div>
     </div>
 
     <footer class="footer" style="background-color: #337ab7; max-height: 100%;">

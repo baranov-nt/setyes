@@ -148,9 +148,9 @@ class RegForm extends Model
     public function sendActivationEmail($user)
     {
         return Yii::$app->mailer->compose('activationEmail', ['user' => $user])
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::t('app', '{app} (sent a robot).')])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::t('app', '{app_name} (sent a robot).', ['app_name' => Yii::$app->name])])
             ->setTo($this->email)
-            ->setSubject(Yii::t('app', 'Activation for {app}.'))
+            ->setSubject(Yii::t('app', 'Activation for {app_name}.', ['app_name' => Yii::$app->name]))
             ->send();
     }
 

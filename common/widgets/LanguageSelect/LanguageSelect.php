@@ -9,14 +9,17 @@ or select on this widget
 namespace common\widgets\LanguageSelect;
 
 use Yii;
-use yii\base\Component;
+//use yii\base\Component;
 use yii\base\Widget;
 use yii\bootstrap\ButtonDropdown;
 use yii\helpers\Url;
-use yii\web\Cookie;
+//use yii\web\Cookie;
 
 class LanguageSelect extends Widget
 {
+    public $container = [
+        'class' => 'pull-right'
+    ];
     /* ใส่ภาษาของคุณที่นี่ */
     public $languages = [
         'en' => 'English',
@@ -51,7 +54,6 @@ class LanguageSelect extends Widget
         {
             Yii::$app->language = $cookies->getValue('language');
         }
-
     }
 
     public function run(){
@@ -73,9 +75,7 @@ class LanguageSelect extends Widget
             'dropdown' => [
                 'items' => $items,
             ],
-            'containerOptions' => [
-                'class' => 'pull-right'
-            ],
+            'containerOptions' => $this->container,
             'options' => [
                 'class' => 'btn btn-xs btn-warning',
                 'style' => 'margin-top: 1px;'

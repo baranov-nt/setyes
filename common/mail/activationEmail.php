@@ -10,8 +10,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $user common\models\User */
 
-echo 'Привет.';
-echo Html::a('Для активации аккаунта перейдите по этой ссылке.',
+echo Html::a(Yii::t('app', 'To activate your account please follow this link.'),
     Yii::$app->urlManager->createAbsoluteUrl(
         [
             '/main/activate-account',

@@ -28,17 +28,17 @@ class ResetPasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'password' => 'Пароль'
+            'password' => Yii::t('app', 'Password')
         ];
     }
 
     public function __construct($key, $config = [])
     {
         if(empty($key) || !is_string($key))
-            throw new InvalidParamException('Ключ не может быть пустым.');
+            throw new InvalidParamException(Yii::t('app', 'The key can not be empty.'));
         $this->_user = User::findBySecretKey($key);
         if(!$this->_user)
-            throw new InvalidParamException('Не верный ключ.');
+            throw new InvalidParamException(Yii::t('app', 'Invalid key.'));
         parent::__construct($config);
     }
 

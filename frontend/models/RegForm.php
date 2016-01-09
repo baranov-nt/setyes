@@ -165,7 +165,7 @@ class RegForm extends Model
         $countriesArray = ArrayHelper::map($model,
             'id',
             function($model) {
-                return Yii::t('app', $model['short_name']).' +'.$model['calling_code'];
+                return Yii::t('countries', $model['short_name']).' +'.$model['calling_code'];
             }
         );
 

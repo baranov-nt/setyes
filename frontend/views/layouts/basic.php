@@ -99,8 +99,8 @@ $this->beginPage();
             $user = Yii::$app->user->identity;
 
             /* @var $user common\models\User */
-            if($user->profile->imagesOfObjects):
-                foreach($user->profile->imagesOfObjects as $one):
+            if($user->userProfile->imagesOfObjects):
+                foreach($user->userProfile->imagesOfObjects as $one):
                     /* @var $one common\models\ImagesOfObject */
                     $image = Html::img('/images/'.$one->image->path_small_image, ['style' => 'width: 35px; border: 2px solid #ffffff; border-radius: 3px;']);
                 endforeach;

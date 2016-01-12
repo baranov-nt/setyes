@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "images_of_object".
@@ -15,10 +16,9 @@ use Yii;
  *
  * @property Carousel $object
  * @property Images $image
- * @property Product $object0
- * @property Profile $object1
+ * @property UserProfile $object1
  */
-class ImagesOfObject extends \yii\db\ActiveRecord
+class ImagesOfObject extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -62,6 +62,6 @@ class ImagesOfObject extends \yii\db\ActiveRecord
      */
     public function getObject1()
     {
-        return $this->hasOne(Profile::className(), ['user_id' => 'object_id']);
+        return $this->hasOne(UserProfile::className(), ['user_id' => 'object_id']);
     }
 }

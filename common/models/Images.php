@@ -17,7 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $temp
  *
  * @property ImagesOfObject[] $imagesOfObjects
- * @property Profile[] $profiles
+ * @property UserProfile[] $profiles
  */
 class Images extends ActiveRecord
 {

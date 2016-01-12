@@ -15,7 +15,8 @@ use Yii;
 use yii\base\Model;
 use common\rbac\helpers\RbacHelper;
 use common\models\User;
-use common\models\Profile;
+use common\models\UserProfile;
+use common\models\UserPrivilege;
 use yii\helpers\ArrayHelper;
 
 class RegForm extends Model
@@ -125,7 +126,6 @@ class RegForm extends Model
 
     public function reg()
     {
-
         $modelUser = new User();
         $modelUser->phone = $this->getPhoneNumber();
         $modelUser->email = $this->email;
@@ -138,8 +138,10 @@ class RegForm extends Model
             $modelUser->generateSecretKey();
 
         if($modelUser->save()):
-            $modelProfile = new Profile();
-            $modelProfile->link('user', $modelUser);
+            $modelUserProfile = new UserProfile();
+            $modelUserProfile->link('user', $modelUser);
+            $modelUserProfile = new UserPrivilege();
+            $modelUserProfile->link('user', $modelUser);
             return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
         endif;
         return false;

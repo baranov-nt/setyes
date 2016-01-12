@@ -5,7 +5,7 @@ use Yii;
 use frontend\models\RegForm;
 use common\models\LoginForm;
 use common\models\User;
-use common\models\Profile;
+use common\models\UserProfile;
 use frontend\models\SendEmailForm;
 use frontend\models\ResetPasswordForm;
 use yii\base\InvalidParamException;
@@ -222,7 +222,7 @@ class MainController extends BehaviorsController
 
     public function actionUser()
     {
-        $modelProfile = ($modelProfile = Profile::findOne(Yii::$app->user->id)) ? $modelProfile : new Profile();
+        $modelUserProfile = ($modelUserProfile = UserProfile::findOne(Yii::$app->user->id)) ? $modelUserProfile : new UserProfile();
 
         $modelUser = ($modelUser = User::findOne(Yii::$app->user->id)) ? $modelUser : new User();
 
@@ -239,7 +239,7 @@ class MainController extends BehaviorsController
         return $this->render(
             'profile',
             [
-                'modelProfile' => $modelProfile,
+                'modelUserProfile' => $modelUserProfile,
                 'modelUser' => $modelUser
             ]
         );
@@ -247,17 +247,17 @@ class MainController extends BehaviorsController
 
     public function actionProfile()
     {
-        /* @var $modelProfile \common\models\Profile */
+        /* @var $modelUserProfile \common\models\UserProfile */
 
-        $modelProfile = $modelProfile = Profile::findOne(Yii::$app->user->id);
+        $modelUserProfile = $modelUserProfile = UserProfile::findOne(Yii::$app->user->id);
 
-        $imagesObject = $modelProfile->imagesOfObjects;
+        $imagesObject = $modelUserProfile->imagesOfObjects;
 
         $modelUser = ($modelUser = User::findOne(Yii::$app->user->id)) ? $modelUser : new User();
 
-        if($modelProfile->load(Yii::$app->request->post()) && $modelProfile->validate()):
-            if($modelProfile->updateProfile()):
-                if(!$modelProfile->user->errors):
+        if($modelUserProfile->load(Yii::$app->request->post()) && $modelUserProfile->validate()):
+            if($modelUserProfile->updateProfile()):
+                if(!$modelUserProfile->user->errors):
                     Yii::$app->session->setFlash('success', Yii::t('app', 'Profile changed'));
                 endif;
             else:
@@ -270,7 +270,7 @@ class MainController extends BehaviorsController
         return $this->render(
             'profile',
             [
-                'modelProfile' => $modelProfile,
+                'modelUserProfile' => $modelUserProfile,
                 'modelUser' => $modelUser,
                 'imagesObject' => $imagesObject
             ]
@@ -279,18 +279,18 @@ class MainController extends BehaviorsController
 
     public function actionViewProfile($id)
     {
-        /* @var $modelProfile \common\models\Profile */
+        /* @var $modelUserProfile \common\models\UserProfile */
 
-        $modelProfile = ($model = Profile::findOne($id)) ? $model : new Profile();
-        $this->titleMeta = $modelProfile->first_name.' '.$modelProfile->second_name;
+        $modelUserProfile = ($model = UserProfile::findOne($id)) ? $model : new UserProfile();
+        $this->titleMeta = $modelUserProfile->first_name.' '.$modelUserProfile->second_name;
         $this->descriptionMeta = Yii::t('app', 'Card User');
-        foreach($modelProfile->imagesOfObjects as $one):
+        foreach($modelUserProfile->imagesOfObjects as $one):
             $this->imageMeta = Yii::$app->urlManager->createAbsoluteUrl('').'images/'.$one->image->path_small_image;
         endforeach;
 
         return $this->render(
             'view-profile', [
-                'modelProfile' => $modelProfile
+                'modelUserProfile' => $modelUserProfile
             ]
         );
     }

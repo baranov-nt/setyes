@@ -8,8 +8,8 @@
 
 namespace frontend\controllers;
 
+use common\models\UserProfile;
 use Yii;
-use common\models\Profile;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\helpers\Json;
 use common\widgets\ImageLoad\models\ImageForm;
@@ -34,10 +34,10 @@ class ImagesController extends BehaviorsController
             $error = false;
         endif;
 
-        /* @var $model \common\models\Profile */
+        /* @var $model \common\models\UserProfile */
 
-        if($imageData['modelName'] == 'Profile'):
-            $model = Profile::findOne($imageData['object_id']);
+        if($imageData['modelName'] == 'UserProfile'):
+            $model = UserProfile::findOne($imageData['object_id']);
         endif;
 
         $imagesObject = $model->imagesOfObjects;
@@ -82,10 +82,10 @@ class ImagesController extends BehaviorsController
             $error = false;
         endif;
 
-        /* @var $model \common\models\Profile */
+        /* @var $model \common\models\UserProfile */
 
-        if($imageData['modelName'] == 'Profile'):
-            $model = Profile::findOne($imageData['object_id']);
+        if($imageData['modelName'] == 'UserProfile'):
+            $model = UserProfile::findOne($imageData['object_id']);
         endif;
 
         $imagesObject = $model->imagesOfObjects;
@@ -99,6 +99,8 @@ class ImagesController extends BehaviorsController
                 'images_num' => $imageData['images_num'],
                 'images_label' => $imageData['images_label'],
                 'images_temp' => $imageData['images_temp'],
+                'imageSmallWidth' => $imageData['imageSmallWidth'],
+                'imageSmallHeight' => $imageData['imageSmallHeight'],
                 'imagesObject' => $imagesObject,
                 'modelImageForm' => $modelImageForm,
                 'baseUrl' => $imageData['baseUrl'],

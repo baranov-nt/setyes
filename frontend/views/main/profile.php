@@ -3,10 +3,9 @@ use yii\widgets\ActiveForm;
 use common\widgets\PjaxField\PjaxFieldWidget;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use common\widgets\SocialLinks\ShareBar;
-use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $modelProfile common\models\Profile */
+/* @var $modelUserProfile common\models\UserProfile */
 /* @var $image common\models\ImagesOfObject */
 /* @var $modelUser common\models\User */
 /* @var $form ActiveForm */
@@ -26,12 +25,12 @@ use yii\helpers\Url;
         <div class="col-md-6 col-md-offset-3">
             <?php
             echo ImageLoadWidget::widget([
-                'modelName' => 'Profile',
+                'modelName' => 'UserProfile',
                 'id' => 'load-avatar',                          // суффикс ID для основных форм виджета
-                'object_id' => $modelProfile->user_id,              // ID объекта, к которому привязаны изображения
-                'imagesObject' => $modelProfile->imagesOfObjects,    // объект с загруженными для модели изображениями
-                'images_num' => $modelProfile->images_num,       // максимальное количество изображений
-                'images_label' => $modelProfile->images_label,       // метка для изображения
+                'object_id' => $modelUserProfile->user_id,              // ID объекта, к которому привязаны изображения
+                'imagesObject' => $modelUserProfile->imagesOfObjects,    // объект с загруженными для модели изображениями
+                'images_num' => $modelUserProfile->images_num,       // максимальное количество изображений
+                'images_label' => $modelUserProfile->images_label,       // метка для изображения
                 'images_temp' => 0,       // указываем временной изображение или нет (0 = нет)
                 'imageSmallWidth' => 150,                       // ширина миниатюры
                 'imageSmallHeight' => 150,                      // высота миниатюры
@@ -79,29 +78,29 @@ use yii\helpers\Url;
             <?php
             echo PjaxFieldWidget::widget([
                 'route' => '/main/user',
-                'model' => $modelProfile,
+                'model' => $modelUserProfile,
                 'id' => Yii::$app->user->id,
                 'attribute' => 'phone_second',
             ]);
             echo PjaxFieldWidget::widget([
                 'route' => '/main/user',
-                'model' => $modelProfile,
+                'model' => $modelUserProfile,
                 'id' => Yii::$app->user->id,
                 'attribute' => 'phone_third',
             ]);
             echo PjaxFieldWidget::widget([
                 'route' => '/main/profile',
-                'model' => $modelProfile,
+                'model' => $modelUserProfile,
                 'attribute' => 'first_name',
             ]);
             echo PjaxFieldWidget::widget([
                 'route' => '/main/profile',
-                'model' => $modelProfile,
+                'model' => $modelUserProfile,
                 'attribute' => 'second_name',
             ]);
             echo PjaxFieldWidget::widget([
                 'route' => '/main/profile',
-                'model' => $modelProfile,
+                'model' => $modelUserProfile,
                 'attribute' => 'middle_name',
             ]);
             ?>
@@ -110,7 +109,7 @@ use yii\helpers\Url;
                 echo ShareBar::widget([
                     'title' => Yii::t('app', 'Title Content'),                                     // Название
                     'media' => 'image.jpg',                                         // Медиа контент
-                    'url' => ['main/view-profile', 'id' => $modelProfile->user_id],       // Ссылка страницы, с которой делимся
+                    'url' => ['main/view-profile', 'id' => $modelUserProfile->user_id],       // Ссылка страницы, с которой делимся
                     'networks' => [
                         //'Email',
                         //'Github',

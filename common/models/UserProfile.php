@@ -6,7 +6,7 @@ use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "profile".
+ * This is the model class for table "user_profile".
  *
  * @property integer $user_id
  * @property integer $images_num
@@ -22,17 +22,14 @@ use yii\db\ActiveRecord;
  * @property ImagesOfObject[] $imagesOfObjects
  * @property User $user
  */
-
-class Profile extends ActiveRecord
+class UserProfile extends ActiveRecord
 {
-    public $case_3;
-
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'profile';
+        return 'user_profile';
     }
 
     /**
@@ -41,11 +38,10 @@ class Profile extends ActiveRecord
     public function rules()
     {
         return [
-            [['images_num', 'birthday', 'gender', 'phone_second', 'phone_third'], 'integer'],
+            [['images_num', 'phone_second', 'phone_third', 'birthday', 'gender'], 'integer'],
             [['images_label', 'first_name', 'second_name', 'middle_name'], 'string', 'max' => 32]
         ];
     }
-
 
     /**
      * @inheritdoc
@@ -56,10 +52,11 @@ class Profile extends ActiveRecord
             'user_id' => Yii::t('app', 'User ID'),
             'images_num' => Yii::t('app', 'Images Num'),
             'images_label' => Yii::t('app', 'Images Label'),
-            'avatar' => Yii::t('app', 'Avatar'),
             'first_name' => Yii::t('app', 'First Name'),
             'second_name' => Yii::t('app', 'Last Name'),
             'middle_name' => Yii::t('app', 'Middle Name'),
+            'phone_second' => Yii::t('app', 'Phone Second'),
+            'phone_third' => Yii::t('app', 'Phone Third'),
             'birthday' => Yii::t('app', 'Birthday'),
             'gender' => Yii::t('app', 'Gender'),
         ];
@@ -97,13 +94,13 @@ class Profile extends ActiveRecord
 
     public function updateProfile()
     {
-        $profile = ($profile = Profile::findOne(Yii::$app->user->id)) ? $profile : new Profile();
-        $profile->user_id = Yii::$app->user->id;
-        $profile->first_name = $this->first_name;
-        $profile->second_name = $this->second_name;
-        $profile->middle_name = $this->middle_name;
-        if($profile->save()):
-            return $profile;
+        $modelUserProfile = ($modelUserProfile = UserProfile::findOne(Yii::$app->user->id)) ? $modelUserProfile : new UserProfile();
+        $modelUserProfile->user_id = Yii::$app->user->id;
+        $modelUserProfile->first_name = $this->first_name;
+        $modelUserProfile->second_name = $this->second_name;
+        $modelUserProfile->middle_name = $this->middle_name;
+        if($modelUserProfile->save()):
+            return $modelUserProfile;
         endif;
         return false;
     }

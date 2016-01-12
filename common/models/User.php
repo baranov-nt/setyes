@@ -11,21 +11,22 @@ use common\rbac\models\Role;
 /**
  * This is the model class for table "user".
  *
- * @property integer $id
  * @property string $phone
  * @property string $email
+ * @property string $balance
  * @property string $password_hash
  * @property integer $status
- * @property integer $country_id                            // Данные о стране пользователя
+ * @property integer $country_id
  * @property string $auth_key
+ * @property string $secret_key
  * @property integer $created_at
  * @property integer $updated_at
- * @property string $secret_key
  *
+ * @property Auth[] $auths
  * @property Carousel[] $carousels
- * @property ImagesOfObject[] $imagesOfObjects
- * @property Profile $profile
  * @property Country $country
+ * @property UserPrivilege $userPrivilege
+ * @property UserProfile $userProfile
  * @property mixed role
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -94,26 +95,28 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Auth::className(), ['user_id' => 'id']);
     }
 
-    // inverseOf() - указывает на обратную связь в модели Profile
-    public function getProfile2()
-    {
-        return $this->hasMany(Profile::className(), ['user_id' => 'id'])->inverseOf('user');
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProfile()
-    {
-        return $this->hasOne(Profile::className(), ['user_id' => 'id']);
-    }
-
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getCountry()
     {
         return $this->hasOne(Country::className(), ['id' => 'country_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserPrivilege()
+    {
+        return $this->hasOne(UserPrivilege::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserProfile()
+    {
+        return $this->hasOne(UserProfile::className(), ['user_id' => 'id']);
     }
 
     /* Поведения */

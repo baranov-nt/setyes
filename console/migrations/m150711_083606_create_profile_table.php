@@ -8,7 +8,7 @@ class m150711_083606_create_profile_table extends Migration
     public function safeUp()
     {
         $this->createTable(
-            'profile',
+            'user_profile',
             [
                 'user_id' => Schema::TYPE_PK,
                 'images_num' => $this->smallInteger()->defaultValue(1),
@@ -22,13 +22,13 @@ class m150711_083606_create_profile_table extends Migration
                 'gender' => Schema::TYPE_SMALLINT
             ]
         );
-        $this->addForeignKey('profile_user', 'profile', 'user_id', 'user', 'id', 'cascade', 'cascade');
+        $this->addForeignKey('profile_user', 'user_profile', 'user_id', 'user', 'id', 'cascade', 'cascade');
     }
 
     public function safeDown()
     {
-        $this->dropForeignKey('profile_user', 'profile');
-        $this->dropTable('profile');
+        $this->dropForeignKey('profile_user', 'user_profile');
+        $this->dropTable('user_profile');
     }
     
     /*

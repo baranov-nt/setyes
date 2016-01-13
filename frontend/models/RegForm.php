@@ -6,11 +6,11 @@
  * Time: 18:17
  */
 
-/* @property \common\models\Country $modelCountry */
+/* @property \common\models\PlaceCountry $modelPlaceCountry */
 
 namespace frontend\models;
 
-use common\models\Country;
+use common\models\PlaceCountry;
 use Yii;
 use yii\base\Model;
 use common\rbac\helpers\RbacHelper;
@@ -61,26 +61,26 @@ class RegForm extends Model
 
     public function validatePhone()
     {
-        /* @var $modelCountry \common\models\Country */
-        $modelCountry = Country::findOne($this->country_id);
+        /* @var $modelPlaceCountry \common\models\PlaceCountry */
+        $modelPlaceCountry = PlaceCountry::findOne($this->country_id);
 
-        if ($modelCountry->phone_number_digits_code != strlen($this->phone) && $modelCountry->phone_number_digits_code != null) {
-            $this->addError('phone', Yii::t('app', 'Phone should contain {length, number} digits.', ['length' => $modelCountry->phone_number_digits_code]));
+        if ($modelPlaceCountry->phone_number_digits_code != strlen($this->phone) && $modelPlaceCountry->phone_number_digits_code != null) {
+            $this->addError('phone', Yii::t('app', 'Phone should contain {length, number} digits.', ['length' => $modelPlaceCountry->phone_number_digits_code]));
         }
 
-        if ($modelCountry->phone_number_digits_code == null) {
+        if ($modelPlaceCountry->phone_number_digits_code == null) {
             if((strlen($this->phone) < 5) || (strlen($this->phone) > 12)) {
                 $this->addError('phone', Yii::t('app', 'Phone is invalid.'));
             }
         }
 
-        if($modelCountry->iso2 == 'RU') {
+        if($modelPlaceCountry->iso2 == 'RU') {
             if(substr($this->phone, 0, 1) != '9' && substr($this->phone, 0, 1) != '3') {
                 $this->addError('phone', Yii::t('app', 'Phone is invalid.'));
             }
         }
 
-        $phone = $modelCountry->calling_code.$this->phone;
+        $phone = $modelPlaceCountry->calling_code.$this->phone;
         $phone = str_replace([' ', '-', '+'], '', $phone);
         $modelUser = User::findOne(['phone' => $phone]);
         if($modelUser):
@@ -103,7 +103,7 @@ class RegForm extends Model
     public function finishReg($id)
     {
         /* @var $modelUser \common\models\User */
-        /* @var $modelCountry \common\models\Country */
+        /* @var $modelPlaceCountry \common\models\PlaceCountry */
         $modelUser = User::findOne($id);
 
         if($this->scenario === 'phoneFinish'):
@@ -163,11 +163,11 @@ class RegForm extends Model
      */
     public function getCountriesList()
     {
-        $model = Country::find()->asArray()->all();
-        $countriesArray = ArrayHelper::map($model,
+        $modelPlaceCountry = PlaceCountry::find()->asArray()->all();
+        $countriesArray = ArrayHelper::map($modelPlaceCountry,
             'id',
-            function($model) {
-                return Yii::t('countries', $model['short_name']).' +'.$model['calling_code'];
+            function($modelPlaceCountry) {
+                return Yii::t('countries', $modelPlaceCountry['short_name']).' +'.$modelPlaceCountry['calling_code'];
             }
         );
 
@@ -181,9 +181,9 @@ class RegForm extends Model
      */
     public function getPhoneNumber()
     {
-        /* @var $modelCountry \common\models\Country */
-        $modelCountry = Country::findOne($this->country_id);
-        $phone = $modelCountry->calling_code.$this->phone;
+        /* @var $modelPlaceCountry \common\models\PlaceCountry */
+        $modelPlaceCountry = PlaceCountry::findOne($this->country_id);
+        $phone = $modelPlaceCountry->calling_code.$this->phone;
         $phone = str_replace([' ', '-', '+'], '', $phone);
         return $phone;
     }

@@ -5,22 +5,22 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "place".
+ * This is the model class for table "place_address".
  *
  * @property integer $id
  * @property string $place_id
  * @property integer $city_id
  *
- * @property City $city
+ * @property PlaceCity $city
  */
-class Place extends \yii\db\ActiveRecord
+class PlaceAddress extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'place';
+        return 'place_address';
     }
 
     /**
@@ -31,8 +31,7 @@ class Place extends \yii\db\ActiveRecord
         return [
             [['place_id', 'city_id'], 'required'],
             [['city_id'], 'integer'],
-            [['place_id'], 'string', 'max' => 32],
-            [['place_id'], 'unique']
+            [['place_id'], 'string', 'max' => 32]
         ];
     }
 
@@ -53,6 +52,6 @@ class Place extends \yii\db\ActiveRecord
      */
     public function getCity()
     {
-        return $this->hasOne(City::className(), ['id' => 'city_id']);
+        return $this->hasOne(PlaceCity::className(), ['id' => 'city_id']);
     }
 }

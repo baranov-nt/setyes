@@ -3,25 +3,26 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "city".
+ * This is the model class for table "place_city".
  *
  * @property integer $id
  * @property string $place_id
  * @property integer $region_id
  *
- * @property Region $region
- * @property Place[] $places
+ * @property PlaceAddress[] $placeAddresses
+ * @property PlaceRegion $region
  */
-class City extends \yii\db\ActiveRecord
+class PlaceCity extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'city';
+        return 'place_city';
     }
 
     /**
@@ -52,27 +53,27 @@ class City extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getPlaceAddresses()
+    {
+        return $this->hasMany(PlaceAddress::className(), ['city_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getRegion()
     {
-        return $this->hasOne(Region::className(), ['id' => 'region_id']);
+        return $this->hasOne(PlaceRegion::className(), ['id' => 'region_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPlaces()
+    public function createCity($modelPlaceRegion, $cityPlaceId)
     {
-        return $this->hasMany(Place::className(), ['city_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function createCity($modelRegion, $cityId)
-    {
-        $modelCity = new City();
-        $modelCity->place_id = $cityId;
-        $modelCity->link('region', $modelRegion);
-        return $modelCity;
+        $modelPlaceCity = new PlaceCity();
+        $modelPlaceCity->place_id = $cityPlaceId;
+        $modelPlaceCity->link('region', $modelPlaceRegion);
+        return $modelPlaceCity;
     }
 }

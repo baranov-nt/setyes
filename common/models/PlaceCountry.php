@@ -3,11 +3,11 @@
 namespace common\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "country".
+ * This is the model class for table "place_country".
  *
  * @property integer $id
  * @property string $iso2
@@ -21,17 +21,17 @@ use yii\db\ActiveRecord;
  * @property integer $phone_number_digits_code
  * @property string $currency
  *
- * @property Region[] $regions
+ * @property PlaceRegion[] $placeRegions
  * @property User[] $users
  */
-class Country extends ActiveRecord
+class PlaceCountry extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'country';
+        return 'place_country';
     }
 
     /**
@@ -75,9 +75,9 @@ class Country extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRegions()
+    public function getPlaceRegions()
     {
-        return $this->hasMany(Region::className(), ['country_id' => 'id']);
+        return $this->hasMany(PlaceRegion::className(), ['country_id' => 'id']);
     }
 
     /**
@@ -95,11 +95,11 @@ class Country extends ActiveRecord
      */
     public function getCountriesList()
     {
-        $model = Country::find()->asArray()->all();
-        $countriesArray = ArrayHelper::map($model,
+        $modelPlaceCountry = PlaceCountry::find()->asArray()->all();
+        $countriesArray = ArrayHelper::map($modelPlaceCountry,
             'iso2',
-            function($model, $defaultValue) {
-                return Yii::t('app', $model['short_name']).' +'.$model['calling_code'];
+            function($modelPlaceCountry, $defaultValue) {
+                return Yii::t('app', $modelPlaceCountry['short_name']).' +'.$modelPlaceCountry['calling_code'];
             }
         );
 

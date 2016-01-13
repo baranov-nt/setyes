@@ -8,42 +8,42 @@ class m151216_115903_create_place_table extends Migration
     public function safeUp()
     {
         /* Таблица локального адреса */
-        $this->createTable('place', [
+        $this->createTable('place_address', [
             'id' => Schema::TYPE_PK,
             'place_id' => Schema::TYPE_STRING.'(32) NOT NULL',
             'city_id' => Schema::TYPE_INTEGER.' NOT NULL',
         ]);
 
-        $this->createIndex('place_index', 'place', 'place_id');
+        $this->createIndex('place_index', 'place_address', 'place_id');
 
         /* Таблица города */
-        $this->createTable('city', [
+        $this->createTable('place_city', [
             'id' => Schema::TYPE_PK,
             'place_id' => Schema::TYPE_STRING.'(32) NOT NULL',
             'region_id' => Schema::TYPE_INTEGER.' NOT NULL',
         ]);
 
-        $this->createIndex('city_index', 'city', 'place_id');
+        $this->createIndex('city_index', 'place_city', 'place_id');
 
         /* Связь таблицы городов с локальным адресом */
-        $this->addForeignKey('place_city', 'place', 'city_id', 'city', 'id');
+        $this->addForeignKey('place_city', 'place_address', 'city_id', 'place_city', 'id');
 
         /* Таблица регионов */
-        $this->createTable('region', [
+        $this->createTable('place_region', [
             'id' => Schema::TYPE_PK,
             'place_id' => Schema::TYPE_STRING.'(32) NULL',
             'country_id' => Schema::TYPE_INTEGER.' NOT NULL',
         ]);
 
-        $this->createIndex('region_index', 'region', 'place_id');
+        $this->createIndex('region_index', 'place_region', 'place_id');
 
         /* Связь таблицы городов с таблицей регионов, если региона у города нет пишем в регион place_id = NULL.
          * В таблице регионов есть связь с таблицей стран, где указывается к какой стране принадлежит город
          */
-        $this->addForeignKey('city_region', 'city', 'region_id', 'region', 'id');
+        $this->addForeignKey('city_region', 'place_city', 'region_id', 'place_region', 'id');
 
         /* Таблица стран */
-        $this->createTable('country', [
+        $this->createTable('place_country', [
             'id' => Schema::TYPE_PK,
             'iso2' => Schema::TYPE_STRING.'(2) NULL',                       // код страны 2 символа
             'short_name' => Schema::TYPE_STRING.'(80) NOT NULL',            // короткое название страны
@@ -58,12 +58,12 @@ class m151216_115903_create_place_table extends Migration
         ]);
 
         /* Связь таблицы регионов с таблицей стран, если региона у города нет пишем в регион place_id = NULL. */
-        $this->addForeignKey('region_country', 'region', 'country_id', 'country', 'id');
+        $this->addForeignKey('region_country', 'place_region', 'country_id', 'place_country', 'id');
 
         /* Связь пользователя с таблицей стран, если региона у города нет пишем в регион place_id = NULL. */
-        $this->addForeignKey('user_country', 'user', 'country_id', 'country', 'id');
+        $this->addForeignKey('user_country', 'user', 'country_id', 'place_country', 'id');
 
-        $this->batchInsert('country', ['id', 'iso2', 'short_name', 'long_name', 'iso3', 'numcode', 'un_member', 'calling_code', 'cctld', 'phone_number_digits_code', 'currency'],
+        $this->batchInsert('place_country', ['id', 'iso2', 'short_name', 'long_name', 'iso3', 'numcode', 'un_member', 'calling_code', 'cctld', 'phone_number_digits_code', 'currency'],
             [
                 [1, 'AF', Yii::t('countries', 'Afghanistan'), 'Islamic Republic of Afghanistan', 'AFG', '004', 'yes', '93', '.af', null, 'AFA'],
                 //[2, 'AX', Yii::t('countries', 'Aland Islands'), 'Aland Islands', 'ALA', '248', 'no', '358', '.ax', 10, null],
@@ -319,14 +319,14 @@ class m151216_115903_create_place_table extends Migration
 
         /* Добавление региона - Свердловская область */
 
-        $this->batchInsert('region', ['id', 'place_id', 'country_id'],
+        $this->batchInsert('place_region', ['id', 'place_id', 'country_id'],
             [
                 [1, 'ChIJdSSInMv9lEMROHmOUj5RGJM', 182]
             ]);
 
         /* Добавление города - Нижний Тагил */
 
-        $this->batchInsert('city', ['id', 'place_id', 'region_id'],
+        $this->batchInsert('place_city', ['id', 'place_id', 'region_id'],
             [
                 [1, 'ChIJ5-s3Grpk6kMRMh84IcV9-ck', 1]
             ]);

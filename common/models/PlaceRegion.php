@@ -3,25 +3,26 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "region".
+ * This is the model class for table "place_region".
  *
  * @property integer $id
  * @property string $place_id
  * @property integer $country_id
  *
- * @property City[] $cities
- * @property Country $country
+ * @property PlaceCity[] $placeCities
+ * @property PlaceCountry $country
  */
-class Region extends \yii\db\ActiveRecord
+class PlaceRegion extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'region';
+        return 'place_region';
     }
 
     /**
@@ -52,9 +53,9 @@ class Region extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCities()
+    public function getPlaceCities()
     {
-        return $this->hasMany(City::className(), ['region_id' => 'id']);
+        return $this->hasMany(PlaceCity::className(), ['region_id' => 'id']);
     }
 
     /**
@@ -62,20 +63,20 @@ class Region extends \yii\db\ActiveRecord
      */
     public function getCountry()
     {
-        return $this->hasOne(Country::className(), ['id' => 'country_id']);
+        return $this->hasOne(PlaceCountry::className(), ['id' => 'country_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function createRegionAndCity($modelCountry, $regionId, $cityId)
+    public function createRegionAndCity($modelPlaceCountry, $regionPlaceId, $cityPlaceId)
     {
-        $modelRegion = new Region();
-        $modelRegion->place_id = $regionId;
-        $modelRegion->link('country', $modelCountry);
-        $modelCity = new City();
-        $modelCity->place_id = $cityId;
-        $modelCity->link('region', $modelRegion);
+        $modelPlaceRegion = new PlaceRegion();
+        $modelPlaceRegion->place_id = $regionPlaceId;
+        $modelPlaceRegion->link('country', $modelPlaceCountry);
+        $modelCity = new PlaceCity();
+        $modelCity->place_id = $cityPlaceId;
+        $modelCity->link('region', $modelPlaceRegion);
         return $modelCity;
     }
 }

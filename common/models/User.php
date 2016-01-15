@@ -11,6 +11,7 @@ use common\rbac\models\Role;
 /**
  * This is the model class for table "user".
  *
+ * @property integer $id
  * @property string $phone
  * @property string $email
  * @property string $balance
@@ -23,11 +24,9 @@ use common\rbac\models\Role;
  * @property integer $updated_at
  *
  * @property Auth[] $auths
- * @property Carousel[] $carousels
- * @property Country $country
+ * @property PlaceCountry $country
  * @property UserPrivilege $userPrivilege
  * @property UserProfile $userProfile
- * @property mixed role
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -57,13 +56,13 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['phone', 'email', 'password'], 'filter', 'filter' => 'trim'],
-            [['status', 'country_id'], 'required'],
-            ['email', 'email'],
-            ['password', 'required', 'on' => 'create'],
+            [['email', 'status', 'auth_key'], 'required'],
+            [['balance'], 'number'],
+            [['status', 'country_id', 'created_at', 'updated_at'], 'integer'],
+            [['phone', 'auth_key'], 'string', 'max' => 32],
+            [['email', 'password_hash', 'secret_key'], 'string', 'max' => 255],
             ['phone', 'unique', 'message' => Yii::t('app', 'This phone is already registered.')],
             ['email', 'unique', 'message' => Yii::t('app', 'This email is already registered.')],
-            ['secret_key', 'unique']
         ];
     }
 
@@ -77,6 +76,8 @@ class User extends ActiveRecord implements IdentityInterface
             'phone' => Yii::t('app', 'Phone number'),
             'phone_second' => Yii::t('app', 'Additional phone number'),
             'email' => Yii::t('app', 'Email'),
+            'balance' => Yii::t('app', 'Balance'),
+            'country_id' => Yii::t('app', 'Country ID'),
             'password' => Yii::t('app', 'Password'),
             'status' => Yii::t('app', 'Status'),
             'auth_key' => 'Auth Key',
@@ -86,13 +87,12 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    /* Связи */
     /**
      * @return \yii\db\ActiveQuery
      */
     public function getAuths()
     {
-        return $this->hasOne(Auth::className(), ['user_id' => 'id']);
+        return $this->hasMany(Auth::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -100,7 +100,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getCountry()
     {
-        return $this->hasOne(Country::className(), ['id' => 'country_id']);
+        return $this->hasOne(PlaceCountry::className(), ['id' => 'country_id']);
     }
 
     /**

@@ -14,7 +14,7 @@ use common\models\Auth;
 use common\models\User;
 use yii\helpers\Url;
 use yii\web\Controller;
-use common\models\Profile;
+use common\models\UserProfile;
 use yii\authclient\AuthAction;
 
 class SiteController extends Controller
@@ -109,6 +109,8 @@ class SiteController extends Controller
                     /* @var $first_name string */
                     /* @var $second_name string */
 
+
+
                     if(Yii::$app->request->get('authclient') == 'google'):
                         $first_name = $attributes['name']['givenName'];
                         $second_name = $attributes['name']['familyName'];
@@ -144,7 +146,11 @@ class SiteController extends Controller
                         'email' => $email,
                         'password' => $password,
                         'status' => User::STATUS_NOT_ACTIVE,
+                        'country_id' => 182,
                     ]);
+
+
+
                     $user->generateAuthKey();
                     $user->generateSecretKey();
                     $transaction = $user->getDb()->beginTransaction();
@@ -156,8 +162,8 @@ class SiteController extends Controller
                             'source_id' => (string)$attributes['id'],
                         ]);
                         if ($auth->save()) {
-                            /* @var $modelProfile /common/models/Profile */
-                            $modelProfile = new Profile();
+                            /* @var $modelProfile /common/models/UserProfile */
+                            $modelProfile = new UserProfile();
                             $modelProfile->user_id = $user->id;
                             $modelProfile->first_name = $first_name;
                             $modelProfile->second_name = $second_name;
@@ -181,9 +187,10 @@ class SiteController extends Controller
                             print_r($auth->getErrors());
                         }
                     } else {
+                        dd($user->errors);
                         $user = User::findOne(['email' => $user->email]);
                         // Если пользователь регитрировался ранее через форму регистации.
-                        if($user->status == User::STATUS_ACTIVE):
+                        if($user && $user->status == User::STATUS_ACTIVE):
                             Yii::$app->getSession()->setFlash('error',
                                 Yii::t('app', "Authorization using the email address <strong> {email} </strong> has successfully passed through the registration form.
                                  Click on the link <strong> Forgot your password? </strong> to restore the password.", ['email' => $user->email]));
@@ -213,8 +220,6 @@ class SiteController extends Controller
     }
 
     public function redirectUser($url) {
-
-
         /* Если пользователь с таким эл. адресом существуе, делаем переход обратно на страницу входа */
         $viewFile = '@frontend/views/main' . DIRECTORY_SEPARATOR . 'redirect.php';  // файл перехода
         $viewData = [

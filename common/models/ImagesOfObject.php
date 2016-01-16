@@ -52,14 +52,6 @@ class ImagesOfObject extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getObject()
-    {
-        return $this->hasOne(Carousel::className(), ['id' => 'object_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getObject1()
     {
         return $this->hasOne(UserProfile::className(), ['user_id' => 'object_id']);

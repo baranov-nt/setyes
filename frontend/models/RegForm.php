@@ -109,11 +109,13 @@ class RegForm extends Model
         if($this->scenario === 'phoneFinish'):
             $modelUser->phone = $this->getPhoneNumber();
             $modelUser->status = User::STATUS_ACTIVE;
+            $modelUser->country_id = $this->country_id;
             $modelUser->save();
             return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
         elseif($this->scenario === 'phoneAndEmailFinish'):
             $modelUser->phone = $this->getPhoneNumber();
             $modelUser->email = $this->email;
+            $modelUser->country_id = $this->country_id;
             $modelUser->setPassword($this->password);
             $modelUser->generateAuthKey();
             $modelUser->generateSecretKey();
@@ -140,8 +142,8 @@ class RegForm extends Model
         if($modelUser->save()):
             $modelUserProfile = new UserProfile();
             $modelUserProfile->link('user', $modelUser);
-            $modelUserProfile = new UserPrivilege();
-            $modelUserProfile->link('user', $modelUser);
+            $modelUserPrivilege = new UserPrivilege();
+            $modelUserPrivilege->link('user', $modelUser);
             return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
         endif;
         return false;

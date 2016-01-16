@@ -56,7 +56,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'status', 'auth_key'], 'required'],
+            [['status', 'auth_key'], 'required'],
             [['balance'], 'number'],
             [['status', 'country_id', 'created_at', 'updated_at'], 'integer'],
             [['phone', 'auth_key'], 'string', 'max' => 32],
@@ -92,7 +92,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getAuths()
     {
-        return $this->hasMany(Auth::className(), ['user_id' => 'id']);
+        return $this->hasOne(Auth::className(), ['user_id' => 'id']);
     }
 
     /**

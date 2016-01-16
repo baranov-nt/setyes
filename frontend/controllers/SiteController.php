@@ -17,6 +17,7 @@ use yii\web\Controller;
 use common\models\UserProfile;
 use yii\authclient\AuthAction;
 use common\models\UserPrivilege;
+use common\rbac\helpers\RbacHelper;
 
 class SiteController extends Controller
 {
@@ -91,27 +92,26 @@ class SiteController extends Controller
             } else {                        // регистрация
                 if (isset($attributes['email']) && $user = User::findOne(['email' => $attributes['email']])) {
                     // Если пользователь регитрировался ранее через форму регистации.
-                    if($user->status == User::STATUS_ACTIVE):
-                        Yii::$app->getSession()->setFlash('error',
-                            Yii::t('app', "Authorization using the email address <strong> {email} </strong> has successfully passed through the registration form.
- Click on the link <strong> Forgot your password? </strong> to restore the password.", ['email' => $user->email]));
-                        return $this->redirectUser($url = Url::to(['/main/login']));
-                    else:
-                        Yii::$app->getSession()->setFlash('error', [
-                            Yii::t('app', "Authorization using the email address <strong> {email} </strong> is already happening through the account <strong> {auths} </strong>.
-                            Log on using the account <strong> {auths} </strong> or use the link <strong> Forgot your password? </strong> for the password to vostannovleniya
-                            user email <strong> {email} </strong>.", ['email' => $user->email, 'auths' => $user->auths->source]),
-                        ]);
-                        return $this->redirectUser($url = Url::to(['/main/login']));
+                    if($user):
+                        if($user->status == User::STATUS_DELETED):
+                            Yii::$app->getSession()->setFlash('error',
+                                Yii::t('app', "User <strong> {email} </strong> blocked.", ['email' => $user->email]));
+                        elseif($user->auths->source):
+                            Yii::$app->getSession()->setFlash('error', [
+                                Yii::t('app', "Authorization using the email address <strong> {email} </strong> is already happening through the account <strong> {auths} </strong>.
+                            Log on using the account <strong> {auths} </strong> or use the link <strong> Forgot your password? </strong> for email <strong> {email} </strong> to restore the password..", ['email' => $user->email, 'auths' => $user->auths->source]),
+                            ]);
+                        else:
+                            Yii::$app->getSession()->setFlash('error',
+                                Yii::t('app', "Authorization using the email address <strong> {email} </strong> has successfully passed through the registration form. Click on the link <strong> Forgot your password? </strong> to restore the password.", ['email' => $user->email]));
+                        endif;
                     endif;
+                    return $this->redirectUser($url = Url::to(['/main/login']));
                 } else {
                     // Полученные данные заносим в переменные
                     /* @var $email string */
                     /* @var $first_name string */
                     /* @var $second_name string */
-
-
-
                     if(Yii::$app->request->get('authclient') == 'google'):
                         $first_name = $attributes['name']['givenName'];
                         $second_name = $attributes['name']['familyName'];
@@ -171,9 +171,11 @@ class SiteController extends Controller
                             $modelProfile->first_name = $first_name;
                             $modelProfile->second_name = $second_name;
                             if($modelProfile->save()):
-                                $modelUserPrivilege = new UserPrivilege();
-                                $modelUserPrivilege->link('user', $user);
-                                $transaction->commit();
+                                if(RbacHelper::assignRole($user->id)) {
+                                    $modelUserPrivilege = new UserPrivilege();
+                                    $modelUserPrivilege->link('user', $user);
+                                    $transaction->commit();
+                                }
                                 // если нет емайл, делаем перенаправление на main/finish-reg
                                 if($email == false):
                                     Yii::$app->getSession()->setFlash('success', [
@@ -200,7 +202,7 @@ class SiteController extends Controller
                             elseif($user->auths->source):
                                 Yii::$app->getSession()->setFlash('error', [
                                     Yii::t('app', "Authorization using the email address <strong> {email} </strong> is already happening through the account <strong> {auths} </strong>.
-                            Log on using the account <strong> {auths} </strong> or use the link <strong> Forgot your password? </strong> for email <strong> {email} </strong>.", ['email' => $user->email, 'auths' => $user->auths->source]),
+                            Log on using the account <strong> {auths} </strong> or use the link <strong> Forgot your password? </strong> for email <strong> {email} </strong> to restore the password..", ['email' => $user->email, 'auths' => $user->auths->source]),
                                 ]);
                             else:
                                 Yii::$app->getSession()->setFlash('error',

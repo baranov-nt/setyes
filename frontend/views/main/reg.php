@@ -68,8 +68,6 @@ ChosenAsset::register($this);
                 </div>
             </div>
 
-
-
             <div class="form-group">
                 <?= Html::submitButton(Yii::$app->controller->action->id == 'reg' ? Yii::t('app', 'Registration') : Yii::t('app', 'Complete Registration'),
                     [
@@ -89,6 +87,9 @@ ChosenAsset::register($this);
     </div>
     <?php ActiveForm::end(); ?>
     <?php Pjax::end(); ?>
+        <?php
+        if(Yii::$app->controller->action->id == 'reg'):
+        ?>
             <label class="control-label" for="loginform-email"><?= Yii::t('app', 'Login with social network.') ?></label>
             <?php $authAuthChoice = AuthChoice::begin([
                 'baseAuthUrl' => ['site/auth'],
@@ -97,6 +98,9 @@ ChosenAsset::register($this);
                 <div style="width: 40px; float: left; font-size: 0px;"><?php $authAuthChoice->clientLink($client) ?></div>
             <?php endforeach; ?>
             <?php AuthChoice::end(); ?>
+            <?php
+        endif;
+        ?>
     </div>
     <!-- main-reg -->
 </div>

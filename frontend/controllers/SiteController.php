@@ -93,7 +93,7 @@ class SiteController extends Controller
                     if($user->status == User::STATUS_ACTIVE):
                         Yii::$app->getSession()->setFlash('error',
                             Yii::t('app', "Authorization using the email address <strong> {email} </strong> has successfully passed through the registration form.
-                             Click on the link <strong> Forgot your password? </strong> to restore the password.", ['email' => $user->email]));
+ Click on the link <strong> Forgot your password? </strong> to restore the password.", ['email' => $user->email]));
                         return $this->redirectUser($url = Url::to(['/main/login']));
                     else:
                         Yii::$app->getSession()->setFlash('error', [
@@ -187,13 +187,12 @@ class SiteController extends Controller
                             print_r($auth->getErrors());
                         }
                     } else {
-                        dd($user->errors);
                         $user = User::findOne(['email' => $user->email]);
                         // Если пользователь регитрировался ранее через форму регистации.
                         if($user && $user->status == User::STATUS_ACTIVE):
                             Yii::$app->getSession()->setFlash('error',
-                                Yii::t('app', "Authorization using the email address <strong> {email} </strong> has successfully passed through the registration form.
-                                 Click on the link <strong> Forgot your password? </strong> to restore the password.", ['email' => $user->email]));
+                                Yii::t('app', "Authorization using the email address <strong> {email} </strong> has successfully passed through the registration form. Click on
+the link <strong> Forgot your password? </strong> to restore the password.", ['email' => $user->email]));
                             return $this->redirectUser($url = Url::to(['/main/login']));
                         else:
                             Yii::$app->getSession()->setFlash('error', [

@@ -110,6 +110,8 @@ class RegForm extends Model
             $modelUser->phone = $this->getPhoneNumber();
             $modelUser->status = User::STATUS_ACTIVE;
             $modelUser->country_id = $this->country_id;
+            $modelUser->setPassword(time());
+            $modelUser->generateAuthKey();
             $modelUser->save();
             return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
         elseif($this->scenario === 'phoneAndEmailFinish'):

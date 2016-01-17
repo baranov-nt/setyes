@@ -55,7 +55,7 @@ class m151216_115903_create_place_table extends Migration
             'cctld' => Schema::TYPE_STRING.'(5) NULL',                      // домен страны
             'phone_number_digits_code' => Schema::TYPE_SMALLINT.'(5) NULL',    // количество цифр после кода
             'currency' => Schema::TYPE_STRING."(3) NULL",                      // домен страны
-            'system_measure' => Schema::TYPE_SMALLINT,           // система мер (0 - метрическая, 1 - английская)
+            'system_measure' => Schema::TYPE_SMALLINT,                      // система мер (0 - метрическая, 1 - английская)
         ]);
 
         /* Связь таблицы регионов с таблицей стран, если региона у города нет пишем в регион place_id = NULL. */

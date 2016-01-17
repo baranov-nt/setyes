@@ -47,6 +47,13 @@ class BehaviorsController extends Controller {
                     ],
                     [
                         'allow' => true,
+                        'controllers' => ['ad/default'],
+                        'actions' => ['index'],
+                        'verbs' => ['GET', 'POST'],
+                        'roles' => ['@']
+                    ],
+                    [
+                        'allow' => true,
                         'controllers' => ['main'],
                         'actions' => ['logout'],
                         'verbs' => ['POST'],

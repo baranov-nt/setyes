@@ -17,8 +17,8 @@ return [
     'layout' => 'basic',
     'defaultRoute' => 'main/index',
     'modules' => [
-        'ads' => [
-            'class' => 'frontend\modules\ads\Module',
+        'ad' => [
+            'class' => 'frontend\modules\ad\Module',
         ],
     ],
     'components' => [
@@ -86,6 +86,11 @@ return [
                 ],
                 [
                     'pattern' => '<city:\d+>/<module>/<controller>/<action>',
+                    'route' => '<module>/<controller>/<action>',
+                    'suffix' => ''
+                ],
+                [
+                    'pattern' => '<module>/<controller>/<action>',
                     'route' => '<module>/<controller>/<action>',
                     'suffix' => ''
                 ],

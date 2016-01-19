@@ -41,7 +41,7 @@ $this->beginPage();
                 'trackingId' => 'UA-61158765-2'
             ]
         ) ?>
-        <title><?= Yii::$app->name ?></title>
+        <title><?= $this->title ?></title>
         <?php $this->head() ?>
     </head>
     <body>

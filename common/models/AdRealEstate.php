@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "ad_real_estate".
@@ -188,5 +190,19 @@ class AdRealEstate extends \yii\db\ActiveRecord
     public function getAdRealEstateAppliances()
     {
         return $this->hasMany(AdRealEstateAppliances::className(), ['real_estate_id' => 'id']);
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstatePropertyList()
+    {
+        $realEstateProperty = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 8])
+            ->all(), 'id', 'reference_name');
+
+        return $realEstateProperty;
     }
 }

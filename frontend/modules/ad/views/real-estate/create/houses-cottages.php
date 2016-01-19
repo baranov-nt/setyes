@@ -8,7 +8,7 @@
 use yii\helpers\Html;
 ?>
 <div class="ad-real-estate-create">
-    <h1><?= Html::encode($title) ?></h1>
+    <h1><?= Html::encode(Yii::t('references', $title)) ?></h1>
     <?= $this->render('../_form', [
         'model' => $model,
     ]) ?>

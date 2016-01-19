@@ -80,7 +80,8 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateRooms()
     {
-        $model = new AdRealEstate();
+        $model = new AdRealEstate(['scenario' => 'rooms']);
+        $model->property = 1;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -96,11 +97,117 @@ class RealEstateController extends BehaviorsController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      *
-     * Действия для создания объявлений раздела "Комнаты"
+     * Действия для создания объявлений раздела "Квартиры"
      */
     public function actionCreateApartrments()
     {
-        $model = new AdRealEstate();
+        $model = new AdRealEstate(['scenario' => 'apartments']);
+        $model->property = 2;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Creates a new AdRealEstate model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     *
+     * Действия для создания объявлений раздела "Дома, коттеджы"
+     */
+    public function actionCreateHousesCottages()
+    {
+        $model = new AdRealEstate(['scenario' => 'housesCottages']);
+        $model->property = 3;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Creates a new AdRealEstate model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     *
+     * Действия для создания объявлений раздела "Земельные участки"
+     */
+    public function actionCreateLandPlot()
+    {
+        $model = new AdRealEstate(['scenario' => 'landPlot']);
+        $model->property = 4;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Creates a new AdRealEstate model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     *
+     * Действия для создания объявлений раздела "Гаражи, парковка"
+     */
+    public function actionCreateGaragesParking()
+    {
+        $model = new AdRealEstate(['scenario' => 'garagesParking']);
+        $model->property = 5;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Creates a new AdRealEstate model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     *
+     * Действия для создания объявлений раздела "Недвижимость за рубежом"
+     */
+    public function actionCreatePropertyAbroad()
+    {
+        $model = new AdRealEstate(['scenario' => 'propertyAbroad']);
+        $model->property = 6;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Creates a new AdRealEstate model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     *
+     * Действия для создания объявлений раздела "Коммерческая недвижимость"
+     */
+    public function actionCreateCommercialProperty()
+    {
+        $model = new AdRealEstate(['scenario' => 'commercialProperty']);
+        $model->property = 7;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

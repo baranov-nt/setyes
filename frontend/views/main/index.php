@@ -5,6 +5,8 @@
 /* @var $one common\models\Carousel */
 use common\widgets\GoogleMapsMarkers\GoogleMaps;
 //use common\widgets\CurrencyConverter\CurrencyConverter;
+use yii\helpers\Url;
+use yii\helpers\Html;
 
 if (Yii::$app->user->can('Редактор')):
     Yii::$app->assetManager->forceCopy = true;
@@ -28,7 +30,11 @@ endif;
     /*$converter = new CurrencyConverter();
     $rate =  $converter->convert('EUR', 'MYR');
     d($rate);*/
+    if(Yii::$app->user->can('Создатель')):
+        echo Html::a(Yii::t('references', 'Real Estate'), Url::to(['/ad/real-estate/index']));
+    endif;
     ?>
+
 </div>
     <div class="container">
         <?php

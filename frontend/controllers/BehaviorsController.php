@@ -63,7 +63,7 @@ class BehaviorsController extends Controller {
                         'allow' => true,
                         'controllers' => ['ad/real-estate'],
                         'actions' => ['index', 'create', 'view', 'update', 'delete',
-                            'create-rooms', 'create-apartrments'],
+                            'create-rooms', 'create-apartrments', 'create-houses-cottages', 'create-land-plot', 'create-garages-parking', 'create-property-abroad', 'create-commercial-property'],
                         'roles' => ['Создатель']
                     ],
                     [

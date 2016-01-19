@@ -1,20 +1,33 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
+use frontend\assets\ChosenAsset;
 
+ChosenAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $model common\models\AdRealEstate */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap\ActiveForm */
+/* @var $key int */
 ?>
 
 <div class="ad-real-estate-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'property')->textInput() ?>
+    <?= $form->field($model, 'property')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'property_type')->textInput() ?>
+    <?php
+    if($model->scenario == 'apartments' || $model->scenario == 'housesCottages' || $model->scenario == 'landPlot' ||
+        $model->scenario == 'garagesParking' || $model->scenario == 'propertyAbroad' || $model->scenario == 'commercialProperty'):
+    ?>
+    <?= $form->field($model, 'property_type')->dropDownList($model->getRealEstatePropertyTypeList($model->property), [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
+    <?php
+    endif;
+    ?>
 
     <?= $form->field($model, 'category_land')->textInput() ?>
 

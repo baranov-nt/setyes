@@ -4,7 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "ad_real_estate".
@@ -41,7 +41,7 @@ use yii\helpers\Url;
  * @property AdRealEstateReference $systemMeasure
  * @property AdRealEstateAppliances[] $adRealEstateAppliances
  */
-class AdRealEstate extends \yii\db\ActiveRecord
+class AdRealEstate extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -203,6 +203,121 @@ class AdRealEstate extends \yii\db\ActiveRecord
             ->where(['reference_id' => 8])
             ->all(), 'id', 'reference_name');
 
-        return $realEstateProperty;
+        $items = [];
+        foreach($realEstateProperty as $key => $value):
+            switch ($key) {
+                case 1:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/ad/real-estate/create-rooms'],
+                    ];
+                    break;
+                case 2:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/ad/real-estate/create-apartrments'],
+                    ];
+                    break;
+                case 3:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/ad/real-estate/create-houses-cottages'],
+                    ];
+                    break;
+                case 4:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/ad/real-estate/create-land-plot'],
+                    ];
+                    break;
+                case 5:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/ad/real-estate/create-garages-parking'],
+                    ];
+                    break;
+                case 6:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/ad/real-estate/create-property-abroad'],
+                    ];
+                    break;
+                case 7:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/ad/real-estate/create-commercial-property'],
+                    ];
+                    break;
+            }
+        endforeach;
+
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstatePropertyTypeList($property)
+    {
+        switch ($property) {
+            case 2:
+                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 16])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_types as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 3:
+                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 17])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_types as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 4:
+                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 18])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_types as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 5:
+                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 19])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_types as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 6:
+                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 20])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_types as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 7:
+                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 21])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_types as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+        }
+
+        return false;
     }
 }

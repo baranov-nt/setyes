@@ -21,7 +21,7 @@ ChosenAsset::register($this);
     if($model->scenario == 'apartments' || $model->scenario == 'housesCottages' || $model->scenario == 'landPlot' ||
         $model->scenario == 'garagesParking' || $model->scenario == 'propertyAbroad' || $model->scenario == 'commercialProperty'):
     ?>
-    <?= $form->field($model, 'property_type')->dropDownList($model->getRealEstatePropertyTypeList($model->property), [
+    <?= $form->field($model, 'property_type')->dropDownList($model->realEstatePropertyTypeList, [
         'class'  => 'form-control chosen-select',
         //'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -29,23 +29,63 @@ ChosenAsset::register($this);
     endif;
     ?>
 
-    <?= $form->field($model, 'category_land')->textInput() ?>
+    <?= $form->field($model, 'operation_type')->dropDownList($model->realEstateOperationTypeList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
 
-    <?= $form->field($model, 'operation_type')->textInput() ?>
+    <?php
+    if($model->scenario == 'rooms' || $model->scenario == 'apartments'):
+    ?>
+    <?= $form->field($model, 'rooms_in_the_apartment')->dropDownList($model->realEstateRoomsInApartmentList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
+        <?php
+    endif;
+    ?>
 
-    <?= $form->field($model, 'rooms_in_the_apartment')->textInput() ?>
+    <?php
+    if($model->scenario == 'rooms' || $model->scenario == 'apartments' || $model->scenario == 'housesCottages'):
+        ?>
+        <?= $form->field($model, 'material_housing')->dropDownList($model->realEstateMaterialHousingList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
+        <?php
+    endif;
+    ?>
 
-    <?= $form->field($model, 'material_housing')->textInput() ?>
+    <?php
+    if($model->scenario == 'rooms' || $model->scenario == 'apartments'):
+        ?>
+        <?= $form->field($model, 'floor')->dropDownList($model->realEstateFloorsList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
+        <?php
+    endif;
+    ?>
 
-    <?= $form->field($model, 'floor')->textInput() ?>
-
-    <?= $form->field($model, 'floors_in_the_house')->textInput() ?>
+    <?php
+    if($model->scenario == 'rooms' || $model->scenario == 'apartments'):
+        ?>
+        <?= $form->field($model, 'floors_in_the_house')->dropDownList($model->realEstateFloorsList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
+        <?php
+    endif;
+    ?>
 
     <?= $form->field($model, 'area')->textInput() ?>
 
     <?= $form->field($model, 'system_measure')->textInput() ?>
 
-    <?= $form->field($model, 'lease_term')->textInput() ?>
+    <?= $form->field($model, 'lease_term')->dropDownList($model->realEstateLeaseTermList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 

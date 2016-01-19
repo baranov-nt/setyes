@@ -259,9 +259,9 @@ class AdRealEstate extends ActiveRecord
      *
      * @return array
      */
-    public function getRealEstatePropertyTypeList($property)
+    public function getRealEstatePropertyTypeList()
     {
-        switch ($property) {
+        switch ($this->property) {
             case 2:
                 $property_types = ArrayHelper::map(AdRealEstateReference::find()
                     ->where(['reference_id' => 16])
@@ -319,5 +319,161 @@ class AdRealEstate extends ActiveRecord
         }
 
         return false;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateOperationTypeList()
+    {
+        switch ($this->property) {
+            case 1:
+                $property_operations = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => $this->property])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_operations as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 2:
+                $property_operations = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => $this->property])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_operations as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 3:
+                $property_operations = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => $this->property])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_operations as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 4:
+                $property_operations = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => $this->property])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_operations as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 5:
+                $property_operations = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => $this->property])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_operations as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 6:
+                $property_operations = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => $this->property])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_operations as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 7:
+                $property_operations = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => $this->property])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($property_operations as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+        }
+        return false;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateRoomsInApartmentList()
+    {
+        switch ($this->property) {
+            case 1:
+                $rooms_in_the_apartment = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 9])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($rooms_in_the_apartment as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 2:
+                $rooms_in_the_apartment = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 15])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($rooms_in_the_apartment as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+        }
+        return false;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateMaterialHousingList()
+    {
+        $material_housing = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 10])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($material_housing as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateFloorsList()
+    {
+        $floor = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 11])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($floor as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateLeaseTermList()
+    {
+        $lease_term = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 13])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($lease_term as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
     }
 }

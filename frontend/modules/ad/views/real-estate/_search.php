@@ -21,8 +21,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'property_type') ?>
 
-    <?= $form->field($model, 'category_land') ?>
-
     <?= $form->field($model, 'operation_type') ?>
 
     <?php // echo $form->field($model, 'rooms_in_the_apartment') ?>

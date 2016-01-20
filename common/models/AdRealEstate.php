@@ -12,7 +12,6 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property integer $property
  * @property integer $property_type
- * @property integer $category_land
  * @property integer $operation_type
  * @property integer $rooms_in_the_apartment
  * @property integer $material_housing
@@ -23,14 +22,14 @@ use yii\db\ActiveRecord;
  * @property integer $lease_term
  * @property integer $price
  * @property integer $price_period
- * @property integer $furnished
+ * @property integer $necessary_furniture
  * @property integer $internet
  * @property integer $condition
  *
  * @property AdRealEstateReference $categoryLand
  * @property AdRealEstateReference $floor0
  * @property AdRealEstateReference $floorsInTheHouse
- * @property AdRealEstateReference $furnished0
+ * @property AdRealEstateReference $necessary_furniture0
  * @property AdRealEstateReference $leaseTerm
  * @property AdRealEstateReference $materialHousing
  * @property AdRealEstateReference $operationType
@@ -57,8 +56,8 @@ class AdRealEstate extends ActiveRecord
     public function rules()
     {
         return [
-            [['property', 'property_type', 'category_land', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term', 'price_period', 'furnished', 'internet', 'condition'], 'required'],
-            [['property', 'property_type', 'category_land', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure', 'lease_term', 'price', 'price_period', 'furnished', 'internet', 'condition'], 'integer']
+            [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'required'],
+            [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure', 'lease_term', 'price', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'integer']
         ];
     }
 
@@ -71,7 +70,6 @@ class AdRealEstate extends ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'property' => Yii::t('app', 'Property'),
             'property_type' => Yii::t('app', 'Property Type'),
-            'category_land' => Yii::t('app', 'Category Land'),
             'operation_type' => Yii::t('app', 'Operation Type'),
             'rooms_in_the_apartment' => Yii::t('app', 'Rooms In The Apartment'),
             'material_housing' => Yii::t('app', 'Material Housing'),
@@ -82,7 +80,7 @@ class AdRealEstate extends ActiveRecord
             'lease_term' => Yii::t('app', 'Lease Term'),
             'price' => Yii::t('app', 'Price'),
             'price_period' => Yii::t('app', 'Price Period'),
-            'furnished' => Yii::t('app', 'Furnished'),
+            'necessary_furniture' => Yii::t('app', 'Necessary Furniture'),
             'internet' => Yii::t('app', 'Internet'),
             'condition' => Yii::t('app', 'Condition'),
         ];
@@ -115,9 +113,9 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getFurnished0()
+    public function getnecessary_furniture0()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'furnished']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'necessary_furniture']);
     }
 
     /**
@@ -434,7 +432,7 @@ class AdRealEstate extends ActiveRecord
     public function getRealEstateMaterialHousingList()
     {
         $material_housing = ArrayHelper::map(AdRealEstateReference::find()
-            ->where(['reference_id' => 10])
+            ->where(['reference_id' => 24])
             ->all(), 'id', 'reference_name');
         $items = [];
         foreach($material_housing as $key => $value) {

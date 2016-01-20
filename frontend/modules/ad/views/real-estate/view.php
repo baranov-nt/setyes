@@ -28,10 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
+            /*'id',
             'property',
             'property_type',
-            'category_land',
             'operation_type',
             'rooms_in_the_apartment',
             'material_housing',
@@ -42,9 +41,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'lease_term',
             'price',
             'price_period',
-            'furnished',
+            'necessary_furniture',
             'internet',
-            'condition',
+            'condition',*/
         ],
     ]) ?>
 

@@ -18,7 +18,7 @@ class AdRealEstateSearch extends AdRealEstate
     public function rules()
     {
         return [
-            [['id', 'property', 'property_type', 'category_land', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure', 'lease_term', 'price', 'price_period', 'furnished', 'internet', 'condition'], 'integer'],
+            [['id', 'property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure', 'lease_term', 'price', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
         ];
     }
 
@@ -58,7 +58,6 @@ class AdRealEstateSearch extends AdRealEstate
             'id' => $this->id,
             'property' => $this->property,
             'property_type' => $this->property_type,
-            'category_land' => $this->category_land,
             'operation_type' => $this->operation_type,
             'rooms_in_the_apartment' => $this->rooms_in_the_apartment,
             'material_housing' => $this->material_housing,
@@ -69,7 +68,7 @@ class AdRealEstateSearch extends AdRealEstate
             'lease_term' => $this->lease_term,
             'price' => $this->price,
             'price_period' => $this->price_period,
-            'furnished' => $this->furnished,
+            'necessary_furniture' => $this->necessary_furniture,
             'internet' => $this->internet,
             'condition' => $this->condition,
         ]);

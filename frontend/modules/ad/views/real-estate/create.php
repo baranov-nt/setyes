@@ -1,5 +1,4 @@
 <?php
-use yii\bootstrap\Tabs;
 use yii\bootstrap\Nav;
 use yii\widgets\Pjax;
 

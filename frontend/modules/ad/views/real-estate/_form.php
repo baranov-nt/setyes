@@ -91,7 +91,7 @@ ChosenAsset::register($this);
 
     <?= $form->field($model, 'price_period')->textInput() ?>
 
-    <?= $form->field($model, 'furnished')->textInput() ?>
+    <?= $form->field($model, 'necessary_furniture')->textInput() ?>
 
     <?= $form->field($model, 'internet')->textInput() ?>
 

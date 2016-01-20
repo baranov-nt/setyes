@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use frontend\assets\ChosenAsset;
+use yii\widgets\MaskedInput;
 
 ChosenAsset::register($this);
 /* @var $this yii\web\View */
@@ -78,24 +79,51 @@ ChosenAsset::register($this);
     endif;
     ?>
 
-    <?= $form->field($model, 'area')->textInput() ?>
-
-    <?= $form->field($model, 'system_measure')->textInput() ?>
+    <?= $form->field($model, 'area')->textInput()->label($model->getAttributeLabel('area').' ('.$model->realEstateSystemMeasureName.')') ?>
 
     <?= $form->field($model, 'lease_term')->dropDownList($model->realEstateLeaseTermList, [
         'class'  => 'form-control chosen-select',
         //'prompt' => Yii::t('app', '---'),
     ]) ?>
 
-    <?= $form->field($model, 'price')->textInput() ?>
+    <?php
+    echo $form->field($model, 'price')->widget(MaskedInput::className(), [
+        'name' => 'masked-input',
+        'clientOptions' => [
+            'alias' => 'decimal',
+            'digits' => 2,
+            'digitsOptional' => false,
+            'radixPoint' => '.',
+            //'groupSeparator' => ',',
+            'autoGroup' => false,
+            'removeMaskOnSubmit' => true,
+            'placeholder' =>  '0'
+        ],
+    ])->label($model->getAttributeLabel('price').' ('.$model->realEstateCurrency.')'); ?>
 
-    <?= $form->field($model, 'price_period')->textInput() ?>
+    <?= $form->field($model, 'price_period')->dropDownList($model->realEstatePricePeriodList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
 
-    <?= $form->field($model, 'necessary_furniture')->textInput() ?>
+    <?= $form->field($model, 'necessary_furniture')->dropDownList($model->realEstateNecessaryFurnitureList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
 
-    <?= $form->field($model, 'internet')->textInput() ?>
+    <?= $form->field($model, 'internet')->dropDownList($model->realEstateInternetList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
 
-    <?= $form->field($model, 'condition')->textInput() ?>
+    <?= $form->field($model, 'condition')->dropDownList($model->realEstateConditionList, [
+        'class'  => 'form-control chosen-select',
+        //'prompt' => Yii::t('app', '---'),
+    ]) ?>
+
+    <?= $form->field($model, 'system_measure')->hiddenInput(['value' => $model->realEstateSystemMeasure])->label(false) ?>
+
+    <?= $form->field($model, 'currency')->hiddenInput(['value' => $model->realEstateCurrency])->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

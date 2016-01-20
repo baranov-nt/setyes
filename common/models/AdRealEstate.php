@@ -42,6 +42,7 @@ use yii\db\ActiveRecord;
  */
 class AdRealEstate extends ActiveRecord
 {
+    public $currency;
     /**
      * @inheritdoc
      */
@@ -56,8 +57,11 @@ class AdRealEstate extends ActiveRecord
     public function rules()
     {
         return [
-            [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'required'],
-            [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure', 'lease_term', 'price', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'integer']
+            [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
+                'price_period', 'necessary_furniture', 'internet', 'condition', 'currency'], 'required'],
+            [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure',
+                'lease_term', 'price', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
+            [['currency'], 'string']
         ];
     }
 
@@ -188,6 +192,14 @@ class AdRealEstate extends ActiveRecord
     public function getAdRealEstateAppliances()
     {
         return $this->hasMany(AdRealEstateAppliances::className(), ['real_estate_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return Yii::$app->user->identity;
     }
 
     /**
@@ -473,5 +485,125 @@ class AdRealEstate extends ActiveRecord
             $items[$key] = Yii::t('references', $value);
         }
         return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstatePricePeriodList()
+    {
+        $price_period = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 14])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($price_period as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateNecessaryFurnitureList()
+    {
+        $necessary_furniture = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 23])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($necessary_furniture as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateInternetList()
+    {
+        $internet = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 10])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($internet as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateConditionList()
+    {
+        $internet = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 25])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($internet as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateSystemMeasureName()
+    {
+        /* @var $user \common\models\User */
+        $user = $this->getUser();
+        $user->country->system_measure;
+
+        switch ($user->country->system_measure) {
+            case 0:
+                /* @var $system_measure \common\models\AdRealEstateReference */
+                $system_measure = AdRealEstateReference::find()
+                    ->where(['id' => 75])
+                    ->one();
+                return Yii::t('references', $system_measure->reference_name);
+            case 1:
+                /* @var $system_measure \common\models\AdRealEstateReference */
+                $system_measure = AdRealEstateReference::find()
+                    ->where(['id' => 76])
+                    ->one();
+                return Yii::t('references', $system_measure->reference_name);
+        }
+        return false;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateSystemMeasure()
+    {
+        /* @var $user \common\models\User */
+        $user = $this->getUser();
+        return $user->country->system_measure;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateCurrency()
+    {
+        /* @var $user \common\models\User */
+        $user = $this->getUser();
+        return $user->country->currency;
     }
 }

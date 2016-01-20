@@ -20,6 +20,7 @@ use yii\helpers\ArrayHelper;
  * @property string $cctld
  * @property integer $phone_number_digits_code
  * @property string $currency
+ * @property integer $system_measure
  *
  * @property PlaceRegion[] $placeRegions
  * @property User[] $users
@@ -41,7 +42,7 @@ class PlaceCountry extends ActiveRecord
     {
         return [
             [['short_name', 'long_name'], 'required'],
-            [['phone_number_digits_code'], 'integer'],
+            [['phone_number_digits_code', 'system_measure'], 'integer'],
             [['iso2'], 'string', 'max' => 2],
             [['short_name', 'long_name'], 'string', 'max' => 80],
             [['iso3', 'currency'], 'string', 'max' => 3],
@@ -69,6 +70,7 @@ class PlaceCountry extends ActiveRecord
             'cctld' => Yii::t('app', 'Cctld'),
             'phone_number_digits_code' => Yii::t('app', 'Phone Number Digits Code'),
             'currency' => Yii::t('app', 'Currency'),
+            'system_measure' => Yii::t('app', 'System Measure'),
         ];
     }
 

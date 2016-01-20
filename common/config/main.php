@@ -41,7 +41,6 @@ return [
             'dateFormat' => 'full',                               // объем информации о дате (short, medium, long, full)
             //'dateFormat' => 'dd-MM-yyyy',                         // ICU format
             //'dateFormat' => 'php:d mm Y',                           // PHP date()-format
-
             'datetimeFormat' => 'full',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',

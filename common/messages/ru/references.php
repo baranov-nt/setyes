@@ -82,7 +82,7 @@ return [
     'cinder block or other blocks' => 'шлакоблок или другие блоки',
     'brick' => 'кирпич',
     'for a long time' => 'долгое время',
-    'for rent' => 'в аренду',
+    'for rent' => 'посуточно',
     'ft²' => 'фут²',
     'hectare' => 'гектар (га)',
     'modular' => 'модульный',

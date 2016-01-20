@@ -23,9 +23,13 @@ echo Nav::widget([
 ]);
 ?>
 
+<?php if($model->scenario != 'default'): ?>
 <?= $this->render('_form', [
     'model' => $model,
 ]) ?>
+<?php
+endif;
+?>
 
 <?php
 Pjax::end();

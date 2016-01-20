@@ -29,5 +29,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'justinvoelker\awesomebootstrapcheckbox\Asset',
     ];
 }

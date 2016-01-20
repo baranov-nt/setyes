@@ -181,7 +181,7 @@ class m160116_094903_create_real_estate_tables extends Migration
             'area' => $this->integer(),                                     // Площадь помещения
             'system_measure' => $this->integer()->notNull(),                // Единица измерения площади 12 - комнат, квартир и домов, 22 - для земли. Связана с таблицей ad_real_estate_reference
             'lease_term' => $this->integer(),                    // Срок аденды. Связана с таблицей ad_real_estate_reference
-            'price' => $this->integer(),                                    // Цена
+            'price' => $this->integer()->notNull(),                                    // Цена
             'price_period' => $this->integer(),                  // Цена за - 14. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'necessary_furniture' => $this->integer(),                     // меблированный  (есть, нет) - 23. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'internet' => $this->integer(),                      // Наличие интернета (есть, нет) - 10. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference

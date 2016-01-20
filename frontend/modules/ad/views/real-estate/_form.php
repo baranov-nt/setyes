@@ -4,7 +4,10 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use frontend\assets\ChosenAsset;
 use yii\widgets\MaskedInput;
+use common\widgets\FontAwesome\AssetBundle;
+use justinvoelker\awesomebootstrapcheckbox\ActiveField;
 
+AssetBundle::register($this);
 ChosenAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $model common\models\AdRealEstate */
@@ -14,7 +17,9 @@ ChosenAsset::register($this);
 
 <div class="ad-real-estate-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'fieldClass' => ActiveField::className(),
+    ]); ?>
 
     <?= $form->field($model, 'property')->hiddenInput()->label(false) ?>
 
@@ -120,6 +125,14 @@ ChosenAsset::register($this);
         'class'  => 'form-control chosen-select',
         //'prompt' => Yii::t('app', '---'),
     ]) ?>
+
+    <?= $form->field($model, 'appliances')->inline()->checkboxList($model->realEstateAppliancesList,
+        [
+            'itemOptions' => [
+                'disabled' => false,
+                'divOptions' => ['class' => 'checkbox checkbox-success checkbox-inline']
+            ]]);
+    ?>
 
     <?= $form->field($model, 'system_measure')->hiddenInput(['value' => $model->realEstateSystemMeasure])->label(false) ?>
 

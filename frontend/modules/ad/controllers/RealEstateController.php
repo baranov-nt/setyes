@@ -104,7 +104,8 @@ class RealEstateController extends BehaviorsController
         $model = new AdRealEstate(['scenario' => 'apartments']);
         $model->property = 2;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            dd($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [

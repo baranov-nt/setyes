@@ -43,6 +43,8 @@ use yii\db\ActiveRecord;
 class AdRealEstate extends ActiveRecord
 {
     public $currency;
+    public $appliances;
+
     /**
      * @inheritdoc
      */
@@ -57,10 +59,11 @@ class AdRealEstate extends ActiveRecord
     public function rules()
     {
         return [
+            [['price'], 'double', 'on' => 'apartments'],
             [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
-                'price_period', 'necessary_furniture', 'internet', 'condition', 'currency'], 'required'],
+                'price_period', 'necessary_furniture', 'internet', 'condition', 'currency', 'appliances'], 'required', 'on' => 'apartments'],
             [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure',
-                'lease_term', 'price', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
+                'lease_term', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
             [['currency'], 'string']
         ];
     }
@@ -87,6 +90,7 @@ class AdRealEstate extends ActiveRecord
             'necessary_furniture' => Yii::t('app', 'Necessary Furniture'),
             'internet' => Yii::t('app', 'Internet'),
             'condition' => Yii::t('app', 'Condition'),
+            'appliances' => Yii::t('app', 'Appliances'),
         ];
     }
 
@@ -605,5 +609,22 @@ class AdRealEstate extends ActiveRecord
         /* @var $user \common\models\User */
         $user = $this->getUser();
         return $user->country->currency;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateAppliancesList()
+    {
+        $appliances = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 26])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($appliances as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
     }
 }

@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4b581b3fed8ec309884c77404fe2cb7b",
-    "content-hash": "41b031f8a4e8388655f9db1f6e834799",
+    "hash": "48e92a0639203f726fcd72c3c5e59f03",
+    "content-hash": "4ed0d1767fdf4449ebbb058e2ca824c4",
     "packages": [
         {
             "name": "bower-asset/animate.css",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/daneden/animate.css.git",
-                "reference": "0a6a8abf551c9abff96de1b97232bf0fd9a48ba2"
+                "reference": "010e06e11175840ae84ad9363f7269f03775d963"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/daneden/animate.css/zipball/0a6a8abf551c9abff96de1b97232bf0fd9a48ba2",
-                "reference": "0a6a8abf551c9abff96de1b97232bf0fd9a48ba2",
+                "url": "https://api.github.com/repos/daneden/animate.css/zipball/010e06e11175840ae84ad9363f7269f03775d963",
+                "reference": "010e06e11175840ae84ad9363f7269f03775d963",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -85,16 +85,16 @@
         },
         {
             "name": "bower-asset/bootstrap-confirmation2",
-            "version": "v2.1.3",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mistic100/Bootstrap-Confirmation.git",
-                "reference": "a0983463491ff8aae50ac32eff1d58c54719ff88"
+                "reference": "cf6b64426f3a14adffa3bf322d5b095d93f8e571"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mistic100/Bootstrap-Confirmation/zipball/a0983463491ff8aae50ac32eff1d58c54719ff88",
-                "reference": "a0983463491ff8aae50ac32eff1d58c54719ff88",
+                "url": "https://api.github.com/repos/mistic100/Bootstrap-Confirmation/zipball/cf6b64426f3a14adffa3bf322d5b095d93f8e571",
+                "reference": "cf6b64426f3a14adffa3bf322d5b095d93f8e571",
                 "shasum": ""
             },
             "require": {
@@ -571,16 +571,16 @@
         },
         {
             "name": "bower-asset/js-cookie",
-            "version": "v2.0.4",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/js-cookie/js-cookie.git",
-                "reference": "605b12c6fae112bd484bfa005f144c82872e2a90"
+                "reference": "788bde34ed7d8c63c245bb3f7028242e1d1b37c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/js-cookie/js-cookie/zipball/605b12c6fae112bd484bfa005f144c82872e2a90",
-                "reference": "605b12c6fae112bd484bfa005f144c82872e2a90",
+                "url": "https://api.github.com/repos/js-cookie/js-cookie/zipball/788bde34ed7d8c63c245bb3f7028242e1d1b37c1",
+                "reference": "788bde34ed7d8c63c245bb3f7028242e1d1b37c1",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -650,16 +650,16 @@
         },
         {
             "name": "bower-asset/semantic",
-            "version": "2.1.7",
+            "version": "2.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Semantic-Org/Semantic-UI.git",
-                "reference": "5a07cef17e6409222a2c9acee15a2f9745bbd176"
+                "reference": "04a3c48a0dd3bd9b440b59036004409239a6db16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Semantic-Org/Semantic-UI/zipball/5a07cef17e6409222a2c9acee15a2f9745bbd176",
-                "reference": "5a07cef17e6409222a2c9acee15a2f9745bbd176",
+                "url": "https://api.github.com/repos/Semantic-Org/Semantic-UI/zipball/04a3c48a0dd3bd9b440b59036004409239a6db16",
+                "reference": "04a3c48a0dd3bd9b440b59036004409239a6db16",
                 "shasum": ""
             },
             "require": {
@@ -1002,17 +1002,58 @@
             "time": "2013-07-10 17:25:36"
         },
         {
+            "name": "justinvoelker/yii2-awesomebootstrapcheckbox",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/justinvoelker/yii2-awesomebootstrapcheckbox.git",
+                "reference": "d487c399edee6e2fe8f8c9ce64d0d7d02ba0141d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/justinvoelker/yii2-awesomebootstrapcheckbox/zipball/d487c399edee6e2fe8f8c9ce64d0d7d02ba0141d",
+                "reference": "d487c399edee6e2fe8f8c9ce64d0d7d02ba0141d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "justinvoelker\\awesomebootstrapcheckbox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Voelker",
+                    "email": "justin@justinvoelker.com"
+                }
+            ],
+            "description": "Better looking, bootstrap-style checkboxes and radio buttons",
+            "keywords": [
+                "bootstrap",
+                "checkbox",
+                "radio"
+            ],
+            "time": "2015-03-23 13:25:43"
+        },
+        {
             "name": "sjaakp/yii2-illustrated-behavior",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sjaakp/yii2-illustrated-behavior.git",
-                "reference": "1850f6233688bfc89239699ad57ad5c915554145"
+                "reference": "8f95a62ff26e38b057c974b30ab19ff0176bde27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sjaakp/yii2-illustrated-behavior/zipball/1850f6233688bfc89239699ad57ad5c915554145",
-                "reference": "1850f6233688bfc89239699ad57ad5c915554145",
+                "url": "https://api.github.com/repos/sjaakp/yii2-illustrated-behavior/zipball/8f95a62ff26e38b057c974b30ab19ff0176bde27",
+                "reference": "8f95a62ff26e38b057c974b30ab19ff0176bde27",
                 "shasum": ""
             },
             "require": {
@@ -1047,7 +1088,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2015-12-12 19:20:17"
+            "time": "2015-12-29 10:48:37"
         },
         {
             "name": "swiftmailer/swiftmailer",

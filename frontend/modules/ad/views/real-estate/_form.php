@@ -13,12 +13,14 @@ ChosenAsset::register($this);
 /* @var $model common\models\AdRealEstate */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $key int */
+/* @var $pjaxUrl string */
 ?>
 
 <div class="ad-real-estate-form">
 
     <?php $form = ActiveForm::begin([
         'fieldClass' => ActiveField::className(),
+        'id' => 'ad_form',
     ]); ?>
 
     <?= $form->field($model, 'property')->hiddenInput()->label(false) ?>
@@ -29,7 +31,7 @@ ChosenAsset::register($this);
     ?>
     <?= $form->field($model, 'property_type')->dropDownList($model->realEstatePropertyTypeList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
     <?php
     endif;
@@ -37,7 +39,16 @@ ChosenAsset::register($this);
 
     <?= $form->field($model, 'operation_type')->dropDownList($model->realEstateOperationTypeList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
+        'onChange' => '
+        $.pjax({
+            type: "POST",
+            url: "'.$pjaxUrl.'",
+            data: jQuery("#ad_form").serialize(),
+            container: "#w0",
+            push: false
+        })
+        '
     ]) ?>
 
     <?php
@@ -46,6 +57,8 @@ ChosenAsset::register($this);
     <?= $form->field($model, 'rooms_in_the_apartment')->dropDownList($model->realEstateRoomsInApartmentList, [
         'class'  => 'form-control chosen-select',
         //'prompt' => Yii::t('app', '---'),
+        'onChange' => '
+        '
     ]) ?>
         <?php
     endif;

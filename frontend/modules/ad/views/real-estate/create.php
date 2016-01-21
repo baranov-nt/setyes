@@ -5,6 +5,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $model common\models\AdRealEstate */
 /* @var $realEstateProperty common\models\AdRealEstateReference */
+/* @var $pjaxUrl string */
 
 $this->title = Yii::t('app', 'Create Ad Real Estate');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
@@ -18,15 +19,16 @@ echo Nav::widget([
     'activateParents' => true,
     'encodeLabels' => false,
     'options' => [
-        'class' => 'nav nav-tabs'
+        'class' => 'nav nav-tabs',
     ]
 ]);
 ?>
 
 <?php if($model->scenario != 'default'): ?>
-<?= $this->render('_form', [
-    'model' => $model,
-]) ?>
+    <?= $this->render('_form', [
+        'model' => $model,
+        'pjaxUrl' => $pjaxUrl
+    ]) ?>
 <?php
 endif;
 ?>

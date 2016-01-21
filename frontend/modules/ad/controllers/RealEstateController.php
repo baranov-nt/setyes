@@ -83,11 +83,16 @@ class RealEstateController extends BehaviorsController
         $model = new AdRealEstate(['scenario' => 'rooms']);
         $model->property = 1;
 
+        $pjaxUrl = 'create-rooms';
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            dd($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('create', [
                 'model' => $model,
+                'pjaxUrl' => $pjaxUrl
             ]);
         }
     }
@@ -103,13 +108,16 @@ class RealEstateController extends BehaviorsController
     {
         $model = new AdRealEstate(['scenario' => 'apartments']);
         $model->property = 2;
+        $pjaxUrl = 'create-apartrments';
 
         if ($model->load(Yii::$app->request->post())) {
             dd($model);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('create', [
                 'model' => $model,
+                'pjaxUrl' => $pjaxUrl
             ]);
         }
     }
@@ -125,12 +133,15 @@ class RealEstateController extends BehaviorsController
     {
         $model = new AdRealEstate(['scenario' => 'housesCottages']);
         $model->property = 3;
+        $pjaxUrl = 'create-houses-cottages';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('create', [
                 'model' => $model,
+                'pjaxUrl' => $pjaxUrl
             ]);
         }
     }
@@ -146,12 +157,15 @@ class RealEstateController extends BehaviorsController
     {
         $model = new AdRealEstate(['scenario' => 'landPlot']);
         $model->property = 4;
+        $pjaxUrl = 'create-land-plot';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('create', [
                 'model' => $model,
+                'pjaxUrl' => $pjaxUrl
             ]);
         }
     }
@@ -167,12 +181,15 @@ class RealEstateController extends BehaviorsController
     {
         $model = new AdRealEstate(['scenario' => 'garagesParking']);
         $model->property = 5;
+        $pjaxUrl = 'create-garages-parking';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('create', [
                 'model' => $model,
+                'pjaxUrl' => $pjaxUrl
             ]);
         }
     }
@@ -188,12 +205,15 @@ class RealEstateController extends BehaviorsController
     {
         $model = new AdRealEstate(['scenario' => 'propertyAbroad']);
         $model->property = 6;
+        $pjaxUrl = 'create-property-abroad';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('create', [
                 'model' => $model,
+                'pjaxUrl' => $pjaxUrl
             ]);
         }
     }
@@ -209,12 +229,15 @@ class RealEstateController extends BehaviorsController
     {
         $model = new AdRealEstate(['scenario' => 'commercialProperty']);
         $model->property = 7;
+        $pjaxUrl = 'create-commercial-property';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
+
             return $this->render('create', [
                 'model' => $model,
+                'pjaxUrl' => $pjaxUrl
             ]);
         }
     }

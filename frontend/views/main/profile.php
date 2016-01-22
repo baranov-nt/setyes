@@ -80,13 +80,13 @@ use common\widgets\SocialLinks\ShareBar;
                 'route' => '/main/user',
                 'model' => $modelUserProfile,
                 'id' => Yii::$app->user->id,
-                'attribute' => 'phone_second',
+                'attribute' => 'the_second_phone',
             ]);
             echo PjaxFieldWidget::widget([
                 'route' => '/main/user',
                 'model' => $modelUserProfile,
                 'id' => Yii::$app->user->id,
-                'attribute' => 'phone_third',
+                'attribute' => 'the_third_phone',
             ]);
             echo PjaxFieldWidget::widget([
                 'route' => '/main/profile',

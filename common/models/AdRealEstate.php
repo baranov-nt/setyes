@@ -59,6 +59,9 @@ class AdRealEstate extends ActiveRecord
     public function rules()
     {
         return [
+            [['property', 'property_type'], 'integer', 'on' => ['rooms', 'sellingRoom']],
+            [['property', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
+                'price_period', 'necessary_furniture', 'internet', 'condition', 'currency', 'appliances'], 'required', 'on' => 'sellingRoom'],
             [['price'], 'double', 'on' => 'apartments'],
             [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
                 'price_period', 'necessary_furniture', 'internet', 'condition', 'currency', 'appliances'], 'required', 'on' => 'apartments'],

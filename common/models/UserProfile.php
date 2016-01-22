@@ -14,8 +14,8 @@ use yii\db\ActiveRecord;
  * @property string $first_name
  * @property string $second_name
  * @property string $middle_name
- * @property integer $phone_second
- * @property integer $phone_third
+ * @property integer $the_second_phone
+ * @property integer $the_third_phone
  * @property integer $birthday
  * @property integer $gender
  *
@@ -38,7 +38,7 @@ class UserProfile extends ActiveRecord
     public function rules()
     {
         return [
-            [['images_num', 'phone_second', 'phone_third', 'birthday', 'gender'], 'integer'],
+            [['images_num', 'the_second_phone', 'the_third_phone', 'birthday', 'gender'], 'integer'],
             [['images_label', 'first_name', 'second_name', 'middle_name'], 'string', 'max' => 32]
         ];
     }
@@ -55,8 +55,8 @@ class UserProfile extends ActiveRecord
             'first_name' => Yii::t('app', 'First Name'),
             'second_name' => Yii::t('app', 'Last Name'),
             'middle_name' => Yii::t('app', 'Middle Name'),
-            'phone_second' => Yii::t('app', 'Phone Second'),
-            'phone_third' => Yii::t('app', 'Phone Third'),
+            'the_second_phone' => Yii::t('app', 'The Second Phone'),
+            'the_third_phone' => Yii::t('app', 'The Third Phone'),
             'birthday' => Yii::t('app', 'Birthday'),
             'gender' => Yii::t('app', 'Gender'),
         ];

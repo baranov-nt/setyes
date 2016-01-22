@@ -56,7 +56,7 @@ ChosenAsset::register($this);
     ?>
     <?= $form->field($model, 'rooms_in_the_apartment')->dropDownList($model->realEstateRoomsInApartmentList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
         'onChange' => '
         '
     ]) ?>
@@ -69,7 +69,7 @@ ChosenAsset::register($this);
         ?>
         <?= $form->field($model, 'material_housing')->dropDownList($model->realEstateMaterialHousingList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
         <?php
     endif;
@@ -80,7 +80,7 @@ ChosenAsset::register($this);
         ?>
         <?= $form->field($model, 'floor')->dropDownList($model->realEstateFloorsList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
         <?php
     endif;
@@ -91,7 +91,7 @@ ChosenAsset::register($this);
         ?>
         <?= $form->field($model, 'floors_in_the_house')->dropDownList($model->realEstateFloorsList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
         <?php
     endif;
@@ -101,7 +101,7 @@ ChosenAsset::register($this);
 
     <?= $form->field($model, 'lease_term')->dropDownList($model->realEstateLeaseTermList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
 
     <?php
@@ -121,29 +121,29 @@ ChosenAsset::register($this);
 
     <?= $form->field($model, 'price_period')->dropDownList($model->realEstatePricePeriodList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
 
     <?= $form->field($model, 'necessary_furniture')->dropDownList($model->realEstateNecessaryFurnitureList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
 
     <?= $form->field($model, 'internet')->dropDownList($model->realEstateInternetList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
 
     <?= $form->field($model, 'condition')->dropDownList($model->realEstateConditionList, [
         'class'  => 'form-control chosen-select',
-        //'prompt' => Yii::t('app', '---'),
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
 
     <?= $form->field($model, 'appliances')->inline()->checkboxList($model->realEstateAppliancesList,
         [
             'itemOptions' => [
                 'disabled' => false,
-                'divOptions' => ['class' => 'checkbox checkbox-success checkbox-inline']
+                'divOptions' => ['class' => 'checkbox checkbox-warning checkbox-inline']
             ]]);
     ?>
 
@@ -152,7 +152,11 @@ ChosenAsset::register($this);
     <?= $form->field($model, 'currency')->hiddenInput(['value' => $model->realEstateCurrency])->label(false) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+            [
+                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+                'disabled' => true
+            ]) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -80,18 +80,27 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateRooms()
     {
-        $model = new AdRealEstate(['scenario' => 'rooms']);
-        $model->property = 1;
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
+        $modelAdRealEstate->property = 1;
 
         $pjaxUrl = 'create-rooms';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            dd($model);
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            /* Если тип операции "Продажа комнаты" */
+            if($modelAdRealEstate->operation_type == 8) {
+                $modelAdRealEstate = new AdRealEstate(['scenario' => 'sellingRoom']);
+                if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->validate()) {
+
+                } else {
+                    dd($modelAdRealEstate->errors);
+                }
+            }
+            dd($modelAdRealEstate);
+            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
         } else {
 
             return $this->render('create', [
-                'model' => $model,
+                'model' => $modelAdRealEstate,
                 'pjaxUrl' => $pjaxUrl
             ]);
         }

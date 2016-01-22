@@ -29,7 +29,7 @@ ChosenAsset::register($this);
     if($model->scenario == 'apartments' || $model->scenario == 'housesCottages' || $model->scenario == 'landPlot' ||
         $model->scenario == 'garagesParking' || $model->scenario == 'propertyAbroad' || $model->scenario == 'commercialProperty'):
     ?>
-    <?= $form->field($model, 'property_type')->dropDownList($model->realEstatePropertyTypeList, [
+    <?= $form->field($model, 'type_of_property')->dropDownList($model->realEstatePropertyTypeList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -37,7 +37,7 @@ ChosenAsset::register($this);
     endif;
     ?>
 
-    <?= $form->field($model, 'operation_type')->dropDownList($model->realEstateOperationTypeList, [
+    <?= $form->field($model, 'deal_type')->dropDownList($model->realEstateOperationTypeList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
         'onChange' => '
@@ -119,7 +119,7 @@ ChosenAsset::register($this);
         ],
     ])->label($model->getAttributeLabel('price').' ('.$model->realEstateCurrency.')'); ?>
 
-    <?= $form->field($model, 'price_period')->dropDownList($model->realEstatePricePeriodList, [
+    <?= $form->field($model, 'price_for_the_period')->dropDownList($model->realEstatePricePeriodList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>

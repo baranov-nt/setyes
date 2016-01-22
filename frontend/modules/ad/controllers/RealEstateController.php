@@ -14,18 +14,6 @@ use yii\filters\VerbFilter;
  */
 class RealEstateController extends BehaviorsController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all AdRealEstate models.
      * @return mixed
@@ -87,7 +75,7 @@ class RealEstateController extends BehaviorsController
 
         if ($modelAdRealEstate->load(Yii::$app->request->post())) {
             /* Если тип операции "Продажа комнаты" */
-            if($modelAdRealEstate->operation_type == 8) {
+            if($modelAdRealEstate->deal_type == 8) {
                 $modelAdRealEstate = new AdRealEstate(['scenario' => 'sellingRoom']);
                 if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->validate()) {
 

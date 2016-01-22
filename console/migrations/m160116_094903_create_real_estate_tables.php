@@ -172,8 +172,8 @@ class m160116_094903_create_real_estate_tables extends Migration
         $this->createTable('ad_real_estate', [
             'id' => $this->primaryKey(),
             'property' => $this->integer()->notNull(),                      // Недвижимость (комната, дом, квартира). Связана с таблицей ad_real_estate_reference
-            'property_type' => $this->integer()->notNull(),                 // Тип недвижимости .для квартир - 16, для домов - 17, для гаража - 19, для недвижемости за границей - 20, для коммерческой недвижимости - 21  Связана с таблицей ad_real_estate_reference
-            'operation_type' => $this->integer()->notNull(),                // Тип операции. Связана с таблицей ad_real_estate_reference
+            'type_of_property' => $this->integer()->notNull(),                 // Тип недвижимости .для квартир - 16, для домов - 17, для гаража - 19, для недвижемости за границей - 20, для коммерческой недвижимости - 21  Связана с таблицей ad_real_estate_reference
+            'deal_type' => $this->integer()->notNull(),                // Тип операции. Связана с таблицей ad_real_estate_reference
             'rooms_in_the_apartment' => $this->integer(),        // Количество комнат в квартире. Если тип недвижимости комнаты, используем reference = 9, если квартиры, reference = 15. Связана с таблицей ad_real_estate_reference
             'material_housing' => $this->integer(),              // Материал строения - 24. Связана с таблицей ad_real_estate_reference
             'floor' => $this->integer(),                         // Этаж. Связана с таблицей ad_real_estate_reference
@@ -182,22 +182,22 @@ class m160116_094903_create_real_estate_tables extends Migration
             'system_measure' => $this->integer()->notNull(),                // Единица измерения площади 12 - комнат, квартир и домов, 22 - для земли. Связана с таблицей ad_real_estate_reference
             'lease_term' => $this->integer(),                    // Срок аденды. Связана с таблицей ad_real_estate_reference
             'price' => $this->integer()->notNull(),                                    // Цена
-            'price_period' => $this->integer(),                  // Цена за - 14. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
+            'price_for_the_period' => $this->integer(),                  // Цена за - 14. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'necessary_furniture' => $this->integer(),                     // меблированный  (есть, нет) - 23. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'internet' => $this->integer(),                      // Наличие интернета (есть, нет) - 10. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'condition' => $this->integer(),                      // Состояние (есть, нет) - 25. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
         ]);
 
-        $this->addforeignKey('ad_real_estate_property_reference', 'ad_real_estate', 'property_type', 'ad_real_estate_reference', 'id');
-        $this->addforeignKey('ad_real_estate_property_type_reference', 'ad_real_estate', 'property_type', 'ad_real_estate_reference', 'id');
-        $this->addforeignKey('ad_real_estate_operation_type_reference', 'ad_real_estate', 'operation_type', 'ad_real_estate_reference', 'id');
+        $this->addforeignKey('ad_real_estate_property_reference', 'ad_real_estate', 'type_of_property', 'ad_real_estate_reference', 'id');
+        $this->addforeignKey('ad_real_estate_type_of_property_reference', 'ad_real_estate', 'type_of_property', 'ad_real_estate_reference', 'id');
+        $this->addforeignKey('ad_real_estate_deal_type_reference', 'ad_real_estate', 'deal_type', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_rooms_in_the_apartment_reference', 'ad_real_estate', 'rooms_in_the_apartment', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_material_housing_reference', 'ad_real_estate', 'material_housing', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_floor_reference', 'ad_real_estate', 'floor', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_floors_in_the_house_reference', 'ad_real_estate', 'floors_in_the_house', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_system_measure_reference', 'ad_real_estate', 'system_measure', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_lease_term_reference', 'ad_real_estate', 'lease_term', 'ad_real_estate_reference', 'id');
-        $this->addforeignKey('ad_real_estate_price_period_reference', 'ad_real_estate', 'price_period', 'ad_real_estate_reference', 'id');
+        $this->addforeignKey('ad_real_estate_price_for_the_period_reference', 'ad_real_estate', 'price_for_the_period', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_necessary_furniture_reference', 'ad_real_estate', 'necessary_furniture', 'ad_real_estate_reference', 'id');
 
         /* Создаем таблицу  ad_real_estate_appliances, в которой будет хранится бытовая техника, имеющаяся в квартире. Используется для раздела аренды. */

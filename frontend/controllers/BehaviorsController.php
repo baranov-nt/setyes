@@ -50,7 +50,7 @@ class BehaviorsController extends Controller {
                         'controllers' => ['ad/default'],
                         'actions' => ['index'],
                         'verbs' => ['GET', 'POST'],
-                        'roles' => ['@']
+                        'roles' => ['Создатель']
                     ],
                     [
                         'allow' => true,

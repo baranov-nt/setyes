@@ -11,8 +11,8 @@ use yii\db\ActiveRecord;
  *
  * @property integer $id
  * @property integer $property
- * @property integer $property_type
- * @property integer $operation_type
+ * @property integer $type_of_property
+ * @property integer $deal_type
  * @property integer $rooms_in_the_apartment
  * @property integer $material_housing
  * @property integer $floor
@@ -21,7 +21,7 @@ use yii\db\ActiveRecord;
  * @property integer $system_measure
  * @property integer $lease_term
  * @property integer $price
- * @property integer $price_period
+ * @property integer $price_for_the_period
  * @property integer $necessary_furniture
  * @property integer $internet
  * @property integer $condition
@@ -59,14 +59,14 @@ class AdRealEstate extends ActiveRecord
     public function rules()
     {
         return [
-            [['property', 'property_type'], 'integer', 'on' => ['rooms', 'sellingRoom']],
-            [['property', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
-                'price_period', 'necessary_furniture', 'internet', 'condition', 'currency', 'appliances'], 'required', 'on' => 'sellingRoom'],
+            [['property', 'type_of_property'], 'integer', 'on' => ['rooms', 'sellingRoom']],
+            [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
+                'price_for_the_period', 'necessary_furniture', 'internet', 'condition', 'currency', 'appliances'], 'required', 'on' => 'sellingRoom'],
             [['price'], 'double', 'on' => 'apartments'],
-            [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
-                'price_period', 'necessary_furniture', 'internet', 'condition', 'currency', 'appliances'], 'required', 'on' => 'apartments'],
-            [['property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure',
-                'lease_term', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
+            [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
+                'price_for_the_period', 'necessary_furniture', 'internet', 'condition', 'currency', 'appliances'], 'required', 'on' => 'apartments'],
+            [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure',
+                'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
             [['currency'], 'string']
         ];
     }
@@ -79,8 +79,8 @@ class AdRealEstate extends ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'property' => Yii::t('app', 'Property'),
-            'property_type' => Yii::t('app', 'Property Type'),
-            'operation_type' => Yii::t('app', 'Operation Type'),
+            'type_of_property' => Yii::t('app', 'Type of Property'),
+            'deal_type' => Yii::t('app', 'Deal Type'),
             'rooms_in_the_apartment' => Yii::t('app', 'Rooms In The Apartment'),
             'material_housing' => Yii::t('app', 'Material Housing'),
             'floor' => Yii::t('app', 'Floor'),
@@ -89,7 +89,7 @@ class AdRealEstate extends ActiveRecord
             'system_measure' => Yii::t('app', 'System Measure'),
             'lease_term' => Yii::t('app', 'Lease Term'),
             'price' => Yii::t('app', 'Price'),
-            'price_period' => Yii::t('app', 'Price Period'),
+            'price_for_the_period' => Yii::t('app', 'Price For The Period'),
             'necessary_furniture' => Yii::t('app', 'Necessary Furniture'),
             'internet' => Yii::t('app', 'Internet'),
             'condition' => Yii::t('app', 'Condition'),
@@ -150,7 +150,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getOperationType()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'operation_type']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'deal_type']);
     }
 
     /**
@@ -158,7 +158,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getPricePeriod()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'price_period']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'price_for_the_period']);
     }
 
     /**
@@ -166,7 +166,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getPropertyType()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'property_type']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'type_of_property']);
     }
 
     /**
@@ -174,7 +174,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getPropertyType0()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'property_type']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'type_of_property']);
     }
 
     /**
@@ -280,56 +280,56 @@ class AdRealEstate extends ActiveRecord
     {
         switch ($this->property) {
             case 2:
-                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                $type_of_propertys = ArrayHelper::map(AdRealEstateReference::find()
                     ->where(['reference_id' => 16])
                     ->all(), 'id', 'reference_name');
                 $items = [];
-                foreach($property_types as $key => $value) {
+                foreach($type_of_propertys as $key => $value) {
                     $items[$key] = Yii::t('references', $value);
                 }
                 return $items;
             case 3:
-                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                $type_of_propertys = ArrayHelper::map(AdRealEstateReference::find()
                     ->where(['reference_id' => 17])
                     ->all(), 'id', 'reference_name');
                 $items = [];
-                foreach($property_types as $key => $value) {
+                foreach($type_of_propertys as $key => $value) {
                     $items[$key] = Yii::t('references', $value);
                 }
                 return $items;
             case 4:
-                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                $type_of_propertys = ArrayHelper::map(AdRealEstateReference::find()
                     ->where(['reference_id' => 18])
                     ->all(), 'id', 'reference_name');
                 $items = [];
-                foreach($property_types as $key => $value) {
+                foreach($type_of_propertys as $key => $value) {
                     $items[$key] = Yii::t('references', $value);
                 }
                 return $items;
             case 5:
-                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                $type_of_propertys = ArrayHelper::map(AdRealEstateReference::find()
                     ->where(['reference_id' => 19])
                     ->all(), 'id', 'reference_name');
                 $items = [];
-                foreach($property_types as $key => $value) {
+                foreach($type_of_propertys as $key => $value) {
                     $items[$key] = Yii::t('references', $value);
                 }
                 return $items;
             case 6:
-                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                $type_of_propertys = ArrayHelper::map(AdRealEstateReference::find()
                     ->where(['reference_id' => 20])
                     ->all(), 'id', 'reference_name');
                 $items = [];
-                foreach($property_types as $key => $value) {
+                foreach($type_of_propertys as $key => $value) {
                     $items[$key] = Yii::t('references', $value);
                 }
                 return $items;
             case 7:
-                $property_types = ArrayHelper::map(AdRealEstateReference::find()
+                $type_of_propertys = ArrayHelper::map(AdRealEstateReference::find()
                     ->where(['reference_id' => 21])
                     ->all(), 'id', 'reference_name');
                 $items = [];
-                foreach($property_types as $key => $value) {
+                foreach($type_of_propertys as $key => $value) {
                     $items[$key] = Yii::t('references', $value);
                 }
                 return $items;
@@ -501,11 +501,11 @@ class AdRealEstate extends ActiveRecord
      */
     public function getRealEstatePricePeriodList()
     {
-        $price_period = ArrayHelper::map(AdRealEstateReference::find()
+        $price_for_the_period = ArrayHelper::map(AdRealEstateReference::find()
             ->where(['reference_id' => 14])
             ->all(), 'id', 'reference_name');
         $items = [];
-        foreach($price_period as $key => $value) {
+        foreach($price_for_the_period as $key => $value) {
             $items[$key] = Yii::t('references', $value);
         }
         return $items;

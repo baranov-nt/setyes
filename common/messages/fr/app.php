@@ -193,7 +193,7 @@ return [
     'Translation successfuly saved.' => 'Traduction avec succès sauvé.',
     'Translations' => 'Traductions',
     'Translations cache successfully cleared.' => 'Traductions cache effacé avec succès.',
-    'Type Of Property' => '',
+    'Type Of Property' => 'Type de bien',
     'Un Member' => '',
     'Update' => 'Mettre à jour',
     'Update {modelClass}: ' => 'Mettre à jour {modelClass}: ',

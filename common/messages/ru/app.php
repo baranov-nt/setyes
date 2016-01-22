@@ -193,7 +193,7 @@ return [
     'Translation successfuly saved.' => 'Перевод успешно сохранен.',
     'Translations' => 'Переводы',
     'Translations cache successfully cleared.' => 'Кэш переводов успешно очищен.',
-    'Type Of Property' => '',
+    'Type Of Property' => 'Тип недвижимости',
     'Un Member' => '',
     'Update' => 'Обновить',
     'Update {modelClass}: ' => 'Обновить {modelClass}: ',

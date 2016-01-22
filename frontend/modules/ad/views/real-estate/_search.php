@@ -19,9 +19,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'property') ?>
 
-    <?= $form->field($model, 'property_type') ?>
+    <?= $form->field($model, 'type_of_property') ?>
 
-    <?= $form->field($model, 'operation_type') ?>
+    <?= $form->field($model, 'deal_type') ?>
 
     <?php // echo $form->field($model, 'rooms_in_the_apartment') ?>
 

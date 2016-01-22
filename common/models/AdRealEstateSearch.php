@@ -18,7 +18,8 @@ class AdRealEstateSearch extends AdRealEstate
     public function rules()
     {
         return [
-            [['id', 'property', 'property_type', 'operation_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure', 'lease_term', 'price', 'price_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
+            [['id', 'property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house',
+                'area', 'system_measure', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
         ];
     }
 
@@ -57,8 +58,8 @@ class AdRealEstateSearch extends AdRealEstate
         $query->andFilterWhere([
             'id' => $this->id,
             'property' => $this->property,
-            'property_type' => $this->property_type,
-            'operation_type' => $this->operation_type,
+            'type_of_property' => $this->type_of_property,
+            'deal_type' => $this->deal_type,
             'rooms_in_the_apartment' => $this->rooms_in_the_apartment,
             'material_housing' => $this->material_housing,
             'floor' => $this->floor,
@@ -67,7 +68,7 @@ class AdRealEstateSearch extends AdRealEstate
             'system_measure' => $this->system_measure,
             'lease_term' => $this->lease_term,
             'price' => $this->price,
-            'price_period' => $this->price_period,
+            'price_for_the_period' => $this->price_for_the_period,
             'necessary_furniture' => $this->necessary_furniture,
             'internet' => $this->internet,
             'condition' => $this->condition,

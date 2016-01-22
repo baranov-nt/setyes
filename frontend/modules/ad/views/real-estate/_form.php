@@ -134,6 +134,11 @@ ChosenAsset::register($this);
         'prompt' => Yii::t('app', '---'),
     ]) ?>
 
+    <?= $form->field($model, 'pets_allowed')->dropDownList($model->realEstatePetsAllowedList, [
+        'class'  => 'form-control chosen-select',
+        'prompt' => Yii::t('app', '---'),
+    ]) ?>
+
     <?= $form->field($model, 'condition')->dropDownList($model->realEstateConditionList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),

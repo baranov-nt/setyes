@@ -166,6 +166,9 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [122, 26, Yii::t('references', 'electric or gas cooker')],      // электро или газовая плита
                 [123, 26, Yii::t('references', 'refrigerator')],                // холодильник
                 [124, 26, Yii::t('references', 'TV')],                          // телевизор
+                /* Домашние животные разрешены */
+                [125, 27, Yii::t('references', 'Yes')],                // да
+                [126, 27, Yii::t('references', 'No')],                 // нет
             ]);
 
         /* Создаем таблицу  ad_real_estate, в которой будут храниться объявления категории “Недвижимость” */
@@ -185,6 +188,7 @@ class m160116_094903_create_real_estate_tables extends Migration
             'price_for_the_period' => $this->integer(),                  // Цена за - 14. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'necessary_furniture' => $this->integer(),                     // меблированный  (есть, нет) - 23. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'internet' => $this->integer(),                      // Наличие интернета (есть, нет) - 10. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
+            'pets_allowed' => $this->integer(),                   // Домашние животные разрешены - 27
             'condition' => $this->integer(),                      // Состояние (есть, нет) - 25. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
         ]);
 
@@ -199,6 +203,9 @@ class m160116_094903_create_real_estate_tables extends Migration
         $this->addforeignKey('ad_real_estate_lease_term_reference', 'ad_real_estate', 'lease_term', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_price_for_the_period_reference', 'ad_real_estate', 'price_for_the_period', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_necessary_furniture_reference', 'ad_real_estate', 'necessary_furniture', 'ad_real_estate_reference', 'id');
+        $this->addforeignKey('ad_real_estate_internet_reference', 'ad_real_estate', 'internet', 'ad_real_estate_reference', 'id');
+        $this->addforeignKey('ad_real_estate_pets_allowed_reference', 'ad_real_estate', 'pets_allowed', 'ad_real_estate_reference', 'id');
+        $this->addforeignKey('ad_real_estate_condition_reference', 'ad_real_estate', 'condition', 'ad_real_estate_reference', 'id');
 
         /* Создаем таблицу  ad_real_estate_appliances, в которой будет хранится бытовая техника, имеющаяся в квартире. Используется для раздела аренды. */
         $this->createTable('ad_real_estate_appliances', [

@@ -24,6 +24,7 @@ use yii\db\ActiveRecord;
  * @property integer $price_for_the_period
  * @property integer $necessary_furniture
  * @property integer $internet
+ * @property integer $pets_allowed
  * @property integer $condition
  *
  * @property AdRealEstateReference $categoryLand
@@ -60,13 +61,12 @@ class AdRealEstate extends ActiveRecord
     {
         return [
             [['property', 'type_of_property'], 'integer', 'on' => ['rooms', 'sellingRoom']],
+            [['property', 'type_of_property'], 'integer', 'on' => 'rooms'],
             [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
-                'price_for_the_period', 'necessary_furniture', 'internet', 'condition', 'currency', 'appliances'], 'required', 'on' => 'sellingRoom'],
-            [['price'], 'double', 'on' => 'apartments'],
-            [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
-                'price_for_the_period', 'necessary_furniture', 'internet', 'condition', 'currency', 'appliances'], 'required', 'on' => 'apartments'],
-            [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area', 'system_measure',
-                'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
+                'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition', 'currency', 'appliances'], 'required', 'on' => 'sellingRoom'],
+            [['property', 'type_of_property', 'deal_type', 'system_measure', 'price'], 'required'],
+            [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area',
+                'system_measure', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
             [['currency'], 'string']
         ];
     }
@@ -79,7 +79,7 @@ class AdRealEstate extends ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'property' => Yii::t('app', 'Property'),
-            'type_of_property' => Yii::t('app', 'Type of Property'),
+            'type_of_property' => Yii::t('app', 'Type Of Property'),
             'deal_type' => Yii::t('app', 'Deal Type'),
             'rooms_in_the_apartment' => Yii::t('app', 'Rooms In The Apartment'),
             'material_housing' => Yii::t('app', 'Material Housing'),
@@ -92,9 +92,18 @@ class AdRealEstate extends ActiveRecord
             'price_for_the_period' => Yii::t('app', 'Price For The Period'),
             'necessary_furniture' => Yii::t('app', 'Necessary Furniture'),
             'internet' => Yii::t('app', 'Internet'),
+            'pets_allowed' => Yii::t('app', 'Pets Allowed'),
             'condition' => Yii::t('app', 'Condition'),
             'appliances' => Yii::t('app', 'Appliances'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPetsAllowed()
+    {
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'pets_allowed']);
     }
 
     /**
@@ -199,6 +208,22 @@ class AdRealEstate extends ActiveRecord
     public function getAdRealEstateAppliances()
     {
         return $this->hasMany(AdRealEstateAppliances::className(), ['real_estate_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInternet0()
+    {
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'internet']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCondition0()
+    {
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'condition']);
     }
 
     /**
@@ -588,6 +613,23 @@ class AdRealEstate extends ActiveRecord
                 return Yii::t('references', $system_measure->reference_name);
         }
         return false;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstatePetsAllowedList()
+    {
+        $material_housing = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 27])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($material_housing as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
     }
 
     /**

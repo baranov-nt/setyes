@@ -30,6 +30,7 @@ return [
     'Ad Real Estates' => '',
     'Ad Style ID' => '',
     'Add' => 'Добавить',
+    'Address' => 'Адрес',
     'Additional phone number' => 'Дополнительный телефон',
     'All' => 'Все',
     'An unexpected error occured!' => 'Произошла непредвиденная ошибка!',

@@ -45,6 +45,8 @@ class AdRealEstate extends ActiveRecord
 {
     public $currency;
     public $appliances;
+    public $place_city;
+    public $place_address;
 
     /**
      * @inheritdoc
@@ -100,7 +102,7 @@ class AdRealEstate extends ActiveRecord
             [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area',
                 'system_measure', 'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
             ['price', 'double'],
-            [['currency', 'scenario'], 'string']
+            [['currency', 'scenario', 'place_city', 'place_address'], 'string']
         ];
     }
 
@@ -128,6 +130,8 @@ class AdRealEstate extends ActiveRecord
             'pets_allowed' => Yii::t('app', 'Pets Allowed'),
             'condition' => Yii::t('app', 'Condition'),
             'appliances' => Yii::t('app', 'Appliances'),
+            'place_city' => Yii::t('app', 'City'),
+            'place_address' => Yii::t('app', 'Address'),
         ];
     }
 

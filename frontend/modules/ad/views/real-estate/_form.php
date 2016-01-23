@@ -6,6 +6,7 @@ use frontend\assets\ChosenAsset;
 use common\widgets\FontAwesome\AssetBundle;
 use justinvoelker\awesomebootstrapcheckbox\ActiveField;
 use yii\widgets\MaskedInput;
+use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 
 AssetBundle::register($this);
 ChosenAsset::register($this);
@@ -56,6 +57,37 @@ MaskedInput::widget([
         })
         '
     ]) ?>
+
+    <?php
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom' || $model->scenario == 'buyRoom' || $model->scenario == 'rentingARoom'):
+    ?>
+    <?= $form->field($model, 'place_city')->widget(GooglePlacesAutoComplete::className(), [
+        'name' => 'place-city',
+        'value' => '',
+    ]); ?>
+        <?php
+    endif;
+    ?>
+
+    <?php
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
+        ?>
+        <?= $form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
+        'name' => 'place',
+        'value' => '',
+        'language' => Yii::$app->language,
+        'autocompleteOptions' => [
+            'types' =>  [
+                '(address)'
+            ],
+            'componentRestrictions' => [
+                //'country' => 'ru', 'fr'
+            ]
+        ]
+    ]); ?>
+        <?php
+    endif;
+    ?>
 
     <?php
     if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):

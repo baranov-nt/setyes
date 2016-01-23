@@ -70,6 +70,7 @@ class RealEstateController extends BehaviorsController
     {
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
         $modelAdRealEstate->property = 1;
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
         $pjaxUrl = 'create-rooms';
 
@@ -84,6 +85,7 @@ class RealEstateController extends BehaviorsController
                 $modelAdRealEstate = new AdRealEstate(['scenario' => 'sellingRoom']);
                 $modelAdRealEstate->property = 1;
                 $modelAdRealEstate->deal_type = 8;
+                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
                 return $this->render('create', [
                     'model' => $modelAdRealEstate,
@@ -94,6 +96,7 @@ class RealEstateController extends BehaviorsController
             if($modelAdRealEstate->deal_type == 8) {
                 $modelAdRealEstate->scenario = 'sellingRoom';
                 if($modelAdRealEstate->validate()) {
+                    d($modelAdRealEstate);
                     dd('sellingRoom OK!!!');
                 } else {
                     return $this->render('create', [
@@ -109,6 +112,7 @@ class RealEstateController extends BehaviorsController
                 $modelAdRealEstate = new AdRealEstate(['scenario' => 'rentARoom']);
                 $modelAdRealEstate->property = 1;
                 $modelAdRealEstate->deal_type = 9;
+                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
                 return $this->render('create', [
                     'model' => $modelAdRealEstate,
@@ -119,6 +123,7 @@ class RealEstateController extends BehaviorsController
             if($modelAdRealEstate->deal_type == 9) {
                 $modelAdRealEstate->scenario = 'rentARoom';
                 if($modelAdRealEstate->validate()) {
+                    d($modelAdRealEstate);
                     dd('rentARoom OK!!!');
                 } else {
                     return $this->render('create', [
@@ -134,6 +139,7 @@ class RealEstateController extends BehaviorsController
                 $modelAdRealEstate = new AdRealEstate(['scenario' => 'buyRoom']);
                 $modelAdRealEstate->property = 1;
                 $modelAdRealEstate->deal_type = 10;
+                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
                 return $this->render('create', [
                     'model' => $modelAdRealEstate,
@@ -144,6 +150,7 @@ class RealEstateController extends BehaviorsController
             if($modelAdRealEstate->deal_type == 10) {
                 $modelAdRealEstate->scenario = 'buyRoom';
                 if($modelAdRealEstate->validate()) {
+                    d($modelAdRealEstate);
                     dd('buyRoom OK!!!');
                 } else {
                     return $this->render('create', [
@@ -159,6 +166,7 @@ class RealEstateController extends BehaviorsController
                 $modelAdRealEstate = new AdRealEstate(['scenario' => 'rentingARoom']);
                 $modelAdRealEstate->property = 1;
                 $modelAdRealEstate->deal_type = 11;
+                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
                 return $this->render('create', [
                     'model' => $modelAdRealEstate,
@@ -169,6 +177,7 @@ class RealEstateController extends BehaviorsController
             if($modelAdRealEstate->deal_type == 11) {
                 $modelAdRealEstate->scenario = 'rentingARoom';
                 if($modelAdRealEstate->validate()) {
+                    d($modelAdRealEstate);
                     dd('rentingARoom OK!!!');
                 } else {
                     return $this->render('create', [
@@ -178,12 +187,8 @@ class RealEstateController extends BehaviorsController
                 }
             }
 
-            dd($modelAdRealEstate);
             return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
         } else {
-
-            //dd($modelAdRealEstate);
-
             return $this->render('create', [
                 'model' => $modelAdRealEstate,
                 'pjaxUrl' => $pjaxUrl

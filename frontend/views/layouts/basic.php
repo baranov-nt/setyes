@@ -184,7 +184,16 @@ $this->beginPage();
 
         echo GooglePlacesAutoComplete::widget([
             'name' => 'place',
-            'value' => ''
+            'value' => '',
+            'language' => Yii::$app->language,
+            'autocompleteOptions' => [
+                'types' =>  [
+                    '(cities)'
+                ],
+                'componentRestrictions' => [
+                    //'country' => 'ru', 'fr'
+                ]
+            ]
         ]);
 
         echo '<span class="input-group-btn">';

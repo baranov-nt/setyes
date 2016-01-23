@@ -30,6 +30,12 @@ MaskedInput::widget([
         'id' => 'ad_form',
     ]); ?>
 
+    <?php
+    $object = \Yii::$app->googleApi->getGeoCodeObject('Нижний Тагил, Свердловская область, Россия ленина 5', null);
+    $formattedAddress = $object->formatted_address;            // форматированный адрес (строка)
+    $cityPlaceId = $object->place_id;
+    ?>
+
     <?= $form->field($model, 'property')->hiddenInput()->label(false) ?>
 
     <?php
@@ -73,18 +79,22 @@ MaskedInput::widget([
     if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
         ?>
         <?= $form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
-        'name' => 'place',
+        'name' => 'place-city',
         'value' => '',
+    ]); ?>
+        <?php /*$form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
+        'name' => 'place',
+        'value' => 'Jakarta',
         'language' => Yii::$app->language,
         'autocompleteOptions' => [
             'types' =>  [
-                '(address)'
+                '(cities)'
             ],
             'componentRestrictions' => [
                 //'country' => 'ru', 'fr'
             ]
         ]
-    ]); ?>
+    ]);*/ ?>
         <?php
     endif;
     ?>

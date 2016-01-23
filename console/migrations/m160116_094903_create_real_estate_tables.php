@@ -107,7 +107,7 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [76, 12, Yii::t('references', 'ft²')],                          // футы квадратные
                 /* Срок аренды */
                 [77, 13, Yii::t('references', 'for a long time')],              // долгосрочная
-                [78, 13, Yii::t('references', 'for rent')],                     // посуточно
+                [78, 13, Yii::t('references', 'for a short time')],                     // посуточно
                 /* Цена за */
                 [79, 14, Yii::t('references', 'price for a day')],              // день
                 [80, 14, Yii::t('references', 'price per month')],              // месяц
@@ -121,8 +121,8 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [87, 15, Yii::t('references', '6 rooms')],
                 [88, 15, Yii::t('references', 'more than 6 rooms')],
                 /* Тип недвижимости (перепродажа, New building) для квартир */
-                [89, 16, Yii::t('references', 'resale')],              // перепродажа
-                [90, 16, Yii::t('references', 'New building')],        // новое здание
+                [89, 16, Yii::t('references', 'residential building')],              // перепродажа
+                [90, 16, Yii::t('references', 'new building')],        // новое здание
                 /* Тип недвижимости (перепродажа, New building) для коттеджей */
                 [91, 17, Yii::t('references', 'house')],                // дом
                 [92, 17, Yii::t('references', 'country house')],        // деревенский дом

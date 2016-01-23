@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use frontend\assets\ChosenAsset;
-use yii\widgets\MaskedInput;
 use common\widgets\FontAwesome\AssetBundle;
 use justinvoelker\awesomebootstrapcheckbox\ActiveField;
+use yii\widgets\MaskedInput;
 
 AssetBundle::register($this);
 ChosenAsset::register($this);
@@ -14,6 +14,12 @@ ChosenAsset::register($this);
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $key int */
 /* @var $pjaxUrl string */
+MaskedInput::widget([
+    'name' => 'masked-input_init',
+    'clientOptions' => [
+        'alias' => 'decimal',
+    ],
+]);
 ?>
 
 <div class="ad-real-estate-form">
@@ -52,7 +58,7 @@ ChosenAsset::register($this);
     ]) ?>
 
     <?php
-    if($model->scenario == 'rooms' || $model->scenario == 'apartments'):
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
     ?>
     <?= $form->field($model, 'rooms_in_the_apartment')->dropDownList($model->realEstateRoomsInApartmentList, [
         'class'  => 'form-control chosen-select',
@@ -65,7 +71,7 @@ ChosenAsset::register($this);
     ?>
 
     <?php
-    if($model->scenario == 'rooms' || $model->scenario == 'apartments' || $model->scenario == 'housesCottages'):
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
         ?>
         <?= $form->field($model, 'material_housing')->dropDownList($model->realEstateMaterialHousingList, [
         'class'  => 'form-control chosen-select',
@@ -76,7 +82,7 @@ ChosenAsset::register($this);
     ?>
 
     <?php
-    if($model->scenario == 'rooms' || $model->scenario == 'apartments'):
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
         ?>
         <?= $form->field($model, 'floor')->dropDownList($model->realEstateFloorsList, [
         'class'  => 'form-control chosen-select',
@@ -87,7 +93,7 @@ ChosenAsset::register($this);
     ?>
 
     <?php
-    if($model->scenario == 'rooms' || $model->scenario == 'apartments'):
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
         ?>
         <?= $form->field($model, 'floors_in_the_house')->dropDownList($model->realEstateFloorsList, [
         'class'  => 'form-control chosen-select',
@@ -97,13 +103,28 @@ ChosenAsset::register($this);
     endif;
     ?>
 
+    <?php
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
+    ?>
     <?= $form->field($model, 'area')->textInput()->label($model->getAttributeLabel('area').' ('.$model->realEstateSystemMeasureName.')') ?>
+        <?php
+    endif;
+    ?>
 
+    <?php
+    if($model->scenario == 'rentARoom' || $model->scenario == 'rentingARoom'):
+        ?>
     <?= $form->field($model, 'lease_term')->dropDownList($model->realEstateLeaseTermList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
+        <?php
+    endif;
+    ?>
 
+    <?php
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom' || $model->scenario == 'buyRoom' || $model->scenario == 'rentingARoom'):
+    ?>
     <?php
     echo $form->field($model, 'price')->widget(MaskedInput::className(), [
         'name' => 'masked-input',
@@ -117,50 +138,95 @@ ChosenAsset::register($this);
             'removeMaskOnSubmit' => true,
             'placeholder' =>  '0'
         ],
-    ])->label($model->getAttributeLabel('price').' ('.$model->realEstateCurrency.')'); ?>
+    ])->label($model->getAttributeLabel('price').' ('.$model->realEstateCurrency.') '.$model->getRealEstatePriceForThePeriod($model->lease_term)); ?>
+        <?php
+    endif;
+    ?>
 
+    <?php
+    if($model->scenario == 'rentARoom' || $model->scenario == 'rentingARoom'):
+    ?>
     <?= $form->field($model, 'price_for_the_period')->dropDownList($model->realEstatePricePeriodList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
+        <?php
+    endif;
+    ?>
 
+    <?php
+    if($model->scenario == 'rentARoom'):
+    ?>
     <?= $form->field($model, 'necessary_furniture')->dropDownList($model->realEstateNecessaryFurnitureList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
+        <?php
+    endif;
+    ?>
 
+    <?php
+    if($model->scenario == 'rentARoom'):
+    ?>
     <?= $form->field($model, 'internet')->dropDownList($model->realEstateInternetList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
+        <?php
+    endif;
+    ?>
 
+    <?php
+    if($model->scenario == 'rentARoom'):
+    ?>
     <?= $form->field($model, 'pets_allowed')->dropDownList($model->realEstatePetsAllowedList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
+        <?php
+    endif;
+    ?>
 
+    <?php
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
+    ?>
     <?= $form->field($model, 'condition')->dropDownList($model->realEstateConditionList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
+        <?php
+    endif;
+    ?>
 
-    <?= $form->field($model, 'appliances')->inline()->checkboxList($model->realEstateAppliancesList,
+    <?php
+    if($model->scenario == 'rentARoom'):
+    ?>
+    <?php echo $form->field($model, 'appliances')->checkboxList($model->realEstateAppliancesList,
+        [
+            'itemOptions' => [
+                'disabled' => false,
+                'divOptions' => ['class' => 'checkbox checkbox-warning']
+            ]]);
+    ?>
+        <?php
+    endif;
+    ?>
+
+    <?php /*echo $form->field($model, 'appliances')->inline()->checkboxList($model->realEstateAppliancesList,
         [
             'itemOptions' => [
                 'disabled' => false,
                 'divOptions' => ['class' => 'checkbox checkbox-warning checkbox-inline']
-            ]]);
+            ]]);*/
     ?>
 
-    <?= $form->field($model, 'system_measure')->hiddenInput(['value' => $model->realEstateSystemMeasure])->label(false) ?>
-
-    <?= $form->field($model, 'currency')->hiddenInput(['value' => $model->realEstateCurrency])->label(false) ?>
+    <?= $form->field($model, 'scenario')->hiddenInput(['value' => $model->scenario])->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
             [
                 'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
-                'disabled' => true
+                //'disabled' => true
             ]) ?>
     </div>
 

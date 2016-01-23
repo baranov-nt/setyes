@@ -60,14 +60,47 @@ class AdRealEstate extends ActiveRecord
     public function rules()
     {
         return [
-            [['property', 'type_of_property'], 'integer', 'on' => ['rooms', 'sellingRoom']],
-            [['property', 'type_of_property'], 'integer', 'on' => 'rooms'],
-            [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'system_measure', 'lease_term',
-                'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition', 'currency', 'appliances'], 'required', 'on' => 'sellingRoom'],
-            [['property', 'type_of_property', 'deal_type', 'system_measure', 'price'], 'required'],
+            ['property', 'compare', 'compareValue' => 1, 'operator' => '==',
+                'on' => [
+                    'rooms',
+                    'sellingRoom',
+                    'rentARoom',
+                    'buyRoom',
+                    'rentingARoom'
+                ],
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('property')])],  // значение недвижемости для сделок с комнатами
+            ['deal_type', 'in', 'range' => [8, 9, 10, 11],
+                'on' => 'rooms',
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок продажи комнат
+            ['price', 'compare', 'compareValue' => '0.00', 'operator' => '!=',
+                'on' => [
+                    'sellingRoom',
+                    'rentARoom',
+                    'buyRoom',
+                    'rentingARoom'
+                ],
+                'message' => Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->getAttributeLabel('price')])],  // цены
+            ['deal_type', 'in', 'range' => [8],
+                'on' => 'sellingRoom',
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами
+            [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'condition'], 'required', 'on' => 'sellingRoom'],
+            ['deal_type', 'in', 'range' => [9],
+                'on' => 'rentARoom',
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами
+            [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'lease_term',
+                'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required', 'on' => 'rentARoom'],
+            ['deal_type', 'in', 'range' => [10],
+                'on' => 'buyRoom',
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами
+            [['property', 'deal_type', 'price'], 'required', 'on' => 'buyRoom'],
+            ['deal_type', 'in', 'range' => [11],
+                'on' => 'rentingARoom',
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами
+            [['property', 'deal_type', 'price', 'lease_term', 'price_for_the_period'], 'required', 'on' => 'rentingARoom'],
             [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area',
-                'system_measure', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
-            [['currency'], 'string']
+                'system_measure', 'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
+            ['price', 'double'],
+            [['currency', 'scenario'], 'string']
         ];
     }
 
@@ -654,6 +687,19 @@ class AdRealEstate extends ActiveRecord
         /* @var $user \common\models\User */
         $user = $this->getUser();
         return $user->country->currency;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstatePriceForThePeriod($value)
+    {
+        /* @var $user \common\models\User */
+        //dd($this->lease_term);
+        //$user = $this->getUser();
+        return $value;
     }
 
     /**

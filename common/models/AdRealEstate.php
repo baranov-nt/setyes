@@ -82,28 +82,46 @@ class AdRealEstate extends ActiveRecord
                     'rentingARoom'
                 ],
                 'message' => Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->getAttributeLabel('price')])],  // цены
-            ['deal_type', 'in', 'range' => [8],
+            ['deal_type', 'validateDealType', 'on' => ['sellingRoom', 'rentARoom', 'buyRoom', 'rentingARoom']],
+            /*['deal_type', 'compare', 'compareValue' => 8,
                 'on' => 'sellingRoom',
-                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами*/
             [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'condition'], 'required', 'on' => 'sellingRoom'],
-            ['deal_type', 'in', 'range' => [9],
+            /*['deal_type', 'compare', 'compareValue' => 9,
                 'on' => 'rentARoom',
-                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами*/
             [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'lease_term',
                 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required', 'on' => 'rentARoom'],
-            ['deal_type', 'in', 'range' => [10],
+            /*['deal_type', 'compare', 'compareValue' => 10,
                 'on' => 'buyRoom',
-                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами*/
             [['property', 'deal_type', 'price'], 'required', 'on' => 'buyRoom'],
-            ['deal_type', 'in', 'range' => [11],
+            /*['deal_type', 'compare', 'compareValue' => 11,
                 'on' => 'rentingARoom',
-                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами*/
             [['property', 'deal_type', 'price', 'lease_term', 'price_for_the_period'], 'required', 'on' => 'rentingARoom'],
             [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area',
                 'system_measure', 'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
             ['price', 'double'],
             [['currency', 'scenario', 'place_city', 'place_address'], 'string']
         ];
+    }
+
+    public function validateDealType($attribute)
+    {
+        //dd([$attribute, $this->deal_type, $this->scenario]);
+        if($this->scenario == 'sellingRoom' && $this->deal_type != 8) {
+            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
+        }
+        if($this->scenario == 'rentARoom' && $this->deal_type != 9) {
+            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
+        }
+        if($this->scenario == 'buyRoom' && $this->deal_type != 10) {
+            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
+        }
+        if($this->scenario == 'rentingARoom' && $this->deal_type != 11) {
+            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
+        }
     }
 
     /**

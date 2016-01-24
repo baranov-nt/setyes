@@ -13,10 +13,14 @@ use yii\helpers\Html;
 class GooglePlacesAutoComplete extends InputWidget {
     const API_URL = '//maps.googleapis.com/maps/api/js?';
     public $libraries = 'places';
-    public $sensor = false;
-
-    public $language = 'en-US';
-    public $autocompleteOptions = [];
+    public $sensor = true;
+    public $autocompleteOptions = [
+        'types' =>  [
+            '(cities)'
+        ],
+        'componentRestrictions' => [
+        ]
+    ];
 
     // Renders the widget.
 
@@ -42,15 +46,25 @@ class GooglePlacesAutoComplete extends InputWidget {
         $view = $this->getView();
         $view->registerJsFile(self::API_URL . http_build_query([
                 'libraries' => $this->libraries,
-                'sensor' => $this->sensor ? 'true' : 'false',
-                'language' => $this->language
+                'language' => \Yii::$app->language,
             ]));
+
         $view->registerJs(<<<JS
-(function(){
-    var input = document.getElementById('{$elementId}');
-    var options = {$scriptOptions};
-    new google.maps.places.Autocomplete(input, options);
-})();
+        (function(){
+            var input = $('#{$elementId}');
+            input.click(function() {
+                input.val("");
+            });
+        })();
+JS
+            , \yii\web\View::POS_READY);
+
+        $view->registerJs(<<<JS
+            (function(){
+                var input = document.getElementById('{$elementId}');
+                var options = {$scriptOptions};
+                var autocomplete = new google.maps.places.Autocomplete(input, options);
+            })();
 JS
             , \yii\web\View::POS_READY);
     }

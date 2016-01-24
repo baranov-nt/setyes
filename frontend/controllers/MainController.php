@@ -314,7 +314,8 @@ class MainController extends BehaviorsController
                 endif;
             endforeach;
 
-            $object = \Yii::$app->googleApi->getGeoCodeObject($city.' '.$region.' '.$country, null);
+            /*$object = \Yii::$app->googleApi->getGeoCodeObject("проспект Строителей, Нижний Тагил, Свердловская область, Россия 5", null);
+            dd($object);*/
             $formattedAddress = $object->formatted_address;            // форматированный адрес (строка)
             $cityPlaceId = $object->place_id;                               // идентификатор города
 

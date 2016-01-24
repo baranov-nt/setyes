@@ -79,6 +79,7 @@ class RealEstateController extends BehaviorsController
             if(!$modelAdRealEstate->validate(['deal_type'])) {
                 $modelAdRealEstate->scenario = 'rooms';
             }
+            $modelAdRealEstate->clearErrors('deal_type');
             /* Если тип операции "Продажа комнаты" назначаем новый сценарий */
             if($modelAdRealEstate->deal_type == 8 && $modelAdRealEstate->scenario == 'rooms') {
                 $modelAdRealEstate->validate();

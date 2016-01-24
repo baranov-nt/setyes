@@ -65,36 +65,30 @@ MaskedInput::widget([
     ]) ?>
 
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom' || $model->scenario == 'buyRoom' || $model->scenario == 'rentingARoom'):
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
     ?>
-    <?= $form->field($model, 'place_city')->widget(GooglePlacesAutoComplete::className(), [
+    <?= $form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
         'name' => 'place-city',
         'value' => '',
-    ]); ?>
+        'autocompleteOptions' => [
+            'types' =>  [
+                'address'
+            ],
+            'componentRestrictions' => [
+            ]
+        ]
+    ])->label($model->getAttributeLabel('place_address').' <span style="font-weight: 400;">('.Yii::t('app', 'Input format: house, street/avenue, locality, region, country - and select from the drop down list the appropriate option.').')</span>'); ?>
         <?php
     endif;
     ?>
 
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'):
+    if($model->scenario == 'buyRoom' || $model->scenario == 'rentingARoom'):
         ?>
-        <?= $form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
+        <?= $form->field($model, 'place_city')->widget(GooglePlacesAutoComplete::className(), [
         'name' => 'place-city',
         'value' => '',
     ]); ?>
-        <?php /*$form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
-        'name' => 'place',
-        'value' => 'Jakarta',
-        'language' => Yii::$app->language,
-        'autocompleteOptions' => [
-            'types' =>  [
-                '(cities)'
-            ],
-            'componentRestrictions' => [
-                //'country' => 'ru', 'fr'
-            ]
-        ]
-    ]);*/ ?>
         <?php
     endif;
     ?>

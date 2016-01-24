@@ -88,6 +88,8 @@ return [
     'Image ID' => 'Image ID',
     'Images Label' => 'Bilder Etiketten',
     'Images Num' => 'Die Anzahl der Bilder',
+    'Input format: house, street/avenue, locality, region, country - and select from the drop down list the appropriate option.' =>
+        'Eingabeformat: Haus, Straße/Avenue, Ortschaft, Region, Land - und aus der Dropdown-Liste die entsprechende Option auswählen.',
     'Internet' => 'Internet',
     'Invalid key.' => 'Ungültiger Schlüssel.',
     'Invalid key. Repeat registration.' => 'Ungültiger Schlüssel. Wiederholen Sie die Registrierung.',

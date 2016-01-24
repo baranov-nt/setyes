@@ -185,7 +185,6 @@ $this->beginPage();
         echo GooglePlacesAutoComplete::widget([
             'name' => 'place',
             'value' => '',
-            'language' => Yii::$app->language,
             'autocompleteOptions' => [
                 'types' =>  [
                     '(cities)'

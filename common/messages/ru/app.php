@@ -88,6 +88,8 @@ return [
     'Image ID' => 'ID изображения',
     'Images Label' => 'Метка изображения',
     'Images Num' => 'Количество изображений',
+    'Input format: house, street/avenue, locality, region, country - and select from the drop down list the appropriate option.' =>
+        'Формат ввода: улица/проспект, дом, населенный пункт, область, страна - и выберите из выпадающего списка соответствующий пункт.',
     'Internet' => 'Интернет',
     'Invalid key.' => 'Неправильный ключ.',
     'Invalid key. Repeat registration.' => 'Неправильный ключ. Повторите регистрацию.',

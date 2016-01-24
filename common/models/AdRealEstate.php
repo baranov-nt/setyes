@@ -72,7 +72,13 @@ class AdRealEstate extends ActiveRecord
                 ],
                 'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('property')])],  // значение недвижемости для сделок с комнатами
             ['deal_type', 'in', 'range' => [8, 9, 10, 11],
-                'on' => 'rooms',
+                'on' => [
+                    'rooms',
+                    'sellingRoom',
+                    'rentARoom',
+                    'buyRoom',
+                    'rentingARoom'
+                ],
                 'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок продажи комнат
             ['price', 'compare', 'compareValue' => '0.00', 'operator' => '!=',
                 'on' => [

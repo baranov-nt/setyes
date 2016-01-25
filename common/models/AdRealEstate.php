@@ -89,23 +89,17 @@ class AdRealEstate extends ActiveRecord
                 ],
                 'message' => Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->getAttributeLabel('price')])],  // цены
             ['deal_type', 'validateDealType', 'on' => ['sellingRoom', 'rentARoom', 'buyRoom', 'rentingARoom']],
-            /*['deal_type', 'compare', 'compareValue' => 8,
-                'on' => 'sellingRoom',
-                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами*/
             [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'condition'], 'required', 'on' => 'sellingRoom'],
-            /*['deal_type', 'compare', 'compareValue' => 9,
-                'on' => 'rentARoom',
-                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами*/
             [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'lease_term',
                 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required', 'on' => 'rentARoom'],
-            /*['deal_type', 'compare', 'compareValue' => 10,
-                'on' => 'buyRoom',
-                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами*/
             [['property', 'deal_type', 'price'], 'required', 'on' => 'buyRoom'],
-            /*['deal_type', 'compare', 'compareValue' => 11,
-                'on' => 'rentingARoom',
-                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])], // значения типа сделок с комнатами*/
             [['property', 'deal_type', 'price', 'lease_term', 'price_for_the_period'], 'required', 'on' => 'rentingARoom'],
+            ['deal_type', 'in', 'range' => [32, 33, 34, 35, 36, 37, 38],
+                'on' => [
+                    'sellingRoom',
+                    'rentARoom',
+                ],
+                'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])],
             [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area',
                 'system_measure', 'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
             ['price', 'double'],

@@ -75,7 +75,6 @@ class RealEstateController extends BehaviorsController
         $pjaxUrl = 'create-rooms';
 
         if ($modelAdRealEstate->load(Yii::$app->request->post())) {
-            d([$modelAdRealEstate->deal_type, $modelAdRealEstate->scenario]);
             if(!$modelAdRealEstate->validate(['deal_type'])) {
                 $modelAdRealEstate->scenario = 'rooms';
             }
@@ -208,17 +207,129 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateApartrments()
     {
-        $model = new AdRealEstate(['scenario' => 'apartments']);
-        $model->property = 2;
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'apartments']);
+        $modelAdRealEstate->property = 2;
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
         $pjaxUrl = 'create-apartrments';
 
-        if ($model->load(Yii::$app->request->post())) {
-            dd($model);
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            if(!$modelAdRealEstate->validate(['deal_type'])) {
+                $modelAdRealEstate->scenario = 'apartments';
+            }
+            $modelAdRealEstate->clearErrors('deal_type');
+            /* Если тип операции "Продажа квартиры" назначаем новый сценарий */
+            if($modelAdRealEstate->deal_type == 12 && $modelAdRealEstate->scenario == 'apartments') {
+                $modelAdRealEstate->validate();
+                $modelAdRealEstate = new AdRealEstate(['scenario' => 'sellingApatrment',]);
+                $modelAdRealEstate->property = 2;
+                $modelAdRealEstate->deal_type = 12;
+                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate,
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 12) {
+                $modelAdRealEstate->scenario = 'sellingApatrment';
+                if($modelAdRealEstate->validate()) {
+                    d($modelAdRealEstate);
+                    dd('sellingApatrment OK!!!');
+                } else {
+                    return $this->render('create', [
+                        'model' => $modelAdRealEstate,
+                        'pjaxUrl' => $pjaxUrl
+                    ]);
+                }
+            }
+
+            /* Если тип операции "сдам комнату" назначаем новый сценарий */
+            if($modelAdRealEstate->deal_type == 13 && $modelAdRealEstate->scenario == 'apartments') {
+                $modelAdRealEstate->validate();
+                $modelAdRealEstate = new AdRealEstate(['scenario' => 'rentAApatrment']);
+                $modelAdRealEstate->property = 2;
+                $modelAdRealEstate->deal_type = 13;
+                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate,
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 13) {
+                $modelAdRealEstate->scenario = 'rentAApatrment';
+                if($modelAdRealEstate->validate()) {
+                    d($modelAdRealEstate);
+                    dd('rentAApatrment OK!!!');
+                } else {
+                    return $this->render('create', [
+                        'model' => $modelAdRealEstate,
+                        'pjaxUrl' => $pjaxUrl
+                    ]);
+                }
+            }
+
+            /* Если тип операции "куплю комнату" назначаем новый сценарий */
+            if($modelAdRealEstate->deal_type == 14 && $modelAdRealEstate->scenario == 'apartments') {
+                $modelAdRealEstate->validate();
+                $modelAdRealEstate = new AdRealEstate(['scenario' => 'buyApatrment']);
+                $modelAdRealEstate->property = 2;
+                $modelAdRealEstate->deal_type = 14;
+                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate,
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 14) {
+                $modelAdRealEstate->scenario = 'buyApatrment';
+                if($modelAdRealEstate->validate()) {
+                    d($modelAdRealEstate);
+                    dd('buyApatrment OK!!!');
+                } else {
+                    return $this->render('create', [
+                        'model' => $modelAdRealEstate,
+                        'pjaxUrl' => $pjaxUrl
+                    ]);
+                }
+            }
+
+            /* Если тип операции "сниму комнату" назначаем новый сценарий */
+            if($modelAdRealEstate->deal_type == 15 && $modelAdRealEstate->scenario == 'apartments') {
+                $modelAdRealEstate->validate();
+                $modelAdRealEstate = new AdRealEstate(['scenario' => 'rentingAApatrment']);
+                $modelAdRealEstate->property = 2;
+                $modelAdRealEstate->deal_type = 15;
+                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate,
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 15) {
+                $modelAdRealEstate->scenario = 'rentingAApatrment';
+                if($modelAdRealEstate->validate()) {
+                    d($modelAdRealEstate);
+                    dd('rentingAApatrment OK!!!');
+                } else {
+                    return $this->render('create', [
+                        'model' => $modelAdRealEstate,
+                        'pjaxUrl' => $pjaxUrl
+                    ]);
+                }
+            }
+
+            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
+        } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $modelAdRealEstate,
                 'pjaxUrl' => $pjaxUrl
             ]);
         }

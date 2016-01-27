@@ -63,14 +63,21 @@ class AdRealEstate extends ActiveRecord
     {
         $rules = array_merge(
             require(__DIR__ . '/rules/DefaultRules.php'),
-            require(__DIR__ . '/rules/realEstateRules.php')
+            require(__DIR__ . '/rules/realEstateRoomsRules.php'),
+            require(__DIR__ . '/rules/realEstateApartmentsRules.php')
         );
         return $rules;
     }
 
-    public function validateDealType($attribute)
+    public function validateFloor()
     {
-        //dd([$attribute, $this->deal_type, $this->scenario]);
+        if($this->floor > $this->floors_in_the_house) {
+            $this->addError('floors_in_the_house', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('floors_in_the_house')]));
+        }
+    }
+
+    public function validateDealType()
+    {
         if($this->scenario == 'sellingRoom' && $this->deal_type != 8) {
             $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
         }
@@ -81,6 +88,18 @@ class AdRealEstate extends ActiveRecord
             $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
         }
         if($this->scenario == 'rentingARoom' && $this->deal_type != 11) {
+            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
+        }
+        if($this->scenario == 'sellingApatrment' && $this->deal_type != 12) {
+            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
+        }
+        if($this->scenario == 'rentAApatrment' && $this->deal_type != 13) {
+            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
+        }
+        if($this->scenario == 'buyApatrment' && $this->deal_type != 14) {
+            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
+        }
+        if($this->scenario == 'rentingAApatrment' && $this->deal_type != 15) {
             $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
         }
     }
@@ -680,6 +699,7 @@ class AdRealEstate extends ActiveRecord
     public function getRealEstatePriceForThePeriod($value)
     {
         /* @var $user \common\models\User */
+        /* @var $value string */
         //dd($this->lease_term);
         //$user = $this->getUser();
         return $value;

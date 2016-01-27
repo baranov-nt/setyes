@@ -1,6 +1,6 @@
 <?php
 return [
-    'name' => 'SetYes.Com',
+    'name' => 'setYes',
     'language' => 'en',
     'charset' => 'UTF-8',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',

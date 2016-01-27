@@ -6,9 +6,14 @@
  * Time: 19:44
  */
 return [
-    [['type_of_property', 'property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'condition'], 'required', 'on' => 'sellingApatrment'],
-    [['type_of_property', 'property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'lease_term',
-        'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required', 'on' => 'rentAApatrment'],
+    [['type_of_property', 'property', 'deal_type', 'place_city', 'place_street', 'place_house', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'condition'], 'required',
+        'on' => 'sellingApatrment'
+    ],
+    [['type_of_property', 'property', 'deal_type', 'place_city', 'place_street', 'place_house', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'lease_term',
+        'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required',
+        'on' =>
+            'rentAApatrment'
+    ],
     ['property', 'compare', 'compareValue' => 2, 'operator' => '==',
         'on' => [
             'apartments',

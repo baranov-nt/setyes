@@ -53,10 +53,25 @@ MaskedInput::widget([
     ]) ?>
 
     <?php
+    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom' || $model->scenario == 'buyRoom' || $model->scenario == 'rentingARoom'
+        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment' || $model->scenario == 'buyApatrment' || $model->scenario == 'rentingAApatrment'):
+        ?>
+        <?= $form->field($model, 'place_city')->widget(GooglePlacesAutoComplete::className(), [
+        'name' => 'place-city',
+        'value' => '',
+    ]); ?>
+        <?php
+    endif;
+    ?>
+
+
+    <?php
     if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
         || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment'):
-    ?>
-    <?= $form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
+        ?>
+        <?= $form->field($model, 'place_street'); ?>
+        <?= $form->field($model, 'place_house'); ?>
+        <?php /*$form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
         'name' => 'place-city',
         'value' => '',
         'autocompleteOptions' => [
@@ -66,19 +81,7 @@ MaskedInput::widget([
             'componentRestrictions' => [
             ]
         ]
-    ])->label($model->getAttributeLabel('place_address').' <span style="font-weight: 400;">('.Yii::t('app', 'Input format: house, street/avenue, locality, region, country - and select from the drop down list the appropriate option.').')</span>'); ?>
-        <?php
-    endif;
-    ?>
-
-    <?php
-    if($model->scenario == 'buyRoom' || $model->scenario == 'rentingARoom'
-        || $model->scenario == 'buyApatrment' || $model->scenario == 'rentingAApatrment'):
-        ?>
-        <?= $form->field($model, 'place_city')->widget(GooglePlacesAutoComplete::className(), [
-        'name' => 'place-city',
-        'value' => '',
-    ]); ?>
+    ])->label($model->getAttributeLabel('place_address').' <span style="font-weight: 400;">('.Yii::t('app', 'Input format: house, street/avenue, locality, region, country - and select from the drop down list the appropriate option.').')</span>');*/ ?>
         <?php
     endif;
     ?>

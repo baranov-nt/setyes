@@ -46,7 +46,8 @@ class AdRealEstate extends ActiveRecord
     public $currency;
     public $appliances;
     public $place_city;
-    public $place_address;
+    public $place_street;
+    public $place_house;
 
     /**
      * @inheritdoc
@@ -62,7 +63,7 @@ class AdRealEstate extends ActiveRecord
     public function rules()
     {
         $rules = array_merge(
-            require(__DIR__ . '/rules/DefaultRules.php'),
+            require(__DIR__ . '/rules/defaultRules.php'),
             require(__DIR__ . '/rules/realEstateRoomsRules.php'),
             require(__DIR__ . '/rules/realEstateApartmentsRules.php')
         );
@@ -129,7 +130,8 @@ class AdRealEstate extends ActiveRecord
             'condition' => Yii::t('app', 'Condition'),
             'appliances' => Yii::t('app', 'Appliances'),
             'place_city' => Yii::t('app', 'City'),
-            'place_address' => Yii::t('app', 'Address'),
+            'place_street' => Yii::t('app', 'Street Name'),
+            'place_house' => Yii::t('app', 'House number'),
         ];
     }
 

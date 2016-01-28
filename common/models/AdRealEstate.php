@@ -131,7 +131,7 @@ class AdRealEstate extends ActiveRecord
             'appliances' => Yii::t('app', 'Appliances'),
             'place_city' => Yii::t('app', 'City'),
             'place_street' => Yii::t('app', 'Street Name'),
-            'place_house' => Yii::t('app', 'House number'),
+            'place_house' => Yii::t('app', 'House'),
         ];
     }
 

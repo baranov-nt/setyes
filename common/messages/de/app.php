@@ -1,5 +1,4 @@
 <?php
-
 return [
     '(no data)' => '(keine Daten)',
     '*A letter will be sent to the entered email to activate your account.' => '*Ein Schreiben wird an die angegebene E-Mail geschickt werden, um Ihr Konto zu aktivieren.',

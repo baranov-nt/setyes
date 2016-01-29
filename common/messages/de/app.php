@@ -1,9 +1,11 @@
 <?php
+
 return [
     '(no data)' => '(keine Daten)',
     '*A letter will be sent to the entered email to activate your account.' => '*Ein Schreiben wird an die angegebene E-Mail geschickt werden, um Ihr Konto zu aktivieren.',
     '---' => '',
     '@@Activation for {app}.@@' => 'Aktivierung für {app}.',
+    '@@Address@@' => 'Adresse',
     '@@Ads ID@@' => 'Anzeigen ID',
     '@@Authorization using the email address <strong> {email} </strong> is already happening through the account <strong> {auths} </strong>.
                             Log on using the account <strong> {auths} </strong> or use the link <strong> Forgot your password? </strong> for email <strong> {email} </strong> to restore the password.@@' => '',
@@ -12,6 +14,7 @@ return [
     '@@Content Carousel@@' => 'Inhalt Carousel',
     '@@Furnished@@' => 'Eingerichtet',
     '@@Header Carousel@@' => 'Header Carousel',
+    '@@Input format: house, street/avenue, locality, region, country - and select from the drop down list the appropriate option.@@' => 'Eingabeformat: Haus, Straße/Avenue, Ortschaft, Region, Land - und aus der Dropdown-Liste die entsprechende Option auswählen.',
     '@@Operation Type@@' => '',
     '@@To find ...@@' => 'Finden ...',
     '@@Type of Property@@' => 'Art der Immobilie',
@@ -29,7 +32,6 @@ return [
     'Ad Real Estates' => '',
     'Ad Style ID' => '',
     'Add' => 'Hinzufügen',
-    'Address' => 'Adresse',
     'Additional phone number' => 'Zusätzliche Telefonnummer',
     'All' => 'Alle',
     'An unexpected error occured!' => 'Ein unerwarteter Fehler ist aufgetreten!',
@@ -88,8 +90,6 @@ return [
     'Image ID' => 'Image ID',
     'Images Label' => 'Bilder Etiketten',
     'Images Num' => 'Die Anzahl der Bilder',
-    'Input format: house, street/avenue, locality, region, country - and select from the drop down list the appropriate option.' =>
-        'Eingabeformat: Haus, Straße/Avenue, Ortschaft, Region, Land - und aus der Dropdown-Liste die entsprechende Option auswählen.',
     'Internet' => 'Internet',
     'Invalid key.' => 'Ungültiger Schlüssel.',
     'Invalid key. Repeat registration.' => 'Ungültiger Schlüssel. Wiederholen Sie die Registrierung.',
@@ -122,7 +122,7 @@ return [
     'No' => 'Nein',
     'Not Translated' => 'Nicht übersetzt',
     'Not activated' => 'Nicht aktiviert',
-    'Not translated' => 'Non traduit',
+    'Not translated' => '',
     'Numcode' => '',
     'Obsolete messages:' => 'Veraltete Nachrichten:',
     'Password' => 'Passwort',

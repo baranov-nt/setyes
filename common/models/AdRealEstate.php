@@ -84,28 +84,35 @@ class AdRealEstate extends ActiveRecord
 
     public function validateDealType()
     {
-        if($this->scenario == 'sellingRoom' && $this->deal_type != 8) {
-            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
-        }
-        if($this->scenario == 'rentARoom' && $this->deal_type != 9) {
-            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
-        }
-        if($this->scenario == 'buyRoom' && $this->deal_type != 10) {
-            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
-        }
-        if($this->scenario == 'rentingARoom' && $this->deal_type != 11) {
-            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
-        }
-        if($this->scenario == 'sellingApatrment' && $this->deal_type != 12) {
-            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
-        }
-        if($this->scenario == 'rentAApatrment' && $this->deal_type != 13) {
-            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
-        }
-        if($this->scenario == 'buyApatrment' && $this->deal_type != 14) {
-            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
-        }
-        if($this->scenario == 'rentingAApatrment' && $this->deal_type != 15) {
+        $this->setErrorDealType('sellingRoom', 8);
+        $this->setErrorDealType('rentARoom', 9);
+        $this->setErrorDealType('buyRoom', 10);
+        $this->setErrorDealType('rentingARoom', 11);
+        $this->setErrorDealType('sellingApatrment', 12);
+        $this->setErrorDealType('rentAApatrment', 13);
+        $this->setErrorDealType('buyApatrment', 14);
+        $this->setErrorDealType('rentingAApatrment', 15);
+        $this->setErrorDealType('sellingHouse', 16);
+        $this->setErrorDealType('rentHouse', 17);
+        $this->setErrorDealType('buyHouse', 18);
+        $this->setErrorDealType('rentingHouse', 19);
+        $this->setErrorDealType('sellingLand', 20);
+        $this->setErrorDealType('buyLand', 21);
+        $this->setErrorDealType('sellingGarage', 22);
+        $this->setErrorDealType('rentGarage', 23);
+        $this->setErrorDealType('buyGarage', 24);
+        $this->setErrorDealType('rentingGarage', 25);
+        $this->setErrorDealType('sellingPropertyAbroad', 26);
+        $this->setErrorDealType('buyPropertyAbroad', 27);
+        $this->setErrorDealType('sellingComercial', 28);
+        $this->setErrorDealType('rentComercial', 29);
+        $this->setErrorDealType('buyComercial', 30);
+        $this->setErrorDealType('rentingComercial', 31);
+    }
+
+    public function setErrorDealType($scenario, $dealType)
+    {
+        if($this->scenario == $scenario && $this->deal_type != $dealType) {
             $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
         }
     }

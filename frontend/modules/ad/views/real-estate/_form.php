@@ -54,7 +54,13 @@ MaskedInput::widget([
 
     <?php
     if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom' || $model->scenario == 'buyRoom' || $model->scenario == 'rentingARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment' || $model->scenario == 'buyApatrment' || $model->scenario == 'rentingAApatrment'):
+        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment' || $model->scenario == 'buyApatrment' || $model->scenario == 'rentingAApatrment'
+        || $model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'buyHouse' || $model->scenario == 'rentingHouse'
+        || $model->scenario == 'sellingLand' || $model->scenario == 'buyLand'
+        || $model->scenario == 'sellingGarage' || $model->scenario == 'rentGarage' || $model->scenario == 'buyGarage' || $model->scenario == 'rentingGarage'
+        || $model->scenario == 'sellingPropertyAbroad' || $model->scenario == 'buyPropertyAbroad'
+        || $model->scenario == 'sellingComercial' || $model->scenario == 'sellingComercial' || $model->scenario == 'sellingComercial' || $model->scenario == 'sellingComercial'
+    ):
         ?>
         <?= $form->field($model, 'place_city')->widget(GooglePlacesAutoComplete::className(), [
         'name' => 'place-city',
@@ -67,7 +73,10 @@ MaskedInput::widget([
 
     <?php
     if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment'):
+        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment'
+        || $model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse'
+        || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial'
+    ):
         ?>
         <?= $form->field($model, 'place_street'); ?>
         <?= $form->field($model, 'place_house'); ?>

@@ -34,11 +34,6 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])],
-    ['place_street', 'required',
-        'on' => [
-            'sellingApatrment',
-            'rentAApatrment',
-        ]],
     ['type_of_property', 'number', 'min' => 89, 'max' => 90,
         'on' => [
             'apartments',

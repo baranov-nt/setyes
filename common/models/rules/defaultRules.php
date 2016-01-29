@@ -6,7 +6,6 @@
  * Time: 21:55
  */
 return [
-    [['place_city', 'deal_type'], 'required'],
     ['deal_type', 'validateDealType', 'on' => [
         /* комнаты 1 */
         'sellingRoom',
@@ -26,8 +25,8 @@ return [
         'rentingHouse',
         /* земля 4 */
         'land',
-        'sellingHouse',
-        'buyHouse',
+        'sellingLand',
+        'buyLand',
         /* гаражи 5 */
         'garages',
         'sellingGarage',

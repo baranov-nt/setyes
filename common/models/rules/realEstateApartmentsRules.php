@@ -6,7 +6,8 @@
  * Time: 19:44
  */
 return [
-    [['type_of_property', 'property', 'deal_type', 'place_city', 'place_street', 'place_house', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'condition'], 'required',
+    [['type_of_property', 'property', 'deal_type', 'place_city', 'place_street', 'place_house', 'rooms_in_the_apartment', 'material_housing',
+        'floor', 'price', 'area', 'floors_in_the_house', 'condition'], 'required',
         'on' => 'sellingApatrment'
     ],
     [['type_of_property', 'property', 'deal_type', 'place_city', 'place_street', 'place_house', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'lease_term',
@@ -33,7 +34,7 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])],
-    ['place_address', 'required',
+    ['place_street', 'required',
         'on' => [
             'sellingApatrment',
             'rentAApatrment',

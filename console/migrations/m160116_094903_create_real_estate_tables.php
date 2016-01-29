@@ -123,11 +123,11 @@ class m160116_094903_create_real_estate_tables extends Migration
                 /* Тип недвижимости (перепродажа, New building) для квартир */
                 [89, 16, Yii::t('references', 'residential building')],              // перепродажа
                 [90, 16, Yii::t('references', 'new building')],        // новое здание
-                /* Тип недвижимости (перепродажа, New building) для коттеджей */
-                [91, 17, Yii::t('references', 'house')],                // дом
-                [92, 17, Yii::t('references', 'country house')],        // деревенский дом
-                [93, 17, Yii::t('references', 'cottage')],              // коттедж
-                [94, 17, Yii::t('references', 'townhouse')],            // малоэтажный дом на несколько квартир
+                /* Свободные */
+                [91, 28, Yii::t('references', '---')],
+                [92, 28, Yii::t('references', '---')],
+                [93, 28, Yii::t('references', '---')],
+                [94, 28, Yii::t('references', '---')],
                 /* Тип земельного участка */
                 [95, 18, Yii::t('references', 'land settlements')],     // земли населенных пунктов
                 [96, 18, Yii::t('references', 'industrial land')],      // Промышленные земли
@@ -169,6 +169,13 @@ class m160116_094903_create_real_estate_tables extends Migration
                 /* Домашние животные разрешены */
                 [125, 27, Yii::t('references', 'Yes')],                // да
                 [126, 27, Yii::t('references', 'No')],                 // нет
+                /* Тип недвижимости (перепродажа, New building) для коттеджей */
+                [127, 17, Yii::t('references', 'house')],                // дом
+                [128, 17, Yii::t('references', 'summer house')],        // летний дом (сад)
+                [129, 17, Yii::t('references', 'country house')],        // деревенский дом
+                [130, 17, Yii::t('references', 'cottage')],              // коттедж
+                [131, 17, Yii::t('references', 'townhouse')],            // малоэтажный дом на несколько квартир
+                /* Свободные 28 */
             ]);
 
         /* Создаем таблицу  ad_real_estate, в которой будут храниться объявления категории “Недвижимость” */

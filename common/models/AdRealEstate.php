@@ -64,8 +64,13 @@ class AdRealEstate extends ActiveRecord
     {
         $rules = array_merge(
             require(__DIR__ . '/rules/defaultRules.php'),
-            require(__DIR__ . '/rules/realEstateRoomsRules.php'),
-            require(__DIR__ . '/rules/realEstateApartmentsRules.php')
+            require(__DIR__ . '/rules/realEstateRoomsRules.php'),                   // 1
+            require(__DIR__ . '/rules/realEstateApartmentsRules.php'),              // 2
+            require(__DIR__ . '/rules/realEstateHousesRules.php'),                  // 3
+            require(__DIR__ . '/rules/realEstateLandRules.php'),                    // 4
+            require(__DIR__ . '/rules/realEstateGaragesRules.php'),                 // 5
+            require(__DIR__ . '/rules/realEstateAbroadRules.php'),                  // 6
+            require(__DIR__ . '/rules/realEstateCommercialRules.php')               // 7
         );
         return $rules;
     }
@@ -722,5 +727,36 @@ class AdRealEstate extends ActiveRecord
             $items[$key] = Yii::t('references', $value);
         }
         return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     *
+     */
+    public function addNewScenario($dealType, $property, $scenario)
+    {
+        $modelAdRealEstate = new AdRealEstate(['scenario' => $scenario]);
+        $modelAdRealEstate->property = $property;
+        $modelAdRealEstate->deal_type = $dealType;
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+        return $modelAdRealEstate;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     *
+     */
+    public function checkForm($scenario, $modelAdRealEstate)
+    {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate->scenario = $scenario;
+        if($modelAdRealEstate->validate()) {
+            return $modelAdRealEstate;
+        }
+        return $modelAdRealEstate;
     }
 }

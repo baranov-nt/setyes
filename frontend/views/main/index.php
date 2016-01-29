@@ -1,8 +1,6 @@
 <?php
 /* @var $this yii\web\View
  * @var $hello string */
-/* @var $carousel common\models\Carousel */
-/* @var $one common\models\Carousel */
 use common\widgets\GoogleMapsMarkers\GoogleMaps;
 //use common\widgets\CurrencyConverter\CurrencyConverter;
 use yii\helpers\Url;
@@ -50,9 +48,6 @@ endif;
                 'zoom' => 1
             ]
         ]);
-
-        //d(Yii::$app->googleApi->geocode_api_key);
-
         ?>
     </div>
 

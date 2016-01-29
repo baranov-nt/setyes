@@ -7,7 +7,6 @@ use common\models\AdRealEstate;
 use common\models\AdRealEstateSearch;
 use frontend\controllers\BehaviorsController;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * RealEstateController implements the CRUD actions for AdRealEstate model.
@@ -18,6 +17,7 @@ class RealEstateController extends BehaviorsController
      * Lists all AdRealEstate models.
      * @return mixed
      */
+
     public function actionIndex()
     {
         $searchModel = new AdRealEstateSearch();
@@ -68,6 +68,7 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateRooms()
     {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
         $modelAdRealEstate->property = 1;
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
@@ -79,121 +80,65 @@ class RealEstateController extends BehaviorsController
                 $modelAdRealEstate->scenario = 'rooms';
             }
             $modelAdRealEstate->clearErrors('deal_type');
-            /* Если тип операции "Продажа комнаты" назначаем новый сценарий */
-            if($modelAdRealEstate->deal_type == 8 && $modelAdRealEstate->scenario == 'rooms') {
-                $modelAdRealEstate->validate();
-                $modelAdRealEstate = new AdRealEstate(['scenario' => 'sellingRoom']);
-                $modelAdRealEstate->property = 1;
-                $modelAdRealEstate->deal_type = 8;
-                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
+            if($modelAdRealEstate->deal_type == 8 && $modelAdRealEstate->scenario == 'rooms') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate,
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 1, $scenario = 'sellingRoom'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 8) {
-                $modelAdRealEstate->scenario = 'sellingRoom';
-                if($modelAdRealEstate->validate()) {
-                    d($modelAdRealEstate);
-                    dd('sellingRoom OK!!!');
-                } else {
-                    return $this->render('create', [
-                        'model' => $modelAdRealEstate,
-                        'pjaxUrl' => $pjaxUrl
-                    ]);
-                }
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingRoom', $modelAdRealEstate);
             }
 
-            /* Если тип операции "сдам комнату" назначаем новый сценарий */
-            if($modelAdRealEstate->deal_type == 9 && $modelAdRealEstate->scenario == 'rooms') {
-                $modelAdRealEstate->validate();
-                $modelAdRealEstate = new AdRealEstate(['scenario' => 'rentARoom']);
-                $modelAdRealEstate->property = 1;
-                $modelAdRealEstate->deal_type = 9;
-                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
+            if($modelAdRealEstate->deal_type == 9 && $modelAdRealEstate->scenario == 'rooms') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate,
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 1, $scenario = 'rentARoom'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 9) {
-                $modelAdRealEstate->scenario = 'rentARoom';
-                if($modelAdRealEstate->validate()) {
-                    d($modelAdRealEstate);
-                    dd('rentARoom OK!!!');
-                } else {
-                    return $this->render('create', [
-                        'model' => $modelAdRealEstate,
-                        'pjaxUrl' => $pjaxUrl
-                    ]);
-                }
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentARoom', $modelAdRealEstate);
             }
 
             /* Если тип операции "куплю комнату" назначаем новый сценарий */
             if($modelAdRealEstate->deal_type == 10 && $modelAdRealEstate->scenario == 'rooms') {
-                $modelAdRealEstate->validate();
-                $modelAdRealEstate = new AdRealEstate(['scenario' => 'buyRoom']);
-                $modelAdRealEstate->property = 1;
-                $modelAdRealEstate->deal_type = 10;
-                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
-
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate,
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 1, $scenario = 'buyRoom'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 10) {
-                $modelAdRealEstate->scenario = 'buyRoom';
-                if($modelAdRealEstate->validate()) {
-                    d($modelAdRealEstate);
-                    dd('buyRoom OK!!!');
-                } else {
-                    return $this->render('create', [
-                        'model' => $modelAdRealEstate,
-                        'pjaxUrl' => $pjaxUrl
-                    ]);
-                }
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'buyRoom', $modelAdRealEstate);
             }
 
             /* Если тип операции "сниму комнату" назначаем новый сценарий */
             if($modelAdRealEstate->deal_type == 11 && $modelAdRealEstate->scenario == 'rooms') {
-                $modelAdRealEstate->validate();
-                $modelAdRealEstate = new AdRealEstate(['scenario' => 'rentingARoom']);
-                $modelAdRealEstate->property = 1;
-                $modelAdRealEstate->deal_type = 11;
-                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
-
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate,
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 1, $scenario = 'rentingARoom'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 11) {
-                $modelAdRealEstate->scenario = 'rentingARoom';
-                if($modelAdRealEstate->validate()) {
-                    d($modelAdRealEstate);
-                    dd('rentingARoom OK!!!');
-                } else {
-                    return $this->render('create', [
-                        'model' => $modelAdRealEstate,
-                        'pjaxUrl' => $pjaxUrl
-                    ]);
-                }
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentingARoom', $modelAdRealEstate);
             }
 
-            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $modelAdRealEstate,
-                'pjaxUrl' => $pjaxUrl
-            ]);
+            if($modelAdRealEstate) {
+                /* Если валидация и запись прошла */
+                d([$modelAdRealEstate->scenario, 'OK']);
+            }
+            /* Если валидация и запись не прошла */
         }
+
+        return $this->render('create', [
+            'model' => $modelAdRealEstate,
+            'pjaxUrl' => $pjaxUrl
+        ]);
     }
 
 
@@ -207,6 +152,7 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateApartrments()
     {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'apartments']);
         $modelAdRealEstate->property = 2;
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
@@ -218,121 +164,62 @@ class RealEstateController extends BehaviorsController
                 $modelAdRealEstate->scenario = 'apartments';
             }
             $modelAdRealEstate->clearErrors('deal_type');
-            /* Если тип операции "Продажа квартиры" назначаем новый сценарий */
-            if($modelAdRealEstate->deal_type == 12 && $modelAdRealEstate->scenario == 'apartments') {
-                $modelAdRealEstate->validate();
-                $modelAdRealEstate = new AdRealEstate(['scenario' => 'sellingApatrment',]);
-                $modelAdRealEstate->property = 2;
-                $modelAdRealEstate->deal_type = 12;
-                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
+            if($modelAdRealEstate->deal_type == 12 && $modelAdRealEstate->scenario == 'apartments') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate,
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 2, $scenario = 'sellingApatrment'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 12) {
-                $modelAdRealEstate->scenario = 'sellingApatrment';
-                if($modelAdRealEstate->validate()) {
-                    d($modelAdRealEstate);
-                    dd('sellingApatrment OK!!!');
-                } else {
-                    return $this->render('create', [
-                        'model' => $modelAdRealEstate,
-                        'pjaxUrl' => $pjaxUrl
-                    ]);
-                }
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingApatrment', $modelAdRealEstate);
             }
 
-            /* Если тип операции "сдам комнату" назначаем новый сценарий */
             if($modelAdRealEstate->deal_type == 13 && $modelAdRealEstate->scenario == 'apartments') {
-                $modelAdRealEstate->validate();
-                $modelAdRealEstate = new AdRealEstate(['scenario' => 'rentAApatrment']);
-                $modelAdRealEstate->property = 2;
-                $modelAdRealEstate->deal_type = 13;
-                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
-
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate,
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 2, $scenario = 'rentAApatrment'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 13) {
-                $modelAdRealEstate->scenario = 'rentAApatrment';
-                if($modelAdRealEstate->validate()) {
-                    d($modelAdRealEstate);
-                    dd('rentAApatrment OK!!!');
-                } else {
-                    return $this->render('create', [
-                        'model' => $modelAdRealEstate,
-                        'pjaxUrl' => $pjaxUrl
-                    ]);
-                }
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentAApatrment', $modelAdRealEstate);
             }
 
-            /* Если тип операции "куплю комнату" назначаем новый сценарий */
             if($modelAdRealEstate->deal_type == 14 && $modelAdRealEstate->scenario == 'apartments') {
-                $modelAdRealEstate->validate();
-                $modelAdRealEstate = new AdRealEstate(['scenario' => 'buyApatrment']);
-                $modelAdRealEstate->property = 2;
-                $modelAdRealEstate->deal_type = 14;
-                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
-
-                return $this->render('create', [
-                    'model' => $modelAdRealEstate,
+                 return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 2, $scenario = 'buyApatrment'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 14) {
-                $modelAdRealEstate->scenario = 'buyApatrment';
-                if($modelAdRealEstate->validate()) {
-                    d($modelAdRealEstate);
-                    dd('buyApatrment OK!!!');
-                } else {
-                    return $this->render('create', [
-                        'model' => $modelAdRealEstate,
-                        'pjaxUrl' => $pjaxUrl
-                    ]);
-                }
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'buyApatrment', $modelAdRealEstate);
             }
 
-            /* Если тип операции "сниму комнату" назначаем новый сценарий */
             if($modelAdRealEstate->deal_type == 15 && $modelAdRealEstate->scenario == 'apartments') {
-                $modelAdRealEstate->validate();
-                $modelAdRealEstate = new AdRealEstate(['scenario' => 'rentingAApatrment']);
-                $modelAdRealEstate->property = 2;
-                $modelAdRealEstate->deal_type = 15;
-                $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
-
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate,
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 2, $scenario = 'rentingAApatrment'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 15) {
-                $modelAdRealEstate->scenario = 'rentingAApatrment';
-                if($modelAdRealEstate->validate()) {
-                    d($modelAdRealEstate);
-                    dd('rentingAApatrment OK!!!');
-                } else {
-                    return $this->render('create', [
-                        'model' => $modelAdRealEstate,
-                        'pjaxUrl' => $pjaxUrl
-                    ]);
-                }
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentingAApatrment', $modelAdRealEstate);
             }
 
-            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $modelAdRealEstate,
-                'pjaxUrl' => $pjaxUrl
-            ]);
+            if($modelAdRealEstate) {
+                /* Если валидация и запись прошла */
+                d([$modelAdRealEstate->scenario, 'OK']);
+            }
+            /* Если валидация и запись не прошла */
         }
+
+        return $this->render('create', [
+            'model' => $modelAdRealEstate,
+            'pjaxUrl' => $pjaxUrl
+        ]);
     }
 
     /**
@@ -344,19 +231,73 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateHousesCottages()
     {
-        $model = new AdRealEstate(['scenario' => 'housesCottages']);
-        $model->property = 3;
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'houses']);
+        $modelAdRealEstate->property = 3;
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
         $pjaxUrl = 'create-houses-cottages';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            if(!$modelAdRealEstate->validate(['deal_type'])) {
+                $modelAdRealEstate->scenario = 'houses';
+            }
+            $modelAdRealEstate->clearErrors('deal_type');
+            if($modelAdRealEstate->deal_type == 16 && $modelAdRealEstate->scenario == 'houses') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'sellingHouse'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
 
-            return $this->render('create', [
-                'model' => $model,
-                'pjaxUrl' => $pjaxUrl
-            ]);
+            if($modelAdRealEstate->deal_type == 16) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingHouse', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 17 && $modelAdRealEstate->scenario == 'houses') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentHouse'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 17) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentHouse', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 18 && $modelAdRealEstate->scenario == 'houses') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'buyHouse'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 18) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'buyHouse', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 19 && $modelAdRealEstate->scenario == 'houses') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentingHouse'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 19) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentingHouse', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate) {
+                /* Если валидация и запись прошла */
+                d([$modelAdRealEstate->scenario, 'OK']);
+            }
+            /* Если валидация и запись не прошла */
         }
+
+        return $this->render('create', [
+            'model' => $modelAdRealEstate,
+            'pjaxUrl' => $pjaxUrl
+        ]);
     }
 
     /**
@@ -368,19 +309,52 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateLandPlot()
     {
-        $model = new AdRealEstate(['scenario' => 'landPlot']);
-        $model->property = 4;
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'land']);
+        $modelAdRealEstate->property = 4;
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
         $pjaxUrl = 'create-land-plot';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            if(!$modelAdRealEstate->validate(['deal_type'])) {
+                $modelAdRealEstate->scenario = 'land';
+            }
+            $modelAdRealEstate->clearErrors('deal_type');
 
-            return $this->render('create', [
-                'model' => $model,
-                'pjaxUrl' => $pjaxUrl
-            ]);
+            if($modelAdRealEstate->deal_type == 20 && $modelAdRealEstate->scenario == 'land') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 4, $scenario = 'sellingLand'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 20) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingLand', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 21 && $modelAdRealEstate->scenario == 'land') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 4, $scenario = 'buyLand'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 21) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'buyLand', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate) {
+                /* Если валидация и запись прошла */
+                d([$modelAdRealEstate->scenario, 'OK']);
+            }
+            /* Если валидация и запись не прошла */
         }
+
+        return $this->render('create', [
+            'model' => $modelAdRealEstate,
+            'pjaxUrl' => $pjaxUrl
+        ]);
     }
 
     /**
@@ -392,19 +366,73 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateGaragesParking()
     {
-        $model = new AdRealEstate(['scenario' => 'garagesParking']);
-        $model->property = 5;
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'garages']);
+        $modelAdRealEstate->property = 5;
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
         $pjaxUrl = 'create-garages-parking';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            if(!$modelAdRealEstate->validate(['deal_type'])) {
+                $modelAdRealEstate->scenario = 'garages';
+            }
+            $modelAdRealEstate->clearErrors('deal_type');
+            if($modelAdRealEstate->deal_type == 22 && $modelAdRealEstate->scenario == 'garages') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'sellingGarage'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
 
-            return $this->render('create', [
-                'model' => $model,
-                'pjaxUrl' => $pjaxUrl
-            ]);
+            if($modelAdRealEstate->deal_type == 22) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingGarage', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 23 && $modelAdRealEstate->scenario == 'garages') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentGarage'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 23) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentGarage', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 24 && $modelAdRealEstate->scenario == 'garages') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'buyGarage'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 24) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'buyGarage', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 25 && $modelAdRealEstate->scenario == 'garages') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentingGarage'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 25) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentingGarage', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate) {
+                /* Если валидация и запись прошла */
+                d([$modelAdRealEstate->scenario, 'OK']);
+            }
+            /* Если валидация и запись не прошла */
         }
+
+        return $this->render('create', [
+            'model' => $modelAdRealEstate,
+            'pjaxUrl' => $pjaxUrl
+        ]);
     }
 
     /**
@@ -416,19 +444,52 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreatePropertyAbroad()
     {
-        $model = new AdRealEstate(['scenario' => 'propertyAbroad']);
-        $model->property = 6;
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'propertyAbroad']);
+        $modelAdRealEstate->property = 6;
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
         $pjaxUrl = 'create-property-abroad';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            if(!$modelAdRealEstate->validate(['deal_type'])) {
+                $modelAdRealEstate->scenario = 'propertyAbroad';
+            }
+            $modelAdRealEstate->clearErrors('deal_type');
 
-            return $this->render('create', [
-                'model' => $model,
-                'pjaxUrl' => $pjaxUrl
-            ]);
+            if($modelAdRealEstate->deal_type == 26 && $modelAdRealEstate->scenario == 'propertyAbroad') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 4, $scenario = 'sellingPropertyAbroad'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 26) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingPropertyAbroad', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 27 && $modelAdRealEstate->scenario == 'propertyAbroad') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 4, $scenario = 'buyPropertyAbroad'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 27) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'buyPropertyAbroad', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate) {
+                /* Если валидация и запись прошла */
+                d([$modelAdRealEstate->scenario, 'OK']);
+            }
+            /* Если валидация и запись не прошла */
         }
+
+        return $this->render('create', [
+            'model' => $modelAdRealEstate,
+            'pjaxUrl' => $pjaxUrl
+        ]);
     }
 
     /**
@@ -440,19 +501,73 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateCommercialProperty()
     {
-        $model = new AdRealEstate(['scenario' => 'commercialProperty']);
-        $model->property = 7;
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'comercial']);
+        $modelAdRealEstate->property = 7;
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
         $pjaxUrl = 'create-commercial-property';
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            if(!$modelAdRealEstate->validate(['deal_type'])) {
+                $modelAdRealEstate->scenario = 'comercial';
+            }
+            $modelAdRealEstate->clearErrors('deal_type');
+            if($modelAdRealEstate->deal_type == 28 && $modelAdRealEstate->scenario == 'comercial') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'sellingComercial'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
 
-            return $this->render('create', [
-                'model' => $model,
-                'pjaxUrl' => $pjaxUrl
-            ]);
+            if($modelAdRealEstate->deal_type == 28) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingComercial', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 29 && $modelAdRealEstate->scenario == 'comercial') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentComercial'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 29) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentComercial', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 30 && $modelAdRealEstate->scenario == 'comercial') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'buyComercial'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 30) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'buyComercial', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate->deal_type == 31 && $modelAdRealEstate->scenario == 'comercial') {
+                return $this->render('create', [
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentingComercial'),
+                    'pjaxUrl' => $pjaxUrl
+                ]);
+            }
+
+            if($modelAdRealEstate->deal_type == 31) {
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentingComercial', $modelAdRealEstate);
+            }
+
+            if($modelAdRealEstate) {
+                /* Если валидация и запись прошла */
+                d([$modelAdRealEstate->scenario, 'OK']);
+            }
+            /* Если валидация и запись не прошла */
         }
+
+        return $this->render('create', [
+            'model' => $modelAdRealEstate,
+            'pjaxUrl' => $pjaxUrl
+        ]);
     }
 
     /**

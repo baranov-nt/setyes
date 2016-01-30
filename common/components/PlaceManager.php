@@ -137,9 +137,6 @@ class PlaceManager extends Object
                 $modelPlaceCity = PlaceCity::findOne(['place_id' => $cityPlaceId]);
 
                 if($modelPlaceCity):
-                    // если город найден выставляем куки и переходим на главную страницу с get переменной city
-                    $this->setCookie($formattedAddress, $modelPlaceCity);
-                    Yii::$app->session->set('_cityId', $modelPlaceCity->id);
                     return $modelPlaceCity->id;
                 else:
                     // если город не найден, находим регион
@@ -154,8 +151,6 @@ class PlaceManager extends Object
                         $modelPlaceCity = new PlaceCity();
                         // добавляем новый город к найденному региону, пишем куки и переходим на главную страницу с get переменной city
                         $modelPlaceCity = $modelPlaceCity->createCity($modelPlaceRegion, $cityPlaceId);
-                        $this->setCookie($formattedAddress, $modelPlaceCity);
-                        Yii::$app->session->set('_cityId', $modelPlaceCity->id);
                         return $modelPlaceCity->id;
                     else:
                         // если регион не найден, находим страну
@@ -170,8 +165,6 @@ class PlaceManager extends Object
                             $modelPlaceRegion = new PlaceRegion();
                             // Добавляем новый регион и город, пишем куки и переходим на главную страницу с get переменной city
                             $modelPlaceCity = $modelPlaceRegion->createRegionAndCity($modelPlaceCountry, $regionPlaceId, $cityPlaceId);
-                            $this->setCookie($formattedAddress, $modelPlaceCity);
-                            Yii::$app->session->set('_cityId', $modelPlaceCity->id);
                             return $modelPlaceCity->id;
                         endif;
                     endif;

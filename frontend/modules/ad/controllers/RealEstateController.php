@@ -92,7 +92,6 @@ class RealEstateController extends BehaviorsController
                 $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingRoom', $modelAdRealEstate);
             }
 
-
             if($modelAdRealEstate->deal_type == 9 && $modelAdRealEstate->scenario == 'rooms') {
                 return $this->render('create', [
                     'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 1, $scenario = 'rentARoom'),

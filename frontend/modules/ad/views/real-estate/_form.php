@@ -80,6 +80,7 @@ MaskedInput::widget([
         ?>
         <?= $form->field($model, 'place_street'); ?>
         <?= $form->field($model, 'place_house'); ?>
+        <?= $form->field($model, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
         <?php /*$form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
         'name' => 'place-city',
         'value' => '',

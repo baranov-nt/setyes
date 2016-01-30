@@ -48,6 +48,7 @@ class AdRealEstate extends ActiveRecord
     public $place_city;
     public $place_street;
     public $place_house;
+    public $place_address;
 
     /**
      * @inheritdoc
@@ -144,6 +145,7 @@ class AdRealEstate extends ActiveRecord
             'place_city' => Yii::t('app', 'City'),
             'place_street' => Yii::t('app', 'Street Name'),
             'place_house' => Yii::t('app', 'House'),
+            'place_address' => Yii::t('app', 'Address'),
         ];
     }
 
@@ -762,7 +764,16 @@ class AdRealEstate extends ActiveRecord
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->scenario = $scenario;
         if($modelAdRealEstate->validate()) {
-            return $modelAdRealEstate;
+            $place = $modelAdRealEstate->place_house.' '.$modelAdRealEstate->place_street.' '.$modelAdRealEstate->place_city;
+            $address = Yii::$app->placeManager->findAddress($place);
+            if(!$address) {
+                $modelAdRealEstate->place_street = '';
+                $modelAdRealEstate->place_house = '';
+                $modelAdRealEstate->place_address = 0;
+            }
+            if($modelAdRealEstate->validate(['place_address'])) {
+                return $modelAdRealEstate;
+            }
         }
         return $modelAdRealEstate;
     }

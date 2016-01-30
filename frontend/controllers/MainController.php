@@ -292,7 +292,6 @@ class MainController extends BehaviorsController
     public function actionSelectCity()
     {
         $place = Yii::$app->request->post('place');
-
         $cityId = Yii::$app->placeManager->setMainCity($place);
         if($cityId) {
             return $this->redirect(Url::to(['/main/index', 'cityId' => $cityId]));
@@ -300,8 +299,6 @@ class MainController extends BehaviorsController
         /* Если объект не найден, переходим на главную страницу */
         return $this->redirect(Url::to(['/main/index']));
     }
-
-
 
     public function actionError()
     {

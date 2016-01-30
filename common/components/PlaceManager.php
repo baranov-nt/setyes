@@ -98,24 +98,16 @@ class PlaceManager extends Object
     }
 
     /* Находим адрес */
-    public function findAddress($place)
+    public function findCity($place)
     {
         $object = Yii::$app->googleApi->getGeoCodeObject($place, null);
         if(isset($object)):
 
-            $street_number = '';
-            $route = '';
             $city = '';
             $region = '';
             $country = '';
 
             foreach($object->address_components as $one):
-                if($one->types[0] == 'street_number'):
-                    $street_number = $one->short_name;
-                endif;
-                if($one->types[0] == 'route'):
-                    $route = $one->short_name;
-                endif;
                 if($one->types[0] == 'locality'):
                     $city = $one->short_name;
                 endif;
@@ -127,10 +119,101 @@ class PlaceManager extends Object
                 endif;
             endforeach;
 
-            if($street_number):
-            //dd([$object->formatted_address, $street_number, $route, $city, $region, $country]);
+            if($object):
+                //dd([$object->formatted_address, $street_number, $route, $city, $region, $country]);
                 $formattedAddress = $object->formatted_address;            // форматированный адрес (строка)
                 $cityPlaceId = $object->place_id;                               // идентификатор города
+
+                /* Находим введенный город в базе по place_id */
+                /* @var $modelPlaceCity \common\models\PlaceCity */
+                $modelPlaceCity = PlaceCity::findOne(['place_id' => $cityPlaceId]);
+
+                if($modelPlaceCity):
+                    return $modelPlaceCity->id;
+                else:
+                    // если город не найден, находим регион
+                    $objectRegion = Yii::$app->googleApi->getGeoCodeObject($region.' '.$country, null);
+                    $regionPlaceId = $objectRegion->place_id;
+                    // ищем регион в базе
+                    /* @var $modelPlaceRegion \common\models\PlaceRegion */
+                    $modelPlaceRegion = PlaceRegion::findOne(['place_id' => $regionPlaceId]);
+
+                    if($modelPlaceRegion):
+                        // если регион найден
+                        $modelPlaceCity = new PlaceCity();
+                        // добавляем новый город к найденному региону, пишем куки и переходим на главную страницу с get переменной city
+                        $modelPlaceCity = $modelPlaceCity->createCity($modelPlaceRegion, $cityPlaceId);
+                        return $modelPlaceCity->id;
+                    else:
+                        // если регион не найден, находим страну
+                        foreach($object->address_components as $one):
+                            if($one->types[0] == 'country'):
+                                $country = $one->short_name;
+                            endif;
+                        endforeach;
+                        $modelPlaceCountry = PlaceCountry::findOne(['iso2' => $country]);
+                        // если страна найдена
+                        if($modelPlaceCountry):
+                            $modelPlaceRegion = new PlaceRegion();
+                            // Добавляем новый регион и город, пишем куки и переходим на главную страницу с get переменной city
+                            $modelPlaceCity = $modelPlaceRegion->createRegionAndCity($modelPlaceCountry, $regionPlaceId, $cityPlaceId);
+                            return $modelPlaceCity->id;
+                        endif;
+                    endif;
+                endif;
+            endif;
+        endif;
+
+        return false;
+    }
+
+    /* Находим адрес */
+    public function findAddress($place)
+    {
+        $object = Yii::$app->googleApi->getGeoCodeObject($place, null);
+        if (isset($object)):
+
+            $street_number = '';
+            $route = '';
+            $city = '';
+            $region = '';
+            $country = '';
+
+            foreach ($object->address_components as $one):
+                if ($one->types[0] == 'street_number'):
+                    $street_number = $one->short_name;
+                endif;
+                if ($one->types[0] == 'route'):
+                    $route = $one->short_name;
+                endif;
+                if ($one->types[0] == 'locality'):
+                    $city = $one->short_name;
+                endif;
+                if ($one->types[0] == 'administrative_area_level_1'):            // ищем облать-регион
+                    $region = $one->short_name;
+                endif;
+                if ($one->types[0] == 'country'):
+                    $country = $one->short_name;
+                endif;
+            endforeach;
+
+            if ($street_number):
+                //dd([$object->formatted_address, $street_number, $route, $city, $region, $country]);
+                $formattedAddress = $object->formatted_address;            // форматированный адрес (строка)
+                $addressPlaceId = $object->place_id;                               // идентификатор города
+
+                /* Находим введенный адрес в базе по place_id */
+                /* @var $modelPlaceAddress \common\models\PlaceAddress */
+                $modelPlaceAddress = PlaceAddress::findOne(['place_id' => $addressPlaceId]);
+
+                if ($modelPlaceAddress) {
+                    return $modelPlaceAddress->id;
+                } else {
+                    // если адрес не найден, находим город
+                    $objectCity = Yii::$app->googleApi->getGeoCodeObject($city.' '.$region.' '.$country, null);
+                    dd($objectCity);
+                    $cityPlaceId = $objectCity->place_id;
+                }
 
                 /* Находим введенный город в базе по place_id */
                 /* @var $modelPlaceCity \common\models\PlaceCity */

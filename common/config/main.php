@@ -85,5 +85,8 @@ return [
                 ],
             ],
         ],
+        'placeManager' => [
+            'class' => \common\components\PlaceManager::className(),
+        ],
     ],
 ];

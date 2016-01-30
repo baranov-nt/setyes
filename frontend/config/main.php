@@ -35,7 +35,7 @@ return [
             'enableStrictParsing' => true,
             'rules' => [
                 [
-                    'pattern' => '<city:\d+>',
+                    'pattern' => '<cityId:\d+>',
                     'route' => 'main/index',
                     'suffix' => ''
                 ],
@@ -65,7 +65,7 @@ return [
                     'suffix' => ''
                 ],
                 [
-                    'pattern' => '<city:\d+>/<controller>/<action>',
+                    'pattern' => '<cityId:\d+>/<controller>/<action>',
                     'route' => '<controller>/<action>',
                     'suffix' => ''
                 ],
@@ -80,12 +80,12 @@ return [
                     'suffix' => '.html'
                 ],
                 [
-                    'pattern' => '<city:\d+>/<module>/<controller>/<action>/<id:\d+>',
+                    'pattern' => '<cityId:\d+>/<module>/<controller>/<action>/<id:\d+>',
                     'route' => '<module>/<controller>/<action>',
                     'suffix' => ''
                 ],
                 [
-                    'pattern' => '<city:\d+>/<module>/<controller>/<action>',
+                    'pattern' => '<cityId:\d+>/<module>/<controller>/<action>',
                     'route' => '<module>/<controller>/<action>',
                     'suffix' => ''
                 ],

@@ -13,6 +13,7 @@ use yii\db\ActiveRecord;
  * @property integer $property
  * @property integer $type_of_property
  * @property integer $deal_type
+ * @property integer $place_address_id
  * @property integer $rooms_in_the_apartment
  * @property integer $material_housing
  * @property integer $floor
@@ -27,18 +28,21 @@ use yii\db\ActiveRecord;
  * @property integer $pets_allowed
  * @property integer $condition
  *
- * @property AdRealEstateReference $categoryLand
+ * @property AdRealEstateReference $condition0
+ * @property AdRealEstateReference $dealType
  * @property AdRealEstateReference $floor0
  * @property AdRealEstateReference $floorsInTheHouse
- * @property AdRealEstateReference $necessary_furniture0
+ * @property AdRealEstateReference $internet0
  * @property AdRealEstateReference $leaseTerm
  * @property AdRealEstateReference $materialHousing
- * @property AdRealEstateReference $operationType
- * @property AdRealEstateReference $pricePeriod
- * @property AdRealEstateReference $propertyType
- * @property AdRealEstateReference $propertyType0
+ * @property AdRealEstateReference $necessaryFurniture
+ * @property AdRealEstateReference $petsAllowed
+ * @property PlaceAddress $placeAddress
+ * @property AdRealEstateReference $priceForThePeriod
+ * @property AdRealEstateReference $typeOfProperty
  * @property AdRealEstateReference $roomsInTheApartment
  * @property AdRealEstateReference $systemMeasure
+ * @property AdRealEstateReference $typeOfProperty0
  * @property AdRealEstateAppliances[] $adRealEstateAppliances
  */
 class AdRealEstate extends ActiveRecord
@@ -65,13 +69,13 @@ class AdRealEstate extends ActiveRecord
     {
         $rules = array_merge(
             require(__DIR__ . '/rules/defaultRules.php'),
-            require(__DIR__ . '/rules/realEstateRoomsRules.php'),                   // 1
-            require(__DIR__ . '/rules/realEstateApartmentsRules.php'),              // 2
-            require(__DIR__ . '/rules/realEstateHousesRules.php'),                  // 3
-            require(__DIR__ . '/rules/realEstateLandRules.php'),                    // 4
-            require(__DIR__ . '/rules/realEstateGaragesRules.php'),                 // 5
-            require(__DIR__ . '/rules/realEstateAbroadRules.php'),                  // 6
-            require(__DIR__ . '/rules/realEstateCommercialRules.php')               // 7
+            require(__DIR__ . '/rules/realEstateRoomsRules.php'),                  // 1
+            require(__DIR__ . '/rules/realEstateApartmentsRules.php'),             // 2
+            require(__DIR__ . '/rules/realEstateHousesRules.php'),                 // 3
+            require(__DIR__ . '/rules/realEstateLandRules.php'),                   // 4
+            require(__DIR__ . '/rules/realEstateGaragesRules.php'),                // 5
+            require(__DIR__ . '/rules/realEstateAbroadRules.php'),                 // 6
+            require(__DIR__ . '/rules/realEstateCommercialRules.php')              // 7
         );
         return $rules;
     }
@@ -113,8 +117,9 @@ class AdRealEstate extends ActiveRecord
 
     public function setErrorDealType($scenario, $dealType)
     {
-        if($this->scenario == $scenario && $this->deal_type != $dealType) {
-            $this->addError('deal_type', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
+        if ($this->scenario == $scenario && $this->deal_type != $dealType) {
+            $this->addError('deal_type',
+                Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]));
         }
     }
 
@@ -128,6 +133,7 @@ class AdRealEstate extends ActiveRecord
             'property' => Yii::t('app', 'Property'),
             'type_of_property' => Yii::t('app', 'Type Of Property'),
             'deal_type' => Yii::t('app', 'Deal Type'),
+            'place_address_id' => Yii::t('app', 'Place Address ID'),
             'rooms_in_the_apartment' => Yii::t('app', 'Rooms In The Apartment'),
             'material_housing' => Yii::t('app', 'Material Housing'),
             'floor' => Yii::t('app', 'Floor'),
@@ -152,17 +158,17 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPetsAllowed()
+    public function getCondition0()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'pets_allowed']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'condition']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategoryLand()
+    public function getDealType()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'category_land']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'deal_type']);
     }
 
     /**
@@ -184,9 +190,9 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getnecessary_furniture0()
+    public function getInternet0()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'necessary_furniture']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'internet']);
     }
 
     /**
@@ -208,15 +214,31 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOperationType()
+    public function getNecessaryFurniture()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'deal_type']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'necessary_furniture']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPricePeriod()
+    public function getPetsAllowed()
+    {
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'pets_allowed']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPlaceAddress()
+    {
+        return $this->hasOne(PlaceAddress::className(), ['id' => 'place_address_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPriceForThePeriod()
     {
         return $this->hasOne(AdRealEstateReference::className(), ['id' => 'price_for_the_period']);
     }
@@ -224,15 +246,7 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPropertyType()
-    {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'type_of_property']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getPropertyType0()
+    public function getTypeOfProperty()
     {
         return $this->hasOne(AdRealEstateReference::className(), ['id' => 'type_of_property']);
     }
@@ -256,25 +270,17 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getTypeOfProperty0()
+    {
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'type_of_property']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getAdRealEstateAppliances()
     {
         return $this->hasMany(AdRealEstateAppliances::className(), ['real_estate_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getInternet0()
-    {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'internet']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCondition0()
-    {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'condition']);
     }
 
     /**

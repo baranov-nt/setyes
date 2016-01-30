@@ -379,7 +379,7 @@ class RealEstateController extends BehaviorsController
             $modelAdRealEstate->clearErrors('deal_type');
             if($modelAdRealEstate->deal_type == 22 && $modelAdRealEstate->scenario == 'garages') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'sellingGarage'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 5, $scenario = 'sellingGarage'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
@@ -390,7 +390,7 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 23 && $modelAdRealEstate->scenario == 'garages') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentGarage'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 5, $scenario = 'rentGarage'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
@@ -401,7 +401,7 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 24 && $modelAdRealEstate->scenario == 'garages') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'buyGarage'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 5, $scenario = 'buyGarage'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
@@ -412,7 +412,7 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 25 && $modelAdRealEstate->scenario == 'garages') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentingGarage'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 5, $scenario = 'rentingGarage'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
@@ -458,7 +458,7 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 26 && $modelAdRealEstate->scenario == 'propertyAbroad') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 4, $scenario = 'sellingPropertyAbroad'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 6, $scenario = 'sellingPropertyAbroad'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
@@ -469,7 +469,7 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 27 && $modelAdRealEstate->scenario == 'propertyAbroad') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 4, $scenario = 'buyPropertyAbroad'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 6, $scenario = 'buyPropertyAbroad'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
@@ -514,7 +514,7 @@ class RealEstateController extends BehaviorsController
             $modelAdRealEstate->clearErrors('deal_type');
             if($modelAdRealEstate->deal_type == 28 && $modelAdRealEstate->scenario == 'comercial') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'sellingComercial'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 7, $scenario = 'sellingComercial'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
@@ -525,7 +525,7 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 29 && $modelAdRealEstate->scenario == 'comercial') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentComercial'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 7, $scenario = 'rentComercial'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
@@ -536,7 +536,7 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 30 && $modelAdRealEstate->scenario == 'comercial') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'buyComercial'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 7, $scenario = 'buyComercial'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
@@ -547,7 +547,7 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 31 && $modelAdRealEstate->scenario == 'comercial') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 3, $scenario = 'rentingComercial'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 7, $scenario = 'rentingComercial'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }

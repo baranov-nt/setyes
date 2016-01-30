@@ -70,7 +70,6 @@ MaskedInput::widget([
     endif;
     ?>
 
-
     <?php
     if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
         || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment'
@@ -81,17 +80,16 @@ MaskedInput::widget([
         <?= $form->field($model, 'place_street'); ?>
         <?= $form->field($model, 'place_house'); ?>
         <?= $form->field($model, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
-        <?php /*$form->field($model, 'place_address')->widget(GooglePlacesAutoComplete::className(), [
-        'name' => 'place-city',
-        'value' => '',
-        'autocompleteOptions' => [
-            'types' =>  [
-                'address'
-            ],
-            'componentRestrictions' => [
-            ]
-        ]
-    ])->label($model->getAttributeLabel('place_address').' <span style="font-weight: 400;">('.Yii::t('app', 'Input format: house, street/avenue, locality, region, country - and select from the drop down list the appropriate option.').')</span>');*/ ?>
+        <?php
+    endif;
+    ?>
+
+    <?php
+    if($model->scenario == 'sellingGarage' || $model->scenario == 'rentGarage'
+    ):
+        ?>
+        <?= $form->field($model, 'place_street'); ?>
+        <?= $form->field($model, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
         <?php
     endif;
     ?>

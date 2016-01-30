@@ -107,5 +107,16 @@ return [
             'rentComercial',
         ],
         'message' => Yii::t('app', 'Unfortunately, the specified address was not found.')],
+    [['place_street', 'place_house'], 'required',
+        'on' => [
+            'sellingRoom',
+            'rentARoom',
+            'sellingApatrment',
+            'rentAApatrment',
+            'sellingHouse',
+            'rentHouse',
+            'sellingComercial',
+            'rentComercial',
+        ]],
     [['currency', 'scenario', 'place_city', 'place_street', 'place_house', 'place_address'], 'string'],
 ];

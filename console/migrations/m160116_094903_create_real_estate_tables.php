@@ -184,6 +184,7 @@ class m160116_094903_create_real_estate_tables extends Migration
             'property' => $this->integer()->notNull(),           // Недвижимость (комната, дом, квартира). Связана с таблицей ad_real_estate_reference
             'type_of_property' => $this->integer()->notNull(),   // Тип недвижимости .для квартир - 16, для домов - 17, для гаража - 19, для недвижемости за границей - 20, для коммерческой недвижимости - 21  Связана с таблицей ad_real_estate_reference
             'deal_type' => $this->integer()->notNull(),          // Тип операции. Связана с таблицей ad_real_estate_reference
+            'place_address_id' => $this->integer()->notNull(),   // Адрес для которого добавлено объявление. Связь с таблицей place_address
             'rooms_in_the_apartment' => $this->integer(),        // Количество комнат в квартире. Если тип недвижимости комнаты, используем reference = 9, если квартиры, reference = 15. Связана с таблицей ad_real_estate_reference
             'material_housing' => $this->integer(),              // Материал строения - 24. Связана с таблицей ad_real_estate_reference
             'floor' => $this->integer(),                         // Этаж. Связана с таблицей ad_real_estate_reference
@@ -202,6 +203,7 @@ class m160116_094903_create_real_estate_tables extends Migration
         $this->addforeignKey('ad_real_estate_property_reference', 'ad_real_estate', 'type_of_property', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_type_of_property_reference', 'ad_real_estate', 'type_of_property', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_deal_type_reference', 'ad_real_estate', 'deal_type', 'ad_real_estate_reference', 'id');
+        $this->addForeignKey('ad_real_estate_place_address', 'ad_real_estate', 'place_address_id', 'place_address', 'id');
         $this->addforeignKey('ad_real_estate_rooms_in_the_apartment_reference', 'ad_real_estate', 'rooms_in_the_apartment', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_material_housing_reference', 'ad_real_estate', 'material_housing', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_floor_reference', 'ad_real_estate', 'floor', 'ad_real_estate_reference', 'id');

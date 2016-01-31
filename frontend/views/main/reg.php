@@ -6,8 +6,9 @@ use frontend\assets\ChosenAsset;
 use yii\widgets\Pjax;
 use yii\authclient\widgets\AuthChoice;
 use yii\widgets\MaskedInput;
+use yii\helpers\Url;
 
-ChosenAsset::register($this);
+
 /* @var $this yii\web\View */
 /* @var $model frontend\models\RegForm */
 /* @var $modelUser common\models\User */
@@ -19,36 +20,63 @@ ChosenAsset::register($this);
     Pjax::begin([
         'enablePushState' => false,
     ]);
-    $form = ActiveForm::begin(['options' => ['data-pjax' => true]]); ?>
+    MaskedInput::widget(['name' => 'phoneada',
+        'mask' => 'asdasd',
+        ]);
+    ChosenAsset::register($this);
+    $form = ActiveForm::begin(['action' => Url::to(['/site/reg']), 'id' => 'form', 'options' => ['data-pjax' => true]]); ?>
     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-xs-6">
                     <?php
-                    $model->country_id =  \Yii::$app->getRequest()->getCookies()->getValue('_countryId');
+                    if(!isset($phoneMask)):
+                        $model->country_id =  \Yii::$app->getRequest()->getCookies()->getValue('_countryId');
+                    endif;
+                    ?>
+                    <?php
                     echo $form->field($model, 'country_id')->dropDownList($model->countriesList, [
                         'class'  => 'form-control chosen-select',
                         'prompt' => Yii::t('app', 'Select country'),
+                        'onchange' => '
+                        $.pjax({
+                            type: "POST",
+                            url: "update-phone.html",
+                            data: jQuery("#form").serialize(),
+                            container: "#w0",
+                            push: false
+                        })'
                     ])
                     ?>
                 </div>
                 <div class="col-xs-6">
-                    <?= $form->field($model, 'phone') ?>
                     <?php
-                    /*echo $form->field($model, 'phone')->widget(MaskedInput::className(),[
-                        'name' => 'phone',
-                        'mask' => '7 (999) 999-9999',
-                        'options' => [
-                            'placeholder' => '7 (___) ___-____',
-                            'class' => 'form-control'
-                        ]]);*/
+                    if($model->country_id):
+                        if(!isset($phoneMask)):
+                            $phoneMask = $model->getPhoneMask();
+                        endif;
+                        echo $form->field($model, 'phone')->widget(MaskedInput::className(),[
+                            'name' => 'phone',
+                            'mask' => $phoneMask[0],
+                            'options' => [
+                                'placeholder' => $phoneMask[1],
+                                'class' => 'form-control'
+                            ]]);
+                    ?>
+                        <?php
+                    else:
+                    ?>
+                    <?= $form->field($model, 'phone')->textInput(['class' => 'form-control disabled', 'disabled' => true]) ?>
+                    <?php
+                    endif;
                     ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6 offset6">
                     <?php
-                    if(($model->scenario === 'emailActivation' || $model->scenario === 'phoneAndEmailFinish') || Yii::$app->controller->action->id == 'reg'):
+                    if(($model->scenario === 'emailActivation' || $model->scenario === 'phoneAndEmailFinish')
+                        || Yii::$app->controller->action->id == 'reg' || Yii::$app->controller->action->id == 'update-phone'):
                         ?>
 
                         <?= $form->field($model, 'email') ?>
@@ -60,7 +88,7 @@ ChosenAsset::register($this);
             <div class="row">
                 <div class="col-xs-6">
                     <?php
-                    if(Yii::$app->controller->action->id == 'reg'):
+                    if(Yii::$app->controller->action->id == 'reg' || Yii::$app->controller->action->id == 'update-phone'):
                         ?>
                         <?= $form->field($model, 'password')->passwordInput() ?>
                         <?php
@@ -69,7 +97,7 @@ ChosenAsset::register($this);
                 </div>
                 <div class="col-xs-6">
                     <?php
-                    if(Yii::$app->controller->action->id == 'reg'):
+                    if(Yii::$app->controller->action->id == 'reg' || Yii::$app->controller->action->id == 'update-phone'):
                         ?>
                         <?= $form->field($model, 'password_repeat')->passwordInput() ?>
                         <?php

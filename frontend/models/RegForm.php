@@ -64,8 +64,8 @@ class RegForm extends Model
         /* @var $modelPlaceCountry \common\models\PlaceCountry */
         $modelPlaceCountry = PlaceCountry::findOne($this->country_id);
 
-        if ($modelPlaceCountry->phone_number_digits_code != strlen($this->phone) && $modelPlaceCountry->phone_number_digits_code != null) {
-            $this->addError('phone', Yii::t('app', 'Phone should contain {length, number} digits.', ['length' => $modelPlaceCountry->phone_number_digits_code]));
+        if (($modelPlaceCountry->phone_number_digits_code + strlen($modelPlaceCountry->calling_code)) != strlen($this->phone) && $modelPlaceCountry->phone_number_digits_code != null) {
+            $this->addError('phone', Yii::t('app', 'Phone should contain {length, number} digits.', ['length' => ($modelPlaceCountry->phone_number_digits_code + strlen($modelPlaceCountry->calling_code))]));
         }
 
         if ($modelPlaceCountry->phone_number_digits_code == null) {
@@ -75,12 +75,12 @@ class RegForm extends Model
         }
 
         if($modelPlaceCountry->iso2 == 'RU') {
-            if(substr($this->phone, 0, 1) != '9' && substr($this->phone, 0, 1) != '3') {
+            if(substr($this->phone, 0, 2) != '79' && substr($this->phone, 0, 1) != '3') {
                 $this->addError('phone', Yii::t('app', 'Phone is invalid.'));
             }
         }
 
-        $phone = $modelPlaceCountry->calling_code.$this->phone;
+        $phone = $this->phone;
         $phone = str_replace([' ', '-', '+'], '', $phone);
         $modelUser = User::findOne(['phone' => $phone]);
         if($modelUser):
@@ -167,11 +167,14 @@ class RegForm extends Model
      */
     public function getCountriesList()
     {
-        $modelPlaceCountry = PlaceCountry::find()->asArray()->all();
+        $modelPlaceCountry = PlaceCountry::find()
+            ->where(['is not', 'phone_number_digits_code', null])
+            ->asArray()
+            ->all();
         $countriesArray = ArrayHelper::map($modelPlaceCountry,
             'id',
             function($modelPlaceCountry) {
-                return Yii::t('countries', $modelPlaceCountry['short_name']).' +'.$modelPlaceCountry['calling_code'];
+                return Yii::t('countries', $modelPlaceCountry['short_name']).' +'.str_replace(['\\'], '', $modelPlaceCountry['calling_code']);
             }
         );
 
@@ -186,9 +189,49 @@ class RegForm extends Model
     public function getPhoneNumber()
     {
         /* @var $modelPlaceCountry \common\models\PlaceCountry */
-        $modelPlaceCountry = PlaceCountry::findOne($this->country_id);
-        $phone = $modelPlaceCountry->calling_code.$this->phone;
+        $phone = $this->phone;
         $phone = str_replace([' ', '-', '+'], '', $phone);
         return $phone;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getPhoneMask()
+    {
+        /* @var $modelPlaceCountry \common\models\PlaceCountry */
+        $this->phone = '';
+        $modelPlaceCountry = PlaceCountry::findOne($this->country_id);
+        if($modelPlaceCountry) {
+            if($modelPlaceCountry->phone_number_digits_code) {
+                $i = 1;
+                $phoneMask = '';
+                $phonePlaceholder = '';
+                while($i <= $modelPlaceCountry->phone_number_digits_code) {
+                    $phoneMask .= '9';
+                    $phonePlaceholder .= '_';
+                    $i++;
+                }
+                $phoneMask = $modelPlaceCountry->calling_code.$phoneMask;
+                $phonePlaceholder = str_replace(['\\'], '', $modelPlaceCountry->calling_code.$phonePlaceholder);
+                return [$phoneMask, $phonePlaceholder];
+            } else {
+                $i = 1;
+                $phoneMask = '';
+                $phonePlaceholder = '';
+                while($i <= 12) {
+                    $phoneMask .= '9';
+                    $i++;
+                }
+                $phoneMask = $modelPlaceCountry->calling_code.$phoneMask;
+                $phonePlaceholder = str_replace(['\\'], '', $modelPlaceCountry->calling_code.$phonePlaceholder);
+                return [$phoneMask, $phonePlaceholder];
+            }
+        }
+        $phoneMask = '';
+        $phonePlaceholder = '';
+        return [$phoneMask, $phonePlaceholder];
     }
 }

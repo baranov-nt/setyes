@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\PlaceCountry;
 use Yii;
 use frontend\models\RegForm;
 use common\models\LoginForm;
@@ -115,6 +116,31 @@ class MainController extends BehaviorsController
             'reg',
             [
                 'model' => $model
+            ]
+        );
+    }
+
+    public function actionUpdatePhone()
+    {
+        $emailActivation = Yii::$app->params['emailActivation'];
+        $modelReg = $emailActivation ? new RegForm(['scenario' => 'emailActivation']) : new RegForm();
+
+        if ($modelReg->load(Yii::$app->request->post())):
+            $phoneMask = $modelReg->getPhoneMask();
+            d($phoneMask);
+            return $this->render(
+                'reg',
+                [
+                    'model' => $modelReg,
+                    'phoneMask' => $phoneMask,
+                ]
+            );
+        endif;
+
+        return $this->render(
+            'reg',
+            [
+                'model' => $modelReg,
             ]
         );
     }

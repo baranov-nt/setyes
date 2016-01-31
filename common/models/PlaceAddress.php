@@ -54,4 +54,15 @@ class PlaceAddress extends \yii\db\ActiveRecord
     {
         return $this->hasOne(PlaceCity::className(), ['id' => 'city_id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function createAddress($modelPlaceCity, $addressPlaceId)
+    {
+        $modelPlaceAddress = new PlaceAddress();
+        $modelPlaceAddress->place_id = $addressPlaceId;
+        $modelPlaceAddress->link('city', $modelPlaceCity);
+        return $modelPlaceAddress;
+    }
 }

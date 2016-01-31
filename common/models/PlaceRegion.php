@@ -79,4 +79,21 @@ class PlaceRegion extends ActiveRecord
         $modelCity->link('region', $modelPlaceRegion);
         return $modelCity;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function createRegionAndCityAndAddress($modelPlaceCountry, $regionPlaceId, $cityPlaceId, $addressPlaceId)
+    {
+        $modelPlaceRegion = new PlaceRegion();
+        $modelPlaceRegion->place_id = $regionPlaceId;
+        $modelPlaceRegion->link('country', $modelPlaceCountry);
+        $modelPlaceCity = new PlaceCity();
+        $modelPlaceCity->place_id = $cityPlaceId;
+        $modelPlaceCity->link('region', $modelPlaceRegion);
+        $modelPlaceAddress = new PlaceAddress();
+        $modelPlaceAddress->place_id = $addressPlaceId;
+        $modelPlaceCity->link('placeAddresses', $modelPlaceCity);
+        return $modelPlaceAddress;
+    }
 }

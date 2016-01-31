@@ -5,6 +5,7 @@ use yii\bootstrap\ActiveForm;
 use frontend\assets\ChosenAsset;
 use yii\widgets\Pjax;
 use yii\authclient\widgets\AuthChoice;
+use yii\widgets\MaskedInput;
 
 ChosenAsset::register($this);
 /* @var $this yii\web\View */
@@ -33,6 +34,15 @@ ChosenAsset::register($this);
                 </div>
                 <div class="col-xs-6">
                     <?= $form->field($model, 'phone') ?>
+                    <?php
+                    /*echo $form->field($model, 'phone')->widget(MaskedInput::className(),[
+                        'name' => 'phone',
+                        'mask' => '7 (999) 999-9999',
+                        'options' => [
+                            'placeholder' => '7 (___) ___-____',
+                            'class' => 'form-control'
+                        ]]);*/
+                    ?>
                 </div>
             </div>
             <div class="row">

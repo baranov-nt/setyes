@@ -8,11 +8,13 @@
 return [
     ['deal_type', 'validateDealType', 'on' => [
         /* комнаты 1 */
+        'rooms',
         'sellingRoom',
         'rentARoom',
         'buyRoom',
         'rentingARoom',
         /* квартиры 2 */
+        'apartments',
         'sellingApatrment',
         'rentAApatrment',
         'buyApatrment',

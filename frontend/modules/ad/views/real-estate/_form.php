@@ -66,6 +66,7 @@ MaskedInput::widget([
         'name' => 'place-city',
         'value' => '',
     ]); ?>
+        <?= $form->field($model, 'place_city_validate')->hiddenInput(['value' => '1'])->label(false); ?>
         <?php
     endif;
     ?>

@@ -50,6 +50,7 @@ class AdRealEstate extends ActiveRecord
     public $currency;
     public $appliances;
     public $place_city;
+    public $place_city_validate;
     public $place_street;
     public $place_house;
     public $place_address;
@@ -770,16 +771,33 @@ class AdRealEstate extends ActiveRecord
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->scenario = $scenario;
         if($modelAdRealEstate->validate()) {
+            if($scenario == 'sellingRoom' || $scenario == 'rentARoom'
+                || $scenario == 'sellingApatrment' || $scenario == 'rentAApatrment'
+                || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
+                || $scenario == 'sellingComercial' || $scenario == 'rentComercial') {
             $place = $modelAdRealEstate->place_house.' '.$modelAdRealEstate->place_street.' '.$modelAdRealEstate->place_city;
+            /* Возвращает id адреса, если он найден. Иначе вернет false */
             $address = Yii::$app->placeManager->findAddress($place);
-            if(!$address) {
-                $modelAdRealEstate->place_street = '';
-                $modelAdRealEstate->place_house = '';
-                $modelAdRealEstate->place_address = 0;
+                if(!$address) {
+                    $modelAdRealEstate->place_street = '';
+                    $modelAdRealEstate->place_house = '';
+                    $modelAdRealEstate->place_address = 0;
+                }
+                if($modelAdRealEstate->validate(['place_address'])) {
+                    return $modelAdRealEstate;
+                }
+            } else {
+                /* Возвращает id адреса, если он найден. Иначе вернет false */
+                $city = Yii::$app->placeManager->findCity($modelAdRealEstate->place_city);
+
+                if(!$city) {
+                    $modelAdRealEstate->place_city_validate = 0;
+                }
+                if($modelAdRealEstate->validate(['place_city_validate'])) {
+                    return $modelAdRealEstate;
+                }
             }
-            if($modelAdRealEstate->validate(['place_address'])) {
-                return $modelAdRealEstate;
-            }
+
         }
         return $modelAdRealEstate;
     }

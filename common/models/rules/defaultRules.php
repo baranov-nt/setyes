@@ -107,6 +107,8 @@ return [
             'rentComercial',
         ],
         'message' => Yii::t('app', 'Unfortunately, the specified address was not found.')],
+    [['place_city_validate'], 'compare', 'compareValue' => 1, 'operator' => '==',
+        'message' => Yii::t('app', 'Unfortunately, the specified city was not found.')],
     [['place_street', 'place_house'], 'required',
         'on' => [
             'sellingRoom',

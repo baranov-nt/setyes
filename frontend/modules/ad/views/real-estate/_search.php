@@ -23,6 +23,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'deal_type') ?>
 
+    <?= $form->field($model, 'place_address_id') ?>
+
     <?php // echo $form->field($model, 'rooms_in_the_apartment') ?>
 
     <?php // echo $form->field($model, 'material_housing') ?>
@@ -31,7 +33,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'floors_in_the_house') ?>
 
-    <?php // echo $form->field($model, 'area') ?>
+    <?php // echo $form->field($model, 'area_of_property') ?>
+
+    <?php // echo $form->field($model, 'area_of_land') ?>
 
     <?php // echo $form->field($model, 'system_measure') ?>
 
@@ -39,11 +43,13 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'price') ?>
 
-    <?php // echo $form->field($model, 'price_period') ?>
+    <?php // echo $form->field($model, 'price_for_the_period') ?>
 
-    <?php // echo $form->field($model, 'furnished') ?>
+    <?php // echo $form->field($model, 'necessary_furniture') ?>
 
     <?php // echo $form->field($model, 'internet') ?>
+
+    <?php // echo $form->field($model, 'pets_allowed') ?>
 
     <?php // echo $form->field($model, 'condition') ?>
 

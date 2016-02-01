@@ -345,7 +345,7 @@ class GoogleMaps extends Widget
             // query by address string
             $geoCodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
                 . $querystring
-                . '&language=' . \Yii::$app->language;
+                . '&language='.\Yii::$app->language;
                 //.'&result_type=country|street_address'
                 //. '&key=' . $this->geocode_api_key;
 

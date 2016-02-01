@@ -90,7 +90,13 @@ MaskedInput::widget([
     ?>
 
     <?php
-    if($model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment'):
+    if($model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment'
+        || $model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'buyHouse' || $model->scenario == 'rentingHouse'
+        || $model->scenario == 'sellingLand' || $model->scenario == 'buyLand'
+        || $model->scenario == 'sellingGarage' || $model->scenario == 'rentGarage' || $model->scenario == 'buyGarage' || $model->scenario == 'rentingGarage'
+        || $model->scenario == 'sellingPropertyAbroad' || $model->scenario == 'buyPropertyAbroad'
+        || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial' || $model->scenario == 'buyComercial' || $model->scenario == 'rentingComercial'
+    ):
         ?>
         <?= $form->field($model, 'type_of_property')->dropDownList($model->realEstatePropertyTypeList, [
         'class'  => 'form-control chosen-select',
@@ -154,7 +160,19 @@ MaskedInput::widget([
     if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
         || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentAApatrment'):
     ?>
-    <?= $form->field($model, 'area')->textInput()->label($model->getAttributeLabel('area').' ('.$model->realEstateSystemMeasureName.')') ?>
+    <?= $form->field($model, 'area_of_property')->textInput()->label($model->getAttributeLabel('area_of_property').' ('.$model->realEstateSystemMeasureName.')') ?>
+        <?php
+    endif;
+    ?>
+
+    <?php
+    if($model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'sellingLand'):
+        ?>
+        <?= $form->field($model, 'area_of_land')->textInput() ?>
+        <?= $form->field($model, 'system_measure')->dropDownList($model->realEstateLeaseTermList, [
+        'class'  => 'form-control chosen-select',
+        'prompt' => Yii::t('app', '---'),
+    ]) ?>
         <?php
     endif;
     ?>

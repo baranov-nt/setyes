@@ -46,7 +46,7 @@ return [
         'buyComercial',
         'rentingComercial'
     ]],
-    [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area',
+    [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area_of_property', 'area_of_land',
         'system_measure', 'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
     ['price', 'double'],
     ['price', 'compare', 'compareValue' => '0.00', 'operator' => '!=',

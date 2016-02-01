@@ -18,7 +18,8 @@ use yii\db\ActiveRecord;
  * @property integer $material_housing
  * @property integer $floor
  * @property integer $floors_in_the_house
- * @property integer $area
+ * @property integer $area_of_property
+ * @property integer $area_of_land
  * @property integer $system_measure
  * @property integer $lease_term
  * @property integer $price
@@ -139,7 +140,8 @@ class AdRealEstate extends ActiveRecord
             'material_housing' => Yii::t('app', 'Material Housing'),
             'floor' => Yii::t('app', 'Floor'),
             'floors_in_the_house' => Yii::t('app', 'Floors In The House'),
-            'area' => Yii::t('app', 'Area'),
+            'area_of_property' => Yii::t('app', 'Area of property'),
+            'area_of_land' => Yii::t('app', 'Area of land'),
             'system_measure' => Yii::t('app', 'System Measure'),
             'lease_term' => Yii::t('app', 'Lease Term'),
             'price' => Yii::t('app', 'Price'),
@@ -775,7 +777,7 @@ class AdRealEstate extends ActiveRecord
                 || $scenario == 'sellingApatrment' || $scenario == 'rentAApatrment'
                 || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
                 || $scenario == 'sellingComercial' || $scenario == 'rentComercial') {
-            $place = $modelAdRealEstate->place_house.' '.$modelAdRealEstate->place_street.' '.$modelAdRealEstate->place_city;
+            $place = $modelAdRealEstate->place_house.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_city;
             /* Возвращает id адреса, если он найден. Иначе вернет false */
             $address = Yii::$app->placeManager->findAddress($place);
                 if(!$address) {

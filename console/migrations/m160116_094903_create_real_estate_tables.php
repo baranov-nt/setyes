@@ -189,7 +189,8 @@ class m160116_094903_create_real_estate_tables extends Migration
             'material_housing' => $this->integer(),              // Материал строения - 24. Связана с таблицей ad_real_estate_reference
             'floor' => $this->integer(),                         // Этаж. Связана с таблицей ad_real_estate_reference
             'floors_in_the_house' => $this->integer(),           // Количество этажей в здании. Используем reference этажей. Связана с таблицей ad_real_estate_reference
-            'area' => $this->integer(),                          // Площадь помещения
+            'area_of_property' => $this->integer(),              // Площадь помещения
+            'area_of_land' => $this->integer(),                  // Площадь земли
             'system_measure' => $this->integer()->notNull(),     // Единица измерения площади 12 - комнат, квартир и домов, 28 - для земли (метрическая), 29 - для земли (английская). Связана с таблицей ad_real_estate_reference
             'lease_term' => $this->integer(),                    // Срок аденды. Связана с таблицей ad_real_estate_reference
             'price' => $this->integer()->notNull(),              // Цена

@@ -18,8 +18,7 @@ class AdRealEstateSearch extends AdRealEstate
     public function rules()
     {
         return [
-            [['id', 'property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house',
-                'area', 'system_measure', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'condition'], 'integer'],
+            [['id', 'property', 'type_of_property', 'deal_type', 'place_address_id', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area_of_property', 'area_of_land', 'system_measure', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
         ];
     }
 
@@ -60,17 +59,20 @@ class AdRealEstateSearch extends AdRealEstate
             'property' => $this->property,
             'type_of_property' => $this->type_of_property,
             'deal_type' => $this->deal_type,
+            'place_address_id' => $this->place_address_id,
             'rooms_in_the_apartment' => $this->rooms_in_the_apartment,
             'material_housing' => $this->material_housing,
             'floor' => $this->floor,
             'floors_in_the_house' => $this->floors_in_the_house,
-            'area' => $this->area,
+            'area_of_property' => $this->area_of_property,
+            'area_of_land' => $this->area_of_land,
             'system_measure' => $this->system_measure,
             'lease_term' => $this->lease_term,
             'price' => $this->price,
             'price_for_the_period' => $this->price_for_the_period,
             'necessary_furniture' => $this->necessary_furniture,
             'internet' => $this->internet,
+            'pets_allowed' => $this->pets_allowed,
             'condition' => $this->condition,
         ]);
 

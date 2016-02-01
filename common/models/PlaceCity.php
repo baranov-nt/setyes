@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  */
 class PlaceCity extends ActiveRecord
 {
+    public $city_id;
     /**
      * @inheritdoc
      */

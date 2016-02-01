@@ -24,7 +24,7 @@ use yii\helpers\Url;
         'mask' => 'asdasd',
         ]);
     ChosenAsset::register($this);
-    $form = ActiveForm::begin(['action' => Url::to(['/site/reg']), 'id' => 'form', 'options' => ['data-pjax' => true]]); ?>
+    $form = ActiveForm::begin(['action' => Url::to(['/main/reg']), 'id' => 'form', 'options' => ['data-pjax' => true]]); ?>
     <div class="row">
         <div class="col-md-12">
             <div class="row">

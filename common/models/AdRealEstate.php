@@ -607,6 +607,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getRealEstateLeaseTermList()
     {
+        d($this->deal_type);
         $lease_term = ArrayHelper::map(AdRealEstateReference::find()
             ->where(['reference_id' => 13])
             ->all(), 'id', 'reference_name');

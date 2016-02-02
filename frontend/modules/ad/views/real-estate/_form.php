@@ -179,7 +179,6 @@ MaskedInput::widget([
     <?php
     if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
         || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'
-        || $model->scenario == 'sellingPropertyAbroad'
         || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial'
     ):
         ?>
@@ -192,11 +191,11 @@ MaskedInput::widget([
     ?>
 
     <?php
-    /** Этажей в доме с недвижемостью (для операций с домами) доступен для сценариев
-     * 'sellingHouse' 'rentHouse' */
+    /** Этажей в доме с недвижемостью (для операций с домами и недвижемостью за рубежом) доступен для сценариев
+     * 'sellingHouse' 'rentHouse' 'sellingPropertyAbroad' */
     ?>
     <?php
-    if($model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse'):
+    if($model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'sellingPropertyAbroad'):
         ?>
         <?= $form->field($model, 'floors_in_the_house')->dropDownList($model->realEstateFloorsInHouseList, [
         'class'  => 'form-control chosen-select',
@@ -207,14 +206,28 @@ MaskedInput::widget([
     ?>
 
     <?php
+    /** Площать ведвижемости доступен для сценариев
+     * 'sellingRoom'  'rentARoom' 'sellingApatrment' 'rentApatrment' 'sellingHouse' 'rentHouse' 'sellingGarage' 'rentGarage'
+     * 'sellingPropertyAbroad' 'sellingComercial' 'rentComercial' */
+    ?>
+    <?php
     if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'):
+        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'
+        || $model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse'
+        || $model->scenario == 'sellingGarage' || $model->scenario == 'rentGarage'
+        || $model->scenario == 'sellingPropertyAbroad'
+        || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial'
+    ):
     ?>
     <?= $form->field($model, 'area_of_property')->textInput()->label($model->getAttributeLabel('area_of_property').' ('.$model->realEstateSystemMeasureName.')') ?>
         <?php
     endif;
     ?>
 
+    <?php
+    /** Площать земли доступен для сценариев
+     * 'sellingLand' 'sellingHouse' 'rentHouse' */
+    ?>
     <?php
     if($model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'sellingLand'):
         ?>

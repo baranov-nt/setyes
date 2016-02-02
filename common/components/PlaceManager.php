@@ -97,17 +97,19 @@ class PlaceManager extends Object
         return false;
     }
 
-    /* Находим адрес */
-    public function findCity($place)
+    /* Находим город */
+    public function findCity($city)
     {
-        $object = Yii::$app->googleApi->getGeoCodeObject($place, null);
-        if(isset($object)):
-
+        /* Находим город, заполненный в форме */
+        $objectCity = Yii::$app->googleApi->getGeoCodeObject($city, null);
+        if(isset($objectCity)):
+            /* Если найден объект города, создаем пустые переменные для города */
             $city = '';
             $region = '';
             $country = '';
 
-            foreach($object->address_components as $one):
+            /* Формируем переменныe для города */
+            foreach($objectCity->address_components as $one):
                 if($one->types[0] == 'locality'):
                     $city = $one->short_name;
                 endif;
@@ -119,45 +121,33 @@ class PlaceManager extends Object
                 endif;
             endforeach;
 
-            if($object):
-                //dd([$object->formatted_address, $street_number, $route, $city, $region, $country]);
-                $formattedAddress = $object->formatted_address;            // форматированный адрес (строка)
-                $cityPlaceId = $object->place_id;                               // идентификатор города
-
+            if($objectCity):
                 /* Находим введенный город в базе по place_id */
                 /* @var $modelPlaceCity \common\models\PlaceCity */
-                $modelPlaceCity = PlaceCity::findOne(['place_id' => $cityPlaceId]);
+                $modelPlaceCity = PlaceCity::findOne(['place_id' => $objectCity->place_id]);
 
                 if($modelPlaceCity):
-                    return $modelPlaceCity->id;
+                    return $modelPlaceCity;
                 else:
                     // если город не найден, находим регион
                     $objectRegion = Yii::$app->googleApi->getGeoCodeObject($region.' '.$country, null);
-                    $regionPlaceId = $objectRegion->place_id;
                     // ищем регион в базе
                     /* @var $modelPlaceRegion \common\models\PlaceRegion */
-                    $modelPlaceRegion = PlaceRegion::findOne(['place_id' => $regionPlaceId]);
+                    $modelPlaceRegion = PlaceRegion::findOne(['place_id' => $objectRegion->place_id]);
 
                     if($modelPlaceRegion):
                         // если регион найден
                         $modelPlaceCity = new PlaceCity();
-                        // добавляем новый город к найденному региону, пишем куки и переходим на главную страницу с get переменной city
-                        $modelPlaceCity = $modelPlaceCity->createCity($modelPlaceRegion, $cityPlaceId);
-                        return $modelPlaceCity->id;
+                        // добавляем новый город к найденному региону, возвращаем объект города
+                        return $modelPlaceCity->createCity($modelPlaceRegion, $objectCity->place_id);
                     else:
                         // если регион не найден, находим страну
-                        foreach($object->address_components as $one):
-                            if($one->types[0] == 'country'):
-                                $country = $one->short_name;
-                            endif;
-                        endforeach;
                         $modelPlaceCountry = PlaceCountry::findOne(['iso2' => $country]);
                         // если страна найдена
                         if($modelPlaceCountry):
                             $modelPlaceRegion = new PlaceRegion();
                             // Добавляем новый регион и город, пишем куки и переходим на главную страницу с get переменной city
-                            $modelPlaceCity = $modelPlaceRegion->createRegionAndCity($modelPlaceCountry, $regionPlaceId, $cityPlaceId);
-                            return $modelPlaceCity->id;
+                            return $modelPlaceRegion->createRegionAndCity($modelPlaceCountry, $objectRegion->place_id, $objectCity->place_id);
                         endif;
                     endif;
                 endif;
@@ -210,8 +200,8 @@ class PlaceManager extends Object
                 if ($modelPlaceAddress) {
                     /* @var $modelPlaceAddress \common\models\PlaceAddress */
                     /** Если найденный place_id уже есть в таблице адресов place_address
-                     *  Возвращаем id этой записи */
-                    return $modelPlaceAddress->id;
+                     *  Возвращаем объект адреса */
+                    return $modelPlaceAddress;
                 } else {
                     // если адрес не найден, находим город
                     $objectCity = Yii::$app->googleApi->getGeoCodeObject($city.' '.$region.' '.$country, null);
@@ -226,7 +216,7 @@ class PlaceManager extends Object
                     $modelPlaceCity = PlaceCity::findOne(['place_id' => $objectCity->place_id]);
 
                     if($modelPlaceCity) {
-                        /* Если город в базе найден, записываем адрес этого города и возващаем id адреса из таблицы place_address */
+                        /* Если город в базе найден, записываем адрес этого города и возващаем объект адреса из таблицы place_address */
                         $modelPlaceAddress = new PlaceAddress();
                         return $modelPlaceAddress->createAddress($modelPlaceCity, $objectAddress->place_id);
                     } else {
@@ -237,17 +227,19 @@ class PlaceManager extends Object
                         $modelPlaceRegion = PlaceRegion::findOne(['place_id' => $objectRegion->place_id]);
 
                         if($modelPlaceRegion):
+
                             // если регион найден
                             $modelPlaceCity = new PlaceCity();
-                            // добавляем новый город к найденному региону и новый адрес к городу, возващаем id адреса
+                            // добавляем новый город к найденному региону и новый адрес к городу, возващаем объект адреса
                             return $modelPlaceCity->createCityAndAddress($modelPlaceRegion, $objectCity->place_id, $objectAddress->place_id);
                         else:
                             // если регион не найден, находим страну в БД
                             $modelPlaceCountry = PlaceCountry::findOne(['iso2' => $country]);
                             // если страна найдена
                             if($modelPlaceCountry):
+
                                 $modelPlaceRegion = new PlaceRegion();
-                                // Добавляем новый регион и город, пишем куки и переходим на главную страницу с get переменной city
+                                // Добавляем новый регион и город, пишем куки и переходим на главную страницу с get переменной city, возвращаем объект адреса
                                 return $modelPlaceRegion->createRegionAndCityAndAddress($modelPlaceCountry, $objectRegion->place_id, $objectCity->place_id, $objectAddress->place_id);
                             endif;
                         endif;

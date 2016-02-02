@@ -93,7 +93,8 @@ class PlaceRegion extends ActiveRecord
         $modelPlaceCity->link('region', $modelPlaceRegion);
         $modelPlaceAddress = new PlaceAddress();
         $modelPlaceAddress->place_id = $addressPlaceId;
-        $modelPlaceCity->link('placeAddresses', $modelPlaceCity);
-        return $modelPlaceAddress->id;
+        $modelPlaceAddress->city_id = $modelPlaceCity->id;
+
+        return $modelPlaceAddress->save() ? $modelPlaceAddress : false;
     }
 }

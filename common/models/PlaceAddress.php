@@ -63,6 +63,6 @@ class PlaceAddress extends \yii\db\ActiveRecord
         $modelPlaceAddress = new PlaceAddress();
         $modelPlaceAddress->place_id = $addressPlaceId;
         $modelPlaceAddress->link('city', $modelPlaceCity);
-        return $modelPlaceAddress->id;
+        return $modelPlaceAddress;
     }
 }

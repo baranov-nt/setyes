@@ -191,13 +191,13 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 13 && $modelAdRealEstate->scenario == 'apartments') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 2, $scenario = 'rentAApatrment'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 2, $scenario = 'rentApatrment'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 13) {
-                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentAApatrment', $modelAdRealEstate);
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentApatrment', $modelAdRealEstate);
             }
 
             if($modelAdRealEstate->deal_type == 14 && $modelAdRealEstate->scenario == 'apartments') {
@@ -213,13 +213,13 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate->deal_type == 15 && $modelAdRealEstate->scenario == 'apartments') {
                 return $this->render('create', [
-                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 2, $scenario = 'rentingAApatrment'),
+                    'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 2, $scenario = 'rentingApatrment'),
                     'pjaxUrl' => $pjaxUrl
                 ]);
             }
 
             if($modelAdRealEstate->deal_type == 15) {
-                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentingAApatrment', $modelAdRealEstate);
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'rentingApatrment', $modelAdRealEstate);
             }
 
             if($modelAdRealEstate) {

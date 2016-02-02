@@ -19,5 +19,9 @@ return [
         'on' => [
             'sellingGarage',
             'rentGarage',
-        ]],
+            'buyGarage',
+            'rentingGarage'
+        ],
+        'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('place_street')])],
+
 ];

@@ -62,15 +62,13 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [35, 9, 4],
                 [36, 9, 5],
                 [37, 9, 6],
-                [38, 9, Yii::t('references', 'more than 6 rooms')],
-                /* Интернет */
-                [39, 10, Yii::t('references', 'available')],            // доступна
-                [40, 10, Yii::t('references', 'not available')],        // не доступна
+                [38, 9, Yii::t('references', 'more than 6')],
                 /* Состояние недвижемости */
-                [41, 25, Yii::t('references', 'requires repair')],             // требуется ремонт
-                [42, 25, Yii::t('references', 'normal')],                      // нормальное
-                [43, 25, Yii::t('references', 'excellent')],                   // не доступна
+                [39, 25, Yii::t('references', 'requires repair')],             // требуется ремонт
+                [40, 25, Yii::t('references', 'normal')],                      // нормальное
+                [41, 25, Yii::t('references', 'excellent')],                   // не доступна
                 /* Этаж */
+                [43, 11, Yii::t('references', 'basement')],
                 [44, 11, 1],
                 [45, 11, 2],
                 [46, 11, 3],
@@ -175,6 +173,9 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [129, 17, Yii::t('references', 'country house')],        // деревенский дом
                 [130, 17, Yii::t('references', 'cottage')],              // коттедж
                 [131, 17, Yii::t('references', 'townhouse')],            // малоэтажный дом на несколько квартир
+                /* Интернет */
+                [132, 10, Yii::t('references', 'available')],            // доступна
+                [133, 10, Yii::t('references', 'not available')],        // не доступна
                 /* Свободные 30 */
             ]);
 

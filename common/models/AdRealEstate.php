@@ -97,9 +97,9 @@ class AdRealEstate extends ActiveRecord
         $this->setErrorDealType('buyRoom', 10);
         $this->setErrorDealType('rentingARoom', 11);
         $this->setErrorDealType('sellingApatrment', 12);
-        $this->setErrorDealType('rentAApatrment', 13);
+        $this->setErrorDealType('rentApatrment', 13);
         $this->setErrorDealType('buyApatrment', 14);
-        $this->setErrorDealType('rentingAApatrment', 15);
+        $this->setErrorDealType('rentingApatrment', 15);
         $this->setErrorDealType('sellingHouse', 16);
         $this->setErrorDealType('rentHouse', 17);
         $this->setErrorDealType('buyHouse', 18);
@@ -568,6 +568,43 @@ class AdRealEstate extends ActiveRecord
      *
      * @return array
      */
+    public function getRealEstateFloorsInBuildingList()
+    {
+        $floor = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 11])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        $i = 1;
+        foreach($floor as $key => $value) {
+            if($i != 1)
+                $items[$key] = Yii::t('references', $value);
+            $i++;
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateFloorsInHouseList()
+    {
+        $floor = ArrayHelper::map(AdRealEstateReference::find()
+            ->where(['reference_id' => 9])
+            ->all(), 'id', 'reference_name');
+        $items = [];
+        foreach($floor as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
     public function getRealEstateLeaseTermList()
     {
         $lease_term = ArrayHelper::map(AdRealEstateReference::find()
@@ -780,7 +817,7 @@ class AdRealEstate extends ActiveRecord
              *  Если адрес не найден, возвращается false
             */
             if($scenario == 'sellingRoom' || $scenario == 'rentARoom'
-                || $scenario == 'sellingApatrment' || $scenario == 'rentAApatrment'
+                || $scenario == 'sellingApatrment' || $scenario == 'rentApatrment'
                 || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
                 || $scenario == 'sellingComercial' || $scenario == 'rentComercial') {
 

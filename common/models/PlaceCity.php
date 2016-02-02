@@ -89,6 +89,6 @@ class PlaceCity extends ActiveRecord
         $modelPlaceCity->place_id = $cityPlaceId;
         $modelPlaceCity->link('region', $modelPlaceRegion);
         $modelPlaceCity->link('placeAddresses', $modelPlaceAddress);
-        return $modelPlaceAddress;
+        return $modelPlaceAddress->id;
     }
 }

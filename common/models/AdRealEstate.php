@@ -91,6 +91,7 @@ class AdRealEstate extends ActiveRecord
 
     public function validateDealType()
     {
+
         $this->setErrorDealType('sellingRoom', 8);
         $this->setErrorDealType('rentARoom', 9);
         $this->setErrorDealType('buyRoom', 10);
@@ -772,15 +773,30 @@ class AdRealEstate extends ActiveRecord
     {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->scenario = $scenario;
+        /* Проверям заполненные поля для полученного сценария */
         if($modelAdRealEstate->validate()) {
+            /** Если используются сценарии, для которых необходимо получить адрес, находим этот адрес и пишем его в БД.
+             *  Возвращется id из таблицы place_address с найденным place_id из Google Maps.
+             *  Если адрес не найден, возвращается false
+            */
             if($scenario == 'sellingRoom' || $scenario == 'rentARoom'
                 || $scenario == 'sellingApatrment' || $scenario == 'rentAApatrment'
                 || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
                 || $scenario == 'sellingComercial' || $scenario == 'rentComercial') {
-            $place = $modelAdRealEstate->place_house.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_city;
-            /* Возвращает id адреса, если он найден. Иначе вернет false */
-            $address = Yii::$app->placeManager->findAddress($place);
-                if(!$address) {
+
+                /** Если валидация всех (кроме адреса и города) полей прошла успешно
+                 *  формируем введенный адрес, где
+                 *  $city - введенный город
+                 *  $address - введеный адрес (улица и номер мода)
+                 */
+                $city = $modelAdRealEstate->place_city;
+                $address = $modelAdRealEstate->place_house.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_city;
+                /** Находим в Google Maps введенный адрес, если адрес найден и записан в БД,
+                 *  возвращаем id адреса из таблицы place_address. Если адрес не найден, вернется false.
+                 */
+                $placeAddressId = Yii::$app->placeManager->findAddress($city, $address);
+
+                if(!$placeAddressId) {
                     $modelAdRealEstate->place_street = '';
                     $modelAdRealEstate->place_house = '';
                     $modelAdRealEstate->place_address = 0;
@@ -799,7 +815,6 @@ class AdRealEstate extends ActiveRecord
                     return $modelAdRealEstate;
                 }
             }
-
         }
         return $modelAdRealEstate;
     }

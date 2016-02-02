@@ -6,8 +6,8 @@
  * Time: 7:20
  */
 return [
-    [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'condition'], 'required', 'on' => 'sellingRoom'],
-    [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area', 'floors_in_the_house', 'lease_term',
+    [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area_of_property', 'floors_in_the_house', 'condition'], 'required', 'on' => 'sellingRoom'],
+    [['property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area_of_property', 'floors_in_the_house', 'lease_term',
         'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required', 'on' => 'rentARoom'],
     [['property', 'deal_type', 'price'], 'required', 'on' => 'buyRoom'],
     [['property', 'deal_type', 'price', 'lease_term', 'price_for_the_period'], 'required', 'on' => 'rentingARoom'],

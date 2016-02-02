@@ -69,18 +69,28 @@ class RealEstateController extends BehaviorsController
     public function actionCreateRooms()
     {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /* Установка сценария по умолчанию для комнат */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
-        $modelAdRealEstate->property = 1;
-        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+        $modelAdRealEstate->property = 1;                                                               // свойство property (недвижемость) для комнат равно 1
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');     // Получаем город из куки
 
+        // Ссылка Pjax для выпадающего списка выбора операции (свойство deal_type)
         $pjaxUrl = 'create-rooms';
 
         if ($modelAdRealEstate->load(Yii::$app->request->post())) {
             if(!$modelAdRealEstate->validate(['deal_type'])) {
+                /** Если операция не соответствует сценарию, назначаем сценарий для комнат по умолчанию 'rooms' и очищаем ошибку
+                 *  Используется когда отправляется уже с выбранным сценарием */
                 $modelAdRealEstate->scenario = 'rooms';
+                $modelAdRealEstate->clearErrors('deal_type');
             }
-            $modelAdRealEstate->clearErrors('deal_type');
 
+            /** Если в выпадающем списке выбрана операция 'selling room' (значение 8) и используется сценарий для комнат по умолчанию 'rooms'
+             *  назначаем новый сценарий 'sellingRoom', где в модели $modelAdRealEstate
+             *  $modelAdRealEstate->property = 1 (тип недвижемости - комнаты)
+             *  $modelAdRealEstate->deal_type = 8 (тип операции)
+             *  $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+             * */
             if($modelAdRealEstate->deal_type == 8 && $modelAdRealEstate->scenario == 'rooms') {
                 return $this->render('create', [
                     'model' => $modelAdRealEstate->addNewScenario($dealType = $modelAdRealEstate->deal_type, $property = 1, $scenario = 'sellingRoom'),
@@ -88,6 +98,10 @@ class RealEstateController extends BehaviorsController
                 ]);
             }
 
+            /** Если была отправлена форма кнопкой submit
+             *  $modelAdRealEstate->deal_type = 8 (тип операции)
+             *  проверяем заполенные поля для сценария 'sellingRoom'
+             * */
             if($modelAdRealEstate->deal_type == 8) {
                 $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingRoom', $modelAdRealEstate);
             }
@@ -131,7 +145,7 @@ class RealEstateController extends BehaviorsController
                 /* Если валидация и запись прошла */
                 d([$modelAdRealEstate->scenario, 'OK']);
             }
-            /* Если валидация и запись не прошла */
+            /* Если валидация или запись не прошла */
         }
 
         return $this->render('create', [

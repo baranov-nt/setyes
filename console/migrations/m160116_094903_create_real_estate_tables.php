@@ -183,9 +183,9 @@ class m160116_094903_create_real_estate_tables extends Migration
         $this->createTable('ad_real_estate', [
             'id' => $this->primaryKey(),
             'property' => $this->integer()->notNull(),           // Недвижимость (комната, дом, квартира). Связана с таблицей ad_real_estate_reference
-            'type_of_property' => $this->integer()->notNull(),   // Тип недвижимости .для квартир - 16, для домов - 17, для гаража - 19, для недвижемости за границей - 20, для коммерческой недвижимости - 21  Связана с таблицей ad_real_estate_reference
             'deal_type' => $this->integer()->notNull(),          // Тип операции. Связана с таблицей ad_real_estate_reference
-            'place_address_id' => $this->integer(),   // Адрес для которого добавлено объявление. Связь с таблицей place_address
+            'type_of_property' => $this->integer(),             // Тип недвижимости .для квартир - 16, для домов - 17, для гаража - 19, для недвижемости за границей - 20, для коммерческой недвижимости - 21  Связана с таблицей ad_real_estate_reference
+            'place_address_id' => $this->integer(),             // Адрес для которого добавлено объявление. Связь с таблицей place_address
             'rooms_in_the_apartment' => $this->integer(),        // Количество комнат в квартире. Если тип недвижимости комнаты, используем reference = 9, если квартиры, reference = 15. Связана с таблицей ad_real_estate_reference
             'material_housing' => $this->integer(),              // Материал строения - 24. Связана с таблицей ad_real_estate_reference
             'floor' => $this->integer(),                         // Этаж. Связана с таблицей ad_real_estate_reference
@@ -202,6 +202,8 @@ class m160116_094903_create_real_estate_tables extends Migration
             'internet' => $this->integer(),                      // Наличие интернета (есть, нет) - 10. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'pets_allowed' => $this->integer(),                  // Домашние животные разрешены - 27
             'condition' => $this->integer(),                     // Состояние (есть, нет) - 25. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
+            'category_id' => $this->smallInteger(2)->defaultValue('0'), // id категории объявления (1 - для недвижимости)
+            'temp' => $this->boolean()->defaultValue('0'),       // временная запись или нет
         ]);
 
         //$this->addForeignKey('ad_category_reference_main', 'ad_category', 'category_id', 'ad_reference_main', 'id');

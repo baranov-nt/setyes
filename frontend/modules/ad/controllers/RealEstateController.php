@@ -69,21 +69,22 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateRooms()
     {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
-        $modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
+        // @var $modelAdRealEstate \common\models\AdRealEstate
+
+        $modelAdRealEstate = $modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
         if(!isset($modelAdRealEstate)):
             Yii::$app->session->remove('tempModel');
             Yii::$app->session->remove('tempId');
         endif;
         if (isset($modelAdRealEstate) && $modelAdRealEstate->load(Yii::$app->request->post())):
-            /* @var $modelAdRealEstate \common\models\AdRealEstate */
+            // @var $modelAdRealEstate \common\models\AdRealEstate
             if($modelAdRealEstate->updateObject($modelAdRealEstate)):
                 return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
             endif;
         endif;
-        if(Yii::$app->session->get('tempModel') != 'AdRealEstate'):
-            $modelAdRealEstate = new AdRealEstate();
-            $modelAdRealEstate = $modelAdRealEstate->createObject();
+        $modelAdRealEstate = new AdRealEstate();
+        if(Yii::$app->session->get('tempModel') != 'AdRealEstate'  && $modelAdRealEstate->load(Yii::$app->request->post())):
+             $modelAdRealEstate = $modelAdRealEstate->createObject();
         endif;
         
         /* @var $modelAdRealEstate \common\models\AdRealEstate */

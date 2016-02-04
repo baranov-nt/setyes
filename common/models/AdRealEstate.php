@@ -917,13 +917,10 @@ class AdRealEstate extends ActiveRecord
     public function createObject()
     {
         $modelAdRealEstate = new AdRealEstate();
-        $modelAdRealEstate->images_num = 3;
-        $modelAdRealEstate->images_label = 'AdRealEstate';
-        $modelAdRealEstate->desc = '';
-        $modelAdRealEstate->price = 0;
-        $modelAdRealEstate->user_id = Yii::$app->user->id;
-        $modelAdRealEstate->temp = 1;
+        $modelAdRealEstate->property = $this->property;
+        $modelAdRealEstate->deal_type = $this->deal_type;
         $modelAdRealEstate->save();
+        dd($modelAdRealEstate);
         Yii::$app->session->set('tempModel', 'AdRealEstate');
         Yii::$app->session->set('tempId', $modelAdRealEstate->id);
         return  $modelAdRealEstate ? $modelAdRealEstate : null;
@@ -934,8 +931,9 @@ class AdRealEstate extends ActiveRecord
      */
     public function updateObject($modelAdRealEstate)
     {
+        dd(222);
         $modelAdRealEstate->temp = 0;
-        $modelAdRealEstate->setScenario('update');
+        //$modelAdRealEstate->setScenario('update');
         if($modelAdRealEstate->save()):
             Yii::$app->session->remove('tempModel');
             Yii::$app->session->remove('tempId');

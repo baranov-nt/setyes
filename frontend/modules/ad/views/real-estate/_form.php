@@ -31,6 +31,13 @@ MaskedInput::widget([
 <div class="row">
     <div class="col-md-12">
         <?php
+        /** Изображения доступен всем операциям */
+        ?>
+        <?php
+        if($modelAdRealEstate->scenario != 'default' && $modelAdRealEstate->scenario != 'rooms' && $modelAdRealEstate->scenario != 'apartments' && $modelAdRealEstate->scenario != 'houses' && $modelAdRealEstate->scenario != 'land'
+        && $modelAdRealEstate->scenario != 'garages' && $modelAdRealEstate->scenario != 'propertyAbroad' && $modelAdRealEstate->scenario != 'comercial'):
+        ?>
+        <?php
         echo ImageLoadWidget::widget([
             'modelName' => 'Product',
             'id' => 'load-image',                                                           // суффикс ID для основных форм виджета
@@ -44,8 +51,8 @@ MaskedInput::widget([
             'headerModal' => 'Загрузить изображение товара',                        // заголовок в модальном окне
             'sizeModal' => 'modal-md',                                  // размер модального окна
             'baseUrl' => '/images/',                        // основной путь к изображениям
-            'imagePath' => 'product/images/',   // путь, куда будут записыватся изображения
-            'noImage' => 'product/noImage.png',                 // картинка, если изображение отсутствует
+            'imagePath' => 'ad/images/',   // путь, куда будут записыватся изображения
+            'noImage' => 'ad/noImage.png',                 // картинка, если изображение отсутствует
             'classesWidget' => [
                 'imageClass' => 'imageProduct',
                 'buttonDeleteClass' => 'btn btn-xs btn-danger btn-imageDeleteProduct glyphicon glyphicon-trash glyphicon',
@@ -76,6 +83,9 @@ MaskedInput::widget([
                 //'width' => 500,                             // ширина
                 //'height' => 500                             // высота
             ]]);
+        ?>
+            <?php
+        endif;
         ?>
     </div>
 </div>

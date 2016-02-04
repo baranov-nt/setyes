@@ -185,13 +185,15 @@ class m160116_094903_create_real_estate_tables extends Migration
             'property' => $this->integer()->notNull(),           // Недвижимость (комната, дом, квартира). Связана с таблицей ad_real_estate_reference
             'type_of_property' => $this->integer()->notNull(),   // Тип недвижимости .для квартир - 16, для домов - 17, для гаража - 19, для недвижемости за границей - 20, для коммерческой недвижимости - 21  Связана с таблицей ad_real_estate_reference
             'deal_type' => $this->integer()->notNull(),          // Тип операции. Связана с таблицей ad_real_estate_reference
-            'place_address_id' => $this->integer()->notNull(),   // Адрес для которого добавлено объявление. Связь с таблицей place_address
+            'place_address_id' => $this->integer(),   // Адрес для которого добавлено объявление. Связь с таблицей place_address
             'rooms_in_the_apartment' => $this->integer(),        // Количество комнат в квартире. Если тип недвижимости комнаты, используем reference = 9, если квартиры, reference = 15. Связана с таблицей ad_real_estate_reference
             'material_housing' => $this->integer(),              // Материал строения - 24. Связана с таблицей ad_real_estate_reference
             'floor' => $this->integer(),                         // Этаж. Связана с таблицей ad_real_estate_reference
             'floors_in_the_house' => $this->integer(),           // Количество этажей в здании. Используем reference этажей. Связана с таблицей ad_real_estate_reference
             'area_of_property' => $this->integer(),              // Площадь помещения
+            'measurement_of_property' => $this->integer(),       // Единицы измерения площади недвижемости (м2 или фут квадратный)
             'area_of_land' => $this->integer(),                  // Площадь земли
+            'measurement_of_land' => $this->integer(),           // Единицы измерения площади земли (сотки или гектары)
             'system_measure' => $this->integer()->notNull(),     // Единица измерения площади 12 - комнат, квартир и домов, 28 - для земли (метрическая), 29 - для земли (английская). Связана с таблицей ad_real_estate_reference
             'lease_term' => $this->integer(),                    // Срок аденды. Связана с таблицей ad_real_estate_reference
             'price' => $this->integer()->notNull(),              // Цена
@@ -210,7 +212,8 @@ class m160116_094903_create_real_estate_tables extends Migration
         $this->addforeignKey('ad_real_estate_material_housing_reference', 'ad_real_estate', 'material_housing', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_floor_reference', 'ad_real_estate', 'floor', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_floors_in_the_house_reference', 'ad_real_estate', 'floors_in_the_house', 'ad_real_estate_reference', 'id');
-        $this->addforeignKey('ad_real_estate_system_measure_reference', 'ad_real_estate', 'system_measure', 'ad_real_estate_reference', 'id');
+        $this->addforeignKey('ad_real_estate_measurement_of_property_reference', 'ad_real_estate', 'measurement_of_property', 'ad_real_estate_reference', 'id');
+        $this->addforeignKey('ad_real_estate_measurement_of_land_reference', 'ad_real_estate', 'measurement_of_land', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_lease_term_reference', 'ad_real_estate', 'lease_term', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_price_for_the_period_reference', 'ad_real_estate', 'price_for_the_period', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_necessary_furniture_reference', 'ad_real_estate', 'necessary_furniture', 'ad_real_estate_reference', 'id');

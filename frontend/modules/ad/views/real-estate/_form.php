@@ -232,7 +232,7 @@ MaskedInput::widget([
     if($model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'sellingLand'):
         ?>
         <?= $form->field($model, 'area_of_land')->textInput() ?>
-        <?= $form->field($model, 'system_measure')->dropDownList($model->realEstateLeaseTermList, [
+        <?= $form->field($model, 'measurement_of_property')->dropDownList($model->realEstateLeaseTermList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>

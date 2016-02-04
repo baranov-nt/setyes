@@ -20,7 +20,7 @@ use yii\db\ActiveRecord;
  * @property integer $floors_in_the_house
  * @property integer $area_of_property
  * @property integer $area_of_land
- * @property integer $system_measure
+ * @property integer $measurement_of_property
  * @property integer $lease_term
  * @property integer $price
  * @property integer $price_for_the_period
@@ -143,7 +143,7 @@ class AdRealEstate extends ActiveRecord
             'floors_in_the_house' => Yii::t('app', 'Floors In The House'),
             'area_of_property' => Yii::t('app', 'Area of property'),
             'area_of_land' => Yii::t('app', 'Area of land'),
-            'system_measure' => Yii::t('app', 'System Measure'),
+            'measurement_of_property' => Yii::t('app', 'System Measure'),
             'lease_term' => Yii::t('app', 'Lease Term'),
             'price' => Yii::t('app', 'Price'),
             'price_for_the_period' => Yii::t('app', 'Price For The Period'),
@@ -268,7 +268,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getSystemMeasure()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'system_measure']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'measurement_of_property']);
     }
 
     /**
@@ -607,7 +607,6 @@ class AdRealEstate extends ActiveRecord
      */
     public function getRealEstateLeaseTermList()
     {
-        d($this->deal_type);
         $lease_term = ArrayHelper::map(AdRealEstateReference::find()
             ->where(['reference_id' => 13])
             ->all(), 'id', 'reference_name');
@@ -699,17 +698,17 @@ class AdRealEstate extends ActiveRecord
 
         switch ($user->country->system_measure) {
             case 0:
-                /* @var $system_measure \common\models\AdRealEstateReference */
-                $system_measure = AdRealEstateReference::find()
+                /* @var $measurement_of_property \common\models\AdRealEstateReference */
+                $measurement_of_property = AdRealEstateReference::find()
                     ->where(['id' => 75])
                     ->one();
-                return Yii::t('references', $system_measure->reference_name);
+                return Yii::t('references', $measurement_of_property->reference_name);
             case 1:
-                /* @var $system_measure \common\models\AdRealEstateReference */
-                $system_measure = AdRealEstateReference::find()
+                /* @var $measurement_of_property \common\models\AdRealEstateReference */
+                $measurement_of_property = AdRealEstateReference::find()
                     ->where(['id' => 76])
                     ->one();
-                return Yii::t('references', $system_measure->reference_name);
+                return Yii::t('references', $measurement_of_property->reference_name);
         }
         return false;
     }
@@ -740,7 +739,7 @@ class AdRealEstate extends ActiveRecord
     {
         /* @var $user \common\models\User */
         $user = $this->getUser();
-        return $user->country->system_measure;
+        return $user->country->measurement_of_property;
     }
 
     /**

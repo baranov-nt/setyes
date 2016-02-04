@@ -7,14 +7,19 @@ use common\widgets\FontAwesome\AssetBundle;
 use justinvoelker\awesomebootstrapcheckbox\ActiveField;
 use yii\widgets\MaskedInput;
 use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
+use common\widgets\ImageLoad\ImageLoadWidget;
 
 AssetBundle::register($this);
 ChosenAsset::register($this);
 /* @var $this yii\web\View */
-/* @var $model common\models\AdRealEstate */
+/* @var $modelAdRealEstate common\models\AdRealEstate */
+/* @var $user common\models\User */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $key int */
 /* @var $pjaxUrl string */
+
+$user = Yii::$app->user->identity;
+
 MaskedInput::widget([
     'name' => 'masked-input_init',
     'clientOptions' => [
@@ -23,16 +28,66 @@ MaskedInput::widget([
 ]);
 ?>
 
+<div class="row">
+    <div class="col-md-12">
+        <?php
+        echo ImageLoadWidget::widget([
+            'modelName' => 'Product',
+            'id' => 'load-image',                                       // суффикс ID для основных форм виджета
+            'object_id' => $modelAdRealEstate->id,                          // ID объекта, к которому привязаны изображения
+            'imagesObject' => $modelAdRealEstate->adCategories->imagesOfObjects,          // объект с загруженными для модели изображениями
+            'images_num' => $user->userPrivilege->images_num,                 // максимальное количество изображений
+            'images_label' => $modelAdRealEstate->adCategories->category_id,             // максимальное количество изображений
+            'images_temp' => 0,       // указываем временной изображение или нет
+            'imageSmallWidth' => 360,                       // ширина миниатюры
+            'imageSmallHeight' => 200,                      // высота миниатюры
+            'headerModal' => 'Загрузить изображение товара',                        // заголовок в модальном окне
+            'sizeModal' => 'modal-md',                                  // размер модального окна
+            'baseUrl' => '/images/',                        // основной путь к изображениям
+            'imagePath' => 'product/images/',   // путь, куда будут записыватся изображения
+            'noImage' => 'product/noImage.png',                 // картинка, если изображение отсутствует
+            'classesWidget' => [
+                'imageClass' => 'imageProduct',
+                'buttonDeleteClass' => 'btn btn-xs btn-danger btn-imageDeleteProduct glyphicon glyphicon-trash glyphicon',
+                'imageContainerClass' => 'imageContainerProduct',
+                'formImagesContainerClass' => 'formImageContainerProduct',
+            ],
+            'pluginOptions' => [                            // настройки плагина
+                'aspectRatio' => 16/9,                      // установите соотношение сторон рамки обрезки. По умолчанию свободное отношение.
+                'strict' => true,                           // true - рамка не может вызодить за холст, false - может
+                'guides' => true,                           // показывать пунктирные линии в рамке
+                'center' => true,                           // показывать центр в рамке изображения изображения
+                'autoCrop' => true,                         // показывать рамку обрезки при загрузке
+                'autoCropArea' => 0.5,                      // площидь рамки на холсте изображения при autoCrop (1 = 100% - 0 - 0%)
+                'dragCrop' => true,                         // создание новой рамки при клики в свободное место хоста (false - нельзя)
+                'movable' => true,                          // перемещать изображение холста (false - нельзя)
+                'rotatable' => true,                        // позволяет вращать изображение
+                'scalable' => true,                         // мастабирование изображения
+                'zoomable' => true,
+                'preview' => '.img-preview',                // класс превью
+            ],
+            'cropBoxData' => [                              // начальные настройки рамки // cropBoxData = { left: 10, top: 10, width: 160, height:200 }
+                'left' => 10,                               // смещение слева
+                'top' => 10,                                // смещение вниз
+                //'width' => 160,                             // ширина
+                //'height' => 200                             // высота
+            ],
+            'canvasData' => [                               // начальные настройки холста
+                //'width' => 500,                             // ширина
+                //'height' => 500                             // высота
+            ]]);
+        ?>
+    </div>
+</div>
 <div class="ad-real-estate-form">
-
     <?php $form = ActiveForm::begin([
         'fieldClass' => ActiveField::className(),
         'id' => 'ad_form',
     ]); ?>
 
-    <?= $form->field($model, 'property')->hiddenInput()->label(false) ?>
+    <?= $form->field($modelAdRealEstate, 'property')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'deal_type')->dropDownList($model->realEstateOperationTypeList, [
+    <?= $form->field($modelAdRealEstate, 'deal_type')->dropDownList($modelAdRealEstate->realEstateOperationTypeList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
         'onChange' => '
@@ -50,14 +105,14 @@ MaskedInput::widget([
     /** Город доступен всем операциям */
     ?>
     <?php
-    if($model->scenario != 'rooms' && $model->scenario != 'apartments' && $model->scenario != 'houses' && $model->scenario != 'land'
-        && $model->scenario != 'garages' && $model->scenario != 'propertyAbroad' && $model->scenario != 'comercial'):
+    if($modelAdRealEstate->scenario != 'rooms' && $modelAdRealEstate->scenario != 'apartments' && $modelAdRealEstate->scenario != 'houses' && $modelAdRealEstate->scenario != 'land'
+        && $modelAdRealEstate->scenario != 'garages' && $modelAdRealEstate->scenario != 'propertyAbroad' && $modelAdRealEstate->scenario != 'comercial'):
         ?>
-        <?= $form->field($model, 'place_city')->widget(GooglePlacesAutoComplete::className(), [
+        <?= $form->field($modelAdRealEstate, 'place_city')->widget(GooglePlacesAutoComplete::className(), [
         'name' => 'place-city',
         'value' => '',
     ]); ?>
-        <?= $form->field($model, 'place_city_validate')->hiddenInput(['value' => '1'])->label(false); ?>
+        <?= $form->field($modelAdRealEstate, 'place_city_validate')->hiddenInput(['value' => '1'])->label(false); ?>
         <?php
     endif;
     ?>
@@ -67,10 +122,10 @@ MaskedInput::widget([
      * 'sellingGarage' 'rentGarage' */
     ?>
     <?php
-    if($model->scenario == 'sellingGarage' || $model->scenario == 'rentGarage' || $model->scenario == 'buyGarage' || $model->scenario == 'buyGarage'):
+    if($modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'buyGarage' || $modelAdRealEstate->scenario == 'buyGarage'):
         ?>
-        <?= $form->field($model, 'place_street'); ?>
-        <?= $form->field($model, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
+        <?= $form->field($modelAdRealEstate, 'place_street'); ?>
+        <?= $form->field($modelAdRealEstate, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
         <?php
     endif;
     ?>
@@ -80,15 +135,15 @@ MaskedInput::widget([
      * 'sellingRoom'  'rentARoom' 'sellingApatrment' 'rentApatrment' 'sellingHouse' 'rentHouse' 'sellingComercial' 'rentComercial' */
     ?>
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'
-        || $model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse'
-        || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial'
+    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
-        <?= $form->field($model, 'place_street'); ?>
-        <?= $form->field($model, 'place_house'); ?>
-        <?= $form->field($model, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
+        <?= $form->field($modelAdRealEstate, 'place_street'); ?>
+        <?= $form->field($modelAdRealEstate, 'place_house'); ?>
+        <?= $form->field($modelAdRealEstate, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
         <?php
     endif;
     ?>
@@ -98,15 +153,15 @@ MaskedInput::widget([
      * 'sellingRoom'  'rentARoom' 'buyRoom' 'rentingARoom' */
     ?>
     <?php
-    if($model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'
-        || $model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'buyHouse' || $model->scenario == 'rentingHouse'
-        || $model->scenario == 'sellingLand' || $model->scenario == 'buyLand'
-        || $model->scenario == 'sellingGarage' || $model->scenario == 'rentGarage' || $model->scenario == 'buyGarage' || $model->scenario == 'rentingGarage'
-        || $model->scenario == 'sellingPropertyAbroad' || $model->scenario == 'buyPropertyAbroad'
-        || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial' || $model->scenario == 'buyComercial' || $model->scenario == 'rentingComercial'
+    if($modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'buyHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
+        || $modelAdRealEstate->scenario == 'sellingLand' || $modelAdRealEstate->scenario == 'buyLand'
+        || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'buyGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'buyPropertyAbroad'
+        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial' || $modelAdRealEstate->scenario == 'buyComercial' || $modelAdRealEstate->scenario == 'rentingComercial'
     ):
         ?>
-        <?= $form->field($model, 'type_of_property')->dropDownList($model->realEstatePropertyTypeList, [
+        <?= $form->field($modelAdRealEstate, 'type_of_property')->dropDownList($modelAdRealEstate->realEstatePropertyTypeList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -119,10 +174,10 @@ MaskedInput::widget([
      * 'sellingRoom'  'rentARoom' 'sellingApatrment' 'rentApatrment' */
     ?>
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'):
+    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'):
     ?>
-    <?= $form->field($model, 'rooms_in_the_apartment')->dropDownList($model->realEstateRoomsInApartmentList, [
+    <?= $form->field($modelAdRealEstate, 'rooms_in_the_apartment')->dropDownList($modelAdRealEstate->realEstateRoomsInApartmentList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
         'onChange' => '
@@ -138,15 +193,15 @@ MaskedInput::widget([
      * 'sellingPropertyAbroad' 'sellingComercial' 'rentComercial' */
     ?>
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'
-        || $model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse'
-        || $model->scenario == 'sellingGarage' || $model->scenario == 'rentGarage'
-        || $model->scenario == 'sellingPropertyAbroad'
-        || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial'
+    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+        || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad'
+        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
-        <?= $form->field($model, 'material_housing')->dropDownList($model->realEstateMaterialHousingList, [
+        <?= $form->field($modelAdRealEstate, 'material_housing')->dropDownList($modelAdRealEstate->realEstateMaterialHousingList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -159,12 +214,12 @@ MaskedInput::widget([
      * 'sellingRoom'  'rentARoom' 'sellingApatrment' 'rentApatrment' 'sellingComercial' 'rentComercial' */
     ?>
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'
-        || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial'
+    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
-        <?= $form->field($model, 'floor')->dropDownList($model->realEstateFloorsList, [
+        <?= $form->field($modelAdRealEstate, 'floor')->dropDownList($modelAdRealEstate->realEstateFloorsList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -177,12 +232,12 @@ MaskedInput::widget([
      * 'sellingRoom'  'rentARoom' 'sellingApatrment' 'rentApatrment' 'sellingPropertyAbroad' 'sellingComercial' 'rentComercial' */
     ?>
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'
-        || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial'
+    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
-        <?= $form->field($model, 'floors_in_the_house')->dropDownList($model->realEstateFloorsInBuildingList, [
+        <?= $form->field($modelAdRealEstate, 'floors_in_the_house')->dropDownList($modelAdRealEstate->realEstateFloorsInBuildingList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -195,9 +250,9 @@ MaskedInput::widget([
      * 'sellingHouse' 'rentHouse' 'sellingPropertyAbroad' */
     ?>
     <?php
-    if($model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'sellingPropertyAbroad'):
+    if($modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'sellingPropertyAbroad'):
         ?>
-        <?= $form->field($model, 'floors_in_the_house')->dropDownList($model->realEstateFloorsInHouseList, [
+        <?= $form->field($modelAdRealEstate, 'floors_in_the_house')->dropDownList($modelAdRealEstate->realEstateFloorsInHouseList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -211,15 +266,15 @@ MaskedInput::widget([
      * 'sellingPropertyAbroad' 'sellingComercial' 'rentComercial' */
     ?>
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'
-        || $model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse'
-        || $model->scenario == 'sellingGarage' || $model->scenario == 'rentGarage'
-        || $model->scenario == 'sellingPropertyAbroad'
-        || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial'
+    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+        || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad'
+        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
     ?>
-    <?= $form->field($model, 'area_of_property')->textInput(['style' => 'text-align: right !important;'])->label($model->getAttributeLabel('area_of_property').' ('.$model->realEstateMeasurementOfPropertyName.')') ?>
+    <?= $form->field($modelAdRealEstate, 'area_of_property')->textInput(['style' => 'text-align: right !important;'])->label($modelAdRealEstate->getAttributeLabel('area_of_property').' ('.$modelAdRealEstate->realEstateMeasurementOfPropertyName.')') ?>
         <?php
     endif;
     ?>
@@ -229,10 +284,10 @@ MaskedInput::widget([
      * 'sellingLand' 'sellingHouse' 'rentHouse' */
     ?>
     <?php
-    if($model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'sellingLand'):
+    if($modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'sellingLand'):
         ?>
-        <?= $form->field($model, 'area_of_land')->textInput(['style' => 'text-align: right !important;']) ?>
-        <?= $form->field($model, 'measurement_of_land')->dropDownList($model->realEstateMeasurementOfLandName, [
+        <?= $form->field($modelAdRealEstate, 'area_of_land')->textInput(['style' => 'text-align: right !important;']) ?>
+        <?= $form->field($modelAdRealEstate, 'measurement_of_land')->dropDownList($modelAdRealEstate->realEstateMeasurementOfLandName, [
         'class'  => 'form-control chosen-select',
     ]) ?>
         <?php
@@ -240,10 +295,14 @@ MaskedInput::widget([
     ?>
 
     <?php
-    if($model->scenario == 'rentARoom' || $model->scenario == 'rentingARoom'
-        || $model->scenario == 'rentApatrment' || $model->scenario == 'rentingApatrment'):
+    /** Срок аренды доступена для сценариев
+     * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
+    ?>
+    <?php
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'
+        || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentComercial'):
         ?>
-    <?= $form->field($model, 'lease_term')->dropDownList($model->realEstateLeaseTermList, [
+    <?= $form->field($modelAdRealEstate, 'lease_term')->dropDownList($modelAdRealEstate->realEstateLeaseTermList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -252,11 +311,14 @@ MaskedInput::widget([
     ?>
 
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom' || $model->scenario == 'buyRoom' || $model->scenario == 'rentingARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment' || $model->scenario == 'buyApatrment' || $model->scenario == 'rentingApatrment'):
+    /** Цена доступена всем операциям */
     ?>
     <?php
-    echo $form->field($model, 'price')->widget(MaskedInput::className(), [
+    if($modelAdRealEstate->scenario != 'rooms' && $modelAdRealEstate->scenario != 'apartments' && $modelAdRealEstate->scenario != 'houses' && $modelAdRealEstate->scenario != 'land'
+        && $modelAdRealEstate->scenario != 'garages' && $modelAdRealEstate->scenario != 'propertyAbroad' && $modelAdRealEstate->scenario != 'comercial'):
+        ?>
+    <?php
+    echo $form->field($modelAdRealEstate, 'price')->widget(MaskedInput::className(), [
         'name' => 'masked-input',
         'clientOptions' => [
             'alias' => 'decimal',
@@ -268,16 +330,20 @@ MaskedInput::widget([
             'removeMaskOnSubmit' => true,
             'placeholder' =>  '0'
         ],
-    ])->label($model->getAttributeLabel('price').' ('.$model->realEstateCurrency.') '.$model->getRealEstatePriceForThePeriod($model->lease_term)); ?>
+    ])->label($modelAdRealEstate->getAttributeLabel('price').' ('.$modelAdRealEstate->realEstateCurrency.') '.$modelAdRealEstate->getRealEstatePriceForThePeriod($modelAdRealEstate->lease_term)); ?>
         <?php
     endif;
     ?>
 
     <?php
-    if($model->scenario == 'rentARoom' || $model->scenario == 'rentingARoom'
-        || $model->scenario == 'rentApatrment' || $model->scenario == 'rentingApatrment'):
+    /** Цена за период доступена для сценариев
+     * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
     ?>
-    <?= $form->field($model, 'price_for_the_period')->dropDownList($model->realEstatePricePeriodList, [
+    <?php
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'
+        || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentComercial'):
+        ?>
+    <?= $form->field($modelAdRealEstate, 'price_for_the_period')->dropDownList($modelAdRealEstate->realEstatePricePeriodList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -286,9 +352,13 @@ MaskedInput::widget([
     ?>
 
     <?php
-    if($model->scenario == 'rentARoom' || $model->scenario == 'rentApatrment'):
+    /** Необходимая мебель доступена для сценариев
+     * 'rentARoom' 'rentApatrment' 'rentHouse' */
     ?>
-    <?= $form->field($model, 'necessary_furniture')->dropDownList($model->realEstateNecessaryFurnitureList, [
+    <?php
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'):
+        ?>
+    <?= $form->field($modelAdRealEstate, 'necessary_furniture')->dropDownList($modelAdRealEstate->realEstateNecessaryFurnitureList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -297,9 +367,13 @@ MaskedInput::widget([
     ?>
 
     <?php
-    if($model->scenario == 'rentARoom' || $model->scenario == 'rentApatrment'):
+    /** Интернет доступен для сценариев
+     * 'rentARoom' 'rentApatrment' 'rentHouse' */
     ?>
-    <?= $form->field($model, 'internet')->dropDownList($model->realEstateInternetList, [
+    <?php
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'):
+    ?>
+    <?= $form->field($modelAdRealEstate, 'internet')->dropDownList($modelAdRealEstate->realEstateInternetList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -308,9 +382,13 @@ MaskedInput::widget([
     ?>
 
     <?php
-    if($model->scenario == 'rentARoom' || $model->scenario == 'rentApatrment'):
+    /** Домашние животные доступен для сценариев
+     * 'rentARoom' 'rentApatrment' 'rentHouse' */
     ?>
-    <?= $form->field($model, 'pets_allowed')->dropDownList($model->realEstatePetsAllowedList, [
+    <?php
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'):
+        ?>
+    <?= $form->field($modelAdRealEstate, 'pets_allowed')->dropDownList($modelAdRealEstate->realEstatePetsAllowedList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -319,10 +397,20 @@ MaskedInput::widget([
     ?>
 
     <?php
-    if($model->scenario == 'sellingRoom' || $model->scenario == 'rentARoom'
-        || $model->scenario == 'sellingApatrment' || $model->scenario == 'rentApatrment'):
+    /** Состояние доступено для сценариев
+     * 'sellingRoom'  'rentARoom' 'sellingApatrment' 'rentApatrment' 'sellingHouse' 'rentHouse' 'sellingGarage' 'rentGarage'
+     * 'sellingPropertyAbroad' 'sellingComercial' 'rentComercial' */
     ?>
-    <?= $form->field($model, 'condition')->dropDownList($model->realEstateConditionList, [
+    <?php
+    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+        || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad'
+        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
+    ):
+        ?>
+    <?= $form->field($modelAdRealEstate, 'condition')->dropDownList($modelAdRealEstate->realEstateConditionList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -331,9 +419,13 @@ MaskedInput::widget([
     ?>
 
     <?php
-    if($model->scenario == 'rentARoom' || $model->scenario == 'rentApatrment'):
+    /** Бытовая техника доступена для сценариев
+     * 'rentARoom' 'rentApatrment' 'rentHouse' */
     ?>
-    <?php echo $form->field($model, 'appliances')->checkboxList($model->realEstateAppliancesList,
+    <?php
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'):
+        ?>
+    <?php echo $form->field($modelAdRealEstate, 'appliances')->checkboxList($modelAdRealEstate->realEstateAppliancesList,
         [
             'itemOptions' => [
                 'disabled' => false,
@@ -344,7 +436,7 @@ MaskedInput::widget([
     endif;
     ?>
 
-    <?php /*echo $form->field($model, 'appliances')->inline()->checkboxList($model->realEstateAppliancesList,
+    <?php /*echo $form->field($modelAdRealEstate, 'appliances')->inline()->checkboxList($modelAdRealEstate->realEstateAppliancesList,
         [
             'itemOptions' => [
                 'disabled' => false,
@@ -352,12 +444,12 @@ MaskedInput::widget([
             ]]);*/
     ?>
 
-    <?= $form->field($model, 'scenario')->hiddenInput(['value' => $model->scenario])->label(false) ?>
+    <?= $form->field($modelAdRealEstate, 'scenario')->hiddenInput(['value' => $modelAdRealEstate->scenario])->label(false) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        <?= Html::submitButton($modelAdRealEstate->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
             [
-                'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+                'class' => $modelAdRealEstate->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
                 //'disabled' => true
             ]) ?>
     </div>

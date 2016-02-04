@@ -3,7 +3,7 @@ use yii\bootstrap\Nav;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AdRealEstate */
+/* @var $modelAdRealEstate common\models\AdRealEstate */
 /* @var $realEstateProperty common\models\AdRealEstateReference */
 /* @var $pjaxUrl string */
 
@@ -15,7 +15,7 @@ Pjax::begin([
 ]);
 Yii::$app->view->registerJs('$(".chosen-select").chosen({disable_search_threshold: 10});', \yii\web\View::POS_READY);
 echo Nav::widget([
-    'items' => $model->realEstatePropertyList,
+    'items' => $modelAdRealEstate->realEstatePropertyList,
     'activateParents' => true,
     'encodeLabels' => false,
     'options' => [
@@ -26,7 +26,7 @@ echo Nav::widget([
 
 <?php if($model->scenario != 'default'): ?>
     <?= $this->render('_form', [
-        'model' => $model,
+        'modelAdRealEstate' => $modelAdRealEstate,
         'pjaxUrl' => $pjaxUrl
     ]) ?>
 <?php

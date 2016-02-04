@@ -6,6 +6,83 @@
  * Time: 21:55
  */
 return [
+    [['type_of_property'], 'required', 'on' => [
+        /* квартиры 2 */
+        'sellingApatrment',
+        'rentApatrment',
+        'buyApatrment',
+        'rentingApatrment',
+        /* дома 3 */
+        'sellingHouse',
+        'rentHouse',
+        'buyHouse',
+        'rentingHouse',
+        /* земля 4 */
+        'sellingLand',
+        'buyLand',
+        /* гаражи 5 */
+        'sellingGarage',
+        'rentGarage',
+        'buyGarage',
+        'rentingGarage',
+        /* недвижемость за рубежем 6 */
+        'sellingPropertyAbroad',
+        'buyPropertyAbroad',
+        /* коммерческая недвижемость */
+        'sellingComercial',
+        'rentComercial',
+        'buyComercial',
+        'rentingComercial'
+    ]],
+    [['property', 'deal_type'], 'required', 'on' => [
+        /* комнаты 1 */
+        'rooms',
+        /* квартиры 2 */
+        'apartments',
+        /* дома 3 */
+        'houses',
+        /* земля 4 */
+        'land',
+        /* гаражи 5 */
+        'garages',
+        /* недвижемость за рубежем 6 */
+        'propertyAbroad',
+        /* коммерческая недвижемость */
+        'comercial',
+    ]],
+    [['property', 'deal_type', 'price', 'place_city'], 'required', 'on' => [
+        /* комнаты 1 */
+        'sellingRoom',
+        'rentARoom',
+        'buyRoom',
+        'rentingARoom',
+        /* квартиры 2 */
+        'sellingApatrment',
+        'rentApatrment',
+        'buyApatrment',
+        'rentingApatrment',
+        /* дома 3 */
+        'sellingHouse',
+        'rentHouse',
+        'buyHouse',
+        'rentingHouse',
+        /* земля 4 */
+        'sellingLand',
+        'buyLand',
+        /* гаражи 5 */
+        'sellingGarage',
+        'rentGarage',
+        'buyGarage',
+        'rentingGarage',
+        /* недвижемость за рубежем 6 */
+        'sellingPropertyAbroad',
+        'buyPropertyAbroad',
+        /* коммерческая недвижемость */
+        'sellingComercial',
+        'rentComercial',
+        'buyComercial',
+        'rentingComercial'
+    ]],
     ['deal_type', 'validateDealType', 'on' => [
         /* комнаты 1 */
         'rooms',
@@ -111,7 +188,7 @@ return [
             'rentComercial',
         ],
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('area_of_property')])],
-    ['area_of_land', 'required',
+    [['area_of_land', 'measurement_of_land'], 'required',
         'on' => [
             'sellingLand',
             'sellingHouse',
@@ -160,30 +237,5 @@ return [
         ],
         'message' => Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->getAttributeLabel('price')])],  // цены
 
-    [['place_address'], 'compare', 'compareValue' => 1, 'operator' => '==',
-        'on' => [
-            'sellingRoom',
-            'rentARoom',
-            'sellingApatrment',
-            'rentApatrment',
-            'sellingHouse',
-            'rentHouse',
-            'sellingComercial',
-            'rentComercial',
-        ],
-        'message' => Yii::t('app', 'Unfortunately, the specified address was not found.')],
-    [['place_city_validate'], 'compare', 'compareValue' => 1, 'operator' => '==',
-        'message' => Yii::t('app', 'Unfortunately, the specified city was not found.')],
-    [['place_street', 'place_house'], 'required',
-        'on' => [
-            'sellingRoom',
-            'rentARoom',
-            'sellingApatrment',
-            'rentApatrment',
-            'sellingHouse',
-            'rentHouse',
-            'sellingComercial',
-            'rentComercial',
-        ]],
-    [['currency', 'scenario', 'place_city', 'place_street', 'place_house', 'place_address'], 'string'],
+
 ];

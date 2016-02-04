@@ -9,9 +9,11 @@ use Yii;
  *
  * @property integer $id
  * @property integer $category_id
- * @property string $ad_id
+ * @property integer $ad_id
  *
  * @property AdReferenceMain $category
+ * @property AdRealEstate $ad
+ * @property ImagesOfObject $imagesOfObjects
  * @property AdMain[] $adMains
  */
 class AdCategory extends \yii\db\ActiveRecord
@@ -30,9 +32,8 @@ class AdCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'ad_id'], 'required'],
-            [['category_id'], 'integer'],
-            [['ad_id'], 'string', 'max' => 255]
+            [['category_id'], 'required'],
+            [['category_id', 'ad_id'], 'integer']
         ];
     }
 
@@ -59,8 +60,28 @@ class AdCategory extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getAd()
+    {
+        return $this->hasOne(AdRealEstate::className(), ['id' => 'ad_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getAdMains()
     {
         return $this->hasMany(AdMain::className(), ['ad_category_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImagesOfObjects()
+    {
+        return $this->hasMany(ImagesOfObject::className(),
+            [
+                'object_id' => 'id',
+                'label' => 'category_id'
+            ]);
     }
 }

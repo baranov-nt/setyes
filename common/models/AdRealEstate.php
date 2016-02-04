@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\db\ActiveRecord;
+use yii\db\Exception;
 
 /**
  * This is the model class for table "ad_real_estate".
@@ -19,9 +20,10 @@ use yii\db\ActiveRecord;
  * @property integer $floor
  * @property integer $floors_in_the_house
  * @property integer $area_of_property
- * @property integer $area_of_land
  * @property integer $measurement_of_property
+ * @property integer $area_of_land
  * @property integer $measurement_of_land
+ * @property integer $system_measure
  * @property integer $lease_term
  * @property integer $price
  * @property integer $price_for_the_period
@@ -30,6 +32,7 @@ use yii\db\ActiveRecord;
  * @property integer $pets_allowed
  * @property integer $condition
  *
+ * @property AdCategory[] $adCategories
  * @property AdRealEstateReference $condition0
  * @property AdRealEstateReference $dealType
  * @property AdRealEstateReference $floor0
@@ -37,13 +40,14 @@ use yii\db\ActiveRecord;
  * @property AdRealEstateReference $internet0
  * @property AdRealEstateReference $leaseTerm
  * @property AdRealEstateReference $materialHousing
+ * @property AdRealEstateReference $measurementOfLand
+ * @property AdRealEstateReference $measurementOfProperty
  * @property AdRealEstateReference $necessaryFurniture
  * @property AdRealEstateReference $petsAllowed
  * @property PlaceAddress $placeAddress
  * @property AdRealEstateReference $priceForThePeriod
  * @property AdRealEstateReference $typeOfProperty
  * @property AdRealEstateReference $roomsInTheApartment
- * @property AdRealEstateReference $systemMeasure
  * @property AdRealEstateReference $typeOfProperty0
  * @property AdRealEstateAppliances[] $adRealEstateAppliances
  */
@@ -159,6 +163,14 @@ class AdRealEstate extends ActiveRecord
             'place_address' => Yii::t('app', 'Address'),
             'measurement_of_land' => Yii::t('app', 'Measurement Of Land'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdCategories()
+    {
+        return $this->hasOne(AdCategory::className(), ['ad_id' => 'id']);
     }
 
     /**
@@ -896,4 +908,73 @@ class AdRealEstate extends ActiveRecord
         }
         return $modelAdRealEstate;
     }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function createObject()
+    {
+        $modelAdRealEstate = new AdRealEstate();
+        $modelAdRealEstate->images_num = 3;
+        $modelAdRealEstate->images_label = 'AdRealEstate';
+        $modelAdRealEstate->desc = '';
+        $modelAdRealEstate->price = 0;
+        $modelAdRealEstate->user_id = Yii::$app->user->id;
+        $modelAdRealEstate->temp = 1;
+        $modelAdRealEstate->save();
+        Yii::$app->session->set('tempModel', 'AdRealEstate');
+        Yii::$app->session->set('tempId', $modelAdRealEstate->id);
+        return  $modelAdRealEstate ? $modelAdRealEstate : null;
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     * @var $modelAdRealEstate \common\models\AdRealEstate
+     */
+    public function updateObject($modelAdRealEstate)
+    {
+        $modelAdRealEstate->temp = 0;
+        $modelAdRealEstate->setScenario('update');
+        if($modelAdRealEstate->save()):
+            Yii::$app->session->remove('tempModel');
+            Yii::$app->session->remove('tempId');
+            return true;
+        endif;
+        return false;
+    }
+
+    /**
+     * @param $modelAdRealEstate
+     * @return \yii\db\ActiveQuery
+     * @throws \Exception
+     * @throws \yii\db\Exception
+     */
+    public function deleteObject($modelAdRealEstate)
+    {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /* @var $one \common\models\ImagesOfObject */
+        $modelImages = $modelAdRealEstate->imagesOfObjects;
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            foreach($modelImages as $one):
+                $this->deleteImageFile($one->image->path);
+                $this->deleteImageFile($one->image->path_small_image);
+                $one->delete();
+                $one->image->delete();
+            endforeach;
+            if($modelAdRealEstate->delete()):
+                $transaction->commit();
+            endif;
+        } catch (Exception $e) {
+            $transaction->rollBack();
+        }
+    }
+    public function deleteImageFile($image_file) {
+        if (empty('images/'.$image_file) || !file_exists('images/'.$image_file))
+            return false;
+        if (!unlink('images/'.$image_file))
+            return false;
+        return true;
+    }
+
 }

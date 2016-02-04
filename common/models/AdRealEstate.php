@@ -32,7 +32,7 @@ use yii\db\Exception;
  * @property integer $pets_allowed
  * @property integer $condition
  *
- * @property AdCategory[] $adCategories
+ * @property AdCategory $adCategories
  * @property AdRealEstateReference $condition0
  * @property AdRealEstateReference $dealType
  * @property AdRealEstateReference $floor0
@@ -51,6 +51,7 @@ use yii\db\Exception;
  * @property AdRealEstateReference $typeOfProperty0
  * @property AdRealEstateAppliances[] $adRealEstateAppliances
  */
+
 class AdRealEstate extends ActiveRecord
 {
     public $currency;
@@ -170,7 +171,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getAdCategories()
     {
-        return $this->hasOne(AdCategory::className(), ['ad_id' => 'id']);
+        return $this->hasMany(AdCategory::className(), ['ad_id' => 'id']);
     }
 
     /**

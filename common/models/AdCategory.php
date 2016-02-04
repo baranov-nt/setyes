@@ -13,8 +13,8 @@ use Yii;
  *
  * @property AdReferenceMain $category
  * @property AdRealEstate $ad
- * @property ImagesOfObject $imagesOfObjects
  * @property AdMain[] $adMains
+ * @property ImagesOfObject[] $imagesOfObjects
  */
 class AdCategory extends \yii\db\ActiveRecord
 {

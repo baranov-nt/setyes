@@ -24,7 +24,7 @@ echo Nav::widget([
 ]);
 ?>
 
-<?php if($model->scenario != 'default'): ?>
+<?php if($modelAdRealEstate->scenario != 'default'): ?>
     <?= $this->render('_form', [
         'modelAdRealEstate' => $modelAdRealEstate,
         'pjaxUrl' => $pjaxUrl

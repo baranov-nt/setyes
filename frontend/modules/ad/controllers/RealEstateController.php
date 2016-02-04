@@ -49,13 +49,13 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreate()
     {
-        $model = new AdRealEstate();
+        $modelAdRealEstate = new AdRealEstate();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
+            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
         } else {
             return $this->render('create', [
-                'modelAdRealEstate' => $model,
+                'modelAdRealEstate' => $modelAdRealEstate,
             ]);
         }
     }
@@ -609,13 +609,13 @@ class RealEstateController extends BehaviorsController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $modelAdRealEstate = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
+            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
         } else {
             return $this->render('update', [
-                'modelAdRealEstate' => $model,
+                'modelAdRealEstate' => $modelAdRealEstate,
             ]);
         }
     }
@@ -642,8 +642,8 @@ class RealEstateController extends BehaviorsController
      */
     protected function findModel($id)
     {
-        if (($model = AdRealEstate::findOne($id)) !== null) {
-            return $model;
+        if (($modelAdRealEstate = AdRealEstate::findOne($id)) !== null) {
+            return $modelAdRealEstate;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }

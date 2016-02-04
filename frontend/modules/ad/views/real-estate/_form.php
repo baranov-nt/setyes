@@ -33,11 +33,11 @@ MaskedInput::widget([
         <?php
         echo ImageLoadWidget::widget([
             'modelName' => 'Product',
-            'id' => 'load-image',                                       // суффикс ID для основных форм виджета
-            'object_id' => $modelAdRealEstate->id,                          // ID объекта, к которому привязаны изображения
-            'imagesObject' => $modelAdRealEstate->adCategories->imagesOfObjects,          // объект с загруженными для модели изображениями
-            'images_num' => $user->userPrivilege->images_num,                 // максимальное количество изображений
-            'images_label' => $modelAdRealEstate->adCategories->category_id,             // максимальное количество изображений
+            'id' => 'load-image',                                                           // суффикс ID для основных форм виджета
+            'object_id' => $modelAdRealEstate->id,                                          // ID объекта, к которому привязаны изображения
+            'imagesObject' => $modelAdRealEstate->adCategories->imagesOfObjects,            // объект с загруженными для модели изображениями
+            'images_num' => $user->userPrivilege->images_num,                               // максимальное количество изображений
+            'images_label' => $modelAdRealEstate->adCategories->category_id,                // максимальное количество изображений
             'images_temp' => 0,       // указываем временной изображение или нет
             'imageSmallWidth' => 360,                       // ширина миниатюры
             'imageSmallHeight' => 200,                      // высота миниатюры

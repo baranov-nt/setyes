@@ -14,7 +14,7 @@ class m151022_045706_images_of_object extends Migration
             'id' => $this->primaryKey(),
             'image_id' => $this->integer(),
             'object_id' => $this->integer(),
-            'label' => $this->string(32),
+            'label' => $this->integer(),
             'place' => $this->smallInteger(),
         ]);
         $this->createIndex('FK_image', 'images_of_object', 'image_id');

@@ -30,10 +30,11 @@ class m160116_074120_create_ad_main_table extends Migration
         $this->createTable('ad_category', [
             'id' => $this->primaryKey(),
             'category_id' => $this->integer()->notNull(),           // Номер категории из таблицы ad_reference_main. Связь с таблицей  ad_reference_main.
-            'ad_id' => $this->string()->notNull(),                  // Номер объявления. Связь с объявлением с одной из таблиц разделов (недвижимость, транспорт или др.)
+            'ad_id' => $this->integer(),                  // Номер объявления. Связь с объявлением с одной из таблиц разделов (недвижимость, транспорт или др.)
         ]);
 
         $this->addForeignKey('ad_category_reference_main', 'ad_category', 'category_id', 'ad_reference_main', 'id');
+        //$this->addForeignKey('ad_category_images_of_objects', 'images_of_object', 'object_id', 'ad_category', 'ad_id');
 
         /* Создаем таблицу  ad_style, в которой будут находится стили для объявлений.
            Стиль с id = 1 доступен для всех пользователей, другие стили доступны только премиум пользователям. */

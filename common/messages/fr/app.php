@@ -120,6 +120,8 @@ return [
     'Manage Site' => 'Gérer le site',
     'Managing the application' => 'Gestion de l\'application',
     'Material Housing' => 'Matériau du boîtier',
+    'Measurement Of Land' => 'Mesure de la terre',
+    'Measurement Of Property' => 'Mesure de la propriété',
     'Message' => 'Un message',
     'Message Translations' => 'Les traductions des messages',
     'Message successfully deleted.' => 'Un message supprimé.',

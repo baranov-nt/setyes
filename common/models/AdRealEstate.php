@@ -21,6 +21,7 @@ use yii\db\ActiveRecord;
  * @property integer $area_of_property
  * @property integer $area_of_land
  * @property integer $measurement_of_property
+ * @property integer $measurement_of_land
  * @property integer $lease_term
  * @property integer $price
  * @property integer $price_for_the_period
@@ -143,7 +144,7 @@ class AdRealEstate extends ActiveRecord
             'floors_in_the_house' => Yii::t('app', 'Floors In The House'),
             'area_of_property' => Yii::t('app', 'Area of property'),
             'area_of_land' => Yii::t('app', 'Area of land'),
-            'measurement_of_property' => Yii::t('app', 'System Measure'),
+            'measurement_of_property' => Yii::t('app', 'Measurement Of Property'),
             'lease_term' => Yii::t('app', 'Lease Term'),
             'price' => Yii::t('app', 'Price'),
             'price_for_the_period' => Yii::t('app', 'Price For The Period'),
@@ -156,6 +157,7 @@ class AdRealEstate extends ActiveRecord
             'place_street' => Yii::t('app', 'Street Name'),
             'place_house' => Yii::t('app', 'House'),
             'place_address' => Yii::t('app', 'Address'),
+            'measurement_of_land' => Yii::t('app', 'Measurement Of Land'),
         ];
     }
 
@@ -690,7 +692,7 @@ class AdRealEstate extends ActiveRecord
      *
      * @return array
      */
-    public function getRealEstateSystemMeasureName()
+    public function getRealEstateMeasurementOfPropertyName()
     {
         /* @var $user \common\models\User */
         $user = $this->getUser();
@@ -709,6 +711,42 @@ class AdRealEstate extends ActiveRecord
                     ->where(['id' => 76])
                     ->one();
                 return Yii::t('references', $measurement_of_property->reference_name);
+        }
+        return false;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateMeasurementOfLandName()
+    {
+        /* @var $user \common\models\User */
+        $user = $this->getUser();
+        $user->country->system_measure;
+
+        switch ($user->country->system_measure) {
+            case 0:
+                /* @var $measurement_of_land \common\models\AdRealEstateReference */
+                $measurement_of_land = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 28])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($measurement_of_land as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
+            case 1:
+                /* @var $measurement_of_land \common\models\AdRealEstateReference */
+                $measurement_of_land = ArrayHelper::map(AdRealEstateReference::find()
+                    ->where(['reference_id' => 29])
+                    ->all(), 'id', 'reference_name');
+                $items = [];
+                foreach($measurement_of_land as $key => $value) {
+                    $items[$key] = Yii::t('references', $value);
+                }
+                return $items;
         }
         return false;
     }

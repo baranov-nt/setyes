@@ -120,6 +120,8 @@ return [
     'Manage Site' => 'Webseite verwalten',
     'Managing the application' => 'Bedienung der Anwendung',
     'Material Housing' => 'Material Gehäuse',
+    'Measurement Of Land' => 'Mess-Land',
+    'Measurement Of Property' => 'Die Bewertung von Sach',
     'Message' => 'Nachricht',
     'Message Translations' => 'Nachricht Übersetzungen',
     'Message successfully deleted.' => 'Nachricht erfolgreich gelöscht.',

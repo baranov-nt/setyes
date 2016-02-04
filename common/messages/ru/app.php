@@ -120,6 +120,8 @@ return [
     'Manage Site' => 'Управление сайтом',
     'Managing the application' => 'Управление приложением',
     'Material Housing' => 'Материал здания',
+    'Measurement Of Land' => 'Измерение земли',
+    'Measurement Of Property' => 'Измерение недвижимости',
     'Message' => 'Сообщение',
     'Message Translations' => 'Перевод сообщений',
     'Message successfully deleted.' => 'Сообщение успешно удалено.',

@@ -219,7 +219,7 @@ MaskedInput::widget([
         || $model->scenario == 'sellingComercial' || $model->scenario == 'rentComercial'
     ):
     ?>
-    <?= $form->field($model, 'area_of_property')->textInput()->label($model->getAttributeLabel('area_of_property').' ('.$model->realEstateSystemMeasureName.')') ?>
+    <?= $form->field($model, 'area_of_property')->textInput(['style' => 'text-align: right !important;'])->label($model->getAttributeLabel('area_of_property').' ('.$model->realEstateMeasurementOfPropertyName.')') ?>
         <?php
     endif;
     ?>
@@ -231,10 +231,9 @@ MaskedInput::widget([
     <?php
     if($model->scenario == 'sellingHouse' || $model->scenario == 'rentHouse' || $model->scenario == 'sellingLand'):
         ?>
-        <?= $form->field($model, 'area_of_land')->textInput() ?>
-        <?= $form->field($model, 'measurement_of_property')->dropDownList($model->realEstateLeaseTermList, [
+        <?= $form->field($model, 'area_of_land')->textInput(['style' => 'text-align: right !important;']) ?>
+        <?= $form->field($model, 'measurement_of_land')->dropDownList($model->realEstateMeasurementOfLandName, [
         'class'  => 'form-control chosen-select',
-        'prompt' => Yii::t('app', '---'),
     ]) ?>
         <?php
     endif;

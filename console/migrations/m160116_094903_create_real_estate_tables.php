@@ -203,7 +203,7 @@ class m160116_094903_create_real_estate_tables extends Migration
             'pets_allowed' => $this->integer(),                  // Домашние животные разрешены - 27
             'condition' => $this->integer(),                     // Состояние (есть, нет) - 25. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'category_id' => $this->smallInteger(2)->defaultValue('0'), // id категории объявления (1 - для недвижимости)
-            'temp' => $this->boolean()->defaultValue('0'),       // временная запись или нет
+            'temp' => $this->boolean()->defaultValue('1'),       // временная запись или нет
         ]);
 
         //$this->addForeignKey('ad_category_reference_main', 'ad_category', 'category_id', 'ad_reference_main', 'id');

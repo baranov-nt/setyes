@@ -68,6 +68,7 @@ class ImageLoadWidget extends Widget
         $view = $this->getView();
         // Регистрация виджета
         CropperAsset::register($view);
+
         // Пользовательские настройки переводим в JSON
         $options = Json::encode($this->pluginOptions);
         $cropBoxData = Json::encode($this->cropBoxData);

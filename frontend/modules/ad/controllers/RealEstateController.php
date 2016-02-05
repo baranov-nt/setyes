@@ -71,25 +71,20 @@ class RealEstateController extends BehaviorsController
     {
         // @var $modelAdRealEstate \common\models\AdRealEstate
 
-        /*$modelAdRealEstate = $modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
+        $modelAdRealEstate = $modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
         if(!isset($modelAdRealEstate)):
             Yii::$app->session->remove('tempModel');
             Yii::$app->session->remove('tempId');
         endif;
-        if (isset($modelAdRealEstate) && $modelAdRealEstate->load(Yii::$app->request->post())):
-            // @var $modelAdRealEstate \common\models\AdRealEstate
-            if($modelAdRealEstate->updateObject($modelAdRealEstate)):
-                return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-            endif;
-        endif;
-        $modelAdRealEstate = new AdRealEstate();
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
         if(Yii::$app->session->get('tempModel') != 'AdRealEstate'  && $modelAdRealEstate->load(Yii::$app->request->post())):
-             $modelAdRealEstate = $modelAdRealEstate->createObject();
-        endif;*/
+            $modelAdRealEstate = $modelAdRealEstate->createObject();
+            //dd($modelAdRealEstate);
+        endif;
         
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         /* Установка сценария по умолчанию для комнат */
-        $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
+        //$modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
         $modelAdRealEstate->property = 1;                                                               // свойство property (недвижемость) для комнат равно 1
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');     // Получаем город из куки
 
@@ -162,6 +157,9 @@ class RealEstateController extends BehaviorsController
 
             if($modelAdRealEstate) {
                 /* Если валидация и запись прошла */
+                /*if($modelAdRealEstate->updateObject($modelAdRealEstate)):
+                    return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
+                endif;*/
                 d([$modelAdRealEstate->scenario, 'OK']);
             }
             /* Если валидация или запись не прошла */

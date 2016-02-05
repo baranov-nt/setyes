@@ -34,7 +34,7 @@ class AdMain extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'place_city_id', 'ad_category_id'], 'required'],
+            [['user_id', 'ad_category_id'], 'required'],
             [['user_id', 'place_city_id', 'ad_category_id', 'ad_style_id'], 'integer']
         ];
     }

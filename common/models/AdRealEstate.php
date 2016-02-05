@@ -171,7 +171,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getAdCategories()
     {
-        return $this->hasMany(AdCategory::className(), ['ad_id' => 'id']);
+        return $this->hasOne(AdCategory::className(), ['ad_id' => 'id']);
     }
 
     /**
@@ -919,10 +919,30 @@ class AdRealEstate extends ActiveRecord
         $modelAdRealEstate = new AdRealEstate();
         $modelAdRealEstate->property = $this->property;
         $modelAdRealEstate->deal_type = $this->deal_type;
-        $modelAdRealEstate->validate();
-        dd($modelAdRealEstate->errors);
-        Yii::$app->session->set('tempModel', 'AdRealEstate');
-        Yii::$app->session->set('tempId', $modelAdRealEstate->id);
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if($modelAdRealEstate->save()) {
+                $modelCategory = new AdCategory();
+                $modelCategory->category_id = 1;        // Категория для недвижемости
+                $modelCategory->ad_id = $modelAdRealEstate->id;
+                if($modelCategory->save()) {
+                    $modelAdMain = new AdMain();
+                    $modelAdMain->user_id = Yii::$app->user->id;
+                    $modelAdMain->ad_category_id = $modelCategory->id;
+                    if($modelAdMain->save()) {
+                        Yii::$app->session->set('tempModel', 'AdRealEstate');
+                        Yii::$app->session->set('tempId', $modelAdRealEstate->id);
+                        $transaction->commit();
+                    }
+                }
+            } else {
+                \Yii::$app->session->set('error', 'Изображение не добавлено.');         // если все в порядке, пишем в сессию путь к изображениею
+                \Yii::$app->session->remove('image');
+            }
+        } catch (Exception $e) {
+            $transaction->rollBack();
+        }
+
         return  $modelAdRealEstate ? $modelAdRealEstate : null;
     }
     /**

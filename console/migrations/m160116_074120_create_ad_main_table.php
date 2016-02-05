@@ -60,9 +60,9 @@ class m160116_074120_create_ad_main_table extends Migration
         $this->createTable('ad_main', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),           // Пользователь, который добавил объявление (обязательно). Связь с таблицей user
-            'place_city_id' => $this->integer()->notNull(),     // Город, для которого добавлено объявление. Связь с таблицей place_city
+            'place_city_id' => $this->integer(),     // Город, для которого добавлено объявление. Связь с таблицей place_city
             'ad_category_id' => $this->integer()->notNull(),    // Тема объявления. Связь с таблицей ad_category
-            'ad_style_id' => $this->integer()->notNull()->defaultValue(1),       // Стиль объявления. Связь с таблицей ad_style
+            'ad_style_id' => $this->integer()->defaultValue(1),       // Стиль объявления. Связь с таблицей ad_style
         ]);
 
         $this->addForeignKey('ad_main_user', 'ad_main', 'user_id', 'user', 'id');

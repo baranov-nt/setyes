@@ -6,6 +6,9 @@ use justinvoelker\awesomebootstrapcheckbox\ActiveField;
 use yii\widgets\MaskedInput;
 use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 use common\widgets\ImageLoad\ImageLoadWidget;
+use common\widgets\ImageLoad\assets\CropperAsset;
+
+CropperAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -27,6 +30,7 @@ $user = Yii::$app->user->identity;
         && $modelAdRealEstate->scenario != 'garages' && $modelAdRealEstate->scenario != 'propertyAbroad' && $modelAdRealEstate->scenario != 'comercial'):
         ?>
         <?php
+        //d($modelAdRealEstate->adCategories);
         echo ImageLoadWidget::widget([
             'modelName' => 'Product',
             'id' => 'load-image',                                                           // суффикс ID для основных форм виджета
@@ -40,8 +44,8 @@ $user = Yii::$app->user->identity;
             'headerModal' => 'Загрузить изображение товара',                        // заголовок в модальном окне
             'sizeModal' => 'modal-md',                                  // размер модального окна
             'baseUrl' => '/images/',                        // основной путь к изображениям
-            'imagePath' => 'ad/images/',   // путь, куда будут записыватся изображения
-            'noImage' => 'ad/noImage.png',                 // картинка, если изображение отсутствует
+            'imagePath' => 'imagesApp/images/',   // путь, куда будут записыватся изображения
+            'noImage' => 'imagesApp/noImage.png',                 // картинка, если изображение отсутствует
             'classesWidget' => [
                 'imageClass' => 'imageProduct',
                 'buttonDeleteClass' => 'btn btn-xs btn-danger btn-imageDeleteProduct glyphicon glyphicon-trash glyphicon',

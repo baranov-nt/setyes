@@ -56,7 +56,7 @@ Pjax::begin([
 
         $form = ActiveForm::begin(
             [
-                'action' => Url::to(['images/image-autoload']),
+                'action' => Url::to(['/images/image-autoload']),
                 'options' => [
                     'enctype' => 'multipart/form-data',
                     'id' => 'image-form-'.$id,
@@ -65,7 +65,7 @@ Pjax::begin([
             ]);
 
         echo $form->field($modelImageForm, 'image', [
-            'template' => '<div id="crop-url-'.$id.'" class="btn-file" data-crop-url="'.Url::to(['images/image-autoload']).'">
+            'template' => '<div id="crop-url-'.$id.'" class="btn-file" data-crop-url="'.Url::to(['/images/image-autoload']).'">
     {input}</div>'])
             ->input('file', [
                 'onchange' => 'loadFile(event)',

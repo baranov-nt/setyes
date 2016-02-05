@@ -195,7 +195,7 @@ class m160116_094903_create_real_estate_tables extends Migration
             'area_of_land' => $this->integer(),                  // Площадь земли
             'measurement_of_land' => $this->integer(),           // Единицы измерения площади земли (сотки или гектары)
             'lease_term' => $this->integer(),                    // Срок аденды. Связана с таблицей ad_real_estate_reference
-            'price' => $this->integer()->notNull(),              // Цена
+            'price' => $this->integer(),                        // Цена
             'price_for_the_period' => $this->integer(),          // Цена за - 14. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'necessary_furniture' => $this->integer(),           // меблированный  (есть, нет) - 23. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'internet' => $this->integer(),                      // Наличие интернета (есть, нет) - 10. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference

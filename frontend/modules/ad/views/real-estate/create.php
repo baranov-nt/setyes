@@ -36,7 +36,6 @@ echo Nav::widget([
 ?>
 
 <?php if($modelAdRealEstate->scenario != 'default'):
-
     ?>
     <?= $this->render('_form', [
         'modelAdRealEstate' => $modelAdRealEstate,

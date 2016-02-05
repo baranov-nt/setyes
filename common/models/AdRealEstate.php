@@ -943,6 +943,8 @@ class AdRealEstate extends ActiveRecord
             $transaction->rollBack();
         }
 
+        d($modelAdRealEstate->adCategories->imagesOfObjects);
+
         return  $modelAdRealEstate ? $modelAdRealEstate : null;
     }
     /**

@@ -45,7 +45,7 @@ class ImageLoadWidget extends Widget
     {
         parent::init();
         $this->modelImageForm = new ImageForm();
-        $this->deleteUrl = Url::to(['images/delete-avatar']);
+        $this->deleteUrl = Url::to(['/images/delete-avatar']);
         $this->registerClientScript();
     }
 

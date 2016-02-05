@@ -5,10 +5,9 @@
  * Date: 27.10.2015
  * Time: 11:09
  */
-
 namespace frontend\controllers;
 
-use common\models\UserProfile;
+use common\models\AdRealEstate;
 use Yii;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\helpers\Json;
@@ -19,29 +18,25 @@ class ImagesController extends BehaviorsController
     public function actionImageAutoload()
     {
         $imageData = Yii::$app->request->post('phpntCrop');
-
         $modelImageForm = new ImageForm();
-
         if($imageData['image_id'] == '0'):
             $modelImageForm->createImage();
         else:
             $modelImageForm->updateImage();
         endif;
-
         if(Yii::$app->session->get('error')):
             $error = Yii::$app->session->get('error');
         else:
             $error = false;
         endif;
-
-        /* @var $model \common\models\UserProfile */
-
-        if($imageData['modelName'] == 'UserProfile'):
-            $model = UserProfile::findOne($imageData['object_id']);
+        /* @var $model \common\models\AdRealEstate */
+        if($imageData['modelName'] == 'AdRealEstate'):
+            $model = AdRealEstate::findOne($imageData['object_id']);
+        //dd($model);
+        //elseif($imageData['modelName'] == 'Product'):
+            //$model = Product::findOne($imageData['object_id']);
         endif;
-
         $imagesObject = $model->imagesOfObjects;
-
         return $this->render(
             '@common/widgets/ImageLoad/views/_formAutoload',
             [
@@ -66,7 +61,6 @@ class ImagesController extends BehaviorsController
             ]
         );
     }
-
     /**
      * @return string
      */
@@ -75,21 +69,18 @@ class ImagesController extends BehaviorsController
         $imageData = Json::decode(Yii::$app->request->post('imageData'));
         $modelImageForm = new ImageForm();
         $modelImageForm->deleteImage();
-
         if(Yii::$app->session->get('error')):
             echo $error = Yii::$app->session->get('error');
         else:
             $error = false;
         endif;
-
-        /* @var $model \common\models\UserProfile */
-
-        if($imageData['modelName'] == 'UserProfile'):
-            $model = UserProfile::findOne($imageData['object_id']);
+        /* @var $model \common\models\AdRealEstate */
+        if($imageData['modelName'] == 'AdRealEstate'):
+            $model = AdRealEstate::findOne($imageData['object_id']);
+        //elseif($imageData['modelName'] == 'Product'):
+            //$model = Product::findOne($imageData['object_id']);
         endif;
-
         $imagesObject = $model->imagesOfObjects;
-
         return $this->render(
             '@common/widgets/ImageLoad/views/_formAutoload',
             [

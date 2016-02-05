@@ -18,6 +18,7 @@ CropperAsset::register($this);
 /* @var $pjaxUrl string */
 
 $user = Yii::$app->user->identity;
+d($modelAdRealEstate->adCategories->imagesOfObjects);
 ?>
 
 <div class="row">
@@ -26,8 +27,8 @@ $user = Yii::$app->user->identity;
         /** Изображения доступен всем операциям */
         ?>
         <?php
-        if($modelAdRealEstate->scenario != 'default' && $modelAdRealEstate->scenario != 'rooms' && $modelAdRealEstate->scenario != 'apartments' && $modelAdRealEstate->scenario != 'houses' && $modelAdRealEstate->scenario != 'land'
-        && $modelAdRealEstate->scenario != 'garages' && $modelAdRealEstate->scenario != 'propertyAbroad' && $modelAdRealEstate->scenario != 'comercial'):
+        /*if($modelAdRealEstate->scenario != 'default' && $modelAdRealEstate->scenario != 'rooms' && $modelAdRealEstate->scenario != 'apartments' && $modelAdRealEstate->scenario != 'houses' && $modelAdRealEstate->scenario != 'land'
+        && $modelAdRealEstate->scenario != 'garages' && $modelAdRealEstate->scenario != 'propertyAbroad' && $modelAdRealEstate->scenario != 'comercial'):*/
         ?>
         <?php
         //d($modelAdRealEstate->adCategories);
@@ -78,7 +79,7 @@ $user = Yii::$app->user->identity;
             ]]);
         ?>
             <?php
-        endif;
+        //endif;
         ?>
     </div>
 </div>

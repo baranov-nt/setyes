@@ -919,8 +919,8 @@ class AdRealEstate extends ActiveRecord
         $modelAdRealEstate = new AdRealEstate();
         $modelAdRealEstate->property = $this->property;
         $modelAdRealEstate->deal_type = $this->deal_type;
-        $modelAdRealEstate->save();
-        dd($modelAdRealEstate);
+        $modelAdRealEstate->validate();
+        dd($modelAdRealEstate->errors);
         Yii::$app->session->set('tempModel', 'AdRealEstate');
         Yii::$app->session->set('tempId', $modelAdRealEstate->id);
         return  $modelAdRealEstate ? $modelAdRealEstate : null;

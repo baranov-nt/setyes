@@ -194,7 +194,6 @@ class m160116_094903_create_real_estate_tables extends Migration
             'measurement_of_property' => $this->integer(),       // Единицы измерения площади недвижемости (м2 или фут квадратный)
             'area_of_land' => $this->integer(),                  // Площадь земли
             'measurement_of_land' => $this->integer(),           // Единицы измерения площади земли (сотки или гектары)
-            'system_measure' => $this->integer()->notNull(),     // Единица измерения площади 12 - комнат, квартир и домов, 28 - для земли (метрическая), 29 - для земли (английская). Связана с таблицей ad_real_estate_reference
             'lease_term' => $this->integer(),                    // Срок аденды. Связана с таблицей ad_real_estate_reference
             'price' => $this->integer()->notNull(),              // Цена
             'price_for_the_period' => $this->integer(),          // Цена за - 14. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference

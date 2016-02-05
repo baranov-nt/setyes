@@ -71,7 +71,7 @@ class RealEstateController extends BehaviorsController
     {
         // @var $modelAdRealEstate \common\models\AdRealEstate
 
-        $modelAdRealEstate = $modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
+        /*$modelAdRealEstate = $modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
         if(!isset($modelAdRealEstate)):
             Yii::$app->session->remove('tempModel');
             Yii::$app->session->remove('tempId');
@@ -85,7 +85,7 @@ class RealEstateController extends BehaviorsController
         $modelAdRealEstate = new AdRealEstate();
         if(Yii::$app->session->get('tempModel') != 'AdRealEstate'  && $modelAdRealEstate->load(Yii::$app->request->post())):
              $modelAdRealEstate = $modelAdRealEstate->createObject();
-        endif;
+        endif;*/
         
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         /* Установка сценария по умолчанию для комнат */

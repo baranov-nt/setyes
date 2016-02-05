@@ -2,15 +2,11 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use frontend\assets\ChosenAsset;
-use common\widgets\FontAwesome\AssetBundle;
 use justinvoelker\awesomebootstrapcheckbox\ActiveField;
 use yii\widgets\MaskedInput;
 use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 use common\widgets\ImageLoad\ImageLoadWidget;
 
-AssetBundle::register($this);
-ChosenAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
 /* @var $user common\models\User */
@@ -19,13 +15,6 @@ ChosenAsset::register($this);
 /* @var $pjaxUrl string */
 
 $user = Yii::$app->user->identity;
-
-MaskedInput::widget([
-    'name' => 'masked-input_init',
-    'clientOptions' => [
-        'alias' => 'decimal',
-    ],
-]);
 ?>
 
 <div class="row">

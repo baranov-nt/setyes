@@ -36,6 +36,7 @@ Pjax::begin([
     'id' => 'images-widget',
     'enablePushState' => false,
 ]);
+
 ?>
     <div class="<?= $formImagesContainerClass ?>">
         <?php

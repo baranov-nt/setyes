@@ -71,6 +71,9 @@ $this->params['breadcrumbs'][] = $this->title;
 Pjax::begin([
     'enablePushState' => false,
 ]);
+?>
+
+<?php
 AssetBundle::register($this);
 ChosenAsset::register($this);
 MaskedInput::widget([

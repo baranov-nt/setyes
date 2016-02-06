@@ -169,6 +169,18 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getImagesOfObjects()
+    {
+        return $this->hasMany(ImagesOfObject::className(),
+            [
+                'object_id' => 'id',
+                'label' => 'images_label'
+            ]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getAdCategories()
     {
         return $this->hasOne(AdCategory::className(), ['ad_id' => 'id']);
@@ -917,18 +929,23 @@ class AdRealEstate extends ActiveRecord
     public function createObject()
     {
         $modelAdRealEstate = new AdRealEstate();
+        $modelAdRealEstate->property = 1;
+        $modelAdRealEstate->deal_type = 8;
+        $modelAdRealEstate->save();
+        /*$modelAdRealEstate = new AdRealEstate();
         $modelAdRealEstate->property = $this->property;
         $modelAdRealEstate->deal_type = $this->deal_type;
+        dd(4444);
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if($modelAdRealEstate->save()) {
                 $modelCategory = new AdCategory();
-                $modelCategory->category_id = 1;        // Категория для недвижемости
+                $modelCategory->category = 1;                       // Категория для недвижемость 1
                 $modelCategory->ad_id = $modelAdRealEstate->id;
                 if($modelCategory->save()) {
                     $modelAdMain = new AdMain();
                     $modelAdMain->user_id = Yii::$app->user->id;
-                    $modelAdMain->ad_category_id = $modelCategory->id;
+                    $modelAdMain->category_id = $modelCategory->id;
                     if($modelAdMain->save()) {
                         Yii::$app->session->set('tempModel', 'AdRealEstate');
                         Yii::$app->session->set('tempId', $modelAdRealEstate->id);
@@ -941,9 +958,11 @@ class AdRealEstate extends ActiveRecord
             }
         } catch (Exception $e) {
             $transaction->rollBack();
-        }
+        }*/
 
-        d($modelAdRealEstate->adCategories->imagesOfObjects);
+        Yii::$app->session->set('tempModel', 'AdRealEstate');
+        Yii::$app->session->set('tempId', $modelAdRealEstate->id);
+        //dd($modelAdRealEstate->errors);
 
         return  $modelAdRealEstate ? $modelAdRealEstate : null;
     }

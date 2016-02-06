@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id
  * @property integer $user_id
  * @property integer $place_city_id
- * @property integer $ad_category_id
+ * @property integer $category_id
  * @property integer $ad_style_id
  *
  * @property AdCategory $adCategory
@@ -34,8 +34,8 @@ class AdMain extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'ad_category_id'], 'required'],
-            [['user_id', 'place_city_id', 'ad_category_id', 'ad_style_id'], 'integer']
+            [['user_id', 'category_id'], 'required'],
+            [['user_id', 'place_city_id', 'category_id', 'ad_style_id'], 'integer']
         ];
     }
 
@@ -48,7 +48,7 @@ class AdMain extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'user_id' => Yii::t('app', 'User ID'),
             'place_city_id' => Yii::t('app', 'Place City ID'),
-            'ad_category_id' => Yii::t('app', 'Ad Category ID'),
+            'category_id' => Yii::t('app', 'Ad Category ID'),
             'ad_style_id' => Yii::t('app', 'Ad Style ID'),
         ];
     }
@@ -58,7 +58,7 @@ class AdMain extends \yii\db\ActiveRecord
      */
     public function getAdCategory()
     {
-        return $this->hasOne(AdCategory::className(), ['id' => 'ad_category_id']);
+        return $this->hasOne(AdCategory::className(), ['id' => 'category_id']);
     }
 
     /**

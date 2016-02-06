@@ -201,11 +201,10 @@ class m160116_094903_create_real_estate_tables extends Migration
             'internet' => $this->integer(),                      // Наличие интернета (есть, нет) - 10. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
             'pets_allowed' => $this->integer(),                  // Домашние животные разрешены - 27
             'condition' => $this->integer(),                     // Состояние (есть, нет) - 25. Зависит от значения lease_term. Связана с таблицей ad_real_estate_reference
-            'category_id' => $this->smallInteger(2)->defaultValue('0'), // id категории объявления (1 - для недвижимости)
+            'images_label' => $this->smallInteger(2)->defaultValue(1), // метка изображения (1 - для недвижимости)
             'temp' => $this->boolean()->defaultValue('1'),       // временная запись или нет
         ]);
 
-        //$this->addForeignKey('ad_category_reference_main', 'ad_category', 'category_id', 'ad_reference_main', 'id');
         $this->addforeignKey('ad_real_estate_category', 'ad_category', 'ad_id', 'ad_real_estate', 'id');
         $this->addforeignKey('ad_real_estate_property_reference', 'ad_real_estate', 'type_of_property', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_type_of_property_reference', 'ad_real_estate', 'type_of_property', 'ad_real_estate_reference', 'id');

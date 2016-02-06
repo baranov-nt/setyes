@@ -32,8 +32,8 @@ class AdCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id'], 'required'],
-            [['category_id', 'ad_id'], 'integer']
+            [['category'], 'required'],
+            [['category', 'ad_id'], 'integer']
         ];
     }
 
@@ -44,7 +44,7 @@ class AdCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'category_id' => Yii::t('app', 'Category ID'),
+            'category' => Yii::t('app', 'Category ID'),
             'ad_id' => Yii::t('app', 'Ad ID'),
         ];
     }
@@ -54,7 +54,7 @@ class AdCategory extends \yii\db\ActiveRecord
      */
     public function getCategory()
     {
-        return $this->hasOne(AdReferenceMain::className(), ['id' => 'category_id']);
+        return $this->hasOne(AdReferenceMain::className(), ['id' => 'category']);
     }
 
     /**
@@ -70,7 +70,7 @@ class AdCategory extends \yii\db\ActiveRecord
      */
     public function getAdMains()
     {
-        return $this->hasMany(AdMain::className(), ['ad_category_id' => 'id']);
+        return $this->hasMany(AdMain::className(), ['category_id' => 'id']);
     }
 
     /**
@@ -81,7 +81,7 @@ class AdCategory extends \yii\db\ActiveRecord
         return $this->hasMany(ImagesOfObject::className(),
             [
                 'object_id' => 'id',
-                'label' => 'category_id'
+                'label' => 'category'
             ]);
     }
 }

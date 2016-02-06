@@ -14,10 +14,14 @@ use yii\db\ActiveRecord;
  * @property string $label
  * @property integer $place
  *
- * @property Carousel $object
  * @property Images $image
  * @property UserProfile $object1
+ *
+ * Метки для изображений (image_label) к основным странницам:
+ * 1 - Недвижемость
+ * 99 - Аватар
  */
+
 class ImagesOfObject extends ActiveRecord
 {
     /**
@@ -38,8 +42,6 @@ class ImagesOfObject extends ActiveRecord
             [['label'], 'string', 'max' => 32]
         ];
     }
-
-
 
     /**
      * @return \yii\db\ActiveQuery

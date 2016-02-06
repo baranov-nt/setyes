@@ -29,11 +29,11 @@ class m160116_074120_create_ad_main_table extends Migration
         /* Создаем таблицу  ad_category, в которой будут записываться id объявления и категория этого объявления. Связана с таблицами ad_main и таблицей объявлений. */
         $this->createTable('ad_category', [
             'id' => $this->primaryKey(),
-            'category_id' => $this->integer()->notNull(),           // Номер категории из таблицы ad_reference_main. Связь с таблицей  ad_reference_main.
+            'category' => $this->integer()->notNull(),           // Номер категории из таблицы ad_reference_main. Связь с таблицей  ad_reference_main.
             'ad_id' => $this->integer(),                  // Номер объявления. Связь с объявлением с одной из таблиц разделов (недвижимость, транспорт или др.)
         ]);
 
-        $this->addForeignKey('ad_category_reference_main', 'ad_category', 'category_id', 'ad_reference_main', 'id');
+        $this->addForeignKey('ad_category_reference_main', 'ad_category', 'category', 'ad_reference_main', 'id');
         //$this->addForeignKey('ad_category_images_of_objects', 'images_of_object', 'object_id', 'ad_category', 'ad_id');
 
         /* Создаем таблицу  ad_style, в которой будут находится стили для объявлений.
@@ -61,13 +61,13 @@ class m160116_074120_create_ad_main_table extends Migration
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),           // Пользователь, который добавил объявление (обязательно). Связь с таблицей user
             'place_city_id' => $this->integer(),     // Город, для которого добавлено объявление. Связь с таблицей place_city
-            'ad_category_id' => $this->integer()->notNull(),    // Тема объявления. Связь с таблицей ad_category
+            'category_id' => $this->integer()->notNull(),    // Тема объявления. Связь с таблицей ad_category
             'ad_style_id' => $this->integer()->defaultValue(1),       // Стиль объявления. Связь с таблицей ad_style
         ]);
 
         $this->addForeignKey('ad_main_user', 'ad_main', 'user_id', 'user', 'id');
         $this->addForeignKey('ad_main_place_city', 'ad_main', 'place_city_id', 'place_city', 'id');
-        $this->addForeignKey('ad_main_category', 'ad_main', 'ad_category_id', 'ad_category', 'id');
+        $this->addForeignKey('ad_main_category', 'ad_main', 'category_id', 'ad_category', 'id');
         $this->addForeignKey('ad_main_style', 'ad_main', 'ad_style_id', 'ad_style', 'id');
     }
 

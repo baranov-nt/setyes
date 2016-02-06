@@ -12,7 +12,7 @@ class m150711_083606_create_profile_table extends Migration
             [
                 'user_id' => Schema::TYPE_PK,
                 'images_num' => $this->smallInteger()->defaultValue(1),
-                'images_label' => $this->string(32)->defaultValue('avatar'),
+                'images_label' => $this->smallInteger(2)->defaultValue(99),
                 'first_name' => Schema::TYPE_STRING.'(32)',
                 'second_name' => Schema::TYPE_STRING.'(32)',
                 'middle_name' => Schema::TYPE_STRING.'(32)',

@@ -129,6 +129,11 @@ class RealEstateController extends BehaviorsController
             'pjaxUrl' => $pjaxUrl
         ]);
 
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'apartments']);
+        $modelAdRealEstate->property = 1;
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
+
         $modelAdRealEstate->scenario = 'rooms';
 
         //d($modelAdRealEstate->adCategories->imagesOfObjects);

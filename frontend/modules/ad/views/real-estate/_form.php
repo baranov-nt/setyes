@@ -104,7 +104,7 @@ $user = Yii::$app->user->identity;
             type: "POST",
             url: "'.$pjaxUrl.'",
             data: jQuery("#ad_form").serialize(),
-            container: "#w0",
+            container: "#w3",
             push: false
         })
         '

@@ -34,7 +34,7 @@ use common\widgets\SocialLinks\ShareBar;
                 'images_temp' => 0,       // указываем временной изображение или нет (0 = нет)
                 'imageSmallWidth' => 150,                       // ширина миниатюры
                 'imageSmallHeight' => 150,                      // высота миниатюры
-                'headerModal' => Yii::t('app', 'Upload an avatar'),            // заголовок в модальном окне
+                'headerModal' => 'Загрузить аватар',            // заголовок в модальном окне
                 'sizeModal' => 'modal-md',                      // размер модального окна
                 'baseUrl' => '/images/',                        // основной путь к изображениям
                 'imagePath' => 'avatars/users/'.Yii::$app->user->id.'/', // путь, куда будут записыватся изображения

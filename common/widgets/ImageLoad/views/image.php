@@ -5,7 +5,7 @@ use yii\web\View;
 
 /* @var $this View */
 /* @var $widget \common\widgets\ImageLoad\ImageLoadWidget */
-/* @var $modelImageForm \common\widgets\ImageLoad\ImageForm */
+/* @var $modelImageForm \common\widgets\ImageLoad\models\ImageForm */
 /* @var $attribute string */
 /* @var $imagePath string */
 
@@ -37,14 +37,14 @@ Modal::begin([
     'footer' => '
         <div class="btn-group">
             <button type="button" class="btn btn-primary" id="rotate-right-'.$widget->id.'">
-                <span class="fa fa-rotate-right gly-spin-right"></span>
+                <span class="fa fa-rotate-right"></span>
             </button>
             <button type="button" class="btn btn-primary" id="rotate-left-'.$widget->id.'">
-                <span class="fa fa-rotate-left  gly-spin-left"></span>
+                <span class="fa fa-rotate-left"></span>
             </button>
         </div>
-        <button type="button" class="btn btn-primary crop-submit">'.Yii::t('app', 'Apply').'</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">'.Yii::t('app', 'Cancel').'</button>
+        <button type="button" class="btn btn-primary crop-submit">Применить</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
     ',
     'toggleButton' => false,
     'options' => [

@@ -8,7 +8,6 @@
 
 namespace common\widgets\ImageLoad;
 
-use Yii;
 use yii\web\View;
 use yii\base\Widget;
 use yii\helpers\Json;
@@ -68,7 +67,6 @@ class ImageLoadWidget extends Widget
         $view = $this->getView();
         // Регистрация виджета
         CropperAsset::register($view);
-
         // Пользовательские настройки переводим в JSON
         $options = Json::encode($this->pluginOptions);
         $cropBoxData = Json::encode($this->cropBoxData);
@@ -79,8 +77,6 @@ class ImageLoadWidget extends Widget
         $imageContainerClass = $this->classesWidget['imageContainerClass'];
         $formImagesContainerClass = $this->classesWidget['formImagesContainerClass'];
 
-        $deleteMessage = Yii::t('app', 'Delete image?');
-
         $js = <<< JS
             var loadFile = function(event) {                                // Создается объект события, который срабатывает при выборе нового изображения
                 var output = document.getElementById("previewImg-$this->id");         // output - объект, куда будет помещено выбранное изображение
@@ -89,7 +85,7 @@ class ImageLoadWidget extends Widget
             };
 
             var deleteImage = function(event) {                                // Функция для удаления изображения
-                if (confirm("$deleteMessage")) {                                   // подтверждение удаления
+                if (confirm("Удалить изображение?")) {                                   // подтверждение удаления
                     var imageData = JSON.stringify({
                         modelName: "$this->modelName",
                         id: "$this->id",

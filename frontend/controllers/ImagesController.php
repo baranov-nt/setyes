@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 use common\models\AdRealEstate;
+use common\models\UserProfile;
 use Yii;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\helpers\Json;
@@ -33,8 +34,8 @@ class ImagesController extends BehaviorsController
         if($imageData['modelName'] == 'AdRealEstate'):
             $model = AdRealEstate::findOne($imageData['object_id']);
         //dd($model);
-        //elseif($imageData['modelName'] == 'Product'):
-            //$model = Product::findOne($imageData['object_id']);
+        elseif($imageData['modelName'] == 'UserProfile'):
+            $model = UserProfile::findOne($imageData['object_id']);
         endif;
         $imagesObject = $model->imagesOfObjects;
         return $this->render(

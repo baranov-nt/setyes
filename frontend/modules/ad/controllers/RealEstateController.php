@@ -68,11 +68,11 @@ class RealEstateController extends BehaviorsController
 
         if(Yii::$app->session->get('tempModel') != 'AdRealEstate'):
             d(2);
-            $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
+            $modelAdRealEstate = new AdRealEstate();
             $modelAdRealEstate = $modelAdRealEstate->createObject();
         endif;
 
-        $modelAdRealEstate->scenario = 'rooms';
+        //$modelAdRealEstate->scenario = 'rooms';
 
         return $this->render('create', [
             'modelAdRealEstate' => $modelAdRealEstate,

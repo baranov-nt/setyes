@@ -24,7 +24,8 @@ $user = Yii::$app->user->identity;
 
 <div class="ad-real-estate-form">
     <?php $form = ActiveForm::begin([
-        'fieldClass' => ActiveField::className(),
+        'method' => 'post',
+        //'fieldClass' => ActiveField::className(),
         'id' => 'ad_form',
     ]); ?>
 

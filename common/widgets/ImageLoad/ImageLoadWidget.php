@@ -179,6 +179,33 @@ JS;
                     });
                     modalBox.modal("hide");                                     // событие выполняется перед фактическим закрытием модального окна и перед событием hidden.bs.modal
 
+                    /*var formData = new FormData($('form')[0]);
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/images/image-autoload.html");
+                    xhr.send(formData);*/
+
+
+
+                    /*$.pjax({
+                        url: '/images/image-autoload.html',
+                        type: 'POST',
+                        data: formData,
+                        /!*cache: false,
+                        contentType: false,
+                        processData: false,*!/
+                        container: "#images-widget",
+                        push: false
+                    });*/
+
+                    /*$.pjax({
+                        type: "POST",
+                        url: "/images/image-autoload.html",
+                        data: $("#image-form").serialize(),
+                        container: "#images-widget",
+                        push: false
+                    })*/
+
                     /*var imageData = JSON.stringify({
                         modelName: "$this->modelName",
                         id: "$this->id",
@@ -196,7 +223,8 @@ JS;
                         imageClass: "$imageClass",
                         buttonDeleteClass: "$buttonDeleteClass",
                         imageContainerClass: "$imageContainerClass",
-                        formImagesContainerClass: "$formImagesContainerClass"
+                        formImagesContainerClass: "$formImagesContainerClass",
+                        file: $('#image-form-load-image')[0]
                     });
                     $.pjax({
                         type: "POST",
@@ -206,11 +234,27 @@ JS;
                         push: false
                     });*/
 
+                    /*var file_data = $('#imageform-image').prop('files')[0];
+                        var form_data = new FormData();
+                        form_data.append('file', file_data);
+                        $.ajax({
+                            url: '/images/autoload-image.html',
+                            dataType: 'text',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: form_data,
+                            type: 'post',
+                            success: function(data){
+                                $('#images-widget').html(data);
+                            }
+                        });*/
+
                     /*$.pjax({
-                        type: "POST",
-                        url: "/images/image-autoload.html",
-                        data: $("#image-form-load-image").serialize(),
-                        container: "#image-form-load-image",
+                        type: "post",
+                        url: "/images/autoload-image.html",
+                        data: $("#image-form").serialize(),
+                        container: "#images-widget",
                         push: false
                     })*/
                 });

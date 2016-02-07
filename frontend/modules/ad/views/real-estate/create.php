@@ -14,6 +14,31 @@ $this->title = Yii::t('app', 'Create Ad Real Estate');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
+<?php
+Pjax::begin([
+    'enablePushState' => false,
+]);
+AssetBundle::register($this);
+ChosenAsset::register($this);
+MaskedInput::widget([
+    'name' => 'masked-input_init',
+    'clientOptions' => [
+        'alias' => 'decimal',
+    ],
+]);
+//
+echo Nav::widget([
+    'items' => $modelAdRealEstate->realEstatePropertyList,
+    'activateParents' => true,
+    'encodeLabels' => false,
+    'options' => [
+        'class' => 'nav nav-tabs',
+    ]
+]);
+?>
+
 <div class="row">
     <div class="col-md-12">
         <?php
@@ -65,30 +90,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </div>
 </div>
-
-<?php
-Pjax::begin([
-    'enablePushState' => false,
-]);
-AssetBundle::register($this);
-ChosenAsset::register($this);
-MaskedInput::widget([
-    'name' => 'masked-input_init',
-    'clientOptions' => [
-        'alias' => 'decimal',
-    ],
-]);
-//
-echo Nav::widget([
-    'items' => $modelAdRealEstate->realEstatePropertyList,
-    'activateParents' => true,
-    'encodeLabels' => false,
-    'options' => [
-        'class' => 'nav nav-tabs',
-    ]
-]);
-?>
-
 
 <?php if($modelAdRealEstate->scenario != 'default'):
     ?>

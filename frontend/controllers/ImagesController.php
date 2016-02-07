@@ -13,12 +13,25 @@ use Yii;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\helpers\Json;
 use common\widgets\ImageLoad\models\ImageForm;
+use yii\web\Controller;
 
-class ImagesController extends BehaviorsController
+class ImagesController extends Controller
 {
-    public function actionImageAutoload()
+    public $titleMeta = 'Бояр';
+    public $siteNameMeta = 'Бояр';
+    public $descriptionMeta = 'Заказ продуктов питания.';
+    public $imageMeta = 'logo.jpg';
+    public $urlMeta = '';
+    public $appFbIdMeta = '618854251589299';
+
+    public function actionAutoloadImage()
     {
+        /*d($_FILES);
+        d(Yii::$app->request->get());
+        dd(Yii::$app->request->post());*/
+        //dd(Yii::$app->request->get());
         $imageData = Yii::$app->request->post('imageData');
+        //$imageData = Yii::$app->request->get('imageData');
         $modelImageForm = new ImageForm();
         if($imageData['image_id'] == '0'):
             $modelImageForm->createImage();
@@ -32,12 +45,15 @@ class ImagesController extends BehaviorsController
         endif;
         /* @var $model \common\models\AdRealEstate */
         if($imageData['modelName'] == 'AdRealEstate'):
+
             $model = AdRealEstate::findOne($imageData['object_id']);
+            d($model);
         elseif($imageData['modelName'] == 'UserProfile'):
             $model = UserProfile::findOne($imageData['object_id']);
+            //d($model);
         endif;
         $imagesObject = $model->imagesOfObjects;
-        //dd($model->imagesOfObjects);
+        //d($model->imagesOfObjects);
         return $this->render(
             '@common/widgets/ImageLoad/views/_formAutoload',
             [

@@ -60,6 +60,8 @@ class ImageBehavior extends Behavior
         $model = new ImageForm();
         $model->image = UploadedFile::getInstance($model, 'image');
 
+        d($model->image);
+
         if($model->validate()):
             $smallFileName = time().'_'.Yii::$app->user->id.'_small.'.$model->image->extension;           // будущее имя миниатюры
             $fileName = time().'_'.Yii::$app->user->id.'.'.$model->image->extension;           // будущее имя
@@ -71,8 +73,8 @@ class ImageBehavior extends Behavior
             $modelImages->status = 0;                                                         // статус проверки
             $modelImages->temp = $this->imageData['images_temp'];                               // статус временного файла
 
-            $transaction = Yii::$app->db->beginTransaction();
-            try {
+            /*$transaction = Yii::$app->db->beginTransaction();
+            try {*/
                 if($modelImages->save()):
                     $modelImagesOfObject = new ImagesOfObject();
                     $modelImagesOfObject->image_id = $modelImages->id;
@@ -92,20 +94,25 @@ class ImageBehavior extends Behavior
                                 $newImage = $image->open('images/'.$this->imageData['imagePath'].$fileName);              // создание миниатюры
                                 $newImage->thumbnail(new Box($this->imageData['imageSmallWidth'], $this->imageData['imageSmallHeight']))
                                     ->save('images/'.$this->imageData['imagePath'].$smallFileName);
-                                $transaction->commit();
+                                //$transaction->commit();
+                                d(1);
                             endif;
                         endif;
+
                         \Yii::$app->session->set('image', $modelImages->id);                          // если объект сохранился, записываем ID в сессию
                         \Yii::$app->session->remove('error');
                     endif;
                 else:
+                    d(2);
                     \Yii::$app->session->set('error', 'Изображение не добавлено.');         // если все в порядке, пишем в сессию путь к изображениею
                     \Yii::$app->session->remove('image');
                 endif;
-            } catch (Exception $e) {
+            /*} catch (Exception $e) {
                 $transaction->rollBack();
-            }
+            }*/
+            //dd([$model->errors, $modelImages->errors, $modelImagesOfObject->errors]);
         else:
+            dd($model->errors);
             \Yii::$app->session->set('error', $model->errors['image']['0']); // если все в порядке, пишем в сессию путь к изображениею
             \Yii::$app->session->remove('image');
         endif;

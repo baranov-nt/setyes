@@ -36,8 +36,8 @@ Pjax::begin([
     'id' => 'images-widget',
     'enablePushState' => false,
 ]);
-
 ?>
+<div id="">
     <div class="<?= $formImagesContainerClass ?>">
         <?php
         if(isset($error) && $error != false):
@@ -57,7 +57,7 @@ Pjax::begin([
 
         $form = ActiveForm::begin(
             [
-                'action' => Url::to(['/images/image-autoload']),
+                'action' => Url::to(['/images/autoload-image']),
                 'options' => [
                     'enctype' => 'multipart/form-data',
                     'id' => 'image-form-'.$id,
@@ -66,7 +66,7 @@ Pjax::begin([
             ]);
 
         echo $form->field($modelImageForm, 'image', [
-            'template' => '<div id="crop-url-'.$id.'" class="btn-file" data-crop-url="'.Url::to(['/images/image-autoload']).'">
+            'template' => '<div id="crop-url-'.$id.'" class="btn-file" data-crop-url="'.Url::to(['/images/autoload-image']).'">
     {input}</div>'])
             ->input('file', [
                 'onchange' => 'loadFile(event)',
@@ -129,5 +129,6 @@ Pjax::begin([
         ActiveForm::end();
         ?>
     </div>
+</div>
 <?php
 Pjax::end();

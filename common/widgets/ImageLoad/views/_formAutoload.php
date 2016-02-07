@@ -109,23 +109,23 @@ Pjax::begin([
             </div>
             <?php
         endif;
-        echo Html::input('hidden', 'phpntCrop[modelName]', $modelName);
-        echo Html::input('hidden', 'phpntCrop[id]', $id);
-        echo Html::input('hidden', 'phpntCrop[object_id]', $object_id);
-        echo Html::input('hidden', 'phpntCrop[image_id]', null, ['id' => 'image_id-'.$id]);
-        echo Html::input('hidden', 'phpntCrop[images_num]', $images_num);
-        echo Html::input('hidden', 'phpntCrop[images_label]', $images_label);
-        echo Html::input('hidden', 'phpntCrop[images_temp]', $images_temp);
-        echo Html::input('hidden', 'phpntCrop[imageSmallWidth]', $imageSmallWidth);
-        echo Html::input('hidden', 'phpntCrop[imageSmallHeight]', $imageSmallHeight);
-        echo Html::input('hidden', 'phpntCrop[baseUrl]', $baseUrl);
-        echo Html::input('hidden', 'phpntCrop[imagePath]', $imagePath);
-        echo Html::input('hidden', 'phpntCrop[noImage]', $noImage);
-        echo Html::input('hidden', 'phpntCrop[imageCrop]', null, ['id' => 'imageCrop-'.$id]);
-        echo Html::input('hidden', 'phpntCrop[imageClass]', $imageClass);
-        echo Html::input('hidden', 'phpntCrop[buttonDeleteClass]', $buttonDeleteClass);
-        echo Html::input('hidden', 'phpntCrop[imageContainerClass]', $imageContainerClass);
-        echo Html::input('hidden', 'phpntCrop[formImagesContainerClass]', $formImagesContainerClass);
+        echo Html::input('hidden', 'imageData[modelName]', $modelName);
+        echo Html::input('hidden', 'imageData[id]', $id);
+        echo Html::input('hidden', 'imageData[object_id]', $object_id);
+        echo Html::input('hidden', 'imageData[image_id]', null, ['id' => 'image_id-'.$id]);
+        echo Html::input('hidden', 'imageData[images_num]', $images_num);
+        echo Html::input('hidden', 'imageData[images_label]', $images_label);
+        echo Html::input('hidden', 'imageData[images_temp]', $images_temp);
+        echo Html::input('hidden', 'imageData[imageSmallWidth]', $imageSmallWidth);
+        echo Html::input('hidden', 'imageData[imageSmallHeight]', $imageSmallHeight);
+        echo Html::input('hidden', 'imageData[baseUrl]', $baseUrl);
+        echo Html::input('hidden', 'imageData[imagePath]', $imagePath);
+        echo Html::input('hidden', 'imageData[noImage]', $noImage);
+        echo Html::input('hidden', 'imageData[imageCrop]', null, ['id' => 'imageCrop-'.$id]);
+        echo Html::input('hidden', 'imageData[imageClass]', $imageClass);
+        echo Html::input('hidden', 'imageData[buttonDeleteClass]', $buttonDeleteClass);
+        echo Html::input('hidden', 'imageData[imageContainerClass]', $imageContainerClass);
+        echo Html::input('hidden', 'imageData[formImagesContainerClass]', $formImagesContainerClass);
         ActiveForm::end();
         ?>
     </div>

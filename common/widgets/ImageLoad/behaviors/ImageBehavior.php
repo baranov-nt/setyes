@@ -29,7 +29,6 @@ use yii\db\Exception;
 class ImageBehavior extends Behavior
 {
     private $imageData;                             // Полученые параметры для редактирования
-    private $imageDeleteData;                       // Полученые параметры для удаления
 
     /**
      * @inheritdoc
@@ -37,8 +36,7 @@ class ImageBehavior extends Behavior
     public function init()
     {
         parent::init();
-        $this->imageData = Yii::$app->request->post('phpntCrop');
-        $this->imageDeleteData = Yii::$app->request->post('imageData');
+        $this->imageData = Yii::$app->request->post('imageData');
     }
 
     /**
@@ -183,7 +181,7 @@ class ImageBehavior extends Behavior
         /* @var $modelImages \common\models\Images */
         /* @var $modelImagesOfObject \common\models\ImagesOfObject */
 
-        $paramsImageDeleteData = Json::decode($this->imageDeleteData);
+        $paramsImageDeleteData = Json::decode($this->imageData);
 
         $modelImages = Images::findOne($paramsImageDeleteData['image_id']);
 

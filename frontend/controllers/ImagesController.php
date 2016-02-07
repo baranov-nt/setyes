@@ -18,7 +18,7 @@ class ImagesController extends BehaviorsController
 {
     public function actionImageAutoload()
     {
-        $imageData = Yii::$app->request->post('phpntCrop');
+        $imageData = Yii::$app->request->post('imageData');
         $modelImageForm = new ImageForm();
         if($imageData['image_id'] == '0'):
             $modelImageForm->createImage();

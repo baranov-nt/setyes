@@ -61,7 +61,6 @@ class ImageForm extends Model
     }
 
     public  function  deleteImage() {
-
         $this->trigger(self::EVENT_DELETE_IMAGE);                       // вызываем событие EVENT_CROP_AVATAR в поведении ImageBehavior
     }
 }

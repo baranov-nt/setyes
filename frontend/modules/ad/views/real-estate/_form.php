@@ -18,7 +18,7 @@ CropperAsset::register($this);
 /* @var $pjaxUrl string */
 
 $user = Yii::$app->user->identity;
-d($modelAdRealEstate->adCategories->imagesOfObjects);
+//d($modelAdRealEstate->adCategories->imagesOfObjects);
 ?>
 
 

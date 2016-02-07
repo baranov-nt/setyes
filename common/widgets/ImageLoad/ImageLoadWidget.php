@@ -27,6 +27,7 @@ class ImageLoadWidget extends Widget
     public $imageSmallWidth;
     public $imageSmallHeight;
     public $deleteUrl;
+    public $autoloadUrl;
     public $classesWidget;
     public $headerModal;
     public $sizeModal;
@@ -45,6 +46,7 @@ class ImageLoadWidget extends Widget
         parent::init();
         $this->modelImageForm = new ImageForm();
         $this->deleteUrl = Url::to(['/images/delete-avatar']);
+        $this->autoloadUrl = Url::to(['/images/autoload-image']);
         $this->registerClientScript();
     }
 
@@ -176,6 +178,41 @@ JS;
                         $("#imageCrop-$this->id").attr("value", cropData);
                     });
                     modalBox.modal("hide");                                     // событие выполняется перед фактическим закрытием модального окна и перед событием hidden.bs.modal
+
+                    /*var imageData = JSON.stringify({
+                        modelName: "$this->modelName",
+                        id: "$this->id",
+                        object_id: "$this->object_id",
+                        image_id: "0",
+                        images_num: "$this->images_num",
+                        images_label: "$this->images_label",
+                        images_temp: "$this->images_temp",
+                        imageSmallWidth: "$this->imageSmallWidth",
+                        imageSmallHeight: "$this->imageSmallHeight",
+                        baseUrl: "$this->baseUrl",
+                        imagePath: "$this->imagePath",
+                        noImage: "$this->noImage",
+                        imageCrop: cropData,
+                        imageClass: "$imageClass",
+                        buttonDeleteClass: "$buttonDeleteClass",
+                        imageContainerClass: "$imageContainerClass",
+                        formImagesContainerClass: "$formImagesContainerClass"
+                    });
+                    $.pjax({
+                        type: "POST",
+                        url: "$this->autoloadUrl",
+                        data: {imageData: imageData},
+                        container: "#images-widget",
+                        push: false
+                    });*/
+
+                    /*$.pjax({
+                        type: "POST",
+                        url: "/images/image-autoload.html",
+                        data: $("#image-form-load-image").serialize(),
+                        container: "#image-form-load-image",
+                        push: false
+                    })*/
                 });
 JS;
         $view->registerJs($js);

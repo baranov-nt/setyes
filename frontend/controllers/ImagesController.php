@@ -78,9 +78,10 @@ class ImagesController extends BehaviorsController
         /* @var $model \common\models\AdRealEstate */
         if($imageData['modelName'] == 'AdRealEstate'):
             $model = AdRealEstate::findOne($imageData['object_id']);
-        //elseif($imageData['modelName'] == 'Product'):
-            //$model = Product::findOne($imageData['object_id']);
+        elseif($imageData['modelName'] == 'UserProfile'):
+            $model = UserProfile::findOne($imageData['object_id']);
         endif;
+
         $imagesObject = $model->imagesOfObjects;
         return $this->render(
             '@common/widgets/ImageLoad/views/_formAutoload',

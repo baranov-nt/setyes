@@ -187,11 +187,14 @@ class ImageBehavior extends Behavior
 
         $modelImages = Images::findOne($paramsImageDeleteData['image_id']);
 
+        //d([$paramsImageDeleteData]);
 
         $modelImagesOfObject = ImagesOfObject::findOne([
             'image_id' => $paramsImageDeleteData['image_id'],
             'object_id' => $paramsImageDeleteData['object_id']
         ]);
+
+        //dd($modelImagesOfObject);
 
         $transaction = Yii::$app->db->beginTransaction();
         try {

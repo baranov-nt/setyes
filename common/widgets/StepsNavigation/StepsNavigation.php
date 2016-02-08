@@ -11,6 +11,8 @@ namespace common\widgets\StepsNavigation;
 
 use yii\base\Widget;
 use common\widgets\StepsNavigation\assets\StepsAsset;
+use yii\web\View;
+use yii\helpers\Url;
 
 class StepsNavigation extends Widget
 {
@@ -32,10 +34,16 @@ class StepsNavigation extends Widget
     public $classContentStep3;
     public $classLinkStep4;
     public $classContentStep4;
+    /* ссылки */
+    public $urlStep1;
+    public $urlStep2;
+    public $urlStep3;
+    public $urlStep4;
 
     public function init()
     {
         parent::init();
+        $this->urlStep1 = Url::to(['/ad/default/index']);
         $this->registerClientScript();
     }
 
@@ -53,6 +61,15 @@ class StepsNavigation extends Widget
         $view = $this->getView();
         // Регистрация виджета
         StepsAsset::register($view);
+
+        $js = <<< JS
+            function  comeHere(id) {
+                if($(id).attr('id') == "linkStep1" && $(id).attr('class') == '') {
+                    $.pjax({url: "$this->urlStep1", container: '#w0'});
+                }
+            };
+JS;
+        $view->registerJs($js, View::POS_HEAD);
 
         $js = <<< JS
         $(document).ready(function () {
@@ -86,6 +103,12 @@ class StepsNavigation extends Widget
         function prevTab(elem) {
             $(elem).prev().find('a[data-toggle="tab"]').click();
             //alert("go prev-step");
+        }
+
+        function comeHere(id) {
+            if($(id).attr('id') == "linkStep1" && $(id).attr('class') == '') {
+                    $.pjax({url: "$this->urlStep1", container: '#w0'});
+                }
         }
 JS;
         $view->registerJs($js);

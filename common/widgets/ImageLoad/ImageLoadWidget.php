@@ -162,7 +162,6 @@ JS;
                 $(document).on("click", "#modal-$this->id .crop-submit", function(e) {    // событие нажатия на кнопку с классом .crop-submit в элементе с ID "#$this->id"
                     e.preventDefault();                                             // событие не сработает по умолчанию
                     //console.log(image.cropper("getData"));                       // вывод объекта image.cropper("getData") в консоль
-                    //console.log(image.cropper);
                     var form = $("#image-form-$this->id");
 
                     cropBoxData = image.cropper('getCropBoxData');              // получение конечных данных рамки

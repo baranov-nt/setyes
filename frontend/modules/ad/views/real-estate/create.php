@@ -65,13 +65,11 @@ $this->params['breadcrumbs'][] = $this->title;
         */?>
     </div>
 </div>-->
-<div class="container">
+<div class="container" style="margin-top: 0 !important; padding-top: 0 !important;">
 <?php
 Pjax::begin([
     //'enablePushState' => false,
 ]);
-
-
 echo StepsNavigation::widget([
     'headerStep1' => Yii::t('app', 'Select Category'),
     'contentStep1' => Yii::t('app', 'Select Category: content'),

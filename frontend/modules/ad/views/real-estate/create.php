@@ -4,6 +4,7 @@ use yii\widgets\Pjax;
 use common\widgets\Chosen\ChosenAsset;
 use common\widgets\FontAwesome\AssetBundle;
 use yii\widgets\MaskedInput;
+use common\widgets\StepsNavigation\StepsNavigation;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -15,34 +16,10 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), '
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
-<?php
-Pjax::begin([
-    //'enablePushState' => false,
-]);
-AssetBundle::register($this);
-ChosenAsset::register($this);
-MaskedInput::widget([
-    'name' => 'masked-input_init',
-    'clientOptions' => [
-        'alias' => 'decimal',
-    ],
-]);
-//
-echo Nav::widget([
-    'items' => $modelAdRealEstate->realEstatePropertyList,
-    'activateParents' => true,
-    'encodeLabels' => false,
-    'options' => [
-        'class' => 'nav nav-tabs',
-    ]
-]);
-?>
-
-<div class="row">
+<!--<div class="row">
     <div class="col-md-12">
         <?php
-        echo \common\widgets\ImageLoad\ImageLoadWidget::widget([
+/*        echo \common\widgets\ImageLoad\ImageLoadWidget::widget([
             'modelName' => 'AdRealEstate',
             'id' => 'load-image',                                       // суффикс ID для основных форм виджета
             'object_id' => $modelAdRealEstate->id,                          // ID объекта, к которому привязаны изображения
@@ -87,22 +64,44 @@ echo Nav::widget([
                 //'width' => 500,                             // ширина
                 //'height' => 500                             // высота
             ]]);
-        ?>
+        */?>
     </div>
-</div>
+</div>-->
 
+<?php
+echo StepsNavigation::widget();
+
+Pjax::begin([
+    //'enablePushState' => false,
+]);
+AssetBundle::register($this);
+ChosenAsset::register($this);
+MaskedInput::widget([
+    'name' => 'masked-input_init',
+    'clientOptions' => [
+        'alias' => 'decimal',
+    ],
+]);
+//
+echo Nav::widget([
+    'items' => $modelAdRealEstate->realEstatePropertyList,
+    'activateParents' => true,
+    'encodeLabels' => false,
+    'options' => [
+        'class' => 'nav nav-tabs',
+    ]
+]);
+?>
 <?php if($modelAdRealEstate->scenario != 'default'):
     ?>
     <?= $this->render('_form', [
         'modelAdRealEstate' => $modelAdRealEstate,
         'pjaxUrl' => $pjaxUrl
     ]);
-
     ?>
 <?php
 endif;
 ?>
-
 <?php
 Pjax::end();
 ?>

@@ -50,11 +50,11 @@ class RealEstateController extends BehaviorsController
     public function actionCreate()
     {
         // @var $modelAdRealEstate \common\models\AdRealEstate
-        //$pjaxUrl = 'create-rooms';
+        $pjaxUrl = 'create-rooms';
 
-        //$modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
+        $modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
 
-        /*if(!isset($modelAdRealEstate)):
+        if(!isset($modelAdRealEstate)):
             d(1);
             Yii::$app->session->remove('tempModel');
             Yii::$app->session->remove('tempId');
@@ -70,15 +70,15 @@ class RealEstateController extends BehaviorsController
             d(2);
             $modelAdRealEstate = new AdRealEstate();
             $modelAdRealEstate = $modelAdRealEstate->createObject();
-        endif;*/
+        endif;
 
         //$modelAdRealEstate->scenario = 'rooms';
 
-        $modelAdRealEstate = AdRealEstate::findOne(1);
+        $modelAdRealEstate = ($modelAdRealEstate = AdRealEstate::findOne(1)) ? $modelAdRealEstate : new AdRealEstate();
 
         return $this->render('create', [
             'modelAdRealEstate' => $modelAdRealEstate,
-            //'pjaxUrl' => $pjaxUrl
+            'pjaxUrl' => $pjaxUrl
         ]);
 
         /*$modelAdRealEstate = new AdRealEstate();

@@ -10,21 +10,22 @@ use yii\widgets\ListView;
 $this->title = Yii::t('app', 'Ad Real Estates');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="ad-real-estate-index">
+<div class="container">
+    <div class="ad-real-estate-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+        <h1><?= Html::encode($this->title) ?></h1>
+        <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Ad Real Estate'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        <p>
+            <?= Html::a(Yii::t('app', 'Create Ad Real Estate'), ['create'], ['class' => 'btn btn-success']) ?>
+        </p>
 
-    <?= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
-        },
-    ]) ?>
-
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'itemOptions' => ['class' => 'item'],
+            'itemView' => function ($model, $key, $index, $widget) {
+                return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
+            },
+        ]) ?>
+    </div>
 </div>

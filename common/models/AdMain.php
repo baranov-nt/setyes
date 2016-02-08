@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ad_main".
@@ -83,5 +84,67 @@ class AdMain extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getMainCategoryList()
+    {
+        $mainCategory = ArrayHelper::map(AdMainReference::find()
+            ->where(['reference_id' => 1])
+            ->all(), 'id', 'reference_name');
+
+        $items = [];
+        foreach($mainCategory as $key => $value):
+            switch ($key) {
+                case 1:     // Недвижемость
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/ad/real-estate/create'],
+                    ];
+                    break;
+                case 2:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/#'],
+                    ];
+                    break;
+                case 3:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/#'],
+                    ];
+                    break;
+                case 4:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/#'],
+                    ];
+                    break;
+                case 5:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/#'],
+                    ];
+                    break;
+                case 6:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/#'],
+                    ];
+                    break;
+                case 7:
+                    $items[] = [
+                        'label' => Yii::t('references', $value),
+                        'url' => ['/#'],
+                    ];
+                    break;
+            }
+        endforeach;
+
+        return $items;
     }
 }

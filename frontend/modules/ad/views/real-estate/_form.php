@@ -7,7 +7,11 @@ use yii\widgets\MaskedInput;
 use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use common\widgets\ImageLoad\assets\CropperAsset;
+use common\widgets\Chosen\ChosenAsset;
+use common\widgets\FontAwesome\AssetBundle;
 
+AssetBundle::register($this);
+ChosenAsset::register($this);
 CropperAsset::register($this);
 
 /* @var $this yii\web\View */

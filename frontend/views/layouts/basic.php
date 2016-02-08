@@ -216,10 +216,8 @@ $this->beginPage();
 
         NavBar::end();
         ?>
-        <div class="container">
             <?= Alert::widget() ?>
             <?= $content ?>
-        </div>
     </div>
 
     <footer class="footer" style="background-color: #337ab7; max-height: 100%;">

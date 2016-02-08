@@ -7,14 +7,14 @@ class m160116_074120_create_ad_main_table extends Migration
     public function safeUp()
     {
         /* Создаем таблицу  ad_reference_main, в которой будут хранится основные свойства объявлений (категория, ед. измерения, валюта) */
-        $this->createTable('ad_reference_main', [
+        $this->createTable('ad_main_reference', [
             'id' => $this->primaryKey(),
             'reference_id' => $this->integer()->notNull(),           // Номер справочного раздела
             'reference_name' => $this->string()->notNull(),         // Название элемента
         ]);
 
         /* Добавляем основные свойства */
-        $this->batchInsert('ad_reference_main', ['id', 'reference_id', 'reference_name'],
+        $this->batchInsert('ad_main_reference', ['id', 'reference_id', 'reference_name'],
             [
                 /* Главные категории объявлений */
                 [1, 1, Yii::t('references', 'Real Estate')],
@@ -29,11 +29,11 @@ class m160116_074120_create_ad_main_table extends Migration
         /* Создаем таблицу  ad_category, в которой будут записываться id объявления и категория этого объявления. Связана с таблицами ad_main и таблицей объявлений. */
         $this->createTable('ad_category', [
             'id' => $this->primaryKey(),
-            'category' => $this->integer()->notNull(),           // Номер категории из таблицы ad_reference_main. Связь с таблицей  ad_reference_main.
+            'category' => $this->integer()->notNull(),           // Номер категории из таблицы ad_main_reference. Связь с таблицей  ad_main_reference.
             'ad_id' => $this->integer(),                  // Номер объявления. Связь с объявлением с одной из таблиц разделов (недвижимость, транспорт или др.)
         ]);
 
-        $this->addForeignKey('ad_category_reference_main', 'ad_category', 'category', 'ad_reference_main', 'id');
+        $this->addForeignKey('ad_category_main_reference', 'ad_category', 'category', 'ad_main_reference', 'id');
         //$this->addForeignKey('ad_category_images_of_objects', 'images_of_object', 'object_id', 'ad_category', 'ad_id');
 
         /* Создаем таблицу  ad_style, в которой будут находится стили для объявлений.
@@ -76,9 +76,9 @@ class m160116_074120_create_ad_main_table extends Migration
         $this->dropForeignKey('ad_main_place_city', 'ad_main');
         $this->dropForeignKey('ad_main_user', 'ad_main');
         $this->dropTable('ad_main');
-        $this->dropForeignKey('ad_category_reference_main', 'ad_category');
+        $this->dropForeignKey('ad_category_main_reference', 'ad_category');
         $this->dropTable('ad_category');
-        $this->dropTable('ad_reference_main');
+        $this->dropTable('ad_main_reference');
     }
 
     /*

@@ -1,8 +1,6 @@
 <?php
 use yii\bootstrap\Nav;
 use yii\widgets\Pjax;
-use common\widgets\Chosen\ChosenAsset;
-use common\widgets\FontAwesome\AssetBundle;
 use yii\widgets\MaskedInput;
 use common\widgets\StepsNavigation\StepsNavigation;
 
@@ -67,20 +65,30 @@ $this->params['breadcrumbs'][] = $this->title;
         */?>
     </div>
 </div>-->
-
+<div class="container">
 <?php
-echo StepsNavigation::widget();
-
 Pjax::begin([
     //'enablePushState' => false,
 ]);
-AssetBundle::register($this);
-ChosenAsset::register($this);
-MaskedInput::widget([
-    'name' => 'masked-input_init',
-    'clientOptions' => [
-        'alias' => 'decimal',
-    ],
+
+
+echo StepsNavigation::widget([
+    'headerStep1' => Yii::t('app', 'Select Category'),
+    'contentStep1' => Yii::t('app', 'Select Category: content'),
+    'headerStep2' => Yii::t('app', 'Fill in the form'),
+    'contentStep2' => Yii::t('app', 'Fill in the form: content'),
+    'headerStep3' => Yii::t('app', 'Add images'),
+    'contentStep3' => Yii::t('app', 'Add images: content'),
+    'headerStep4' => Yii::t('app', 'Post the ad'),
+    'contentStep4' => Yii::t('app', 'Post the ad: content'),
+    'classLinkStep1' => '',
+    'classContentStep1' => 'tab-pane',
+    'classLinkStep2' => 'active',
+    'classContentStep2' => 'tab-pane active',
+    'classLinkStep3' => 'disabled',
+    'classContentStep3' => 'tab-pane',
+    'classLinkStep4' => 'disabled',
+    'classContentStep4' => 'tab-pane',
 ]);
 //
 echo Nav::widget([
@@ -105,4 +113,4 @@ endif;
 <?php
 Pjax::end();
 ?>
-
+</div>

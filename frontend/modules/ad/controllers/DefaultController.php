@@ -3,11 +3,17 @@
 namespace frontend\modules\ad\controllers;
 
 use frontend\controllers\BehaviorsController;
+use common\models\AdMain;
 
 class DefaultController extends BehaviorsController
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        $modelAdMain = new AdMain();
+
+        return $this->render('index',
+            [
+                'modelAdMain' => $modelAdMain
+            ]);
     }
 }

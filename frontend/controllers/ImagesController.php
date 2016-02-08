@@ -26,10 +26,12 @@ class ImagesController extends Controller
 
     public function actionAutoloadImage()
     {
-        /*d($_FILES);
-        d(Yii::$app->request->get());
-        dd(Yii::$app->request->post());*/
+
         //dd(Yii::$app->request->get());
+        if(Yii::$app->request->isPjax) {
+            /*d($_FILES);
+            d(Yii::$app->request->get());
+            dd(Yii::$app->request->post());*/
         $imageData = Yii::$app->request->post('imageData');
         //$imageData = Yii::$app->request->get('imageData');
         $modelImageForm = new ImageForm();
@@ -47,7 +49,7 @@ class ImagesController extends Controller
         if($imageData['modelName'] == 'AdRealEstate'):
 
             $model = AdRealEstate::findOne($imageData['object_id']);
-            d($model);
+            //d($model);
         elseif($imageData['modelName'] == 'UserProfile'):
             $model = UserProfile::findOne($imageData['object_id']);
             //d($model);
@@ -77,6 +79,39 @@ class ImagesController extends Controller
                 'error' => $error,
             ]
         );
+        } else {
+            d($_FILES);
+            d(Yii::$app->request->get());
+            dd(Yii::$app->request->post());
+            /*dd([Yii::$app->session->get('tempId')]);
+            $model = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
+            $imagesObject = $model->imagesOfObjects;
+            $modelImageForm = new ImageForm();
+            return $this->render(
+                '@common/widgets/ImageLoad/views/_formAutoload',
+                [
+                    'modelName' => $imageData['modelName'],
+                    'id' => $imageData['id'],
+                    'object_id' => $imageData['object_id'],
+                    'images_num' => $imageData['images_num'],
+                    'images_label' => $imageData['images_label'],
+                    'images_temp' => $imageData['images_temp'],
+                    'imageSmallWidth' => $imageData['imageSmallWidth'],
+                    'imageSmallHeight' => $imageData['imageSmallHeight'],
+                    'imagesObject' => $imagesObject,
+                    'modelImageForm' => $modelImageForm,
+                    'baseUrl' => $imageData['baseUrl'],
+                    'imagePath' => $imageData['imagePath'],
+                    'noImage' => $imageData['noImage'],
+                    'imageClass' => $imageData['imageClass'],
+                    'buttonDeleteClass' => $imageData['buttonDeleteClass'],
+                    'imageContainerClass' => $imageData['imageContainerClass'],
+                    'formImagesContainerClass' => $imageData['formImagesContainerClass'],
+                    'error' => $error,
+                ]
+            );*/
+            //return $this->redirect(['/ad/real-estate/create']);
+        }
     }
     /**
      * @return string

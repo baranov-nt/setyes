@@ -129,7 +129,7 @@ JS;
                 cropUrl;                                                    // путь контроллер/действие, куда будут отправлятся pjax данные
 
             modalBox.on("shown.bs.modal", function (event) {                // событие, перед фактическим показом модального окна, выполняется после события show
-                cropUrl = $("#crop-url-$this->id").attr("data-crop-url");   // в объект cropUrl помещаем маршрут из свойства data-crop-url элемента "#crop-url-$this->id"
+                cropUrl = $("#crop-url-$this->id").attr("$this->autoloadUrl");   // в объект cropUrl помещаем маршрут из свойства data-crop-url элемента "#crop-url-$this->id"
                 image.cropper($.extend({                                    // $.extend объеденяем объекты built и dragend, результат будет записан в built
                     built: function () {                                    // событие происходит когда Cropper полностью построен
                         // Начальные настройки изображения
@@ -168,6 +168,17 @@ JS;
                     canvasData = image.cropper('getCanvasData');                // получение конечных данных холста
 
                     var cropData = JSON.stringify(image.cropper("getData"));
+
+                    /*$.pjax({
+        type       : 'POST',
+        url        : '/images/autoload-image.html',
+        container  : '#images-widget',
+        data       : {qeqwe: 222},
+        push       : false,
+        replace    : false,
+        timeout    : 10000,
+        "scrollTo" : false
+    })*/
 
                     form.trigger('submit');
 

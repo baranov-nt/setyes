@@ -60,13 +60,15 @@ Pjax::begin([
                 'action' => Url::to(['/images/autoload-image']),
                 'options' => [
                     'enctype' => 'multipart/form-data',
+                    'data-pjax' => true,
                     'id' => 'image-form-'.$id,
-                    'data-pjax' => 'image-widget-'.$id,
+                    //'data-pjax' => 'image-widget-'.$id,
+                    'timeout' => '7000'
                 ]
             ]);
 
         echo $form->field($modelImageForm, 'image', [
-            'template' => '<div id="crop-url-'.$id.'" class="btn-file" data-crop-url="'.Url::to(['/images/autoload-image']).'">
+            'template' => '<div id="crop-url-'.$id.'" class="btn-file">
     {input}</div>'])
             ->input('file', [
                 'onchange' => 'loadFile(event)',
@@ -131,4 +133,5 @@ Pjax::begin([
     </div>
 </div>
 <?php
+//dd(1);
 Pjax::end();

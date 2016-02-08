@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 Pjax::begin([
-    'enablePushState' => false,
+    //'enablePushState' => false,
 ]);
 AssetBundle::register($this);
 ChosenAsset::register($this);

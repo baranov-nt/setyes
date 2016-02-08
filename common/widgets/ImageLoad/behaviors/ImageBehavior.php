@@ -60,7 +60,7 @@ class ImageBehavior extends Behavior
         $model = new ImageForm();
         $model->image = UploadedFile::getInstance($model, 'image');
 
-        d($model->image);
+        //d($model->image);
 
         if($model->validate()):
             $smallFileName = time().'_'.Yii::$app->user->id.'_small.'.$model->image->extension;           // будущее имя миниатюры
@@ -95,7 +95,7 @@ class ImageBehavior extends Behavior
                                 $newImage->thumbnail(new Box($this->imageData['imageSmallWidth'], $this->imageData['imageSmallHeight']))
                                     ->save('images/'.$this->imageData['imagePath'].$smallFileName);
                                 //$transaction->commit();
-                                d(1);
+                                //d(1);
                             endif;
                         endif;
 
@@ -103,7 +103,7 @@ class ImageBehavior extends Behavior
                         \Yii::$app->session->remove('error');
                     endif;
                 else:
-                    d(2);
+                    //d(2);
                     \Yii::$app->session->set('error', 'Изображение не добавлено.');         // если все в порядке, пишем в сессию путь к изображениею
                     \Yii::$app->session->remove('image');
                 endif;
@@ -112,7 +112,7 @@ class ImageBehavior extends Behavior
             }*/
             //dd([$model->errors, $modelImages->errors, $modelImagesOfObject->errors]);
         else:
-            dd($model->errors);
+            //dd($model->errors);
             \Yii::$app->session->set('error', $model->errors['image']['0']); // если все в порядке, пишем в сессию путь к изображениею
             \Yii::$app->session->remove('image');
         endif;

@@ -162,6 +162,7 @@ class PlaceManager extends Object
     {
         /* Находим город, заполненный в форме */
         $objectInputCity = Yii::$app->googleApi->getGeoCodeObject($city, null);
+        //d($objectInputCity);
         /* Находим адрес */
         $objectAddress = Yii::$app->googleApi->getGeoCodeObject($address, null);
 

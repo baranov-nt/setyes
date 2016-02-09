@@ -12,8 +12,8 @@ use yii\db\Exception;
  *
  * @property integer $id
  * @property integer $property
- * @property integer $type_of_property
  * @property integer $deal_type
+ * @property integer $type_of_property
  * @property integer $place_address_id
  * @property integer $rooms_in_the_apartment
  * @property integer $material_housing
@@ -23,7 +23,6 @@ use yii\db\Exception;
  * @property integer $measurement_of_property
  * @property integer $area_of_land
  * @property integer $measurement_of_land
- * @property integer $system_measure
  * @property integer $lease_term
  * @property integer $price
  * @property integer $price_for_the_period
@@ -31,8 +30,10 @@ use yii\db\Exception;
  * @property integer $internet
  * @property integer $pets_allowed
  * @property integer $condition
+ * @property integer $images_label
+ * @property integer $temp
  *
- * @property AdCategory $adCategories
+ * @property AdCategory[] $adCategories
  * @property AdRealEstateReference $condition0
  * @property AdRealEstateReference $dealType
  * @property AdRealEstateReference $floor0
@@ -872,71 +873,104 @@ class AdRealEstate extends ActiveRecord
      */
     public function checkForm($scenario, $modelAdRealEstate)
     {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
-        $modelAdRealEstate->scenario = $scenario;
-        /* Проверям заполненные поля для полученного сценария */
-        if($modelAdRealEstate->validate()) {
-            /** Если используются сценарии, для которых необходимо получить адрес, находим этот адрес и пишем его в БД.
-             *  Возвращется объект адреса из таблицы place_address с найденным place_id из Google Maps.
-             *  Если адрес не найден, возвращается false
-            */
-            if($scenario == 'sellingRoom' || $scenario == 'rentARoom'
-                || $scenario == 'sellingApatrment' || $scenario == 'rentApatrment'
-                || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
-                || $scenario == 'sellingComercial' || $scenario == 'rentComercial') {
-
-                /** Если валидация всех (кроме адреса и города) полей прошла успешно
-                 *  формируем введенный адрес, где
-                 *  $city - введенный город
-                 *  $address - введеный адрес (улица и номер мода)
+        //dd([$scenario, $modelAdRealEstate->scenario]);
+        //if($scenario == $modelAdRealEstate->scenario) {
+            /* @var $modelAdRealEstate \common\models\AdRealEstate */
+            $modelAdRealEstate->scenario = $scenario;
+            /* Проверям заполненные поля для полученного сценария */
+            if ($modelAdRealEstate->validate()) {
+                /** Если используются сценарии, для которых необходимо получить адрес, находим этот адрес и пишем его в БД.
+                 *  Возвращется объект адреса из таблицы place_address с найденным place_id из Google Maps.
+                 *  Если адрес не найден, возвращается false
                  */
-                $city = $modelAdRealEstate->place_city;
-                $address = $modelAdRealEstate->place_house.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_city;
-                /** Находим в Google Maps введенный адрес, если адрес найден и записан в БД,
-                 *  возвращаем объект адреса из таблицы place_address. Если адрес не найден, вернется false.
-                 */
-                $placeAddress = Yii::$app->placeManager->findAddress($city, $address);
+                if ($scenario == 'sellingRoom' || $scenario == 'rentARoom'
+                    || $scenario == 'sellingApatrment' || $scenario == 'rentApatrment'
+                    || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
+                    || $scenario == 'sellingComercial' || $scenario == 'rentComercial'
+                ) {
 
-                if(!$placeAddress) {
-                    $modelAdRealEstate->place_street = '';
-                    $modelAdRealEstate->place_house = '';
-                    $modelAdRealEstate->place_address = 0;
-                }
-                if($modelAdRealEstate->validate(['place_address'])) {
-                    return $modelAdRealEstate;
-                }
-            } else {
-                /** Если используются сценарии, для которых необходимо получить город, находим этот город и пишем его в БД.
-                 *  Возвращется объект города из таблицы place_city с найденным place_id из Google Maps.
-                 *  Если город не найден, возвращается false
-                 */
-                $placeCity = Yii::$app->placeManager->findCity($modelAdRealEstate->place_city);
+                    /** Если валидация всех (кроме адреса и города) полей прошла успешно
+                     *  формируем введенный адрес, где
+                     *  $city - введенный город
+                     *  $address - введеный адрес (улица и номер мода)
+                     */
+                    //d($modelAdRealEstate);
 
-                if(!$placeCity) {
-                    $modelAdRealEstate->place_city_validate = 0;
-                }
-                if($modelAdRealEstate->validate(['place_city_validate'])) {
-                    return $modelAdRealEstate;
+                    $city = $modelAdRealEstate->place_city;
+                    $address = $modelAdRealEstate->place_house . ', ' . $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
+                    /** Находим в Google Maps введенный адрес, если адрес найден и записан в БД,
+                     *  возвращаем объект адреса из таблицы place_address. Если адрес не найден, вернется false.
+                     */
+
+                    /* @var $placeAddress \common\models\PlaceAddress */
+                    $placeAddress = Yii::$app->placeManager->findAddress($city, $address);
+
+                    if (!$placeAddress) {
+                        $modelAdRealEstate->place_street = '';
+                        $modelAdRealEstate->place_house = '';
+                        $modelAdRealEstate->place_address = 0;
+                    }
+                    if ($modelAdRealEstate->validate(['place_address'])) {
+                        //$modelAdRealEstate = $this->saveAd($placeAddress, $placeCity = null, $scenario);
+                        //dd($modelAdRealEstate);
+                        return $modelAdRealEstate;
+                    }
+                } else {
+                    /** Если используются сценарии, для которых необходимо получить город, находим этот город и пишем его в БД.
+                     *  Возвращется объект города из таблицы place_city с найденным place_id из Google Maps.
+                     *  Если город не найден, возвращается false
+                     */
+                    $placeCity = Yii::$app->placeManager->findCity($modelAdRealEstate->place_city);
+
+                    if (!$placeCity) {
+                        $modelAdRealEstate->place_city_validate = 0;
+                    }
+                    if ($modelAdRealEstate->validate(['place_city_validate'])) {
+                        //$modelAdRealEstate = $this->saveAd($placeAddress = null, $placeCity);
+                        //dd($modelAdRealEstate);
+                        return $modelAdRealEstate;
+                    }
                 }
             }
-        }
-        return $modelAdRealEstate;
+            d(1);
+            return $modelAdRealEstate ? $modelAdRealEstate : null;
+        /*}
+        return null;*/
     }
 
+    public function saveAd($placeAddress = null, $placeCity = null, $scenario) {
+        /* @var $placeAddress \common\models\PlaceAddress */
+        /* @var $placeCity \common\models\PlaceCity */
+        if(isset($placeAddress)) {
+            $placeAddressId = $placeAddress->id;
+            $placeCityId = $placeAddress->id;
+        } else {
+            $placeAddressId = null;
+            $placeCityId = $placeCity->id;
+        }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function createObject()
-    {
-        $modelAdRealEstate = new AdRealEstate();
-        $modelAdRealEstate->property = 1;
-        $modelAdRealEstate->deal_type = 8;
-        $modelAdRealEstate->save();
-        /*$modelAdRealEstate = new AdRealEstate();
+        $modelAdRealEstate = new AdRealEstate(['scenario' => $scenario]);
         $modelAdRealEstate->property = $this->property;
         $modelAdRealEstate->deal_type = $this->deal_type;
-        dd(4444);
+        $modelAdRealEstate->type_of_property = $this->type_of_property;
+        $modelAdRealEstate->place_address_id = $placeAddressId;
+        $modelAdRealEstate->rooms_in_the_apartment = $this->rooms_in_the_apartment;
+        $modelAdRealEstate->material_housing = $this->material_housing;
+        $modelAdRealEstate->floor = $this->floor;
+        $modelAdRealEstate->floors_in_the_house = $this->floors_in_the_house;
+        $modelAdRealEstate->area_of_property = $this->area_of_property;
+        $modelAdRealEstate->measurement_of_property = $this->measurement_of_property;
+        $modelAdRealEstate->area_of_land = $this->area_of_land;
+        $modelAdRealEstate->measurement_of_land = $this->measurement_of_land;
+        $modelAdRealEstate->lease_term = $this->lease_term;
+        $modelAdRealEstate->price = $this->price;
+        $modelAdRealEstate->price_for_the_period = $this->price_for_the_period;
+        $modelAdRealEstate->necessary_furniture = $this->necessary_furniture;
+        $modelAdRealEstate->internet = $this->internet;
+        $modelAdRealEstate->pets_allowed = $this->pets_allowed;
+        $modelAdRealEstate->condition = $this->condition;
+        $modelAdRealEstate->temp = 1;
+
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if($modelAdRealEstate->save()) {
@@ -947,75 +981,17 @@ class AdRealEstate extends ActiveRecord
                     $modelAdMain = new AdMain();
                     $modelAdMain->user_id = Yii::$app->user->id;
                     $modelAdMain->category_id = $modelCategory->id;
+                    $modelAdMain->place_city_id = $placeCityId;
                     if($modelAdMain->save()) {
-                        Yii::$app->session->set('tempModel', 'AdRealEstate');
-                        Yii::$app->session->set('tempId', $modelAdRealEstate->id);
                         $transaction->commit();
                     }
                 }
             } else {
-                \Yii::$app->session->set('error', 'Изображение не добавлено.');         // если все в порядке, пишем в сессию путь к изображениею
-                \Yii::$app->session->remove('image');
+                \Yii::$app->session->set('error', 'Объявление недвижимости не добавлено.');         // если все в порядке, пишем в сессию путь к изображениею
             }
         } catch (Exception $e) {
             $transaction->rollBack();
-        }*/
-
-        Yii::$app->session->set('tempModel', 'AdRealEstate');
-        Yii::$app->session->set('tempId', $modelAdRealEstate->id);
-        //dd($modelAdRealEstate->errors);
-
+        }
         return  $modelAdRealEstate ? $modelAdRealEstate : null;
     }
-    /**
-     * @return \yii\db\ActiveQuery
-     * @var $modelAdRealEstate \common\models\AdRealEstate
-     */
-    public function updateObject($modelAdRealEstate)
-    {
-        dd(222);
-        $modelAdRealEstate->temp = 0;
-        //$modelAdRealEstate->setScenario('update');
-        if($modelAdRealEstate->save()):
-            Yii::$app->session->remove('tempModel');
-            Yii::$app->session->remove('tempId');
-            return true;
-        endif;
-        return false;
-    }
-
-    /**
-     * @param $modelAdRealEstate
-     * @return \yii\db\ActiveQuery
-     * @throws \Exception
-     * @throws \yii\db\Exception
-     */
-    public function deleteObject($modelAdRealEstate)
-    {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
-        /* @var $one \common\models\ImagesOfObject */
-        $modelImages = $modelAdRealEstate->imagesOfObjects;
-        $transaction = Yii::$app->db->beginTransaction();
-        try {
-            foreach($modelImages as $one):
-                $this->deleteImageFile($one->image->path);
-                $this->deleteImageFile($one->image->path_small_image);
-                $one->delete();
-                $one->image->delete();
-            endforeach;
-            if($modelAdRealEstate->delete()):
-                $transaction->commit();
-            endif;
-        } catch (Exception $e) {
-            $transaction->rollBack();
-        }
-    }
-    public function deleteImageFile($image_file) {
-        if (empty('images/'.$image_file) || !file_exists('images/'.$image_file))
-            return false;
-        if (!unlink('images/'.$image_file))
-            return false;
-        return true;
-    }
-
 }

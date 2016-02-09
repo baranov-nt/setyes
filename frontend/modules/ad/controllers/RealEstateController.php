@@ -49,7 +49,7 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreate()
     {
-        $modelAdRealEstate = new AdRealEstate();
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'default']);
 
         if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
             return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
@@ -71,14 +71,21 @@ class RealEstateController extends BehaviorsController
     {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         /* Установка сценария по умолчанию для комнат */
+        /*$modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
+        $modelAdRealEstate->property = 1;                                                               // свойство property (недвижемость) для комнат равно 1
+        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');     // Получаем город из куки*/
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
         $modelAdRealEstate->property = 1;                                                               // свойство property (недвижемость) для комнат равно 1
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');     // Получаем город из куки
 
-        // Ссылка Pjax для выпадающего списка выбора операции (свойство deal_type)
-        $pjaxUrl = 'create-rooms';
-
         if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            d($modelAdRealEstate->scenario);
+            $modelAdRealEstate->validate();
+            dd($modelAdRealEstate);
+            /**
+             * 1. При выборе операции (deal_type) отправляются только (property и deal_type)
+             *
+             * */
             if(!$modelAdRealEstate->validate(['deal_type'])) {
                 /** Если операция не соответствует сценарию, назначаем сценарий для комнат по умолчанию 'rooms' и очищаем ошибку
                  *  Используется когда отправляется уже с выбранным сценарием */
@@ -157,6 +164,8 @@ class RealEstateController extends BehaviorsController
             'pjaxUrl' => $pjaxUrl
         ]);
     }
+
+
 
 
 
@@ -617,6 +626,54 @@ class RealEstateController extends BehaviorsController
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+
+
+    /**
+     * Creates a new AdRealEstate model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     *
+     * Действия для выбора сцегария в зависимости от пункта deal_type
+     */
+    public function actionSelectDeal()
+    {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /* Установка сценария по умолчанию для комнат */
+        $modelAdRealEstate = new AdRealEstate();
+        $pjaxUrl = 'create';
+
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            /**
+             *
+             * */
+            if($modelAdRealEstate->deal_type == 8)
+                $this->setScenario($modelAdRealEstate->deal_type, $property = 1, $scenario = 'sellingRoom', $pjaxUrl = 'create-rooms');
+            if($modelAdRealEstate->deal_type == 9)
+                $this->setScenario($modelAdRealEstate->deal_type, $property = 1, $scenario = 'rentARoom', $pjaxUrl = 'create-rooms');
+            if($modelAdRealEstate->deal_type == 10)
+                $this->setScenario($modelAdRealEstate->deal_type, $property = 1, $scenario = 'buyRoom', $pjaxUrl = 'create-rooms');
+            if($modelAdRealEstate->deal_type == 11)
+                $this->setScenario($modelAdRealEstate->deal_type, $property = 1, $scenario = 'rentingARoom', $pjaxUrl = 'create-rooms');
+        }
+
+        return $this->render('create', [
+            'modelAdRealEstate' => $modelAdRealEstate,
+            'pjaxUrl' => $pjaxUrl
+        ]);
+    }
+
+    /**
+     * Устанавливает в форме сценарий, согласно deal_type
+     */
+    protected function setScenario($dealType, $property, $scenario, $pjaxUrl)
+    {
+        $modelAdRealEstate = new AdRealEstate();
+        return $this->render('create', [
+            'modelAdRealEstate' => $modelAdRealEstate->addNewScenario($dealType, $property, $scenario),
+            'pjaxUrl' => $pjaxUrl
+        ]);
     }
 
     /**

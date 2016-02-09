@@ -28,6 +28,7 @@ $user = Yii::$app->user->identity;
 
 <div class="ad-real-estate-form">
     <?php $form = ActiveForm::begin([
+        'action' => $pjaxUrl,
         'method' => 'post',
         //'fieldClass' => ActiveField::className(),
         'id' => 'ad_form',
@@ -41,7 +42,7 @@ $user = Yii::$app->user->identity;
         'onChange' => '
         $.pjax({
             type: "POST",
-            url: "'.$pjaxUrl.'",
+            url: "select-deal",
             data: jQuery("#ad_form").serialize(),
             container: "#w0",
             push: false
@@ -390,6 +391,9 @@ $user = Yii::$app->user->identity;
                 'disabled' => false,
                 'divOptions' => ['class' => 'checkbox checkbox-warning checkbox-inline']
             ]]);*/
+    ?>
+    <?php
+    d($modelAdRealEstate->scenario);
     ?>
     <?= $form->field($modelAdRealEstate, 'scenario')->hiddenInput(['value' => $modelAdRealEstate->scenario])->label(false) ?>
 

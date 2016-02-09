@@ -70,6 +70,14 @@ $this->params['breadcrumbs'][] = $this->title;
 Pjax::begin([
     //'enablePushState' => false,
 ]);
+
+MaskedInput::widget([
+    'name' => 'masked-input_init',
+    'clientOptions' => [
+        'alias' => 'decimal',
+    ],
+]);
+
 echo StepsNavigation::widget([
     'headerStep1' => Yii::t('app', 'Select Category'),
     'contentStep1' => Yii::t('app', 'Select Category: content'),

@@ -392,6 +392,9 @@ $user = Yii::$app->user->identity;
             ]]);*/
     ?>
 
+    <?php
+    d($modelAdRealEstate->scenario);
+    ?>
     <?= $form->field($modelAdRealEstate, 'scenario')->hiddenInput(['value' => $modelAdRealEstate->scenario])->label(false) ?>
 
     <div class="form-group">

@@ -49,39 +49,7 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreate()
     {
-        // @var $modelAdRealEstate \common\models\AdRealEstate
-        $pjaxUrl = 'create-rooms';
-
-        $modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
-
-        if(!isset($modelAdRealEstate)):
-            d(1);
-            Yii::$app->session->remove('tempModel');
-            Yii::$app->session->remove('tempId');
-        endif;
-
-        if (isset($modelAdRealEstate) && $modelAdRealEstate->load(Yii::$app->request->post())):
-            if($modelAdRealEstate->updateObject($modelAdRealEstate)):
-                return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-            endif;
-        endif;
-
-        if(Yii::$app->session->get('tempModel') != 'AdRealEstate'):
-            d(2);
-            $modelAdRealEstate = new AdRealEstate();
-            $modelAdRealEstate = $modelAdRealEstate->createObject();
-        endif;
-
-        //$modelAdRealEstate->scenario = 'rooms';
-
-        $modelAdRealEstate = ($modelAdRealEstate = AdRealEstate::findOne(1)) ? $modelAdRealEstate : new AdRealEstate();
-
-        return $this->render('create', [
-            'modelAdRealEstate' => $modelAdRealEstate,
-            'pjaxUrl' => $pjaxUrl
-        ]);
-
-        /*$modelAdRealEstate = new AdRealEstate();
+        $modelAdRealEstate = new AdRealEstate();
 
         if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
             return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
@@ -89,7 +57,7 @@ class RealEstateController extends BehaviorsController
             return $this->render('create', [
                 'modelAdRealEstate' => $modelAdRealEstate,
             ]);
-        }*/
+        }
     }
 
     /**
@@ -101,48 +69,9 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateRooms()
     {
-        // @var $modelAdRealEstate \common\models\AdRealEstate
-        $pjaxUrl = 'create-rooms';
-
-        $modelAdRealEstate = AdRealEstate::findOne(Yii::$app->session->get('tempId'));
-
-        if(!isset($modelAdRealEstate)):
-            d(1);
-            Yii::$app->session->remove('tempModel');
-            Yii::$app->session->remove('tempId');
-        endif;
-
-        if (isset($modelAdRealEstate) && $modelAdRealEstate->load(Yii::$app->request->post())):
-            if($modelAdRealEstate->updateObject($modelAdRealEstate)):
-                return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-            endif;
-        endif;
-
-        if(Yii::$app->session->get('tempModel') != 'AdRealEstate'):
-            d(2);
-            $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
-            $modelAdRealEstate = $modelAdRealEstate->createObject();
-        endif;
-
-        $modelAdRealEstate->scenario = 'rooms';
-
-        return $this->render('create', [
-            'modelAdRealEstate' => $modelAdRealEstate,
-            'pjaxUrl' => $pjaxUrl
-        ]);
-
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
-        $modelAdRealEstate = new AdRealEstate(['scenario' => 'apartments']);
-        $modelAdRealEstate->property = 1;
-        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
-
-        $modelAdRealEstate->scenario = 'rooms';
-
-        //d($modelAdRealEstate->adCategories->imagesOfObjects);
-        
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         /* Установка сценария по умолчанию для комнат */
-        //$modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'rooms']);
         $modelAdRealEstate->property = 1;                                                               // свойство property (недвижемость) для комнат равно 1
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');     // Получаем город из куки
 

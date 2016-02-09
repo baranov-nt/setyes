@@ -54,6 +54,7 @@ use yii\db\Exception;
 
 class AdRealEstate extends ActiveRecord
 {
+    public $scenario;
     public $currency;
     public $appliances;
     public $place_city;

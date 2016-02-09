@@ -6,6 +6,7 @@
  * Time: 21:55
  */
 return [
+    ['scenario', 'string'],
     [['type_of_property'], 'required', 'on' => [
         /* квартиры 2 */
         'sellingApatrment',

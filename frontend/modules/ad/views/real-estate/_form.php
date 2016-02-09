@@ -391,10 +391,6 @@ $user = Yii::$app->user->identity;
                 'divOptions' => ['class' => 'checkbox checkbox-warning checkbox-inline']
             ]]);*/
     ?>
-
-    <?php
-    d($modelAdRealEstate->scenario);
-    ?>
     <?= $form->field($modelAdRealEstate, 'scenario')->hiddenInput(['value' => $modelAdRealEstate->scenario])->label(false) ?>
 
     <div class="form-group">

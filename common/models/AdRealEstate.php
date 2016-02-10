@@ -62,6 +62,7 @@ class AdRealEstate extends ActiveRecord
     public $place_street;
     public $place_house;
     public $place_address;
+    public $current_scenario;
 
     /**
      * @inheritdoc
@@ -77,14 +78,14 @@ class AdRealEstate extends ActiveRecord
     public function rules()
     {
         $rules = array_merge(
-            require(__DIR__ . '/rules/defaultRules.php')
-            /*require(__DIR__ . '/rules/realEstateRoomsRules.php'),                  // 1
+            require(__DIR__ . '/rules/defaultRules.php'),
+            require(__DIR__ . '/rules/realEstateRoomsRules.php'),                  // 1
             require(__DIR__ . '/rules/realEstateApartmentsRules.php'),             // 2
             require(__DIR__ . '/rules/realEstateHousesRules.php'),                 // 3
             require(__DIR__ . '/rules/realEstateLandRules.php'),                   // 4
             require(__DIR__ . '/rules/realEstateGaragesRules.php'),                // 5
-            require(__DIR__ . '/rules/realEstateAbroadRules.php'),   */              // 6
-           // require(__DIR__ . '/rules/realEstateCommercialRules.php')              // 7
+            require(__DIR__ . '/rules/realEstateAbroadRules.php'),                 // 6
+            require(__DIR__ . '/rules/realEstateCommercialRules.php')              // 7
         );
         return $rules;
     }
@@ -703,11 +704,11 @@ class AdRealEstate extends ActiveRecord
      */
     public function getRealEstateConditionList()
     {
-        $internet = ArrayHelper::map(AdRealEstateReference::find()
+        $condition = ArrayHelper::map(AdRealEstateReference::find()
             ->where(['reference_id' => 25])
             ->all(), 'id', 'reference_name');
         $items = [];
-        foreach($internet as $key => $value) {
+        foreach($condition as $key => $value) {
             $items[$key] = Yii::t('references', $value);
         }
         return $items;
@@ -875,7 +876,7 @@ class AdRealEstate extends ActiveRecord
         //dd([$scenario, $modelAdRealEstate->scenario]);
         //if($scenario == $modelAdRealEstate->scenario) {
             /* @var $modelAdRealEstate \common\models\AdRealEstate */
-            $modelAdRealEstate->scenario = $scenario;
+        $modelAdRealEstate->setScenario($scenario);
             /* Проверям заполненные поля для полученного сценария */
             if ($modelAdRealEstate->validate()) {
                 /** Если используются сценарии, для которых необходимо получить адрес, находим этот адрес и пишем его в БД.
@@ -931,7 +932,6 @@ class AdRealEstate extends ActiveRecord
                     }
                 }
             }
-            d(1);
             return $modelAdRealEstate ? $modelAdRealEstate : null;
         /*}
         return null;*/

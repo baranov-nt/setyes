@@ -6,11 +6,24 @@
  * Time: 7:20
  */
 return [
-    [['rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area_of_property', 'floors_in_the_house', 'condition'], 'required', 'on' => 'sellingRoom'],
-    [['rooms_in_the_apartment', 'material_housing', 'floor', 'price', 'area_of_property', 'floors_in_the_house', 'lease_term',
-        'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required', 'on' => 'rentARoom'],
-
-    [['price', 'lease_term', 'price_for_the_period'], 'required', 'on' => 'rentingARoom'],
+    [
+        ['property', 'deal_type', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing',
+            'floor', 'floors_in_the_house', 'area_of_property', 'price', 'condition'], 'required',
+        'on' => 'sellingRoom'
+    ],
+    [
+        ['property', 'deal_type', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing', 'floor',
+            'floors_in_the_house', 'area_of_property', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required',
+        'on' => 'rentARoom'
+    ],
+    [
+        ['property', 'deal_type', 'place_city', 'price'], 'required',
+        'on' => 'buyRoom'
+    ],
+    [
+        ['property', 'deal_type', 'place_city', 'lease_term', 'price', 'price_for_the_period'], 'required',
+        'on' => 'rentingARoom'
+    ],
     ['property', 'compare', 'compareValue' => 1, 'operator' => '==',
         'on' => [
             'rooms',
@@ -38,6 +51,28 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')])],
+    ['material_housing', 'number', 'min' => 112, 'max' => 117,
+        'on' => [
+            'sellingRoom',
+            'rentARoom',
+        ],
+        'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')]),
+        'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')]),
+        'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')])],
+    [['floor', 'floors_in_the_house'], 'number', 'min' => 44, 'max' => 74,
+        'on' => [
+            'sellingRoom',
+            'rentARoom',
+        ],
+        'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('floor')]),
+        'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('floor')]),
+        'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('floor')])],
+    [['floor', 'floors_in_the_house'], 'validateFloor',
+        'on' => [
+            'sellingRoom',
+            'rentARoom',
+        ],
+    ],
     [['lease_term'], 'number', 'min' => 77, 'max' => 78,
         'on' => [
             'rentARoom',
@@ -61,7 +96,7 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('necessary_furniture')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('necessary_furniture')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('necessary_furniture')])],
-    [['internet'], 'number', 'min' => 39, 'max' => 40,
+    [['internet'], 'number', 'min' => 132, 'max' => 133,
         'on' => [
             'rentARoom',
         ],
@@ -75,7 +110,7 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('pets_allowed')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('pets_allowed')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('pets_allowed')])],
-    [['condition'], 'number', 'min' => 41, 'max' => 43,
+    [['condition'], 'number', 'min' => 39, 'max' => 41,
         'on' => [
             'sellingRoom',
             'rentARoom',
@@ -83,11 +118,7 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('condition')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('condition')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('condition')])],
-    [['appliances'], 'number', 'min' => 118, 'max' => 124,
-        'on' => [
-            'rentARoom',
-        ],
-        'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('appliances')]),
-        'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('appliances')]),
-        'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('appliances')])],
+    ['appliances', 'in', 'range' => [118, 119, 120, 121, 122, 123, 124], 'allowArray' => true,
+        'on' => 'rentARoom'
+    ],
 ];

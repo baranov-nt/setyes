@@ -6,7 +6,8 @@
  * Time: 21:55
  */
 return [
-    [['place_city', 'place_street', 'place_house', 'place_address'], 'string'],
+    [['place_city', 'place_street', 'place_house', 'place_address', 'current_scenario'], 'string'],
+    ['appliances', 'in', 'range' => [118, 2, 124], 'allowArray' => true],
     [['type_of_property'], 'required', 'on' => [
         /* квартиры 2 */
         'sellingApatrment',

@@ -30,7 +30,7 @@ $user = Yii::$app->user->identity;
     <?php $form = ActiveForm::begin([
         'action' => 'create',
         'method' => 'post',
-        //'fieldClass' => ActiveField::className(),
+        'fieldClass' => ActiveField::className(),
         'id' => 'ad_form',
     ]); ?>
 
@@ -242,6 +242,7 @@ $user = Yii::$app->user->identity;
         <?= $form->field($modelAdRealEstate, 'area_of_land')->textInput(['style' => 'text-align: right !important;']) ?>
         <?= $form->field($modelAdRealEstate, 'measurement_of_land')->dropDownList($modelAdRealEstate->realEstateMeasurementOfLandName, [
         'class'  => 'form-control chosen-select',
+        'prompt' => Yii::t('app', '---'),
     ]) ?>
         <?php
     endif;
@@ -252,7 +253,9 @@ $user = Yii::$app->user->identity;
      * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
     ?>
     <?php
-    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentingARoom'
+        || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
+        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
         || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentComercial'):
         ?>
     <?= $form->field($modelAdRealEstate, 'lease_term')->dropDownList($modelAdRealEstate->realEstateLeaseTermList, [
@@ -293,7 +296,9 @@ $user = Yii::$app->user->identity;
      * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
     ?>
     <?php
-    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentingARoom'
+        || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
+        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
         || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentComercial'):
         ?>
     <?= $form->field($modelAdRealEstate, 'price_for_the_period')->dropDownList($modelAdRealEstate->realEstatePricePeriodList, [
@@ -396,6 +401,8 @@ $user = Yii::$app->user->identity;
                 'divOptions' => ['class' => 'checkbox checkbox-warning checkbox-inline']
             ]]);*/
     ?>
+
+    <?= $form->field($modelAdRealEstate, 'current_scenario')->hiddenInput(['value' => $modelAdRealEstate->scenario])->label(false); ?>
 
     <div class="form-group">
         <?= Html::submitButton($modelAdRealEstate->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),

@@ -49,11 +49,11 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreate()
     {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'default']);
 
         if ($modelAdRealEstate->load(Yii::$app->request->post())) {
-            dd($modelAdRealEstate);
-            $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = 'sellingApatrment', $modelAdRealEstate);
+            $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->current_scenario, $modelAdRealEstate);
             dd($modelAdRealEstate);
             return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
         } else {
@@ -90,7 +90,6 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateApartrments()
     {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'apartments']);
         $modelAdRealEstate->property = 2;
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
@@ -109,7 +108,6 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateHousesCottages()
     {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'houses']);
         $modelAdRealEstate->property = 3;
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
@@ -128,7 +126,6 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateLandPlot()
     {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'land']);
         $modelAdRealEstate->property = 4;
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
@@ -147,7 +144,6 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateGaragesParking()
     {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'garages']);
         $modelAdRealEstate->property = 5;
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
@@ -166,7 +162,6 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreatePropertyAbroad()
     {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'propertyAbroad']);
         $modelAdRealEstate->property = 6;
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
@@ -185,7 +180,6 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreateCommercialProperty()
     {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'comercial']);
         $modelAdRealEstate->property = 7;
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');

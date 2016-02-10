@@ -55,7 +55,6 @@ use yii\db\Exception;
 
 class AdRealEstate extends ActiveRecord
 {
-    public $scenario;
     public $currency;
     public $appliances;
     public $place_city;
@@ -78,14 +77,14 @@ class AdRealEstate extends ActiveRecord
     public function rules()
     {
         $rules = array_merge(
-            require(__DIR__ . '/rules/defaultRules.php'),
-            require(__DIR__ . '/rules/realEstateRoomsRules.php'),                  // 1
+            require(__DIR__ . '/rules/defaultRules.php')
+            /*require(__DIR__ . '/rules/realEstateRoomsRules.php'),                  // 1
             require(__DIR__ . '/rules/realEstateApartmentsRules.php'),             // 2
             require(__DIR__ . '/rules/realEstateHousesRules.php'),                 // 3
             require(__DIR__ . '/rules/realEstateLandRules.php'),                   // 4
             require(__DIR__ . '/rules/realEstateGaragesRules.php'),                // 5
-            require(__DIR__ . '/rules/realEstateAbroadRules.php'),                 // 6
-            require(__DIR__ . '/rules/realEstateCommercialRules.php')              // 7
+            require(__DIR__ . '/rules/realEstateAbroadRules.php'),   */              // 6
+           // require(__DIR__ . '/rules/realEstateCommercialRules.php')              // 7
         );
         return $rules;
     }

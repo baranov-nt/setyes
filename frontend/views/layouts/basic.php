@@ -86,6 +86,13 @@ $this->beginPage();
                         'style' => 'cursor: pointer; outline: none;'
                     ],
                 ],
+                [
+                    'label' => '<button class="btn btn-primary">'.Yii::t('app', 'Post ad').'</button>',
+                    'url' => Url::to(['/ad/default/index']),
+                    'linkOptions' => [
+                        'style' => 'padding: 7px 5px 0 5px'
+                    ]
+                ],
             ];
         endif;
         if(Yii::$app->user->isGuest):
@@ -128,7 +135,6 @@ $this->beginPage();
                     'style' => 'margin: 6px 0 0 20px; padding: 0'
                 ]
             ];
-
         else:
             $menuItems[] = [
                 'label' => '<span class="btn btn-default glyphicon glyphicon-question-sign" style=""></span>',

@@ -80,6 +80,11 @@ return [
                     'suffix' => '.html'
                 ],
                 [
+                    'pattern' => 'ad',
+                    'route' => 'ad/default/index',
+                    'suffix' => '.html'
+                ],
+                [
                     'pattern' => '<cityId:\d+>/<module>/<controller>/<action>/<id:\d+>',
                     'route' => '<module>/<controller>/<action>',
                     'suffix' => ''

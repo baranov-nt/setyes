@@ -81,7 +81,7 @@ MaskedInput::widget([
 echo StepsNavigation::widget([
     'headerStep1' => Yii::t('app', 'Select Category'),
     'contentStep1' => Yii::t('app', 'Select Category: content'),
-    'headerStep2' => Yii::t('app', 'Fill in the form'),
+    'headerStep2' => Yii::t('app', 'Select the type of property and fill out a simple form.'),
     'contentStep2' => Yii::t('app', 'Fill in the form: content'),
     'headerStep3' => Yii::t('app', 'Add images'),
     'contentStep3' => Yii::t('app', 'Add images: content'),
@@ -110,7 +110,6 @@ echo Nav::widget([
     ?>
     <?= $this->render('_form', [
         'modelAdRealEstate' => $modelAdRealEstate,
-        'pjaxUrl' => $pjaxUrl
     ]);
     ?>
 <?php

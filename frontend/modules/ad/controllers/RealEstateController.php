@@ -78,6 +78,8 @@ class RealEstateController extends BehaviorsController
         $modelAdRealEstate->property = 1;                                                               // свойство property (недвижемость) для комнат равно 1
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');     // Получаем город из куки
 
+        $pjaxUrl = '';
+
         if ($modelAdRealEstate->load(Yii::$app->request->post())) {
             d($modelAdRealEstate->scenario);
             $modelAdRealEstate->validate();

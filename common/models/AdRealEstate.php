@@ -36,6 +36,7 @@ use yii\db\Exception;
  *
  * @property AdCategory[] $adCategories
  * @property AdRealEstateReference $condition0
+ * @property ImagesOfObject $imagesOfObjects
  * @property AdRealEstateReference $dealType
  * @property AdRealEstateReference $floor0
  * @property AdRealEstateReference $floorsInTheHouse

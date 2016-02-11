@@ -98,6 +98,9 @@ class RealEstateController extends BehaviorsController
         $modelAdRealEstate = $this->findModel($id);
         $modelAdRealEstate->setScenario($modelAdRealEstate->model_scenario);
 
+        $objectAddress = Yii::$app->googleApi->getGeoCodeObject(null, null, $modelAdRealEstate->placeAddress->place_id);
+        //dd($objectAddress);
+
         if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
             return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
         } else {

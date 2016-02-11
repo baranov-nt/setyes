@@ -324,32 +324,41 @@ class GoogleMaps extends Widget
      */
     public $webroot = '@app/web';
 
-    public function getGeoCodeObject($address = null, $latlng = null)
+    public function getGeoCodeObject($address = null, $latlng = null, $placeId = null)
     {
-        if ($address !== null || $latlng !== null) {
+        if ($address !== null || $latlng !== null || $placeId !== null) {
 
             switch (true) {
                 case $address !== null:
                     $querystring = '?address=' . urlencode($address);
+                    $querystring = str_replace(' ', '%20', $querystring);
+                    $geoCodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
+                        . $querystring
+                        . '&language='.\Yii::$app->language;
                     break;
                 case $latlng !== null:
                     $querystring = '?latlng=' . $latlng;
+                    $querystring = str_replace(' ', '%20', $querystring);
+                    $geoCodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
+                        . $querystring
+                        . '&language='.\Yii::$app->language;
+                    break;
+                case $placeId !== null:
+                    $querystring = '?placeid=' . $placeId . '&key=' . $this->geocode_api_key;
+                    $querystring = str_replace(' ', '%20', $querystring);
+                    $geoCodeUrl = 'https://maps.googleapis.com/maps/api/place/details/json'
+                        . $querystring
+                        . '&language='.\Yii::$app->language;
+                    /*$querystring = '?place_id=' . $placeId . '&key=' . $this->geocode_api_key;
+                    $querystring = str_replace(' ', '%20', $querystring);
+                    $geoCodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
+                        . $querystring
+                        . '&language='.\Yii::$app->language;*/
                     break;
                 default:
                     $querystring = '';
             }
 
-            // concat query string
-            $querystring = str_replace(' ', '%20', $querystring);
-
-            // query by address string
-            $geoCodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json'
-                . $querystring
-                . '&language='.\Yii::$app->language;
-                //.'&result_type=country|street_address'
-                //. '&key=' . $this->geocode_api_key;
-
-            // get geocode object
             try {
                 $ch = curl_init($geoCodeUrl);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -369,8 +378,22 @@ class GoogleMaps extends Widget
             // json decode response
             $response_a = json_decode($response);
 
-            if (isset($response_a->results[0])) {
-                return $response_a->results[0];
+            switch (true) {
+                case $address !== null:
+                    $result = $response_a->results[0];
+                    break;
+                case $latlng !== null:
+                    $result = $response_a->results[0];
+                    break;
+                case $placeId !== null:
+                    $result = $response_a->result;
+                    break;
+                default:
+                    $querystring = '';
+            }
+
+            if (isset($result)) {
+                return $result;
             } else {
                 return null;
             }

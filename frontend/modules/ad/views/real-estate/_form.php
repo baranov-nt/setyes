@@ -261,6 +261,7 @@ $user = Yii::$app->user->identity;
         || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
         || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
         || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'
+        || $modelAdRealEstate->scenario == 'buyComercial'  || $modelAdRealEstate->scenario == 'rentingComercial'
     ):
         ?>
         <?= $form->field($modelAdRealEstate, 'lease_term')->dropDownList($modelAdRealEstate->realEstateLeaseTermList, [
@@ -275,11 +276,11 @@ $user = Yii::$app->user->identity;
     /** Цена доступена всем операциям */
     ?>
     <?php
-    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentingARoom'
-        || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
-        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
-        || $modelAdRealEstate->scenario == 'rentGarage'  || $modelAdRealEstate->scenario == 'rentingGarage'
-        || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'):
+    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+        || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
+        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'):
         ?>
         <?php
         echo $form->field($modelAdRealEstate, 'price')->widget(MaskedInput::className(), [

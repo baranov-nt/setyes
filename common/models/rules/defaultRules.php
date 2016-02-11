@@ -6,7 +6,8 @@
  * Time: 21:55
  */
 return [
-    [['place_city', 'place_street', 'place_house', 'place_address', 'current_scenario'], 'string'],
+    [['place_city', 'place_street', 'place_house', 'current_scenario'], 'string'],
+    [['place_address'], 'integer'],
     ['deal_type', 'validateDealType', 'on' => [
         /* комнаты 1 */
         'rooms',
@@ -49,6 +50,18 @@ return [
     ]],
     [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area_of_property', 'area_of_land',
         'measurement_of_property', 'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
+    [['place_address'], 'compare', 'compareValue' => 1, 'operator' => '==',
+        'on' => [
+            'sellingRoom',
+            'rentARoom',
+            'sellingApatrment',
+            'rentApatrment',
+            'sellingHouse',
+            'rentHouse',
+            'sellingComercial',
+            'rentComercial',
+        ],
+        'message' => Yii::t('app', 'Unfortunately, the specified address was not found.')],
     ['price', 'double'],
     ['price', 'compare', 'compareValue' => '0.00', 'operator' => '!=',
         'on' => [
@@ -90,6 +103,4 @@ return [
             'rentingComercial'
         ],
         'message' => Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->getAttributeLabel('price')])],  // цены
-
-
 ];

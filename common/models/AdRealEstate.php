@@ -873,68 +873,66 @@ class AdRealEstate extends ActiveRecord
      */
     public function checkForm($scenario, $modelAdRealEstate)
     {
-        //dd([$scenario, $modelAdRealEstate->scenario]);
-        //if($scenario == $modelAdRealEstate->scenario) {
-            /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->setScenario($scenario);
-            /* Проверям заполненные поля для полученного сценария */
-            if ($modelAdRealEstate->validate()) {
-                /** Если используются сценарии, для которых необходимо получить адрес, находим этот адрес и пишем его в БД.
-                 *  Возвращется объект адреса из таблицы place_address с найденным place_id из Google Maps.
-                 *  Если адрес не найден, возвращается false
+        /* Проверям заполненные поля для полученного сценария */
+        if ($modelAdRealEstate->validate()) {
+            /** Если используются сценарии, для которых необходимо получить адрес, находим этот адрес и пишем его в БД.
+             *  Возвращется объект адреса из таблицы place_address с найденным place_id из Google Maps.
+             *  Если адрес не найден, возвращается false
+             */
+            if ($scenario == 'sellingRoom' || $scenario == 'rentARoom'
+                || $scenario == 'sellingApatrment' || $scenario == 'rentApatrment'
+                || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
+                || $scenario == 'sellingComercial' || $scenario == 'rentComercial'
+            ) {
+
+                /** Если валидация всех (кроме адреса и города) полей прошла успешно
+                 *  формируем введенный адрес, где
+                 *  $city - введенный город
+                 *  $address - введеный адрес (улица и номер мода)
                  */
-                if ($scenario == 'sellingRoom' || $scenario == 'rentARoom'
-                    || $scenario == 'sellingApatrment' || $scenario == 'rentApatrment'
-                    || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
-                    || $scenario == 'sellingComercial' || $scenario == 'rentComercial'
-                ) {
+                //d($modelAdRealEstate);
 
-                    /** Если валидация всех (кроме адреса и города) полей прошла успешно
-                     *  формируем введенный адрес, где
-                     *  $city - введенный город
-                     *  $address - введеный адрес (улица и номер мода)
-                     */
-                    //d($modelAdRealEstate);
+                $city = $modelAdRealEstate->place_city;
+                $address = $modelAdRealEstate->place_house . ', ' . $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
+                /** Находим в Google Maps введенный адрес, если адрес найден и записан в БД,
+                 *  возвращаем объект адреса из таблицы place_address. Если адрес не найден, вернется false.
+                 */
 
-                    $city = $modelAdRealEstate->place_city;
-                    $address = $modelAdRealEstate->place_house . ', ' . $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
-                    /** Находим в Google Maps введенный адрес, если адрес найден и записан в БД,
-                     *  возвращаем объект адреса из таблицы place_address. Если адрес не найден, вернется false.
-                     */
+                /* @var $placeAddress \common\models\PlaceAddress */
+                $placeAddress = Yii::$app->placeManager->findAddress($city, $address);
 
-                    /* @var $placeAddress \common\models\PlaceAddress */
-                    $placeAddress = Yii::$app->placeManager->findAddress($city, $address);
+                if (!$placeAddress) {
+                    /* Если адрес не найден устанавливаем place_address = 0, вывод ошибки ввода адреса */
+                    $modelAdRealEstate->place_street = '';
+                    $modelAdRealEstate->place_house = '';
+                    $modelAdRealEstate->place_address = 0;
+                }
+                if ($modelAdRealEstate->validate(['place_address'])) {
+                    //$modelAdRealEstate = $this->saveAd($placeAddress, $placeCity = null, $scenario);
+                }
 
-                    if (!$placeAddress) {
-                        $modelAdRealEstate->place_street = '';
-                        $modelAdRealEstate->place_house = '';
-                        $modelAdRealEstate->place_address = 0;
-                    }
-                    if ($modelAdRealEstate->validate(['place_address'])) {
-                        //$modelAdRealEstate = $this->saveAd($placeAddress, $placeCity = null, $scenario);
-                        //dd($modelAdRealEstate);
-                        return $modelAdRealEstate;
-                    }
-                } else {
-                    /** Если используются сценарии, для которых необходимо получить город, находим этот город и пишем его в БД.
-                     *  Возвращется объект города из таблицы place_city с найденным place_id из Google Maps.
-                     *  Если город не найден, возвращается false
-                     */
-                    $placeCity = Yii::$app->placeManager->findCity($modelAdRealEstate->place_city);
+                //dd(2);
+            } else {
+                /** Если используются сценарии, для которых необходимо получить город, находим этот город и пишем его в БД.
+                 *  Возвращется объект города из таблицы place_city с найденным place_id из Google Maps.
+                 *  Если город не найден, возвращается false
+                 */
+                $placeCity = Yii::$app->placeManager->findCity($modelAdRealEstate->place_city);
 
-                    if (!$placeCity) {
-                        $modelAdRealEstate->place_city_validate = 0;
-                    }
-                    if ($modelAdRealEstate->validate(['place_city_validate'])) {
-                        //$modelAdRealEstate = $this->saveAd($placeAddress = null, $placeCity);
-                        //dd($modelAdRealEstate);
-                        return $modelAdRealEstate;
-                    }
+                if (!$placeCity) {
+                    $modelAdRealEstate->place_city_validate = 0;
+                }
+                if ($modelAdRealEstate->validate(['place_city_validate'])) {
+                    //$modelAdRealEstate = $this->saveAd($placeAddress = null, $placeCity);
+                    //dd($modelAdRealEstate);
+                    //return $modelAdRealEstate;
                 }
             }
-            return $modelAdRealEstate ? $modelAdRealEstate : null;
-        /*}
-        return null;*/
+        }
+        //dd($modelAdRealEstate->errors);
+        return $modelAdRealEstate;
     }
 
     public function saveAd($placeAddress = null, $placeCity = null, $scenario) {

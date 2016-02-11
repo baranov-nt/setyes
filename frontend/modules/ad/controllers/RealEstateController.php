@@ -54,7 +54,13 @@ class RealEstateController extends BehaviorsController
 
         if ($modelAdRealEstate->load(Yii::$app->request->post())) {
             $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->current_scenario, $modelAdRealEstate);
-            dd($modelAdRealEstate);
+            if($modelAdRealEstate->errors) {
+                return $this->render('create', [
+                    'modelAdRealEstate' => $modelAdRealEstate,
+                ]);
+            } else {
+                dd('OK!!!');
+            }
             return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
         } else {
             return $this->render('create', [

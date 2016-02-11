@@ -193,6 +193,7 @@ return [
     'Translations cache successfully cleared.' => 'Übersetzungen Cache erfolgreich gelöscht.',
     'Type Of Property' => 'Typ der Wohnung',
     'Unfortunately, the specified address was not found.' => 'Leider wurde der angegebenen Adresse nicht gefunden.',
+    'Unfortunately, the specified city was not found.' => 'Leider wurde der angegebenen Stadt nicht gefunden.',
     'Update' => 'Aktualisieren',
     'Update {modelClass}: ' => 'Aktualisieren {modelClass}: ',
     'Updated' => 'Aktualisiert',

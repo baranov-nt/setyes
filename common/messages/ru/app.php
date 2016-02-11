@@ -193,6 +193,7 @@ return [
     'Translations cache successfully cleared.' => 'Кэш переводов успешно очищен.',
     'Type Of Property' => 'Тип недвижимости',
     'Unfortunately, the specified address was not found.' => 'К сожалению, указанный адрес не был найден.',
+    'Unfortunately, the specified city was not found.' => 'К сожалению, указанный город не был найден.',
     'Update' => 'Обновить',
     'Update {modelClass}: ' => 'Обновить {modelClass}: ',
     'Updated' => 'Обновлен',

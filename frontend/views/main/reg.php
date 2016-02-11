@@ -29,7 +29,7 @@ use yii\helpers\Url;
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-md-6">
                             <?php
                             if(!isset($phoneMask)):
                                 $model->country_id =  \Yii::$app->getRequest()->getCookies()->getValue('_countryId');
@@ -50,7 +50,7 @@ use yii\helpers\Url;
                             ])
                             ?>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-md-6">
                             <?php
                             if($model->country_id):
                                 if(!isset($phoneMask)):
@@ -74,7 +74,7 @@ use yii\helpers\Url;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6 offset6">
+                        <div class="col-md-6 offset6">
                             <?php
                             if(($model->scenario === 'emailActivation' || $model->scenario === 'phoneAndEmailFinish')
                                 || Yii::$app->controller->action->id == 'reg' || Yii::$app->controller->action->id == 'update-phone'):
@@ -87,7 +87,7 @@ use yii\helpers\Url;
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-md-6">
                             <?php
                             if(Yii::$app->controller->action->id == 'reg' || Yii::$app->controller->action->id == 'update-phone'):
                                 ?>
@@ -96,7 +96,7 @@ use yii\helpers\Url;
                             endif;
                             ?>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-md-6">
                             <?php
                             if(Yii::$app->controller->action->id == 'reg' || Yii::$app->controller->action->id == 'update-phone'):
                                 ?>
@@ -114,6 +114,7 @@ use yii\helpers\Url;
                             ]
                         )
                         ?>
+                        <?= Html::a(Yii::t('app', 'Login'), Url::to(['/main/login']), ['class' => 'btn btn-primary']) ?>
                     </div>
                     <?php
                     if($model->scenario === 'emailActivation' || $model->scenario === 'phoneAndEmailFinish'):

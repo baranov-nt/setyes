@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\authclient\widgets\AuthChoice;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\LoginForm  */
@@ -19,6 +20,7 @@ use yii\authclient\widgets\AuthChoice;
 
                 <div class="form-group">
                     <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a(Yii::t('app', 'Registration'), Url::to(['/main/reg']), ['class' => 'btn btn-primary']) ?>
                 </div>
                 <?= Html::a(Yii::t('app', 'Forgot your password?'), ['/main/send-email']) ?>
             </div>

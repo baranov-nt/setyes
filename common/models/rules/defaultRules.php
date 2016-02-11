@@ -49,7 +49,9 @@ return [
         'rentingComercial'
     ]],
     [['property', 'type_of_property', 'deal_type', 'rooms_in_the_apartment', 'material_housing', 'floor', 'floors_in_the_house', 'area_of_property', 'area_of_land',
-        'measurement_of_property', 'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
+        'measurement_of_property', 'measurement_of_land', 'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
+    [['place_city_validate'], 'compare', 'compareValue' => 1, 'operator' => '==',
+        'message' => Yii::t('app', 'Unfortunately, the specified city was not found.')],
     [['place_address'], 'compare', 'compareValue' => 1, 'operator' => '==',
         'on' => [
             'sellingRoom',

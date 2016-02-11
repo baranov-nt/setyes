@@ -63,6 +63,7 @@ class AdRealEstate extends ActiveRecord
     public $place_house;
     public $place_address;
     public $current_scenario;
+    public $measurement_of_land;
 
     /**
      * @inheritdoc
@@ -875,25 +876,40 @@ class AdRealEstate extends ActiveRecord
     {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->setScenario($scenario);
+        //dd($modelAdRealEstate);
         /* Проверям заполненные поля для полученного сценария */
         if ($modelAdRealEstate->validate()) {
             /** Если используются сценарии, для которых необходимо получить адрес, находим этот адрес и пишем его в БД.
              *  Возвращется объект адреса из таблицы place_address с найденным place_id из Google Maps.
              *  Если адрес не найден, возвращается false
              */
-            if ($scenario == 'sellingRoom' || $scenario == 'rentARoom'
+            /*if ($scenario == 'sellingRoom' || $scenario == 'rentARoom'
                 || $scenario == 'sellingApatrment' || $scenario == 'rentApatrment'
                 || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
                 || $scenario == 'sellingComercial' || $scenario == 'rentComercial'
             ) {
 
+
+                //d($modelAdRealEstate);
+
+
+            }*/
+            /** Если используются сценарии, для которых необходимо получить город, находим этот город и пишем его в БД.
+             *  Возвращется объект города из таблицы place_city с найденным place_id из Google Maps.
+             *  Если город не найден, возвращается false
+             */
+            $placeCity = Yii::$app->placeManager->findCity($modelAdRealEstate->place_city);
+
+            if (!$placeCity) {
+                $modelAdRealEstate->place_city = '';
+                $modelAdRealEstate->place_city_validate = 0;
+            }
+            if ($modelAdRealEstate->validate(['place_city_validate'])) {
                 /** Если валидация всех (кроме адреса и города) полей прошла успешно
                  *  формируем введенный адрес, где
                  *  $city - введенный город
                  *  $address - введеный адрес (улица и номер мода)
                  */
-                //d($modelAdRealEstate);
-
                 $city = $modelAdRealEstate->place_city;
                 $address = $modelAdRealEstate->place_house . ', ' . $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
                 /** Находим в Google Maps введенный адрес, если адрес найден и записан в БД,
@@ -911,23 +927,6 @@ class AdRealEstate extends ActiveRecord
                 }
                 if ($modelAdRealEstate->validate(['place_address'])) {
                     //$modelAdRealEstate = $this->saveAd($placeAddress, $placeCity = null, $scenario);
-                }
-
-                //dd(2);
-            } else {
-                /** Если используются сценарии, для которых необходимо получить город, находим этот город и пишем его в БД.
-                 *  Возвращется объект города из таблицы place_city с найденным place_id из Google Maps.
-                 *  Если город не найден, возвращается false
-                 */
-                $placeCity = Yii::$app->placeManager->findCity($modelAdRealEstate->place_city);
-
-                if (!$placeCity) {
-                    $modelAdRealEstate->place_city_validate = 0;
-                }
-                if ($modelAdRealEstate->validate(['place_city_validate'])) {
-                    //$modelAdRealEstate = $this->saveAd($placeAddress = null, $placeCity);
-                    //dd($modelAdRealEstate);
-                    //return $modelAdRealEstate;
                 }
             }
         }

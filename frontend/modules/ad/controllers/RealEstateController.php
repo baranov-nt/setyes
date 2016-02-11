@@ -59,9 +59,9 @@ class RealEstateController extends BehaviorsController
                     'modelAdRealEstate' => $modelAdRealEstate,
                 ]);
             } else {
-                dd('OK!!!');
+                //dd('OK!!!');
+                return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
             }
-            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
         } else {
             return $this->render('create', [
                 'modelAdRealEstate' => $modelAdRealEstate,

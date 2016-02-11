@@ -902,9 +902,41 @@ class AdRealEstate extends ActiveRecord
                     $modelAdRealEstate = $this->findAddress($modelAdRealEstate);
                 }
             }
+
+            if(!$modelAdRealEstate->errors) {
+                $modelAdRealEstate = $this->saveAd($modelAdRealEstate);
+            }
         }
-        dd($modelAdRealEstate);
         return $modelAdRealEstate;
+    }
+
+    public function saveAd($modelAdRealEstate) {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+
+        $modelAdRealEstate->temp = 1;
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if($modelAdRealEstate->save()) {
+                $modelCategory = new AdCategory();
+                $modelCategory->category = $modelAdRealEstate->property;                       // Категория для недвижемость 1
+                $modelCategory->ad_id = $modelAdRealEstate->id;
+                if($modelCategory->save()) {
+                    $modelAdMain = new AdMain();
+                    $modelAdMain->user_id = Yii::$app->user->id;
+                    $modelAdMain->place_city_id = $this->place_city_id;
+                    $modelAdMain->category_id = $modelCategory->id;
+                    $modelAdMain->ad_style_id = 1;
+                    if($modelAdMain->save()) {
+                        $transaction->commit();
+                    }
+                }
+            } else {
+                \Yii::$app->session->set('error', 'Объявление недвижимости не добавлено.');         // если все в порядке, пишем в сессию путь к изображениею
+            }
+        } catch (Exception $e) {
+            $transaction->rollBack();
+        }
+        return  $modelAdRealEstate;
     }
 
     /* Функция для нахождения города по введенному значению */
@@ -964,62 +996,5 @@ class AdRealEstate extends ActiveRecord
             $modelAdRealEstate->place_address_id = $placeAddress->id;
         }
         return $modelAdRealEstate;
-    }
-
-    public function saveAd($placeAddress = null, $placeCity = null, $scenario) {
-        /* @var $placeAddress \common\models\PlaceAddress */
-        /* @var $placeCity \common\models\PlaceCity */
-        if(isset($placeAddress)) {
-            $placeAddressId = $placeAddress->id;
-            $placeCityId = $placeAddress->id;
-        } else {
-            $placeAddressId = null;
-            $placeCityId = $placeCity->id;
-        }
-
-        $modelAdRealEstate = new AdRealEstate(['scenario' => $scenario]);
-        $modelAdRealEstate->property = $this->property;
-        $modelAdRealEstate->deal_type = $this->deal_type;
-        $modelAdRealEstate->type_of_property = $this->type_of_property;
-        $modelAdRealEstate->place_address_id = $placeAddressId;
-        $modelAdRealEstate->rooms_in_the_apartment = $this->rooms_in_the_apartment;
-        $modelAdRealEstate->material_housing = $this->material_housing;
-        $modelAdRealEstate->floor = $this->floor;
-        $modelAdRealEstate->floors_in_the_house = $this->floors_in_the_house;
-        $modelAdRealEstate->area_of_property = $this->area_of_property;
-        $modelAdRealEstate->measurement_of_property = $this->measurement_of_property;
-        $modelAdRealEstate->area_of_land = $this->area_of_land;
-        $modelAdRealEstate->measurement_of_land = $this->measurement_of_land;
-        $modelAdRealEstate->lease_term = $this->lease_term;
-        $modelAdRealEstate->price = $this->price;
-        $modelAdRealEstate->price_for_the_period = $this->price_for_the_period;
-        $modelAdRealEstate->necessary_furniture = $this->necessary_furniture;
-        $modelAdRealEstate->internet = $this->internet;
-        $modelAdRealEstate->pets_allowed = $this->pets_allowed;
-        $modelAdRealEstate->condition = $this->condition;
-        $modelAdRealEstate->temp = 1;
-
-        $transaction = Yii::$app->db->beginTransaction();
-        try {
-            if($modelAdRealEstate->save()) {
-                $modelCategory = new AdCategory();
-                $modelCategory->category = 1;                       // Категория для недвижемость 1
-                $modelCategory->ad_id = $modelAdRealEstate->id;
-                if($modelCategory->save()) {
-                    $modelAdMain = new AdMain();
-                    $modelAdMain->user_id = Yii::$app->user->id;
-                    $modelAdMain->category_id = $modelCategory->id;
-                    $modelAdMain->place_city_id = $placeCityId;
-                    if($modelAdMain->save()) {
-                        $transaction->commit();
-                    }
-                }
-            } else {
-                \Yii::$app->session->set('error', 'Объявление недвижимости не добавлено.');         // если все в порядке, пишем в сессию путь к изображениею
-            }
-        } catch (Exception $e) {
-            $transaction->rollBack();
-        }
-        return  $modelAdRealEstate ? $modelAdRealEstate : null;
     }
 }

@@ -79,7 +79,9 @@ MaskedInput::widget([
     ],
 ]);
 ?>
+
     <div class="col-md-12 text-center">
+
     <?php
 echo StepsNavigation::widget([
     'urlStep1' => Url::to(['/ad/default/index']),
@@ -89,7 +91,7 @@ echo StepsNavigation::widget([
     'titleStep1' => Yii::t('app', 'Step 1'),
     'titleStep2' => Yii::t('app', 'Step 2'),
     'titleStep3' => Yii::t('app', 'Step 3'),
-    'titleStep4' => Yii::t('app', 'Step 4'),
+    'titleStep4' => Yii::t('app', 'Complite'),
     'headerStep1' => Yii::t('app', 'Select Category'),
     'headerStep2' => Yii::t('app', 'Select the type of property and fill out a simple form.'),
     'headerStep3' => Yii::t('app', 'Add images'),

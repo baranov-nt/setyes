@@ -53,7 +53,7 @@ class RealEstateController extends BehaviorsController
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'default']);
 
         if ($modelAdRealEstate->load(Yii::$app->request->post())) {
-            $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->current_scenario, $modelAdRealEstate);
+            $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
             if($modelAdRealEstate->errors) {
                 return $this->render('create', [
                     'modelAdRealEstate' => $modelAdRealEstate,
@@ -85,6 +85,26 @@ class RealEstateController extends BehaviorsController
         return $this->render('create', [
             'modelAdRealEstate' => $modelAdRealEstate,
         ]);
+    }
+
+    /**
+     * Updates an existing AdRealEstate model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $modelAdRealEstate = $this->findModel($id);
+        $modelAdRealEstate->setScenario($modelAdRealEstate->model_scenario);
+
+        if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
+            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
+        } else {
+            return $this->render('update', [
+                'modelAdRealEstate' => $modelAdRealEstate,
+            ]);
+        }
     }
 
     /**
@@ -285,25 +305,6 @@ class RealEstateController extends BehaviorsController
         return $this->render('create', [
             'modelAdRealEstate' => $modelAdRealEstate->addNewScenario($dealType, $property, $scenario),
         ]);
-    }
-
-    /**
-     * Updates an existing AdRealEstate model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $modelAdRealEstate = $this->findModel($id);
-
-        if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
-            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-        } else {
-            return $this->render('update', [
-                'modelAdRealEstate' => $modelAdRealEstate,
-            ]);
-        }
     }
 
     /**

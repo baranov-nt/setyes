@@ -231,6 +231,7 @@ $user = Yii::$app->user->identity;
     ):
         ?>
         <?= $form->field($modelAdRealEstate, 'area_of_property')->textInput(['style' => 'text-align: right !important;'])->label($modelAdRealEstate->getAttributeLabel('area_of_property').' ('.$modelAdRealEstate->realEstateMeasurementOfPropertyName.')') ?>
+        <?= $form->field($modelAdRealEstate, 'measurement_of_property')->hiddenInput(['value' => $modelAdRealEstate->realEstateMeasurementOfPropertyId])->label(false); ?>
         <?php
     endif;
     ?>
@@ -418,7 +419,7 @@ $user = Yii::$app->user->identity;
             ]]);*/
     ?>
 
-    <?= $form->field($modelAdRealEstate, 'current_scenario')->hiddenInput(['value' => $modelAdRealEstate->scenario])->label(false); ?>
+    <?= $form->field($modelAdRealEstate, 'model_scenario')->hiddenInput(['value' => $modelAdRealEstate->scenario])->label(false); ?>
 
     <div class="form-group">
         <?= Html::submitButton($modelAdRealEstate->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),

@@ -6,7 +6,7 @@
  * Time: 21:55
  */
 return [
-    [['place_city', 'place_street', 'place_house', 'current_scenario'], 'string'],
+    [['place_city', 'place_street', 'place_house', 'model_scenario'], 'string'],
     [['place_address'], 'integer'],
     ['deal_type', 'validateDealType', 'on' => [
         /* комнаты 1 */

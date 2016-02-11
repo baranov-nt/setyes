@@ -68,7 +68,17 @@ class StepsNavigation extends Widget
         $js = <<< JS
             function  comeHere(id) {
                 if($(id).attr('id') == "linkStep1" && $(id).attr('class') == '') {
-                    $.pjax({url: "$this->urlStep1", container: '#w0'});
+                    //$.pjax({url: "$this->urlStep1", container: '#w0'});
+                    window.location.replace("$this->urlStep1");
+                }
+                if($(id).attr('id') == "linkStep2" && $(id).attr('class') == '') {
+                    window.location.replace("$this->urlStep2");
+                }
+                if($(id).attr('id') == "linkStep3" && $(id).attr('class') == '') {
+                    window.location.replace("$this->urlStep3");
+                }
+                if($(id).attr('id') == "linkStep4" && $(id).attr('class') == '') {
+                    window.location.replace("$this->urlStep4");
                 }
             };
 JS;
@@ -110,8 +120,18 @@ JS;
 
         function comeHere(id) {
             if($(id).attr('id') == "linkStep1" && $(id).attr('class') == '') {
-                    $.pjax({url: "$this->urlStep1", container: '#w0'});
+                    //$.pjax({url: "$this->urlStep1", container: '#w0'});
+                    window.location.replace("$this->urlStep1");
                 }
+            if($(id).attr('id') == "linkStep2" && $(id).attr('class') == '') {
+                window.location.replace("$this->urlStep2");
+            }
+            if($(id).attr('id') == "linkStep3" && $(id).attr('class') == '') {
+                window.location.replace("$this->urlStep3");
+            }
+            if($(id).attr('id') == "linkStep4" && $(id).attr('class') == '') {
+                window.location.replace("$this->urlStep4");
+            }
         }
 JS;
         $view->registerJs($js);

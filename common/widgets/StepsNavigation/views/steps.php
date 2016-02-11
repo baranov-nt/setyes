@@ -17,7 +17,7 @@ use yii\bootstrap\Html;
                 <ul class="nav nav-tabs" role="tablist">
 
                     <li id="linkStep1" role="presentation" class="<?= $widget->classLinkStep1 ?>" onclick="comeHere('#linkStep1')">
-                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="<?= $widget->titleStep1 ?>">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-book"></i>
                             </span>
@@ -25,14 +25,14 @@ use yii\bootstrap\Html;
                     </li>
 
                     <li id="linkStep2" role="presentation" class="<?= $widget->classLinkStep2 ?>" onclick="comeHere('#linkStep2')">
-                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="<?= $widget->titleStep2 ?>">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </span>
                         </a>
                     </li>
                     <li id="linkStep3" role="presentation" class="<?= $widget->classLinkStep3 ?>" onclick="comeHere('#linkStep3')">
-                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="<?= $widget->titleStep3 ?>">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-picture"></i>
                             </span>
@@ -40,7 +40,7 @@ use yii\bootstrap\Html;
                     </li>
 
                     <li id="linkStep4" role="presentation" class="<?= $widget->classLinkStep4 ?>" onclick="comeHere('#linkStep4')">
-                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="<?= $widget->titleStep4 ?>">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </span>
@@ -74,12 +74,12 @@ use yii\bootstrap\Html;
                     </div>
                     <div class="<?= $widget->classContentStep3 ?> text-center" role="tabpanel" id="step3">
                         <h3><?= $widget->headerStep3 ?></h3>
-                        <p><?= $widget->contentStep3 ?></p>
+                        <!--<p><?/*= $widget->contentStep3 */?></p>
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-default next-step">Skip</button></li>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-                        </ul>
+                        </ul>-->
                     </div>
                     <div class="<?= $widget->classContentStep4 ?> text-center" role="tabpanel" id="complete">
                         <h3><?= $widget->headerStep4 ?></h3>

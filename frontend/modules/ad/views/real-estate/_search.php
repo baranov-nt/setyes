@@ -19,9 +19,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'property') ?>
 
-    <?= $form->field($model, 'type_of_property') ?>
-
     <?= $form->field($model, 'deal_type') ?>
+
+    <?= $form->field($model, 'type_of_property') ?>
 
     <?= $form->field($model, 'place_address_id') ?>
 
@@ -35,9 +35,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'area_of_property') ?>
 
+    <?php // echo $form->field($model, 'measurement_of_property') ?>
+
     <?php // echo $form->field($model, 'area_of_land') ?>
 
-    <?php // echo $form->field($model, 'system_measure') ?>
+    <?php // echo $form->field($model, 'measurement_of_land') ?>
 
     <?php // echo $form->field($model, 'lease_term') ?>
 
@@ -52,6 +54,10 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'pets_allowed') ?>
 
     <?php // echo $form->field($model, 'condition') ?>
+
+    <?php // echo $form->field($model, 'images_label') ?>
+
+    <?php // echo $form->field($model, 'temp') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>

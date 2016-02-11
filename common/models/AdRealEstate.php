@@ -31,6 +31,7 @@ use yii\db\Exception;
  * @property integer $pets_allowed
  * @property integer $condition
  * @property integer $images_label
+ * @property string $model_scenario
  * @property integer $temp
  *
  * @property AdCategory[] $adCategories
@@ -47,9 +48,9 @@ use yii\db\Exception;
  * @property AdRealEstateReference $petsAllowed
  * @property PlaceAddress $placeAddress
  * @property AdRealEstateReference $priceForThePeriod
- * @property AdRealEstateReference $typeOfProperty
+ * @property AdRealEstateReference $property0
  * @property AdRealEstateReference $roomsInTheApartment
- * @property AdRealEstateReference $typeOfProperty0
+ * @property AdRealEstateReference $typeOfProperty
  * @property AdRealEstateAppliances[] $adRealEstateAppliances
  */
 
@@ -64,7 +65,6 @@ class AdRealEstate extends ActiveRecord
     public $place_street_validate;
     public $place_house;
     public $place_address;
-    public $current_scenario;
     public $measurement_of_land;
 
     /**
@@ -145,16 +145,17 @@ class AdRealEstate extends ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'property' => Yii::t('app', 'Property'),
-            'type_of_property' => Yii::t('app', 'Type Of Property'),
             'deal_type' => Yii::t('app', 'Deal Type'),
+            'type_of_property' => Yii::t('app', 'Type Of Property'),
             'place_address_id' => Yii::t('app', 'Place Address ID'),
             'rooms_in_the_apartment' => Yii::t('app', 'Rooms In The Apartment'),
             'material_housing' => Yii::t('app', 'Material Housing'),
             'floor' => Yii::t('app', 'Floor'),
             'floors_in_the_house' => Yii::t('app', 'Floors In The House'),
             'area_of_property' => Yii::t('app', 'Area of property'),
-            'area_of_land' => Yii::t('app', 'Area of land'),
             'measurement_of_property' => Yii::t('app', 'Measurement Of Property'),
+            'area_of_land' => Yii::t('app', 'Area of land'),
+            'measurement_of_land' => Yii::t('app', 'Measurement Of Land'),
             'lease_term' => Yii::t('app', 'Lease Term'),
             'price' => Yii::t('app', 'Price'),
             'price_for_the_period' => Yii::t('app', 'Price For The Period'),
@@ -162,12 +163,14 @@ class AdRealEstate extends ActiveRecord
             'internet' => Yii::t('app', 'Internet'),
             'pets_allowed' => Yii::t('app', 'Pets Allowed'),
             'condition' => Yii::t('app', 'Condition'),
+            'images_label' => Yii::t('app', 'Images Label'),
             'appliances' => Yii::t('app', 'Appliances'),
             'place_city' => Yii::t('app', 'City'),
             'place_street' => Yii::t('app', 'Street Name'),
             'place_house' => Yii::t('app', 'House'),
             'place_address' => Yii::t('app', 'Address'),
-            'measurement_of_land' => Yii::t('app', 'Measurement Of Land'),
+
+            'temp' => Yii::t('app', 'Temp'),
         ];
     }
 
@@ -188,7 +191,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getAdCategories()
     {
-        return $this->hasOne(AdCategory::className(), ['ad_id' => 'id']);
+        return $this->hasMany(AdCategory::className(), ['ad_id' => 'id']);
     }
 
     /**
@@ -250,6 +253,22 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getMeasurementOfLand()
+    {
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'measurement_of_land']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMeasurementOfProperty()
+    {
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'measurement_of_property']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getNecessaryFurniture()
     {
         return $this->hasOne(AdRealEstateReference::className(), ['id' => 'necessary_furniture']);
@@ -282,9 +301,9 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTypeOfProperty()
+    public function getProperty0()
     {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'type_of_property']);
+        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'property']);
     }
 
     /**
@@ -298,15 +317,7 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSystemMeasure()
-    {
-        return $this->hasOne(AdRealEstateReference::className(), ['id' => 'measurement_of_property']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTypeOfProperty0()
+    public function getTypeOfProperty()
     {
         return $this->hasOne(AdRealEstateReference::className(), ['id' => 'type_of_property']);
     }
@@ -744,6 +755,29 @@ class AdRealEstate extends ActiveRecord
         }
         return false;
     }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getRealEstateMeasurementOfPropertyId()
+    {
+        /* @var $user \common\models\User */
+        $user = $this->getUser();
+        $user->country->system_measure;
+
+        switch ($user->country->system_measure) {
+            case 0:
+                /* @var $measurement_of_property \common\models\AdRealEstateReference */
+                return 75;
+            case 1:
+                /* @var $measurement_of_property \common\models\AdRealEstateReference */
+                return 76;
+        }
+        return false;
+    }
+
 
     /**
      * Returns the array of possible user status values.

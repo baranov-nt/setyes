@@ -7,21 +7,21 @@
  */
 return [
     [
-        ['property', 'deal_type', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing',
-            'floor', 'floors_in_the_house', 'area_of_property', 'price', 'condition'], 'required',
+        ['property', 'deal_type', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'measurement_of_property', 'material_housing',
+            'floor', 'floors_in_the_house', 'area_of_property', 'price', 'condition', 'model_scenario'], 'required',
         'on' => 'sellingRoom'
     ],
     [
-        ['property', 'deal_type', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing', 'floor',
-            'floors_in_the_house', 'area_of_property', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required',
+        ['property', 'deal_type', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'measurement_of_property', 'material_housing', 'floor',
+            'floors_in_the_house', 'area_of_property', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition', 'model_scenario'], 'required',
         'on' => 'rentARoom'
     ],
     [
-        ['property', 'deal_type', 'place_city', 'price'], 'required',
+        ['property', 'deal_type', 'place_city', 'price', 'model_scenario'], 'required',
         'on' => 'buyRoom'
     ],
     [
-        ['property', 'deal_type', 'place_city', 'lease_term', 'price', 'price_for_the_period'], 'required',
+        ['property', 'deal_type', 'place_city', 'lease_term', 'price', 'price_for_the_period', 'model_scenario'], 'required',
         'on' => 'rentingARoom'
     ],
     ['property', 'compare', 'compareValue' => 1, 'operator' => '==',

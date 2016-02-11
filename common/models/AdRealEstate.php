@@ -58,9 +58,10 @@ class AdRealEstate extends ActiveRecord
     public $currency;
     public $appliances;
     public $place_city;
+    public $place_city_id;
     public $place_city_validate;
-    public $place_street_validate;
     public $place_street;
+    public $place_street_validate;
     public $place_house;
     public $place_address;
     public $current_scenario;
@@ -875,75 +876,92 @@ class AdRealEstate extends ActiveRecord
      */
     public function checkForm($scenario, $modelAdRealEstate)
     {
+        dd($modelAdRealEstate);
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->setScenario($scenario);
         //dd($modelAdRealEstate);
         /* Проверям заполненные поля для полученного сценария */
         if ($modelAdRealEstate->validate()) {
-            /** Если используются сценарии, для которых необходимо получить адрес, находим этот адрес и пишем его в БД.
-             *  Возвращется объект адреса из таблицы place_address с найденным place_id из Google Maps.
-             *  Если адрес не найден, возвращается false
-             */
-            /*if ($scenario == 'sellingRoom' || $scenario == 'rentARoom'
-                || $scenario == 'sellingApatrment' || $scenario == 'rentApatrment'
-                || $scenario == 'sellingHouse' || $scenario == 'rentHouse'
-                || $scenario == 'sellingComercial' || $scenario == 'rentComercial'
-            ) {
-
-
-                //d($modelAdRealEstate);
-
-
-            }*/
-            /** Если используются сценарии, для которых необходимо получить город, находим этот город и пишем его в БД.
-             *  Возвращется объект города из таблицы place_city с найденным place_id из Google Maps.
-             *  Если город не найден, возвращается false
-             */
-            $placeCity = Yii::$app->placeManager->findCity($modelAdRealEstate->place_city);
-
-            if (!$placeCity) {
-                $modelAdRealEstate->place_city = '';
-                $modelAdRealEstate->place_city_validate = 0;
-            }
-            if ($modelAdRealEstate->validate(['place_city_validate'])) {
-                /** Если валидация всех (кроме адреса и города) полей прошла успешно
-                 *  формируем введенный адрес, где
-                 *  $city - введенный город
-                 *  $address - введеный адрес (улица и номер мода)
-                 */
-
-                $city = $modelAdRealEstate->place_city;
-                $street = $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
-
-                /* @var $placeAddress \common\models\PlaceAddress */
-                $placeStreet = Yii::$app->placeManager->findStreet($city, $street);
-
-                if (!$placeStreet) {
-                    /* Если адрес не найден устанавливаем place_address = 0, вывод ошибки ввода адреса */
-                    $modelAdRealEstate->place_street = '';
-                    $modelAdRealEstate->place_street_validate = 0;
+            /* Находит введенный город */
+            $modelAdRealEstate = $this->findCity($modelAdRealEstate);
+            /* Находит введенную улицу, если город найден */
+            if(!$modelAdRealEstate->errors) {
+                /* Сценарии для поиска улицы, без номера дома */
+                if($modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
+                    || $modelAdRealEstate->scenario == 'buyGarage'  || $modelAdRealEstate->scenario == 'rentingGarage'
+                    || $modelAdRealEstate->scenario == 'buyComercial'  || $modelAdRealEstate->scenario == 'rentingComercial'
+                ) {
+                    $modelAdRealEstate = $this->findStreet($modelAdRealEstate);
                 }
-                if ($modelAdRealEstate->validate(['place_street_validate'])) {
-                    $city = $modelAdRealEstate->place_city;
-                    $address = $modelAdRealEstate->place_house . ', ' . $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
-                    /** Находим в Google Maps введенный адрес, если адрес найден и записан в БД,
-                     *  возвращаем объект адреса из таблицы place_address. Если адрес не найден, вернется false.
-                     */
-
-                    /* @var $placeAddress \common\models\PlaceAddress */
-                    $placeAddress = Yii::$app->placeManager->findAddress($city, $address);
-
-                    if (!$placeAddress) {
-                        /* Если адрес не найден устанавливаем place_address = 0, вывод ошибки ввода адреса */
-                        $modelAdRealEstate->place_street = '';
-                        $modelAdRealEstate->place_house = '';
-                        $modelAdRealEstate->place_address = 0;
-                    }
-                    if ($modelAdRealEstate->validate(['place_address'])) {
-                        //$modelAdRealEstate = $this->saveAd($placeAddress, $placeCity = null, $scenario);
-                    }
+                /* Сценарии для поиска улицы, с номером дома */
+                if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+                    || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+                    || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+                    || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
+                ) {
+                    $modelAdRealEstate = $this->findAddress($modelAdRealEstate);
                 }
             }
+        }
+
+        return $modelAdRealEstate;
+    }
+
+    /* Функция для нахождения города по введенному значению */
+    private function findCity($modelAdRealEstate) {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /* @var $modelPlaceCity \common\models\PlaceCity */
+        $modelPlaceCity = Yii::$app->placeManager->findCity($modelAdRealEstate->place_city);
+
+        if (!$modelPlaceCity) {
+            $modelAdRealEstate->place_city = '';
+            $modelAdRealEstate->place_city_validate = 0;
+        }
+        if ($modelAdRealEstate->validate(['place_city_validate'])) {
+            $this->place_city_id = $modelPlaceCity->id;
+            $modelAdRealEstate->place_address_id = $modelPlaceCity->id;
+        }
+        return $modelAdRealEstate;
+    }
+
+    /* Функция для нахождения улицы по введенному значению */
+    private function findStreet($modelAdRealEstate) {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /* @var $placeStreet \common\models\PlaceAddress */
+        $city = $modelAdRealEstate->place_city;
+        $street = $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
+        $placeStreet = Yii::$app->placeManager->findStreet($city, $street);
+
+    if (!$placeStreet) {
+        /* Если адрес не найден устанавливаем place_address = 0, вывод ошибки ввода адреса */
+        $modelAdRealEstate->place_street = '';
+        $modelAdRealEstate->place_street_validate = 0;
+    }
+        if ($modelAdRealEstate->validate(['place_street_validate'])) {
+            $this->place_city_id = $placeStreet->city->id;
+            $modelAdRealEstate->place_address_id = $placeStreet->id;
+        }
+        return $modelAdRealEstate;
+    }
+
+    /* Функция для нахождения улицы по введенному значению */
+    private function findAddress($modelAdRealEstate) {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /* @var $placeAddress \common\models\PlaceAddress */
+        $city = $modelAdRealEstate->place_city;
+        $address = $modelAdRealEstate->place_house . ', ' . $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
+
+        $placeAddress = Yii::$app->placeManager->findAddress($city, $address);
+
+        if (!$placeAddress) {
+            /* Если адрес не найден устанавливаем place_address = 0, вывод ошибки ввода адреса */
+            $modelAdRealEstate->place_street = '';
+            $modelAdRealEstate->place_house = '';
+            $modelAdRealEstate->place_address = 0;
+        }
+        if ($modelAdRealEstate->validate(['place_address'])) {
+            $this->place_city_id = $placeAddress->city->id;
+            $modelAdRealEstate->place_address_id = $placeAddress->id;
         }
         return $modelAdRealEstate;
     }

@@ -54,8 +54,10 @@ return [
         'message' => Yii::t('app', 'Unfortunately, the specified city was not found.')],
     [['place_street_validate'], 'compare', 'compareValue' => 1, 'operator' => '==',
         'on' => [
+            'sellingGarage',
+            'rentGarage',
             'buyGarage',
-            'rentingGarage',
+            'rentingGarage'
         ],
         'message' => Yii::t('app', 'Unfortunately, the specified street was not found.')],
     [['place_address'], 'compare', 'compareValue' => 1, 'operator' => '==',

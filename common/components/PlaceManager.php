@@ -257,20 +257,30 @@ class PlaceManager extends Object
     {
         /* Находим город, заполненный в форме */
         $objectInputCity = Yii::$app->googleApi->getGeoCodeObject($city, null);
-        //d($objectInputCity);
         /* Находим адрес */
-        $objectAddress = Yii::$app->googleApi->getGeoCodeObject($address, null);
+        $objectStreet = Yii::$app->googleApi->getGeoCodeObject($address, null);
 
-        if (isset($objectAddress)):
+        $route = '';
+        /* Формируем переменныe для адреса */
+        foreach ($objectStreet->address_components as $one):
+            if ($one->types[0] == 'route'):
+                $route = $one->short_name;
+            endif;
+        endforeach;
+
+        $objectStreet = Yii::$app->googleApi->getGeoCodeObject($route.' '.$city, null);
+
+        //d($objectStreet);
+
+        if (isset($objectStreet)):
             /* Если найден объект адреса, создаем пустые переменные для адреса */
-            $street_number = '';    // номер дома
             $route = '';            // улица
             $city = '';             // город
             $region = '';           // область, регион
             $country = '';          // cnhfyf
 
             /* Формируем переменныe для адреса */
-            foreach ($objectAddress->address_components as $one):
+            foreach ($objectStreet->address_components as $one):
                 if ($one->types[0] == 'route'):
                     $route = $one->short_name;
                 endif;
@@ -288,7 +298,7 @@ class PlaceManager extends Object
             if ($route):
                 /* Если есть номер дома */
                 /* Находим введенный адрес в базе по place_id */
-                $modelPlaceAddress = PlaceAddress::findOne(['place_id' => $objectAddress->place_id]);
+                $modelPlaceAddress = PlaceAddress::findOne(['place_id' => $objectStreet->place_id]);
 
                 if ($modelPlaceAddress) {
                     /* @var $modelPlaceAddress \common\models\PlaceAddress */
@@ -311,7 +321,7 @@ class PlaceManager extends Object
                     if($modelPlaceCity) {
                         /* Если город в базе найден, записываем адрес этого города и возващаем объект адреса из таблицы place_address */
                         $modelPlaceAddress = new PlaceAddress();
-                        return $modelPlaceAddress->createAddress($modelPlaceCity, $objectAddress->place_id);
+                        return $modelPlaceAddress->createAddress($modelPlaceCity, $objectStreet->place_id);
                     } else {
                         /* Если город в базе не найден, ищем регион в Google Maps */
                         $objectRegion = Yii::$app->googleApi->getGeoCodeObject($region.' '.$country, null);
@@ -324,7 +334,7 @@ class PlaceManager extends Object
                             // если регион найден
                             $modelPlaceCity = new PlaceCity();
                             // добавляем новый город к найденному региону и новый адрес к городу, возващаем объект адреса
-                            return $modelPlaceCity->createCityAndAddress($modelPlaceRegion, $objectCity->place_id, $objectAddress->place_id);
+                            return $modelPlaceCity->createCityAndAddress($modelPlaceRegion, $objectCity->place_id, $objectStreet->place_id);
                         else:
                             // если регион не найден, находим страну в БД
                             $modelPlaceCountry = PlaceCountry::findOne(['iso2' => $country]);
@@ -333,7 +343,7 @@ class PlaceManager extends Object
 
                                 $modelPlaceRegion = new PlaceRegion();
                                 // Добавляем новый регион и город, пишем куки и переходим на главную страницу с get переменной city, возвращаем объект адреса
-                                return $modelPlaceRegion->createRegionAndCityAndAddress($modelPlaceCountry, $objectRegion->place_id, $objectCity->place_id, $objectAddress->place_id);
+                                return $modelPlaceRegion->createRegionAndCityAndAddress($modelPlaceCountry, $objectRegion->place_id, $objectCity->place_id, $objectStreet->place_id);
                             endif;
                         endif;
                     }

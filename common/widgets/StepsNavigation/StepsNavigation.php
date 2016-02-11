@@ -17,22 +17,26 @@ use yii\helpers\Url;
 class StepsNavigation extends Widget
 {
     /* Содержание */
+    public $titleStep1;
+    public $titleStep2;
+    public $titleStep3;
+    public $titleStep4;
     public $headerStep1;
-    public $contentStep1;
     public $headerStep2;
-    public $contentStep2;
     public $headerStep3;
-    public $contentStep3;
     public $headerStep4;
+    public $contentStep1;
+    public $contentStep2;
+    public $contentStep3;
     public $contentStep4;
     /* Стили (классы) */
     public $classLinkStep1;
-    public $classContentStep1;
     public $classLinkStep2;
-    public $classContentStep2;
     public $classLinkStep3;
-    public $classContentStep3;
     public $classLinkStep4;
+    public $classContentStep1;
+    public $classContentStep2;
+    public $classContentStep3;
     public $classContentStep4;
     /* ссылки */
     public $urlStep1;
@@ -43,7 +47,6 @@ class StepsNavigation extends Widget
     public function init()
     {
         parent::init();
-        $this->urlStep1 = Url::to(['/ad/default/index']);
         $this->registerClientScript();
     }
 

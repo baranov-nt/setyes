@@ -51,7 +51,7 @@ use yii\bootstrap\Html;
 
             <form role="form">
                 <div class="tab-content">
-                    <div class="<?= $widget->classContentStep1 ?>" role="tabpanel" id="step1" style="padding: 0 !important; margin-top: 10px !important;">
+                    <div class="<?= $widget->classContentStep1 ?> text-center" role="tabpanel" id="step1" style="padding: 0 !important; margin-top: 10px !important;">
                         <h3><?= $widget->headerStep1 ?></h3>
                         <!--<p><?/*= $widget->contentStep1 */?></p>-->
                         <!--<ul class="list-inline pull-right">
@@ -60,7 +60,7 @@ use yii\bootstrap\Html;
                             </li>
                         </ul>-->
                     </div>
-                    <div class="<?= $widget->classContentStep2 ?>" role="tabpanel" id="step2" style="padding: 0 !important; margin-top: 10px !important;">
+                    <div class="<?= $widget->classContentStep2 ?> text-center" role="tabpanel" id="step2" style="padding: 0 !important; margin-top: 10px !important;">
                         <h3><?= $widget->headerStep2 ?></h3>
                         <!--<p><?/*= $widget->contentStep2 */?></p>
                         <ul class="list-inline pull-right">
@@ -72,7 +72,7 @@ use yii\bootstrap\Html;
                             </li>
                         </ul>-->
                     </div>
-                    <div class="<?= $widget->classContentStep3 ?>" role="tabpanel" id="step3">
+                    <div class="<?= $widget->classContentStep3 ?> text-center" role="tabpanel" id="step3">
                         <h3><?= $widget->headerStep3 ?></h3>
                         <p><?= $widget->contentStep3 ?></p>
                         <ul class="list-inline pull-right">
@@ -81,7 +81,7 @@ use yii\bootstrap\Html;
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
                     </div>
-                    <div class="<?= $widget->classContentStep4 ?>" role="tabpanel" id="complete">
+                    <div class="<?= $widget->classContentStep4 ?> text-center" role="tabpanel" id="complete">
                         <h3><?= $widget->headerStep4 ?></h3>
                         <p><?= $widget->contentStep4 ?></p>
                     </div>

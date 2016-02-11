@@ -5,6 +5,7 @@ use yii\widgets\Pjax;
 use common\widgets\Chosen\ChosenAsset;
 use common\widgets\FontAwesome\AssetBundle;
 use yii\widgets\MaskedInput;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $modelAdMain common\models\AdMain */
 
@@ -26,34 +27,44 @@ MaskedInput::widget([
 ]);
 ?>
     <?= StepsNavigation::widget([
+    'urlStep1' => Url::to(['/ad/default/index']),
+    'urlStep2' => Url::to(['/#']),
+    'urlStep3' => Url::to(['/#']),
+    'urlStep4' => Url::to(['/#']),
+    'titleStep1' => Yii::t('app', 'Step 1'),
+    'titleStep2' => Yii::t('app', 'Step 2'),
+    'titleStep3' => Yii::t('app', 'Step 3'),
+    'titleStep4' => Yii::t('app', 'Step 4'),
     'headerStep1' => Yii::t('app', 'Select Category'),
-    'contentStep1' => Yii::t('app', 'Select Category: content'),
     'headerStep2' => Yii::t('app', 'Select the type of property and fill out a simple form.'),
-    'contentStep2' => Yii::t('app', 'Fill in the form: content'),
     'headerStep3' => Yii::t('app', 'Add images'),
-    'contentStep3' => Yii::t('app', 'Add images: content'),
     'headerStep4' => Yii::t('app', 'Post the ad'),
+    'contentStep1' => Yii::t('app', 'Select Category: content'),
+    'contentStep2' => Yii::t('app', 'Fill in the form: content'),
+    'contentStep3' => Yii::t('app', 'Add images: content'),
     'contentStep4' => Yii::t('app', 'Post the ad: content'),
     'classLinkStep1' => 'active',
-    'classContentStep1' => 'tab-pane active',
     'classLinkStep2' => 'disabled',
-    'classContentStep2' => 'tab-pane',
     'classLinkStep3' => 'disabled',
-    'classContentStep3' => 'tab-pane',
     'classLinkStep4' => 'disabled',
+    'classContentStep1' => 'tab-pane active',
+    'classContentStep2' => 'tab-pane',
+    'classContentStep3' => 'tab-pane',
     'classContentStep4' => 'tab-pane',
-
 ]); ?>
+    <div class="col-md-12 text-center">
+        <?php
+        echo Nav::widget([
+            'items' => $modelAdMain->mainCategoryList,
+            'activateParents' => true,
+            'encodeLabels' => false,
+            'options' => [
+                'class' => 'nav nav-pills',
+            ]
+        ]);
+        ?>
+    </div>
 <?php
-echo Nav::widget([
-    'items' => $modelAdMain->mainCategoryList,
-    'activateParents' => true,
-    'encodeLabels' => false,
-    'options' => [
-        'class' => 'nav nav-pills',
-    ]
-]);
-
 Pjax::end();
 ?>
 </div>

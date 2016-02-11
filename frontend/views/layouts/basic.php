@@ -76,14 +76,15 @@ $this->beginPage();
         if(Yii::$app->user->can('Администратор')):
             $menuItems = [
                 [
-                    'label' => Yii::t('app', 'Rules').' <span class="glyphicon glyphicon-question-sign"></span>',
+                    //'label' => Yii::t('app', 'Rules').' <span class="glyphicon glyphicon-question-sign"></span>',
+                    'label' => '<button class="btn btn-primary">'.Yii::t('app', 'Rules').' <span class="glyphicon glyphicon-question-sign"></span></button>',
                     'url' => [
                         '#'
                     ],
                     'linkOptions' => [
                         'data-toggle' => 'modal',
                         'data-target' => '#modal',
-                        'style' => 'cursor: pointer; outline: none;'
+                        'style' => 'padding: 7px 5px 0 5px'
                     ],
                 ],
                 [

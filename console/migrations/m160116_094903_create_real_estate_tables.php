@@ -19,7 +19,7 @@ class m160116_094903_create_real_estate_tables extends Migration
                 /* Тип недвижимости */
                 [1, 8, Yii::t('references', 'rooms')],                      // комнаты
                 [2, 8, Yii::t('references', 'apartments')],                 // квартиры
-                [3, 8, Yii::t('references', 'houses & cottages')],          // дома и коттеджи
+                [3, 8, Yii::t('references', 'houses')],                     // дома и коттеджи
                 [4, 8, Yii::t('references', 'land plots')],                 // земельные участки
                 [5, 8, Yii::t('references', 'garages and parking lots')],   // гаражи и стоянки
                 [6, 8, Yii::t('references', 'property abroad')],            // недвижемость за рубежем
@@ -35,10 +35,10 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [14, 2, Yii::t('references', 'buy an apartment')],          // купить квартиру
                 [15, 2, Yii::t('references', 'renting an apartment')],      // сниму квартиру
                 /* Операции с домами */
-                [16, 3, Yii::t('references', 'selling a house, villa')],      // продам дом
-                [17, 3, Yii::t('references', 'rent a house, villa')],         // сдам дом
-                [18, 3, Yii::t('references', 'buy a house, villa')],          // купить дом
-                [19, 3, Yii::t('references', 'renting a house, villa')],      // сниму дом
+                [16, 3, Yii::t('references', 'selling a house')],      // продам дом
+                [17, 3, Yii::t('references', 'rent a house')],         // сдам дом
+                [18, 3, Yii::t('references', 'buy a house')],          // купить дом
+                [19, 3, Yii::t('references', 'renting a house')],      // сниму дом
                 /* Операции с земельными участками */
                 [20, 4, Yii::t('references', 'selling land')],              // продам земельный участок
                 [21, 4, Yii::t('references', 'buy plot')],                  // куплю земельный участок

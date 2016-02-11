@@ -3,6 +3,7 @@ use yii\bootstrap\Nav;
 use yii\widgets\Pjax;
 use yii\widgets\MaskedInput;
 use common\widgets\StepsNavigation\StepsNavigation;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -77,23 +78,33 @@ MaskedInput::widget([
         'alias' => 'decimal',
     ],
 ]);
-
+?>
+    <div class="col-md-12 text-center">
+    <?php
 echo StepsNavigation::widget([
+    'urlStep1' => Url::to(['/ad/default/index']),
+    'urlStep2' => Url::to(['/#']),
+    'urlStep3' => Url::to(['/#']),
+    'urlStep4' => Url::to(['/#']),
+    'titleStep1' => Yii::t('app', 'Step 1'),
+    'titleStep2' => Yii::t('app', 'Step 2'),
+    'titleStep3' => Yii::t('app', 'Step 3'),
+    'titleStep4' => Yii::t('app', 'Step 4'),
     'headerStep1' => Yii::t('app', 'Select Category'),
-    'contentStep1' => Yii::t('app', 'Select Category: content'),
     'headerStep2' => Yii::t('app', 'Select the type of property and fill out a simple form.'),
-    'contentStep2' => Yii::t('app', 'Fill in the form: content'),
     'headerStep3' => Yii::t('app', 'Add images'),
-    'contentStep3' => Yii::t('app', 'Add images: content'),
     'headerStep4' => Yii::t('app', 'Post the ad'),
+    'contentStep1' => Yii::t('app', 'Select Category: content'),
+    'contentStep2' => Yii::t('app', 'Fill in the form: content'),
+    'contentStep3' => Yii::t('app', 'Add images: content'),
     'contentStep4' => Yii::t('app', 'Post the ad: content'),
     'classLinkStep1' => '',
-    'classContentStep1' => 'tab-pane',
     'classLinkStep2' => 'active',
-    'classContentStep2' => 'tab-pane active',
     'classLinkStep3' => 'disabled',
-    'classContentStep3' => 'tab-pane',
     'classLinkStep4' => 'disabled',
+    'classContentStep1' => 'tab-pane',
+    'classContentStep2' => 'tab-pane active',
+    'classContentStep3' => 'tab-pane',
     'classContentStep4' => 'tab-pane',
 ]);
 //
@@ -106,6 +117,7 @@ echo Nav::widget([
     ]
 ]);
 ?>
+    </div>
 <?php if($modelAdRealEstate->scenario != 'default'):
     ?>
     <?= $this->render('_form', [

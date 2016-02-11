@@ -6,11 +6,14 @@
  * Time: 10:49
  */
 return [
-    ['property', 'compare', 'compareValue' => 6, 'operator' => '==',
-        'on' => [
-            'propertyAbroad',
-            'sellingPropertyAbroad',
-            'buyPropertyAbroad',
-        ],
-        'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('property')])],  // значение недвижемости для сделок с домами
+    [
+        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing',
+            'floor', 'floors_in_the_house', 'area_of_property', 'price', 'condition'], 'required',
+        'on' => 'sellingPropertyAbroad'
+    ],
+    [
+        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing',
+            'floor', 'floors_in_the_house', 'area_of_property', 'price', 'condition'], 'required',
+        'on' => 'rentPropertyAbroad'
+    ],
 ];

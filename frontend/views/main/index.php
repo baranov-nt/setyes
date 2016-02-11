@@ -19,21 +19,6 @@ if(!Yii::$app->user->isGuest):
 endif;
 ?>
 </div>
-<div class="container">
-    <?php
-    // вывод id страны
-    //d(\Yii::$app->getRequest()->getCookies()->getValue('_countryId'));
-
-    // конвертер валют
-    /*$converter = new CurrencyConverter();
-    $rate =  $converter->convert('EUR', 'MYR');
-    d($rate);*/
-    if(Yii::$app->user->can('Создатель')):
-        echo Html::a(Yii::t('references', 'Real Estate'), Url::to(['/ad/real-estate/index']));
-    endif;
-    ?>
-
-</div>
     <div class="container">
         <?php
         echo GoogleMaps::widget([

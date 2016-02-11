@@ -75,7 +75,8 @@ $user = Yii::$app->user->identity;
      * 'sellingGarage' 'rentGarage' */
     ?>
     <?php
-    if($modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'buyGarage' || $modelAdRealEstate->scenario == 'buyGarage'):
+    if($modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
+        || $modelAdRealEstate->scenario == 'buyGarage'  || $modelAdRealEstate->scenario == 'rentingGarage'):
         ?>
         <?= $form->field($modelAdRealEstate, 'place_street'); ?>
         <?= $form->field($modelAdRealEstate, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
@@ -91,6 +92,7 @@ $user = Yii::$app->user->identity;
     if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
@@ -110,7 +112,7 @@ $user = Yii::$app->user->identity;
         || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'buyHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
         || $modelAdRealEstate->scenario == 'sellingLand' || $modelAdRealEstate->scenario == 'buyLand'
         || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'buyGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'buyPropertyAbroad'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial' || $modelAdRealEstate->scenario == 'buyComercial' || $modelAdRealEstate->scenario == 'rentingComercial'
     ):
         ?>
@@ -128,7 +130,9 @@ $user = Yii::$app->user->identity;
     ?>
     <?php
     if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
-        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'):
+        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
+    ):
     ?>
     <?= $form->field($modelAdRealEstate, 'rooms_in_the_apartment')->dropDownList($modelAdRealEstate->realEstateRoomsInApartmentList, [
         'class'  => 'form-control chosen-select',
@@ -150,7 +154,7 @@ $user = Yii::$app->user->identity;
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
         || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
@@ -169,6 +173,7 @@ $user = Yii::$app->user->identity;
     <?php
     if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
@@ -187,6 +192,7 @@ $user = Yii::$app->user->identity;
     <?php
     if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
@@ -223,7 +229,7 @@ $user = Yii::$app->user->identity;
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
         || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
     ?>
@@ -256,7 +262,8 @@ $user = Yii::$app->user->identity;
     if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentingARoom'
         || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
         || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
-        || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentComercial'):
+        || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
+        || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'):
         ?>
     <?= $form->field($modelAdRealEstate, 'lease_term')->dropDownList($modelAdRealEstate->realEstateLeaseTermList, [
         'class'  => 'form-control chosen-select',
@@ -299,7 +306,8 @@ $user = Yii::$app->user->identity;
     if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentingARoom'
         || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
         || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
-        || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentComercial'):
+        || $modelAdRealEstate->scenario == 'rentGarage'  || $modelAdRealEstate->scenario == 'rentingGarage'
+        || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'):
         ?>
     <?= $form->field($modelAdRealEstate, 'price_for_the_period')->dropDownList($modelAdRealEstate->realEstatePricePeriodList, [
         'class'  => 'form-control chosen-select',
@@ -314,7 +322,8 @@ $user = Yii::$app->user->identity;
      * 'rentARoom' 'rentApatrment' 'rentHouse' */
     ?>
     <?php
-    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'):
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
         ?>
     <?= $form->field($modelAdRealEstate, 'necessary_furniture')->dropDownList($modelAdRealEstate->realEstateNecessaryFurnitureList, [
         'class'  => 'form-control chosen-select',
@@ -329,7 +338,8 @@ $user = Yii::$app->user->identity;
      * 'rentARoom' 'rentApatrment' 'rentHouse' */
     ?>
     <?php
-    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'):
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
     ?>
     <?= $form->field($modelAdRealEstate, 'internet')->dropDownList($modelAdRealEstate->realEstateInternetList, [
         'class'  => 'form-control chosen-select',
@@ -344,7 +354,8 @@ $user = Yii::$app->user->identity;
      * 'rentARoom' 'rentApatrment' 'rentHouse' */
     ?>
     <?php
-    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'):
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
         ?>
     <?= $form->field($modelAdRealEstate, 'pets_allowed')->dropDownList($modelAdRealEstate->realEstatePetsAllowedList, [
         'class'  => 'form-control chosen-select',
@@ -364,7 +375,7 @@ $user = Yii::$app->user->identity;
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
         || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
@@ -381,7 +392,8 @@ $user = Yii::$app->user->identity;
      * 'rentARoom' 'rentApatrment' 'rentHouse' */
     ?>
     <?php
-    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentHouse'):
+    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
         ?>
     <?php echo $form->field($modelAdRealEstate, 'appliances')->checkboxList($modelAdRealEstate->realEstateAppliancesList,
         [

@@ -250,7 +250,7 @@ class RealEstateController extends BehaviorsController
             if($modelAdRealEstate->deal_type == 26)
                 $this->setScenario($modelAdRealEstate->deal_type, $property = 6, $scenario = 'sellingPropertyAbroad');
             if($modelAdRealEstate->deal_type == 27)
-                $this->setScenario($modelAdRealEstate->deal_type, $property = 6, $scenario = 'buyPropertyAbroad');
+                $this->setScenario($modelAdRealEstate->deal_type, $property = 6, $scenario = 'rentPropertyAbroad');
             /* Операции с коммерческой недвижимостью */
             if($modelAdRealEstate->deal_type == 28)
                 $this->setScenario($modelAdRealEstate->deal_type, $property = 7, $scenario = 'sellingComercial');

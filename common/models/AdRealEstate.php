@@ -876,7 +876,6 @@ class AdRealEstate extends ActiveRecord
      */
     public function checkForm($scenario, $modelAdRealEstate)
     {
-        dd($modelAdRealEstate);
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->setScenario($scenario);
         //dd($modelAdRealEstate);
@@ -894,16 +893,17 @@ class AdRealEstate extends ActiveRecord
                     $modelAdRealEstate = $this->findStreet($modelAdRealEstate);
                 }
                 /* Сценарии для поиска улицы, с номером дома */
-                if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+                if($modelAdRealEstate->scenario == 'sellingRoom'
+                /*|| $modelAdRealEstate->scenario == 'rentARoom'
                     || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
                     || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
-                    || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
+                    || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'*/
                 ) {
                     $modelAdRealEstate = $this->findAddress($modelAdRealEstate);
                 }
             }
         }
-
+        dd($modelAdRealEstate);
         return $modelAdRealEstate;
     }
 

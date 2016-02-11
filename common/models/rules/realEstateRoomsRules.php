@@ -59,7 +59,7 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')])],
-    [['floor', 'floors_in_the_house'], 'number', 'min' => 44, 'max' => 74,
+    [['floor', 'floors_in_the_house'], 'number', 'min' => 43, 'max' => 74,
         'on' => [
             'sellingRoom',
             'rentARoom',

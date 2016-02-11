@@ -10,7 +10,7 @@ class m151216_115903_create_place_table extends Migration
         /* Таблица локального адреса */
         $this->createTable('place_address', [
             'id' => Schema::TYPE_PK,
-            'place_id' => Schema::TYPE_STRING.'(32) NOT NULL',
+            'place_id' => Schema::TYPE_STRING.'(255) NOT NULL',
             'city_id' => Schema::TYPE_INTEGER.' NOT NULL',
         ]);
 
@@ -19,7 +19,7 @@ class m151216_115903_create_place_table extends Migration
         /* Таблица города */
         $this->createTable('place_city', [
             'id' => Schema::TYPE_PK,
-            'place_id' => Schema::TYPE_STRING.'(32) NOT NULL',
+            'place_id' => Schema::TYPE_STRING.'(255) NOT NULL',
             'region_id' => Schema::TYPE_INTEGER.' NOT NULL',
         ]);
 
@@ -31,7 +31,7 @@ class m151216_115903_create_place_table extends Migration
         /* Таблица регионов */
         $this->createTable('place_region', [
             'id' => Schema::TYPE_PK,
-            'place_id' => Schema::TYPE_STRING.'(32) NULL',
+            'place_id' => Schema::TYPE_STRING.'(255) NULL',
             'country_id' => Schema::TYPE_INTEGER.' NOT NULL',
         ]);
 

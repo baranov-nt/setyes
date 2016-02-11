@@ -19,7 +19,7 @@ use yii\helpers\Url;
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-success']) ?>
                     <?= Html::a(Yii::t('app', 'Registration'), Url::to(['/main/reg']), ['class' => 'btn btn-primary']) ?>
                 </div>
                 <?= Html::a(Yii::t('app', 'Forgot your password?'), ['/main/send-email']) ?>

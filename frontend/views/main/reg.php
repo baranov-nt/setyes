@@ -108,9 +108,9 @@ use yii\helpers\Url;
                     </div>
 
                     <div class="form-group">
-                        <?= Html::submitButton(Yii::$app->controller->action->id == 'reg' ? Yii::t('app', 'Registration') : Yii::t('app', 'Complete Registration'),
+                        <?= Html::submitButton(Yii::t('app', 'Registration'),
                             [
-                                'class' => Yii::$app->controller->action->id == 'reg' ? 'btn btn-primary' : 'btn btn-success'
+                                'class' => 'btn btn-success'
                             ]
                         )
                         ?>

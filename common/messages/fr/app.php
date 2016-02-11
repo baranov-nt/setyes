@@ -59,6 +59,7 @@ return [
     'Change password' => 'Changer le mot de passe',
     'City' => 'Ville',
     'Clear Cache' => 'Vider le cache',
+    'Complite' => 'Achevée',
     'Complete Registration' => 'Enregistrement complet',
     'Condition' => 'Condition',
     'Confirm password' => 'Confirmez le mot de passe',

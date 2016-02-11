@@ -59,6 +59,7 @@ return [
     'Change password' => 'Изменить пароль',
     'City' => 'Город',
     'Clear Cache' => 'Очистить кэш',
+    'Complite' => 'Завершить',
     'Complete Registration' => 'Завершить регистрацию',
     'Condition' => 'Состояние',
     'Confirm password' => 'Подтвердите Пароль',

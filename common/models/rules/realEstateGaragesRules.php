@@ -7,20 +7,20 @@
  */
 return [
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'place_address', 'material_housing', 'area_of_property', 'price', 'condition'], 'required',
+        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'material_housing', 'area_of_property', 'price', 'condition'], 'required',
         'on' => 'sellingGarage'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'place_address', 'material_housing', 'area_of_property', 'lease_term', 'price',
+        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'material_housing', 'area_of_property', 'lease_term', 'price',
             'price_for_the_period', 'condition'], 'required',
         'on' => 'rentGarage'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'place_address', 'price'], 'required',
+        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street'], 'required',
         'on' => 'buyGarage'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'place_address', 'lease_term', 'price', 'price_for_the_period'], 'required',
+        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'lease_term'], 'required',
         'on' => 'rentingGarage'
     ],
     ['property', 'compare', 'compareValue' => 5, 'operator' => '==',
@@ -32,7 +32,7 @@ return [
             'rentingGarage'
         ],
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('property')])],  // значение недвижемости для сделок с комнатами
-    ['deal_type', 'number', 'min' => 22, 'max' => 15,
+    ['deal_type', 'number', 'min' => 22, 'max' => 25,
         'on' => [
             'sellingGarage',
             'rentGarage',

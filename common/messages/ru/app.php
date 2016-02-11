@@ -194,6 +194,7 @@ return [
     'Type Of Property' => 'Тип недвижимости',
     'Unfortunately, the specified address was not found.' => 'К сожалению, указанный адрес не был найден.',
     'Unfortunately, the specified city was not found.' => 'К сожалению, указанный город не был найден.',
+    'Unfortunately, the specified street was not found.' => 'К сожалению, указанная улица не была найдена.',
     'Update' => 'Обновить',
     'Update {modelClass}: ' => 'Обновить {modelClass}: ',
     'Updated' => 'Обновлен',

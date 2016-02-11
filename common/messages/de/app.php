@@ -194,6 +194,7 @@ return [
     'Type Of Property' => 'Typ der Wohnung',
     'Unfortunately, the specified address was not found.' => 'Leider wurde der angegebenen Adresse nicht gefunden.',
     'Unfortunately, the specified city was not found.' => 'Leider wurde der angegebenen Stadt nicht gefunden.',
+    'Unfortunately, the specified street was not found.' => 'Leider wurde der angegebenen Straße nicht gefunden.',
     'Update' => 'Aktualisieren',
     'Update {modelClass}: ' => 'Aktualisieren {modelClass}: ',
     'Updated' => 'Aktualisiert',

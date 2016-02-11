@@ -55,6 +55,27 @@ $user = Yii::$app->user->identity;
     ]) ?>
 
     <?php
+    /** Тип недвижемости доступен всем операциям, кроме сценариев
+     * 'sellingRoom'  'rentARoom' 'buyRoom' 'rentingARoom' */
+    ?>
+    <?php
+    if($modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'buyHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
+        || $modelAdRealEstate->scenario == 'sellingLand' || $modelAdRealEstate->scenario == 'buyLand'
+        || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'buyGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
+        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
+        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial' || $modelAdRealEstate->scenario == 'buyComercial' || $modelAdRealEstate->scenario == 'rentingComercial'
+    ):
+        ?>
+        <?= $form->field($modelAdRealEstate, 'type_of_property')->dropDownList($modelAdRealEstate->realEstatePropertyTypeList, [
+        'class'  => 'form-control chosen-select',
+        'prompt' => Yii::t('app', '---'),
+    ]) ?>
+        <?php
+    endif;
+    ?>
+
+    <?php
     /** Город доступен всем операциям */
     ?>
     <?php
@@ -81,7 +102,7 @@ $user = Yii::$app->user->identity;
     ):
         ?>
         <?= $form->field($modelAdRealEstate, 'place_street'); ?>
-        <?= $form->field($modelAdRealEstate, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
+        <?= $form->field($modelAdRealEstate, 'place_street_validate')->hiddenInput(['value' => '1'])->label(false); ?>
         <?php
     endif;
     ?>
@@ -100,27 +121,6 @@ $user = Yii::$app->user->identity;
         <?= $form->field($modelAdRealEstate, 'place_street'); ?>
         <?= $form->field($modelAdRealEstate, 'place_house'); ?>
         <?= $form->field($modelAdRealEstate, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
-        <?php
-    endif;
-    ?>
-
-    <?php
-    /** Тип недвижемости доступен всем операциям, кроме сценариев
-     * 'sellingRoom'  'rentARoom' 'buyRoom' 'rentingARoom' */
-    ?>
-    <?php
-    if($modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
-        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'buyHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
-        || $modelAdRealEstate->scenario == 'sellingLand' || $modelAdRealEstate->scenario == 'buyLand'
-        || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'buyGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
-        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial' || $modelAdRealEstate->scenario == 'buyComercial' || $modelAdRealEstate->scenario == 'rentingComercial'
-    ):
-        ?>
-        <?= $form->field($modelAdRealEstate, 'type_of_property')->dropDownList($modelAdRealEstate->realEstatePropertyTypeList, [
-        'class'  => 'form-control chosen-select',
-        'prompt' => Yii::t('app', '---'),
-    ]) ?>
         <?php
     endif;
     ?>
@@ -309,7 +309,7 @@ $user = Yii::$app->user->identity;
     if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentingARoom'
         || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
         || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
-        || $modelAdRealEstate->scenario == 'rentGarage'  || $modelAdRealEstate->scenario == 'rentingGarage'
+        || $modelAdRealEstate->scenario == 'rentGarage'
         || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>

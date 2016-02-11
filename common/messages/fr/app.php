@@ -194,6 +194,7 @@ return [
     'Type Of Property' => 'Type de bien',
     'Unfortunately, the specified address was not found.' => 'Malheureusement, l\'adresse spécifiée n\'a pas été trouvé.',
     'Unfortunately, the specified city was not found.' => 'Malheureusement, la ville spécifié est introuvable.',
+    'Unfortunately, the specified street was not found.' => 'Malheureusement, la rue spécifié est introuvable.',
     'Update' => 'Mettre à jour',
     'Update {modelClass}: ' => 'Mettre à jour {modelClass}: ',
     'Updated' => 'Mise à jour',

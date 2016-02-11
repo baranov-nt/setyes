@@ -52,6 +52,12 @@ return [
         'measurement_of_property', 'measurement_of_land', 'lease_term', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'integer'],
     [['place_city_validate'], 'compare', 'compareValue' => 1, 'operator' => '==',
         'message' => Yii::t('app', 'Unfortunately, the specified city was not found.')],
+    [['place_street_validate'], 'compare', 'compareValue' => 1, 'operator' => '==',
+        'on' => [
+            'buyGarage',
+            'rentingGarage',
+        ],
+        'message' => Yii::t('app', 'Unfortunately, the specified street was not found.')],
     [['place_address'], 'compare', 'compareValue' => 1, 'operator' => '==',
         'on' => [
             'sellingRoom',

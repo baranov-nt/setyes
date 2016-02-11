@@ -59,6 +59,7 @@ class AdRealEstate extends ActiveRecord
     public $appliances;
     public $place_city;
     public $place_city_validate;
+    public $place_street_validate;
     public $place_street;
     public $place_house;
     public $place_address;
@@ -910,27 +911,40 @@ class AdRealEstate extends ActiveRecord
                  *  $city - введенный город
                  *  $address - введеный адрес (улица и номер мода)
                  */
+
                 $city = $modelAdRealEstate->place_city;
-                $address = $modelAdRealEstate->place_house . ', ' . $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
-                /** Находим в Google Maps введенный адрес, если адрес найден и записан в БД,
-                 *  возвращаем объект адреса из таблицы place_address. Если адрес не найден, вернется false.
-                 */
+                $street = $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
 
                 /* @var $placeAddress \common\models\PlaceAddress */
-                $placeAddress = Yii::$app->placeManager->findAddress($city, $address);
+                $placeStreet = Yii::$app->placeManager->findStreet($city, $street);
 
-                if (!$placeAddress) {
+                if (!$placeStreet) {
                     /* Если адрес не найден устанавливаем place_address = 0, вывод ошибки ввода адреса */
                     $modelAdRealEstate->place_street = '';
-                    $modelAdRealEstate->place_house = '';
-                    $modelAdRealEstate->place_address = 0;
+                    $modelAdRealEstate->place_street_validate = 0;
                 }
-                if ($modelAdRealEstate->validate(['place_address'])) {
-                    //$modelAdRealEstate = $this->saveAd($placeAddress, $placeCity = null, $scenario);
+                if ($modelAdRealEstate->validate(['place_street_validate'])) {
+                    $city = $modelAdRealEstate->place_city;
+                    $address = $modelAdRealEstate->place_house . ', ' . $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
+                    /** Находим в Google Maps введенный адрес, если адрес найден и записан в БД,
+                     *  возвращаем объект адреса из таблицы place_address. Если адрес не найден, вернется false.
+                     */
+
+                    /* @var $placeAddress \common\models\PlaceAddress */
+                    $placeAddress = Yii::$app->placeManager->findAddress($city, $address);
+
+                    if (!$placeAddress) {
+                        /* Если адрес не найден устанавливаем place_address = 0, вывод ошибки ввода адреса */
+                        $modelAdRealEstate->place_street = '';
+                        $modelAdRealEstate->place_house = '';
+                        $modelAdRealEstate->place_address = 0;
+                    }
+                    if ($modelAdRealEstate->validate(['place_address'])) {
+                        //$modelAdRealEstate = $this->saveAd($placeAddress, $placeCity = null, $scenario);
+                    }
                 }
             }
         }
-        //dd($modelAdRealEstate->errors);
         return $modelAdRealEstate;
     }
 

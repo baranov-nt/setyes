@@ -92,7 +92,6 @@ $user = Yii::$app->user->identity;
     if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
@@ -131,10 +130,9 @@ $user = Yii::$app->user->identity;
     <?php
     if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
     ):
-    ?>
-    <?= $form->field($modelAdRealEstate, 'rooms_in_the_apartment')->dropDownList($modelAdRealEstate->realEstateRoomsInApartmentList, [
+        ?>
+        <?= $form->field($modelAdRealEstate, 'rooms_in_the_apartment')->dropDownList($modelAdRealEstate->realEstateRoomsInApartmentList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
         'onChange' => '
@@ -173,7 +171,6 @@ $user = Yii::$app->user->identity;
     <?php
     if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
@@ -192,7 +189,6 @@ $user = Yii::$app->user->identity;
     <?php
     if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
@@ -209,7 +205,7 @@ $user = Yii::$app->user->identity;
      * 'sellingHouse' 'rentHouse' 'sellingPropertyAbroad' */
     ?>
     <?php
-    if($modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'sellingPropertyAbroad'):
+    if($modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'):
         ?>
         <?= $form->field($modelAdRealEstate, 'floors_in_the_house')->dropDownList($modelAdRealEstate->realEstateFloorsInHouseList, [
         'class'  => 'form-control chosen-select',
@@ -229,11 +225,10 @@ $user = Yii::$app->user->identity;
         || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
         || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
-        || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
-    ?>
-    <?= $form->field($modelAdRealEstate, 'area_of_property')->textInput(['style' => 'text-align: right !important;'])->label($modelAdRealEstate->getAttributeLabel('area_of_property').' ('.$modelAdRealEstate->realEstateMeasurementOfPropertyName.')') ?>
+        ?>
+        <?= $form->field($modelAdRealEstate, 'area_of_property')->textInput(['style' => 'text-align: right !important;'])->label($modelAdRealEstate->getAttributeLabel('area_of_property').' ('.$modelAdRealEstate->realEstateMeasurementOfPropertyName.')') ?>
         <?php
     endif;
     ?>
@@ -265,7 +260,7 @@ $user = Yii::$app->user->identity;
         || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
         || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'):
         ?>
-    <?= $form->field($modelAdRealEstate, 'lease_term')->dropDownList($modelAdRealEstate->realEstateLeaseTermList, [
+        <?= $form->field($modelAdRealEstate, 'lease_term')->dropDownList($modelAdRealEstate->realEstateLeaseTermList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -280,20 +275,20 @@ $user = Yii::$app->user->identity;
     if($modelAdRealEstate->scenario != 'rooms' && $modelAdRealEstate->scenario != 'apartments' && $modelAdRealEstate->scenario != 'houses' && $modelAdRealEstate->scenario != 'land'
         && $modelAdRealEstate->scenario != 'garages' && $modelAdRealEstate->scenario != 'propertyAbroad' && $modelAdRealEstate->scenario != 'comercial'):
         ?>
-    <?php
-    echo $form->field($modelAdRealEstate, 'price')->widget(MaskedInput::className(), [
-        'name' => 'masked-input',
-        'clientOptions' => [
-            'alias' => 'decimal',
-            'digits' => 2,
-            'digitsOptional' => false,
-            'radixPoint' => '.',
-            //'groupSeparator' => ',',
-            'autoGroup' => false,
-            'removeMaskOnSubmit' => true,
-            'placeholder' =>  '0'
-        ],
-    ])->label($modelAdRealEstate->getAttributeLabel('price').' ('.$modelAdRealEstate->realEstateCurrency.') '.$modelAdRealEstate->getRealEstatePriceForThePeriod($modelAdRealEstate->lease_term)); ?>
+        <?php
+        echo $form->field($modelAdRealEstate, 'price')->widget(MaskedInput::className(), [
+            'name' => 'masked-input',
+            'clientOptions' => [
+                'alias' => 'decimal',
+                'digits' => 2,
+                'digitsOptional' => false,
+                'radixPoint' => '.',
+                //'groupSeparator' => ',',
+                'autoGroup' => false,
+                'removeMaskOnSubmit' => true,
+                'placeholder' =>  '0'
+            ],
+        ])->label($modelAdRealEstate->getAttributeLabel('price').' ('.$modelAdRealEstate->realEstateCurrency.') '.$modelAdRealEstate->getRealEstatePriceForThePeriod($modelAdRealEstate->lease_term)); ?>
         <?php
     endif;
     ?>
@@ -309,7 +304,7 @@ $user = Yii::$app->user->identity;
         || $modelAdRealEstate->scenario == 'rentGarage'  || $modelAdRealEstate->scenario == 'rentingGarage'
         || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'):
         ?>
-    <?= $form->field($modelAdRealEstate, 'price_for_the_period')->dropDownList($modelAdRealEstate->realEstatePricePeriodList, [
+        <?= $form->field($modelAdRealEstate, 'price_for_the_period')->dropDownList($modelAdRealEstate->realEstatePricePeriodList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -325,7 +320,7 @@ $user = Yii::$app->user->identity;
     if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
         ?>
-    <?= $form->field($modelAdRealEstate, 'necessary_furniture')->dropDownList($modelAdRealEstate->realEstateNecessaryFurnitureList, [
+        <?= $form->field($modelAdRealEstate, 'necessary_furniture')->dropDownList($modelAdRealEstate->realEstateNecessaryFurnitureList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -340,8 +335,8 @@ $user = Yii::$app->user->identity;
     <?php
     if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
-    ?>
-    <?= $form->field($modelAdRealEstate, 'internet')->dropDownList($modelAdRealEstate->realEstateInternetList, [
+        ?>
+        <?= $form->field($modelAdRealEstate, 'internet')->dropDownList($modelAdRealEstate->realEstateInternetList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -357,7 +352,7 @@ $user = Yii::$app->user->identity;
     if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
         ?>
-    <?= $form->field($modelAdRealEstate, 'pets_allowed')->dropDownList($modelAdRealEstate->realEstatePetsAllowedList, [
+        <?= $form->field($modelAdRealEstate, 'pets_allowed')->dropDownList($modelAdRealEstate->realEstatePetsAllowedList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -379,7 +374,7 @@ $user = Yii::$app->user->identity;
         || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
     ):
         ?>
-    <?= $form->field($modelAdRealEstate, 'condition')->dropDownList($modelAdRealEstate->realEstateConditionList, [
+        <?= $form->field($modelAdRealEstate, 'condition')->dropDownList($modelAdRealEstate->realEstateConditionList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
     ]) ?>
@@ -395,13 +390,13 @@ $user = Yii::$app->user->identity;
     if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
         || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
         ?>
-    <?php echo $form->field($modelAdRealEstate, 'appliances')->checkboxList($modelAdRealEstate->realEstateAppliancesList,
+        <?php echo $form->field($modelAdRealEstate, 'appliances')->checkboxList($modelAdRealEstate->realEstateAppliancesList,
         [
             'itemOptions' => [
                 'disabled' => false,
                 'divOptions' => ['class' => 'checkbox checkbox-warning']
             ]]);
-    ?>
+        ?>
         <?php
     endif;
     ?>

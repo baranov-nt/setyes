@@ -261,6 +261,13 @@ class RealEstateController extends BehaviorsController
             if($modelAdRealEstate->deal_type == 31)
                 $this->setScenario($modelAdRealEstate->deal_type, $property = 7, $scenario = 'rentingComercial');
         }
+
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = new AdRealEstate(['scenario' => 'default']);
+
+        return $this->render('create', [
+            'modelAdRealEstate' => $modelAdRealEstate,
+        ]);
     }
 
     /**

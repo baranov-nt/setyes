@@ -30,7 +30,7 @@ class m160116_074120_create_ad_main_table extends Migration
         $this->createTable('ad_category', [
             'id' => $this->primaryKey(),
             'category' => $this->integer()->notNull(),           // Номер категории из таблицы ad_main_reference. Связь с таблицей  ad_main_reference.
-            'ad_id' => $this->integer(),                  // Номер объявления. Связь с объявлением с одной из таблиц разделов (недвижимость, транспорт или др.)
+            'ad_id' => $this->integer()->unique(),                  // Номер объявления. Связь с объявлением с одной из таблиц разделов (недвижимость, транспорт или др.)
         ]);
 
         $this->addForeignKey('ad_category_main_reference', 'ad_category', 'category', 'ad_main_reference', 'id');

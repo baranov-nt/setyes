@@ -55,7 +55,6 @@ $user = Yii::$app->user->identity;
                 <h6><?= $modelAdRealEstate->columnList[2]['value'] ?></h6>
                 <p><?= $modelAdRealEstate->columnList[3]['value'] ?></p>
             </div>
-
         </div>
     </div>
     <div class="col-md-12">

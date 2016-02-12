@@ -97,16 +97,8 @@ class RealEstateController extends BehaviorsController
         $modelAdRealEstate = $this->findModel($id);
         $modelAdRealEstate->setScenario($modelAdRealEstate->model_scenario);
 
-        if($modelAdRealEstate->placeAddress) {
-            /* Устанавливаем поля в модели в соответствии с адресом */
-            $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
-        } else {
-            /* Устанавливаем поля в модели в соответствии с городом */
-            $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
-        }
-
         if ($modelAdRealEstate->load(Yii::$app->request->post())) {
-            $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
+            /*$modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
             if($modelAdRealEstate->errors) {
                 return $this->render('create', [
                     'modelAdRealEstate' => $modelAdRealEstate,
@@ -114,7 +106,15 @@ class RealEstateController extends BehaviorsController
             } else {
                 //dd('OK!!!');
                 return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-            }
+            }*/
+        }
+
+        if($modelAdRealEstate->placeAddress) {
+            /* Устанавливаем поля в модели в соответствии с адресом */
+            $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
+        } else {
+            /* Устанавливаем поля в модели в соответствии с городом */
+            $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
         }
 
         return $this->render('update', [

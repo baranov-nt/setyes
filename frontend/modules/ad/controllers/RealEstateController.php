@@ -360,7 +360,8 @@ class RealEstateController extends BehaviorsController
         if (($modelAdRealEstate = AdRealEstate::findOne($id)) !== null) {
             return $modelAdRealEstate;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            //throw new NotFoundHttpException('The requested page does not exist.');
+            return $this->redirect(['/ad/default/index']);
         }
     }
 }

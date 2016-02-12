@@ -1086,6 +1086,35 @@ class AdRealEstate extends ActiveRecord
         return  $modelAdRealEstate;
     }
 
+    public function compliteAd($modelAdRealEstate) {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+
+        $modelAdRealEstate->temp = 1;
+        $transaction = Yii::$app->db->beginTransaction();
+        try {
+            if($modelAdRealEstate->save()) {
+                $modelCategory = new AdCategory();
+                $modelCategory->category = $modelAdRealEstate->property;                       // Категория для недвижемость 1
+                $modelCategory->ad_id = $modelAdRealEstate->id;
+                if($modelCategory->save()) {
+                    $modelAdMain = new AdMain();
+                    $modelAdMain->user_id = Yii::$app->user->id;
+                    $modelAdMain->place_city_id = $this->place_city_id;
+                    $modelAdMain->category_id = $modelCategory->id;
+                    $modelAdMain->ad_style_id = 1;
+                    if($modelAdMain->save()) {
+                        $transaction->commit();
+                    }
+                }
+            } else {
+                \Yii::$app->session->set('error', 'Объявление недвижимости не добавлено.');         // если все в порядке, пишем в сессию путь к изображениею
+            }
+        } catch (Exception $e) {
+            $transaction->rollBack();
+        }
+        return  $modelAdRealEstate;
+    }
+
     /* Функция для нахождения города по введенному значению */
     private function findCity($modelAdRealEstate) {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */

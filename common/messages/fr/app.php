@@ -64,6 +64,7 @@ return [
     'Complete Registration' => 'Enregistrement complet',
     'Condition' => 'Condition',
     'Confirm password' => 'Confirmez le mot de passe',
+    'Continue' => 'Continuer',
     'Copy from source message' => 'Copie de message source',
     'Country' => 'Pays',
     'Create' => 'Créer',

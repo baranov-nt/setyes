@@ -64,6 +64,7 @@ return [
     'Complete Registration' => 'Komplette Registrierung',
     'Condition' => 'Zustand',
     'Confirm password' => 'Bestätige das Passwort',
+    'Continue' => 'Fortsetzen',
     'Copy from source message' => 'Kopieren Sie aus dem Quellcode-Nachricht',
     'Country' => 'Land',
     'Create' => 'Schaffen',

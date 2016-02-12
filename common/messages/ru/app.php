@@ -64,6 +64,7 @@ return [
     'Complete Registration' => 'Завершить регистрацию',
     'Condition' => 'Состояние',
     'Confirm password' => 'Подтвердите Пароль',
+    'Continue' => 'Продолжить',
     'Copy from source message' => 'Копировать из исходного сообщения',
     'Country' => 'Страна',
     'Create' => 'Создать',

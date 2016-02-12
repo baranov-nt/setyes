@@ -30,6 +30,38 @@ class RealEstateController extends BehaviorsController
         ]);
     }
 
+    public function actionComplite($id)
+    {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = $this->findModel($id);
+
+        if($modelAdRealEstate->placeAddress) {
+            /* Устанавливаем поля в модели в соответствии с адресом */
+            $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
+        } else {
+            /* Устанавливаем поля в модели в соответствии с городом */
+            $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
+        }
+
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            dd(777);
+            $modelAdRealEstate->compliteAd($modelAdRealEstate);
+            $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
+            if($modelAdRealEstate->errors) {
+                return $this->render('create', [
+                    'modelAdRealEstate' => $modelAdRealEstate,
+                ]);
+            } else {
+                //dd('OK!!!');
+                return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
+            }
+        }
+
+        return $this->render('complite', [
+            'modelAdRealEstate' => $modelAdRealEstate,
+        ]);
+    }
+
     /**
      * Displays a single AdRealEstate model.
      * @param integer $id

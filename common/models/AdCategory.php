@@ -3,20 +3,20 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "ad_category".
  *
  * @property integer $id
- * @property integer $category_id
+ * @property integer $category
  * @property integer $ad_id
  *
- * @property AdReferenceMain $category
+ * @property AdMainReference $category0
  * @property AdRealEstate $ad
- * @property AdMain[] $adMains
- * @property ImagesOfObject[] $imagesOfObjects
+ * @property AdMain $adMains
  */
-class AdCategory extends \yii\db\ActiveRecord
+class AdCategory extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -44,7 +44,7 @@ class AdCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'category' => Yii::t('app', 'Category ID'),
+            'category' => Yii::t('app', 'Category'),
             'ad_id' => Yii::t('app', 'Ad ID'),
         ];
     }
@@ -52,9 +52,9 @@ class AdCategory extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory()
+    public function getCategory0()
     {
-        return $this->hasOne(AdReferenceMain::className(), ['id' => 'category']);
+        return $this->hasOne(AdMainReference::className(), ['id' => 'category']);
     }
 
     /**
@@ -70,18 +70,6 @@ class AdCategory extends \yii\db\ActiveRecord
      */
     public function getAdMains()
     {
-        return $this->hasMany(AdMain::className(), ['category_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getImagesOfObjects()
-    {
-        return $this->hasMany(ImagesOfObject::className(),
-            [
-                'object_id' => 'id',
-                'label' => 'category'
-            ]);
+        return $this->hasOne(AdMain::className(), ['category_id' => 'id']);
     }
 }

@@ -34,7 +34,7 @@ use yii\db\Exception;
  * @property string $model_scenario
  * @property integer $temp
  *
- * @property AdCategory[] $adCategories
+ * @property AdCategory $adCategories
  * @property AdRealEstateReference $condition0
  * @property ImagesOfObject $imagesOfObjects
  * @property AdRealEstateReference $dealType
@@ -192,7 +192,7 @@ class AdRealEstate extends ActiveRecord
      */
     public function getAdCategories()
     {
-        return $this->hasMany(AdCategory::className(), ['ad_id' => 'id']);
+        return $this->hasOne(AdCategory::className(), ['ad_id' => 'id']);
     }
 
     /**
@@ -942,6 +942,7 @@ class AdRealEstate extends ActiveRecord
                 $modelAdRealEstate = $this->saveAd($modelAdRealEstate);
             }
         }
+        //dd($modelAdRealEstate->errors);
         return $modelAdRealEstate;
     }
 
@@ -986,7 +987,6 @@ class AdRealEstate extends ActiveRecord
         }
         if ($modelAdRealEstate->validate(['place_city_validate'])) {
             $this->place_city_id = $modelPlaceCity->id;
-            $modelAdRealEstate->place_address_id = $modelPlaceCity->id;
         }
         return $modelAdRealEstate;
     }

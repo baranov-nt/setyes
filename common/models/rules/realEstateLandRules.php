@@ -11,7 +11,7 @@ return [
         'on' => 'sellingLand'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'price'], 'required',
+        ['property', 'deal_type', 'type_of_property', 'place_city'], 'required',
         'on' => 'buyLand'
     ],
     ['property', 'compare', 'compareValue' => 4, 'operator' => '==',

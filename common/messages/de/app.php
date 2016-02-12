@@ -36,6 +36,7 @@ return [
     'Activation was successful.' => 'Die Aktivierung war erfolgreich.',
     'Add' => 'Hinzufügen',
     'Additional phone number' => 'Zusätzliche Telefonnummer',
+    'Add photos' => 'Fotos hinzufügen',
     'Address' => 'Adresse',
     'All' => 'Alle',
     'An unexpected error occured!' => 'Ein unerwarteter Fehler ist aufgetreten!',

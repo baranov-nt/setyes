@@ -42,7 +42,7 @@ echo StepsNavigation::widget([
     'titleStep4' => Yii::t('app', 'Complite'),
     'headerStep1' => Yii::t('app', 'Select Category'),
     'headerStep2' => Yii::t('app', 'Select the type of property and fill out a simple form.'),
-    'headerStep3' => Yii::t('app', 'Add images'),
+    'headerStep3' => Yii::t('app', 'Add photos'),
     'headerStep4' => Yii::t('app', 'Post the ad'),
     'contentStep1' => Yii::t('app', 'Select Category: content'),
     'contentStep2' => Yii::t('app', 'Fill in the form: content'),

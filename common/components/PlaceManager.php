@@ -401,4 +401,51 @@ class PlaceManager extends Object
         $cookies->remove('_regionId');
         $cookies->remove('_countryId');
     }
+
+    public function setAddress($modelAdRealEstate) {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $objectPlace = Yii::$app->googleApi->getGeoCodeObject(null, null, $modelAdRealEstate->placeAddress->place_id);
+        /* Формируем переменныe для адреса */
+        $street_number = '';
+        $route = '';
+        $city = '';
+        $region = '';
+        $country = '';
+        foreach ($objectPlace->address_components as $one):
+            if ($one->types[0] == 'street_number'):
+                $street_number = $one->short_name;
+            endif;
+            if ($one->types[0] == 'route'):
+                $route = $one->short_name;
+            endif;
+            if ($one->types[0] == 'locality'):
+                $city = $one->short_name;
+            endif;
+            if ($one->types[0] == 'administrative_area_level_1'):            // ищем облать-регион
+                $region = $one->short_name;
+            endif;
+            if ($one->types[0] == 'country'):
+                $country = $one->long_name;
+            endif;
+            $modelAdRealEstate->place_city = $city.', '.$region.', '.$country;
+            $modelAdRealEstate->place_street = $route;
+            $modelAdRealEstate->place_house = $street_number;
+        endforeach;
+        return $modelAdRealEstate;
+    }
+
+    public function setCity($modelAdRealEstate) {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /** Если город объявления совпадает с текущим городом, устанавливаем значение главного города,
+         *  иначе находим город */
+        $mainCityPlaceId = Yii::$app->request->cookies->getValue('_cityPlaceId');
+        $currentCityPlaceId = $modelAdRealEstate->adCategories->adMains->placeCity->place_id;
+        if($mainCityPlaceId == $currentCityPlaceId) {
+            $modelAdRealEstate->place_city = Yii::$app->request->cookies->getValue('_city');
+        } else {
+            $objectPlace = Yii::$app->googleApi->getGeoCodeObject(null, null, $currentCityPlaceId);
+            $modelAdRealEstate->place_city = $objectPlace->formatted_address;
+        }
+        return $modelAdRealEstate;
+    }
 }

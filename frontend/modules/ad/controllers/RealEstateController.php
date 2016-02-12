@@ -37,9 +37,48 @@ class RealEstateController extends BehaviorsController
      */
     public function actionView($id)
     {
+        $modelAdRealEstate = $this->findModel($id);
+
+        if($modelAdRealEstate->placeAddress) {
+            /* Устанавливаем поля в модели в соответствии с адресом */
+            $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
+        } else {
+            /* Устанавливаем поля в модели в соответствии с городом */
+            $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
+        }
+
         return $this->render('view', [
-            'modelAdRealEstate' => $this->findModel($id),
+            'modelAdRealEstate' => $modelAdRealEstate
         ]);
+    }
+
+    /**
+     * Updates an existing AdRealEstate model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = $this->findModel($id);
+        $modelAdRealEstate->setScenario($modelAdRealEstate->model_scenario);
+
+        if($modelAdRealEstate->placeAddress) {
+            /* Устанавливаем поля в модели в соответствии с адресом */
+            $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
+        } else {
+            /* Устанавливаем поля в модели в соответствии с городом */
+            $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
+        }
+
+        if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
+            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
+        } else {
+            return $this->render('update', [
+                'modelAdRealEstate' => $modelAdRealEstate,
+            ]);
+        }
     }
 
     /**
@@ -85,29 +124,6 @@ class RealEstateController extends BehaviorsController
         return $this->render('create', [
             'modelAdRealEstate' => $modelAdRealEstate,
         ]);
-    }
-
-    /**
-     * Updates an existing AdRealEstate model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $modelAdRealEstate = $this->findModel($id);
-        $modelAdRealEstate->setScenario($modelAdRealEstate->model_scenario);
-
-        $objectAddress = Yii::$app->googleApi->getGeoCodeObject(null, null, $modelAdRealEstate->placeAddress->place_id);
-        //dd($objectAddress);
-
-        if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
-            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-        } else {
-            return $this->render('update', [
-                'modelAdRealEstate' => $modelAdRealEstate,
-            ]);
-        }
     }
 
     /**

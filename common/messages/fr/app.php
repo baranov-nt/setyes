@@ -82,6 +82,7 @@ return [
     'Font Family' => 'Famille de fonte',
     'Font Family Style' => 'Font Family Style',
     'Font Weight' => 'Poids de fonte',
+    'For this advertisement you can not add photos.' => 'Pour cette annonce vous ne pouvez pas ajouter des photos.',
     'Forgot your password?' => 'Mot de passe oublié?',
     'Gender' => 'Genre',
     'Header Color' => 'Header couleur',
@@ -207,6 +208,7 @@ return [
     'Wrong phone, email or password.' => 'Téléphone Mauvaise, e-mail ou mot de passe.',
     'Yes' => 'Oui',
     'You can not reset the password.' => 'Vous ne pouvez pas réinitialiser le mot de passe.',
+    'Your ad is not added. Would you like to create another ad?' => 'Votre annonce est pas ajouté. Voulez-vous créer une autre annonce?',
     'Your password is changed.' => 'Votre mot de passe est changé.',
     '{app_name} (sent a robot).' => '{app_name} (envoyé un robot).',
 ];

@@ -168,18 +168,6 @@ JS;
                     canvasData = image.cropper('getCanvasData');                // получение конечных данных холста
 
                     var cropData = JSON.stringify(image.cropper("getData"));
-
-                    /*$.pjax({
-        type       : 'POST',
-        url        : '/images/autoload-image.html',
-        container  : '#images-widget',
-        data       : {qeqwe: 222},
-        push       : false,
-        replace    : false,
-        timeout    : 10000,
-        "scrollTo" : false
-    })*/
-
                     form.trigger('submit');
 
                     form.on("beforeSubmit", function(e) {
@@ -189,85 +177,6 @@ JS;
                         $("#imageCrop-$this->id").attr("value", cropData);
                     });
                     modalBox.modal("hide");                                     // событие выполняется перед фактическим закрытием модального окна и перед событием hidden.bs.modal
-
-                    /*var formData = new FormData($('form')[0]);
-
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/images/image-autoload.html");
-                    xhr.send(formData);*/
-
-
-
-                    /*$.pjax({
-                        url: '/images/image-autoload.html',
-                        type: 'POST',
-                        data: formData,
-                        /!*cache: false,
-                        contentType: false,
-                        processData: false,*!/
-                        container: "#images-widget",
-                        push: false
-                    });*/
-
-                    /*$.pjax({
-                        type: "POST",
-                        url: "/images/image-autoload.html",
-                        data: $("#image-form").serialize(),
-                        container: "#images-widget",
-                        push: false
-                    })*/
-
-                    /*var imageData = JSON.stringify({
-                        modelName: "$this->modelName",
-                        id: "$this->id",
-                        object_id: "$this->object_id",
-                        image_id: "0",
-                        images_num: "$this->images_num",
-                        images_label: "$this->images_label",
-                        images_temp: "$this->images_temp",
-                        imageSmallWidth: "$this->imageSmallWidth",
-                        imageSmallHeight: "$this->imageSmallHeight",
-                        baseUrl: "$this->baseUrl",
-                        imagePath: "$this->imagePath",
-                        noImage: "$this->noImage",
-                        imageCrop: cropData,
-                        imageClass: "$imageClass",
-                        buttonDeleteClass: "$buttonDeleteClass",
-                        imageContainerClass: "$imageContainerClass",
-                        formImagesContainerClass: "$formImagesContainerClass",
-                        file: $('#image-form-load-image')[0]
-                    });
-                    $.pjax({
-                        type: "POST",
-                        url: "$this->autoloadUrl",
-                        data: {imageData: imageData},
-                        container: "#images-widget",
-                        push: false
-                    });*/
-
-                    /*var file_data = $('#imageform-image').prop('files')[0];
-                        var form_data = new FormData();
-                        form_data.append('file', file_data);
-                        $.ajax({
-                            url: '/images/autoload-image.html',
-                            dataType: 'text',
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            data: form_data,
-                            type: 'post',
-                            success: function(data){
-                                $('#images-widget').html(data);
-                            }
-                        });*/
-
-                    /*$.pjax({
-                        type: "post",
-                        url: "/images/autoload-image.html",
-                        data: $("#image-form").serialize(),
-                        container: "#images-widget",
-                        push: false
-                    })*/
                 });
 JS;
         $view->registerJs($js);

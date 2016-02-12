@@ -3,6 +3,7 @@
 use yii\widgets\DetailView;
 use common\widgets\StepsNavigation\StepsNavigation;
 use yii\helpers\Url;
+use common\widgets\ImageLoad\ImageLoadWidget;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -18,7 +19,7 @@ $user = Yii::$app->user->identity;
     <div class="col-md-12 text-center">
         <?php
         echo StepsNavigation::widget([
-            'urlStep1' => Url::to(['/ad/default/index']),
+            'urlStep1' => Url::to(['/ad/default/index', 'id' => $modelAdRealEstate->id]),
             'urlStep2' => Url::to(['/ad/real-estate/update', 'id' => $modelAdRealEstate->id]),
             'urlStep3' => Url::to(['/#']),
             'urlStep4' => Url::to(['/#']),
@@ -48,7 +49,11 @@ $user = Yii::$app->user->identity;
     </div>
     <div class="col-md-6" style="margin-top: 0 !important; padding-top: 0 !important;">
         <?php
-        echo \common\widgets\ImageLoad\ImageLoadWidget::widget([
+        if($modelAdRealEstate->model_scenario == 'sellingRoom'):
+
+        ?>
+        <?php
+        echo ImageLoadWidget::widget([
             'modelName' => 'AdRealEstate',
             'id' => 'load-image',                                       // суффикс ID для основных форм виджета
             'object_id' => $modelAdRealEstate->id,                          // ID объекта, к которому привязаны изображения
@@ -61,7 +66,7 @@ $user = Yii::$app->user->identity;
             'headerModal' => 'Загрузить изображение товара',                        // заголовок в модальном окне
             'sizeModal' => 'modal-md',                                  // размер модального окна
             'baseUrl' => '/images/',                        // основной путь к изображениям
-            'imagePath' => 'imagesApp/images/',   // путь, куда будут записыватся изображения
+            'imagePath' => 'imagesApp/images/'.$modelAdRealEstate->subDir.'/',   // путь, куда будут записыватся изображения
             'noImage' => 'imagesApp/noImage.png',                 // картинка, если изображение отсутствует
             'classesWidget' => [
                 'imageClass' => 'imageProduct',
@@ -94,95 +99,20 @@ $user = Yii::$app->user->identity;
                 //'height' => 500                             // высота
             ]]);
         ?>
+        <?php
+        else:
+        ?>
+        <h1><?= Yii::t('app', 'For this advertisement you can not add photos.') ?></h1>
+        <?php
+        endif;
+        ?>
     </div>
     <div class="col-md-6">
         <div class="ad-real-estate-view">
-            <?= DetailView::widget([
+            <?php
+            echo DetailView::widget([
                 'model' => $modelAdRealEstate,
-                'attributes' => [
-                    //'id',
-                    [
-                        'attribute' => 'property',
-                        'value' => Yii::t('references', $modelAdRealEstate->property0->reference_name),
-                    ],
-                    [
-                        'attribute' => 'place_city',
-                        'value' => $modelAdRealEstate->place_city,
-                    ],
-                    [
-                        'attribute' => 'place_address',
-                        'value' => $modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_house,
-                    ],
-                    [
-                        'attribute' => 'deal_type',
-                        'value' => Yii::t('references', $modelAdRealEstate->dealType->reference_name),
-                    ],
-                    /*[
-                        'attribute' => 'type_of_property',
-                        'value' => Yii::t('references', $modelAdRealEstate->typeOfProperty->reference_name),
-                    ],*/
-                    [
-                        'attribute' => 'rooms_in_the_apartment',
-                        'value' => Yii::t('references', $modelAdRealEstate->roomsInTheApartment->reference_name),
-                    ],
-                    [
-                        'attribute' => 'material_housing',
-                        'value' => Yii::t('references', $modelAdRealEstate->materialHousing->reference_name),
-                    ],
-                    [
-                        'attribute' => 'floor',
-                        'value' => Yii::t('references', $modelAdRealEstate->floor0->reference_name),
-                    ],
-                    [
-                        'attribute' => 'floors_in_the_house',
-                        'value' => Yii::t('references', $modelAdRealEstate->floorsInTheHouse->reference_name),
-                    ],
-                    [
-                        'attribute' => 'area_of_property',
-                        'value' => $modelAdRealEstate->area_of_property.' '.Yii::t('references', $modelAdRealEstate->measurementOfProperty->reference_name),
-                    ],
-                    /*[
-                        'attribute' => 'area_of_land',
-                        'value' => $modelAdRealEstate->area_of_land.' '.Yii::t('references', $modelAdRealEstate->measurementOfLand),
-                    ],*/
-                    /*[
-                        'attribute' => 'lease_term',
-                        'value' => Yii::t('references', $modelAdRealEstate->leaseTerm->reference_name),
-                    ],*/
-                    [
-                        'attribute' => 'price',
-                        'value' => $modelAdRealEstate->price.' '.Yii::t('references', $user->country->currency),
-                    ],
-                    /*[
-                        'attribute' => 'price_for_the_period',
-                        'value' => Yii::t('references', $modelAdRealEstate->priceForThePeriod->reference_name),
-                    ],*/
-                    /*[
-                        'attribute' => 'necessary_furniture',
-                        'value' => Yii::t('references', $modelAdRealEstate->necessaryFurniture->reference_name),
-                    ],
-                    [
-                        'attribute' => 'internet',
-                        'value' => Yii::t('references', $modelAdRealEstate->internet0->reference_name),
-                    ],
-                    [
-                        'attribute' => 'pets_allowed',
-                        'value' => Yii::t('references', $modelAdRealEstate->petsAllowed->reference_name),
-                    ],*/
-                    [
-                        'attribute' => 'condition',
-                        'value' => Yii::t('references', $modelAdRealEstate->condition0->reference_name),
-                    ],
-                    /*[
-                        'attribute' => 'images_label',
-                        'value' => $modelAdRealEstate->getImagesOfObjects(),
-                    ],*/
-                    [
-                        'attribute' => 'temp',
-                        'value' => $modelAdRealEstate->temp,
-                    ],
-                    //'place_address_id',
-                ],
+                'attributes' => $modelAdRealEstate->columnList,
             ]) ?>
         </div>
     </div>

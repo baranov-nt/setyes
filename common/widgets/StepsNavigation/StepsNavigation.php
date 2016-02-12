@@ -9,6 +9,7 @@
 
 namespace common\widgets\StepsNavigation;
 
+use Yii;
 use yii\base\Widget;
 use common\widgets\StepsNavigation\assets\StepsAsset;
 use yii\web\View;
@@ -44,6 +45,8 @@ class StepsNavigation extends Widget
     public $urlStep3;
     public $urlStep4;
 
+    private $confirm = 'Your ad is not added. Would you like to create another ad?';
+
     public function init()
     {
         parent::init();
@@ -61,6 +64,7 @@ class StepsNavigation extends Widget
 
     public function registerClientScript()
     {
+        $this->confirm = Yii::t('app', $this->confirm);
         $view = $this->getView();
         // Регистрация виджета
         StepsAsset::register($view);
@@ -68,8 +72,9 @@ class StepsNavigation extends Widget
         $js = <<< JS
             function  comeHere(id) {
                 if($(id).attr('id') == "linkStep1" && $(id).attr('class') == '') {
-                    //$.pjax({url: "$this->urlStep1", container: '#w0'});
-                    window.location.replace("$this->urlStep1");
+                    if (confirm("$this->confirm")) {
+                        window.location.replace("$this->urlStep1");
+                    }
                 }
                 if($(id).attr('id') == "linkStep2" && $(id).attr('class') == '') {
                     window.location.replace("$this->urlStep2");

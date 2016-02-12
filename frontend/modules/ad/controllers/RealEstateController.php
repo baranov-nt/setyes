@@ -37,6 +37,7 @@ class RealEstateController extends BehaviorsController
      */
     public function actionView($id)
     {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = $this->findModel($id);
 
         if($modelAdRealEstate->placeAddress) {
@@ -72,13 +73,21 @@ class RealEstateController extends BehaviorsController
             $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
         }
 
-        if ($modelAdRealEstate->load(Yii::$app->request->post()) && $modelAdRealEstate->save()) {
-            return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-        } else {
-            return $this->render('update', [
+        if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+            $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
+            if($modelAdRealEstate->errors) {
+                return $this->render('create', [
+                    'modelAdRealEstate' => $modelAdRealEstate,
+                ]);
+            } else {
+                //dd('OK!!!');
+                return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
+            }
+        }
+
+        return $this->render('update', [
                 'modelAdRealEstate' => $modelAdRealEstate,
             ]);
-        }
     }
 
     /**
@@ -101,11 +110,11 @@ class RealEstateController extends BehaviorsController
                 //dd('OK!!!');
                 return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
             }
-        } else {
-            return $this->render('create', [
+        }
+
+        return $this->render('create', [
                 'modelAdRealEstate' => $modelAdRealEstate,
             ]);
-        }
     }
 
     /**

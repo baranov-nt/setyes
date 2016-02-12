@@ -82,6 +82,7 @@ return [
     'Font Family' => 'Название шрифта',
     'Font Family Style' => 'Стиль шрифта',
     'Font Weight' => 'Вес шрифта',
+    'For this advertisement you can not add photos.' => 'Для данного объявления вы не можете добавлять фотографии.',
     'Forgot your password?' => 'Забыли пароль?',
     'Gender' => 'Пол',
     'Header Color' => 'Цвет заголовка',
@@ -207,6 +208,7 @@ return [
     'Wrong phone, email or password.' => 'Неправильный телефон, адрес электронной почты или пароль.',
     'Yes' => 'Да',
     'You can not reset the password.' => 'Вы не можете сбросить пароль.',
+    'Your ad is not added. Would you like to create another ad?' => 'Ваше объявление не добавлено. Хотите создать другое объявление?',
     'Your password is changed.' => 'Ваш пароль изменен.',
     '{app_name} (sent a robot).' => '{app_name} (отправленно роботом).',
 ];

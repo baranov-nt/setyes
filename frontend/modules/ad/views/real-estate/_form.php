@@ -9,6 +9,7 @@ use common\widgets\ImageLoad\ImageLoadWidget;
 use common\widgets\ImageLoad\assets\CropperAsset;
 use common\widgets\Chosen\ChosenAsset;
 use common\widgets\FontAwesome\AssetBundle;
+use yii\helpers\Url;
 
 AssetBundle::register($this);
 ChosenAsset::register($this);
@@ -28,7 +29,7 @@ $user = Yii::$app->user->identity;
 
 <div class="ad-real-estate-form">
     <?php $form = ActiveForm::begin([
-        'action' => 'create',
+        'action' => $modelAdRealEstate->isNewRecord ? 'create' : Url::to(['update', 'id' => $modelAdRealEstate->id]),
         'method' => 'post',
         'fieldClass' => ActiveField::className(),
         'id' => 'ad_form',

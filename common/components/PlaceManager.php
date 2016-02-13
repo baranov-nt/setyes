@@ -439,7 +439,7 @@ class PlaceManager extends Object
         /** Если город объявления совпадает с текущим городом, устанавливаем значение главного города,
          *  иначе находим город */
         $mainCityPlaceId = Yii::$app->request->cookies->getValue('_cityPlaceId');
-        $currentCityPlaceId = $modelAdRealEstate->adCategories->adMains->placeCity->place_id;
+        $currentCityPlaceId = $modelAdRealEstate->adCategory->adMain->placeCity->place_id;
         if($mainCityPlaceId == $currentCityPlaceId) {
             $modelAdRealEstate->place_city = Yii::$app->request->cookies->getValue('_city');
         } else {

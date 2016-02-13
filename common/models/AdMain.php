@@ -87,6 +87,17 @@ class AdMain extends \yii\db\ActiveRecord
     }
 
     /**
+     * Получить id создателя объявления
+     * NOTE: needed for RBAC Author rule.
+     *
+     * @return integer
+     */
+    public function getCreatedBy()
+    {
+        return $this->user_id;
+    }
+
+    /**
      * Returns the array of possible user status values.
      *
      * @return array

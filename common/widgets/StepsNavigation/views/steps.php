@@ -13,6 +13,7 @@ Modal::begin([
     'size' => 'modal-sm',
     'header' => '<h5>'.Yii::t('app', $widget->confirm).'</h5>',
     'toggleButton' => false,
+    'closeButton' => false,
     'id' => 'confirm-step1',
 ]);
 

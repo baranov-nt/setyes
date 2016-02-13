@@ -9,12 +9,11 @@ use yii\bootstrap\Html;
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
 /* @var $user common\models\User */
+$user = Yii::$app->user->identity;
 
 $this->title = Yii::t('app', 'Step 3').': '.Yii::t('references', $modelAdRealEstate->dealType->reference_name);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
-$user = Yii::$app->user->identity;
 ?>
 <div class="container" style="margin-top: 0 !important; padding-top: 0 !important;">
     <div class="col-md-12 text-center">

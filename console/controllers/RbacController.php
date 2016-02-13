@@ -19,10 +19,10 @@ use Yii;
  * Создание разрешений:
  *
  * - Использовать премиум
- * - Управлять товарами
- * - Добавлять товары
- * - Редактировать товары
- * - Удалять товары
+ * - Управлять объявлениями
+ * - Добавлять объявления
+ * - Редактировать объявления
+ * - Удалять объявления
  * - Управлять пользователями
  * - Просматривать пользователей
  *
@@ -51,25 +51,20 @@ class RbacController extends Controller
         $usePremiumContent->description = 'Позволяет использовать премиум контент';
         $auth->add($usePremiumContent);
 
-        // добавить "Управлять товарами" разрешение
-        $manageProduct = $auth->createPermission('Управлять товарами');
-        $manageProduct->description = 'Позволяет управлять товарами';
-        $auth->add($manageProduct);
+        // добавить "Добавлять объявления" разрешение
+        $addAds = $auth->createPermission('Добавлять объявления');
+        $addAds->description = 'Позволяет добавлять объявления';
+        $auth->add($addAds);
 
-        // добавить "Добавлять товары" разрешение
-        $addProduct = $auth->createPermission('Добавлять товары');
-        $addProduct->description = 'Позволяет добавлять товары';
-        $auth->add($addProduct);
+        // добавить "Редактировать объявления" разрешение
+        $updateAds = $auth->createPermission('Редактировать объявления');
+        $updateAds->description = 'Позволяет редактировать объявления';
+        $auth->add($updateAds);
 
-        // добавить "Редактировать товары" разрешение
-        $updateProduct = $auth->createPermission('Редактировать товары');
-        $updateProduct->description = 'Позволяет редактировать товары';
-        $auth->add($updateProduct);
-
-        // добавить "Удалять товары" разрешение
-        $deleteProduct = $auth->createPermission('Удалять товары');
-        $deleteProduct->description = 'Позволяет удалять товары';
-        $auth->add($deleteProduct);
+        // добавить "Удалять объявления" разрешение
+        $deleteAds = $auth->createPermission('Удалять объявления');
+        $deleteAds->description = 'Позволяет удалять объявления';
+        $auth->add($deleteAds);
 
         // добавить "Управлять пользователями" разрешение
         $manageUsers = $auth->createPermission('Управлять пользователями');
@@ -81,33 +76,44 @@ class RbacController extends Controller
         $viewUsers->description = 'Позволяет просматривать пользователей';
         $auth->add($viewUsers);
 
+        // add the "updateOwnAds" permission and associate the rule with it.
+        $updateOwnAds = $auth->createPermission('Автор');
+        $updateOwnAds->description = 'Редактировать свои объявления';
+        $updateOwnAds->ruleName = $rule->name;
+        $auth->add($updateOwnAds);
+
+        // "updateOwnAds" will be used from "updateAds"
+        $auth->addChild($updateOwnAds, $updateAds);
+
         //---------- РОЛИ ----------//
 
         // "Пользователь"
+        // Проверка на автора Yii::$app->user->can('Автор', $modelAdRealEstate->adCategory->adMain->user_id)
         $member = $auth->createRole('Пользователь');
         $member->description = 'Роль. Простой пользователь, зарегистрированный на сайте.';
         $auth->add($member);
+        $auth->addChild($member, $updateOwnAds);
 
         // "Премиум"
         $premium = $auth->createRole('Премиум');
         $premium->description = 'Роль. Премиум пользователь. Который имеет больше возможностей, чем простой пользователь.';
         $auth->add($premium);
+        $auth->addChild($premium, $member);
         $auth->addChild($premium, $usePremiumContent);
 
         // "Редактор"
         $editor = $auth->createRole('Редактор');
-        $editor->description = 'Роль. Модератор. Управление товарами.';
+        $editor->description = 'Роль. Модератор. Управление объявлениями.';
         $auth->add($editor);
         $auth->addChild($editor, $premium);
-        $auth->addChild($editor, $member);
-        $auth->addChild($editor, $addProduct);
-        $auth->addChild($editor, $updateProduct);
-        $auth->addChild($editor, $deleteProduct);
+        $auth->addChild($editor, $addAds);
+        $auth->addChild($editor, $updateAds);
+        $auth->addChild($editor, $deleteAds);
         $auth->addChild($editor, $viewUsers);
 
         // "Администратор"
         $admin = $auth->createRole('Администратор');
-        $admin->description = 'Роль. Администратор. Управление товарами и пользователями.';
+        $admin->description = 'Роль. Администратор. Управление объявлениями и пользователями.';
         $auth->add($admin);
         $auth->addChild($admin, $editor);
         $auth->addChild($admin, $manageUsers);

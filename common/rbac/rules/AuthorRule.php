@@ -1,6 +1,7 @@
 <?php
 namespace common\rbac\rules;
 
+use common\rbac\models\AuthItem;
 use yii\rbac\Rule;
 
 /**
@@ -8,11 +9,11 @@ use yii\rbac\Rule;
  */
 class AuthorRule extends Rule
 {
-    public $name = 'isAuthor';
+    public $name = 'Автор';
 
     /**
      * @param  string|integer $user   The user ID.
-     * @param  Item           $item   The role or permission that this rule is associated with
+     * @param  AuthItem           $item   The role or permission that this rule is associated with
      * @param  array          $params Parameters passed to ManagerInterface::checkAccess().
      * @return boolean                A value indicating whether the rule permits the role or 
      *                                permission it is associated with.

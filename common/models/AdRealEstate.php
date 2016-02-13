@@ -35,7 +35,7 @@ use yii\db\Exception;
  * @property integer $temp
  *
  * @property AdRealEstate[] $columnList
- * @property AdCategory $adCategories
+ * @property AdCategory $adCategory
  * @property AdRealEstateReference $condition0
  * @property ImagesOfObject $imagesOfObjects
  * @property AdRealEstateReference $dealType
@@ -191,7 +191,7 @@ class AdRealEstate extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAdCategories()
+    public function getAdCategory()
     {
         return $this->hasOne(AdCategory::className(), ['ad_id' => 'id']);
     }
@@ -1064,12 +1064,12 @@ class AdRealEstate extends ActiveRecord
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if($modelAdRealEstate->save()) {
-                //dd($modelAdRealEstate->adCategories->id);
-                $modelCategory = ($modelCategory = AdCategory::findOne($modelAdRealEstate->adCategories->id)) ? $modelCategory : new AdCategory();
+                //dd($modelAdRealEstate->adCategory->id);
+                $modelCategory = ($modelCategory = AdCategory::findOne($modelAdRealEstate->adCategory->id)) ? $modelCategory : new AdCategory();
                 $modelCategory->category = 1;                       // Категория для недвижемость 1 (из reference main)
                 $modelCategory->ad_id = $modelAdRealEstate->id;
                 if($modelCategory->save()) {
-                    $modelAdMain = ($modelAdMain = AdMain::findOne($modelAdRealEstate->adCategories->adMains->id)) ? $modelAdMain : new AdMain();
+                    $modelAdMain = ($modelAdMain = AdMain::findOne($modelAdRealEstate->adCategory->adMains->id)) ? $modelAdMain : new AdMain();
                     $modelAdMain->user_id = Yii::$app->user->id;
                     $modelAdMain->place_city_id = $this->place_city_id;
                     $modelAdMain->category_id = $modelCategory->id;
@@ -1195,8 +1195,8 @@ class AdRealEstate extends ActiveRecord
                     $one->image->delete();
                 }
 
-                if($modelAdRealEstate->adCategories->adMains->delete()) {
-                    if($modelAdRealEstate->adCategories->delete()) {
+                if($modelAdRealEstate->adCategory->adMains->delete()) {
+                    if($modelAdRealEstate->adCategory->delete()) {
                         if($modelAdRealEstate->delete()) {
                             $transaction->commit();
                         }

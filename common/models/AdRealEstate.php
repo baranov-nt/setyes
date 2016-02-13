@@ -1064,12 +1064,11 @@ class AdRealEstate extends ActiveRecord
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if($modelAdRealEstate->save()) {
-                //dd($modelAdRealEstate->adCategory->id);
-                $modelCategory = ($modelCategory = AdCategory::findOne($modelAdRealEstate->adCategory->id)) ? $modelCategory : new AdCategory();
+                $modelCategory = $modelAdRealEstate->adCategory ? ($modelCategory = AdCategory::findOne($modelAdRealEstate->adCategory->id)) : new AdCategory();
                 $modelCategory->category = 1;                       // Категория для недвижемость 1 (из reference main)
                 $modelCategory->ad_id = $modelAdRealEstate->id;
                 if($modelCategory->save()) {
-                    $modelAdMain = ($modelAdMain = AdMain::findOne($modelAdRealEstate->adCategory->adMain->id)) ? $modelAdMain : new AdMain();
+                    $modelAdMain = ($modelAdMain = AdMain::findOne(['category_id' => $modelCategory->id])) ? $modelAdMain : new AdMain();
                     $modelAdMain->user_id = Yii::$app->user->id;
                     $modelAdMain->place_city_id = $this->place_city_id;
                     $modelAdMain->category_id = $modelCategory->id;

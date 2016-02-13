@@ -429,11 +429,10 @@ $user = Yii::$app->user->identity;
 
     <?= $form->field($modelAdRealEstate, 'model_scenario')->hiddenInput(['value' => $modelAdRealEstate->scenario])->label(false); ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($modelAdRealEstate->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+    <div class="form-group text-center">
+        <?= Html::submitButton(Yii::t('app', 'Continue'),
             [
-                'class' => $modelAdRealEstate->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
-                //'disabled' => true
+                'class' => 'btn btn-primary',
             ]) ?>
     </div>
 

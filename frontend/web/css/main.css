@@ -54,6 +54,10 @@ body {
 #main-menu.navbar-default .navbar-toggle:focus .icon-bar {
     background-color: #fff;
 }
-
-
+.carousel-control {
+    border-radius: 3px !important;
+}
+.carousel-indicators {
+    margin-top: 10% !important;
+}
 

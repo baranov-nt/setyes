@@ -1,10 +1,9 @@
 <?php
-
-use yii\widgets\DetailView;
 use common\widgets\StepsNavigation\StepsNavigation;
 use yii\helpers\Url;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\bootstrap\Html;
+use yii\bootstrap\Carousel;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -49,17 +48,67 @@ $user = Yii::$app->user->identity;
         //
         ?>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 alert alert-success"  style="border: 1px solid #cccccc; border-radius: 3px; box-shadow: 0.2em 0.2em 3px rgba(122,122,122,0.5);">
         <div class="row">
-            <div class="col-xs-12" style="border: 1px solid #cccccc; border-radius: 3px;">
-                <h3><?= $modelAdRealEstate->columnList[1]['value']; // операция ?></h3>
-                <h6><?= $modelAdRealEstate->columnList[2]['value'] ?></h6>
-                <p><?= $modelAdRealEstate->columnList[3]['value'] ?></p>
+            <div class="col-xs-12">
+                <button class="btn btn-sm btn-success" style="outline: none; border-radius: 3px; margin: 10px 0 0 0 !important; float: right;"><i class="fa fa-plus-circle fa-lg" style=""></i></button>
+                <h5><?= Html::a(Yii::t('references', $modelAdRealEstate->dealType->reference_name), Url::to(['/#']), ['style' => 'text-transform: uppercase;']) // операция ?></h5>
+            </div>
+            <div class="col-xs-12">
+                <p style="text-align: justify;"><?= $modelAdRealEstate->place_city.', '.$modelAdRealEstate->place_address ?></p>
+            </div>
+            <div class="col-xs-12" style="padding-bottom: 10px;">
+                <?php
+                if(count($modelAdRealEstate->imagesOfObjects) > 1):
+                    foreach($modelAdRealEstate->imagesOfObjects as $one):
+                        $items[] = [
+                            'content' => Html::img('/images/'.$one->image->path_small_image, [
+                                'style' => 'width: 100%; border-radius: 3px;'
+                            ]),
+                            //'caption' => '<h5>'.$modelAdRealEstate->name.'</h5><p>'.$modelAdRealEstate->desc.'</p>',
+                            //'caption' => '<h5>'.$modelAdRealEstate->name.'</h5><p>'.$modelAdRealEstate->desc.'</p>',
+                            'options' => [
+                                'style' => 'width:100%;' // set the width of the container if you like
+                            ],
+                            'active' => false
+                        ];
+                    endforeach;
+                    echo Carousel::widget([
+                        'items' => $items,
+                        'options' => [
+                            'data-interval' => 0,
+                            'class' => 'slide',
+                            'style' => 'width:100%;' // set the width of the container if you like
+                        ],
+                        'controls' => ['&lsaquo;', '&rsaquo;'],     // Стрелочки вперед - назад
+                        //'controls' => ['<', '>'],                     // Стрелочки вперед - назад
+                        'showIndicators' => true,                   // отображать индикаторы (кругляшки)
+
+                    ]);
+                else:
+                    foreach($modelAdRealEstate->imagesOfObjects as $one):
+                        echo Html::img($asset->baseUrl.'/'.$one->image->path_small_image, [
+                            'style' => 'width: 100%'
+                        ]);
+                    endforeach;
+                endif;
+                ?>
+            </div>
+            <div class="col-xs-12">
+                <i class="fa fa-mobile fa-3x" style="outline: none; border-radius: 3px; float: left; margin-right: 10px;"></i>
+                <h5 style="margin-top: 17px !important;"><?= $user->phone ?></h5>
+            </div>
+            <div class="col-xs-12">
+                <i class="fa fa-envelope-o fa-2x" style="outline: none; border-radius: 3px; float: left; margin-right: 10px;"></i>
+                <h5 style="margin-top: 8px !important;"><?= $user->email ?></h5>
             </div>
         </div>
     </div>
     <div class="col-md-12">
-        <?php d($modelAdRealEstate->columnList) ?>
+
+        <?php //d($modelAdRealEstate->columnList) ?>
     </div>
+
 </div>
+
 

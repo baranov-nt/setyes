@@ -115,9 +115,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 endif;
                 ?>
             </div>
-            <div class="col-md-12">
-                <?= Html::a(Yii::t('app', 'Continue'), ['/ad/real-estate/complite', 'id' => $modelAdRealEstate->id], ['class' => 'btn btn-success']) ?>
-            </div>
         </div>
     </div>
     <div class="col-md-6">
@@ -128,6 +125,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attributes' => $modelAdRealEstate->columnList,
             ]) ?>
         </div>
+    </div>
+    <div class="col-md-12 text-center">
+        <?= Html::a(Yii::t('app', 'Continue'), ['/ad/real-estate/complite', 'id' => $modelAdRealEstate->id], ['class' => 'btn btn-primary']) ?>
     </div>
 </div>
 

@@ -51,11 +51,11 @@ $user = Yii::$app->user->identity;
     <div class="col-md-3 alert alert-success"  style="border: 1px solid #cccccc; border-radius: 3px; box-shadow: 0.2em 0.2em 3px rgba(122,122,122,0.5);">
         <div class="row">
             <div class="col-xs-12">
-                <button class="btn btn-sm btn-success" style="outline: none; border-radius: 3px; margin: 10px 0 0 0 !important; float: right;"><i class="fa fa-plus-circle fa-lg" style=""></i></button>
-                <h5><?= Html::a(Yii::t('references', $modelAdRealEstate->dealType->reference_name), Url::to(['/#']), ['style' => 'text-transform: uppercase;']) // операция ?></h5>
+                <button class="btn btn-sm btn-success" style="outline: none; border-radius: 3px; margin: 0 0 0 0 !important; float: right;"><i class="fa fa-plus-circle fa-lg" style=""></i></button>
+                <h4 style="padding: 0; margin: 0;"><?= Html::a(Yii::t('references', $modelAdRealEstate->dealType->reference_name), Url::to(['/#']), ['style' => 'text-transform: uppercase;']) // операция ?></h4>
             </div>
-            <div class="col-xs-12">
-                <p style="text-align: justify;"><?= $modelAdRealEstate->place_city.', '.$modelAdRealEstate->place_address ?></p>
+            <div class="col-xs-12" style="padding-top: 10px;">
+                <p style="text-align: justify;"><?= $modelAdRealEstate->place_city.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_house ?></p>
             </div>
             <div class="col-xs-12" style="padding-bottom: 10px;">
                 <?php
@@ -101,6 +101,9 @@ $user = Yii::$app->user->identity;
             <div class="col-xs-12">
                 <i class="fa fa-envelope-o fa-2x" style="outline: none; border-radius: 3px; float: left; margin-right: 10px;"></i>
                 <h5 style="margin-top: 8px !important;"><?= $user->email ?></h5>
+            </div>
+            <div class="col-xs-12">
+                <?= Html::button('Быстрый просмотр', ['class' => 'btn btn-success', 'style' => 'width: 100%;']) ?>
             </div>
         </div>
     </div>

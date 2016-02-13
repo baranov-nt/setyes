@@ -10,7 +10,7 @@ use yii\bootstrap\Html;
 /* @var $modelAdRealEstate common\models\AdRealEstate */
 /* @var $user common\models\User */
 
-$this->title = $modelAdRealEstate->id;
+$this->title = Yii::t('app', 'Step 3').': '.Yii::t('references', $modelAdRealEstate->dealType->reference_name);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -59,7 +59,7 @@ $user = Yii::$app->user->identity;
         </div>
     </div>
     <div class="col-md-12">
-    <?php d($modelAdRealEstate->columnList) ?>
+        <?php d($modelAdRealEstate->columnList) ?>
     </div>
 </div>
 

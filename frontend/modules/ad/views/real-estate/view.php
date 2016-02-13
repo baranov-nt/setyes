@@ -5,6 +5,8 @@ use common\widgets\StepsNavigation\StepsNavigation;
 use yii\helpers\Url;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\bootstrap\Html;
+use yii\bootstrap\NavBar;
+use yii\bootstrap\Nav;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -14,7 +16,10 @@ $user = Yii::$app->user->identity;
 $this->title = Yii::t('app', 'Step 3').': '.Yii::t('references', $modelAdRealEstate->dealType->reference_name);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+
+
 <div class="container" style="margin-top: 0 !important; padding-top: 0 !important;">
     <div class="col-md-12 text-center">
         <?php
@@ -48,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //
         ?>
     </div>
-    <div class="col-md-6" style="margin-top: 0 !important; padding-top: 0 !important;">
+    <div class="col-md-6" style="margin-top: 0 !important; padding-top: 0 !important; padding-bottom: 20px;">
         <div class="row">
             <div class="col-md-12">
                 <?php
@@ -70,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'sizeModal' => 'modal-md',                                  // размер модального окна
                         'baseUrl' => '/images/',                        // основной путь к изображениям
                         'imagePath' => 'imagesApp/'.$modelAdRealEstate->model_scenario.'/'.$modelAdRealEstate->subDir.'/',   // путь, куда будут записыватся изображения
-                        'noImage' => 'imagesApp/noImage.png',                 // картинка, если изображение отсутствует
+                        'noImage' => 'imagesApp/noImage_'.Yii::$app->language.'.png',                 // картинка, если изображение отсутствует
                         'classesWidget' => [
                             'imageClass' => 'imageProduct',
                             'buttonDeleteClass' => 'btn btn-xs btn-danger btn-imageDeleteProduct glyphicon glyphicon-trash glyphicon',

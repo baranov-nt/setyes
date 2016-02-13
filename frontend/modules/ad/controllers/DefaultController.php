@@ -14,8 +14,8 @@ class DefaultController extends BehaviorsController
     {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         if($id) {
+            $modelAdRealEstate = AdRealEstate::findOne($id);
             if (Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain])) {
-                $modelAdRealEstate = AdRealEstate::findOne($id);
                 if($modelAdRealEstate) {
                     $modelAdRealEstate->deleteObject($modelAdRealEstate);
                 }

@@ -1069,7 +1069,7 @@ class AdRealEstate extends ActiveRecord
                 $modelCategory->category = 1;                       // Категория для недвижемость 1 (из reference main)
                 $modelCategory->ad_id = $modelAdRealEstate->id;
                 if($modelCategory->save()) {
-                    $modelAdMain = ($modelAdMain = AdMain::findOne($modelAdRealEstate->adCategory->adMains->id)) ? $modelAdMain : new AdMain();
+                    $modelAdMain = ($modelAdMain = AdMain::findOne($modelAdRealEstate->adCategory->adMain->id)) ? $modelAdMain : new AdMain();
                     $modelAdMain->user_id = Yii::$app->user->id;
                     $modelAdMain->place_city_id = $this->place_city_id;
                     $modelAdMain->category_id = $modelCategory->id;
@@ -1195,7 +1195,7 @@ class AdRealEstate extends ActiveRecord
                     $one->image->delete();
                 }
 
-                if($modelAdRealEstate->adCategory->adMains->delete()) {
+                if($modelAdRealEstate->adCategory->adMain->delete()) {
                     if($modelAdRealEstate->adCategory->delete()) {
                         if($modelAdRealEstate->delete()) {
                             $transaction->commit();

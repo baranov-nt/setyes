@@ -7,6 +7,19 @@
  */
 /* @var $widget \common\widgets\StepsNavigation\StepsNavigation */
 use yii\bootstrap\Html;
+use yii\bootstrap\Modal;
+
+Modal::begin([
+    'size' => 'modal-sm',
+    'header' => '<h5>'.Yii::t('app', $widget->confirm).'</h5>',
+    'toggleButton' => false,
+    'id' => 'confirm-step1',
+]);
+
+echo Html::a(Yii::t('app', 'Yes'), $widget->urlStep1, ['class' => 'btn btn-danger', 'style' => 'margin-right: 5px;']);
+echo Html::button(Yii::t('app', 'No'), ['class' => 'btn btn-success', 'data-dismiss' => 'modal', 'aria-hidden' => 'true', 'style' => 'margin-left: 5px;']);
+
+Modal::end();
 ?>
 
 <div class="row" style="padding: 0; margin: 0;">
@@ -16,8 +29,8 @@ use yii\bootstrap\Html;
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
 
-                    <li id="linkStep1" role="presentation" class="<?= $widget->classLinkStep1 ?>" onclick="comeHere('#linkStep1')">
-                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="<?= $widget->titleStep1 ?>">
+                    <li id="linkStep1" data-toggle="modal" data-target="#confirm-step1" class="<?= $widget->classLinkStep1 ?>" onclick="comeHere('#linkStep1')" style="outline: none;">
+                        <a href="#step1"  aria-controls="step1" role="tab" title="<?= $widget->titleStep1 ?>" style="outline: none;">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-book"></i>
                             </span>

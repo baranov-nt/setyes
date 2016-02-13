@@ -8,9 +8,9 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
 
-$this->title = Yii::t('app', 'Update {modelClass}: ', [
-        'modelClass' => 'Ad Real Estate',
-    ]) . ' ' . $modelAdRealEstate->id;
+$this->title = Yii::t('app', '{modelClass}: ', [
+        'modelClass' => Yii::t('references', $modelAdRealEstate->adCategories->category0->reference_name),
+    ]) . ' ' . Yii::t('references', $modelAdRealEstate->dealType->reference_name);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $modelAdRealEstate->id, 'url' => ['view', 'id' => $modelAdRealEstate->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');

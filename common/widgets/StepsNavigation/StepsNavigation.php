@@ -45,7 +45,7 @@ class StepsNavigation extends Widget
     public $urlStep3;
     public $urlStep4;
 
-    private $confirm = 'Your ad is not added. Would you like to create another ad?';
+    public $confirm = 'Your ad is not added. Would you like to create another ad?';
 
     public function init()
     {
@@ -71,11 +71,22 @@ class StepsNavigation extends Widget
 
         $js = <<< JS
             function  comeHere(id) {
-                if($(id).attr('id') == "linkStep1" && $(id).attr('class') == '') {
+                /*if($(id).attr('id') == "linkStep1" && $(id).attr('class') == '') {
                     if (confirm("$this->confirm")) {
+                    alert('444');
                         window.location.replace("$this->urlStep1");
+                    } else {
+                        alert('3333');
+                        //alert("click next-step");
+                        var active = $('.wizard .nav-tabs li.active');
+                        console.log(active('id'));
+                        $('#linkStep2').click();
+                        //$(active).next().find('a[data-toggle="tab"]').click();
+                            //alert("go next-step");
+
+
                     }
-                }
+                }*/
                 if($(id).attr('id') == "linkStep2" && $(id).attr('class') == '') {
                     window.location.replace("$this->urlStep2");
                 }
@@ -101,7 +112,7 @@ JS;
                 }
             });
 
-            $(".next-step").click(function (e) {
+            /*$(".next-step").click(function (e) {
                 //alert("click next-step");
                 var active = $('.wizard .nav-tabs li.active');
                 active.next().removeClass('disabled');
@@ -111,23 +122,26 @@ JS;
                 //alert("click prev-step");
                 var active = $('.wizard .nav-tabs li.active');
                 prevTab(active);
-            });
+            });*/
         });
 
-        function nextTab(elem) {
+       /* function nextTab(elem) {
             $(elem).next().find('a[data-toggle="tab"]').click();
             //alert("go next-step");
         }
         function prevTab(elem) {
             $(elem).prev().find('a[data-toggle="tab"]').click();
             //alert("go prev-step");
-        }
+        }*/
 
         function comeHere(id) {
-            if($(id).attr('id') == "linkStep1" && $(id).attr('class') == '') {
-                    //$.pjax({url: "$this->urlStep1", container: '#w0'});
-                    window.location.replace("$this->urlStep1");
-                }
+            /*if (confirm("$this->confirm")) {
+                    alert('444');
+                        window.location.replace("$this->urlStep1");
+                    } else {
+                        alert('3333');
+                        return false;
+                    }*/
             if($(id).attr('id') == "linkStep2" && $(id).attr('class') == '') {
                 window.location.replace("$this->urlStep2");
             }

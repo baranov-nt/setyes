@@ -4,6 +4,7 @@ use yii\widgets\Pjax;
 use yii\widgets\MaskedInput;
 use common\widgets\StepsNavigation\StepsNavigation;
 use yii\helpers\Url;
+use common\widgets\Chosen\ChosenAsset;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -19,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 Pjax::begin([
     //'enablePushState' => false,
 ]);
-
+ChosenAsset::register($this);
 MaskedInput::widget([
     'name' => 'masked-input_init',
     'clientOptions' => [

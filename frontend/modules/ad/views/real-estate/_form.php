@@ -41,6 +41,9 @@ $user = Yii::$app->user->identity;
 
     <?= $form->field($modelAdRealEstate, 'property')->hiddenInput()->label(false) ?>
 
+    <?php
+    if(Yii::$app->controller->action->id != 'update'):
+    ?>
     <?= $form->field($modelAdRealEstate, 'deal_type')->dropDownList($modelAdRealEstate->realEstateOperationTypeList, [
         'class'  => 'form-control chosen-select',
         'prompt' => Yii::t('app', '---'),
@@ -54,6 +57,10 @@ $user = Yii::$app->user->identity;
         })
         '
     ]) ?>
+    <?php
+    endif;
+    ?>
+
 
     <?php
     /** Тип недвижемости доступен всем операциям, кроме сценариев

@@ -33,6 +33,7 @@ MaskedInput::widget([
 
     <?php
 echo StepsNavigation::widget([
+    'targetStep1' => '#confirm-step1',
     'urlStep1' => Url::to(['/ad/default/index']),
     'urlStep2' => Url::to(['/#']),
     'urlStep3' => Url::to(['/#']),

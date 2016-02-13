@@ -30,7 +30,7 @@ Modal::end();
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
 
-                    <li id="linkStep1" data-toggle="modal" data-target="#confirm-step1" class="<?= $widget->classLinkStep1 ?>" onclick="comeHere('#linkStep1')" style="outline: none;">
+                    <li id="linkStep1" data-toggle="modal" data-target="<?= $widget->targetStep1 ?>" class="<?= $widget->classLinkStep1 ?>" onclick="comeHere('#linkStep1')" style="outline: none;">
                         <a href="#step1"  aria-controls="step1" role="tab" title="<?= $widget->titleStep1 ?>" style="outline: none;">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-book"></i>

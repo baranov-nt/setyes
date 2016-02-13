@@ -27,6 +27,7 @@ MaskedInput::widget([
 ]);
 ?>
     <?= StepsNavigation::widget([
+        'targetStep1' => '',
         'urlStep1' => Url::to(['/ad/default/index']),
         'urlStep2' => Url::to(['/#']),
         'urlStep3' => Url::to(['/#']),

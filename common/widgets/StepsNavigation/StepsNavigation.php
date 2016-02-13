@@ -17,6 +17,7 @@ use yii\helpers\Url;
 
 class StepsNavigation extends Widget
 {
+    public $targetStep1 = '';
     /* Содержание */
     public $titleStep1;
     public $titleStep2;

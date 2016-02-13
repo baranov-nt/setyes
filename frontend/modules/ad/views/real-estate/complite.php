@@ -20,6 +20,7 @@ $user = Yii::$app->user->identity;
     <div class="col-md-12 text-center">
         <?php
         echo StepsNavigation::widget([
+            'targetStep1' => '#confirm-step1',
             'urlStep1' => Url::to(['/ad/default/index', 'id' => $modelAdRealEstate->id]),
             'urlStep2' => Url::to(['/ad/real-estate/update', 'id' => $modelAdRealEstate->id]),
             'urlStep3' => Url::to(['/ad/real-estate/view', 'id' => $modelAdRealEstate->id]),

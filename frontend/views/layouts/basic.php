@@ -30,7 +30,6 @@ $this->beginPage();
         <?= Html::csrfMetaTags() ?>
         <meta charset="<?= Yii::$app->charset ?>">
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="<?= Yii::$app->controller->siteNameMeta ?>"/>
         <meta property="og:title" content="<?= Yii::$app->controller->titleMeta ?>" />
         <meta property="og:site_name" content="<?= Yii::$app->controller->siteNameMeta ?>"/>
         <meta property="og:description" content="<?= Yii::$app->controller->descriptionMeta ?>" />

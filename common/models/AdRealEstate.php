@@ -1101,7 +1101,7 @@ class AdRealEstate extends ActiveRecord
     public function saveAd($modelAdRealEstate) {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
 
-        $modelAdRealEstate->temp = 1;
+        //$modelAdRealEstate->temp = 1;
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if($modelAdRealEstate->save()) {

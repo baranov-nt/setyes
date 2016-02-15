@@ -439,7 +439,7 @@ class RealEstateController extends BehaviorsController
         if (Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain])) {
                 $modelAdRealEstate->temp = 0;
                 if($modelAdRealEstate->save()) {
-                    return $this->redirect(['/main/index', 'id' => $modelAdRealEstate->id]);
+                    return $this->redirect(['/ad/view/all', 'id' => $modelAdRealEstate->id]);
                 }
 
             if ($modelAdRealEstate->placeAddress) {

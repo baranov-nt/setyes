@@ -104,6 +104,7 @@ return [
     'Font Weight' => 'Вес шрифта',
     'For this advertisement you can not add photos.' => 'Для данного объявления вы не можете добавлять фотографии.',
     'Forgot your password?' => 'Забыли пароль?',
+    'Free classifieds from all over the world !!!' => 'Бесплатные объявления со всего мира !!!',
     'Gender' => 'Пол',
     'Header Color' => 'Цвет заголовка',
     'Hello' => 'Здравствуйте',

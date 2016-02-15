@@ -104,6 +104,7 @@ return [
     'Font Weight' => 'Poids de fonte',
     'For this advertisement you can not add photos.' => 'Pour cette annonce vous ne pouvez pas ajouter des photos.',
     'Forgot your password?' => 'Mot de passe oublié?',
+    'Free classifieds from all over the world !!!' => 'Annonces gratuites de partout dans le monde !!!',
     'Gender' => 'Genre',
     'Header Color' => 'Header couleur',
     'Hello' => 'Salut',

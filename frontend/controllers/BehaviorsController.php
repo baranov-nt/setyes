@@ -15,12 +15,20 @@ use yii\filters\AccessControl;
 class BehaviorsController extends Controller {
 
     // Параметры для метатегов
-    public $titleMeta = 'Бояр';
-    public $siteNameMeta = 'Бояр';
-    public $descriptionMeta = 'Заказ продуктов питания.';
+    public $titleMeta;
+    public $siteNameMeta;
+    public $descriptionMeta;
     public $imageMeta = 'logo.jpg';
     public $urlMeta = '';
     public $appFbIdMeta = '618854251589299';
+
+    public function init()
+    {
+        parent::init();
+        $this->titleMeta = Yii::$app->name;
+        $this->siteNameMeta = Yii::$app->name;
+        $this->descriptionMeta = Yii::t('app', 'Free classifieds from all over the world !!!');
+    }
 
     public function behaviors()
     {
@@ -47,13 +55,6 @@ class BehaviorsController extends Controller {
                     ],
                     [
                         'allow' => true,
-                        'controllers' => ['ad/default'],
-                        'actions' => ['index'],
-                        'verbs' => ['GET', 'POST'],
-                        'roles' => ['Создатель']
-                    ],
-                    [
-                        'allow' => true,
                         'controllers' => ['main'],
                         'actions' => ['logout'],
                         'verbs' => ['POST'],
@@ -61,11 +62,24 @@ class BehaviorsController extends Controller {
                     ],
                     [
                         'allow' => true,
+                        'controllers' => ['ad/default'],
+                        'actions' => ['index'],
+                        'verbs' => ['GET', 'POST'],
+                        'roles' => ['Администратор']
+                    ],
+                    [
+                        'allow' => true,
                         'controllers' => ['ad/real-estate'],
                         'actions' => ['index', 'create', 'view', 'update', 'delete',
                             'create-rooms', 'create-apartrments', 'create-houses-cottages', 'create-land-plot', 'create-garages-parking', 'create-property-abroad', 'create-commercial-property',
                             'select-deal', 'complite', 'select-style', 'publish'],
-                        'roles' => ['Пользователь']
+                        'roles' => ['Администратор']
+                    ],
+                    [
+                        'allow' => true,
+                        'controllers' => ['ad/view'],
+                        'actions' => ['all', 'view'],
+                        'roles' => ['Администратор']
                     ],
                     [
                         'allow' => true,

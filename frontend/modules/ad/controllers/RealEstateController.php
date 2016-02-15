@@ -2,6 +2,7 @@
 
 namespace frontend\modules\ad\controllers;
 
+use common\models\AdMain;
 use Yii;
 use common\models\AdRealEstate;
 use common\models\AdRealEstateSearch;
@@ -58,6 +59,35 @@ class RealEstateController extends BehaviorsController
                     //dd('OK!!!');
                     return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
                 }
+            }
+
+            return $this->render('complite', [
+                'modelAdRealEstate' => $modelAdRealEstate,
+            ]);
+
+        } else {
+            throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
+        }
+    }
+
+    public function actionSelectStyle($id)
+    {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = $this->findModel($id);
+        $modelAdMain = AdMain::findOne($modelAdRealEstate->adCategory->adMain->id);
+
+        if (Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain])) {
+
+            if ($modelAdMain->load(Yii::$app->request->post()) && $modelAdMain->save()) {
+                $modelAdRealEstate = $this->findModel($id);
+            }
+
+            if ($modelAdRealEstate->placeAddress) {
+                /* Устанавливаем поля в модели в соответствии с адресом */
+                $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
+            } else {
+                /* Устанавливаем поля в модели в соответствии с городом */
+                $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
             }
 
             return $this->render('complite', [
@@ -399,6 +429,34 @@ class RealEstateController extends BehaviorsController
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionPublish($id)
+    {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $modelAdRealEstate = $this->findModel($id);
+
+        if (Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain])) {
+                $modelAdRealEstate->temp = 0;
+                if($modelAdRealEstate->save()) {
+                    return $this->redirect(['/main/index', 'id' => $modelAdRealEstate->id]);
+                }
+
+            if ($modelAdRealEstate->placeAddress) {
+                /* Устанавливаем поля в модели в соответствии с адресом */
+                $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
+            } else {
+                /* Устанавливаем поля в модели в соответствии с городом */
+                $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
+            }
+
+            return $this->render('complite', [
+                'modelAdRealEstate' => $modelAdRealEstate,
+            ]);
+
+        } else {
+            throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
+        }
     }
 
     /**

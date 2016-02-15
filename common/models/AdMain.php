@@ -52,7 +52,7 @@ class AdMain extends \yii\db\ActiveRecord
             'user_id' => Yii::t('app', 'User ID'),
             'place_city_id' => Yii::t('app', 'Place City ID'),
             'category_id' => Yii::t('app', 'Ad Category ID'),
-            'ad_style_id' => Yii::t('app', 'Ad Style ID'),
+            'ad_style_id' => Yii::t('app', 'Ad Style'),
         ];
     }
 

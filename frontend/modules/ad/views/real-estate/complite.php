@@ -3,8 +3,10 @@ use common\widgets\StepsNavigation\StepsNavigation;
 use yii\helpers\Url;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\bootstrap\Html;
-use yii\bootstrap\Carousel;
+use yii\bootstrap\ActiveForm;
+use justinvoelker\awesomebootstrapcheckbox\ActiveField;
 use common\widgets\ImagesView\ImagesView;
+use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -49,7 +51,13 @@ $user = Yii::$app->user->identity;
         //
         ?>
     </div>
-    <div class="col-md-3 main-container-element <?= $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class ?>">
+    <?php
+    Pjax::begin([
+        'id' => 'style_forms'
+        //'enablePushState' => false,
+    ]);
+    ?>
+    <div class="col-md-3 col-md-offset-3 main-container-element <?= $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class ?>">
         <div class="row">
             <div class="col-xs-12">
                 <span class="<?= $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon ?> icon-favorite"></span>
@@ -88,6 +96,81 @@ $user = Yii::$app->user->identity;
                 <?= Html::button(Yii::t('app', 'Quick view'), ['class' => $modelAdRealEstate->adCategory->adMain->adStyle->quick_view_class, 'style' => 'width: 100%;']) ?>
             </div>
         </div>
+    </div>
+    <?php
+    Pjax::end();
+    ?>
+
+    <div class="col-md-3">
+        <?php $form = ActiveForm::begin([
+            'method' => 'post',
+            'fieldClass' => ActiveField::className(),
+            'id' => 'style_form',
+        ]); ?>
+
+        <?php
+        //dd($modelAdRealEstate->adCategory->adMain->adStyle->id);
+        echo $form->field($modelAdRealEstate->adCategory->adMain, 'ad_style_id')->radioList($modelAdRealEstate->adCategory->adMain->adStyle->styleList,
+            [
+                'onchange' => '
+                $.pjax({
+                    type: "POST",
+                    url: "'.Url::to(['/ad/real-estate/select-style', 'id' => $modelAdRealEstate->id]).'",
+                    data: jQuery("#style_form").serialize(),
+                    container: "#style_forms",
+                    push: false
+                })',
+                'item' => function($index, $label, $name, $checked, $value) {
+                    switch ($value) {
+                        case 1:
+                            if($checked)
+                                $checked = 'checked';
+                            $bgClass = 'bg-default';
+                            $textClass = 'text-muted';
+                            $radioClass = 'radio-default';
+                            break;
+                        case 2:
+                            if($checked)
+                                $checked = 'checked';
+                            $bgClass = 'bg-success';
+                            $textClass = 'text-success';
+                            $radioClass = 'radio-success';
+                            break;
+                        case 3:
+                            if($checked)
+                                $checked = 'checked';
+                            $bgClass = 'bg-info';
+                            $textClass = 'text-info';
+                            $radioClass = 'radio-info';
+                            break;
+                        case 4:
+                            if($checked)
+                                $checked = 'checked';
+                            $bgClass = 'bg-warning';
+                            $textClass = 'text-warning';
+                            $radioClass = 'radio-warning';
+                            break;
+                        case 5:
+                            if($checked)
+                                $checked = 'checked';
+                            $bgClass = 'bg-danger';
+                            $textClass = 'text-danger';
+                            $radioClass = 'radio-danger';
+                            break;
+                    }
+                    $return = '<div class="radio '.$radioClass.' '.$bgClass.'">';
+                    $return .= '<input id="AdRealEstate-style-'.$value.'" type="radio" name="' . $name . '" value="'.$value.'" style="outline: none;" '.$checked.'>';
+                    $return .= '<label for="AdRealEstate-style-'.$value.'">'.$label.'</label>';
+                    $return .= '</div>';
+                    return $return;
+                }
+            ]
+        );
+        ?>
+        <?php ActiveForm::end(); ?>
+    </div>
+    <div class="col-md-12 text-center">
+        <?= Html::a(Yii::t('app', 'Publish ad'), ['/ad/real-estate/publish', 'id' => $modelAdRealEstate->id], ['class' => 'btn btn-success']) ?>
     </div>
 </div>
 

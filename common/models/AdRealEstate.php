@@ -69,6 +69,7 @@ class AdRealEstate extends ActiveRecord
     public $place_house;
     public $place_address;
     public $measurement_of_land;
+    public $style;
 
     /**
      * @inheritdoc
@@ -172,8 +173,8 @@ class AdRealEstate extends ActiveRecord
             'place_street' => Yii::t('app', 'Street Name'),
             'place_house' => Yii::t('app', 'House'),
             'place_address' => Yii::t('app', 'Address'),
-
             'temp' => Yii::t('app', 'Temp'),
+            'style' => Yii::t('app', 'Style'),
         ];
     }
 
@@ -1112,7 +1113,7 @@ class AdRealEstate extends ActiveRecord
                     $modelAdMain->user_id = Yii::$app->user->id;
                     $modelAdMain->place_city_id = $this->place_city_id;
                     $modelAdMain->category_id = $modelCategory->id;
-                    $modelAdMain->ad_style_id = 1;
+                    //$modelAdMain->ad_style_id = 1;
                     if($modelAdMain->save()) {
                         $transaction->commit();
                     }
@@ -1141,7 +1142,7 @@ class AdRealEstate extends ActiveRecord
                     $modelAdMain->user_id = Yii::$app->user->id;
                     $modelAdMain->place_city_id = $this->place_city_id;
                     $modelAdMain->category_id = $modelCategory->id;
-                    $modelAdMain->ad_style_id = 1;
+                    //$modelAdMain->ad_style_id = 1;
                     if($modelAdMain->save()) {
                         $transaction->commit();
                     }

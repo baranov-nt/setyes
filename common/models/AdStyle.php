@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ad_style".
@@ -43,7 +44,7 @@ class AdStyle extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'Style'),
             'name' => Yii::t('app', 'Name'),
             'main_container_class' => Yii::t('app', 'Main Container Class'),
             'header_link_class' => Yii::t('app', 'Header Link Class'),
@@ -58,5 +59,37 @@ class AdStyle extends \yii\db\ActiveRecord
     public function getAdMains()
     {
         return $this->hasMany(AdMain::className(), ['ad_style_id' => 'id']);
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getStyleList()
+    {
+        $appliances = ArrayHelper::map(AdStyle::find()
+            ->all(), 'id', 'name');
+        $items = [];
+        foreach($appliances as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
+     */
+    public function getClassList()
+    {
+        $appliances = ArrayHelper::map(AdStyle::find()
+            ->all(), 'id', 'name');
+        $items = [];
+        foreach($appliances as $key => $value) {
+            $items[$key] = Yii::t('references', $value);
+        }
+        return $items;
     }
 }

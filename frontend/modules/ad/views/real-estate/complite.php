@@ -51,6 +51,9 @@ $user = Yii::$app->user->identity;
         //
         ?>
     </div>
+    <div class="col-md-12 text-center block-padding-bottom">
+        <h1><?= Yii::t('app', 'Template') ?></h1>
+    </div>
     <?php
     Pjax::begin([
         'id' => 'style_forms'

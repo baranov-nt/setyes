@@ -40,20 +40,21 @@ class m160116_074120_create_ad_main_table extends Migration
            Стиль с id = 1 доступен для всех пользователей, другие стили доступны только премиум пользователям. */
         $this->createTable('ad_style', [
             'id' => $this->primaryKey(),
-            'background-color' => $this->string(32)->defaultValue('#ffffff'),       // Цвет фона
-            'bоrder-color' => $this->string(32)->defaultValue('#000000'),           // Цвет рамки
-            'border-weight' => $this->smallInteger()->defaultValue(1),              // Толщина рамки (1px - 3px)
-            'header-color' => $this->string(32)->defaultValue('#000000'),           // Цвет заголовка
-            'text-color' => $this->string(32)->defaultValue('#000000'),             // Цвет текста
-            'font-weight' => $this->smallInteger(3)->defaultValue(400),              // Толщина текста (100 - 900)
-            'font-family' => $this->string(32)->defaultValue('Verdana'),            // Шрифт текста
-            'font-family-style' => $this->string(32)->defaultValue('sans-serif'),   // Стиль шрифта текста
+            'name' => $this->string(32),
+            'main_container_class' => $this->string(32),        // Класс контейнера
+            'header_link_class' => $this->string(32),           // Класс для ссылки в заголовке
+            'favorite_icon' => $this->string(255),              // Иконка "Добавить в избранное"
+            'quick_view_class' => $this->string(32),            // Класс для кнопки "Быстрый просмотр"
         ]);
 
         /* Добавляем стиль по умолчанию */
-        $this->batchInsert('ad_style', ['id', 'background-color', 'bоrder-color', 'border-weight', 'header-color', 'text-color', 'font-weight', 'font-family', 'font-family-style'],
+        $this->batchInsert('ad_style', ['id','name', 'main_container_class', 'header_link_class', 'favorite_icon', 'quick_view_class'],
             [
-                [1, '#ffffff', '#000000', 1, '#000000', '#000000', 400, 'Verdana', 'sans-serif'],
+                [1, 'default', 'alert', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-default'],
+                [2, 'grass', 'alert alert-success', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-success'],
+                [3, 'sky', 'alert alert-info', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-info'],
+                [4, 'shine', 'alert alert-warning', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-warning'],
+                [5, 'fire', 'alert alert-danger', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-danger'],
             ]);
 
         /* Создаем таблицу  ad_main, в которой будут присутствовать поля, имеющиеся во всех объявлениях */

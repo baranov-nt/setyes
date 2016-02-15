@@ -38,8 +38,8 @@ class UserProfile extends ActiveRecord
     public function rules()
     {
         return [
-            [['images_num', 'the_second_phone', 'the_third_phone', 'birthday', 'gender'], 'integer'],
-            [['images_label', 'first_name', 'second_name', 'middle_name'], 'string', 'max' => 32]
+            [['images_num', 'the_second_phone', 'the_third_phone', 'birthday', 'images_label', 'gender'], 'integer'],
+            [['first_name', 'second_name', 'middle_name'], 'string', 'max' => 32]
         ];
     }
 

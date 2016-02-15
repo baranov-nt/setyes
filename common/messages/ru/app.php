@@ -174,6 +174,7 @@ return [
     'Profile changed' => 'Профиль изменен',
     'Profile not changed' => 'Профиль не изменен',
     'Property' => 'Недвижимость',
+    'Quick view' => 'Быстрый просмотр',
     'Real Estate ID' => '',
     'Reference ID' => '',
     'Reference Name' => 'Имя ссылки',

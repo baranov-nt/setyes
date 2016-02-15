@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "ad_main".
@@ -18,6 +19,7 @@ use yii\helpers\ArrayHelper;
  * @property PlaceCity $placeCity
  * @property AdStyle $adStyle
  * @property User $user
+ * @property [] $images
  */
 class AdMain extends \yii\db\ActiveRecord
 {
@@ -154,6 +156,23 @@ class AdMain extends \yii\db\ActiveRecord
                     ];
                     break;
             }
+        endforeach;
+
+        return $items;
+    }
+
+    public function getImages($modelAdRealEstate) {
+        $items = '';
+        foreach($modelAdRealEstate->imagesOfObjects as $one):
+            $items[] = [
+                'content' => Html::img('/images/'.$one->image->path_small_image, [
+                    'style' => 'width: 100%; border-radius: 3px;'
+                ]),
+                'options' => [
+
+                ],
+                'active' => false
+            ];
         endforeach;
 
         return $items;

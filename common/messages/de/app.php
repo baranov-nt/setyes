@@ -174,6 +174,7 @@ return [
     'Profile changed' => 'Profil geändert',
     'Profile not changed' => 'Profil nicht geändert',
     'Property' => 'Eigentum',
+    'Quick view' => 'Schnellansicht',
     'Real Estate ID' => '',
     'Reference ID' => '',
     'Reference Name' => '',

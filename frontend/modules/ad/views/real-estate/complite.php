@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\bootstrap\Html;
 use yii\bootstrap\Carousel;
+use common\widgets\ImagesView\ImagesView;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -48,72 +49,46 @@ $user = Yii::$app->user->identity;
         //
         ?>
     </div>
-    <div class="col-md-3 alert alert-success"  style="border: 1px solid #cccccc; border-radius: 3px; box-shadow: 0.2em 0.2em 3px rgba(122,122,122,0.5);">
+    <div class="col-md-3 main-container-element <?= $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class ?>">
         <div class="row">
             <div class="col-xs-12">
-                <button class="btn btn-sm btn-success" style="outline: none; border-radius: 3px; margin: 0 0 0 0 !important; float: right;"><i class="fa fa-plus-circle fa-lg" style=""></i></button>
-                <h4 style="padding: 0; margin: 0;"><?= Html::a(Yii::t('references', $modelAdRealEstate->dealType->reference_name), Url::to(['/#']), ['style' => 'text-transform: uppercase;']) // операция ?></h4>
+                <span class="<?= $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon ?> icon-favorite"></span>
+                <h4 class="main-container-header-element"><?= Html::a(Yii::t('references', $modelAdRealEstate->dealType->reference_name), Url::to(['/#']), ['class' => 'main-container-header-link-element alert-link']) // операция ?></h4>
             </div>
-            <div class="col-xs-12" style="padding-top: 10px;">
-                <p style="text-align: justify;"><?= $modelAdRealEstate->place_city.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_house ?></p>
+            <div class="col-xs-12">
+                <p><?= $modelAdRealEstate->place_city.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_house ?></p>
             </div>
-            <div class="col-xs-12" style="padding-bottom: 10px;">
+            <div class="col-xs-12 block-padding-bottom">
                 <?php
-                if(count($modelAdRealEstate->imagesOfObjects) > 1):
-                    foreach($modelAdRealEstate->imagesOfObjects as $one):
-                        $items[] = [
-                            'content' => Html::img('/images/'.$one->image->path_small_image, [
-                                'style' => 'width: 100%; border-radius: 3px;'
-                            ]),
-                            'options' => [
-                                'style' => 'width:100%;' // set the width of the container if you like
-                            ],
-                            'active' => false
-                        ];
-                    endforeach;
-                    echo Carousel::widget([
-                        'items' => $items,
-                        'options' => [
-                            'data-interval' => 0,
-                            'class' => 'slide',
-                            'style' => 'width:100%;' // set the width of the container if you like
-                        ],
-                        'controls' => ['&lsaquo;', '&rsaquo;'],     // Стрелочки вперед - назад
-                        //'controls' => ['<', '>'],                     // Стрелочки вперед - назад
-                        'showIndicators' => true,                   // отображать индикаторы (кругляшки)
-
-                    ]);
-                else:
-                    /* Если одно изоражение */
-                    foreach($modelAdRealEstate->imagesOfObjects as $one):
-                        echo Html::img('/images/'.$one->image->path_small_image, [
-                            'style' => 'width: 100%'
-                        ]);
-                    endforeach;
-                endif;
+                echo ImagesView::widget(['model' => $modelAdRealEstate]);
                 ?>
             </div>
             <div class="col-xs-12">
                 <?= $modelAdRealEstate->contentList ?>
             </div>
             <div class="col-xs-12">
-                <i class="fa fa-mobile fa-3x" style="outline: none; border-radius: 3px; float: left; margin-right: 10px;"></i>
-                <h5 style="margin-top: 17px !important;"><?= $user->phone ?></h5>
+                <i class="fa fa-mobile fa-2x"></i>
+                <h5><?= $user->phone ?></h5>
             </div>
             <div class="col-xs-12">
-                <i class="fa fa-envelope-o fa-2x" style="outline: none; border-radius: 3px; float: left; margin-right: 10px;"></i>
-                <h5 style="margin-top: 8px !important;"><?= $user->email ?></h5>
+                <i class="fa fa-envelope-o fa-2x"></i>
+                <h5><?= $user->email ?></h5>
             </div>
+            <?php
+            if($user->userProfile->first_name || $user->userProfile->second_name):
+                ?>
+                <div class="col-xs-12">
+                    <i class="fa fa-user fa-2x" style=""></i>
+                    <h5><?= $user->userProfile->first_name.' '.$user->userProfile->second_name ?></h5>
+                </div>
+                <?php
+            endif;
+            ?>
             <div class="col-xs-12">
-                <?= Html::button('Быстрый просмотр', ['class' => 'btn btn-success', 'style' => 'width: 100%;']) ?>
+                <?= Html::button(Yii::t('app', 'Quick view'), ['class' => $modelAdRealEstate->adCategory->adMain->adStyle->quick_view_class, 'style' => 'width: 100%;']) ?>
             </div>
         </div>
     </div>
-    <div class="col-md-12">
-
-        <?php //d($modelAdRealEstate->columnList) ?>
-    </div>
-
 </div>
 
 

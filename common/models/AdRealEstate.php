@@ -421,7 +421,7 @@ class AdRealEstate extends ActiveRecord
         if($this->price)
             $items[] = [
                 'attribute' => 'price',
-                'value' => $this->price.' '.Yii::t('references', $this->user->country->currency),
+                'value' => Yii::$app->formatter->asCurrency(Yii::t('references', $this->price), $this->user->country->currency),
             ];
         if($this->price_for_the_period)
             $items[] = [
@@ -472,55 +472,24 @@ class AdRealEstate extends ActiveRecord
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_property').':</strong> '.Yii::t('references', $this->area_of_property).' '.Yii::t('references', $this->measurementOfProperty->reference_name).'</p>';
         if($this->area_of_land)
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_land').':</strong> '.Yii::t('references', $this->area_of_land).' '.Yii::t('references', $this->measurementOfLand->reference_name).'</p>';
-        /*
-        if($this->area_of_property)
-            $items[] = [
-                'attribute' => 'area_of_property',
-                'value' => $this->area_of_property.' '.Yii::t('references', $this->measurementOfProperty->reference_name),
-            ];
-        if($this->area_of_land)
-            $items[] = [
-                'attribute' => 'area_of_land',
-                'value' => $this->area_of_land.' '.Yii::t('references', $this->measurementOfLand),
-            ];
         if($this->lease_term)
-            $items[] = [
-                'attribute' => 'lease_term',
-                'value' => Yii::t('references', $this->leaseTerm->reference_name),
-            ];
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('lease_term').':</strong> '.Yii::t('references', $this->leaseTerm->reference_name).'</p>';
         if($this->price)
-            $items[] = [
-                'attribute' => 'price',
-                'value' => $this->price.' '.Yii::t('references', $this->user->country->currency),
-            ];
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('price').':</strong> '.
+                Yii::$app->formatter->asCurrency(Yii::t('references', $this->price), $this->user->country->currency)
+                .'</p>';
         if($this->price_for_the_period)
-            $items[] = [
-                'attribute' => 'price_for_the_period',
-                'value' => Yii::t('references', $this->priceForThePeriod->reference_name),
-            ];
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('price_for_the_period').':</strong> '.Yii::t('references', $this->priceForThePeriod->reference_name).'</p>';
         if($this->necessary_furniture)
-            $items[] = [
-                'attribute' => 'necessary_furniture',
-                'value' => Yii::t('references', $this->necessaryFurniture->reference_name),
-            ];
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('necessary_furniture').':</strong> '.Yii::t('references', $this->necessaryFurniture->reference_name).'</p>';
         if($this->internet)
-            $items[] = [
-                'attribute' => 'internet',
-                'value' => Yii::t('references', $this->internet0->reference_name),
-            ];
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('internet').':</strong> '.Yii::t('references', $this->internet0->reference_name).'</p>';
         if($this->pets_allowed)
-            $items[] = [
-                'attribute' => 'pets_allowed',
-                'value' => Yii::t('references', $this->petsAllowed->reference_name),
-            ];
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('pets_allowed').':</strong> '.Yii::t('references', $this->petsAllowed->reference_name).'</p>';
         if($this->condition)
-            $items[] = [
-                'attribute' => 'condition',
-                'value' => Yii::t('references', $this->condition0->reference_name),
-            ];*/
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('condition').':</strong> '.Yii::t('references', $this->condition0->reference_name).'</p>';
         return $items;
     }
-
     /**
      * Returns the array of possible user status values.
      *

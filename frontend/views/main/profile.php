@@ -77,7 +77,7 @@ use common\widgets\SocialLinks\ShareBar;
 
             <div class="col-md-6 col-md-offset-3">
                 <?php
-                echo PjaxFieldWidget::widget([
+                /*echo PjaxFieldWidget::widget([
                     'route' => '/main/user',
                     'model' => $modelUserProfile,
                     'id' => Yii::$app->user->id,
@@ -88,7 +88,7 @@ use common\widgets\SocialLinks\ShareBar;
                     'model' => $modelUserProfile,
                     'id' => Yii::$app->user->id,
                     'attribute' => 'the_third_phone',
-                ]);
+                ]);*/
                 echo PjaxFieldWidget::widget([
                     'route' => '/main/profile',
                     'model' => $modelUserProfile,

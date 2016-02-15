@@ -1,0 +1,40 @@
+.main-container-element {
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    box-shadow: 0.2em 0.2em 3px rgba(122,122,122,0.5);
+}
+.main-container-header-element {
+    padding: 0;
+    margin: 0;
+}
+.main-container-header-link-element {
+    text-transform: uppercase;
+}
+.icon-favorite {
+    font-size: 18px;
+    color: #cccccc;
+    cursor: pointer;
+    !important; float: right;
+}
+.icon-favorite:hover {
+    color: #cc0000;
+}
+.content-elem {
+    margin: 0 0 5px 0 !important;
+}
+.block-padding-bottom {
+    padding-bottom: 10px;
+}
+.fa-mobile {
+    float: left;
+    margin-right: 10px;
+}
+.fa-envelope-o {
+    float: left;
+    margin-right: 10px;
+}
+.fa-user {
+    float: left;
+    margin-right: 10px;
+}
+

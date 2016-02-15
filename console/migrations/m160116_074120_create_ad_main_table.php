@@ -50,11 +50,11 @@ class m160116_074120_create_ad_main_table extends Migration
         /* Добавляем стиль по умолчанию */
         $this->batchInsert('ad_style', ['id','name', 'main_container_class', 'header_link_class', 'favorite_icon', 'quick_view_class'],
             [
-                [1, 'default', 'alert', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-default'],
-                [2, 'grass', 'alert alert-success', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-success'],
-                [3, 'sky', 'alert alert-info', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-info'],
-                [4, 'shine', 'alert alert-warning', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-warning'],
-                [5, 'fire', 'alert alert-danger', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-danger'],
+                [1, Yii::t('references', 'Default'), 'alert', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-default'],
+                [2, Yii::t('references', 'Grass'), 'alert alert-success', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-success'],
+                [3, Yii::t('references', 'Sky'), 'alert alert-info', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-info'],
+                [4, Yii::t('references', 'Sand'), 'alert alert-warning', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-warning'],
+                [5, Yii::t('references', 'Rose'), 'alert alert-danger', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-danger'],
             ]);
 
         /* Создаем таблицу  ad_main, в которой будут присутствовать поля, имеющиеся во всех объявлениях */

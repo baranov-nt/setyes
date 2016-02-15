@@ -35,6 +35,7 @@ use yii\db\Exception;
  * @property integer $temp
  *
  * @property AdRealEstate[] $columnList
+ * @property AdRealEstate[] $contentList
  * @property AdCategory $adCategory
  * @property AdRealEstateReference $condition0
  * @property ImagesOfObject $imagesOfObjects
@@ -447,6 +448,76 @@ class AdRealEstate extends ActiveRecord
                 'attribute' => 'condition',
                 'value' => Yii::t('references', $this->condition0->reference_name),
             ];
+        return $items;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContentList()
+    {
+        $modelAdRealEstate = new AdRealEstate();
+        $items = '';
+        if($this->type_of_property)
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('type_of_property').':</strong> '.Yii::t('references', $this->typeOfProperty->reference_name).'</p>';
+        if($this->rooms_in_the_apartment)
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('rooms_in_the_apartment').':</strong> '.Yii::t('references', $this->roomsInTheApartment->reference_name).'</p>';
+        if($this->material_housing)
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('material_housing').':</strong> '.Yii::t('references', $this->materialHousing->reference_name).'</p>';
+        if($this->floor)
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('floor').':</strong> '.Yii::t('references', $this->floor0->reference_name).'</p>';
+        if($this->floors_in_the_house)
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('floors_in_the_house').':</strong> '.Yii::t('references', $this->floorsInTheHouse->reference_name).'</p>';
+        if($this->area_of_property)
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_property').':</strong> '.Yii::t('references', $this->area_of_property).' '.Yii::t('references', $this->measurementOfProperty->reference_name).'</p>';
+        if($this->area_of_land)
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_land').':</strong> '.Yii::t('references', $this->area_of_land).' '.Yii::t('references', $this->measurementOfLand->reference_name).'</p>';
+        /*
+        if($this->area_of_property)
+            $items[] = [
+                'attribute' => 'area_of_property',
+                'value' => $this->area_of_property.' '.Yii::t('references', $this->measurementOfProperty->reference_name),
+            ];
+        if($this->area_of_land)
+            $items[] = [
+                'attribute' => 'area_of_land',
+                'value' => $this->area_of_land.' '.Yii::t('references', $this->measurementOfLand),
+            ];
+        if($this->lease_term)
+            $items[] = [
+                'attribute' => 'lease_term',
+                'value' => Yii::t('references', $this->leaseTerm->reference_name),
+            ];
+        if($this->price)
+            $items[] = [
+                'attribute' => 'price',
+                'value' => $this->price.' '.Yii::t('references', $this->user->country->currency),
+            ];
+        if($this->price_for_the_period)
+            $items[] = [
+                'attribute' => 'price_for_the_period',
+                'value' => Yii::t('references', $this->priceForThePeriod->reference_name),
+            ];
+        if($this->necessary_furniture)
+            $items[] = [
+                'attribute' => 'necessary_furniture',
+                'value' => Yii::t('references', $this->necessaryFurniture->reference_name),
+            ];
+        if($this->internet)
+            $items[] = [
+                'attribute' => 'internet',
+                'value' => Yii::t('references', $this->internet0->reference_name),
+            ];
+        if($this->pets_allowed)
+            $items[] = [
+                'attribute' => 'pets_allowed',
+                'value' => Yii::t('references', $this->petsAllowed->reference_name),
+            ];
+        if($this->condition)
+            $items[] = [
+                'attribute' => 'condition',
+                'value' => Yii::t('references', $this->condition0->reference_name),
+            ];*/
         return $items;
     }
 

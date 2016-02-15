@@ -65,8 +65,6 @@ $user = Yii::$app->user->identity;
                             'content' => Html::img('/images/'.$one->image->path_small_image, [
                                 'style' => 'width: 100%; border-radius: 3px;'
                             ]),
-                            //'caption' => '<h5>'.$modelAdRealEstate->name.'</h5><p>'.$modelAdRealEstate->desc.'</p>',
-                            //'caption' => '<h5>'.$modelAdRealEstate->name.'</h5><p>'.$modelAdRealEstate->desc.'</p>',
                             'options' => [
                                 'style' => 'width:100%;' // set the width of the container if you like
                             ],
@@ -86,13 +84,17 @@ $user = Yii::$app->user->identity;
 
                     ]);
                 else:
+                    /* Если одно изоражение */
                     foreach($modelAdRealEstate->imagesOfObjects as $one):
-                        echo Html::img($asset->baseUrl.'/'.$one->image->path_small_image, [
+                        echo Html::img('/images/'.$one->image->path_small_image, [
                             'style' => 'width: 100%'
                         ]);
                     endforeach;
                 endif;
                 ?>
+            </div>
+            <div class="col-xs-12">
+                <?= $modelAdRealEstate->contentList ?>
             </div>
             <div class="col-xs-12">
                 <i class="fa fa-mobile fa-3x" style="outline: none; border-radius: 3px; float: left; margin-right: 10px;"></i>

@@ -60,4 +60,6 @@ body {
 .carousel-indicators {
     margin-top: 10% !important;
 }
-
+.content-elem {
+    margin: 0 0 5px 0 !important;
+}

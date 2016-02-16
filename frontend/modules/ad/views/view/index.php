@@ -27,10 +27,6 @@ Masonry::widget();
         <?php
 
         ?>
-<!--<style>
-    .grid-item { width: 200px; }
-    .grid-item--width2 { width: 400px; }
-</style>-->
         <?=
         ListView::widget([
             'dataProvider' => $dataProvider,

@@ -49,12 +49,12 @@ Masonry::widget();
                 // or just do some echo
                 //return $model->name . ' добавил ' . $model->user->email;
             },
-            /*'itemOptions' => [                                                      // свойства для элементов контейнера
+            'itemOptions' => [                                                      // свойства для элементов контейнера
                 'tag' => 'div',
-                'class' => '',
+                'class' => 'grid-item col-md-3',
                 //'id' => 'list-wrapper',
                 //'style' => 'float: left !important;'
-            ],*/
+            ],
             'pager' => [                                                            // параметры для пагинации
                 'firstPageLabel' => 'первая',
                 'lastPageLabel' => 'последняя',

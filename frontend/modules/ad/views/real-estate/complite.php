@@ -62,7 +62,7 @@ $user = Yii::$app->user->identity;
     ]);
     $js=<<<JS
     $("#style_forms").on("pjax:complete", function() {
-        $("#style_forms").attr("tabindex",-1).focus();
+        $("#style_form").attr("tabindex",-1).focus();
     });
 JS;
     $this->registerJS($js);
@@ -82,11 +82,12 @@ JS;
     ?>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-3" style="">
         <?php $form = ActiveForm::begin([
             'method' => 'post',
             'fieldClass' => ActiveField::className(),
             'id' => 'style_form',
+            'options' => ['style' => 'outline: none;']
         ]); ?>
 
         <?php

@@ -22,7 +22,7 @@ JS;
 $this->registerJS($js);*/
 ?>
 
-<div id="id_<?= $widget->id ?>" class="main-container-element <?= $widget->main_container_class ?>">
+<div id="id_<?= $widget->id ?>" class="main-container-element <?= $widget->main_container_class ?>" style="outline: none;">
     <div class="row">
         <div class="col-xs-12">
             <?= Html::tag('span', '', [

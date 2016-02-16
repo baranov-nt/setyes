@@ -13,7 +13,6 @@ use Yii;
 use yii\base\Widget;
 use common\widgets\StepsNavigation\assets\StepsAsset;
 use yii\web\View;
-use yii\helpers\Url;
 
 class StepsNavigation extends Widget
 {

@@ -15,7 +15,7 @@ return [
     ],
     'controllerNamespace' => 'frontend\controllers',
     'layout' => 'basic',
-    'defaultRoute' => 'main/index',
+    'defaultRoute' => '/ad/view/all',
     'modules' => [
         'ad' => [
             'class' => 'frontend\modules\ad\Module',
@@ -34,19 +34,19 @@ return [
             'showScriptName' => false,
             'enableStrictParsing' => true,
             'rules' => [
-                [
+                /*[
                     'pattern' => '<cityId:\d+>',
-                    'route' => 'main/index',
+                    'route' => '/ad/view/all',
                     'suffix' => ''
-                ],
+                ],*/
                 [
-                    'pattern' => 'main/index',
-                    'route' => 'main/index',
+                    'pattern' => '/ad/view/all/<cityId:\d+>',
+                    'route' => '/ad/view/all',
                     'suffix' => ''
                 ],
                 [
                     'pattern' => '',
-                    'route' => 'main/index',
+                    'route' => '/ad/view/all',
                     'suffix' => ''
                 ],
                 [

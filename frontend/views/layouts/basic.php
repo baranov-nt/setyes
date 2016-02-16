@@ -64,7 +64,7 @@ $this->beginPage();
                 ],
                 'brandLabel' => Yii::$app->name,
                 'brandUrl' => [
-                    '/main/index'
+                    '/ad/view/all'
                 ],
                 'brandOptions' => [
                     'class' => 'navbar-brand'

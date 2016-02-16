@@ -60,7 +60,7 @@ class MainController extends BehaviorsController
                 else:
                     if($model->sendActivationEmail($modelUser)):
                         Yii::$app->session->setFlash('success', Yii::t('app', 'Letter to activate your account was sent to the email <strong> {email} </strong> (check spam folder).', ['email' => $modelUser->email]));
-                        return $this->redirect(Url::to(['/main/index']));
+                        return $this->redirect(Url::to(['/ad/view/all']));
                     else:
                         Yii::$app->session->setFlash('error', Yii::t('app', 'Error. The letter was not sent.'));
                         Yii::error(Yii::t('app', 'Error. The letter was not sent.'));
@@ -98,7 +98,7 @@ class MainController extends BehaviorsController
                 else:
                     if($model->sendActivationEmail($user)):
                         Yii::$app->session->setFlash('success', Yii::t('app', 'Letter to activate your account was sent to the email <strong> {email} </strong> (check spam folder).', ['email' => $user->email]));
-                        return $this->redirect(Url::to(['/main/index']));
+                        return $this->redirect(Url::to(['/ad/view/all']));
                     else:
                         Yii::$app->session->setFlash('error', Yii::t('app', 'Error. The letter was not sent.'));
                         Yii::error(Yii::t('app', 'Error. The letter was not sent.'));
@@ -170,13 +170,13 @@ class MainController extends BehaviorsController
             Yii::error(Yii::t('app', 'Activation error.'));
         endif;
 
-        return $this->redirect(Url::to(['/main/index']));
+        return $this->redirect(Url::to(['/ad/view/all']));
     }
 
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->redirect(['/main/index']);
+        return $this->redirect(['/ad/view/all']);
     }
 
     public function actionLogin()
@@ -320,10 +320,10 @@ class MainController extends BehaviorsController
         $place = Yii::$app->request->post('place');
         $cityId = Yii::$app->placeManager->setMainCity($place);
         if($cityId) {
-            return $this->redirect(Url::to(['/main/index', 'cityId' => $cityId]));
+            return $this->redirect(Url::to(['/ad/view/all', 'cityId' => $cityId]));
         }
         /* Если объект не найден, переходим на главную страницу */
-        return $this->redirect(Url::to(['/main/index']));
+        return $this->redirect(Url::to(['/ad/view/all']));
     }
 
     public function actionError()

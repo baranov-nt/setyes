@@ -5,8 +5,8 @@ use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\bootstrap\Html;
 use yii\bootstrap\ActiveForm;
 use justinvoelker\awesomebootstrapcheckbox\ActiveField;
-use common\widgets\ImagesView\ImagesView;
 use yii\widgets\Pjax;
+use common\widgets\AdWidget\AdWidget;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -59,47 +59,17 @@ $user = Yii::$app->user->identity;
         'id' => 'style_forms'
         //'enablePushState' => false,
     ]);
+    echo AdWidget::widget([
+        'template' => true,
+        'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class,
+        'favorite_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon,
+        'header' => $modelAdRealEstate->dealType->reference_name,
+        'address' => $modelAdRealEstate->place_city.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_house,
+        'images' => $modelAdRealEstate->imagesOfObjects,
+        'content' => $modelAdRealEstate->contentList,
+        'quick_view_class' => $modelAdRealEstate->adCategory->adMain->adStyle->quick_view_class
+    ]);
     ?>
-    <div class="col-md-3 col-md-offset-3 main-container-element <?= $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class ?>">
-        <div class="row">
-            <div class="col-xs-12">
-                <span class="<?= $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon ?> icon-favorite"></span>
-                <h4 class="main-container-header-element"><?= Html::a(Yii::t('references', $modelAdRealEstate->dealType->reference_name), Url::to(['/#']), ['class' => 'main-container-header-link-element alert-link']) // операция ?></h4>
-            </div>
-            <div class="col-xs-12">
-                <p><?= $modelAdRealEstate->place_city.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_house ?></p>
-            </div>
-            <div class="col-xs-12 block-padding-bottom">
-                <?php
-                echo ImagesView::widget(['model' => $modelAdRealEstate]);
-                ?>
-            </div>
-            <div class="col-xs-12">
-                <?= $modelAdRealEstate->contentList ?>
-            </div>
-            <div class="col-xs-12">
-                <i class="fa fa-mobile fa-2x"></i>
-                <h5><?= $user->phone ?></h5>
-            </div>
-            <div class="col-xs-12">
-                <i class="fa fa-envelope-o fa-2x"></i>
-                <h5><?= $user->email ?></h5>
-            </div>
-            <?php
-            if($user->userProfile->first_name || $user->userProfile->second_name):
-                ?>
-                <div class="col-xs-12">
-                    <i class="fa fa-user fa-2x" style=""></i>
-                    <h5><?= $user->userProfile->first_name.' '.$user->userProfile->second_name ?></h5>
-                </div>
-                <?php
-            endif;
-            ?>
-            <div class="col-xs-12">
-                <?= Html::button(Yii::t('app', 'Quick view'), ['class' => $modelAdRealEstate->adCategory->adMain->adStyle->quick_view_class, 'style' => 'width: 100%;']) ?>
-            </div>
-        </div>
-    </div>
     <?php
     Pjax::end();
     ?>

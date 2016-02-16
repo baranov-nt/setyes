@@ -86,7 +86,7 @@ class SiteController extends Controller
                     Yii::$app->getSession()->setFlash('error', [
                         Yii::t('app', "This user is blocked."),
                     ]);
-                    return $this->redirectUser($url = Url::to(['/main/index']));
+                    return $this->redirectUser($url = Url::to(['/ad/view/all']));
                 endif;
                 Yii::$app->user->login($user);
             } else {                        // регистрация

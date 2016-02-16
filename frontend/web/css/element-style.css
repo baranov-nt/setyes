@@ -10,6 +10,15 @@
 .main-container-header-link-element {
     text-transform: uppercase;
 }
+.main-container-header-element-template {
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: transparent;
+    cursor: pointer;
+}
+.main-container-header-element-template:hover {
+    text-decoration: underline;
+}
 .icon-favorite {
     font-size: 18px;
     color: #cccccc;

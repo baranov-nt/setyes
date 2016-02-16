@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
+use common\widgets\Masonry\Masonry;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\AdMainSearch */
@@ -11,6 +12,7 @@ use yii\widgets\ListView;
 $this->title = Yii::t('app', 'Ad Mains');
 $this->params['breadcrumbs'][] = $this->title;
 
+Masonry::widget();
 ?>
 <div class="container">
     <div class="ad-main-index">
@@ -25,7 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
 
         ?>
-
+<!--<style>
+    .grid-item { width: 200px; }
+    .grid-item--width2 { width: 400px; }
+</style>-->
         <?=
         ListView::widget([
             'dataProvider' => $dataProvider,
@@ -44,12 +49,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 // or just do some echo
                 //return $model->name . ' добавил ' . $model->user->email;
             },
-            'itemOptions' => [                                                      // свойства для элементов контейнера
+            /*'itemOptions' => [                                                      // свойства для элементов контейнера
                 'tag' => 'div',
-                //'class' => 'col-md-4',
+                'class' => '',
                 //'id' => 'list-wrapper',
                 //'style' => 'float: left !important;'
-            ],
+            ],*/
             'pager' => [                                                            // параметры для пагинации
                 'firstPageLabel' => 'первая',
                 'lastPageLabel' => 'последняя',
@@ -65,7 +70,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'options' => [                                                          // свойства основного контейнера для элементов
                 'tag' => 'div',
-                'class' => 'list-wrapper row',
+                'class' => '/*list-wrapper*/ row grid',
                 'id' => 'list-wrapper',
             ],
 

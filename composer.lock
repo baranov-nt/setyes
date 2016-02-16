@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "48e92a0639203f726fcd72c3c5e59f03",
-    "content-hash": "4ed0d1767fdf4449ebbb058e2ca824c4",
+    "hash": "ee74f12da4a5d82822aca9bd5e6334e8",
+    "content-hash": "1209f4daa870291b4e11c018ea8eb4b4",
     "packages": [
         {
             "name": "bower-asset/animate.css",
@@ -226,6 +226,123 @@
             ]
         },
         {
+            "name": "bower-asset/desandro-matches-selector",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/desandro/matches-selector.git",
+                "reference": "94f06d14dc2defafe8b6d6be4d9b999269d70abc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/desandro/matches-selector/zipball/94f06d14dc2defafe8b6d6be4d9b999269d70abc",
+                "reference": "94f06d14dc2defafe8b6d6be4d9b999269d70abc",
+                "shasum": ""
+            },
+            "require-dev": {
+                "bower-asset/qunit": "dev-1.x|1.x"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "matches-selector.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests",
+                    "tests.*",
+                    "package.json"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "matches/matchesSelector helper",
+            "keywords": [
+                "DOM",
+                "matches",
+                "matchesSelector"
+            ]
+        },
+        {
+            "name": "bower-asset/ev-emitter",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/metafizzy/ev-emitter.git",
+                "reference": "e1f8d670f76749aff783ad5e2f27d7294c2c679e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metafizzy/ev-emitter/zipball/e1f8d670f76749aff783ad5e2f27d7294c2c679e",
+                "reference": "e1f8d670f76749aff783ad5e2f27d7294c2c679e",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "ev-emitter.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests",
+                    "sandbox"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "lil' event emitter",
+            "keywords": [
+                "emitter",
+                "event",
+                "pubsub"
+            ]
+        },
+        {
+            "name": "bower-asset/fizzy-ui-utils",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/metafizzy/fizzy-ui-utils.git",
+                "reference": "2d0c0d4533fc9062f42720f946768eb1f2009596"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metafizzy/fizzy-ui-utils/zipball/2d0c0d4533fc9062f42720f946768eb1f2009596",
+                "reference": "2d0c0d4533fc9062f42720f946768eb1f2009596",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/desandro-matches-selector": "~2.0.0"
+            },
+            "require-dev": {
+                "bower-asset/qunit": "~1.20.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "utils.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests",
+                    "package.json"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "UI utilities",
+            "keywords": [
+                "ui",
+                "utility"
+            ]
+        },
+        {
             "name": "bower-asset/fontawesome",
             "version": "v4.5.0",
             "source": {
@@ -263,6 +380,48 @@
             "description": "Font Awesome"
         },
         {
+            "name": "bower-asset/get-size",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/desandro/get-size.git",
+                "reference": "2d64a97712adcaeaa9c3a415559934df20bf8009"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/desandro/get-size/zipball/2d64a97712adcaeaa9c3a415559934df20bf8009",
+                "reference": "2d64a97712adcaeaa9c3a415559934df20bf8009",
+                "shasum": ""
+            },
+            "require-dev": {
+                "bower-asset/qunit": "~1.10"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "get-size.js",
+                "bower-asset-ignore": [
+                    "test/",
+                    "**/.*",
+                    "package.json",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests",
+                    "sandbox.html"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "measures element size",
+            "keywords": [
+                "dom",
+                "height",
+                "size",
+                "width"
+            ]
+        },
+        {
             "name": "bower-asset/igrowl",
             "version": "v1.0",
             "source": {
@@ -280,36 +439,22 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.1.4",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jquery/jquery.git",
-                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85"
+                "url": "https://github.com/jquery/jquery-dist.git",
+                "reference": "6fc01e29bdad0964f62ef56d01297039cdcadbe5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery/zipball/7751e69b615c6eca6f783a81e292a55725af6b85",
-                "reference": "7751e69b615c6eca6f783a81e292a55725af6b85",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/6fc01e29bdad0964f62ef56d01297039cdcadbe5",
+                "reference": "6fc01e29bdad0964f62ef56d01297039cdcadbe5",
                 "shasum": ""
-            },
-            "require-dev": {
-                "bower-asset/qunit": "1.14.0",
-                "bower-asset/requirejs": "2.1.10",
-                "bower-asset/sinon": "1.8.1",
-                "bower-asset/sizzle": "2.1.1-patch2"
             },
             "type": "bower-asset-library",
             "extra": {
                 "bower-asset-main": "dist/jquery.js",
                 "bower-asset-ignore": [
-                    "**/.*",
-                    "build",
-                    "dist/cdn",
-                    "speed",
-                    "test",
-                    "*.md",
-                    "AUTHORS.txt",
-                    "Gruntfile.js",
                     "package.json"
                 ]
             },
@@ -317,6 +462,7 @@
                 "MIT"
             ],
             "keywords": [
+                "browser",
                 "javascript",
                 "jquery",
                 "library"
@@ -475,16 +621,16 @@
         },
         {
             "name": "bower-asset/jquery.inputmask",
-            "version": "3.1.63",
+            "version": "3.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-                "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48"
+                "reference": "5a72c563b502b8e05958a524cdfffafe9987be38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
-                "reference": "c40c7287eadc31e341ebbf0c02352eb55b9cbc48",
+                "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/5a72c563b502b8e05958a524cdfffafe9987be38",
+                "reference": "5a72c563b502b8e05958a524cdfffafe9987be38",
                 "shasum": ""
             },
             "require": {
@@ -493,23 +639,17 @@
             "type": "bower-asset-library",
             "extra": {
                 "bower-asset-main": [
-                    "./dist/inputmask/jquery.inputmask.js",
-                    "./dist/inputmask/jquery.inputmask.extensions.js",
-                    "./dist/inputmask/jquery.inputmask.date.extensions.js",
-                    "./dist/inputmask/jquery.inputmask.numeric.extensions.js",
-                    "./dist/inputmask/jquery.inputmask.phone.extensions.js",
-                    "./dist/inputmask/jquery.inputmask.regex.extensions.js"
+                    "./dist/inputmask/inputmask.js"
                 ],
                 "bower-asset-ignore": [
-                    "**/.*",
-                    "qunit/",
-                    "nuget/",
-                    "tools/",
-                    "js/",
-                    "*.md",
-                    "build.properties",
-                    "build.xml",
-                    "jquery.inputmask.jquery.json"
+                    "**/*",
+                    "!dist/*",
+                    "!dist/inputmask/*",
+                    "!dist/min/*",
+                    "!dist/min/inputmask/*",
+                    "!extra/bindings/*",
+                    "!extra/dependencyLibs/*",
+                    "!extra/phone-codes/*"
                 ]
             },
             "license": [
@@ -602,6 +742,105 @@
             },
             "license": [
                 "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/masonry",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/desandro/masonry.git",
+                "reference": "22e9953eaa0726f9ee019937be448d33d80ff92b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/desandro/masonry/zipball/22e9953eaa0726f9ee019937be448d33d80ff92b",
+                "reference": "22e9953eaa0726f9ee019937be448d33d80ff92b",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/get-size": "~2.0.2",
+                "bower-asset/outlayer": "~2.0.0"
+            },
+            "require-dev": {
+                "bower-asset/jquery": ">=1.4.3,<4",
+                "bower-asset/jquery-bridget": "~2.0.0",
+                "bower-asset/qunit": ">=1.12.0,<2.0.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "masonry.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests",
+                    "sandbox/",
+                    "CONTRIBUTING.mdown",
+                    "gulpfile.js",
+                    "package.json"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Cascading grid layout library",
+            "keywords": [
+                "layout",
+                "masonry",
+                "outlayer"
+            ]
+        },
+        {
+            "name": "bower-asset/outlayer",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/metafizzy/outlayer.git",
+                "reference": "2c68ab7a901c8272f26b823b87b51a4e10b390f9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metafizzy/outlayer/zipball/2c68ab7a901c8272f26b823b87b51a4e10b390f9",
+                "reference": "2c68ab7a901c8272f26b823b87b51a4e10b390f9",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/ev-emitter": "~1.0.0",
+                "bower-asset/fizzy-ui-utils": "~2.0.0",
+                "bower-asset/get-size": "~2.0.2"
+            },
+            "require-dev": {
+                "bower-asset/jquery": ">=1.4.3,<4",
+                "bower-asset/jquery-bridget": "dev-2.x|2.x",
+                "bower-asset/qunit": ">=1.17.0,<2.0.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "outlayer.js",
+                "bower-asset-ignore": [
+                    "test/",
+                    "docs/",
+                    "sandbox/",
+                    ".*",
+                    "notes.md",
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests",
+                    "package.json"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "the brains and guts of a layout library",
+            "keywords": [
+                "isotope",
+                "layout",
+                "masonry"
             ]
         },
         {
@@ -782,16 +1021,16 @@
         },
         {
             "name": "codemix/yii2-localeurls",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codemix/yii2-localeurls.git",
-                "reference": "7c2544e006c4971d29747632985d6401492cd9ef"
+                "reference": "cfdb9b6b0ae12b4e55fbb43eff9c25aa25055320"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codemix/yii2-localeurls/zipball/7c2544e006c4971d29747632985d6401492cd9ef",
-                "reference": "7c2544e006c4971d29747632985d6401492cd9ef",
+                "url": "https://api.github.com/repos/codemix/yii2-localeurls/zipball/cfdb9b6b0ae12b4e55fbb43eff9c25aa25055320",
+                "reference": "cfdb9b6b0ae12b4e55fbb43eff9c25aa25055320",
                 "shasum": ""
             },
             "require": {
@@ -819,7 +1058,7 @@
                 "locale",
                 "yii2"
             ],
-            "time": "2015-09-17 07:13:16"
+            "time": "2016-02-05 12:46:45"
         },
         {
             "name": "cybercog/yii2-google-analytics",
@@ -1145,29 +1384,30 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38"
+                "reference": "f45651582cb853b4326730d9d187a0f7a44a45a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f42b2eb80f61992438661b01d0d74c6738e2ff38",
-                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f45651582cb853b4326730d9d187a0f7a44a45a3",
+                "reference": "f45651582cb853b4326730d9d187a0f7a44a45a3",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/jquery": "2.1.*@stable | 1.11.*@stable",
-                "bower-asset/jquery.inputmask": "3.1.*",
+                "bower-asset/jquery": "2.2.*@stable | 2.1.*@stable | 1.11.*@stable",
+                "bower-asset/jquery.inputmask": "~3.2.2",
                 "bower-asset/punycode": "1.3.*",
-                "bower-asset/yii2-pjax": ">=2.0.1",
+                "bower-asset/yii2-pjax": "~2.0.1",
                 "cebe/markdown": "~1.0.0 | ~1.1.0",
+                "ext-ctype": "*",
                 "ext-mbstring": "*",
                 "ezyang/htmlpurifier": "4.6.*",
                 "lib-pcre": "*",
                 "php": ">=5.4.0",
-                "yiisoft/yii2-composer": "*"
+                "yiisoft/yii2-composer": "~2.0.4"
             },
             "bin": [
                 "yii"
@@ -1221,6 +1461,11 @@
                     "name": "Paul Klimov",
                     "email": "klimov.paul@gmail.com",
                     "role": "Core framework development"
+                },
+                {
+                    "name": "Dmitry Naumenko",
+                    "email": "d.naumenko.a@gmail.com",
+                    "role": "Core framework development"
                 }
             ],
             "description": "Yii PHP Framework Version 2",
@@ -1229,7 +1474,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-08-05 22:00:30"
+            "time": "2016-02-14 14:45:55"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -1331,20 +1576,20 @@
         },
         {
             "name": "yiisoft/yii2-composer",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-composer.git",
-                "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be"
+                "reference": "7452fd908a5023b8bb5ea1b123a174ca080de464"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/ca8d23707ae47d20b0454e4b135c156f6da6d7be",
-                "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/7452fd908a5023b8bb5ea1b123a174ca080de464",
+                "reference": "7452fd908a5023b8bb5ea1b123a174ca080de464",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "1.0.0"
+                "composer-plugin-api": "^1.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -1374,7 +1619,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2015-03-01 06:22:44"
+            "time": "2016-02-06 00:49:24"
         },
         {
             "name": "yiisoft/yii2-imagine",

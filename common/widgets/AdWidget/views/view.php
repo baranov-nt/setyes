@@ -12,7 +12,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Carousel;
 ?>
-<div class="col-md-3 main-container-element <?= $widget->main_container_class ?>">
+<div class="grid-item col-md-3 main-container-element <?= $widget->main_container_class ?>">
     <div class="row">
         <div class="col-xs-12">
             <span class="<?= $widget->favorite_icon ?> icon-favorite"></span>

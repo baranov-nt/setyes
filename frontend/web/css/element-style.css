@@ -20,13 +20,13 @@
     text-decoration: underline;
 }
 .icon-favorite {
-    font-size: 18px;
+    font-size: 24px;
     color: #cccccc;
     cursor: pointer;
     !important; float: right;
 }
 .icon-favorite:hover {
-    color: #cc0000;
+    color: #ddaa00;
 }
 .content-elem {
     margin: 0 0 5px 0 !important;

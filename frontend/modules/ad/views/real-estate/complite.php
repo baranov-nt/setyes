@@ -61,10 +61,10 @@ $user = Yii::$app->user->identity;
     ]);
     echo AdWidget::widget([
         'template' => true,
-        'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class,
+        'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class.' col-md-offset-3',
         'favorite_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon,
         'header' => $modelAdRealEstate->dealType->reference_name,
-        'address' => $modelAdRealEstate->place_city.', '.$modelAdRealEstate->place_street.', '.$modelAdRealEstate->place_house,
+        'address' => $modelAdRealEstate->getAddress($modelAdRealEstate),
         'images' => $modelAdRealEstate->imagesOfObjects,
         'content' => $modelAdRealEstate->contentList,
         'quick_view_class' => $modelAdRealEstate->adCategory->adMain->adStyle->quick_view_class
@@ -99,35 +99,30 @@ $user = Yii::$app->user->identity;
                             if($checked)
                                 $checked = 'checked';
                             $bgClass = 'bg-default';
-                            $textClass = 'text-muted';
                             $radioClass = 'radio-default';
                             break;
                         case 2:
                             if($checked)
                                 $checked = 'checked';
                             $bgClass = 'bg-success';
-                            $textClass = 'text-success';
                             $radioClass = 'radio-success';
                             break;
                         case 3:
                             if($checked)
                                 $checked = 'checked';
                             $bgClass = 'bg-info';
-                            $textClass = 'text-info';
                             $radioClass = 'radio-info';
                             break;
                         case 4:
                             if($checked)
                                 $checked = 'checked';
                             $bgClass = 'bg-warning';
-                            $textClass = 'text-warning';
                             $radioClass = 'radio-warning';
                             break;
                         case 5:
                             if($checked)
                                 $checked = 'checked';
                             $bgClass = 'bg-danger';
-                            $textClass = 'text-danger';
                             $radioClass = 'radio-danger';
                             break;
                     }

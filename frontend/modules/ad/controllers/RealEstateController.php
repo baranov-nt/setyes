@@ -48,7 +48,7 @@ class RealEstateController extends BehaviorsController
             }
 
             if ($modelAdRealEstate->load(Yii::$app->request->post())) {
-                dd(777);
+
                 $modelAdRealEstate->compliteAd($modelAdRealEstate);
                 $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
                 if ($modelAdRealEstate->errors) {
@@ -73,6 +73,7 @@ class RealEstateController extends BehaviorsController
     public function actionSelectStyle($id)
     {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /* @var $modelAdMain \common\models\AdMain */
         $modelAdRealEstate = $this->findModel($id);
         $modelAdMain = AdMain::findOne($modelAdRealEstate->adCategory->adMain->id);
 
@@ -80,14 +81,6 @@ class RealEstateController extends BehaviorsController
 
             if ($modelAdMain->load(Yii::$app->request->post()) && $modelAdMain->save()) {
                 $modelAdRealEstate = $this->findModel($id);
-            }
-
-            if ($modelAdRealEstate->placeAddress) {
-                /* Устанавливаем поля в модели в соответствии с адресом */
-                $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
-            } else {
-                /* Устанавливаем поля в модели в соответствии с городом */
-                $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
             }
 
             return $this->render('complite', [
@@ -441,14 +434,6 @@ class RealEstateController extends BehaviorsController
                 if($modelAdRealEstate->save()) {
                     return $this->redirect(['/ad/view/all']);
                 }
-
-            if ($modelAdRealEstate->placeAddress) {
-                /* Устанавливаем поля в модели в соответствии с адресом */
-                $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
-            } else {
-                /* Устанавливаем поля в модели в соответствии с городом */
-                $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
-            }
 
             return $this->render('complite', [
                 'modelAdRealEstate' => $modelAdRealEstate,

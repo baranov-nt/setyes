@@ -7,8 +7,10 @@ use yii\widgets\ListView;
 /* @var $searchModel common\models\AdMainSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+
 $this->title = Yii::t('app', 'Ad Mains');
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="container">
     <div class="ad-main-index">
@@ -20,13 +22,55 @@ $this->params['breadcrumbs'][] = $this->title;
             <?/*= Html::a(Yii::t('app', 'Create Ad Main'), ['create'], ['class' => 'btn btn-success']) */?>
         </p>-->
 
-        <?= ListView::widget([
+        <?php
+
+        ?>
+
+        <?=
+        ListView::widget([
             'dataProvider' => $dataProvider,
-            'itemOptions' => ['class' => 'item'],
-            'itemView' => function ($model, $key, $index, $widget) {
-                return Html::a(Html::encode($model->id), ['view', 'id' => $model->id]);
+            'layout' => "{summary}\n{items}<div class='col-md-12'>{pager}</div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
+            // sorter(вывод блока сортировки), pager(вывод пагинации)
+            //'itemView' => 'index',                                                // представление для элементов
+            'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
+                /* @var $model common\models\AdMain */
+                //dd($model->adCategory->category);
+                return $this->render('_category_'.$model->adCategory->category,[
+                    'model' => $model->adCategory->ad,
+                    'key' => $key,
+                    'index' => $index,
+                    'widget' => $widget
+                ]);
+                // or just do some echo
+                //return $model->name . ' добавил ' . $model->user->email;
             },
-        ]) ?>
+            'itemOptions' => [                                                      // свойства для элементов контейнера
+                'tag' => 'div',
+                //'class' => 'col-md-4',
+                //'id' => 'list-wrapper',
+                //'style' => 'float: left !important;'
+            ],
+            'pager' => [                                                            // параметры для пагинации
+                'firstPageLabel' => 'первая',
+                'lastPageLabel' => 'последняя',
+                'nextPageLabel' => 'следующая',
+                'prevPageLabel' => 'предыдущая',
+                'maxButtonCount' => 3,                                              // количество цифровых кнопок
+            ],
+            //'summary' => "{begin}{end}{count}{totalCount}{page}{pageCount}",      // свойства выводимых данных количества элементов
+            'summaryOptions' => [                                                   // свойства для количества элементов
+                'tag' => 'div',
+                'class' => 'col-md-12',
+                //'id' => 'list-wrapper',
+            ],
+            'options' => [                                                          // свойства основного контейнера для элементов
+                'tag' => 'div',
+                'class' => 'list-wrapper row',
+                'id' => 'list-wrapper',
+            ],
+
+        ]);
+        ?>
 
     </div>
 </div>

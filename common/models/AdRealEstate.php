@@ -342,6 +342,16 @@ class AdRealEstate extends ActiveRecord
         return Yii::$app->user->identity;
     }
 
+    public function getAddress($modelAdRealEstate) {
+        if ($modelAdRealEstate->placeAddress) {
+            /* Получает строку адреса */
+            return Yii::$app->placeManager->getAddress($modelAdRealEstate);
+        } else {
+            /* Получает строку города */
+            return Yii::$app->placeManager->getCity($modelAdRealEstate);
+        }
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

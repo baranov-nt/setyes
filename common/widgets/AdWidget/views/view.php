@@ -12,7 +12,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Carousel;
 ?>
-<div class="col-md-3 col-md-offset-3 main-container-element <?= $widget->main_container_class ?>">
+<div class="col-md-3 main-container-element <?= $widget->main_container_class ?>">
     <div class="row">
         <div class="col-xs-12">
             <span class="<?= $widget->favorite_icon ?> icon-favorite"></span>
@@ -31,26 +31,32 @@ use yii\bootstrap\Carousel;
         <div class="col-xs-12">
             <p><?= $widget->address ?></p>
         </div>
-        <div class="col-xs-12 block-padding-bottom">
-            <?php
-            if(count($widget->images) > 1):
-                echo Carousel::widget([
-                    'items' => $items,
-                    'options' => [
-                        'data-interval' => 0,
-                        'class' => 'slide',
-                        'style' => 'width:100%;' // set the width of the container if you like
-                    ],
-                    'controls' => ['&lsaquo;', '&rsaquo;'],     // Стрелочки вперед - назад
-                    //'controls' => ['<', '>'],                     // Стрелочки вперед - назад
-                    'showIndicators' => true,                   // отображать индикаторы (кругляшки)
-
-                ]);
-            else:
-                echo $widget->images;
-            endif;
+        <?php
+        if($widget->images):
             ?>
-        </div>
+            <div class="col-xs-12 block-padding-bottom">
+                <?php
+                if(count($widget->images) > 1):
+                    echo Carousel::widget([
+                        'items' => $items,
+                        'options' => [
+                            'data-interval' => 0,
+                            'class' => 'slide',
+                            'style' => 'width:100%;' // set the width of the container if you like
+                        ],
+                        'controls' => ['&lsaquo;', '&rsaquo;'],     // Стрелочки вперед - назад
+                        //'controls' => ['<', '>'],                     // Стрелочки вперед - назад
+                        'showIndicators' => true,                   // отображать индикаторы (кругляшки)
+
+                    ]);
+                else:
+                    echo $widget->images;
+                endif;
+                ?>
+            </div>
+            <?php
+        endif;
+        ?>
         <div class="col-xs-12">
             <?= $widget->content ?>
         </div>

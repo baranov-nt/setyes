@@ -26,13 +26,9 @@ class PlaceManager extends Object
         $object = Yii::$app->googleApi->getGeoCodeObject($place, null);
         /* Если вернулся объект города */
         if(isset($object)):
-            $city = '';
             $region = '';
             $country = '';
             foreach($object->address_components as $one):
-                if($one->types[0] == 'locality'):
-                    $city = $one->short_name;
-                endif;
                 if($one->types[0] == 'administrative_area_level_1'):            // ищем облать-регион
                     $region = $one->short_name;
                 endif;
@@ -104,15 +100,11 @@ class PlaceManager extends Object
         $objectCity = Yii::$app->googleApi->getGeoCodeObject($city, null);
         if(isset($objectCity)):
             /* Если найден объект города, создаем пустые переменные для города */
-            $city = '';
             $region = '';
             $country = '';
 
             /* Формируем переменныe для города */
             foreach($objectCity->address_components as $one):
-                if($one->types[0] == 'locality'):
-                    $city = $one->short_name;
-                endif;
                 if($one->types[0] == 'administrative_area_level_1'):            // ищем облать-регион
                     $region = $one->short_name;
                 endif;
@@ -169,7 +161,6 @@ class PlaceManager extends Object
         if (isset($objectAddress)):
             /* Если найден объект адреса, создаем пустые переменные для адреса */
             $street_number = '';    // номер дома
-            $route = '';            // улица
             $city = '';             // город
             $region = '';           // область, регион
             $country = '';          // cnhfyf
@@ -178,9 +169,6 @@ class PlaceManager extends Object
             foreach ($objectAddress->address_components as $one):
                 if ($one->types[0] == 'street_number'):
                     $street_number = $one->short_name;
-                endif;
-                if ($one->types[0] == 'route'):
-                    $route = $one->short_name;
                 endif;
                 if ($one->types[0] == 'locality'):
                     $city = $one->short_name;
@@ -427,11 +415,44 @@ class PlaceManager extends Object
             if ($one->types[0] == 'country'):
                 $country = $one->long_name;
             endif;
+
             $modelAdRealEstate->place_city = $city.', '.$region.', '.$country;
             $modelAdRealEstate->place_street = $route;
             $modelAdRealEstate->place_house = $street_number;
         endforeach;
         return $modelAdRealEstate;
+    }
+
+    public function getAddress($modelAdRealEstate) {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        $objectPlace = Yii::$app->googleApi->getGeoCodeObject(null, null, $modelAdRealEstate->placeAddress->place_id);
+        /* Формируем переменныe для адреса */
+        $address = '';
+        $street_number = '';
+        $route = '';
+        $city = '';
+        $region = '';
+        $country = '';
+        foreach ($objectPlace->address_components as $one):
+            if ($one->types[0] == 'street_number'):
+                $street_number = $one->short_name;
+            endif;
+            if ($one->types[0] == 'route'):
+                $route = $one->short_name;
+            endif;
+            if ($one->types[0] == 'locality'):
+                $city = $one->short_name;
+            endif;
+            if ($one->types[0] == 'administrative_area_level_1'):            // ищем облать-регион
+                $region = $one->short_name;
+            endif;
+            if ($one->types[0] == 'country'):
+                $country = $one->long_name;
+            endif;
+
+            $address = $city.', '.$region.', '.$country.', '.$route.', '.$street_number;
+        endforeach;
+        return $address;
     }
 
     public function setCity($modelAdRealEstate) {
@@ -447,5 +468,20 @@ class PlaceManager extends Object
             $modelAdRealEstate->place_city = $objectPlace->formatted_address;
         }
         return $modelAdRealEstate;
+    }
+
+    public function getCity($modelAdRealEstate) {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /** Если город объявления совпадает с текущим городом, устанавливаем значение главного города,
+         *  иначе находим город */
+        $mainCityPlaceId = Yii::$app->request->cookies->getValue('_cityPlaceId');
+        $currentCityPlaceId = $modelAdRealEstate->adCategory->adMain->placeCity->place_id;
+        if($mainCityPlaceId == $currentCityPlaceId) {
+            $city = Yii::$app->request->cookies->getValue('_city');
+        } else {
+            $objectPlace = Yii::$app->googleApi->getGeoCodeObject(null, null, $currentCityPlaceId);
+            $city = $objectPlace->formatted_address;
+        }
+        return $city;
     }
 }

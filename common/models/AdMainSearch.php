@@ -5,7 +5,6 @@ namespace common\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\AdMain;
 
 /**
  * AdMainSearch represents the model behind the search form about `common\models\AdMain`.
@@ -40,7 +39,13 @@ class AdMainSearch extends AdMain
      */
     public function search($params)
     {
-        $query = AdMain::find();
+        $query = AdMain::find()
+            ->joinWith('adCategory')
+            ->joinWith([
+                'adCategory.ad' => function ($query) {
+                    $query->andWhere(['temp' => 0]);
+                },
+            ]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

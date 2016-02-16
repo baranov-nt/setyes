@@ -47,7 +47,7 @@ Masonry::widget();
             },
             'itemOptions' => [                                                      // свойства для элементов контейнера
                 'tag' => 'div',
-                'class' => 'grid-item col-md-3',
+                'class' => 'grid-item col-md-3 col-sm-6',
                 //'id' => 'list-wrapper',
                 //'style' => 'float: left !important;'
             ],

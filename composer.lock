@@ -316,10 +316,10 @@
                 "shasum": ""
             },
             "require": {
-                "bower-asset/desandro-matches-selector": "~2.0.0"
+                "bower-asset/desandro-matches-selector": ">=2.0.0,<2.1"
             },
             "require-dev": {
-                "bower-asset/qunit": "~1.20.0"
+                "bower-asset/qunit": ">=1.20.0,<1.21"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -394,7 +394,7 @@
                 "shasum": ""
             },
             "require-dev": {
-                "bower-asset/qunit": "~1.10"
+                "bower-asset/qunit": ">=1.10,<1.11"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -759,13 +759,13 @@
                 "shasum": ""
             },
             "require": {
-                "bower-asset/get-size": "~2.0.2",
-                "bower-asset/outlayer": "~2.0.0"
+                "bower-asset/get-size": ">=2.0.2,<2.1",
+                "bower-asset/outlayer": ">=2.0.0,<2.1"
             },
             "require-dev": {
                 "bower-asset/jquery": ">=1.4.3,<4",
-                "bower-asset/jquery-bridget": "~2.0.0",
-                "bower-asset/qunit": ">=1.12.0,<2.0.0"
+                "bower-asset/jquery-bridget": ">=2.0.0,<2.1",
+                "bower-asset/qunit": ">=1.12,<2.0"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -807,14 +807,14 @@
                 "shasum": ""
             },
             "require": {
-                "bower-asset/ev-emitter": "~1.0.0",
-                "bower-asset/fizzy-ui-utils": "~2.0.0",
-                "bower-asset/get-size": "~2.0.2"
+                "bower-asset/ev-emitter": ">=1.0.0,<1.1",
+                "bower-asset/fizzy-ui-utils": ">=2.0.0,<2.1",
+                "bower-asset/get-size": ">=2.0.2,<2.1"
             },
             "require-dev": {
                 "bower-asset/jquery": ">=1.4.3,<4",
                 "bower-asset/jquery-bridget": "dev-2.x|2.x",
-                "bower-asset/qunit": ">=1.17.0,<2.0.0"
+                "bower-asset/qunit": ">=1.17.0,<2.0"
             },
             "type": "bower-asset-library",
             "extra": {

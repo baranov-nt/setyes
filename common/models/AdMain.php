@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
@@ -38,7 +39,7 @@ class AdMain extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'category_id'], 'required'],
-            [['user_id', 'place_city_id', 'category_id', 'ad_style_id'], 'integer']
+            [['user_id', 'place_city_id', 'category_id', 'ad_style_id', 'created_at', 'updated_at'], 'integer']
         ];
     }
 
@@ -53,6 +54,16 @@ class AdMain extends \yii\db\ActiveRecord
             'place_city_id' => Yii::t('app', 'Place City ID'),
             'category_id' => Yii::t('app', 'Ad Category ID'),
             'ad_style_id' => Yii::t('app', 'Ad Style'),
+            'created_at' => Yii::t('app', 'Created at'),
+            'updated_at' => Yii::t('app', 'Updated at'),
+        ];
+    }
+
+    /* Поведения */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
         ];
     }
 

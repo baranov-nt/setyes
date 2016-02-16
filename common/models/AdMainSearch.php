@@ -45,7 +45,9 @@ class AdMainSearch extends AdMain
                 'adCategory.ad' => function ($query) {
                     $query->andWhere(['temp' => 0]);
                 },
-            ]);
+            ])
+            ->orderBy([
+                'updated_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

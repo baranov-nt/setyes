@@ -50,6 +50,11 @@ return [
                     'suffix' => ''
                 ],
                 [
+                    'pattern' => '/view/<action>',
+                    'route' => '/ad/view/<action>',
+                    'suffix' => ''
+                ],
+                [
                     'pattern' => 'site/auth',
                     'route' => 'site/auth',
                     'suffix' => ''

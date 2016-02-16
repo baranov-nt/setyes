@@ -33,7 +33,7 @@ class ViewController extends BehaviorsController
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionOne($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -88,6 +88,10 @@ class ViewController extends BehaviorsController
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionFavorite () {
+        return '123';
     }
 
     /**

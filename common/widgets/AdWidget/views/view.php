@@ -11,11 +11,29 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Carousel;
+use yii\widgets\Pjax;
+
+Pjax::widget();
+/*$js=<<<JS
+$("#id_$this->id").on("pjax:complete", function() {
+    $("#id_$this->id").attr("tabindex",-1).focus();
+ });
+JS;
+$this->registerJS($js);*/
 ?>
-<div class="main-container-element <?= $widget->main_container_class ?>">
+
+<div id="id_<?= $widget->id ?>" class="main-container-element <?= $widget->main_container_class ?>">
     <div class="row">
         <div class="col-xs-12">
-            <span class="<?= $widget->favorite_icon ?> icon-favorite"></span>
+            <?= Html::tag('span', '', [
+                'class' => $widget->favorite_icon.' icon-favorite',
+                'onclick' => '$.pjax({
+                    type: "POST",
+                    url: "'.Url::to(['/ad/view/favorite']).'",
+                    container: "#id_'.$widget->id.'",
+                    push: false
+                })'
+            ]) ?>
             <?php
             if($widget->template):
                 ?>
@@ -23,7 +41,7 @@ use yii\bootstrap\Carousel;
                 <?php
             else:
                 ?>
-                <h4 class="main-container-header-element"><?= Html::a(Yii::t('references', $widget->header), Url::to(['/#']), ['class' => 'main-container-header-link-element alert-link']) // операция ?></h4>
+                <h4 class="main-container-header-element"><?= Html::a(Yii::t('references', $widget->header), Url::to(['/ad/view/one', 'id' => $widget->id]), ['class' => 'main-container-header-link-element alert-link']) // операция ?></h4>
                 <?php
             endif;
             ?>
@@ -83,3 +101,4 @@ use yii\bootstrap\Carousel;
         </div>
     </div>
 </div>
+<?php

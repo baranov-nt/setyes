@@ -54,14 +54,21 @@ $user = Yii::$app->user->identity;
     <div class="col-md-12 text-center block-padding-bottom">
         <h1><?= Yii::t('app', 'Template') ?></h1>
     </div>
+    <div class="style_forms">
     <?php
     Pjax::begin([
-        'id' => 'style_forms'
-        //'enablePushState' => false,
+        'id' => 'style_forms',
+        'enablePushState' => true
     ]);
+    $js=<<<JS
+    $("#style_forms").on("pjax:complete", function() {
+        $("#style_forms").attr("tabindex",-1).focus();
+    });
+JS;
+    $this->registerJS($js);
     echo AdWidget::widget([
         'template' => true,
-        'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class.' col-md-offset-3',
+        'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class.' col-md-3 col-md-offset-3',
         'favorite_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon,
         'header' => $modelAdRealEstate->dealType->reference_name,
         'address' => $modelAdRealEstate->getAddress($modelAdRealEstate),
@@ -73,6 +80,7 @@ $user = Yii::$app->user->identity;
     <?php
     Pjax::end();
     ?>
+    </div>
 
     <div class="col-md-3">
         <?php $form = ActiveForm::begin([

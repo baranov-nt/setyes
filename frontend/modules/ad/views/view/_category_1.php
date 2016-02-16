@@ -22,7 +22,8 @@
 use common\widgets\AdWidget\AdWidget;
 
 echo AdWidget::widget([
-    'template' => true,
+    'template' => false,
+    'id' => $model->adCategory->adMain->id,
     'main_container_class' => $model->adCategory->adMain->adStyle->main_container_class,
     'favorite_icon' => $model->adCategory->adMain->adStyle->favorite_icon,
     'header' => $model->dealType->reference_name,

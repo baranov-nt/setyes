@@ -50,11 +50,11 @@ class m160116_074120_create_ad_main_table extends Migration
         /* Добавляем стиль по умолчанию */
         $this->batchInsert('ad_style', ['id','name', 'main_container_class', 'header_link_class', 'favorite_icon', 'quick_view_class'],
             [
-                [1, Yii::t('references', 'Default'), 'alert', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-default'],
-                [2, Yii::t('references', 'Grass'), 'alert alert-success', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-success'],
-                [3, Yii::t('references', 'Sky'), 'alert alert-info', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-info'],
-                [4, Yii::t('references', 'Sand'), 'alert alert-warning', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-warning'],
-                [5, Yii::t('references', 'Rose'), 'alert alert-danger', 'header-link-class', 'glyphicon glyphicon-heart', 'btn btn-danger'],
+                [1, Yii::t('references', 'Default'), 'alert', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-default'],
+                [2, Yii::t('references', 'Grass'), 'alert alert-success', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-success'],
+                [3, Yii::t('references', 'Sky'), 'alert alert-info', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-info'],
+                [4, Yii::t('references', 'Sand'), 'alert alert-warning', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-warning'],
+                [5, Yii::t('references', 'Rose'), 'alert alert-danger', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-danger'],
             ]);
 
         /* Создаем таблицу  ad_main, в которой будут присутствовать поля, имеющиеся во всех объявлениях */
@@ -64,6 +64,8 @@ class m160116_074120_create_ad_main_table extends Migration
             'place_city_id' => $this->integer(),     // Город, для которого добавлено объявление. Связь с таблицей place_city
             'category_id' => $this->integer()->notNull(),    // Тема объявления. Связь с таблицей ad_category
             'ad_style_id' => $this->integer()->defaultValue(1),       // Стиль объявления. Связь с таблицей ad_style
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
         ]);
 
         $this->addForeignKey('ad_main_user', 'ad_main', 'user_id', 'user', 'id');

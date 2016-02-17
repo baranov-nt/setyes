@@ -24,6 +24,7 @@ use common\widgets\AdWidget\AdWidget;
 echo AdWidget::widget([
     'template' => false,
     'id' => $model->adCategory->adMain->id,
+    'author' => Yii::$app->user->can('Автор', ['model' => $model->adCategory->adMain]),
     'main_container_class' => $model->adCategory->adMain->adStyle->main_container_class,
     'favorite' => $model->adCategory->adMain->getFavorite($model->adCategory->adMain->id),
     'favorite_icon' => $model->adCategory->adMain->adStyle->favorite_icon,

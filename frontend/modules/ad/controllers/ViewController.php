@@ -86,6 +86,10 @@ class ViewController extends BehaviorsController
     {
         $model = $this->findModel($id);
 
+        /* Если категория равна 1, делаем перенаправление на Недвижимость */
+        if($model->adCategory->category == 1)
+            return $this->redirect(['/ad/real-estate/update', 'id' => $model->adCategory->ad->id]);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

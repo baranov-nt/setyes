@@ -29,20 +29,53 @@ $this->registerJS($js);
                 <?php
                 if($widget->template):
                     ?>
-                    <span id="icon-favorite-id-3" class="icon-favorite-empty glyphicon glyphicon-star" title="Add to favorites" style="outline: none;" data-toggle="tooltip" data-placement="top"></span>
+                    <?= Html::tag('span', '',
+                    [
+                        'class' => 'icon-favorite-empty glyphicon glyphicon-star',
+                        'title' => Yii::t('app', 'Add to favorites'),
+                        'data-toggle' => 'tooltip',
+                        'data-placement' => 'top',
+                    ]) ?>
                     <?php
                 else:
-                    if($widget->favorite) {
-                        echo $this->render('_icon-favorite', [
-                            'id' => $widget->id,
-                            'icon' => $widget->favorite_icon
-                        ]);
-                    } else {
-                        echo $this->render('_icon-favorite-empty', [
-                            'id' => $widget->id,
-                            'icon' => $widget->favorite_icon
-                        ]);
-                    }
+                    if($widget->author):
+                    ?>
+                        <a href="<?= Url::to(['/ad/view/update', 'id' => $widget->id]) ?>">
+                            <?php
+                            echo Html::tag('span', '',
+                                [
+                                    'class' => 'icon-trash glyphicon glyphicon-trash',
+                                    'title' => Yii::t('app', 'Edit ad'),
+                                    'data-toggle' => 'tooltip',
+                                    'data-placement' => 'top',
+                                ]);
+                            ?>
+                        </a>
+                        <a href="<?= Url::to(['/ad/view/update', 'id' => $widget->id]) ?>">
+                            <?php
+                            echo Html::tag('span', '',
+                                [
+                                    'class' => 'icon-pencil glyphicon glyphicon-pencil',
+                                    'title' => Yii::t('app', 'Remove ad'),
+                                    'data-toggle' => 'tooltip',
+                                    'data-placement' => 'top',
+                                ]);
+                            ?>
+                        </a>
+                    <?php
+                    else:
+                        if ($widget->favorite) {
+                            echo $this->render('_icon-favorite', [
+                                'id' => $widget->id,
+                                'icon' => $widget->favorite_icon
+                            ]);
+                        } else {
+                            echo $this->render('_icon-favorite-empty', [
+                                'id' => $widget->id,
+                                'icon' => $widget->favorite_icon
+                            ]);
+                        }
+                    endif;
                 endif;
                 ?>
             </div>

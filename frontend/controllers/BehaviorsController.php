@@ -78,7 +78,7 @@ class BehaviorsController extends Controller {
                     [
                         'allow' => true,
                         'controllers' => ['ad/view'],
-                        'actions' => ['all', 'one', 'add-to-favorites', 'delete-from-favorites', 'favorites'],
+                        'actions' => ['all', 'one', 'add-to-favorites', 'delete-from-favorites', 'favorites', 'update'],
                         'roles' => ['Администратор']
                     ],
                     [

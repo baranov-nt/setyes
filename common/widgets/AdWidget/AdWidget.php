@@ -18,6 +18,7 @@ class AdWidget extends Widget
     public $model;
     public $template;
     public $id;
+    public $author;
     public $main_container_class;
     public $favorite;
     public $favorite_icon;

@@ -6,6 +6,7 @@
  * Time: 9:52
  */
 /** @var $id integer
+ *  @var $ok integer
  *  @var $icon string */
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -31,5 +32,16 @@ $this->registerJS($js);
                     data: {id: '.$id.', icon: "'.$icon.'"},
                     push: false
                 })'
-]) ?>
+]);
+if($ok == 1)
+    Yii::$app->view->registerJs('
+            $.iGrowl({
+                type: "notice",
+                message: "'.Yii::t('app', 'Ad added to favorites.').'",
+                offset : {
+                    y: 	80
+                }
+            });
+        ');
+?>
 

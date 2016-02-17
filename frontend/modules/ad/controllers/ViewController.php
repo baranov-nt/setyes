@@ -63,6 +63,23 @@ class ViewController extends BehaviorsController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    public function actionMy()
+    {
+        $searchModel = new AdMainSearch();
+        $searchModel->user_id = Yii::$app->user->id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Creates a new AdMain model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
     public function actionCreate()
     {
         $model = new AdMain();
@@ -105,12 +122,14 @@ class ViewController extends BehaviorsController
      * @param integer $id
      * @return mixed _icon-favorite
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        dd($id);
-        $this->findModel($id)->delete();
+        $model = $this->findModel(Yii::$app->request->post('id'));
 
-        return $this->redirect(['index']);
+        $model->adCategory->ad->temp = 1;
+        $model->adCategory->ad->save();
+
+        return $this->renderAjax('@common/widgets/AdWidget/views/_delete_block');
     }
 
     public function actionAddToFavorites () {
@@ -122,7 +141,8 @@ class ViewController extends BehaviorsController
             '@common/widgets/AdWidget/views/_icon-favorite',
             [
                 'id' => $id,
-                'icon' => Yii::$app->request->post('icon')
+                'icon' => Yii::$app->request->post('icon'),
+                'ok' => 1
             ]);
     }
 
@@ -135,7 +155,8 @@ class ViewController extends BehaviorsController
             '@common/widgets/AdWidget/views/_icon-favorite-empty',
             [
                 'id' => Yii::$app->request->post('id'),
-                'icon' => Yii::$app->request->post('icon')
+                'icon' => Yii::$app->request->post('icon'),
+                'ok' => 1
             ]);
     }
 

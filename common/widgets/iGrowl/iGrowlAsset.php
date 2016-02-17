@@ -14,17 +14,24 @@ use Yii;
  */
 class iGrowlAsset extends \yii\web\AssetBundle
 {
-    public $sourcePath = '@common/widgets/iGrowl/assets';
+    /**
+     * @inherit
+     */
+    public $sourcePath = '@bower/igrowl';
+
+    /**
+     * @inherit
+     */
     public $css = [
-        'iGrowl/dist/css/igrowl.min.css',
-        'iGrowl/dist/css/fonts/steadysets.css',
-        'app-igrowl.css',
+        'stylesheets/animate.min.css',
+        'stylesheets/igrowl.min.css',
+        'stylesheets/font css/feather.css',
+        'stylesheets/font css/linecons.css',
+        'stylesheets/font css/steadysets.css',
+        'stylesheets/font css/vicons.css',
     ];
+
     public $js = [
-        'iGrowl/dist/js/igrowl.min.js',
-    ];
-    public $depends = [
-        'yii\web\JqueryAsset',
-        '\common\widgets\Animate_css\AssetBundle',                                      // Подключение animate.css https://github.com/daneden/animate.css
+        'javascripts/igrowl.min.js',
     ];
 }

@@ -6,9 +6,12 @@
  * Time: 10:24
  */
 /** @var $id integer
+ *  @var $ok integer
  *  @var $icon string */
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\widgets\iGrowl\IGrowlWidget;
+
 $js=<<<JS
 $("#star_container_$id").on("pjax:complete", function() {
     $("#icon-favorite-id-$id").attr("tabindex",-1).focus();
@@ -30,4 +33,17 @@ $this->registerJS($js);
                     data: {id: '.$id.', icon: "'.$icon.'"},
                     push: false
                 })'
-]) ?>
+]);
+if($ok == 1)
+    Yii::$app->view->registerJs('
+            $.iGrowl({
+                type: "info",
+                message: "'.Yii::t('app', 'This ad is removed from your favorites.').'",
+                offset : {
+                    y: 	80
+                }
+            });
+        ');
+
+
+

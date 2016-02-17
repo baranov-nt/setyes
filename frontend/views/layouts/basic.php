@@ -76,28 +76,34 @@ $this->beginPage();
             $menuItems = [
                 [
                     //'label' => Yii::t('app', 'Rules').' <span class="glyphicon glyphicon-question-sign"></span>',
-                    'label' => '<button class="btn btn-primary">'.Yii::t('app', 'Rules').' <span class="glyphicon glyphicon-question-sign"></span></button>',
+                    'label' => Yii::t('app', 'Rules').' <span class="glyphicon glyphicon-question-sign"></span>',
                     'url' => [
                         '#'
                     ],
                     'linkOptions' => [
                         'data-toggle' => 'modal',
                         'data-target' => '#modal',
-                        'style' => 'padding: 7px 5px 0 5px'
                     ],
                 ],
                 [
-                    'label' => '<button class="btn btn-primary">'.Yii::t('app', 'Favorites').'</button>',
-                    'url' => Url::to(['/ad/view/favorites']),
+                    'label' => Yii::t('app', 'My ads'),
+                    'url' => Url::to(['/ad/view/my']),
                     'linkOptions' => [
-                        'style' => 'padding: 7px 5px 0 5px'
+
                     ]
                 ],
                 [
-                    'label' => '<button class="btn btn-primary">'.Yii::t('app', 'Post ad').'</button>',
+                    'label' => Yii::t('app', 'Favorites'),
+                    'url' => Url::to(['/ad/view/favorites']),
+                    'linkOptions' => [
+
+                    ]
+                ],
+                [
+                    'label' => Yii::t('app', 'Post ad'),
                     'url' => Url::to(['/ad/default/index']),
                     'linkOptions' => [
-                        'style' => 'padding: 7px 5px 0 5px'
+
                     ]
                 ],
             ];

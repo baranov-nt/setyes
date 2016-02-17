@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\ListView;
 use common\widgets\Masonry\Masonry;
+use common\widgets\iGrowl\AssetBundle;
+
+AssetBundle::register($this);
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\AdMainSearch */

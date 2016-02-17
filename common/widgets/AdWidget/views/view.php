@@ -16,13 +16,27 @@ use yii\bootstrap\Modal;
 
 Modal::begin([
     'size' => 'modal-sm text-center',
-    'header' => '<h5>'.Yii::t('app', 'Do you want to delete the item?').'</h5>',
+    'header' => '<h5>'.Yii::t('app', 'Do you want to delete the ad?').'</h5>',
     'toggleButton' => false,
     'closeButton' => false,
     'id' => 'delete-element-'.$widget->id,
 ]);
 
-echo Html::a(Yii::t('app', 'Yes'), Url::to(['/ad/view/delete', 'id' => $widget->id]), ['class' => 'btn btn-danger', 'style' => 'margin-right: 5px;']);
+echo Html::button(Yii::t('app', 'Yes'),
+    [
+        'class' => 'btn btn-danger',
+        'style' => 'margin-right: 5px;',
+        'onclick' => '
+        $("#delete-element-'.$widget->id.'").modal("hide");
+        $.pjax({
+                    type: "POST",
+                    url: "'.Url::to(['/ad/view/delete']).'",
+                    container: "#element_container_'.$widget->id.'",
+                    data: {id: '.$widget->id.'},
+                    push: false
+                })
+    '
+    ]);
 echo Html::button(Yii::t('app', 'No'), ['class' => 'btn btn-success', 'data-dismiss' => 'modal', 'aria-hidden' => 'true', 'style' => 'margin-left: 5px;']);
 
 Modal::end();
@@ -36,7 +50,7 @@ JS;
 $this->registerJS($js);
 ?>
 
-<div class="main-container-element <?= $widget->main_container_class ?>">
+<div id="element_container_<?= $widget->id ?>" class="main-container-element <?= $widget->main_container_class ?>">
     <div class="row">
         <div class="col-xs-12">
             <div id="star_container_<?= $widget->id ?>" style="outline: none;">
@@ -79,12 +93,14 @@ $this->registerJS($js);
                         if ($widget->favorite) {
                             echo $this->render('_icon-favorite', [
                                 'id' => $widget->id,
-                                'icon' => $widget->favorite_icon
+                                'icon' => $widget->favorite_icon,
+                                'ok' => null
                             ]);
                         } else {
                             echo $this->render('_icon-favorite-empty', [
                                 'id' => $widget->id,
-                                'icon' => $widget->favorite_icon
+                                'icon' => $widget->favorite_icon,
+                                'ok' => null
                             ]);
                         }
                     endif;

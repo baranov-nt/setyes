@@ -11,7 +11,14 @@ AssetBundle::register($this);
 /* @var $searchModel common\models\AdMainSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Ad Mains');
+if(Yii::$app->controller->action->id == 'all') {
+    $this->title = Yii::t('app', 'List of ads');
+} elseif(Yii::$app->controller->action->id == 'my') {
+    $this->title = Yii::t('app', 'My ads');
+} elseif(Yii::$app->controller->action->id == 'favorites') {
+    $this->title = Yii::t('app', 'Selected ads');
+}
+
 $this->params['breadcrumbs'][] = $this->title;
 
 Masonry::widget();

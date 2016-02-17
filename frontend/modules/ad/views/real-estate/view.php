@@ -97,8 +97,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'cropBoxData' => [                              // начальные настройки рамки // cropBoxData = { left: 10, top: 10, width: 160, height:200 }
                             'left' => 10,                               // смещение слева
                             'top' => 10,                                // смещение вниз
-                            //'width' => 160,                             // ширина
-                            //'height' => 200                             // высота
+                            'width' => 560,                             // ширина
+                            'height' => 315                             // высота
                         ],
                         'canvasData' => [                               // начальные настройки холста
                             //'width' => 500,                             // ширина

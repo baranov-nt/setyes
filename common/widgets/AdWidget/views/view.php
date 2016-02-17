@@ -170,7 +170,21 @@ $this->registerJS($js);
         endif;
         ?>
         <div class="col-xs-12">
-            <?= Html::button(Yii::t('app', 'Quick view'), ['class' => $widget->quick_view_class, 'style' => 'width: 100%;']) ?>
+            <?= Html::button(Yii::t('app', 'Quick view'),
+                [
+                    'id' => 'button-open-modal-'.$widget->id,
+                    'class' => $widget->quick_view_class,
+                    'style' => 'width: 100%;',
+                    'onclick' => '
+                    $.pjax({
+                        type: "POST",
+                        url: "'.Url::to(['/ad/view/open-in-modal']).'",
+                        container: "#modal-block",
+                        data: {id: '.$widget->id.'},
+                        push: false
+                    })
+                    '
+                ]) ?>
         </div>
     </div>
 </div>

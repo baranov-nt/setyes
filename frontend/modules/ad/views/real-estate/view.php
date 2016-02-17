@@ -5,8 +5,6 @@ use common\widgets\StepsNavigation\StepsNavigation;
 use yii\helpers\Url;
 use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\bootstrap\Html;
-use yii\bootstrap\NavBar;
-use yii\bootstrap\Nav;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
@@ -69,8 +67,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'images_num' => $user->userPrivilege->images_num,                 // максимальное количество изображений
                         'images_label' => $modelAdRealEstate->images_label,             // максимальное количество изображений
                         'images_temp' => 0,       // указываем временной изображение или нет
-                        'imageSmallWidth' => 360,                       // ширина миниатюры
-                        'imageSmallHeight' => 200,                      // высота миниатюры
+                        'imageSmallWidth' => 560,                       // ширина миниатюры
+                        'imageSmallHeight' => 315,                      // высота миниатюры
                         'headerModal' => 'Загрузить изображение товара',                        // заголовок в модальном окне
                         'sizeModal' => 'modal-md',                                  // размер модального окна
                         'baseUrl' => '/images/',                        // основной путь к изображениям

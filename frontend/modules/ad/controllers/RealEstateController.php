@@ -187,7 +187,6 @@ class RealEstateController extends BehaviorsController
             }
         }
 
-        d(3);
         return $this->render('create', [
                 'modelAdRealEstate' => $modelAdRealEstate,
             ]);

@@ -11,7 +11,6 @@ AssetBundle::register($this);
 /* @var $searchModel common\models\AdMainSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-
 $this->title = Yii::t('app', 'Ad Mains');
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -33,7 +32,7 @@ Masonry::widget();
         <?=
         ListView::widget([
             'dataProvider' => $dataProvider,
-            //'layout' => "{summary}\n{items}<div class='col-md-12'>{pager}</div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
+            //'layout' => "{summary}\n{items}<div class='col-md-12'>ss{pager}</div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
             // sorter(вывод блока сортировки), pager(вывод пагинации)
             //'itemView' => 'index',                                                // представление для элементов
             'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
@@ -62,14 +61,16 @@ Masonry::widget();
                 'maxButtonCount' => 3,                                              // количество цифровых кнопок
             ],
             //'summary' => "{begin}{end}{count}{totalCount}{page}{pageCount}",      // свойства выводимых данных количества элементов
-            'summaryOptions' => [                                                   // свойства для количества элементов
+            'summary' => false,
+            /*'summaryOptions' => [                                                   // свойства для количества элементов
                 'tag' => 'div',
-                'class' => 'col-md-12',
+                'class' => 'grid-item',
+                'style' => 'display: block !important; width: 100% !important; background-color: red !important; margin-bottom: 20px !important;'
                 //'id' => 'list-wrapper',
-            ],
+            ],*/
             'options' => [                                                          // свойства основного контейнера для элементов
                 'tag' => 'div',
-                'class' => 'list-wrapper row',
+                'class' => 'list-wrapper row grid',
                 'id' => 'list-wrapper',
             ],
 
@@ -78,3 +79,5 @@ Masonry::widget();
 
     </div>
 </div>
+<?php
+echo $this->render('_modal-window');

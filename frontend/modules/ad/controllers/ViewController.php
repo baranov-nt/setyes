@@ -80,6 +80,23 @@ class ViewController extends BehaviorsController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
+    public function actionOpenInModal()
+    {
+        //dd(Yii::$app->request->post());
+        $id = Yii::$app->request->post('id');
+        $modalWindow = true;
+
+        return $this->render('_modal-window', [
+            'id' => $id,
+            'modalWindow' => $modalWindow,
+        ]);
+    }
+
+    /**
+     * Creates a new AdMain model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
     public function actionCreate()
     {
         $model = new AdMain();

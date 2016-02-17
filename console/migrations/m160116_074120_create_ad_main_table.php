@@ -72,6 +72,16 @@ class m160116_074120_create_ad_main_table extends Migration
         $this->addForeignKey('ad_main_place_city', 'ad_main', 'place_city_id', 'place_city', 'id');
         $this->addForeignKey('ad_main_category', 'ad_main', 'category_id', 'ad_category', 'id');
         $this->addForeignKey('ad_main_style', 'ad_main', 'ad_style_id', 'ad_style', 'id');
+
+        /* Создаем таблицу  ad_favorite, в которой будут записаваться избранные объявления */
+        $this->createTable('ad_favorite', [
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer()->notNull(),           // Пользователь, который добавил объявление в избранное. Связь с таблицей user
+            'ad_id' => $this->integer()->notNull(),             // Объявление, добавленное в избранное
+        ]);
+
+        $this->addForeignKey('ad_favorite_user', 'ad_favorite', 'user_id', 'user', 'id');
+        $this->addForeignKey('ad_favorite_ad_main', 'ad_favorite', 'ad_id', 'ad_main', 'id');
     }
 
     public function safeDown()

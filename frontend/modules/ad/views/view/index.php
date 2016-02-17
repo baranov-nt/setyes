@@ -30,7 +30,7 @@ Masonry::widget();
         <?=
         ListView::widget([
             'dataProvider' => $dataProvider,
-            'layout' => "{summary}\n{items}<div class='col-md-12'>{pager}</div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
+            //'layout' => "{summary}\n{items}<div class='col-md-12'>{pager}</div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
             // sorter(вывод блока сортировки), pager(вывод пагинации)
             //'itemView' => 'index',                                                // представление для элементов
             'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
@@ -66,7 +66,7 @@ Masonry::widget();
             ],
             'options' => [                                                          // свойства основного контейнера для элементов
                 'tag' => 'div',
-                'class' => '/*list-wrapper*/ row grid',
+                'class' => 'list-wrapper row',
                 'id' => 'list-wrapper',
             ],
 

@@ -12,7 +12,6 @@ namespace common\widgets\AdWidget;
 use Yii;
 use yii\base\Widget;
 use yii\bootstrap\Html;
-use yii\helpers\Url;
 
 class AdWidget extends Widget
 {
@@ -20,6 +19,7 @@ class AdWidget extends Widget
     public $template;
     public $id;
     public $main_container_class;
+    public $favorite;
     public $favorite_icon;
     public $header;
     public $address;
@@ -70,9 +70,9 @@ class AdWidget extends Widget
     {
         $view = $this->getView();
         $js = <<<JS
-$("#id_$this->id").on("pjax:complete", function() {
-    $("#id_$this->id").attr("tabindex",-1).focus();
- });
+        $("#id_$this->id").on("pjax:complete", function() {
+            $("#id_$this->id").attr("tabindex",-1).focus();
+         });
 JS;
         $view->registerJS($js);
     }

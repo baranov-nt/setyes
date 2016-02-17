@@ -7,6 +7,7 @@ use common\models\AdMain;
 use common\models\AdMainSearch;
 use yii\web\NotFoundHttpException;
 use frontend\controllers\BehaviorsController;
+use common\models\AdFavorite;
 
 /**
  * ViewController implements the CRUD actions for AdMain model.
@@ -17,7 +18,7 @@ class ViewController extends BehaviorsController
      * Lists all AdMain models.
      * @return mixed
      */
-    public function actionAll($id = null)
+    public function actionAll()
     {
         $searchModel = new AdMainSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -37,6 +38,23 @@ class ViewController extends BehaviorsController
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new AdMain model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionFavorites()
+    {
+        $searchModel = new AdMainSearch();
+
+        $dataProvider = $searchModel->searchFavorites(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -81,7 +99,7 @@ class ViewController extends BehaviorsController
      * Deletes an existing AdMain model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
-     * @return mixed
+     * @return mixed _icon-favorite
      */
     public function actionDelete($id)
     {
@@ -90,8 +108,30 @@ class ViewController extends BehaviorsController
         return $this->redirect(['index']);
     }
 
-    public function actionFavorite () {
-        return '123';
+    public function actionAddToFavorites () {
+        $id = Yii::$app->request->post('id');
+        $modelAdFavorite = new AdFavorite();
+        $modelAdFavorite->addToFavorite($id);
+
+        return $this->renderAjax(
+            '@common/widgets/AdWidget/views/_icon-favorite',
+            [
+                'id' => $id,
+                'icon' => Yii::$app->request->post('icon')
+            ]);
+    }
+
+    public function actionDeleteFromFavorites () {
+        $id = Yii::$app->request->post('id');
+        $modelAdFavorite = new AdFavorite();
+        $modelAdFavorite->deleteFromFavorite($id);
+
+        return $this->renderAjax(
+            '@common/widgets/AdWidget/views/_icon-favorite-empty',
+            [
+                'id' => Yii::$app->request->post('id'),
+                'icon' => Yii::$app->request->post('icon')
+            ]);
     }
 
     /**

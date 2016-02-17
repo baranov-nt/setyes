@@ -14,26 +14,38 @@ use yii\bootstrap\Carousel;
 use yii\widgets\Pjax;
 
 Pjax::widget();
-/*$js=<<<JS
-$("#id_$this->id").on("pjax:complete", function() {
-    $("#id_$this->id").attr("tabindex",-1).focus();
+$js=<<<JS
+$("#star_container_$widget->id").on("pjax:complete", function() {
+    $("#star_container_$widget->id").attr("tabindex",-1).focus();
  });
 JS;
-$this->registerJS($js);*/
+$this->registerJS($js);
 ?>
 
-<div id="id_<?= $widget->id ?>" class="main-container-element <?= $widget->main_container_class ?>" style="outline: none;">
+<div class="main-container-element <?= $widget->main_container_class ?>">
     <div class="row">
         <div class="col-xs-12">
-            <?= Html::tag('span', '', [
-                'class' => $widget->favorite_icon.' icon-favorite',
-                'onclick' => '$.pjax({
-                    type: "POST",
-                    url: "'.Url::to(['/ad/view/favorite']).'",
-                    container: "#id_'.$widget->id.'",
-                    push: false
-                })'
-            ]) ?>
+            <div id="star_container_<?= $widget->id ?>" style="outline: none;">
+                <?php
+                if($widget->template):
+                    ?>
+                    <span id="icon-favorite-id-3" class="icon-favorite-empty glyphicon glyphicon-star" title="Add to favorites" style="outline: none;" data-toggle="tooltip" data-placement="top"></span>
+                    <?php
+                else:
+                    if($widget->favorite) {
+                        echo $this->render('_icon-favorite', [
+                            'id' => $widget->id,
+                            'icon' => $widget->favorite_icon
+                        ]);
+                    } else {
+                        echo $this->render('_icon-favorite-empty', [
+                            'id' => $widget->id,
+                            'icon' => $widget->favorite_icon
+                        ]);
+                    }
+                endif;
+                ?>
+            </div>
             <?php
             if($widget->template):
                 ?>
@@ -82,10 +94,10 @@ $this->registerJS($js);*/
             <i class="fa fa-mobile fa-2x"></i>
             <h5><?= $user->phone ?></h5>
         </div>
-        <div class="col-xs-12">
+        <!--<div class="col-xs-12">
             <i class="fa fa-envelope-o fa-2x"></i>
-            <h5><?= $user->email ?></h5>
-        </div>
+            <h5><?/*= $user->email */?></h5>
+        </div>-->
         <?php
         if($user->userProfile->first_name || $user->userProfile->second_name):
             ?>

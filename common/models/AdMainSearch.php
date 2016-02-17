@@ -71,4 +71,33 @@ class AdMainSearch extends AdMain
 
         return $dataProvider;
     }
+
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function searchFavorites($params)
+    {
+        $query = AdMain::find()
+            ->joinWith('adCategory')
+            ->joinWith([
+                'adCategory.ad' => function ($query) {
+                    $query->andWhere(['temp' => 0]);
+                },
+            ])
+            ->joinWith('adFavorites')
+            ->andWhere([AdFavorite::tableName().'.user_id' => Yii::$app->user->id])
+            ->orderBy([
+                'updated_at' => SORT_DESC]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+
+        return $dataProvider;
+    }
 }

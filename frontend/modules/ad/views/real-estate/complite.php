@@ -11,6 +11,7 @@ use common\widgets\AdWidget\AdWidget;
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
 /* @var $user common\models\User */
+/* @var $radioClass string */
 
 $this->title = Yii::t('app', 'Step 3').': '.Yii::t('references', $modelAdRealEstate->dealType->reference_name);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
@@ -61,9 +62,9 @@ $user = Yii::$app->user->identity;
         'enablePushState' => true
     ]);
     $js=<<<JS
-    $("#style_forms").on("pjax:complete", function() {
+    /*$("#style_forms").on("pjax:complete", function() {
         $("#style_form").attr("tabindex",-1).focus();
-    });
+    });*/
 JS;
     $this->registerJS($js);
     echo AdWidget::widget([
@@ -103,6 +104,8 @@ JS;
                     push: false
                 })',
                 'item' => function($index, $label, $name, $checked, $value) {
+                    $radioClass = '';
+                    $bgClass = '';
                     switch ($value) {
                         case 1:
                             if($checked)

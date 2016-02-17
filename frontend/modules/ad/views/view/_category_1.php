@@ -25,6 +25,7 @@ echo AdWidget::widget([
     'template' => false,
     'id' => $model->adCategory->adMain->id,
     'main_container_class' => $model->adCategory->adMain->adStyle->main_container_class,
+    'favorite' => $model->adCategory->adMain->getFavorite($model->adCategory->adMain->id),
     'favorite_icon' => $model->adCategory->adMain->adStyle->favorite_icon,
     'header' => $model->dealType->reference_name,
     'address' => $model->getAddress($model),

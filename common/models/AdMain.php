@@ -16,6 +16,7 @@ use yii\helpers\Html;
  * @property integer $category_id
  * @property integer $ad_style_id
  *
+ * @property AdFavorite[] $adFavorites
  * @property AdCategory $adCategory
  * @property PlaceCity $placeCity
  * @property AdStyle $adStyle
@@ -70,6 +71,23 @@ class AdMain extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getAdFavorites()
+    {
+        return $this->hasMany(AdFavorite::className(), ['ad_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdFavorite()
+    {
+        return $this->hasOne(AdFavorite::className(), ['ad_id' => 'id'])
+            ->where(['user_id' => Yii::$app->user->id]);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getAdCategory()
     {
         return $this->hasOne(AdCategory::className(), ['id' => 'category_id']);
@@ -108,6 +126,19 @@ class AdMain extends \yii\db\ActiveRecord
     public function getCreatedBy()
     {
         return $this->user_id;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFavorite($id)
+    {
+        $modelAdFavorite = AdFavorite::findOne([
+            'user_id' => Yii::$app->user->id,
+            'ad_id' => $id
+        ]);
+
+        return $modelAdFavorite ? true : false;
     }
 
     /**

@@ -10,8 +10,6 @@ namespace common\widgets\Masonry;
 
 use Yii;
 use yii\base\Widget;
-use common\widgets\Masonry\MasonryAsses;
-use yii\web\View;
 
 class Masonry extends Widget
 {
@@ -20,15 +18,6 @@ class Masonry extends Widget
         parent::init();
         $this->registerClientScript();
     }
-
-    /*public function run()
-    {
-        return $this->render(
-            'steps',
-            [
-                'widget' => $this,
-            ]);
-    }*/
 
     public function registerClientScript()
     {
@@ -44,6 +33,7 @@ class Masonry extends Widget
               percentPosition: true
               //columnWidth: 200
             });
+
         });
 JS;
         $view->registerJs($js);

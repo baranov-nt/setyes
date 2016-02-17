@@ -107,6 +107,7 @@ class ViewController extends BehaviorsController
      */
     public function actionDelete($id)
     {
+        dd($id);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

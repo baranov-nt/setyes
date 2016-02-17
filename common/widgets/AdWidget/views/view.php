@@ -12,6 +12,20 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Carousel;
 use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
+
+Modal::begin([
+    'size' => 'modal-sm text-center',
+    'header' => '<h5>'.Yii::t('app', 'Do you want to delete the item?').'</h5>',
+    'toggleButton' => false,
+    'closeButton' => false,
+    'id' => 'delete-element-'.$widget->id,
+]);
+
+echo Html::a(Yii::t('app', 'Yes'), Url::to(['/ad/view/delete', 'id' => $widget->id]), ['class' => 'btn btn-danger', 'style' => 'margin-right: 5px;']);
+echo Html::button(Yii::t('app', 'No'), ['class' => 'btn btn-success', 'data-dismiss' => 'modal', 'aria-hidden' => 'true', 'style' => 'margin-left: 5px;']);
+
+Modal::end();
 
 Pjax::widget();
 $js=<<<JS
@@ -40,17 +54,15 @@ $this->registerJS($js);
                 else:
                     if($widget->author):
                     ?>
-                        <a href="<?= Url::to(['/ad/view/update', 'id' => $widget->id]) ?>">
-                            <?php
-                            echo Html::tag('span', '',
-                                [
-                                    'class' => 'icon-trash glyphicon glyphicon-trash',
-                                    'title' => Yii::t('app', 'Edit ad'),
-                                    'data-toggle' => 'tooltip',
-                                    'data-placement' => 'top',
-                                ]);
-                            ?>
-                        </a>
+                        <?php
+                        echo Html::tag('span', '',
+                            [
+                                'class' => 'icon-trash glyphicon glyphicon-trash',
+                                'title' => Yii::t('app', 'Edit ad'),
+                                'data-toggle' => 'modal',
+                                'data-target' => '#delete-element-'.$widget->id,
+                            ]);
+                        ?>
                         <a href="<?= Url::to(['/ad/view/update', 'id' => $widget->id]) ?>">
                             <?php
                             echo Html::tag('span', '',

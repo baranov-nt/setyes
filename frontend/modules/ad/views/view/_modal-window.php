@@ -22,12 +22,14 @@ use yii\widgets\Pjax;
 use justinvoelker\awesomebootstrapcheckbox\Html;
 use yii\bootstrap\Carousel;
 
+
+
 Pjax::begin([
     'id' => 'modal-block'
 ]);
 ?>
 <?php
-
+\common\widgets\ShowMapModal\ShowMapModal::widget();
 ?>
 <?php
 
@@ -43,12 +45,12 @@ JS;
     $this->registerJS($js);
 
     $js=<<<JS
-        $("#modal-element").modal("show");
+        $("#myMapModal").modal("show");
 JS;
 $this->registerJS($js);
 Modal::begin([
     'size' => 'modal-lg',
-    'id' => 'modal-element',
+    'id' => 'myMapModal',
     'header' => '<h1 class="text-uppercase">'.Yii::t('references', $header).'</h1><p>'.$address.'</p>',
     'toggleButton' => false,
 ]);
@@ -117,7 +119,7 @@ Modal::begin([
         ?>
     </div>
     <div class="col-md-6">
-
+        <div id="map-canvas" class="" style=""></div>
     </div>
 </div>
 <?php

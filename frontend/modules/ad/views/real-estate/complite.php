@@ -85,7 +85,7 @@ JS;
         'favorite_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon,
         'header' => $modelAdRealEstate->dealType->reference_name,
         'address' => $modelAdRealEstate->getAddress($modelAdRealEstate),
-        'address_map' => $model->place_address_id ? true : false,
+        'address_map' => $modelAdRealEstate->place_address_id ? true : false,
         'phone_temp_ad' => $modelAdRealEstate->adCategory->adMain->phone_temp_ad,
         'images' => $modelAdRealEstate->imagesOfObjects,
         'content' => $modelAdRealEstate->contentList,

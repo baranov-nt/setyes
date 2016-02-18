@@ -147,6 +147,7 @@ class GoogleMaps extends Widget
         if (empty($this->userLocations) && $this->renderEmptyMap === false) {
             return;
         }
+
         $name = \Yii::$app->getRequest()->getCookies()->getValue('_city');
         if($name):
             $this->geocodeData = $this->getGeoCodeData();

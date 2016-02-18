@@ -5,7 +5,6 @@ use yii\bootstrap\ActiveForm;
 use justinvoelker\awesomebootstrapcheckbox\ActiveField;
 use yii\widgets\MaskedInput;
 use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
-use common\widgets\ImageLoad\ImageLoadWidget;
 use common\widgets\ImageLoad\assets\CropperAsset;
 use common\widgets\Chosen\ChosenAsset;
 use common\widgets\FontAwesome\AssetBundle;
@@ -413,6 +412,18 @@ $user = Yii::$app->user->identity;
                 'disabled' => false,
                 'divOptions' => ['class' => 'checkbox checkbox-warning']
             ]]);
+        ?>
+        <?php
+    endif;
+    ?>
+
+    <?php
+    if(Yii::$app->user->can('Администратор')):
+        ?>
+        <?php echo $form->field($modelAdRealEstate, 'phone_temp_ad')->textInput(
+        [
+            'value' => $modelAdRealEstate->adCategory->adMain->phone_temp_ad
+        ]);
         ?>
         <?php
     endif;

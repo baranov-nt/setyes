@@ -1,7 +1,6 @@
 <?php
 use common\widgets\StepsNavigation\StepsNavigation;
 use yii\helpers\Url;
-use common\widgets\ImageLoad\ImageLoadWidget;
 use yii\bootstrap\Html;
 use yii\bootstrap\ActiveForm;
 use justinvoelker\awesomebootstrapcheckbox\ActiveField;
@@ -67,12 +66,27 @@ $user = Yii::$app->user->identity;
     });*/
 JS;
     $this->registerJS($js);
-    echo AdWidget::widget([
+    /*echo AdWidget::widget([
         'template' => true,
         'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class.' col-md-3 col-md-offset-3',
         'favorite_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon,
         'header' => $modelAdRealEstate->dealType->reference_name,
         'address' => $modelAdRealEstate->getAddress($modelAdRealEstate),
+        'images' => $modelAdRealEstate->imagesOfObjects,
+        'content' => $modelAdRealEstate->contentList,
+        'quick_view_class' => $modelAdRealEstate->adCategory->adMain->adStyle->quick_view_class
+    ]);*/
+    echo AdWidget::widget([
+        'template' => true,
+        'id' => $modelAdRealEstate->adCategory->adMain->id,
+        'author' => Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain]),
+        'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class.' col-md-3 col-md-offset-3',
+        'favorite' => $modelAdRealEstate->adCategory->adMain->getFavorite($modelAdRealEstate->adCategory->adMain->id),
+        'favorite_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon,
+        'header' => $modelAdRealEstate->dealType->reference_name,
+        'address' => $modelAdRealEstate->getAddress($modelAdRealEstate),
+        'address_map' => $model->place_address_id ? true : false,
+        'phone_temp_ad' => $modelAdRealEstate->adCategory->adMain->phone_temp_ad,
         'images' => $modelAdRealEstate->imagesOfObjects,
         'content' => $modelAdRealEstate->contentList,
         'quick_view_class' => $modelAdRealEstate->adCategory->adMain->adStyle->quick_view_class

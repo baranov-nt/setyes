@@ -84,12 +84,37 @@ class ViewController extends BehaviorsController
     {
         //dd(Yii::$app->request->post());
         $id = Yii::$app->request->post('id');
+
+        $modelAdMain = $this->findModel($id);
+
+        $model = '';
+
+        if($modelAdMain->adCategory->category == 1) {
+            $model = $modelAdMain->adCategory->ad;
+        }
+
+        $items = $modelAdMain->getLargeImagesList($model->imagesOfObjects);
+
         $modalWindow = true;
 
-        return $this->render('_modal-window', [
-            'id' => $id,
-            'modalWindow' => $modalWindow,
-        ]);
+        return $this->render('_modal-window',
+            [
+                'modalWindow' => $modalWindow,
+                'user' => Yii::$app->user->identity,
+                'template' => false,
+                'id' => $id,
+                'author' => Yii::$app->user->can('Автор', ['model' => $model->adCategory->adMain]),
+                'main_container_class' => $model->adCategory->adMain->adStyle->main_container_class,
+                'favorite' => $model->adCategory->adMain->getFavorite($model->adCategory->adMain->id),
+                'favorite_icon' => $model->adCategory->adMain->adStyle->favorite_icon,
+                'header' => $model->dealType->reference_name,
+                'address' => $model->getAddress($model),
+                'address_map' => $model->place_address_id ? true : false,
+                'phone_temp_ad' => $model->adCategory->adMain->phone_temp_ad,
+                'items' => $items,
+                'content' => $model->contentList,
+                'quick_view_class' => $model->adCategory->adMain->adStyle->quick_view_class
+            ]);
     }
 
     /**
@@ -141,12 +166,17 @@ class ViewController extends BehaviorsController
      */
     public function actionDelete()
     {
-        $model = $this->findModel(Yii::$app->request->post('id'));
+        $modelAdMain = $this->findModel(Yii::$app->request->post('id'));
 
-        $model->adCategory->ad->temp = 1;
-        $model->adCategory->ad->save();
-
-        return $this->renderAjax('@common/widgets/AdWidget/views/_delete_block');
+        if (Yii::$app->user->can('Автор', ['model' => $modelAdMain])) {
+            if($modelAdMain->adCategory->category == '1') {
+                $modelAdMain->adCategory->ad->temp = 1;
+                $modelAdMain->adCategory->ad->save();
+            }
+            return $this->renderAjax('@common/widgets/AdWidget/views/_delete_block');
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
     public function actionAddToFavorites () {

@@ -64,6 +64,7 @@ class m160116_074120_create_ad_main_table extends Migration
             'place_city_id' => $this->integer(),     // Город, для которого добавлено объявление. Связь с таблицей place_city
             'category_id' => $this->integer()->notNull(),    // Тема объявления. Связь с таблицей ad_category
             'ad_style_id' => $this->integer()->defaultValue(1),       // Стиль объявления. Связь с таблицей ad_style
+            'phone_temp_ad' => $this->string(32),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);

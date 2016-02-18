@@ -15,6 +15,8 @@ use yii\helpers\Html;
  * @property integer $place_city_id
  * @property integer $category_id
  * @property integer $ad_style_id
+ * @property integer $phone_temp_ad
+ *
  *
  * @property AdFavorite[] $adFavorites
  * @property AdCategory $adCategory
@@ -22,6 +24,8 @@ use yii\helpers\Html;
  * @property AdStyle $adStyle
  * @property User $user
  * @property [] $images
+ * @property [] $largeImagesList
+ * @property [] $smallImagesList
  */
 class AdMain extends \yii\db\ActiveRecord
 {
@@ -40,7 +44,8 @@ class AdMain extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'category_id'], 'required'],
-            [['user_id', 'place_city_id', 'category_id', 'ad_style_id', 'created_at', 'updated_at'], 'integer']
+            [['user_id', 'place_city_id', 'category_id', 'ad_style_id', 'created_at', 'updated_at'], 'integer'],
+            [['phone_temp_ad'], 'string']
         ];
     }
 
@@ -55,6 +60,7 @@ class AdMain extends \yii\db\ActiveRecord
             'place_city_id' => Yii::t('app', 'Place City ID'),
             'category_id' => Yii::t('app', 'Ad Category ID'),
             'ad_style_id' => Yii::t('app', 'Ad Style'),
+            'phone_temp_ad' => Yii::t('app', 'Phone for temp ad'),
             'created_at' => Yii::t('app', 'Created at'),
             'updated_at' => Yii::t('app', 'Updated at'),
         ];
@@ -126,6 +132,62 @@ class AdMain extends \yii\db\ActiveRecord
     public function getCreatedBy()
     {
         return $this->user_id;
+    }
+
+    public function getLargeImagesList($images)
+    {
+        $items = '';
+
+        if(count($images) > 1):
+            foreach($images as $one):
+                $items[] = [
+                    'content' => Html::img('/images/'.$one->image->path, [
+                        'style' => 'width: 100%; border-radius: 3px;'
+                    ]),
+                    'options' => [
+
+                    ],
+                    'active' => false
+                ];
+            endforeach;
+        else:
+            /* Если одно изоражение */
+            foreach($images as $one):
+                $items =  Html::img('/images/'.$one->image->path, [
+                    'style' => 'width: 100%'
+                ]);
+            endforeach;
+        endif;
+
+        return $items;
+    }
+
+    public function getSmallImagesList($images)
+    {
+        $items = '';
+
+        if(count($images) > 1):
+            foreach($images as $one):
+                $items[] = [
+                    'content' => Html::img('/images/'.$one->image->path_small_image, [
+                        'style' => 'width: 100%; border-radius: 3px;'
+                    ]),
+                    'options' => [
+
+                    ],
+                    'active' => false
+                ];
+            endforeach;
+        else:
+            /* Если одно изоражение */
+            foreach($images as $one):
+                $items =  Html::img('/images/'.$one->image->path_small_image, [
+                    'style' => 'width: 100%'
+                ]);
+            endforeach;
+        endif;
+
+        return $items;
     }
 
     /**

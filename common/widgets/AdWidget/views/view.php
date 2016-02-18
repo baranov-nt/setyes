@@ -123,11 +123,11 @@ $this->registerJS($js);
             <p><?= $widget->address ?></p>
         </div>
         <?php
-        if($widget->images):
+        if($items):
             ?>
             <div class="col-xs-12 block-padding-bottom">
                 <?php
-                if(count($widget->images) > 1):
+                if(count($items) > 1):
                     echo Carousel::widget([
                         'items' => $items,
                         'options' => [
@@ -141,7 +141,7 @@ $this->registerJS($js);
 
                     ]);
                 else:
-                    echo $widget->images;
+                    echo $items;
                 endif;
                 ?>
             </div>
@@ -152,8 +152,19 @@ $this->registerJS($js);
             <?= $widget->content ?>
         </div>
         <div class="col-xs-12">
-            <i class="fa fa-mobile fa-2x"></i>
-            <h5><?= $user->phone ?></h5>
+            <?php
+            if($widget->phone_temp_ad):
+                ?>
+                <i class="fa fa-mobile fa-2x"></i>
+                <h5><?= $widget->phone_temp_ad ?></h5>
+                <?php
+            else:
+                ?>
+                <i class="fa fa-mobile fa-2x"></i>
+                <h5><?= $user->phone ?></h5>
+                <?php
+            endif;
+            ?>
         </div>
         <!--<div class="col-xs-12">
             <i class="fa fa-envelope-o fa-2x"></i>

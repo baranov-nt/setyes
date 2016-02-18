@@ -17,7 +17,6 @@
 
 /* @var $this yii\web\View */
 /* @var $model common\models\AdRealEstate */
-/* @var $one common\models\ImagesOfObject */
 
 use common\widgets\AdWidget\AdWidget;
 
@@ -30,6 +29,8 @@ echo AdWidget::widget([
     'favorite_icon' => $model->adCategory->adMain->adStyle->favorite_icon,
     'header' => $model->dealType->reference_name,
     'address' => $model->getAddress($model),
+    'address_map' => $model->place_address_id ? true : false,
+    'phone_temp_ad' => $model->adCategory->adMain->phone_temp_ad,
     'images' => $model->imagesOfObjects,
     'content' => $model->contentList,
     'quick_view_class' => $model->adCategory->adMain->adStyle->quick_view_class

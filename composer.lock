@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ee74f12da4a5d82822aca9bd5e6334e8",
-    "content-hash": "1209f4daa870291b4e11c018ea8eb4b4",
+    "hash": "e9f8b424ad1a53df9a749b7c2d7cc17b",
+    "content-hash": "76271d51cc46de93f9acf2695c70ecce",
     "packages": [
         {
             "name": "bower-asset/animate.css",
@@ -316,10 +316,10 @@
                 "shasum": ""
             },
             "require": {
-                "bower-asset/desandro-matches-selector": ">=2.0.0,<2.1"
+                "bower-asset/desandro-matches-selector": "~2.0.0"
             },
             "require-dev": {
-                "bower-asset/qunit": ">=1.20.0,<1.21"
+                "bower-asset/qunit": "~1.20.0"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -394,7 +394,7 @@
                 "shasum": ""
             },
             "require-dev": {
-                "bower-asset/qunit": ">=1.10,<1.11"
+                "bower-asset/qunit": "~1.10"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -759,13 +759,13 @@
                 "shasum": ""
             },
             "require": {
-                "bower-asset/get-size": ">=2.0.2,<2.1",
-                "bower-asset/outlayer": ">=2.0.0,<2.1"
+                "bower-asset/get-size": "~2.0.2",
+                "bower-asset/outlayer": "~2.0.0"
             },
             "require-dev": {
                 "bower-asset/jquery": ">=1.4.3,<4",
-                "bower-asset/jquery-bridget": ">=2.0.0,<2.1",
-                "bower-asset/qunit": ">=1.12,<2.0"
+                "bower-asset/jquery-bridget": "~2.0.0",
+                "bower-asset/qunit": ">=1.12.0,<2.0.0"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -807,14 +807,14 @@
                 "shasum": ""
             },
             "require": {
-                "bower-asset/ev-emitter": ">=1.0.0,<1.1",
-                "bower-asset/fizzy-ui-utils": ">=2.0.0,<2.1",
-                "bower-asset/get-size": ">=2.0.2,<2.1"
+                "bower-asset/ev-emitter": "~1.0.0",
+                "bower-asset/fizzy-ui-utils": "~2.0.0",
+                "bower-asset/get-size": "~2.0.2"
             },
             "require-dev": {
                 "bower-asset/jquery": ">=1.4.3,<4",
                 "bower-asset/jquery-bridget": "dev-2.x|2.x",
-                "bower-asset/qunit": ">=1.17.0,<2.0"
+                "bower-asset/qunit": ">=1.17.0,<2.0.0"
             },
             "type": "bower-asset-library",
             "extra": {
@@ -1381,6 +1381,47 @@
                 "mailer"
             ],
             "time": "2015-06-06 14:19:39"
+        },
+        {
+            "name": "yii2mod/yii2-google-maps-markers",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2mod/yii2-google-maps-markers.git",
+                "reference": "1a439cc7441f05057e31e37bc1a3877e2fb92408"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2mod/yii2-google-maps-markers/zipball/1a439cc7441f05057e31e37bc1a3877e2fb92408",
+                "reference": "1a439cc7441f05057e31e37bc1a3877e2fb92408",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yii2mod\\google\\maps\\markers\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitry Semenov",
+                    "email": "disemx@gmail.com"
+                },
+                {
+                    "name": "Igor Chepurnoy",
+                    "email": "igorzfort@gmail.com"
+                }
+            ],
+            "description": "Google Maps Markers displays a set of user addresses as markers on the map.",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2015-08-05 10:21:18"
         },
         {
             "name": "yiisoft/yii2",

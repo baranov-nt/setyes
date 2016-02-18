@@ -260,8 +260,8 @@ yii.googleMapManager = (function ($) {
         //console.log(styledMap);
 
         var container = document.getElementById(pub.containerId);
-        container.style.width = '100%';
-        container.style.height = '100%';
+        container.style.width = '100px';
+        container.style.height = '100px';
         //container.zoom = 5;
 
         pub.map = new google.maps.Map(container,
@@ -278,7 +278,7 @@ yii.googleMapManager = (function ($) {
         pub.map = new google.maps.Map(container, pub.mapOptions);*/
 
         setTimeout(function () {
-            pub.markerClusterer = new MarkerClusterer(pub.map, [], {gridSize: 50, maxZoom: 1});
+            pub.markerClusterer = new MarkerClusterer(pub.map, [], {/*gridSize: 50, maxZoom: 1*/});
             registerListeners();
             loadMap();
         }, 1000);

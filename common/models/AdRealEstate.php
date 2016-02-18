@@ -70,6 +70,7 @@ class AdRealEstate extends ActiveRecord
     public $place_address;
     public $measurement_of_land;
     public $style;
+    public $phone_temp_ad;
 
     /**
      * @inheritdoc
@@ -175,6 +176,7 @@ class AdRealEstate extends ActiveRecord
             'place_address' => Yii::t('app', 'Address'),
             'temp' => Yii::t('app', 'Temp'),
             'style' => Yii::t('app', 'Style'),
+            'phone_temp_ad' => Yii::t('app', 'Phone for temp ad'),
         ];
     }
 
@@ -458,6 +460,12 @@ class AdRealEstate extends ActiveRecord
             $items[] = [
                 'attribute' => 'condition',
                 'value' => Yii::t('references', $this->condition0->reference_name),
+            ];
+        //dd($this->adCategory->adMain->phone_temp_ad);
+        if($this->adCategory->adMain->phone_temp_ad)
+            $items[] = [
+                'attribute' => 'phone_temp_ad',
+                'value' => $this->adCategory->adMain->phone_temp_ad,
             ];
         return $items;
     }
@@ -1123,6 +1131,7 @@ class AdRealEstate extends ActiveRecord
                     $modelAdMain->user_id = Yii::$app->user->id;
                     $modelAdMain->place_city_id = $this->place_city_id;
                     $modelAdMain->category_id = $modelCategory->id;
+                    $modelAdMain->phone_temp_ad = $this->phone_temp_ad;
                     //$modelAdMain->ad_style_id = 1;
                     if($modelAdMain->save()) {
                         $transaction->commit();
@@ -1152,6 +1161,7 @@ class AdRealEstate extends ActiveRecord
                     $modelAdMain->user_id = Yii::$app->user->id;
                     $modelAdMain->place_city_id = $this->place_city_id;
                     $modelAdMain->category_id = $modelCategory->id;
+                    $modelAdMain->phone_temp_ad = $this->phone_temp_ad;
                     //$modelAdMain->ad_style_id = 1;
                     if($modelAdMain->save()) {
                         $transaction->commit();

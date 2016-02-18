@@ -9,9 +9,9 @@
 
 namespace common\widgets\AdWidget;
 
+use common\models\AdMain;
 use Yii;
 use yii\base\Widget;
-use yii\bootstrap\Html;
 
 class AdWidget extends Widget
 {
@@ -24,6 +24,8 @@ class AdWidget extends Widget
     public $favorite_icon;
     public $header;
     public $address;
+    public $address_map;
+    public $phone_temp_ad;
     public $images;
     public $content;
     public $quick_view_class;
@@ -36,27 +38,8 @@ class AdWidget extends Widget
 
     public function run()
     {
-        $items = '';
-        if(count($this->images) > 1):
-            foreach($this->images as $one):
-                $items[] = [
-                    'content' => Html::img('/images/'.$one->image->path_small_image, [
-                        'style' => 'width: 100%; border-radius: 3px;'
-                    ]),
-                    'options' => [
-
-                    ],
-                    'active' => false
-                ];
-            endforeach;
-        else:
-            /* Если одно изоражение */
-            foreach($this->images as $one):
-                $this->images =  Html::img('/images/'.$one->image->path_small_image, [
-                    'style' => 'width: 100%'
-                ]);
-            endforeach;
-        endif;
+        $modelAdMain = new AdMain();
+        $items = $modelAdMain->getSmallImagesList($this->images);
 
         return $this->render(
             'view',

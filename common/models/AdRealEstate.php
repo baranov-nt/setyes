@@ -71,6 +71,7 @@ class AdRealEstate extends ActiveRecord
     public $measurement_of_land;
     public $style;
     public $phone_temp_ad;
+    public $model_is;
 
     /**
      * @inheritdoc
@@ -1073,6 +1074,21 @@ class AdRealEstate extends ActiveRecord
         return $modelAdRealEstate;
     }
 
+    public function getAttributesArray($attributes)
+    {
+
+        unset(
+            $attributes['id'],
+            /*$attributes['area_of_property'],
+            $attributes['area_of_land'],
+            $attributes['price'],*/
+            $attributes['images_label'],
+            $attributes['temp']
+        );
+
+        return $attributes;
+    }
+
     /**
      * Returns the array of possible user status values.
      *
@@ -1083,7 +1099,21 @@ class AdRealEstate extends ActiveRecord
     {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->setScenario($scenario);
-        //dd($modelAdRealEstate);
+
+        /* Находим такое же объявление, чтобы исключить повтор */
+        $modelAdRealEstateIs = AdRealEstate::find()
+            ->where($this->getAttributesArray($modelAdRealEstate->attributes))
+            ->joinWith([
+                'adCategory.adMain' => function ($query) {
+                    $query->andWhere(['user_id' => Yii::$app->user->id]);
+                },
+            ])
+            ->one();
+
+        if($modelAdRealEstateIs) {
+            return $modelAdRealEstateIs;
+        }
+
         /* Проверям заполненные поля для полученного сценария */
         if ($modelAdRealEstate->validate()) {
             /* Находит введенный город */

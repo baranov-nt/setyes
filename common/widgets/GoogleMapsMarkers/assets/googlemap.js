@@ -260,8 +260,8 @@ yii.googleMapManager = (function ($) {
         //console.log(styledMap);
 
         var container = document.getElementById(pub.containerId);
-        container.style.width = '100px';
-        container.style.height = '100px';
+        container.style.width = '100%';
+        container.style.height = '100%';
         //container.zoom = 5;
 
         pub.map = new google.maps.Map(container,

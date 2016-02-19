@@ -5,6 +5,10 @@ return [
     'charset' => 'UTF-8',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
+        'userAgentParser' => [
+            'class' => \yii\useragentparser\UserAgentParser::className(),
+            'nameHttpPropertyUserAgent' => 'HTTP_USER_AGENT'
+        ],
         // Google Maps Image and Geocode API settings for \Yii::$app->googleApi component
         'googleApi'   => [
             //'class'             => \common\widgets\GoogleApi\GoogleApiLibrary::className(),

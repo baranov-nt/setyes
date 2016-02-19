@@ -266,6 +266,7 @@ return [
     'You are not allowed to access this page.' => '',
     'You can not reset the password.' => 'Вы не можете сбросить пароль.',
     'Your ad is removed.' => 'Ваше объявление удалено.',
+    'Your browser is too old! Open the app with something more modern -:) Thank you.' => 'Ваш браузер слишком стар! Откройте приложение чем-нибудь более современным -:) Спасибо.',
     'Your password is changed.' => 'Ваш пароль изменен.',
     'no input params given!' => '',
     '{app_name} (sent a robot).' => '{app_name} (отправленно роботом).',

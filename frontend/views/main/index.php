@@ -3,8 +3,6 @@
  * @var $hello string */
 use common\widgets\GoogleMapsMarkers\GoogleMaps;
 //use common\widgets\CurrencyConverter\CurrencyConverter;
-use yii\helpers\Url;
-use yii\helpers\Html;
 
 if (Yii::$app->user->can('Редактор')):
     Yii::$app->assetManager->forceCopy = true;
@@ -17,6 +15,8 @@ if(!Yii::$app->user->isGuest):
     echo '<br>'.Yii::$app->timezone->name;
     //Yii::$app->session->remove('timezone');
 endif;
+
+
 ?>
 </div>
     <div class="container">

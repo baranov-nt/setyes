@@ -8,6 +8,7 @@
 
 namespace frontend\controllers;
 
+use common\components\BrowserBehavior;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -97,6 +98,9 @@ class BehaviorsController extends Controller {
                     ],
                 ]
             ],
+            'browserBehavior' => [
+                'class' => BrowserBehavior::className()
+            ]
         ];
     }
 }

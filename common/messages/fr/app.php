@@ -266,6 +266,7 @@ return [
     'You are not allowed to access this page.' => '',
     'You can not reset the password.' => 'Vous ne pouvez pas réinitialiser le mot de passe.',
     'Your ad is removed.' => 'Votre annonce est supprimée.',
+    'Your browser is too old! Open the app with something more modern -:) Thank you.' => 'Votre navigateur est trop vieux! Ouvrez l\'application avec quelque chose de plus moderne - :) Merci.',
     'Your password is changed.' => 'Votre mot de passe est changé.',
     'no input params given!' => '',
     '{app_name} (sent a robot).' => '{app_name} (envoyé un robot).',

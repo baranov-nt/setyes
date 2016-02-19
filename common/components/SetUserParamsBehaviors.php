@@ -19,6 +19,9 @@ class SetUserParamsBehaviors extends Behavior
     public function init()
     {
         parent::init();
+        if(\Yii::$app->session->get('browserError') == 1) {
+            throw new \yii\web\MethodNotAllowedHttpException(Yii::t('app', 'You are not dddallowed to access this page.'));
+        }
     }
 
     public function events()

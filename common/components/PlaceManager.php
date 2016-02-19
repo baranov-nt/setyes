@@ -15,9 +15,17 @@ use common\models\PlaceAddress;
 use common\models\PlaceCity;
 use common\models\PlaceRegion;
 use common\models\PlaceCountry;
+use yii\web\UnsupportedMediaTypeHttpException;
 
 class PlaceManager extends Object
 {
+    public function init()
+    {
+        parent::init();
+        if(\Yii::$app->session->get('browserError') == 1) {
+            throw new UnsupportedMediaTypeHttpException(Yii::t('app', 'Your browser is too old! Open the app with something more modern -:) Thank you.'));
+        }
+    }
     /* Если находит главный город - записывает его в базу, если его там нет
        выставляет куки и передает id города из базы
        если не находит главный город чистит куки и передает false */

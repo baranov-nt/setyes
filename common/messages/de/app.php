@@ -189,6 +189,7 @@ return [
     'Reference Name' => '',
     'Region ID' => '',
     'Registration' => 'Registrierung',
+    'Related ads' => 'Ähnliche Anzeigen',
     'Remember me' => 'Erinnere dich an mich',
     'Remove ad' => 'Entfernen Sie Anzeige',
     'Remove from favorites' => 'Entfernen von Auswahl',

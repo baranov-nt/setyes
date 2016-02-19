@@ -11,6 +11,9 @@ use yii\data\ActiveDataProvider;
  */
 class AdMainSearch extends AdMain
 {
+    public $deal_type;
+    public $deal_query;
+    public $not_owner;
     /**
      * @inheritdoc
      */
@@ -39,13 +42,20 @@ class AdMainSearch extends AdMain
      */
     public function search($params)
     {
+        $this->deal_query = [];
+        if($this->deal_type)
+            $this->deal_query = ['deal_type' => $this->deal_type];
+        if($this->not_owner)
+            $this->not_owner = ['!=', 'user_id', Yii::$app->user->id];
         $query = AdMain::find()
             ->joinWith('adCategory')
             ->joinWith([
                 'adCategory.ad' => function ($query) {
                     $query->andWhere(['temp' => 0]);
+                    $query->andWhere($this->deal_query);
                 },
             ])
+            ->where($this->not_owner)
             ->orderBy([
                 'updated_at' => SORT_DESC]);
 

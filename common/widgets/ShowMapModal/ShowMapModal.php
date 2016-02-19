@@ -11,6 +11,7 @@ use yii\base\Widget;
 
 class ShowMapModal extends Widget
 {
+    public $modal;
     public $address;
 
     public function init()
@@ -20,8 +21,16 @@ class ShowMapModal extends Widget
 
     public function run()
     {
+        if($this->modal) {
+            return $this->render(
+                '_map_in_modal',
+                [
+                    'widget' => $this,
+                ]);
+        }
+
         return $this->render(
-            'map',
+            '_map_in_view',
             [
                 'widget' => $this,
             ]);

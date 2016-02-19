@@ -36,9 +36,46 @@ class ViewController extends BehaviorsController
      */
     public function actionOne($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $modelAdMain = $this->findModel($id);
+
+        $model = '';
+
+        if($modelAdMain->adCategory->category == 1) {
+            $model = $modelAdMain->adCategory->ad;
+        }
+
+        $items = $modelAdMain->getLargeImagesList($model->imagesOfObjects);
+
+        $modalWindow = true;
+
+        /* Фильтр для объявлений */
+        $searchModel = new AdMainSearch();
+        $searchModel->deal_type = $model->deal_type;
+        $searchModel->place_city_id = $model->adCategory->adMain->place_city_id;
+        /* Объявления не владельца */
+        $searchModel->not_owner = true;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('view',
+            [
+                'modalWindow' => $modalWindow,
+                'user' => Yii::$app->user->identity,
+                'template' => false,
+                'id' => $id,
+                'author' => Yii::$app->user->can('Автор', ['model' => $model->adCategory->adMain]),
+                'main_container_class' => $model->adCategory->adMain->adStyle->main_container_class,
+                'favorite' => $model->adCategory->adMain->getFavorite($model->adCategory->adMain->id),
+                'favorite_icon' => $model->adCategory->adMain->adStyle->favorite_icon,
+                'header' => $model->dealType->reference_name,
+                'address' => $model->getAddress($model),
+                'address_map' => $model->place_address_id ? true : false,
+                'phone_temp_ad' => $model->adCategory->adMain->phone_temp_ad,
+                'items' => $items,
+                'content' => $model->contentList,
+                'quick_view_class' => $model->adCategory->adMain->adStyle->quick_view_class,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
     }
 
     /**
@@ -82,7 +119,6 @@ class ViewController extends BehaviorsController
      */
     public function actionOpenInModal()
     {
-        //dd(Yii::$app->request->post());
         $id = Yii::$app->request->post('id');
 
         $modelAdMain = $this->findModel($id);

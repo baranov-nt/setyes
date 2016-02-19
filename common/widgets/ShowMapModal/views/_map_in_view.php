@@ -7,9 +7,9 @@
  */
 /* @var $widget \common\widgets\ShowMapModal\ShowMapModal */
 ?>
-<script>
-    google.maps.event.addDomListener(window, 'load', initialize);
-
+<div id="map-canvas" style="border-radius: 3px;"></div>
+<?php
+$js = <<< JS
     var map;
     var myCenter = new google.maps.LatLng(53, -1.33);
     var marker = new google.maps.Marker({
@@ -28,7 +28,7 @@
 
         var geocoder = new google.maps.Geocoder;
         map = new google.maps.Map(document.getElementById("map-canvas"), mapProp);
-        marker.setMap(map);
+        //marker.setMap(map);
 
         geocodeAddress(geocoder, map);
 
@@ -53,28 +53,7 @@
         });
     }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-    google.maps.event.addDomListener(window, "resize", resizingMap());
-
-    $('#myMapModal').on('show.bs.modal', function() {
-        //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-        resizeMap();
-    });
-
-    function resizeMap() {
-        if (typeof map == "undefined") return;
-        setTimeout(function() {
-            resizingMap();
-        }, 400);
-    }
-
-    function resizingMap() {
-        if (typeof map == "undefined") return;
-        var center = map.getCenter();
-        google.maps.event.trigger(map, "resize");
-        map.setCenter(center);
-    }
     initialize();
-</script>
-<div id="map-canvas" style="border-radius: 3px;"></div>
+JS;
+$this->registerJs($js, \yii\web\View::POS_READY);
+?>

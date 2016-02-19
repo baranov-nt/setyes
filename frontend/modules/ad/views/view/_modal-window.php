@@ -84,6 +84,7 @@ Modal::begin([
     <div class="col-md-6" style="padding: 0 30px 20px 30px;">
         <?php if($address_map): ?>
         <?= ShowMapModal::widget([
+            'modal' => true,
             'address' => $address,
         ]); ?>
     <?php endif; ?>

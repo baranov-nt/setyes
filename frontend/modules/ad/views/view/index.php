@@ -17,6 +17,8 @@ if(Yii::$app->controller->action->id == 'all') {
     $this->title = Yii::t('app', 'My ads');
 } elseif(Yii::$app->controller->action->id == 'favorites') {
     $this->title = Yii::t('app', 'Selected ads');
+} elseif(Yii::$app->controller->action->id == 'one') {
+    $this->title = Yii::t('app', 'Related ads');
 }
 
 $this->params['breadcrumbs'][] = $this->title;
@@ -27,15 +29,6 @@ Masonry::widget();
     <div class="ad-main-index">
 
         <h1><?= Html::encode($this->title) ?></h1>
-        <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-        <!--<p>
-            <?/*= Html::a(Yii::t('app', 'Create Ad Main'), ['create'], ['class' => 'btn btn-success']) */?>
-        </p>-->
-
-        <?php
-
-        ?>
         <?=
         ListView::widget([
             'dataProvider' => $dataProvider,

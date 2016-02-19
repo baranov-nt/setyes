@@ -189,6 +189,7 @@ return [
     'Reference Name' => 'Имя ссылки',
     'Region ID' => '',
     'Registration' => 'Регистрация',
+    'Related ads' => 'Похожие объявления',
     'Remember me' => 'Запомнить меня',
     'Remove ad' => 'Удалить объявление',
     'Remove from favorites' => 'Удалить из избранного',

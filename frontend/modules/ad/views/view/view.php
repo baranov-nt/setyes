@@ -1,39 +1,113 @@
 <?php
-
-use yii\helpers\Html;
-use yii\widgets\DetailView;
+/**
+ * Created by PhpStorm.
+ * User: phpNT
+ * Date: 18.02.2016
+ * Time: 0:52
+ */
+/* @var $modalWindow bool */
+/* @var $id integer */
+/* @var $header string */
+/* @var $address string */
+/* @var $address_map integer */
+/* @var $phone_temp_ad string */
+/* @var $items array */
+/* @var $content array */
+/* @var $this yii\web\View */
+/* @var $model common\models\AdRealEstate */
+/* @var $user common\models\User */
 
 /* @var $this yii\web\View */
-/* @var $model common\models\AdMain */
+/* @var $searchModel common\models\AdMainSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Mains'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+use yii\bootstrap\Carousel;
+use common\widgets\ShowMapModal\ShowMapModal;
+use common\widgets\Masonry\Masonry;
+use common\widgets\iGrowl\AssetBundle;
+
+AssetBundle::register($this);
+Masonry::widget();
 ?>
-<div class="ad-main-view">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-uppercase"><?= Yii::t('references', $header) ?></h1><p><?= $address ?></p>
+        </div>
+        <div class="col-md-12">
+            <?php
+            if($items):
+                ?>
+                <div class="col-xs-12 block-padding-bottom">
+                    <?php
+                    if(count($items) > 1):
+                        echo Carousel::widget([
+                            'items' => $items,
+                            'options' => [
+                                //'data-interval' => 0,
+                                'class' => 'slide',
+                                'style' => 'width:100%;' // set the width of the container if you like
+                            ],
+                            'controls' => ['&lsaquo;', '&rsaquo;'],     // Стрелочки вперед - назад
+                            //'controls' => ['<', '>'],                     // Стрелочки вперед - назад
+                            'showIndicators' => true,                   // отображать индикаторы (кругляшки)
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'user_id',
-            'place_city_id',
-            'category_id',
-            'ad_style_id',
-        ],
-    ]) ?>
-
+                        ]);
+                    else:
+                        echo $items;
+                    endif;
+                    ?>
+                </div>
+                <?php
+            endif;
+            ?>
+        </div>
+        <div class="col-md-6">
+            <div class="col-xs-12">
+                <?= $content ?>
+            </div>
+            <div class="col-xs-12">
+                <?php
+                if($phone_temp_ad):
+                    ?>
+                    <i class="fa fa-mobile fa-2x"></i>
+                    <h5><?= $phone_temp_ad ?></h5>
+                    <?php
+                else:
+                    ?>
+                    <i class="fa fa-mobile fa-2x"></i>
+                    <h5><?= $user->phone ?></h5>
+                    <?php
+                endif;
+                ?>
+            </div>
+            <div class="col-xs-12">
+                <i class="fa fa-envelope-o fa-2x"></i>
+                <h5><?= $user->email ?></h5>
+            </div>
+            <?php
+            if($user->userProfile->first_name || $user->userProfile->second_name):
+                ?>
+                <div class="col-xs-12">
+                    <i class="fa fa-user fa-2x" style=""></i>
+                    <h5><?= $user->userProfile->first_name.' '.$user->userProfile->second_name ?></h5>
+                </div>
+                <?php
+            endif;
+            ?>
+        </div>
+        <div class="col-md-6" style="padding: 0 30px 20px 30px;">
+            <?php if($address_map): ?>
+                <?= ShowMapModal::widget([
+                    'modal' => false,
+                    'address' => $address,
+                ]); ?>
+            <?php endif; ?>
+        </div>
+    </div>
 </div>
+<?php
+echo $this->render('index', [
+    'searchModel' => $searchModel,
+    'dataProvider' => $dataProvider,
+]);

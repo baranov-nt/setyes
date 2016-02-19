@@ -189,6 +189,7 @@ return [
     'Reference Name' => '',
     'Region ID' => '',
     'Registration' => 'Enregistrement',
+    'Related ads' => 'Annonces connexes',
     'Remember me' => 'Souviens-toi de moi',
     'Remove ad' => 'Retirer annonce',
     'Remove from favorites' => 'Retirer de la liste',

@@ -140,7 +140,7 @@ class RealEstateController extends BehaviorsController
             $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
             if($modelAdRealEstate->errors) {
                 if($modelAdRealEstate->errors['model_is']) {
-                    return $this->redirect(['update', 'id' => $modelAdRealEstate->id]);
+                    return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
                 }
 
                 return $this->render('create', [
@@ -183,7 +183,7 @@ class RealEstateController extends BehaviorsController
             $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
             if($modelAdRealEstate->errors) {
                 if($modelAdRealEstate->errors['model_is']) {
-                    return $this->redirect(['update', 'id' => $modelAdRealEstate->id]);
+                    return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
                 }
 
                 return $this->render('create', [

@@ -33,6 +33,7 @@ use yii\db\Exception;
  * @property integer $images_label
  * @property string $model_scenario
  * @property integer $temp
+ * @property integer $model_is
  *
  * @property AdRealEstate[] $columnList
  * @property AdRealEstate[] $contentList
@@ -1079,9 +1080,9 @@ class AdRealEstate extends ActiveRecord
 
         unset(
             $attributes['id'],
-            /*$attributes['area_of_property'],
+            $attributes['area_of_property'],
             $attributes['area_of_land'],
-            $attributes['price'],*/
+            $attributes['price'],
             $attributes['images_label'],
             $attributes['temp']
         );
@@ -1100,17 +1101,20 @@ class AdRealEstate extends ActiveRecord
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->setScenario($scenario);
 
+        //dd($this->phone_temp_ad);
         /* Находим такое же объявление, чтобы исключить повтор */
         $modelAdRealEstateIs = AdRealEstate::find()
             ->where($this->getAttributesArray($modelAdRealEstate->attributes))
             ->joinWith([
                 'adCategory.adMain' => function ($query) {
                     $query->andWhere(['user_id' => Yii::$app->user->id]);
+                    $query->andWhere(['phone_temp_ad' => $this->phone_temp_ad]);
                 },
             ])
             ->one();
-
         if($modelAdRealEstateIs) {
+            /* Если такаяже запись найдена, направляем на ее редактирование */
+            $modelAdRealEstateIs->addError('model_is');
             return $modelAdRealEstateIs;
         }
 

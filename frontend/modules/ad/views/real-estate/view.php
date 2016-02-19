@@ -67,8 +67,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'images_num' => $user->userPrivilege->images_num,                 // максимальное количество изображений
                         'images_label' => $modelAdRealEstate->images_label,             // максимальное количество изображений
                         'images_temp' => 0,       // указываем временной изображение или нет
-                        'imageSmallWidth' => 560,                       // ширина миниатюры
-                        'imageSmallHeight' => 315,                      // высота миниатюры
+                        'imageSmallWidth' => 480,                       // ширина миниатюры
+                        'imageSmallHeight' => 270,                      // высота миниатюры
                         'headerModal' => 'Загрузить изображение товара',                        // заголовок в модальном окне
                         'sizeModal' => 'modal-md',                                  // размер модального окна
                         'baseUrl' => '/images/',                        // основной путь к изображениям
@@ -97,8 +97,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'cropBoxData' => [                              // начальные настройки рамки // cropBoxData = { left: 10, top: 10, width: 160, height:200 }
                             'left' => 10,                               // смещение слева
                             'top' => 10,                                // смещение вниз
-                            'width' => 560,                             // ширина
-                            'height' => 315                             // высота
+                            'width' => 480,                             // ширина
+                            'height' => 270                             // высота
                         ],
                         'canvasData' => [                               // начальные настройки холста
                             //'width' => 500,                             // ширина

@@ -418,11 +418,17 @@ $user = Yii::$app->user->identity;
     ?>
 
     <?php
-    if(Yii::$app->user->can('Администратор')):
+    if(Yii::$app->user->can('Администратор') &&
+        $modelAdRealEstate->scenario != 'rooms' && $modelAdRealEstate->scenario != 'apartments' && $modelAdRealEstate->scenario != 'houses' && $modelAdRealEstate->scenario != 'land'
+        && $modelAdRealEstate->scenario != 'garages' && $modelAdRealEstate->scenario != 'propertyAbroad' && $modelAdRealEstate->scenario != 'comercial'):
+        $value = '';
+        if(isset($modelAdRealEstate->adCategory->adMain->phone_temp_ad)) {
+            $value = $modelAdRealEstate->adCategory->adMain->phone_temp_ad;
+        }
         ?>
         <?php echo $form->field($modelAdRealEstate, 'phone_temp_ad')->textInput(
         [
-            //'value' => $modelAdRealEstate->adCategory->adMain->phone_temp_ad
+            'value' => $value
         ]);
         ?>
         <?php

@@ -50,6 +50,7 @@ class ViewController extends BehaviorsController
 
         /* Фильтр для объявлений */
         $searchModel = new AdMainSearch();
+        //$searchModel->id = $id;
         $searchModel->deal_type = $model->deal_type;
         $searchModel->place_city_id = $model->adCategory->adMain->place_city_id;
         /* Объявления не владельца */

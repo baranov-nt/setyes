@@ -48,8 +48,8 @@ class AdMainSearch extends AdMain
             $this->deal_query = ['deal_type' => $this->deal_type];
         if($this->not_owner)
             $this->not_owner = ['!=', 'user_id', Yii::$app->user->id];
-        if($this->not_this)
-            $this->not_owner = ['!=', 'user_id', $this->id];
+        /*if($this->not_this)
+            $this->not_owner = ['!=', 'user_id', $this->id];*/
         $query = AdMain::find()
             ->joinWith('adCategory')
             ->joinWith([

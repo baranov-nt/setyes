@@ -40,13 +40,13 @@ use yii\helpers\Url;
                                 'class'  => 'form-control chosen-select',
                                 'prompt' => Yii::t('app', 'Select country'),
                                 'onchange' => '
-                        $.pjax({
-                            type: "POST",
-                            url: "update-phone.html",
-                            data: jQuery("#form").serialize(),
-                            container: "#w0",
-                            push: false
-                        })'
+                                    $.pjax({
+                                        type: "POST",
+                                        url: "update-phone.html",
+                                        data: jQuery("#form").serialize(),
+                                        container: "#w0",
+                                        push: false
+                                    })'
                             ])
                             ?>
                         </div>

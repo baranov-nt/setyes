@@ -68,3 +68,13 @@ body {
     width: 100%;
     height: 300px;
 }
+.form-control {
+    height: 25px !important;
+}
+.chosen-single {
+    height: 25px !important;
+    line-height: 25px !important;
+}
+.chosen-single b {
+
+}

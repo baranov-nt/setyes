@@ -11,6 +11,7 @@ use cybercog\yii\googleanalytics\widgets\GATracking;
 use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 use common\widgets\LanguageSelect\LanguageSelect;
 use common\widgets\FontAwesome\AssetBundle;
+
 /**
  * Created by PhpStorm.
  * User: phpNT

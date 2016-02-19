@@ -492,4 +492,6 @@ class PlaceManager extends Object
         }
         return $city;
     }
+
+    public function testBrowser() {}
 }

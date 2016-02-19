@@ -85,6 +85,7 @@ class MainController extends BehaviorsController
 
     public function actionReg()
     {
+        Yii::$app->placeManager->testBrowser();
         //dd(Yii::$app->request->post());
         $emailActivation = Yii::$app->params['emailActivation'];
         $model = $emailActivation ? new RegForm(['scenario' => 'emailActivation']) : new RegForm();
@@ -181,6 +182,8 @@ class MainController extends BehaviorsController
 
     public function actionLogin()
     {
+        Yii::$app->placeManager->testBrowser();
+
         if (!Yii::$app->user->isGuest):
             return $this->goHome();
         endif;

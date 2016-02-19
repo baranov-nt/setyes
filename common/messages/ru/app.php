@@ -161,6 +161,7 @@ return [
     'Path Image' => 'Путь изображения',
     'Path Small Image' => '',
     'Pets Allowed' => 'Домашние животные разрешены',
+    'Phone for temp ad' => 'Телефон для временных объявлений',
     'Phone Number Digits Code' => '',
     'Phone is invalid.' => 'Телефон неверен.',
     'Phone number' => 'Номер телефона',

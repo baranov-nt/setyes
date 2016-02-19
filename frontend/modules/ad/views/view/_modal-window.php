@@ -21,7 +21,7 @@ use yii\bootstrap\Modal;
 use yii\widgets\Pjax;
 use justinvoelker\awesomebootstrapcheckbox\Html;
 use yii\bootstrap\Carousel;
-
+use common\widgets\ShowMapModal\ShowMapModal;
 
 
 Pjax::begin([
@@ -29,7 +29,7 @@ Pjax::begin([
 ]);
 ?>
 <?php
-\common\widgets\ShowMapModal\ShowMapModal::widget();
+
 ?>
 <?php
 
@@ -119,7 +119,7 @@ Modal::begin([
         ?>
     </div>
     <div class="col-md-6">
-        <div id="map-canvas" class="" style=""></div>
+        <?= ShowMapModal::widget(); ?>
     </div>
 </div>
 <?php

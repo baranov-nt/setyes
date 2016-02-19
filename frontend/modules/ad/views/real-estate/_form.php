@@ -422,7 +422,7 @@ $user = Yii::$app->user->identity;
         ?>
         <?php echo $form->field($modelAdRealEstate, 'phone_temp_ad')->textInput(
         [
-            'value' => $modelAdRealEstate->adCategory->adMain->phone_temp_ad
+            //'value' => $modelAdRealEstate->adCategory->adMain->phone_temp_ad
         ]);
         ?>
         <?php

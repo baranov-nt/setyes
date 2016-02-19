@@ -54,6 +54,7 @@ class ViewController extends BehaviorsController
         $searchModel->place_city_id = $model->adCategory->adMain->place_city_id;
         /* Объявления не владельца */
         $searchModel->not_owner = true;
+        $searchModel->not_this = true;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('view',

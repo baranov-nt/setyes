@@ -69,11 +69,11 @@ body {
     height: 300px;
 }
 .form-control {
-    height: 25px !important;
+    height: 30px !important;
 }
 .chosen-single {
-    height: 25px !important;
-    line-height: 25px !important;
+    height: 30px !important;
+    line-height: 30px !important;
 }
 .chosen-single b {
 

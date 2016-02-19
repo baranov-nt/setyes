@@ -42,7 +42,7 @@ $this->registerJS($js);
 Modal::begin([
     'size' => 'modal-lg',
     'id' => 'myMapModal',
-    'header' => '<h1 class="text-uppercase">'.Yii::t('references', $header).'</h1><p>'.$address.'</p>',
+    'header' => '<div style="padding-left: 20px;"><h1 class="text-uppercase">'.Yii::t('references', $header).'</h1><p>'.$address.'</p></div>',
     'toggleButton' => false,
 ]);
 ?>

@@ -32,7 +32,9 @@ Masonry::widget();
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="text-uppercase"><?= Yii::t('references', $header) ?></h1><p><?= $address ?></p>
+            <div style="padding-left: 20px !important;">
+                <h1 class="text-uppercase"><?= Yii::t('references', $header) ?></h1><p><?= $address ?></p>
+            </div>
         </div>
         <div class="col-md-12">
             <?php

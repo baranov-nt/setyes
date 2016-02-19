@@ -154,7 +154,7 @@ class AdMain extends \yii\db\ActiveRecord
             /* Если одно изоражение */
             foreach($images as $one):
                 $items =  Html::img('/images/'.$one->image->path, [
-                    'style' => 'width: 100%'
+                    'style' => 'width: 100%; border-radius: 3px;'
                 ]);
             endforeach;
         endif;
@@ -182,7 +182,7 @@ class AdMain extends \yii\db\ActiveRecord
             /* Если одно изоражение */
             foreach($images as $one):
                 $items =  Html::img('/images/'.$one->image->path_small_image, [
-                    'style' => 'width: 100%'
+                    'style' => 'width: 100%; border-radius: 3px;'
                 ]);
             endforeach;
         endif;

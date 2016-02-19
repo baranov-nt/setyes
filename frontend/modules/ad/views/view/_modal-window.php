@@ -9,6 +9,7 @@
 /* @var $id integer */
 /* @var $header string */
 /* @var $address string */
+/* @var $address_map integer */
 /* @var $phone_temp_ad string */
 /* @var $items array */
 /* @var $content array */
@@ -19,7 +20,6 @@
 
 use yii\bootstrap\Modal;
 use yii\widgets\Pjax;
-use justinvoelker\awesomebootstrapcheckbox\Html;
 use yii\bootstrap\Carousel;
 use common\widgets\ShowMapModal\ShowMapModal;
 
@@ -27,16 +27,7 @@ use common\widgets\ShowMapModal\ShowMapModal;
 Pjax::begin([
     'id' => 'modal-block'
 ]);
-?>
-<?php
-
-?>
-<?php
-
-
-
 if(isset($modalWindow)):
-
     $js=<<<JS
     $("#modal-block").on("pjax:complete", function() {
         $("#button-open-modal-$id").attr("tabindex",-1).focus();
@@ -56,34 +47,6 @@ Modal::begin([
 ]);
 ?>
 <div class="row">
-    <div class="col-md-12">
-        <?php
-        if($items):
-            ?>
-            <div class="col-xs-12 block-padding-bottom">
-                <?php
-                if(count($items) > 1):
-                    echo Carousel::widget([
-                        'items' => $items,
-                        'options' => [
-                            'data-interval' => 0,
-                            'class' => 'slide',
-                            'style' => 'width:100%;' // set the width of the container if you like
-                        ],
-                        'controls' => ['&lsaquo;', '&rsaquo;'],     // Стрелочки вперед - назад
-                        //'controls' => ['<', '>'],                     // Стрелочки вперед - назад
-                        'showIndicators' => true,                   // отображать индикаторы (кругляшки)
-
-                    ]);
-                else:
-                    echo $items;
-                endif;
-                ?>
-            </div>
-            <?php
-        endif;
-        ?>
-    </div>
     <div class="col-md-6">
         <div class="col-xs-12">
             <?= $content ?>
@@ -118,9 +81,42 @@ Modal::begin([
         endif;
         ?>
     </div>
-    <div class="col-md-6">
-        <?= ShowMapModal::widget(); ?>
+    <div class="col-md-6" style="padding: 0 30px 20px 0;">
+        <?php if($address_map): ?>
+        <?= ShowMapModal::widget([
+            'address' => $address,
+        ]); ?>
+    <?php endif; ?>
     </div>
+    <div class="col-md-12">
+        <?php
+        if($items):
+            ?>
+            <div class="col-xs-12 block-padding-bottom">
+                <?php
+                if(count($items) > 1):
+                    echo Carousel::widget([
+                        'items' => $items,
+                        'options' => [
+                            'data-interval' => 0,
+                            'class' => 'slide',
+                            'style' => 'width:100%;' // set the width of the container if you like
+                        ],
+                        'controls' => ['&lsaquo;', '&rsaquo;'],     // Стрелочки вперед - назад
+                        //'controls' => ['<', '>'],                     // Стрелочки вперед - назад
+                        'showIndicators' => true,                   // отображать индикаторы (кругляшки)
+
+                    ]);
+                else:
+                    echo $items;
+                endif;
+                ?>
+            </div>
+            <?php
+        endif;
+        ?>
+    </div>
+
 </div>
 <?php
 Modal::end();

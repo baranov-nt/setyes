@@ -45,7 +45,7 @@ Masonry::widget();
                     // sorter(вывод блока сортировки), pager(вывод пагинации)
                     //'itemView' => 'index',                                                // представление для элементов
                     'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
-                        /* @var $model common\models\AdMain */
+                        // @var $model common\models\AdMain
                         //dd($model->adCategory->category);
                         return $this->render('_category_'.$model->adCategory->category,[
                             'model' => $model->adCategory->ad,
@@ -56,6 +56,11 @@ Masonry::widget();
                         // or just do some echo
                         //return $model->name . ' добавил ' . $model->user->email;
                     },
+                    'options' => [                                                          // свойства основного контейнера для элементов
+                        'tag' => 'div',
+                        'class' => 'list-wrapper row grid',
+                        'id' => 'list-wrapper',
+                    ],
                     'itemOptions' => [                                                      // свойства для элементов контейнера
                         'tag' => 'div',
                         'class' => 'grid-item col-md-3 col-sm-6',
@@ -71,18 +76,12 @@ Masonry::widget();
                     ],
                     'summary' => false,
                     //'summary' => "{begin}{end}{count}{totalCount}{page}{pageCount}",      // свойства выводимых данных количества элементов
-                    /*'summaryOptions' => [                                                   // свойства для количества элементов
-                        'tag' => 'div',
-                        'class' => 'grid-item',
-                        'style' => 'display: block !important; width: 100% !important; background-color: red !important; margin-bottom: 20px !important;'
-                        //'id' => 'list-wrapper',
-                    ],*/
-                    'options' => [                                                          // свойства основного контейнера для элементов
-                        'tag' => 'div',
-                        'class' => 'list-wrapper row grid',
-                        'id' => 'list-wrapper',
-                    ],
-
+                    //'summaryOptions' => [                                                   // свойства для количества элементов
+                    //    'tag' => 'div',
+                    //    'class' => 'grid-item',
+                    //    'style' => 'display: block !important; width: 100% !important; background-color: red !important; margin-bottom: 20px !important;'
+                    //    //'id' => 'list-wrapper',
+                    //],
                 ]);
                 ?>
 

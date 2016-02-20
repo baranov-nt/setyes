@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ListView;
 use common\widgets\Masonry\Masonry;
 use common\widgets\iGrowl\AssetBundle;
+use yii\widgets\Pjax;
 
 AssetBundle::register($this);
 
@@ -12,6 +13,13 @@ AssetBundle::register($this);
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->params['breadcrumbs'][] = $this->title;
+
+
+Pjax::begin([
+    'id' => 'image-list',
+    'timeout' => 9000,
+    'enablePushState' => false
+]);
 
 Masonry::widget();
 ?>
@@ -30,9 +38,10 @@ Masonry::widget();
             ?>
             <h1><?= Html::encode($this->title) ?></h1>
             <div class="ad-main-index">
+
                 <?= ListView::widget([
                     'dataProvider' => $dataProvider,
-                    //'layout' => "{summary}\n{items}<div class='col-md-12'>ss{pager}</div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
+                    'layout' => "{summary}\n{items}<div class='grid-item col-md-12' style='margin-top: 20px;'>{pager}</div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
                     // sorter(вывод блока сортировки), pager(вывод пагинации)
                     //'itemView' => 'index',                                                // представление для элементов
                     'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
@@ -60,8 +69,8 @@ Masonry::widget();
                         'prevPageLabel' => 'предыдущая',
                         'maxButtonCount' => 3,                                              // количество цифровых кнопок
                     ],
-                    //'summary' => "{begin}{end}{count}{totalCount}{page}{pageCount}",      // свойства выводимых данных количества элементов
                     'summary' => false,
+                    //'summary' => "{begin}{end}{count}{totalCount}{page}{pageCount}",      // свойства выводимых данных количества элементов
                     /*'summaryOptions' => [                                                   // свойства для количества элементов
                         'tag' => 'div',
                         'class' => 'grid-item',
@@ -80,5 +89,8 @@ Masonry::widget();
             </div>
         </div>
     </div>
+<?php
+Pjax::end();
+?>
 <?php
 echo $this->render('_modal-window');

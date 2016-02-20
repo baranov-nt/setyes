@@ -1,7 +1,6 @@
 <?php
 namespace frontend\controllers;
 
-use common\models\PlaceCountry;
 use Yii;
 use frontend\models\RegForm;
 use common\models\LoginForm;

@@ -207,6 +207,7 @@ $this->beginPage();
         echo '<div class="input-group">';
 
         echo GooglePlacesAutoComplete::widget([
+            'navbarInput' => true,
             'name' => 'place',
             'value' => '',
             'autocompleteOptions' => [
@@ -223,7 +224,7 @@ $this->beginPage();
         echo Html::submitButton(
             '<span class="glyphicon glyphicon-search"></span>',
             [
-                'class' => 'btn btn-success',
+                'class' => 'btn btn-sm btn-success',
             ]
         );
         echo '</span></div>';

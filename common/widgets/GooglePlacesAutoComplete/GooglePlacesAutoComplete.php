@@ -55,6 +55,15 @@ class GooglePlacesAutoComplete extends InputWidget {
             input.click(function() {
                 input.val("");
             });
+            $('#{$elementId}').change(function () {
+            $.post( "/main/select-city.html", function( data ) {
+                //$( ".result" ).html( data );
+            });
+             var data =  $("#autocomlite-city-form").serialize();
+              /*Serialize form & send it to the search view*/
+             /*show_submit_data(data);
+             return false;*/
+         });
         })();
 JS
             , \yii\web\View::POS_READY);

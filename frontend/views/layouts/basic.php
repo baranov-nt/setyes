@@ -198,6 +198,7 @@ $this->beginPage();
         ActiveForm::begin([
             'action' => ['/main/select-city'],
             'options' => [
+                'id' => 'autocomlite-city-form',
                 'class' => 'navbar-right col-md-5',
                 'style' => 'margin: 7px 0 8px 0;'
             ]]);

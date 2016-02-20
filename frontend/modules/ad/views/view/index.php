@@ -93,3 +93,39 @@ Pjax::end();
 ?>
 <?php
 echo $this->render('_modal-window');
+/* "kop/yii2-scroll-pager": "^2.3" */
+/* echo ListView::widget([
+     'dataProvider' => $dataProvider,
+     'summary' => false,
+     //'layout' => "{summary}<div class='list-wrapper row grid'>{items}<div class='grid-item col-md-12' style='margin-top: 20px;'>{pager}</div></div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
+     //'itemOptions' => ['class' => 'item-pjax'],
+     'options' => [                                                          // свойства основного контейнера для элементов
+         'tag' => 'div',
+         'class' => 'list-view list-wrapper row grid',
+         'style'
+     ],
+     'itemOptions' => [                                                      // свойства для элементов контейнера
+         'tag' => 'div',
+         'class' => 'grid-item col-md-3 col-sm-6 item-pjax',
+         //'id' => 'list-wrapper',
+         'style' => 'float: left !important;'
+     ],
+     'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
+         // @var $model common\models\AdMain
+         //dd($model->adCategory->category);
+         return $this->render('_category_'.$model->adCategory->category,[
+             'model' => $model->adCategory->ad,
+             'key' => $key,
+             'index' => $index,
+             'widget' => $widget
+         ]);
+         // or just do some echo
+         //return $model->name . ' добавил ' . $model->user->email;
+     },
+     'pager' => [
+         'class' => \kop\y2sp\ScrollPager::className(),
+         'item' => '.item-pjax',
+         'triggerTemplate' => '<div class="ias-trigger col-md-12" style="text-align: center; cursor: pointer; margin-top: 20px; "><a>{text}</a></div>',
+         'triggerOffset' => 3
+     ]
+ ]);*/

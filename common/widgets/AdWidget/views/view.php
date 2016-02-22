@@ -200,4 +200,4 @@ $this->registerJS($js);
         </div>
     </div>
 </div>
-<?php
+<div class="clearfix"></div>

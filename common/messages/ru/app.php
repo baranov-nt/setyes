@@ -269,6 +269,7 @@ return [
     'Yes' => 'Да',
     'You are not allowed to access this page.' => '',
     'You can not reset the password.' => 'Вы не можете сбросить пароль.',
+    'Your ad is not added. Would you like to create another ad?' => 'Ваше объявление не добавлено. Хотите создать другое объявление?',
     'Your ad is removed.' => 'Ваше объявление удалено.',
     'Your browser is too old! Open the app with something more modern -:) Thank you.' => 'Ваш браузер слишком стар! Откройте приложение чем-нибудь более современным -:) Спасибо.',
     'Your password is changed.' => 'Ваш пароль изменен.',

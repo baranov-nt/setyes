@@ -270,6 +270,7 @@ return [
     'You are not allowed to access this page.' => '',
     'You can not reset the password.' => 'Sie können das Kennwort nicht zurückgesetzt.',
     'Your ad is removed.' => 'Ihre Anzeige wird entfernt.',
+    'Your ad is not added. Would you like to create another ad?' => 'Ihre Anzeige wird nicht hinzugefügt. Möchten Sie eine Anzeige zu erstellen?',
     'Your browser is too old! Open the app with something more modern -:) Thank you.' => 'Ihr Browser ist zu alt! Öffnen Sie die App mit etwas mehr modern - :) Danke.',
     'Your password is changed.' => 'Ihr Passwort wird geändert.',
     'no input params given!' => '',

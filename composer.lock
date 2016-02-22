@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e69477d9a1bab3bb5f70d9641ac5bd1d",
-    "content-hash": "5f34911ddb321aa858bc6a54fcb1405f",
+    "hash": "69db40175b0263340186b0ea290f77d3",
+    "content-hash": "7636b62a24b43c98ed735c496861e0d6",
     "packages": [
         {
             "name": "alexander-suter/yii2-browser-info",
@@ -577,16 +577,16 @@
         },
         {
             "name": "bower-asset/jquery-infinite-scroll",
-            "version": "2.1.0",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infinite-scroll/infinite-scroll.git",
-                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e"
+                "reference": "1ebb7b5d9c8e807f7bdb1310317b245991e3146e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infinite-scroll/infinite-scroll/zipball/f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
-                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
+                "url": "https://api.github.com/repos/infinite-scroll/infinite-scroll/zipball/1ebb7b5d9c8e807f7bdb1310317b245991e3146e",
+                "reference": "1ebb7b5d9c8e807f7bdb1310317b245991e3146e",
                 "shasum": ""
             },
             "type": "bower-asset-library",

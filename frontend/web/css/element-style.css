@@ -20,28 +20,22 @@
     text-decoration: underline;
 }
 .icon-pencil {
-    font-size: 18px;
+    font-size: 12px;
     color: #9d9d9d;
     cursor: pointer;
     float: right;
 }
 .icon-pencil:hover {
-    font-size: 18px;
     color: #1c309d;
-    cursor: pointer;
-    float: right;
 }
 .icon-trash {
-    font-size: 18px;
+    font-size: 12px;
     color: #9d9d9d;
     cursor: pointer;
     float: right;
 }
 .icon-trash:hover {
-    font-size: 18px;
     color: #9d0d0e;
-    cursor: pointer;
-    float: right;
 }
 .icon-span {
     font-size: 18px;
@@ -52,8 +46,8 @@
 .icon-favorite {
     font-size: 18px;
     color: #ddaa00;
-    cursor: pointer;
-!important; float: right;
+    cursor: pointer !important;
+    float: right;
 }
 .icon-favorite-empty {
     font-size: 18px;

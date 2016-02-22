@@ -179,6 +179,7 @@ class AdRealEstate extends ActiveRecord
             'temp' => Yii::t('app', 'Temp'),
             'style' => Yii::t('app', 'Style'),
             'phone_temp_ad' => Yii::t('app', 'Phone for temp ad'),
+            'model_is' => Yii::t('app', 'model_is'),
         ];
     }
 

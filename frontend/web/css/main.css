@@ -1,6 +1,6 @@
 /* pnpNT CSS file */
 body {
-    font-family: Roboto-Regular;
+    font-family: 'Roboto';
 }
 .badge-primary {
     background-color: rgba(51, 122, 183, 1);
@@ -76,6 +76,7 @@ body {
     line-height: 30px !important;
 }
 #infscr-loading {
+    text-align: center;
     position: fixed;
     bottom: 60px;
     left: 42%;

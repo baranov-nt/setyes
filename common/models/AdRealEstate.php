@@ -1087,9 +1087,11 @@ class AdRealEstate extends ActiveRecord
             $attributes['area_of_property'],
             $attributes['area_of_land'],
             $attributes['price'],
-            $attributes['images_label'],
-            $attributes['temp']
+            $attributes['images_label']
         );
+
+        /* Ищем повтор только у опубликованных объявлений */
+        $attributes['temp'] = 0;
 
         return $attributes;
     }
@@ -1104,23 +1106,6 @@ class AdRealEstate extends ActiveRecord
     {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->setScenario($scenario);
-
-        //dd($this->phone_temp_ad);
-        /* Находим такое же объявление, чтобы исключить повтор */
-        /*$modelAdRealEstateIs = AdRealEstate::find()
-            ->where($this->getAttributesArray($modelAdRealEstate->attributes))
-            ->joinWith([
-                'adCategory.adMain' => function ($query) {
-                    $query->andWhere(['user_id' => Yii::$app->user->id]);
-                    $query->andWhere(['phone_temp_ad' => $this->phone_temp_ad]);
-                },
-            ])
-            ->one();
-        if($modelAdRealEstateIs) {
-            // Если такаяже запись найдена, направляем на ее редактирование
-            $modelAdRealEstateIs->addError('model_is');
-            return $modelAdRealEstateIs;
-        }*/
 
         /* Проверям заполненные поля для полученного сценария */
         if ($modelAdRealEstate->validate()) {
@@ -1147,10 +1132,28 @@ class AdRealEstate extends ActiveRecord
             }
 
             if(!$modelAdRealEstate->errors) {
+                /* Для определенных сценариев проверяем объявления на дублирование */
+                if($modelAdRealEstate->scenario == 'buyLand') {
+                    $modelAdRealEstateIs = AdRealEstate::find()
+                        ->where($this->getAttributesArray($modelAdRealEstate->attributes))
+                        ->joinWith([
+                            'adCategory.adMain' => function ($query) {
+                                $query->andWhere(['user_id' => Yii::$app->user->id]);
+                                $query->andWhere(['phone_temp_ad' => $this->phone_temp_ad]);
+                                $query->andWhere(['place_city_id' => $this->place_city_id]);
+                            },
+                        ])
+                        //->where(['place_address' => $modelAdRealEstate->place_address])
+                        ->one();
+                    if($modelAdRealEstateIs) {
+                        // Если такаяже запись найдена, направляем на ее редактирование
+                        $modelAdRealEstateIs->addError('model_is');
+                        return $modelAdRealEstateIs;
+                    }
+                }
                 $modelAdRealEstate = $this->saveAd($modelAdRealEstate);
             }
         }
-        //dd($modelAdRealEstate->errors);
         return $modelAdRealEstate;
     }
 

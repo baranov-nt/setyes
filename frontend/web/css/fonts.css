@@ -1,5 +1,5 @@
 /* Vladimir Baranov (phpNT)  ==*/
-@font-face {font-family: ClearSans-Bold; src: url(fonts/ClearSans-Bold.ttf);}
+/*@font-face {font-family: ClearSans-Bold; src: url(fonts/ClearSans-Bold.ttf);}
 @font-face {font-family: Roboto-Black; src: url(fonts/Roboto-Black.ttf);}
 @font-face {font-family: Roboto-BlackItalic; src: url(fonts/Roboto-BlackItalic.ttf);}
 @font-face {font-family: Roboto-Bold; src: url(fonts/Roboto-Bold.ttf);}
@@ -15,4 +15,41 @@
 @font-face {font-family: Roboto-MediumItalic; src: url(fonts/Roboto-MediumItalic.ttf);}
 @font-face {font-family: Roboto-Regular; src: url(fonts/Roboto-Regular.ttf);}
 @font-face {font-family: Roboto-Thin; src: url(fonts/Roboto-Thin.ttf);}
-@font-face {font-family: Roboto-ThinItalic; src: url(fonts/Roboto-ThinItalic.ttf);}
+@font-face {font-family: Roboto-ThinItalic; src: url(fonts/Roboto-ThinItalic.ttf);}*/
+/* https://www.maketecheasier.com/use-google-roboto-font-everywhere/ */
+@font-face {
+    font-family: 'RobotoLight';
+    src: url('fonts/RobotoLight/RobotoLight.eot');
+    src: url('fonts/RobotoLight/RobotoLight.eot?#iefix') format('embedded-opentype'),
+    url('fonts/RobotoLight/RobotoLight.woff') format('woff'),
+    url('fonts/RobotoLight/RobotoLight.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RobotoMedium';
+    src: url('fonts/RobotoMedium/RobotoMedium.eot');
+    src: url('fonts/RobotoMedium/RobotoMedium.eot?#iefix') format('embedded-opentype'),
+    url('fonts/RobotoMedium/RobotoMedium.woff') format('woff'),
+    url('fonts/RobotoMedium/RobotoMedium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RobotoRegular';
+    src: url('fonts/RobotoRegular/RobotoRegular.eot');
+    src: url('fonts/RobotoRegular/RobotoRegular.eot?#iefix') format('embedded-opentype'),
+    url('fonts/RobotoRegular/RobotoRegular.woff') format('woff'),
+    url('fonts/RobotoRegular/RobotoRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'RobotoBold';
+    src: url('fonts/RobotoBold/RobotoBold.eot');
+    src: url('fonts/RobotoBold/RobotoBold.eot?#iefix') format('embedded-opentype'),
+    url('fonts/RobotoBold/RobotoBold.woff') format('woff'),
+    url('fonts/RobotoBold/RobotoBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

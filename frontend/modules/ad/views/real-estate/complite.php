@@ -97,14 +97,14 @@ JS;
     ?>
     </div>
 
+    <?php $form = ActiveForm::begin([
+        'action' => Url::to(['/ad/real-estate/publish', 'id' => $modelAdRealEstate->id]),
+        'method' => 'post',
+        'fieldClass' => ActiveField::className(),
+        'id' => 'style_form',
+        'options' => ['style' => 'outline: none;']
+    ]); ?>
     <div class="col-md-3" style="">
-        <?php $form = ActiveForm::begin([
-            'method' => 'post',
-            'fieldClass' => ActiveField::className(),
-            'id' => 'style_form',
-            'options' => ['style' => 'outline: none;']
-        ]); ?>
-
         <?php
         //dd($modelAdRealEstate->adCategory->adMain->adStyle->id);
         echo $form->field($modelAdRealEstate->adCategory->adMain, 'ad_style_id')->radioList($modelAdRealEstate->adCategory->adMain->adStyle->styleList,
@@ -161,11 +161,13 @@ JS;
             ]
         );
         ?>
-        <?php ActiveForm::end(); ?>
+
     </div>
     <div class="col-md-12 text-center">
-        <?= Html::a(Yii::t('app', 'Publish ad'), ['/ad/real-estate/publish', 'id' => $modelAdRealEstate->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::hiddenInput('cityString', $modelAdRealEstate->getCity($modelAdRealEstate)) ?>
+        <?= Html::submitButton(Yii::t('app', 'Publish ad'), ['class' => 'btn btn-success']) ?>
     </div>
+    <?php ActiveForm::end(); ?>
 </div>
 
 

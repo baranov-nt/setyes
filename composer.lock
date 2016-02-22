@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e78befcd1b21816fcd1098bc6599a5e2",
-    "content-hash": "2e8c0c8a3c7f96070e021ec225e878bb",
+    "hash": "41c8dbbcd22a7eacf803aa64abd638ee",
+    "content-hash": "c2d7949f2befb90bdd5c8ecad6e95d0d",
     "packages": [
         {
             "name": "alexander-suter/yii2-browser-info",
@@ -574,6 +574,40 @@
                     "package.json"
                 ]
             }
+        },
+        {
+            "name": "bower-asset/jquery-infinite-scroll",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/infinite-scroll/infinite-scroll.git",
+                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/infinite-scroll/infinite-scroll/zipball/f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
+                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "jquery.infinitescroll.js",
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "jQuery Infinite Scroll Plugin",
+            "keywords": [
+                "infinitescroll",
+                "jquery"
+            ]
         },
         {
             "name": "bower-asset/jquery-mousewheel",
@@ -1203,26 +1237,27 @@
             "time": "2015-07-30 10:17:50"
         },
         {
-            "name": "darkcs/yii2-infinite-scroll",
-            "version": "dev-master",
+            "name": "dlds/yii2-infinite-scroll",
+            "version": "0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/DarkCs/yii2-infinite-scroll.git",
-                "reference": "42e761c0e2fe474e900ef52998133e3f402f8524"
+                "url": "https://github.com/dlds/yii2-infinite-scroll.git",
+                "reference": "595faa265b25b35f84d126a7fcfc18e4dd746999"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DarkCs/yii2-infinite-scroll/zipball/42e761c0e2fe474e900ef52998133e3f402f8524",
-                "reference": "42e761c0e2fe474e900ef52998133e3f402f8524",
+                "url": "https://api.github.com/repos/dlds/yii2-infinite-scroll/zipball/595faa265b25b35f84d126a7fcfc18e4dd746999",
+                "reference": "595faa265b25b35f84d126a7fcfc18e4dd746999",
                 "shasum": ""
             },
             "require": {
+                "bower-asset/jquery-infinite-scroll": "*",
                 "yiisoft/yii2": "*"
             },
             "type": "yii2-extension",
             "autoload": {
                 "psr-4": {
-                    "darkcs\\infinitescroll\\": ""
+                    "dlds\\infinitescroll\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1231,21 +1266,23 @@
             ],
             "authors": [
                 {
-                    "name": "Yuri Plaksunov",
-                    "email": "darkcs2@gmail.com"
+                    "name": "Alexander Stepanov",
+                    "email": "student_vmk@mail.ru"
+                },
+                {
+                    "name": "Jiri Svoboda",
+                    "email": "jiri.svoboda@dlds.cz"
                 }
             ],
-            "description": "Link pager with infinite scroll support.",
+            "description": "Yii2 extension for infinite-scroll jQuery plugin",
             "keywords": [
-                "autopagerize",
-                "endless",
-                "extension",
-                "infinite",
-                "pager",
-                "scroll",
+                "infinite-scroll",
+                "jquery",
+                "plugin",
+                "widget",
                 "yii2"
             ],
-            "time": "2015-09-08 21:38:53"
+            "time": "2015-04-11 19:39:32"
         },
         {
             "name": "donatj/phpuseragentparser",
@@ -2015,40 +2052,6 @@
     ],
     "packages-dev": [
         {
-            "name": "bower-asset/jquery-infinite-scroll",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/infinite-scroll/infinite-scroll.git",
-                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/infinite-scroll/infinite-scroll/zipball/f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
-                "reference": "f0d9eecb55a428b2fd4027964a22b84633ba6e3e",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "jquery.infinitescroll.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "jQuery Infinite Scroll Plugin",
-            "keywords": [
-                "infinitescroll",
-                "jquery"
-            ]
-        },
-        {
             "name": "bower-asset/typeahead.js",
             "version": "v0.10.5",
             "source": {
@@ -2074,54 +2077,6 @@
             "extra": {
                 "bower-asset-main": "dist/typeahead.bundle.js"
             }
-        },
-        {
-            "name": "dlds/yii2-infinite-scroll",
-            "version": "0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dlds/yii2-infinite-scroll.git",
-                "reference": "595faa265b25b35f84d126a7fcfc18e4dd746999"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dlds/yii2-infinite-scroll/zipball/595faa265b25b35f84d126a7fcfc18e4dd746999",
-                "reference": "595faa265b25b35f84d126a7fcfc18e4dd746999",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery-infinite-scroll": "*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "dlds\\infinitescroll\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Stepanov",
-                    "email": "student_vmk@mail.ru"
-                },
-                {
-                    "name": "Jiri Svoboda",
-                    "email": "jiri.svoboda@dlds.cz"
-                }
-            ],
-            "description": "Yii2 extension for infinite-scroll jQuery plugin",
-            "keywords": [
-                "infinite-scroll",
-                "jquery",
-                "plugin",
-                "widget",
-                "yii2"
-            ],
-            "time": "2015-04-11 19:39:32"
         },
         {
             "name": "fzaninotto/faker",
@@ -2405,8 +2360,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "sjaakp/yii2-illustrated-behavior": 20,
-        "darkcs/yii2-infinite-scroll": 20
+        "sjaakp/yii2-illustrated-behavior": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

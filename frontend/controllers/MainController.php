@@ -317,13 +317,15 @@ class MainController extends BehaviorsController
         );
     }
 
-    public function actionSelectCity()
+    public function actionSelectCity($place = null)
     {
-        $place = Yii::$app->request->post('place');
+        if(!$place)
+            $place = Yii::$app->request->post('place');
         $cityId = Yii::$app->placeManager->setMainCity($place);
         if($cityId) {
             return $this->redirect(Url::to(['/ad/view/all', 'cityId' => $cityId]));
         }
+
         /* Если объект не найден, переходим на главную страницу */
         return $this->redirect(Url::to(['/ad/view/all']));
     }

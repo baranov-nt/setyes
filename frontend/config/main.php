@@ -39,11 +39,16 @@ return [
                     'route' => '/ad/view/all',
                     'suffix' => ''
                 ],*/
-                [
-                    'pattern' => '/ad/view/all/<cityId:\d+>',
+                /*[
+                    'pattern' => '/<cityId:\d+>/ad/view/all/<page:\d+>/<per-page:\d+>',
                     'route' => '/ad/view/all',
                     'suffix' => ''
                 ],
+                [
+                    'pattern' => '/<cityId:\d+>/ad/view/all',
+                    'route' => '/ad/view/all',
+                    'suffix' => ''
+                ],*/
                 [
                     'pattern' => '',
                     'route' => '/ad/view/all',

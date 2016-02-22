@@ -97,6 +97,7 @@ Modal::begin([
                 <?php
                 if(count($items) > 1):
                     echo Carousel::widget([
+                        'id' => 'carouser-modal-'.$id,
                         'items' => $items,
                         'options' => [
                             'data-interval' => 0,

@@ -356,6 +356,10 @@ class AdRealEstate extends ActiveRecord
         }
     }
 
+    public function getCity($modelAdRealEstate) {
+        return Yii::$app->placeManager->getCity($modelAdRealEstate);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -1103,7 +1107,7 @@ class AdRealEstate extends ActiveRecord
 
         //dd($this->phone_temp_ad);
         /* Находим такое же объявление, чтобы исключить повтор */
-        $modelAdRealEstateIs = AdRealEstate::find()
+        /*$modelAdRealEstateIs = AdRealEstate::find()
             ->where($this->getAttributesArray($modelAdRealEstate->attributes))
             ->joinWith([
                 'adCategory.adMain' => function ($query) {
@@ -1113,10 +1117,10 @@ class AdRealEstate extends ActiveRecord
             ])
             ->one();
         if($modelAdRealEstateIs) {
-            /* Если такаяже запись найдена, направляем на ее редактирование */
+            // Если такаяже запись найдена, направляем на ее редактирование
             $modelAdRealEstateIs->addError('model_is');
             return $modelAdRealEstateIs;
-        }
+        }*/
 
         /* Проверям заполненные поля для полученного сценария */
         if ($modelAdRealEstate->validate()) {

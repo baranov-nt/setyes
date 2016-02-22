@@ -131,6 +131,7 @@ $this->registerJS($js);
                     echo Carousel::widget([
                         'items' => $items,
                         'options' => [
+                            'id' => 'carouser-'.$widget->id,
                             'data-interval' => 0,
                             'class' => 'slide',
                             'style' => 'width:100%;' // set the width of the container if you like

@@ -438,8 +438,9 @@ class RealEstateController extends BehaviorsController
 
         if (Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain])) {
                 $modelAdRealEstate->temp = 0;
+
                 if($modelAdRealEstate->save()) {
-                    return $this->redirect(['/ad/view/all']);
+                    return $this->redirect(['/main/select-city', 'place' => Yii::$app->request->post('cityString')]);
                 }
 
             return $this->render('complite', [

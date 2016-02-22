@@ -65,7 +65,7 @@ class AdMainSearch extends AdMain
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 3,
+                'pageSize' => 6,
             ],
             /*'sort' => [
                 'defaultOrder' => [

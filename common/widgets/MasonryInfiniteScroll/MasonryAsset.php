@@ -6,9 +6,11 @@
  * Date: 16.02.2016
  * Time: 18:24
  */
-namespace common\widgets\Masonry;
+namespace common\widgets\MasonryInfiniteScroll;
 
-class MasonryAsset extends \yii\web\AssetBundle
+use yii\web\AssetBundle;
+
+class MasonryAsset extends AssetBundle
 {
     /**
      * @inherit

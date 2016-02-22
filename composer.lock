@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "41c8dbbcd22a7eacf803aa64abd638ee",
-    "content-hash": "c2d7949f2befb90bdd5c8ecad6e95d0d",
+    "hash": "e69477d9a1bab3bb5f70d9641ac5bd1d",
+    "content-hash": "5f34911ddb321aa858bc6a54fcb1405f",
     "packages": [
         {
             "name": "alexander-suter/yii2-browser-info",
@@ -1235,54 +1235,6 @@
                 "yii2"
             ],
             "time": "2015-07-30 10:17:50"
-        },
-        {
-            "name": "dlds/yii2-infinite-scroll",
-            "version": "0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dlds/yii2-infinite-scroll.git",
-                "reference": "595faa265b25b35f84d126a7fcfc18e4dd746999"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dlds/yii2-infinite-scroll/zipball/595faa265b25b35f84d126a7fcfc18e4dd746999",
-                "reference": "595faa265b25b35f84d126a7fcfc18e4dd746999",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/jquery-infinite-scroll": "*",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "dlds\\infinitescroll\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Stepanov",
-                    "email": "student_vmk@mail.ru"
-                },
-                {
-                    "name": "Jiri Svoboda",
-                    "email": "jiri.svoboda@dlds.cz"
-                }
-            ],
-            "description": "Yii2 extension for infinite-scroll jQuery plugin",
-            "keywords": [
-                "infinite-scroll",
-                "jquery",
-                "plugin",
-                "widget",
-                "yii2"
-            ],
-            "time": "2015-04-11 19:39:32"
         },
         {
             "name": "donatj/phpuseragentparser",

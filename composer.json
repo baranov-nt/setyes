@@ -36,12 +36,12 @@
         "bower-asset/jquery.scrollTo": "*",
         "bower-asset/jquery-cookie": "*",
         "bower-asset/masonry": "*",
+        "bower-asset/jquery-infinite-scroll": "*",
         "cybercog/yii2-google-analytics": "^0.3.1",
         "himiklab/yii2-recaptcha-widget": "^1.0",
         "justinvoelker/yii2-awesomebootstrapcheckbox": "^1.0",
         "alexander-suter/yii2-browser-info": "^2.0",
-        "nmdimas/yii2-user-agent-parser": "^1.0",
-        "dlds/yii2-infinite-scroll": "0.2"
+        "nmdimas/yii2-user-agent-parser": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -2,9 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ListView;
-use common\widgets\Masonry\Masonry;
 use common\widgets\iGrowl\AssetBundle;
-use yii\widgets\Pjax;
+use common\widgets\MasonryInfiniteScroll\InfiniteScrollPager;
 
 AssetBundle::register($this);
 
@@ -13,11 +12,6 @@ AssetBundle::register($this);
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->params['breadcrumbs'][] = $this->title;
-
-Pjax::begin([
-
-]);
-Masonry::widget();
 ?>
     <div class="container" style="margin-bottom: 20px !important;">
         <div style="padding-left: 20px !important;">
@@ -56,7 +50,7 @@ Masonry::widget();
                     ],
                     'layout' => "<div class=\"items grid\">{items}</div><div>{pager}</div>",
                     'pager' => [
-                        'class' => \dlds\infinitescroll\InfiniteScrollPager::className(),
+                        'class' => InfiniteScrollPager::className(),
                         'widgetId' => 'my-listview-id',
                         'itemsCssClass' => 'items',
                         'contentLoadedCallback' => 'afterAjaxListViewUpdate',
@@ -69,7 +63,7 @@ Masonry::widget();
                                 'msgText' => "<em>Loading next set of items...</em>",
                                 'finishedMsg' => "<em>No more items to load</em>",
                             ],
-                            'behavior' => \dlds\infinitescroll\InfiniteScrollPager::BEHAVIOR_MASONRY,
+                            'behavior' => InfiniteScrollPager::BEHAVIOR_MASONRY,
                         ],
                     ],
                 ]);
@@ -78,10 +72,7 @@ Masonry::widget();
             </div>
         </div>
     </div>
-<?php
-Pjax::end();
-?>
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
 <?php
 echo $this->render('_modal-window');
 /* "kop/yii2-scroll-pager": "^2.3" */

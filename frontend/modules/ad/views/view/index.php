@@ -54,14 +54,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         'widgetId' => 'my-listview-id',
                         'itemsCssClass' => 'items',
                         'contentLoadedCallback' => 'afterAjaxListViewUpdate',
-                        'nextPageLabel' => 'Load more items',
+                        'nextPageLabel' => '',
                         'linkOptions' => [
                             'class' => 'grid-item',
                         ],
                         'pluginOptions' => [
                             'loading' => [
-                                'msgText' => '<em>'.Yii::t('app', 'Loading next set of items.').'</em>',
-                                'finishedMsg' => '<em>'.Yii::t('app', 'No more items to load.').'</em>',
+                                'msgText' => '<em>'.Yii::t('app', 'Loading next set of ads.').'</em>',
+                                'finishedMsg' => '<em>'.Yii::t('app', 'No more ads to load.').'</em>',
                                 'img' => '/images/ajax-loader.gif',
                             ],
                             'behavior' => InfiniteScrollPager::BEHAVIOR_MASONRY,

@@ -173,7 +173,6 @@ JS;
             /* Кнопка внизу "Load more items" */
             $buttons[] = $this->renderPageButton($this->nextPageLabel, $page, $this->nextPageCssClass, $currentPage >= $pageCount - 1);
         }
-
         return Html::tag('ul', implode("\n", $buttons), $this->options);
     }
 

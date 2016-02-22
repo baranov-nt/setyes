@@ -36,5 +36,5 @@ echo AdWidget::widget([
     'quick_view_class' => $model->adCategory->adMain->adStyle->quick_view_class
 ]);
 ?>
-
+<div class="clearfix"></div>
 

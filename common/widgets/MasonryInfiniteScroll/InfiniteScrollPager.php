@@ -105,59 +105,24 @@ class InfiniteScrollPager extends Widget
 
         /* Регистрация масонри */
         MasonryAsset::register($view);
+        /* Регистрация бесконечного скролла */
+        InfiniteScrollAsset::register($view);
 
         /* Инициализация масонри */
         $js = <<< JS
         $(document).ready(function () {
             $('.grid').masonry({
-              // options
               itemSelector: '.grid-item',
               percentPosition: true
-              //columnWidth: 200
             });
 
         });
 JS;
         $view->registerJs($js);
 
-        // Publish assets and register main plugin code
-        InfiniteScrollAsset::register($this->view);
-
-        // Register configured behavior, if any
-        $behavior = ArrayHelper::getValue($this->pluginOptions, 'behavior', null);
-        if (!is_null($behavior)) {
-            $behaviorAsset = 'masonry-isotope.js';
-            $assetManager = $this->view->getAssetManager();
-            $assetBundle = $assetManager->getBundle(InfiniteScrollAsset::className());
-            $behaviorUrl = $assetManager->getAssetUrl($assetBundle, 'behaviors/' . $behaviorAsset);
-            $this->view->registerJsFile($behaviorUrl, [
-                'depends' => [InfiniteScrollAsset::className()]
-            ]);
-        }
-
-        $widgetSelector = '#' . $this->widgetId;
-
-        // Set default plugin selectors / options if not configured
+        // Установка свойств selectors / options https://github.com/infinite-scroll/infinite-scroll
         if (is_null(ArrayHelper::getValue($this->pluginOptions, 'maxPage', null)))
             $this->pluginOptions['maxPage'] = $this->pagination->getPageCount();
-
-        if (is_null(ArrayHelper::getValue($this->pluginOptions, 'contentSelector', null)))
-            $this->pluginOptions['contentSelector'] = $widgetSelector . ' .' . $this->itemsCssClass;
-
-        if (is_null(ArrayHelper::getValue($this->pluginOptions, 'itemSelector', null)))
-            $this->pluginOptions['itemSelector'] = $this->pluginOptions['contentSelector'] . ' >';
-
-        if (is_null(ArrayHelper::getValue($this->pluginOptions, 'navSelector', null)))
-            $this->pluginOptions['navSelector'] = $widgetSelector . " ul." . $this->options['class'];
-
-        if (is_null(ArrayHelper::getValue($this->pluginOptions, 'nextSelector', null)))
-            $this->pluginOptions['nextSelector'] = $this->pluginOptions['navSelector'] . ' li.' . $this->nextPageCssClass . " a:first";
-
-        if (is_null(ArrayHelper::getValue($this->pluginOptions, 'loading', null)))
-            $this->pluginOptions['loading'] = [];
-        if (is_null(ArrayHelper::getValue($this->pluginOptions['loading'], 'img', null))) {
-            $this->pluginOptions['loading']['img'] = '/images/ajax-loader.gif';
-        }
     }
 
     /**
@@ -205,6 +170,7 @@ JS;
             if (($page = $currentPage + 1) >= $pageCount - 1) {
                 $page = $pageCount - 1;
             }
+            /* Кнопка внизу "Load more items" */
             $buttons[] = $this->renderPageButton($this->nextPageLabel, $page, $this->nextPageCssClass, $currentPage >= $pageCount - 1);
         }
 
@@ -223,6 +189,7 @@ JS;
     protected function renderPageButton($label, $page, $class, $disabled)
     {
         $options = ['class' => $class === '' ? null : $class];
+        //dd($options);
         if ($disabled) {
             Html::addCssClass($options, $this->disabledPageCssClass);
 
@@ -234,6 +201,7 @@ JS;
         return Html::tag('li', Html::a($label, $this->pagination->createUrl($page), $linkOptions), $options);
     }
 
+    /* Инициализация плагина */
     protected function initializeInfiniteScrollPlugin()
     {
         $pluginOptions = array_filter($this->pluginOptions);                // Removing null entries
@@ -241,6 +209,11 @@ JS;
             ArrayHelper::getValue($this->pluginOptions, 'loading', null));  // Removing null entries
         if (empty($pluginOptions['loading']))
             unset($pluginOptions['loading']);
+
+
+
+        //dd([$pluginOptions]);
+
         $pluginOptions = Json::encode($pluginOptions);
 
         if (!$this->contentLoadedCallback instanceof JsExpression) {

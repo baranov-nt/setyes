@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'id' => 'list-wrapper',
                         'style' => 'float: left !important;'
                     ],
-                    'layout' => "<div class=\"items grid\">{items}</div><div>{pager}</div>",
+                    'layout' => "<div class=\"items grid\">{items}{pager}</div>",
                     'pager' => [
                         'class' => InfiniteScrollPager::className(),
                         'widgetId' => 'my-listview-id',
@@ -56,14 +56,19 @@ $this->params['breadcrumbs'][] = $this->title;
                         'contentLoadedCallback' => 'afterAjaxListViewUpdate',
                         'nextPageLabel' => 'Load more items',
                         'linkOptions' => [
-                            'class' => 'grid-item btn btn-lg btn-block col-md-12',
+                            'class' => 'grid-item',
                         ],
                         'pluginOptions' => [
                             'loading' => [
-                                'msgText' => "<em>Loading next set of items...</em>",
-                                'finishedMsg' => "<em>No more items to load</em>",
+                                'msgText' => '<em>'.Yii::t('app', 'Loading next set of items.').'</em>',
+                                'finishedMsg' => '<em>'.Yii::t('app', 'No more items to load.').'</em>',
+                                'img' => '/images/ajax-loader.gif',
                             ],
                             'behavior' => InfiniteScrollPager::BEHAVIOR_MASONRY,
+                            'contentSelector' => '#my-listview-id .items',
+                            'itemSelector' => '#my-listview-id .items >',
+                            'navSelector' => '#my-listview-id ul.pagination',
+                            'nextSelector' => '#my-listview-id ul.pagination li.next a:first',
                         ],
                     ],
                 ]);
@@ -72,124 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-    <div class="clearfix"></div>
 <?php
 echo $this->render('_modal-window');
-/* "kop/yii2-scroll-pager": "^2.3" */
-/* echo ListView::widget([
-     'dataProvider' => $dataProvider,
-     'summary' => false,
-     //'layout' => "{summary}<div class='list-wrapper row grid'>{items}<div class='grid-item col-md-12' style='margin-top: 20px;'>{pager}</div></div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
-     //'itemOptions' => ['class' => 'item-pjax'],
-     'options' => [                                                          // свойства основного контейнера для элементов
-         'tag' => 'div',
-         'class' => 'list-view list-wrapper row grid',
-         'style'
-     ],
-     'itemOptions' => [                                                      // свойства для элементов контейнера
-         'tag' => 'div',
-         'class' => 'grid-item col-md-3 col-sm-6 item-pjax',
-         //'id' => 'list-wrapper',
-         'style' => 'float: left !important;'
-     ],
-     'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
-         // @var $model common\models\AdMain
-         //dd($model->adCategory->category);
-         return $this->render('_category_'.$model->adCategory->category,[
-             'model' => $model->adCategory->ad,
-             'key' => $key,
-             'index' => $index,
-             'widget' => $widget
-         ]);
-         // or just do some echo
-         //return $model->name . ' добавил ' . $model->user->email;
-     },
-     'pager' => [
-         'class' => \kop\y2sp\ScrollPager::className(),
-         'item' => '.item-pjax',
-         'triggerTemplate' => '<div class="ias-trigger col-md-12" style="text-align: center; cursor: pointer; margin-top: 20px; "><a>{text}</a></div>',
-         'triggerOffset' => 3
-     ]
- ]);
-
-// --------------------------------------------------------------------------------------------------------------------------------------------------------------------
- echo ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'layout' => "{summary}\n{items}<div class='grid-item col-md-12' style='margin-top: 20px;'>{pager}</div>",              // выводит следующии данные summary(вывод количества записей), items(вывод самих записей),
-                    // sorter(вывод блока сортировки), pager(вывод пагинации)
-                    //'itemView' => 'index',                                                // представление для элементов
-                    'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
-                        // @var $model common\models\AdMain
-                        //dd($model->adCategory->category);
-                        return $this->render('_category_'.$model->adCategory->category,[
-                            'model' => $model->adCategory->ad,
-                            'key' => $key,
-                            'index' => $index,
-                            'widget' => $widget
-                        ]);
-                        // or just do some echo
-                        //return $model->name . ' добавил ' . $model->user->email;
-                    },
-                    'options' => [                                                          // свойства основного контейнера для элементов
-                        'tag' => 'div',
-                        'class' => 'list-wrapper row grid',
-                        'id' => 'list-wrapper',
-                    ],
-                    'itemOptions' => [                                                      // свойства для элементов контейнера
-                        'tag' => 'div',
-                        'class' => 'grid-item col-md-3 col-sm-6',
-                        //'id' => 'list-wrapper',
-                        //'style' => 'float: left !important;'
-                    ],
-                    'pager' => [                                                            // параметры для пагинации
-                        'firstPageLabel' => 'первая',
-                        'lastPageLabel' => 'последняя',
-                        'nextPageLabel' => 'следующая',
-                        'prevPageLabel' => 'предыдущая',
-                        'maxButtonCount' => 3,                                              // количество цифровых кнопок
-                    ],
-                    'summary' => false,
-                    //'summary' => "{begin}{end}{count}{totalCount}{page}{pageCount}",      // свойства выводимых данных количества элементов
-                    //'summaryOptions' => [                                                   // свойства для количества элементов
-                    //    'tag' => 'div',
-                    //    'class' => 'grid-item',
-                    //    'style' => 'display: block !important; width: 100% !important; background-color: red !important; margin-bottom: 20px !important;'
-                    //    //'id' => 'list-wrapper',
-                    //],
-                ]);
-// --------------------------------------------------------------------------------------------------------------------------------------------------------------
-// \darkcs\infinitescroll\InfiniteScrollPager ------------------------------------------------------------------------------------------------------
-// в виджете исправить класс item на item-pjax
-                echo \yii\widgets\ListView::widget([
-                    'dataProvider' => $dataProvider,
-                    'options' => [
-                        'class' => 'grid',
-                    ],
-                    'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
-                        // @var $model common\models\AdMain
-                        //dd($model->adCategory->category);
-                        return $this->render('_category_'.$model->adCategory->category,[
-                            'model' => $model->adCategory->ad,
-                            'key' => $key,
-                            'index' => $index,
-                            'widget' => $widget
-                        ]);
-                        // or just do some echo
-                        //return $model->name . ' добавил ' . $model->user->email;
-                    },
-                    'itemOptions' => [                                                      // свойства для элементов контейнера
-                        'tag' => 'div',
-                        'class' => 'grid-item col-md-3 col-sm-6 item-pjax',
-                        //'id' => 'list-wrapper',
-                        'style' => 'float: left !important;'
-                    ],
-                    'summary' => false,
-                    'layout' => '{items}<div class="pagination-wrap">{pager}</div>',
-                    'pager' => [
-                        'class' => \darkcs\infinitescroll\InfiniteScrollPager::className(),
-                        'paginationSelector' => '.pagination-wrap',
-                        'pjaxContainer' => 'image-list',
-                    ],
-                ]);
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-*/
+?>
+<div class="clearfix"></div>

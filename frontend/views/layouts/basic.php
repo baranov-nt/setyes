@@ -242,7 +242,7 @@ $this->beginPage();
             <?= $content ?>
     </div>
 
-    <footer class="footer" style="background-color: #337ab7; max-height: 100%;">
+    <footer class="footer" style="background-color: #337ab7; max-height: 100%; margin-top: 40px !important;">
         <div class="container" >
             <span class="badge badge-primary">
                 <span class="glyphicon glyphicon-copyright-mark"></span> <?= Yii::$app->name.' '.date('Y') ?>

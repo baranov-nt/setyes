@@ -18,22 +18,11 @@ class InfiniteScrollAsset extends AssetBundle
     public $sourcePath = '@bower/jquery-infinite-scroll';
     public $css = [
     ];
-    public $js = [  // Configured conditionally (source/minified) during init()
+    public $js = [  // Подключение плагина бесконечного скролла
+        'jquery.infinitescroll.min.js',
+        'behaviors/masonry-isotope.js',         // поведение масонри
     ];
     public $depends = [
         'yii\web\JqueryAsset',
     ];
-
-    public function init()
-    {
-        parent::init();
-        $this->js[] = YII_DEBUG ? 'jquery.infinitescroll.js' : 'jquery.infinitescroll.min.js';
-
-        $this->publishOptions['beforeCopy'] = function ($from) {
-            $path = str_replace(realpath(Yii::getAlias('@bower') . '\jquery-infinite-scroll'), '', $from);
-            return
-                $path !== DIRECTORY_SEPARATOR.'site'
-                && $path !== DIRECTORY_SEPARATOR.'wordpress-plugin';
-        };
-    }
 }

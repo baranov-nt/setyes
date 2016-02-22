@@ -75,6 +75,15 @@ body {
     height: 30px !important;
     line-height: 30px !important;
 }
-.chosen-single b {
-
+#infscr-loading {
+    position: fixed;
+    bottom: 60px;
+    left: 42%;
+    z-index: 100;
+    background: white;
+    background: hsla( 0, 0%, 100%, 0.6 );
+    padding: 20px;
+    color: #222;
+    font-size: 12px;
+    border-radius: 20px;
 }

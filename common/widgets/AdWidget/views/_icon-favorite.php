@@ -45,6 +45,7 @@ JS;
                     y: 	80
                 }
             });
+            $("#icon-favorite-id-$id").attr("tabindex",-1).focus();
         ');
     ?>
 </div>

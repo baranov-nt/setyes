@@ -1122,7 +1122,7 @@ class AdRealEstate extends ActiveRecord
                     $modelAdRealEstate = $this->findStreet($modelAdRealEstate);
                 }
                 /* Сценарии для поиска улицы, с номером дома */
-                if($modelAdRealEstate->scenario == 'sellingRoom'
+                if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
                 /*|| $modelAdRealEstate->scenario == 'rentARoom'
                     || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
                     || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
@@ -1165,6 +1165,12 @@ class AdRealEstate extends ActiveRecord
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if($modelAdRealEstate->save()) {
+                foreach($modelAdRealEstate->appliances as $one) {
+                    $modelAdRealEstateAppliances = new AdRealEstateAppliances();
+                    $modelAdRealEstateAppliances->real_estate_id = $modelAdRealEstate->id;
+                    $modelAdRealEstateAppliances->reference_id = $one;
+                    $modelAdRealEstateAppliances->save();
+                }
                 $modelCategory = $modelAdRealEstate->adCategory ? ($modelCategory = AdCategory::findOne($modelAdRealEstate->adCategory->id)) : new AdCategory();
                 $modelCategory->category = 1;                       // Категория для недвижемость 1 (из reference main)
                 $modelCategory->ad_id = $modelAdRealEstate->id;

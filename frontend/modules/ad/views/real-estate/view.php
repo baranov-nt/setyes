@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-md-12">
                 <?php
-                if($modelAdRealEstate->model_scenario == 'sellingRoom'):
+                if($modelAdRealEstate->model_scenario == 'sellingRoom' || $modelAdRealEstate->model_scenario == 'rentARoom'):
 
                     ?>
                     <?php

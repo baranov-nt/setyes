@@ -443,6 +443,9 @@ $user = Yii::$app->user->identity;
                     <div class="col-md-6">
 
                         <?php
+                        //dd($modelAdRealEstate->adRealEstateAppliances);
+                        ?>
+                        <?php
                         /** Бытовая техника доступена для сценариев
                          * 'rentARoom' 'rentApatrment' 'rentHouse' */
                         ?>

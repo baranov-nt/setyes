@@ -23,11 +23,9 @@
 
 use yii\bootstrap\Carousel;
 use common\widgets\ShowMapModal\ShowMapModal;
-use common\widgets\Masonry\Masonry;
 use common\widgets\iGrowl\AssetBundle;
 
 AssetBundle::register($this);
-Masonry::widget();
 ?>
 <div class="container">
     <div class="row">

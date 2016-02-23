@@ -20,7 +20,7 @@
     text-decoration: underline;
 }
 .icon-pencil {
-    font-size: 12px;
+    font-size: 14px;
     color: #9d9d9d;
     cursor: pointer;
     float: right;
@@ -29,7 +29,7 @@
     color: #1c309d;
 }
 .icon-trash {
-    font-size: 12px;
+    font-size: 14px;
     color: #9d9d9d;
     cursor: pointer;
     float: right;

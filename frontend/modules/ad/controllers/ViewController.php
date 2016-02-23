@@ -20,7 +20,9 @@ class ViewController extends BehaviorsController
      */
     public function actionAll()
     {
+        $city = Yii::$app->request->cookies->get('_cityId');
         $searchModel = new AdMainSearch();
+        $searchModel->place_city_id = $city->value;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

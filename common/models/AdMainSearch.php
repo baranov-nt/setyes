@@ -43,24 +43,17 @@ class AdMainSearch extends AdMain
      */
     public function search($params)
     {
-        $this->deal_query = [];
-        if($this->deal_type)
-            $this->deal_query = ['deal_type' => $this->deal_type];
-        if($this->not_owner)
-            $this->not_owner = ['!=', 'user_id', Yii::$app->user->id];
-        /*if($this->not_this)
-            $this->not_owner = ['!=', 'user_id', $this->id];*/
+
         $query = AdMain::find()
             ->joinWith('adCategory')
             ->joinWith([
                 'adCategory.ad' => function ($query) {
-                    $query->andWhere(['temp' => 0]);
-                    $query->andWhere($this->deal_query);
+                    //$query->andWhere(['temp' => 0]);
+                    //$query->andWhere($this->deal_query);
                 },
-            ])
-            ->where($this->not_owner)
-            ->orderBy([
-                'updated_at' => SORT_DESC]);
+            ]);
+            /*->orderBy([
+                'updated_at' => SORT_DESC]);*/
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -75,6 +68,8 @@ class AdMainSearch extends AdMain
             ],*/
         ]);
 
+        //$dataProvider->query->orderBy(" FIELD(`ad_main`.`place_city_id`, `".$this->place_city_id."`)");
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -86,9 +81,11 @@ class AdMainSearch extends AdMain
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'place_city_id' => $this->place_city_id,
+            //'place_city_id' => $this->place_city_id,
             'category_id' => $this->category_id,
             'ad_style_id' => $this->ad_style_id,
+            'ad_real_estate.deal_type' => $this->deal_type,
+            'ad_real_estate.temp' => '0',
         ]);
 
         return $dataProvider;

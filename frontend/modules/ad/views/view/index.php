@@ -45,10 +45,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'itemOptions' => [                                                      // свойства для элементов контейнера
                         'tag' => 'div',
                         'class' => 'grid-item col-md-3 col-sm-6 item-pjax',
-                        //'id' => 'list-wrapper',
-                        'style' => 'float: left !important;'
                     ],
-                    'layout' => "<div class=\"items grid\">{items}{pager}</div>",
+                    'layout' => "<div class=\"items grid\">{items}</div>{pager}",
                     'pager' => [
                         'class' => InfiniteScrollPager::className(),
                         'widgetId' => 'my-listview-id',
@@ -56,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'contentLoadedCallback' => 'afterAjaxListViewUpdate',
                         'nextPageLabel' => '',
                         'linkOptions' => [
-                            'class' => 'grid-item',
+                            'class' => '',
                         ],
                         'pluginOptions' => [
                             'loading' => [
@@ -73,7 +71,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]);
                 ?>
-
             </div>
         </div>
     </div>

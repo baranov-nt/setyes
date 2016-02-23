@@ -13,6 +13,7 @@ use yii\helpers\ArrayHelper;
  * @property string $main_container_class
  * @property string $header_link_class
  * @property string $favorite_icon
+ * @property string $complain_icon
  * @property string $quick_view_class
  *
  * @property AdMain[] $adMains
@@ -34,7 +35,7 @@ class AdStyle extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'main_container_class', 'header_link_class', 'quick_view_class'], 'string', 'max' => 32],
-            [['favorite_icon'], 'string', 'max' => 255]
+            [['favorite_icon', 'complain_icon'], 'string', 'max' => 255]
         ];
     }
 
@@ -49,6 +50,7 @@ class AdStyle extends \yii\db\ActiveRecord
             'main_container_class' => Yii::t('app', 'Main Container Class'),
             'header_link_class' => Yii::t('app', 'Header Link Class'),
             'favorite_icon' => Yii::t('app', 'Favorite Icon'),
+            'complain_icon' => Yii::t('app', 'Complain Icon'),
             'quick_view_class' => Yii::t('app', 'Quick View Class'),
         ];
     }

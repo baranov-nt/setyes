@@ -44,17 +44,19 @@ class m160116_074120_create_ad_main_table extends Migration
             'main_container_class' => $this->string(32),        // Класс контейнера
             'header_link_class' => $this->string(32),           // Класс для ссылки в заголовке
             'favorite_icon' => $this->string(255),              // Иконка "Добавить в избранное"
+            'favorite_icon_empty' => $this->string(255),              // Иконка "Добавить в избранное"
+            'complain_icon' => $this->string(255),              // Иконка "Пожаловаться"
             'quick_view_class' => $this->string(32),            // Класс для кнопки "Быстрый просмотр"
         ]);
 
         /* Добавляем стиль по умолчанию */
-        $this->batchInsert('ad_style', ['id','name', 'main_container_class', 'header_link_class', 'favorite_icon', 'quick_view_class'],
+        $this->batchInsert('ad_style', ['id','name', 'main_container_class', 'header_link_class', 'favorite_icon', 'favorite_icon_empty', 'complain_icon', 'quick_view_class'],
             [
-                [1, Yii::t('references', 'Default'), 'alert', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-default'],
-                [2, Yii::t('references', 'Grass'), 'alert alert-success', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-success'],
-                [3, Yii::t('references', 'Sky'), 'alert alert-info', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-info'],
-                [4, Yii::t('references', 'Sand'), 'alert alert-warning', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-warning'],
-                [5, Yii::t('references', 'Rose'), 'alert alert-danger', 'header-link-class', 'glyphicon glyphicon-star', 'btn btn-danger'],
+                [1, Yii::t('references', 'Default'), 'alert', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-default'],
+                [2, Yii::t('references', 'Grass'), 'alert alert-success', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-success'],
+                [3, Yii::t('references', 'Sky'), 'alert alert-info', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-info'],
+                [4, Yii::t('references', 'Sand'), 'alert alert-warning', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-warning'],
+                [5, Yii::t('references', 'Rose'), 'alert alert-danger', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-danger'],
             ]);
 
         /* Создаем таблицу  ad_main, в которой будут присутствовать поля, имеющиеся во всех объявлениях */
@@ -83,6 +85,16 @@ class m160116_074120_create_ad_main_table extends Migration
 
         $this->addForeignKey('ad_favorite_user', 'ad_favorite', 'user_id', 'user', 'id');
         $this->addForeignKey('ad_favorite_ad_main', 'ad_favorite', 'ad_id', 'ad_main', 'id');
+
+        /* Создаем таблицу  ad_complaints, в которой будут записаваться жалобы на объявления */
+        $this->createTable('ad_complains', [
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer()->notNull(),           // Пользователь, который добавил объявление в избранное. Связь с таблицей user
+            'ad_id' => $this->integer()->notNull(),             // Объявление, добавленное в избранное
+        ]);
+
+        $this->addForeignKey('ad_complains_user', 'ad_complains', 'user_id', 'user', 'id');
+        $this->addForeignKey('ad_complains_ad_main', 'ad_complains', 'ad_id', 'ad_main', 'id');
     }
 
     public function safeDown()

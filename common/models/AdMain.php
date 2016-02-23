@@ -204,6 +204,19 @@ class AdMain extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComplain($id)
+    {
+        $modelAdFavorite = AdComplains::findOne([
+            'user_id' => Yii::$app->user->id,
+            'ad_id' => $id
+        ]);
+
+        return $modelAdFavorite ? true : false;
+    }
+
+    /**
      * Returns the array of possible user status values.
      *
      * @return array

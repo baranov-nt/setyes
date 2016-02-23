@@ -52,22 +52,30 @@ $this->registerJS($js);
 
 <div id="element_container_<?= $widget->id ?>" class="main-container-element <?= $widget->main_container_class ?>">
     <div class="row">
-        <div class="col-xs-12">
-            <div id="star_container_<?= $widget->id ?>" style="outline: none;">
+        <div class="col-xs-12" style="padding-bottom: 5px; padding-top: 5px;">
+
                 <?php
                 if($widget->template):
                     ?>
+
                     <?= Html::tag('span', '',
                     [
-                        'class' => 'icon-favorite-empty glyphicon glyphicon-star',
+                        'class' => 'icon-favorite-empty '.$widget->favorite_icon,
                         'title' => Yii::t('app', 'Add to favorites'),
+                        'data-toggle' => 'tooltip',
+                        'data-placement' => 'top',
+                    ]) ?>
+                    <?= Html::tag('span', '',
+                    [
+                        'class' => 'icon-exclamation-sign-empty '.$widget->complain_icon,
+                        'title' => Yii::t('app', 'Complain about this ad'),
                         'data-toggle' => 'tooltip',
                         'data-placement' => 'top',
                     ]) ?>
                     <?php
                 else:
                     if($widget->author):
-                    ?>
+                        ?>
                         <?php
                         echo Html::tag('span', '',
                             [
@@ -88,7 +96,7 @@ $this->registerJS($js);
                                 ]);
                             ?>
                         </a>
-                    <?php
+                        <?php
                     else:
                         if ($widget->favorite) {
                             echo $this->render('_icon-favorite', [
@@ -99,14 +107,28 @@ $this->registerJS($js);
                         } else {
                             echo $this->render('_icon-favorite-empty', [
                                 'id' => $widget->id,
-                                'icon' => $widget->favorite_icon,
+                                'icon' => $widget->favorite_icon_empty,
+                                'ok' => null
+                            ]);
+                        }
+                        if ($widget->complain) {
+                            echo $this->render('_icon-complain', [
+                                'id' => $widget->id,
+                                'icon' => $widget->complain_icon,
+                                'ok' => null
+                            ]);
+                        } else {
+                            echo $this->render('_icon-complain-empty', [
+                                'id' => $widget->id,
+                                'icon' => $widget->complain_icon,
                                 'ok' => null
                             ]);
                         }
                     endif;
                 endif;
                 ?>
-            </div>
+        </div>
+        <div class="col-xs-12">
             <?php
             if($widget->template):
                 ?>
@@ -200,4 +222,4 @@ $this->registerJS($js);
         </div>
     </div>
 </div>
-<div class="clearfix"></div>
+

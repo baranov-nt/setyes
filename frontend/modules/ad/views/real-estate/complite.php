@@ -66,16 +66,6 @@ $user = Yii::$app->user->identity;
     });*/
 JS;
     $this->registerJS($js);
-    /*echo AdWidget::widget([
-        'template' => true,
-        'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class.' col-md-3 col-md-offset-3',
-        'favorite_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon,
-        'header' => $modelAdRealEstate->dealType->reference_name,
-        'address' => $modelAdRealEstate->getAddress($modelAdRealEstate),
-        'images' => $modelAdRealEstate->imagesOfObjects,
-        'content' => $modelAdRealEstate->contentList,
-        'quick_view_class' => $modelAdRealEstate->adCategory->adMain->adStyle->quick_view_class
-    ]);*/
     echo AdWidget::widget([
         'template' => true,
         'id' => $modelAdRealEstate->adCategory->adMain->id,
@@ -83,6 +73,8 @@ JS;
         'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class.' col-md-3 col-md-offset-3',
         'favorite' => $modelAdRealEstate->adCategory->adMain->getFavorite($modelAdRealEstate->adCategory->adMain->id),
         'favorite_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon,
+        'complain' => $modelAdRealEstate->adCategory->adMain->getComplain($modelAdRealEstate->adCategory->adMain->id),
+        'complain_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->complain_icon,
         'header' => $modelAdRealEstate->dealType->reference_name,
         'address' => $modelAdRealEstate->getAddress($modelAdRealEstate),
         'address_map' => $modelAdRealEstate->place_address_id ? true : false,

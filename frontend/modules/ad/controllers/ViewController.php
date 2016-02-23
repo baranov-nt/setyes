@@ -2,6 +2,8 @@
 
 namespace frontend\modules\ad\controllers;
 
+use common\models\AdComplains;
+use common\models\PlaceCity;
 use Yii;
 use common\models\AdMain;
 use common\models\AdMainSearch;
@@ -20,9 +22,34 @@ class ViewController extends BehaviorsController
      */
     public function actionAll()
     {
-        $city = Yii::$app->request->cookies->get('_cityId');
         $searchModel = new AdMainSearch();
-        $searchModel->place_city_id = $city->value;
+        $city = Yii::$app->request->cookies->get('_cityId');
+        if(isset($city))
+            $searchModel->place_city_id = $city->value;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Creates a new AdMain model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionShowInRegion()
+    {
+        $searchModel = new AdMainSearch();
+        $city = Yii::$app->request->cookies->get('_cityId');
+        if(isset($city)) {
+            /* @var $modelPlaceCity \common\models\PlaceCity */
+            $modelPlaceCity = PlaceCity::findOne($city);
+            if(isset($modelPlaceCity))
+                $searchModel->region_id = $modelPlaceCity->region->id;
+        }
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -240,6 +267,34 @@ class ViewController extends BehaviorsController
 
         return $this->renderAjax(
             '@common/widgets/AdWidget/views/_icon-favorite-empty',
+            [
+                'id' => Yii::$app->request->post('id'),
+                'icon' => Yii::$app->request->post('icon'),
+                'ok' => 1
+            ]);
+    }
+
+    public function actionAddToComplains () {
+        $id = Yii::$app->request->post('id');
+        $modelAdComplain = new AdComplains();
+        $modelAdComplain->addToComplains($id);
+
+        return $this->renderAjax(
+            '@common/widgets/AdWidget/views/_icon-complain',
+            [
+                'id' => $id,
+                'icon' => Yii::$app->request->post('icon'),
+                'ok' => 1
+            ]);
+    }
+
+    public function actionDeleteFromComplains () {
+        $id = Yii::$app->request->post('id');
+        $modelAdComplain = new AdComplains();
+        $modelAdComplain->deleteFromComplains($id);
+
+        return $this->renderAjax(
+            '@common/widgets/AdWidget/views/_icon-complain-empty',
             [
                 'id' => Yii::$app->request->post('id'),
                 'icon' => Yii::$app->request->post('icon'),

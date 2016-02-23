@@ -15,6 +15,7 @@ class AdMainSearch extends AdMain
     public $deal_query;
     public $not_owner;
     public $not_this;
+    public $region_id;
     /**
      * @inheritdoc
      */
@@ -51,9 +52,15 @@ class AdMainSearch extends AdMain
                     //$query->andWhere(['temp' => 0]);
                     //$query->andWhere($this->deal_query);
                 },
-            ]);
-            /*->orderBy([
-                'updated_at' => SORT_DESC]);*/
+            ])
+            ->joinWith([
+                'placeCity.region' => function ($query) {
+                    //$query->andWhere(['temp' => 0]);
+                    //$query->andWhere($this->deal_query);
+                },
+            ])
+            ->orderBy([
+                'updated_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -81,10 +88,11 @@ class AdMainSearch extends AdMain
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            //'place_city_id' => $this->place_city_id,
+            'place_city_id' => $this->place_city_id,
             'category_id' => $this->category_id,
             'ad_style_id' => $this->ad_style_id,
             'ad_real_estate.deal_type' => $this->deal_type,
+            'place_region.id' => $this->region_id,
             'ad_real_estate.temp' => '0',
         ]);
 

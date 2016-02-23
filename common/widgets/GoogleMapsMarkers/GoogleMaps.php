@@ -379,22 +379,26 @@ class GoogleMaps extends Widget
             // json decode response
             $response_a = json_decode($response);
 
-            switch (true) {
-                case $address !== null:
-                    $result = $response_a->results[0];
-                    break;
-                case $latlng !== null:
-                    $result = $response_a->results[0];
-                    break;
-                case $placeId !== null:
-                    $result = $response_a->result;
-                    break;
-                default:
-                    $querystring = '';
-            }
+            if($response_a->status != 'ZERO_RESULTS') {
+                switch (true) {
+                    case $address !== null:
+                        $result = $response_a->results[0];
+                        break;
+                    case $latlng !== null:
+                        $result = $response_a->results[0];
+                        break;
+                    case $placeId !== null:
+                        $result = $response_a->result;
+                        break;
+                    default:
+                        $querystring = '';
+                }
 
-            if (isset($result)) {
-                return $result;
+                if (isset($result)) {
+                    return $result;
+                } else {
+                    return null;
+                }
             } else {
                 return null;
             }

@@ -22,6 +22,9 @@ class AdWidget extends Widget
     public $main_container_class;
     public $favorite;
     public $favorite_icon;
+    public $favorite_icon_empty;
+    public $complain;
+    public $complain_icon;
     public $header;
     public $address;
     public $address_map;

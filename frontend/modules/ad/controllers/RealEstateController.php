@@ -176,7 +176,6 @@ class RealEstateController extends BehaviorsController
      */
     public function actionCreate()
     {
-        dd(Yii::$app->request->post());
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'default']);
 

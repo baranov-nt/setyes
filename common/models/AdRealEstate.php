@@ -468,7 +468,17 @@ class AdRealEstate extends ActiveRecord
                 'attribute' => 'condition',
                 'value' => Yii::t('references', $this->condition0->reference_name),
             ];
-        //dd($this->adCategory->adMain->phone_temp_ad);
+        if($this->adRealEstateAppliances)
+            $itemsDiv = '';
+            $items_appliance = '';
+            foreach($this->adRealEstateAppliances as $one) {
+                $items_appliance .= $itemsDiv.Yii::t('references', $one->reference->reference_name);
+                $itemsDiv = ', ';
+            }
+            $items[] = [
+                'attribute' => 'appliances',
+                'value' => $items_appliance,
+            ];
         if($this->adCategory->adMain->phone_temp_ad)
             $items[] = [
                 'attribute' => 'phone_temp_ad',
@@ -512,6 +522,14 @@ class AdRealEstate extends ActiveRecord
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('internet').':</strong> '.Yii::t('references', $this->internet0->reference_name).'</p>';
         if($this->pets_allowed)
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('pets_allowed').':</strong> '.Yii::t('references', $this->petsAllowed->reference_name).'</p>';
+        if($this->adRealEstateAppliances) {
+            $itemsDiv = '';
+            $items .= '<p class="content-elem"><strong>' . $modelAdRealEstate->getAttributeLabel('appliances') . ':</strong> ';
+            foreach ($this->adRealEstateAppliances as $one) {
+                $items .= $itemsDiv . Yii::t('references', $one->reference->reference_name);
+                $itemsDiv = ', ';
+            }
+        }
         if($this->condition)
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('condition').':</strong> '.Yii::t('references', $this->condition0->reference_name).'</p>';
         return $items;
@@ -1069,6 +1087,21 @@ class AdRealEstate extends ActiveRecord
      * Returns the array of possible user status values.
      *
      * @return array
+     */
+    public function getRealEstateAppliancesListChecked($modelAdRealEstate)
+    {
+        /* @var $modelAdRealEstate AdRealEstate */
+        $items = [];
+        foreach($modelAdRealEstate->adRealEstateAppliances as $one) {
+            $items[] = $one->reference_id;
+        }
+        return $items;
+    }
+
+    /**
+     * Returns the array of possible user status values.
+     *
+     * @return array
      *
      */
     public function addNewScenario($dealType, $property, $scenario)
@@ -1160,11 +1193,12 @@ class AdRealEstate extends ActiveRecord
 
     public function saveAd($modelAdRealEstate) {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
-
+        $modelAdRealEstate->appliances = Yii::$app->request->post('AdRealEstate')['appliances'];
         //$modelAdRealEstate->temp = 1;
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if($modelAdRealEstate->save()) {
+                AdRealEstateAppliances::deleteAll(['real_estate_id' => $modelAdRealEstate->id]);
                 foreach($modelAdRealEstate->appliances as $one) {
                     $modelAdRealEstateAppliances = new AdRealEstateAppliances();
                     $modelAdRealEstateAppliances->real_estate_id = $modelAdRealEstate->id;

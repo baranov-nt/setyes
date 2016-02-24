@@ -121,4 +121,6 @@ return [
     ['appliances', 'in', 'range' => [118, 119, 120, 121, 122, 123, 124], 'allowArray' => true,
         'on' => 'rentARoom'
     ],
+    ['appliances', 'each', 'rule' => ['in', 'range' => [118, 119, 120, 121, 122, 123, 124]],
+        'on' => 'rentARoom'],
 ];

@@ -441,9 +441,8 @@ $user = Yii::$app->user->identity;
                         ?>
                     </div>
                     <div class="col-md-6">
-
                         <?php
-                        //dd($modelAdRealEstate->adRealEstateAppliances);
+                        $modelAdRealEstate->appliances = $modelAdRealEstate->getRealEstateAppliancesListChecked($modelAdRealEstate);
                         ?>
                         <?php
                         /** Бытовая техника доступена для сценариев

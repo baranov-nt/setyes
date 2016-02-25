@@ -468,17 +468,18 @@ class AdRealEstate extends ActiveRecord
                 'attribute' => 'condition',
                 'value' => Yii::t('references', $this->condition0->reference_name),
             ];
-        if($this->adRealEstateAppliances)
+        if($this->adRealEstateAppliances) {
             $itemsDiv = '';
             $items_appliance = '';
-            foreach($this->adRealEstateAppliances as $one) {
-                $items_appliance .= $itemsDiv.Yii::t('references', $one->reference->reference_name);
+            foreach ($this->adRealEstateAppliances as $one) {
+                $items_appliance .= $itemsDiv . Yii::t('references', $one->reference->reference_name);
                 $itemsDiv = ', ';
             }
             $items[] = [
                 'attribute' => 'appliances',
                 'value' => $items_appliance,
             ];
+        }
         if($this->adCategory->adMain->phone_temp_ad)
             $items[] = [
                 'attribute' => 'phone_temp_ad',
@@ -1141,6 +1142,10 @@ class AdRealEstate extends ActiveRecord
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         $modelAdRealEstate->setScenario($scenario);
 
+        if(isset(Yii::$app->request->post('AdRealEstate')['appliances'])) {
+            $modelAdRealEstate->appliances = Yii::$app->request->post('AdRealEstate')['appliances'];
+        }
+
         /* Проверям заполненные поля для полученного сценария */
         if ($modelAdRealEstate->validate()) {
             /* Находит введенный город */
@@ -1191,19 +1196,27 @@ class AdRealEstate extends ActiveRecord
         return $modelAdRealEstate;
     }
 
+    /**
+     * @param $modelAdRealEstate
+     * @return AdRealEstate
+     * @throws Exception
+     */
     public function saveAd($modelAdRealEstate) {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
-        $modelAdRealEstate->appliances = Yii::$app->request->post('AdRealEstate')['appliances'];
         //$modelAdRealEstate->temp = 1;
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if($modelAdRealEstate->save()) {
-                AdRealEstateAppliances::deleteAll(['real_estate_id' => $modelAdRealEstate->id]);
-                foreach($modelAdRealEstate->appliances as $one) {
-                    $modelAdRealEstateAppliances = new AdRealEstateAppliances();
-                    $modelAdRealEstateAppliances->real_estate_id = $modelAdRealEstate->id;
-                    $modelAdRealEstateAppliances->reference_id = $one;
-                    $modelAdRealEstateAppliances->save();
+                if(isset(Yii::$app->request->post('AdRealEstate')['appliances'])) {
+                    $modelAdRealEstate->appliances = Yii::$app->request->post('AdRealEstate')['appliances'];
+
+                    AdRealEstateAppliances::deleteAll(['real_estate_id' => $modelAdRealEstate->id]);
+                    foreach ($modelAdRealEstate->appliances as $one) {
+                        $modelAdRealEstateAppliances = new AdRealEstateAppliances();
+                        $modelAdRealEstateAppliances->real_estate_id = $modelAdRealEstate->id;
+                        $modelAdRealEstateAppliances->reference_id = $one;
+                        $modelAdRealEstateAppliances->save();
+                    }
                 }
                 $modelCategory = $modelAdRealEstate->adCategory ? ($modelCategory = AdCategory::findOne($modelAdRealEstate->adCategory->id)) : new AdCategory();
                 $modelCategory->category = 1;                       // Категория для недвижемость 1 (из reference main)

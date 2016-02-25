@@ -337,7 +337,7 @@ $user = Yii::$app->user->identity;
                                     'removeMaskOnSubmit' => true,
                                     'placeholder' =>  '0'
                                 ],
-                            ])->label($modelAdRealEstate->getAttributeLabel('price').' ('.$modelAdRealEstate->realEstateCurrency.') '.$modelAdRealEstate->getRealEstatePriceForThePeriod($modelAdRealEstate->lease_term)); ?>
+                            ])->label($modelAdRealEstate->getAttributeLabel('price').' ('.$modelAdRealEstate->realEstateCurrency.')'); ?>
                             <?php
                         endif;
                         ?>
@@ -442,7 +442,8 @@ $user = Yii::$app->user->identity;
                     </div>
                     <div class="col-md-6">
                         <?php
-                        $modelAdRealEstate->appliances = $modelAdRealEstate->getRealEstateAppliancesListChecked($modelAdRealEstate);
+                        if(!$modelAdRealEstate->appliances)
+                            $modelAdRealEstate->appliances = $modelAdRealEstate->getRealEstateAppliancesListChecked($modelAdRealEstate);
                         ?>
                         <?php
                         /** Бытовая техника доступена для сценариев

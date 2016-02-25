@@ -185,7 +185,6 @@ class RealEstateController extends BehaviorsController
                 if(isset($modelAdRealEstate->errors['model_is']) && $modelAdRealEstate->errors['model_is']) {
                     return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
                 }
-
                 return $this->render('create', [
                     'modelAdRealEstate' => $modelAdRealEstate,
                 ]);

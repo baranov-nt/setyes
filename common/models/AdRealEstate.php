@@ -1171,8 +1171,8 @@ class AdRealEstate extends ActiveRecord
             }
 
             if(!$modelAdRealEstate->errors) {
-                /* Для определенных сценариев проверяем объявления на дублирование */
-                if($modelAdRealEstate->scenario == 'buyLand') {
+                /* Для определенных сценариев проверяем объявления на дублирование  */
+                if($modelAdRealEstate->scenario == 'buyRoom' || $modelAdRealEstate->scenario == 'rentingARoom' || $modelAdRealEstate->scenario == 'buyLand' ) {
                     $modelAdRealEstateIs = AdRealEstate::find()
                         ->where($this->getAttributesArray($modelAdRealEstate->attributes))
                         ->joinWith([

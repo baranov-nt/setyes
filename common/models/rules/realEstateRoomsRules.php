@@ -17,11 +17,11 @@ return [
         'on' => 'rentARoom'
     ],
     [
-        ['property', 'deal_type', 'place_city', 'price', 'model_scenario'], 'required',
+        ['property', 'deal_type', 'place_city', 'model_scenario'], 'required',
         'on' => 'buyRoom'
     ],
     [
-        ['property', 'deal_type', 'place_city', 'lease_term', 'price', 'price_for_the_period', 'model_scenario'], 'required',
+        ['property', 'deal_type', 'place_city', 'model_scenario'], 'required',
         'on' => 'rentingARoom'
     ],
     ['property', 'compare', 'compareValue' => 1, 'operator' => '==',

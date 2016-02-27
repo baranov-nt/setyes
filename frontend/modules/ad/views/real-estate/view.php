@@ -14,10 +14,7 @@ $user = Yii::$app->user->identity;
 $this->title = Yii::t('app', 'Step 3').': '.Yii::t('references', $modelAdRealEstate->dealType->reference_name);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
 ?>
-
-
 <div class="container" style="margin-top: 0 !important; padding-top: 0 !important;">
     <div class="col-md-12 text-center">
         <?php

@@ -142,7 +142,6 @@ class RealEstateController extends BehaviorsController
                 if(isset($modelAdRealEstate->errors['model_is']) && $modelAdRealEstate->errors['model_is']) {
                     return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
                 }
-
                 return $this->render('create', [
                     'modelAdRealEstate' => $modelAdRealEstate,
                 ]);
@@ -183,6 +182,7 @@ class RealEstateController extends BehaviorsController
             $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
             if($modelAdRealEstate->errors) {
                 if(isset($modelAdRealEstate->errors['model_is']) && $modelAdRealEstate->errors['model_is']) {
+                    Yii::$app->session->setFlash('info', Yii::t('app', 'You have published the same ad.'));
                     return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
                 }
                 return $this->render('create', [

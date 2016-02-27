@@ -12,6 +12,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 <div id="complain_container_<?= $id ?>" style="outline: none;">
+    <?= \common\widgets\AlertIGrowl::widget() ?>
     <?php
     $js=<<<JS
 $("#complain_container_$id").on("pjax:complete", function() {
@@ -35,17 +36,6 @@ JS;
                     push: false
                 })'
     ]);
-    if($ok == 1)
-        Yii::$app->view->registerJs('
-            $.iGrowl({
-                type: "info",
-                message: "'.Yii::t('app', 'This ad is removed from complains.').'",
-                offset : {
-                    y: 	80
-                }
-            });
-            $("#icon-complain-id-$id").attr("tabindex",-1).focus();
-        ');
     ?>
 </div>
 

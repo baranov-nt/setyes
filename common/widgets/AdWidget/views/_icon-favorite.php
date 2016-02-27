@@ -12,6 +12,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 <div id="favorite_container_<?= $id ?>" style="outline: none;">
+    <?= \common\widgets\AlertIGrowl::widget() ?>
     <?php
     $js=<<<JS
 $("#favorite_container_$id").on("pjax:complete", function() {
@@ -36,16 +37,5 @@ JS;
                     push: false
                 })'
     ]);
-    if($ok == 1)
-        Yii::$app->view->registerJs('
-            $.iGrowl({
-                type: "notice",
-                message: "'.Yii::t('app', 'Ad added to favorites.').'",
-                offset : {
-                    y: 	80
-                }
-            });
-            $("#icon-favorite-id-$id").attr("tabindex",-1).focus();
-        ');
     ?>
 </div>

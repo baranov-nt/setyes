@@ -11,6 +11,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
+<?= \common\widgets\AlertIGrowl::widget() ?>
 <div id="favorite_container_<?= $id ?>" style="outline: none;">
     <?php
     $js=<<<JS
@@ -35,17 +36,6 @@ JS;
                     push: false
                 })'
     ]);
-    if($ok == 1)
-        Yii::$app->view->registerJs('
-            $.iGrowl({
-                type: "info",
-                message: "'.Yii::t('app', 'This ad is removed from your favorites.').'",
-                offset : {
-                    y: 	80
-                }
-            });
-            $("#icon-favorite-id-$id").attr("tabindex",-1).focus();
-        ');
     ?>
 </div>
 

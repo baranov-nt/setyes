@@ -276,6 +276,7 @@ return [
     'Yes' => 'Ja',
     'You are not allowed to access this page.' => '',
     'You can not reset the password.' => 'Sie können das Kennwort nicht zurückgesetzt.',
+    'You have published the same ad.' => 'Sie haben die gleiche Anzeige veröffentlicht.',
     'Your ad is removed.' => 'Ihre Anzeige wird entfernt.',
     'Your ad is not added. Would you like to create another ad?' => 'Ihre Anzeige wird nicht hinzugefügt. Möchten Sie eine Anzeige zu erstellen?',
     'Your browser is too old! Open the app with something more modern -:) Thank you.' => 'Ihr Browser ist zu alt! Öffnen Sie die App mit etwas mehr modern - :) Danke.',

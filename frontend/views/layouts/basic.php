@@ -5,12 +5,12 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\Modal;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-use common\widgets\Alert;
 use yii\helpers\Url;
 use cybercog\yii\googleanalytics\widgets\GATracking;
 use common\widgets\GooglePlacesAutoComplete\GooglePlacesAutoComplete;
 use common\widgets\LanguageSelect\LanguageSelect;
 use common\widgets\FontAwesome\AssetBundle;
+use common\widgets\AlertIGrowl;
 
 /**
  * Created by PhpStorm.
@@ -238,7 +238,8 @@ $this->beginPage();
 
         NavBar::end();
         ?>
-            <?= Alert::widget() ?>
+            <?php //echo Alert::widget() ?>
+            <?= AlertIGrowl::widget() ?>
             <?= $content ?>
     </div>
 

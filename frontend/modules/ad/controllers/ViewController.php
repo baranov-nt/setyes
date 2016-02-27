@@ -240,6 +240,7 @@ class ViewController extends BehaviorsController
                 $modelAdMain->adCategory->ad->temp = 1;
                 $modelAdMain->adCategory->ad->save();
             }
+            Yii::$app->session->setFlash('notice', Yii::t('app', 'Message successfully deleted.'));
             return $this->renderAjax('@common/widgets/AdWidget/views/_delete_block');
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -251,12 +252,13 @@ class ViewController extends BehaviorsController
         $modelAdFavorite = new AdFavorite();
         $modelAdFavorite->addToFavorite($id);
 
+        Yii::$app->session->setFlash('success', Yii::t('app', 'Ad added to favorites.'));
+
         return $this->renderAjax(
             '@common/widgets/AdWidget/views/_icon-favorite',
             [
                 'id' => $id,
                 'icon' => Yii::$app->request->post('icon'),
-                'ok' => 1
             ]);
     }
 
@@ -265,12 +267,13 @@ class ViewController extends BehaviorsController
         $modelAdFavorite = new AdFavorite();
         $modelAdFavorite->deleteFromFavorite($id);
 
+        Yii::$app->session->setFlash('info', Yii::t('app', 'This ad is removed from your favorites.'));
+
         return $this->renderAjax(
             '@common/widgets/AdWidget/views/_icon-favorite-empty',
             [
                 'id' => Yii::$app->request->post('id'),
                 'icon' => Yii::$app->request->post('icon'),
-                'ok' => 1
             ]);
     }
 
@@ -279,12 +282,13 @@ class ViewController extends BehaviorsController
         $modelAdComplain = new AdComplains();
         $modelAdComplain->addToComplains($id);
 
+        Yii::$app->session->setFlash('error', Yii::t('app', 'The complaint was successfully added.'));
+
         return $this->renderAjax(
             '@common/widgets/AdWidget/views/_icon-complain',
             [
                 'id' => $id,
                 'icon' => Yii::$app->request->post('icon'),
-                'ok' => 1
             ]);
     }
 
@@ -292,6 +296,8 @@ class ViewController extends BehaviorsController
         $id = Yii::$app->request->post('id');
         $modelAdComplain = new AdComplains();
         $modelAdComplain->deleteFromComplains($id);
+
+        Yii::$app->session->setFlash('info', Yii::t('app', 'This ad is removed from complains.'));
 
         return $this->renderAjax(
             '@common/widgets/AdWidget/views/_icon-complain-empty',

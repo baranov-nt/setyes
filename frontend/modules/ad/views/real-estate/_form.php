@@ -296,8 +296,7 @@ $user = Yii::$app->user->identity;
                          * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
                         ?>
                         <?php
-                        if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentingARoom'
-                            || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
+                        if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
                             || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
                             || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
                             || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'
@@ -350,10 +349,8 @@ $user = Yii::$app->user->identity;
                          * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
                         ?>
                         <?php
-                        if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentingARoom'
-                            || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
-                            || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
-                            || $modelAdRealEstate->scenario == 'rentGarage'
+                        if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
+                            || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentGarage'
                             || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'
                         ):
                             ?>

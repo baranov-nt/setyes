@@ -1,3 +1,4 @@
+<?= \common\widgets\AlertIGrowl::widget() ?>
 <?php
 /**
  * Created by phpNT.
@@ -7,4 +8,5 @@
  */
 echo Yii::t('app', 'Your ad is removed.');
 ?>
+
 

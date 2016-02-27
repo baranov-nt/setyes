@@ -235,6 +235,7 @@ return [
     'Temp Image' => '',
     'Template' => 'Modèle',
     'Text Color' => 'Couleur du texte',
+    'The ad successfully deleted.' => 'Ad supprimé avec succès.',
     'The complaint was successfully added.' => 'La plainte a été ajouté avec succès.',
     'The Second Phone' => 'Le second téléphone',
     'The Third Phone' => 'Le troisième téléphone',

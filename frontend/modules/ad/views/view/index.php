@@ -37,24 +37,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row" style="margin: 20px 0 20px 0 !important;">
         <div class="col-md-12">
             <?php
-            $city = Yii::$app->request->cookies->get('_cityId');
-            if(isset($city)):
-                if(Yii::$app->controller->action->id != 'show-in-region'):
-                    ?>
-                    <?= Html::a(Yii::t('app', 'Show ads in the region.').' <span class="fa fa-spinner fa-spin" style="display: none;"></span>', Url::to(['/ad/view/show-in-region']),
-                    [
-                        'class' => 'btn btn-default',
-                        'onclick' => '$(".fa-spinner").show();'
-                    ]) ?>
-                    <?php
-                else:
-                    ?>
-                    <?= Html::a(Yii::t('app', 'Show ads in the city.').' <span class="fa fa-spinner fa-spin" style="display: none;"></span>', Url::to(['/ad/view/all']),
-                    [
-                        'class' => 'btn btn-default',
-                        'onclick' => '$(".fa-spinner").show();'
-                    ]) ?>
-                    <?php
+            if(Yii::$app->controller->action->id == 'all' || Yii::$app->controller->action->id == 'show-in-region'):
+                $city = Yii::$app->request->cookies->get('_cityId');
+                if(isset($city)):
+                    if(Yii::$app->controller->action->id != 'show-in-region'):
+                        ?>
+                        <?= Html::a(Yii::t('app', 'Show ads in the region.').' <span class="fa fa-spinner fa-spin" style="display: none;"></span>', Url::to(['/ad/view/show-in-region']),
+                        [
+                            'class' => 'btn btn-default',
+                            'onclick' => '$(".fa-spinner").show();'
+                        ]) ?>
+                        <?php
+                    else:
+                        ?>
+                        <?= Html::a(Yii::t('app', 'Show ads in the city.').' <span class="fa fa-spinner fa-spin" style="display: none;"></span>', Url::to(['/ad/view/all']),
+                        [
+                            'class' => 'btn btn-default',
+                            'onclick' => '$(".fa-spinner").show();'
+                        ]) ?>
+                        <?php
+                    endif;
                 endif;
             endif;
             ?>

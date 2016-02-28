@@ -64,29 +64,6 @@ $user = Yii::$app->user->identity;
 
             <div class="col-md-12">
                 <?php
-                /** Тип недвижемости доступен всем операциям, кроме сценариев
-                 * 'sellingRoom'  'rentARoom' 'buyRoom' 'rentingARoom' */
-                ?>
-                <?php
-                if($modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
-                    || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'buyHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
-                    || $modelAdRealEstate->scenario == 'sellingLand' || $modelAdRealEstate->scenario == 'buyLand'
-                    || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'buyGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
-                    || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
-                    || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial' || $modelAdRealEstate->scenario == 'buyComercial' || $modelAdRealEstate->scenario == 'rentingComercial'
-                ):
-                    ?>
-                    <?= $form->field($modelAdRealEstate, 'type_of_property')->dropDownList($modelAdRealEstate->realEstatePropertyTypeList, [
-                    'class'  => 'form-control chosen-select',
-                    'prompt' => Yii::t('app', '---'),
-                ]) ?>
-                    <?php
-                endif;
-                ?>
-            </div>
-
-            <div class="col-md-12">
-                <?php
                 /** Город доступен всем операциям */
                 ?>
                 <?php
@@ -140,6 +117,29 @@ $user = Yii::$app->user->identity;
                         </div>
                     </div>
                     <?= $form->field($modelAdRealEstate, 'place_address')->hiddenInput(['value' => '1'])->label(false); ?>
+                    <?php
+                endif;
+                ?>
+            </div>
+
+            <div class="col-md-12">
+                <?php
+                /** Тип недвижемости доступен всем операциям, кроме сценариев
+                 * 'sellingRoom'  'rentARoom' 'buyRoom' 'rentingARoom' */
+                ?>
+                <?php
+                if($modelAdRealEstate->scenario == 'sellingApatrment'
+                    || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'buyHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
+                    || $modelAdRealEstate->scenario == 'sellingLand' || $modelAdRealEstate->scenario == 'buyLand'
+                    || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'buyGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
+                    || $modelAdRealEstate->scenario == 'sellingPropertyAbroad' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'
+                    || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial' || $modelAdRealEstate->scenario == 'buyComercial' || $modelAdRealEstate->scenario == 'rentingComercial'
+                ):
+                    ?>
+                    <?= $form->field($modelAdRealEstate, 'type_of_property')->dropDownList($modelAdRealEstate->realEstatePropertyTypeList, [
+                    'class'  => 'form-control chosen-select',
+                    'prompt' => Yii::t('app', '---'),
+                ]) ?>
                     <?php
                 endif;
                 ?>

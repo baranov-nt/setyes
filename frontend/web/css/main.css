@@ -73,7 +73,10 @@ body {
 }
 .chosen-single {
     height: 30px !important;
-    line-height: 30px !important;
+    line-height: 26px !important;
+}
+.chosen-single b {
+    margin-top: 3px !important;
 }
 #infscr-loading {
     text-align: center;

@@ -136,7 +136,15 @@ $this->registerJS($js);
                 <?php
             else:
                 ?>
-                <h4 class="main-container-header-element"><?= Html::a(Yii::t('references', $widget->header), Url::to(['/ad/view/one', 'id' => $widget->id]), ['class' => 'main-container-header-link-element alert-link']) // операция ?></h4>
+                <h4 class="main-container-header-element">
+                    <?= Html::a(
+                        Yii::t('references', $widget->header),
+                        Url::to(['/ad/view/one', 'id' => $widget->id]),
+                        [
+                            'class' => 'main-container-header-link-element alert-link',
+                            'data-pjax' => 0
+                        ]) ?>
+                </h4>
                 <?php
             endif;
             ?>

@@ -1161,6 +1161,7 @@ class AdRealEstate extends ActiveRecord
                 }
                 /* Сценарии для поиска улицы, с номером дома */
                 if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+                    || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
                 /*|| $modelAdRealEstate->scenario == 'rentARoom'
                     || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
                     || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'

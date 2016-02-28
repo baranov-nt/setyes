@@ -82,7 +82,7 @@ return [
     'monolithic' => 'monolithique',
     'more than 30' => 'plus de 30',
     'more than 6' => 'plus de 6',
-    'more than 6 rooms' => '',
+    'more than 6 rooms' => 'plus de 6 chambres',
     'm²' => 'm²',
     'new building' => 'nouveau bâtiment',
     'normal' => 'ordinaire',

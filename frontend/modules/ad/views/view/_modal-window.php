@@ -82,11 +82,13 @@ Modal::begin([
         ?>
     </div>
     <div class="col-md-6" style="padding: 0 30px 20px 30px;">
-        <?php if($address_map): ?>
-        <?= ShowMapModal::widget([
-            'modal' => true,
-            'address' => $address,
-        ]); ?>
+        <div style="border: 3px solid #b5b5b5; border-radius: 3px">
+            <?php if($address_map): ?>
+            <?= ShowMapModal::widget([
+                'modal' => true,
+                'address' => $address,
+            ]); ?>
+        </div>
     <?php endif; ?>
     </div>
     <div class="col-md-12">

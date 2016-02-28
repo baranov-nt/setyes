@@ -82,7 +82,7 @@ return [
     'monolithic' => 'монолитный',
     'more than 30' => 'более 30',
     'more than 6' => 'более 6',
-    'more than 6 rooms' => '',
+    'more than 6 rooms' => 'более 6 комнат',
     'm²' => 'м²',
     'new building' => 'новое здание',
     'normal' => 'нормальное',

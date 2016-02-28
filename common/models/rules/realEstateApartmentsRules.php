@@ -12,7 +12,7 @@ return [
         'on' => 'sellingApatrment'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing', 'floor',
+        ['property', 'deal_type', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing', 'floor',
             'floors_in_the_house', 'area_of_property', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required',
         'on' => 'rentApatrment'
     ],
@@ -53,7 +53,7 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])],
-    ['rooms_in_the_apartment', 'number', 'min' => 81, 'max' => 87,
+    ['rooms_in_the_apartment', 'number', 'min' => 81, 'max' => 88,
         'on' => [
             'sellingApatrment',
             'rentApatrment',
@@ -69,7 +69,7 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('rooms_in_the_apartment')])],
-    [['floor', 'floors_in_the_house'], 'number', 'min' => 44, 'max' => 74,
+    [['floor', 'floors_in_the_house'], 'number', 'min' => 43, 'max' => 74,
         'on' => [
             'sellingApatrment',
             'rentApatrment',

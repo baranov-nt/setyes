@@ -172,7 +172,7 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [128, 17, Yii::t('references', 'summer house')],        // летний дом (сад)
                 [129, 17, Yii::t('references', 'country house')],        // деревенский дом
                 [130, 17, Yii::t('references', 'cottage')],              // коттедж
-                [131, 17, Yii::t('references', 'townhouse')],            // малоэтажный дом на несколько квартир
+                //[131, 17, Yii::t('references', 'townhouse')],            // малоэтажный дом на несколько квартир
                 /* Интернет */
                 [132, 10, Yii::t('references', 'available')],            // доступна
                 [133, 10, Yii::t('references', 'not available')],        // не доступна

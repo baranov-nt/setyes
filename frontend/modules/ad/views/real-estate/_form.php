@@ -252,77 +252,77 @@ $user = Yii::$app->user->identity;
 
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-6">
-                        <?php
-                        /** Площать ведвижемости доступен для сценариев
-                         * 'sellingRoom'  'rentARoom' 'sellingApatrment' 'rentApatrment' 'sellingHouse' 'rentHouse' 'sellingGarage' 'rentGarage'
-                         * 'sellingPropertyAbroad' 'sellingComercial' 'rentComercial' */
+
+                    <?php
+                    /** Площать ведвижемости доступен для сценариев
+                     * 'sellingRoom'  'rentARoom' 'sellingApatrment' 'rentApatrment' 'sellingHouse' 'rentHouse' 'sellingGarage' 'rentGarage'
+                     * 'sellingPropertyAbroad' 'sellingComercial' 'rentComercial' */
+                    ?>
+                    <?php
+                    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+                        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+                        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+                        || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
+                        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
+                    ):
                         ?>
-                        <?php
-                        if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
-                            || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
-                            || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
-                            || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
-                            || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
-                        ):
-                            ?>
+                        <div class="col-md-6">
                             <?= $form->field($modelAdRealEstate, 'area_of_property')->textInput(['style' => 'text-align: right !important;'])->label($modelAdRealEstate->getAttributeLabel('area_of_property').' ('.$modelAdRealEstate->realEstateMeasurementOfPropertyName.')') ?>
                             <?= $form->field($modelAdRealEstate, 'measurement_of_property')->hiddenInput(['value' => $modelAdRealEstate->realEstateMeasurementOfPropertyId])->label(false); ?>
-                            <?php
-                        endif;
-                        ?>
-                    </div>
-                    <div class="col-md-6">
-
+                        </div>
                         <?php
-                        /** Площать земли доступен для сценариев
-                         * 'sellingLand' 'sellingHouse' 'rentHouse' */
+                    endif;
+                    ?>
+                    <?php
+                    /** Площать земли доступен для сценариев
+                     * 'sellingLand' 'sellingHouse' 'rentHouse' */
+                    ?>
+                    <?php
+                    if($modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'sellingLand'):
                         ?>
-                        <?php
-                        if($modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'sellingLand'):
-                            ?>
+                        <div class="col-md-6">
                             <?= $form->field($modelAdRealEstate, 'area_of_land')->textInput(['style' => 'text-align: right !important;']) ?>
                             <?= $form->field($modelAdRealEstate, 'measurement_of_land')->dropDownList($modelAdRealEstate->realEstateMeasurementOfLandName, [
-                            'class'  => 'form-control chosen-select',
-                            'prompt' => Yii::t('app', '---'),
-                        ]) ?>
-                            <?php
-                        endif;
-                        ?>
-                    </div>
-                    <div class="col-md-6">
+                                'class'  => 'form-control chosen-select',
+                                'prompt' => Yii::t('app', '---'),
+                            ]) ?>
+                        </div>
                         <?php
-                        /** Срок аренды доступена для сценариев
-                         * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
+                    endif;
+                    ?>
+                    <?php
+                    /** Срок аренды доступена для сценариев
+                     * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
+                    ?>
+                    <?php
+                    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
+                        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
+                        || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
+                        || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'
+                        || $modelAdRealEstate->scenario == 'buyComercial'  || $modelAdRealEstate->scenario == 'rentingComercial'
+                    ):
                         ?>
-                        <?php
-                        if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
-                            || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
-                            || $modelAdRealEstate->scenario == 'rentGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
-                            || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'
-                            || $modelAdRealEstate->scenario == 'buyComercial'  || $modelAdRealEstate->scenario == 'rentingComercial'
-                        ):
-                            ?>
+                        <div class="col-md-6">
                             <?= $form->field($modelAdRealEstate, 'lease_term')->dropDownList($modelAdRealEstate->realEstateLeaseTermList, [
-                            'class'  => 'form-control chosen-select',
-                            'prompt' => Yii::t('app', '---'),
-                        ]) ?>
-                            <?php
-                        endif;
-                        ?>
-                    </div>
-                    <div class="col-md-6">
+                                'class'  => 'form-control chosen-select',
+                                'prompt' => Yii::t('app', '---'),
+                            ]) ?>
+                        </div>
                         <?php
-                        /** Цена доступена всем операциям */
+                    endif;
+                    ?>
+                    <?php
+                    /** Цена доступена всем операциям */
+                    ?>
+                    <?php
+                    if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
+                        || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
+                        || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+                        || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
+                        || $modelAdRealEstate->scenario == 'sellingLand'
+                        || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'):
                         ?>
-                        <?php
-                        if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
-                            || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
-                            || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
-                            || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
-                            || $modelAdRealEstate->scenario == 'sellingLand'
-                            || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'):
-                            ?>
+                        <div class="col-md-6">
                             <?php
                             echo $form->field($modelAdRealEstate, 'price')->widget(MaskedInput::className(), [
                                 'name' => 'masked-input',
@@ -337,49 +337,47 @@ $user = Yii::$app->user->identity;
                                     'placeholder' =>  '0'
                                 ],
                             ])->label($modelAdRealEstate->getAttributeLabel('price').' ('.$modelAdRealEstate->realEstateCurrency.')'); ?>
-                            <?php
-                        endif;
-                        ?>
-                    </div>
-                    <div class="col-md-6">
-
-
+                        </div>
                         <?php
-                        /** Цена за период доступена для сценариев
-                         * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
+                    endif;
+                    ?>
+                    <?php
+                    /** Цена за период доступена для сценариев
+                     * 'rentARoom' 'rentApatrment' 'rentHouse' 'rentGarage' 'rentComercial' */
+                    ?>
+                    <?php
+                    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
+                        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentGarage'
+                        || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'
+                    ):
                         ?>
-                        <?php
-                        if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
-                            || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentGarage'
-                            || $modelAdRealEstate->scenario == 'rentPropertyAbroad' || $modelAdRealEstate->scenario == 'rentComercial'
-                        ):
-                            ?>
+                        <div class="col-md-6">
                             <?= $form->field($modelAdRealEstate, 'price_for_the_period')->dropDownList($modelAdRealEstate->realEstatePricePeriodList, [
-                            'class'  => 'form-control chosen-select',
-                            'prompt' => Yii::t('app', '---'),
-                        ]) ?>
-                            <?php
-                        endif;
-                        ?>
-                    </div>
-                    <div class="col-md-6">
-
+                                'class'  => 'form-control chosen-select',
+                                'prompt' => Yii::t('app', '---'),
+                            ]) ?>
+                        </div>
                         <?php
-                        /** Необходимая мебель доступена для сценариев
-                         * 'rentARoom' 'rentApatrment' 'rentHouse' */
+                    endif;
+                    ?>
+                    <?php
+                    /** Необходимая мебель доступена для сценариев
+                     * 'rentARoom' 'rentApatrment' 'rentHouse' */
+                    ?>
+                    <?php
+                    if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
+                        || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
                         ?>
-                        <?php
-                        if($modelAdRealEstate->scenario == 'rentARoom' || $modelAdRealEstate->scenario == 'rentApatrment'
-                            || $modelAdRealEstate->scenario == 'rentHouse' || $modelAdRealEstate->scenario == 'rentPropertyAbroad'):
-                            ?>
+                        <div class="col-md-6">
                             <?= $form->field($modelAdRealEstate, 'necessary_furniture')->dropDownList($modelAdRealEstate->realEstateNecessaryFurnitureList, [
-                            'class'  => 'form-control chosen-select',
-                            'prompt' => Yii::t('app', '---'),
-                        ]) ?>
-                            <?php
-                        endif;
-                        ?>
-                    </div>
+                                'class'  => 'form-control chosen-select',
+                                'prompt' => Yii::t('app', '---'),
+                            ]) ?>
+                        </div>
+                        <?php
+                    endif;
+                    ?>
+
                     <div class="col-md-6">
                         <?php
                         /** Интернет доступен для сценариев

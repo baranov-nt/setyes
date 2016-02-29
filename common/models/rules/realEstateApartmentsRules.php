@@ -17,12 +17,8 @@ return [
         'on' => 'rentApatrment'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'price'], 'required',
-        'on' => 'buyApatrment'
-    ],
-    [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'lease_term', 'price', 'price_for_the_period'], 'required',
-        'on' => 'rentingApatrment'
+        ['property', 'deal_type', 'place_city'], 'required',
+        'on' => ['buyApatrment', 'rentingApatrment']
     ],
     ['property', 'compare', 'compareValue' => 2, 'operator' => '==',
         'on' => [

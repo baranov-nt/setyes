@@ -69,9 +69,9 @@ class AdRealEstate extends ActiveRecord
     public $place_street_validate;
     public $place_house;
     public $place_address;
-    public $measurement_of_land;
     public $style;
     public $phone_temp_ad;
+    public $link_temp_ad;
     public $model_is;
 
     /**
@@ -104,6 +104,15 @@ class AdRealEstate extends ActiveRecord
     {
         if($this->floor > $this->floors_in_the_house) {
             $this->addError('floors_in_the_house', Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('floors_in_the_house')]));
+        }
+    }
+
+    public function validateAreaOfLand()
+    {
+        if($this->area_of_land) {
+            if(!$this->measurement_of_land) {
+                $this->addError('measurement_of_land', Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->getAttributeLabel('measurement_of_land')]));
+            }
         }
     }
 
@@ -179,6 +188,7 @@ class AdRealEstate extends ActiveRecord
             'temp' => Yii::t('app', 'Temp'),
             'style' => Yii::t('app', 'Style'),
             'phone_temp_ad' => Yii::t('app', 'Phone for temp ad'),
+            'link_temp_ad' => Yii::t('app', 'Link from temp ad'),
             'model_is' => Yii::t('app', 'model_is'),
         ];
     }
@@ -403,6 +413,17 @@ class AdRealEstate extends ActiveRecord
                 'attribute' => 'type_of_property',
                 'value' => Yii::t('references', $this->typeOfProperty->reference_name),
             ];
+        if($this->area_of_property)
+            $items[] = [
+                'attribute' => 'area_of_property',
+                'value' => $this->area_of_property.' '.Yii::t('references', $this->measurementOfProperty->reference_name),
+            ];
+        if($this->area_of_land) {
+            $items[] = [
+                'attribute' => 'area_of_land',
+                'value' => $this->area_of_land . ' ' . Yii::t('references', $this->measurementOfLand->reference_name),
+            ];
+        }
         if($this->rooms_in_the_apartment)
             $items[] = [
                 'attribute' => 'rooms_in_the_apartment',
@@ -422,16 +443,6 @@ class AdRealEstate extends ActiveRecord
             $items[] = [
                 'attribute' => 'floors_in_the_house',
                 'value' => Yii::t('references', $this->floorsInTheHouse->reference_name),
-            ];
-        if($this->area_of_property)
-            $items[] = [
-                'attribute' => 'area_of_property',
-                'value' => $this->area_of_property.' '.Yii::t('references', $this->measurementOfProperty->reference_name),
-            ];
-        if($this->area_of_land)
-            $items[] = [
-                'attribute' => 'area_of_land',
-                'value' => $this->area_of_land.' '.Yii::t('references', $this->measurementOfLand),
             ];
         if($this->lease_term)
             $items[] = [
@@ -497,6 +508,10 @@ class AdRealEstate extends ActiveRecord
         $items = '';
         if($this->type_of_property)
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('type_of_property').':</strong> '.Yii::t('references', $this->typeOfProperty->reference_name).'</p>';
+        if($this->area_of_property)
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_property').':</strong> '.Yii::t('references', $this->area_of_property).' '.Yii::t('references', $this->measurementOfProperty->reference_name).'</p>';
+        if($this->area_of_land)
+            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_land').':</strong> '.Yii::t('references', $this->area_of_land).' '.Yii::t('references', $this->measurementOfLand->reference_name).'</p>';
         if($this->rooms_in_the_apartment)
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('rooms_in_the_apartment').':</strong> '.Yii::t('references', $this->roomsInTheApartment->reference_name).'</p>';
         if($this->material_housing)
@@ -505,10 +520,6 @@ class AdRealEstate extends ActiveRecord
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('floor').':</strong> '.Yii::t('references', $this->floor0->reference_name).'</p>';
         if($this->floors_in_the_house)
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('floors_in_the_house').':</strong> '.Yii::t('references', $this->floorsInTheHouse->reference_name).'</p>';
-        if($this->area_of_property)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_property').':</strong> '.Yii::t('references', $this->area_of_property).' '.Yii::t('references', $this->measurementOfProperty->reference_name).'</p>';
-        if($this->area_of_land)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_land').':</strong> '.Yii::t('references', $this->area_of_land).' '.Yii::t('references', $this->measurementOfLand->reference_name).'</p>';
         if($this->lease_term)
             $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('lease_term').':</strong> '.Yii::t('references', $this->leaseTerm->reference_name).'</p>';
         if($this->price)
@@ -1152,29 +1163,26 @@ class AdRealEstate extends ActiveRecord
             $modelAdRealEstate = $this->findCity($modelAdRealEstate);
             /* Находит введенную улицу, если город найден */
             if(!$modelAdRealEstate->errors) {
-                /* Сценарии для поиска улицы, без номера дома */
-                if($modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
-                    || $modelAdRealEstate->scenario == 'buyGarage'  || $modelAdRealEstate->scenario == 'rentingGarage'
-                    || $modelAdRealEstate->scenario == 'buyComercial'  || $modelAdRealEstate->scenario == 'rentingComercial'
-                ) {
-                    $modelAdRealEstate = $this->findStreet($modelAdRealEstate);
-                }
                 /* Сценарии для поиска улицы, с номером дома */
                 if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
                     || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
-                /*|| $modelAdRealEstate->scenario == 'rentARoom'
-                    || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
                     || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
-                    || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'*/
                 ) {
-                    $modelAdRealEstate = $this->findAddress($modelAdRealEstate);
+                    if($this->place_street != '' || $this->place_house != '') {
+                        $modelAdRealEstate = $this->findAddress($modelAdRealEstate);
+                    } else {
+                        $modelAdRealEstate->place_address_id = '';
+                    }
                 }
             }
 
             if(!$modelAdRealEstate->errors) {
                 /* Для определенных сценариев проверяем объявления на дублирование  */
                 if($modelAdRealEstate->scenario == 'buyRoom' || $modelAdRealEstate->scenario == 'rentingARoom'
-                    || $modelAdRealEstate->scenario == 'buyApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment') {
+                    || $modelAdRealEstate->scenario == 'buyApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
+                    || $modelAdRealEstate->scenario == 'buyHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
+                    || $modelAdRealEstate->scenario == 'buyLand'
+                ) {
                     $modelAdRealEstateIs = AdRealEstate::find()
                         ->where($this->getAttributesArray($modelAdRealEstate->attributes))
                         ->joinWith([
@@ -1229,6 +1237,7 @@ class AdRealEstate extends ActiveRecord
                     $modelAdMain->place_city_id = $this->place_city_id;
                     $modelAdMain->category_id = $modelCategory->id;
                     $modelAdMain->phone_temp_ad = $this->phone_temp_ad;
+                    $modelAdMain->link_temp_ad = $this->link_temp_ad;
                     //$modelAdMain->ad_style_id = 1;
                     if($modelAdMain->save()) {
                         $transaction->commit();
@@ -1290,44 +1299,23 @@ class AdRealEstate extends ActiveRecord
     }
 
     /* Функция для нахождения улицы по введенному значению */
-    private function findStreet($modelAdRealEstate) {
+    private function findAddress($modelAdRealEstate) {
         /* @var $modelAdRealEstate \common\models\AdRealEstate */
         /* @var $placeStreet \common\models\PlaceAddress */
         $city = $modelAdRealEstate->place_city;
-        $street = $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
+        $street = $modelAdRealEstate->place_house.', '.$modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
         $placeStreet = Yii::$app->placeManager->findStreet($city, $street);
 
-    if (!$placeStreet) {
-        /* Если адрес не найден устанавливаем place_address = 0, вывод ошибки ввода адреса */
-        $modelAdRealEstate->place_street = '';
-        $modelAdRealEstate->place_street_validate = 0;
-    }
-        if ($modelAdRealEstate->validate(['place_street_validate'])) {
-            $this->place_city_id = $placeStreet->city->id;
-            $modelAdRealEstate->place_address_id = $placeStreet->id;
-        }
-        return $modelAdRealEstate;
-    }
-
-    /* Функция для нахождения улицы по введенному значению */
-    private function findAddress($modelAdRealEstate) {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
-        /* @var $placeAddress \common\models\PlaceAddress */
-        $city = $modelAdRealEstate->place_city;
-        $address = $modelAdRealEstate->place_house . ', ' . $modelAdRealEstate->place_street . ', ' . $modelAdRealEstate->place_city;
-
-        $placeAddress = Yii::$app->placeManager->findAddress($city, $address);
-
-        if (!$placeAddress) {
+        if (!$placeStreet) {
             /* Если адрес не найден устанавливаем place_address = 0, вывод ошибки ввода адреса */
             $modelAdRealEstate->place_street = '';
-            $modelAdRealEstate->place_house = '';
             $modelAdRealEstate->place_address = 0;
         }
         if ($modelAdRealEstate->validate(['place_address'])) {
-            $this->place_city_id = $placeAddress->city->id;
-            $modelAdRealEstate->place_address_id = $placeAddress->id;
+            $this->place_city_id = $placeStreet->city->id;
+            $modelAdRealEstate->place_address_id = $placeStreet->id;
         }
+
         return $modelAdRealEstate;
     }
 

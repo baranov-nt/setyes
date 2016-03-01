@@ -10,6 +10,7 @@ namespace common\widgets\GooglePlacesAutoComplete;
 
 use yii\widgets\InputWidget;
 use yii\helpers\Html;
+
 class GooglePlacesAutoComplete extends InputWidget {
 
     const API_URL = '//maps.googleapis.com/maps/api/js?';

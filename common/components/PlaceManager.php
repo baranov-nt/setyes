@@ -256,20 +256,23 @@ class PlaceManager extends Object
         /* Находим адрес */
         $objectStreet = Yii::$app->googleApi->getGeoCodeObject($address, null);
 
+        $house = '';
         $route = '';
         /* Формируем переменныe для адреса */
         foreach ($objectStreet->address_components as $one):
+            if ($one->types[0] == 'street_number'):
+                $house = $one->short_name;
+            endif;
             if ($one->types[0] == 'route'):
-                $route = $one->short_name;
+                $route = $one->short_name.', '.$house;
             endif;
         endforeach;
 
         $objectStreet = Yii::$app->googleApi->getGeoCodeObject($route.' '.$city, null);
 
-        //d($objectStreet);
-
         if (isset($objectStreet)):
             /* Если найден объект адреса, создаем пустые переменные для адреса */
+            $house = '';            // номер дома
             $route = '';            // улица
             $city = '';             // город
             $region = '';           // область, регион
@@ -277,6 +280,9 @@ class PlaceManager extends Object
 
             /* Формируем переменныe для адреса */
             foreach ($objectStreet->address_components as $one):
+                if ($one->types[0] == 'street_number'):
+                    $house = $one->short_name;
+                endif;
                 if ($one->types[0] == 'route'):
                     $route = $one->short_name;
                 endif;

@@ -7,21 +7,20 @@
  */
 return [
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing',
-            'floors_in_the_house', 'area_of_property', 'area_of_land', 'measurement_of_land', 'price', 'condition'], 'required',
+        ['property', 'deal_type', 'type_of_property', 'place_city', 'material_housing', 'floors_in_the_house', 'area_of_property', 'price', 'condition'], 'required',
         'on' => 'sellingHouse'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'place_house', 'place_address', 'rooms_in_the_apartment', 'material_housing',
-            'floors_in_the_house', 'area_of_property', 'lease_term', 'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required',
+        ['property', 'deal_type', 'type_of_property', 'place_city', 'material_housing', 'floors_in_the_house', 'area_of_property', 'lease_term',
+            'price', 'price_for_the_period', 'necessary_furniture', 'internet', 'pets_allowed', 'condition'], 'required',
         'on' => 'rentHouse'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'price'], 'required',
+        ['property', 'deal_type', 'type_of_property', 'place_city'], 'required',
         'on' => 'buyHouse'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'lease_term', 'price', 'price_for_the_period'], 'required',
+        ['property', 'deal_type', 'type_of_property', 'place_city'], 'required',
         'on' => 'rentingHouse'
     ],
     ['property', 'compare', 'compareValue' => 3, 'operator' => '==',

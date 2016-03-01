@@ -54,6 +54,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php
                 if($modelAdRealEstate->model_scenario == 'sellingRoom' || $modelAdRealEstate->model_scenario == 'rentARoom'
                     || $modelAdRealEstate->model_scenario == 'sellingApatrment' || $modelAdRealEstate->model_scenario == 'rentApatrment'
+                    || $modelAdRealEstate->model_scenario == 'sellingHouse' || $modelAdRealEstate->model_scenario == 'rentHouse'
+                    || $modelAdRealEstate->model_scenario == 'sellingLand'
                 ):
 
                     ?>

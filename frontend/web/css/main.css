@@ -70,6 +70,7 @@ body {
 }
 .form-control {
     height: 30px !important;
+    text-align: right !important;
 }
 .chosen-single {
     height: 30px !important;

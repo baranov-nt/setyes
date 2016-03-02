@@ -21,9 +21,9 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [2, 8, Yii::t('references', 'apartments')],                 // квартиры
                 [3, 8, Yii::t('references', 'houses')],                     // дома и коттеджи
                 [4, 8, Yii::t('references', 'land plots')],                 // земельные участки
-                [5, 8, Yii::t('references', 'garages and parking lots')],   // гаражи и стоянки
-                [6, 8, Yii::t('references', 'property abroad')],            // недвижемость за рубежем
-                [7, 8, Yii::t('references', 'commercial property')],        // коммерческая недвижемость
+                [5, 8, Yii::t('references', 'garages')],   // гаражи и стоянки
+                [6, 8, Yii::t('references', 'commercial property')],            // недвижемость за рубежем
+                [7, 0, ''],
                 /* Операции с комнатами */
                 [8, 1, Yii::t('references', 'selling room')],               // продам комнату
                 [9, 1, Yii::t('references', 'rent a room')],                // сдам комнату
@@ -131,11 +131,11 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [96, 18, Yii::t('references', 'industrial land')],      // Промышленные земли
                 [97, 18, Yii::t('references', 'farmland')],             // сельскохозяйственные земли
                 /* Тип гаража */
-                [98, 19, Yii::t('references', 'garage')],               // гараж
-                [99, 19, Yii::t('references', 'parking place')],        // парковочное место
+                [98, 0, ''],
+                [99, 0, ''],
                 /* Тип недвижимости за рубежем */
-                [100, 20, Yii::t('references', 'houses and villas')],    // дом и вилла
-                [101, 20, Yii::t('references', 'apartments')],           // квартира
+                [100, 0, ''],
+                [101, 0, ''],
                 /* Тип коммерческой недвижимости */
                 [102, 21, Yii::t('references', 'cafe, restaurant')],        // кафе, ресторан
                 [103, 21, Yii::t('references', 'shop')],                    // магазин
@@ -167,16 +167,15 @@ class m160116_094903_create_real_estate_tables extends Migration
                 /* Домашние животные разрешены */
                 [125, 27, Yii::t('references', 'Yes')],                // да
                 [126, 27, Yii::t('references', 'No')],                 // нет
-                /* Тип недвижимости (перепродажа, New building) для коттеджей */
-                [127, 17, Yii::t('references', 'house')],                // дом
-                [128, 17, Yii::t('references', 'summer house')],        // летний дом (сад)
-                [129, 17, Yii::t('references', 'country house')],        // деревенский дом
-                [130, 17, Yii::t('references', 'cottage')],              // коттедж
-                //[131, 17, Yii::t('references', 'townhouse')],            // малоэтажный дом на несколько квартир
                 /* Интернет */
-                [132, 10, Yii::t('references', 'available')],            // доступна
-                [133, 10, Yii::t('references', 'not available')],        // не доступна
-                /* Свободные 30 */
+                [127, 10, Yii::t('references', 'available')],            // доступна
+                [128, 10, Yii::t('references', 'not available')],        // не доступна
+                /* Тип недвижимости (перепродажа, New building) для коттеджей */
+                [129, 17, Yii::t('references', 'summer house')],        // летний дом (сад)
+                [130, 17, Yii::t('references', 'country house')],        // деревенский дом
+                [131, 17, Yii::t('references', 'cottage')],              // коттедж
+                [132, 17, Yii::t('references', 'villa')],                // дом
+                /* Свободные 30, (id 7, 100, 101, 98, 99) */
             ]);
 
         /* Создаем таблицу  ad_real_estate, в которой будут храниться объявления категории “Недвижимость” */

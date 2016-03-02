@@ -130,6 +130,7 @@ return [
     'Last Name' => 'Фамилия',
     'Lease Term' => 'Срок аренды',
     'Letter to activate your account was sent to the email <strong> {email} </strong> (check spam folder).' => 'Письмо для активации аккаунта было отправлено на адрес электронной почты <strong> {email} </strong> (проверьте папку со спамом).',
+    'Link from temp ad' => 'Ссылка с временного объявления',
     'Link to the password recovery has been sent to your email.' => 'Ссылка на восстановление пароля отправлена на ваш адрес электронной почты.',
     'List of ads' => 'Список объявлений',
     'Location' => 'Location',

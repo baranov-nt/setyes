@@ -131,6 +131,7 @@ return [
     'Last Name' => 'Familienname, Nachname',
     'Lease Term' => 'Vertragslaufzeit',
     'Letter to activate your account was sent to the email <strong> {email} </strong> (check spam folder).' => 'Schreiben Sie Ihr Konto aktivieren zu der E-Mail gesendet <strong> {email} </strong> (Check Spam-Ordner).',
+    'Link from temp ad' => 'Link von Temperaturanzeige',
     'Link to the password recovery has been sent to your email.' => 'Link zur Passwort-Wiederherstellung wurde an Ihre E-Mail gesendet wurde.',
     'List of ads' => 'Liste der Anzeigen',
     'Location' => '',

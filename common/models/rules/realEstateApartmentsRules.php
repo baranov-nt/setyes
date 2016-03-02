@@ -102,7 +102,7 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('necessary_furniture')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('necessary_furniture')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('necessary_furniture')])],
-    [['internet'], 'number', 'min' => 132, 'max' => 133,
+    [['internet'], 'number', 'min' => 127, 'max' => 128,
         'on' => [
             'rentApatrment',
         ],

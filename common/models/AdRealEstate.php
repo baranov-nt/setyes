@@ -94,8 +94,7 @@ class AdRealEstate extends ActiveRecord
             require(__DIR__ . '/rules/realEstateHousesRules.php'),                 // 3
             require(__DIR__ . '/rules/realEstateLandRules.php'),                   // 4
             require(__DIR__ . '/rules/realEstateGaragesRules.php'),                // 5
-            require(__DIR__ . '/rules/realEstateAbroadRules.php'),                 // 6
-            require(__DIR__ . '/rules/realEstateCommercialRules.php')              // 7
+            require(__DIR__ . '/rules/realEstateCommercialRules.php')              // 6
         );
         return $rules;
     }
@@ -1167,6 +1166,7 @@ class AdRealEstate extends ActiveRecord
                 if($modelAdRealEstate->scenario == 'sellingRoom' || $modelAdRealEstate->scenario == 'rentARoom'
                     || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
                     || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
+                    || $modelAdRealEstate->scenario == 'sellingLand'
                 ) {
                     if($this->place_street != '' || $this->place_house != '') {
                         $modelAdRealEstate = $this->findAddress($modelAdRealEstate);
@@ -1203,6 +1203,7 @@ class AdRealEstate extends ActiveRecord
                 $modelAdRealEstate = $this->saveAd($modelAdRealEstate);
             }
         }
+        //dd($modelAdRealEstate->errors);
         return $modelAdRealEstate;
     }
 

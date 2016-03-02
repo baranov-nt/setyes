@@ -6,7 +6,7 @@
  * Time: 21:55
  */
 return [
-    [['place_city', 'place_street', 'place_house', 'model_scenario', 'phone_temp_ad'], 'string'],
+    [['place_city', 'place_street', 'place_house', 'model_scenario', 'phone_temp_ad', 'link_temp_ad'], 'string'],
     [['place_address', 'area_of_land', 'measurement_of_land'], 'integer'],
     [['area_of_land'], 'validateAreaOfLand'],
     ['deal_type', 'validateDealType', 'on' => [

@@ -7,20 +7,20 @@
  */
 return [
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'material_housing', 'area_of_property', 'price', 'condition'], 'required',
+        ['property', 'deal_type', 'place_city', 'place_street', 'material_housing', 'area_of_property', 'price', 'condition'], 'required',
         'on' => 'sellingGarage'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'material_housing', 'area_of_property', 'lease_term', 'price',
+        ['property', 'deal_type', 'place_city', 'place_street', 'material_housing', 'area_of_property', 'lease_term', 'price',
             'price_for_the_period', 'condition'], 'required',
         'on' => 'rentGarage'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street'], 'required',
+        ['property', 'deal_type', 'place_city', 'place_street'], 'required',
         'on' => 'buyGarage'
     ],
     [
-        ['property', 'deal_type', 'type_of_property', 'place_city', 'place_street', 'lease_term'], 'required',
+        ['property', 'deal_type', 'place_city', 'place_street', 'lease_term'], 'required',
         'on' => 'rentingGarage'
     ],
     ['property', 'compare', 'compareValue' => 5, 'operator' => '==',

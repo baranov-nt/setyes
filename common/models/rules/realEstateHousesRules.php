@@ -42,7 +42,7 @@ return [
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('deal_type')])],
-    ['type_of_property', 'number', 'min' => 127, 'max' => 131,
+    ['type_of_property', 'number', 'min' => 129, 'max' => 132,
         'on' => [
             'sellingHouse',
             'rentHouse',
@@ -102,34 +102,34 @@ return [
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('price_for_the_period')])],
     [['necessary_furniture'], 'number', 'min' => 110, 'max' => 111,
         'on' => [
-            'rentApatrment',
+            'rentHouse',
         ],
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('necessary_furniture')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('necessary_furniture')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('necessary_furniture')])],
-    [['internet'], 'number', 'min' => 132, 'max' => 133,
+    [['internet'], 'number', 'min' => 127, 'max' => 128,
         'on' => [
-            'rentApatrment',
+            'rentHouse',
         ],
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('internet')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('internet')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('internet')])],
     [['pets_allowed'], 'number', 'min' => 125, 'max' => 126,
         'on' => [
-            'rentApatrment',
+            'rentHouse',
         ],
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('pets_allowed')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('pets_allowed')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('pets_allowed')])],
     [['condition'], 'number', 'min' => 39, 'max' => 41,
         'on' => [
-            'sellingApatrment',
-            'rentApatrment',
+            'sellingHouse',
+            'rentHouse',
         ],
         'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('condition')]),
         'tooSmall' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('condition')]),
         'tooBig' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('condition')])],
     ['appliances', 'in', 'range' => [118, 119, 120, 121, 122, 123, 124], 'allowArray' => true,
-        'on' => 'rentApatrment'
+        'on' => 'rentHouse'
     ],
 ];

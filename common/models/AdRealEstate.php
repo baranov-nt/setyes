@@ -37,6 +37,8 @@ use yii\db\Exception;
  *
  * @property AdRealEstate[] $columnList
  * @property AdRealEstate[] $contentList
+ * @property AdRealEstate[] $realEstateOperationTypeList
+ * @property AdRealEstate[] $realEstatePropertyTypeList
  * @property AdCategory $adCategory
  * @property AdRealEstateReference $condition0
  * @property ImagesOfObject $imagesOfObjects
@@ -592,12 +594,6 @@ class AdRealEstate extends ActiveRecord
                 case 6:
                     $items[] = [
                         'label' => Yii::t('references', $value),
-                        'url' => ['/ad/real-estate/create-property-abroad'],
-                    ];
-                    break;
-                case 7:
-                    $items[] = [
-                        'label' => Yii::t('references', $value),
                         'url' => ['/ad/real-estate/create-commercial-property'],
                     ];
                     break;
@@ -652,15 +648,6 @@ class AdRealEstate extends ActiveRecord
                 }
                 return $items;
             case 6:
-                $type_of_propertys = ArrayHelper::map(AdRealEstateReference::find()
-                    ->where(['reference_id' => 20])
-                    ->all(), 'id', 'reference_name');
-                $items = [];
-                foreach($type_of_propertys as $key => $value) {
-                    $items[$key] = Yii::t('references', $value);
-                }
-                return $items;
-            case 7:
                 $type_of_propertys = ArrayHelper::map(AdRealEstateReference::find()
                     ->where(['reference_id' => 21])
                     ->all(), 'id', 'reference_name');
@@ -1167,6 +1154,8 @@ class AdRealEstate extends ActiveRecord
                     || $modelAdRealEstate->scenario == 'sellingApatrment' || $modelAdRealEstate->scenario == 'rentApatrment'
                     || $modelAdRealEstate->scenario == 'sellingHouse' || $modelAdRealEstate->scenario == 'rentHouse'
                     || $modelAdRealEstate->scenario == 'sellingLand'
+                    || $modelAdRealEstate->scenario == 'sellingGarage' || $modelAdRealEstate->scenario == 'rentGarage'
+                    || $modelAdRealEstate->scenario == 'sellingComercial' || $modelAdRealEstate->scenario == 'rentComercial'
                 ) {
                     if($this->place_street != '' || $this->place_house != '') {
                         $modelAdRealEstate = $this->findAddress($modelAdRealEstate);
@@ -1182,6 +1171,8 @@ class AdRealEstate extends ActiveRecord
                     || $modelAdRealEstate->scenario == 'buyApatrment' || $modelAdRealEstate->scenario == 'rentingApatrment'
                     || $modelAdRealEstate->scenario == 'buyHouse' || $modelAdRealEstate->scenario == 'rentingHouse'
                     || $modelAdRealEstate->scenario == 'buyLand'
+                    || $modelAdRealEstate->scenario == 'buyGarage' || $modelAdRealEstate->scenario == 'rentingGarage'
+                    || $modelAdRealEstate->scenario == 'buyComercial' || $modelAdRealEstate->scenario == 'rentingComercial'
                 ) {
                     $modelAdRealEstateIs = AdRealEstate::find()
                         ->where($this->getAttributesArray($modelAdRealEstate->attributes))

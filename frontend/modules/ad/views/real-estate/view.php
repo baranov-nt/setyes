@@ -56,9 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     || $modelAdRealEstate->model_scenario == 'sellingApatrment' || $modelAdRealEstate->model_scenario == 'rentApatrment'
                     || $modelAdRealEstate->model_scenario == 'sellingHouse' || $modelAdRealEstate->model_scenario == 'rentHouse'
                     || $modelAdRealEstate->model_scenario == 'sellingLand'
-                ):
-
-                    ?>
+                    || $modelAdRealEstate->model_scenario == 'sellingGarage' || $modelAdRealEstate->model_scenario == 'rentGarage'
+                    || $modelAdRealEstate->model_scenario == 'sellingComercial' || $modelAdRealEstate->model_scenario == 'rentComercial'):?>
                     <?php
                     echo ImageLoadWidget::widget([
                         'modelName' => 'AdRealEstate',

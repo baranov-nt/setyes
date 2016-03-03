@@ -47,16 +47,19 @@ class m160116_074120_create_ad_main_table extends Migration
             'favorite_icon_empty' => $this->string(255),              // Иконка "Добавить в избранное"
             'complain_icon' => $this->string(255),              // Иконка "Пожаловаться"
             'quick_view_class' => $this->string(32),            // Класс для кнопки "Быстрый просмотр"
+            'background_color' => $this->string(32),            // Цвет фона
+            'text_color' => $this->string(32),                  // Цвет текста
         ]);
 
         /* Добавляем стиль по умолчанию */
-        $this->batchInsert('ad_style', ['id','name', 'main_container_class', 'header_link_class', 'favorite_icon', 'favorite_icon_empty', 'complain_icon', 'quick_view_class'],
+        $this->batchInsert('ad_style', ['id','name', 'main_container_class', 'header_link_class', 'favorite_icon', 'favorite_icon_empty', 'complain_icon',
+            'quick_view_class', 'background_color', 'text_color'],
             [
-                [1, Yii::t('references', 'Default'), 'alert', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-default'],
-                [2, Yii::t('references', 'Grass'), 'alert alert-success', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-success'],
-                [3, Yii::t('references', 'Sky'), 'alert alert-info', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-info'],
-                [4, Yii::t('references', 'Sand'), 'alert alert-warning', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-warning'],
-                [5, Yii::t('references', 'Rose'), 'alert alert-danger', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-danger'],
+                [1, Yii::t('references', 'Default'), 'alert', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-default', '#ffffff', '#dddddd'],
+                [2, Yii::t('references', 'Grass'), 'alert alert-success', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-success', '#dff0d8', '#3c763d'],
+                [3, Yii::t('references', 'Sky'), 'alert alert-info', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-info', '#d9edf7', '#377493'],
+                [4, Yii::t('references', 'Sand'), 'alert alert-warning', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-warning', '#fcf8e3', '#957b4c'],
+                [5, Yii::t('references', 'Rose'), 'alert alert-danger', 'header-link-class', 'glyphicon glyphicon-ok-sign', 'glyphicon glyphicon-remove-sign', 'glyphicon glyphicon-ban-circle', 'btn btn-danger', '#f2dede', '#a94442'],
             ]);
 
         /* Создаем таблицу  ad_main, в которой будут присутствовать поля, имеющиеся во всех объявлениях */

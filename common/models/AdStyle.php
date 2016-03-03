@@ -15,6 +15,8 @@ use yii\helpers\ArrayHelper;
  * @property string $favorite_icon
  * @property string $complain_icon
  * @property string $quick_view_class
+ * @property string $background_color
+ *  @property string $text_color
  *
  * @property AdMain[] $adMains
  */
@@ -34,7 +36,7 @@ class AdStyle extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'main_container_class', 'header_link_class', 'quick_view_class'], 'string', 'max' => 32],
+            [['name', 'main_container_class', 'header_link_class', 'quick_view_class', 'background_color', 'text_color'], 'string', 'max' => 32],
             [['favorite_icon', 'complain_icon'], 'string', 'max' => 255]
         ];
     }
@@ -52,6 +54,8 @@ class AdStyle extends \yii\db\ActiveRecord
             'favorite_icon' => Yii::t('app', 'Favorite Icon'),
             'complain_icon' => Yii::t('app', 'Complain Icon'),
             'quick_view_class' => Yii::t('app', 'Quick View Class'),
+            'background_color' => Yii::t('app', 'Background Color'),
+            'text_color' => Yii::t('app', 'Text Color')
         ];
     }
 

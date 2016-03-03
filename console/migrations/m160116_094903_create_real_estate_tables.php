@@ -48,13 +48,13 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [24, 5, Yii::t('references', 'buy garage')],            // купить гараж
                 [25, 5, Yii::t('references', 'looking for garage')],    // ищу гараж
                 /* Операции с недвижемостью за рубежем */
-                [26, 6, Yii::t('references', 'selling overseas property')],        // продам недвижемость за рубежем
-                [27, 6, Yii::t('references', 'rent overseas property')],           // сдам недвижемость за рубежем
+                [26, 0, ''],        // продам недвижемость за рубежем
+                [27, 0, ''],           // сдам недвижемость за рубежем
                 /* Операции с коммерческой недвижемостью */
-                [28, 7, Yii::t('references', 'selling property')],        // продам коммерческую недвижемость
-                [29, 7, Yii::t('references', 'rent property')],           // сдам коммерческую недвижемость
-                [30, 7, Yii::t('references', 'buy property')],            // купить коммерческую недвижемость
-                [31, 7, Yii::t('references', 'renting property')],        // сниму коммерческую недвижемость
+                [28, 6, Yii::t('references', 'selling commercial property')],        // продам коммерческую недвижемость
+                [29, 6, Yii::t('references', 'rent commercial property')],           // сдам коммерческую недвижемость
+                [30, 6, Yii::t('references', 'buy commercial property')],            // купить коммерческую недвижемость
+                [31, 6, Yii::t('references', 'renting commercial property')],        // сниму коммерческую недвижемость
                 /* Количество комнат в квартире (для типа недвижимости комнаты) */
                 [32, 9, 1],
                 [33, 9, 2],
@@ -175,7 +175,7 @@ class m160116_094903_create_real_estate_tables extends Migration
                 [130, 17, Yii::t('references', 'country house')],        // деревенский дом
                 [131, 17, Yii::t('references', 'cottage')],              // коттедж
                 [132, 17, Yii::t('references', 'villa')],                // дом
-                /* Свободные 30, (id 7, 100, 101, 98, 99) */
+                /* Свободные 20, 30, (id 7, 26, 27, 100, 101, 98, 99) */
             ]);
 
         /* Создаем таблицу  ad_real_estate, в которой будут храниться объявления категории “Недвижимость” */

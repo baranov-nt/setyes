@@ -28,7 +28,7 @@ return [
             'buyApatrment',
             'rentingApatrment'
         ],
-        'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('property')])],  // значение недвижемости для сделок с комнатами
+        'message' => Yii::t('yii', '{attribute} is invalid.', ['attribute' => $this->getAttributeLabel('property')])],
     ['deal_type', 'number', 'min' => 12, 'max' => 15,
         'on' => [
             'sellingApatrment',

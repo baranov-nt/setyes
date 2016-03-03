@@ -154,6 +154,8 @@ class ViewController extends BehaviorsController
 
         $modelAdMain = $this->findModel($id);
 
+        //dd($modelAdMain->adStyle);
+
         $model = '';
 
         if($modelAdMain->adCategory->category == 1) {
@@ -180,7 +182,9 @@ class ViewController extends BehaviorsController
                 'phone_temp_ad' => $model->adCategory->adMain->phone_temp_ad,
                 'items' => $items,
                 'content' => $model->contentList,
-                'quick_view_class' => $model->adCategory->adMain->adStyle->quick_view_class
+                'quick_view_class' => $model->adCategory->adMain->adStyle->quick_view_class,
+                'background_color' => $model->adCategory->adMain->adStyle->background_color,
+                'text_color' => $model->adCategory->adMain->adStyle->text_color
             ]);
     }
 

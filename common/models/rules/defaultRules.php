@@ -71,11 +71,14 @@ return [
             'rentApatrment',
             'sellingHouse',
             'rentHouse',
+            'sellingLand',
+            'sellingGarage',
+            'rentGarage',
             'sellingComercial',
             'rentComercial',
         ],
         'message' => Yii::t('app', 'Unfortunately, the specified address was not found.')],
-    ['price', 'double'],
+    ['price', 'double', 'min' => '0.00'],
     ['price', 'compare', 'compareValue' => '0.00', 'operator' => '!=',
         'on' => [
             /* комнаты 1 */

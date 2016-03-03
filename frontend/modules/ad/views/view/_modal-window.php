@@ -9,6 +9,9 @@
 /* @var $id integer */
 /* @var $header string */
 /* @var $address string */
+/* @var $main_container_class string */
+/* @var $background_color string */
+/* @var $text_color string */
 /* @var $address_map integer */
 /* @var $phone_temp_ad string */
 /* @var $items array */
@@ -17,12 +20,10 @@
 /* @var $model common\models\AdRealEstate */
 /* @var $user common\models\User */
 
-
 use yii\bootstrap\Modal;
 use yii\widgets\Pjax;
 use yii\bootstrap\Carousel;
 use common\widgets\ShowMapModal\ShowMapModal;
-
 
 Pjax::begin([
     'id' => 'modal-block'
@@ -37,13 +38,16 @@ JS;
 
     $js=<<<JS
         $("#myMapModal").modal("show");
+        $("#myMapModal .modal-content").addClass("$main_container_class");
+        $(".modal-content").css("background-color", "$background_color");
+        $(".modal-header").css("border-color", "$text_color");
 JS;
 $this->registerJS($js);
 Modal::begin([
     'size' => 'modal-lg',
     'id' => 'myMapModal',
-    'header' => '<div style="padding-left: 20px;"><h1 class="text-uppercase">'.Yii::t('references', $header).'</h1><p>'.$address.'</p></div>',
-    'toggleButton' => false,
+    'header' => '<div class="" style="padding-left: 20px;"><h1 class="text-uppercase" style="margin-top: 0;">'.Yii::t('references', $header).'</h1><p>'.$address.'</p></div>',
+    'toggleButton' => false
 ]);
 ?>
 <div class="row">
@@ -74,7 +78,7 @@ Modal::begin([
         if($user->userProfile->first_name || $user->userProfile->second_name):
             ?>
             <div class="col-xs-12">
-                <i class="fa fa-user fa-2x" style=""></i>
+                <i class="fa fa-user fa-2x"></i>
                 <h5><?= $user->userProfile->first_name.' '.$user->userProfile->second_name ?></h5>
             </div>
             <?php
@@ -82,8 +86,9 @@ Modal::begin([
         ?>
     </div>
     <?php if($address_map): ?>
+
     <div class="col-md-6" style="padding: 0 30px 20px 30px;">
-        <div style="border: 3px solid #b5b5b5; border-radius: 3px">
+        <div style="border: 1px solid <?= $text_color ?>; border-radius: 3px">
             <?= ShowMapModal::widget([
                 'modal' => true,
                 'address' => $address,
@@ -104,7 +109,7 @@ Modal::begin([
                         'options' => [
                             'data-interval' => 0,
                             'class' => 'slide',
-                            'style' => 'width:100%;' // set the width of the container if you like
+                            'style' => 'width:100%;'
                         ],
                         'controls' => ['&lsaquo;', '&rsaquo;'],     // Стрелочки вперед - назад
                         //'controls' => ['<', '>'],                     // Стрелочки вперед - назад

@@ -182,8 +182,8 @@ class RealEstateController extends BehaviorsController
             $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
             if($modelAdRealEstate->errors) {
                 if(isset($modelAdRealEstate->errors['model_is']) && $modelAdRealEstate->errors['model_is']) {
-                    Yii::$app->session->setFlash('info', Yii::t('app', 'You have published the same ad.'));
-                    return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
+                    Yii::$app->session->setFlash('info', Yii::t('app', 'You already have such an ad.'));
+                    return $this->redirect(['complite', 'id' => $modelAdRealEstate->id]);
                 }
                 return $this->render('create', [
                     'modelAdRealEstate' => $modelAdRealEstate,
@@ -296,16 +296,6 @@ class RealEstateController extends BehaviorsController
      *
      * Действия для создания объявлений раздела "Недвижимость за рубежом"
      */
-    public function actionCreatePropertyAbroad()
-    {
-        $modelAdRealEstate = new AdRealEstate(['scenario' => 'propertyAbroad']);
-        $modelAdRealEstate->property = 6;
-        $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
-
-        return $this->render('create', [
-            'modelAdRealEstate' => $modelAdRealEstate,
-        ]);
-    }
 
     /**
      * Creates a new AdRealEstate model.
@@ -317,7 +307,7 @@ class RealEstateController extends BehaviorsController
     public function actionCreateCommercialProperty()
     {
         $modelAdRealEstate = new AdRealEstate(['scenario' => 'comercial']);
-        $modelAdRealEstate->property = 7;
+        $modelAdRealEstate->property = 6;
         $modelAdRealEstate->place_city = \Yii::$app->getRequest()->getCookies()->getValue('_city');
 
         return $this->render('create', [
@@ -382,20 +372,15 @@ class RealEstateController extends BehaviorsController
                 $this->setScenario($modelAdRealEstate->deal_type, $property = 5, $scenario = 'buyGarage');
             if($modelAdRealEstate->deal_type == 25)
                 $this->setScenario($modelAdRealEstate->deal_type, $property = 5, $scenario = 'rentingGarage');
-            /* Операции с недвижимостью за рубежом */
-            if($modelAdRealEstate->deal_type == 26)
-                $this->setScenario($modelAdRealEstate->deal_type, $property = 6, $scenario = 'sellingPropertyAbroad');
-            if($modelAdRealEstate->deal_type == 27)
-                $this->setScenario($modelAdRealEstate->deal_type, $property = 6, $scenario = 'rentPropertyAbroad');
             /* Операции с коммерческой недвижимостью */
             if($modelAdRealEstate->deal_type == 28)
-                $this->setScenario($modelAdRealEstate->deal_type, $property = 7, $scenario = 'sellingComercial');
+                $this->setScenario($modelAdRealEstate->deal_type, $property = 6, $scenario = 'sellingComercial');
             if($modelAdRealEstate->deal_type == 29)
-                $this->setScenario($modelAdRealEstate->deal_type, $property = 7, $scenario = 'rentComercial');
+                $this->setScenario($modelAdRealEstate->deal_type, $property = 6, $scenario = 'rentComercial');
             if($modelAdRealEstate->deal_type == 30)
-                $this->setScenario($modelAdRealEstate->deal_type, $property = 7, $scenario = 'buyComercial');
+                $this->setScenario($modelAdRealEstate->deal_type, $property = 6, $scenario = 'buyComercial');
             if($modelAdRealEstate->deal_type == 31)
-                $this->setScenario($modelAdRealEstate->deal_type, $property = 7, $scenario = 'rentingComercial');
+                $this->setScenario($modelAdRealEstate->deal_type, $property = 6, $scenario = 'rentingComercial');
         }
 
         /* @var $modelAdRealEstate \common\models\AdRealEstate */

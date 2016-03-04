@@ -8,9 +8,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
 
-$this->title = Yii::t('app', '{modelClass}: ', [
-        'modelClass' => Yii::t('references', $modelAdRealEstate->adCategory->category0->reference_name),
-    ]) . ' ' . Yii::t('references', $modelAdRealEstate->dealType->reference_name);
+$this->title = Yii::t('app', 'Step 2').': '.Yii::t('app', 'Edit ad').' '.Yii::t('references', $modelAdRealEstate->dealType->reference_name);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $modelAdRealEstate->id, 'url' => ['view', 'id' => $modelAdRealEstate->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
@@ -48,10 +46,8 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
         //
         ?>
     </div>
+    <h1 class="text-center" style="margin-bottom: 40px;"><?= Html::encode($this->title) ?></h1>
     <div class="ad-real-estate-update">
-
-        <h1><?= Html::encode($this->title) ?></h1>
-
         <?= $this->render('_form', [
             'modelAdRealEstate' => $modelAdRealEstate,
         ]) ?>

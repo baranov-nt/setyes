@@ -317,6 +317,10 @@ class MainController extends BehaviorsController
         );
     }
 
+    /**
+     * @param null $place
+     * @return \yii\web\Response
+     */
     public function actionSelectCity($place = null)
     {
         if(!$place)

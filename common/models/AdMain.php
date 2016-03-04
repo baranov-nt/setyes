@@ -17,7 +17,7 @@ use yii\helpers\Html;
  * @property integer $ad_style_id
  * @property integer $phone_temp_ad
  * @property integer $checked
- *
+ * @property integer $temp
  *
  * @property AdFavorite[] $adFavorites
  * @property AdCategory $adCategory
@@ -45,7 +45,7 @@ class AdMain extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'category_id'], 'required'],
-            [['user_id', 'place_city_id', 'category_id', 'ad_style_id', 'checked', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'place_city_id', 'category_id', 'ad_style_id', 'checked', 'temp', 'created_at', 'updated_at'], 'integer'],
             [['phone_temp_ad'], 'string']
         ];
     }
@@ -63,6 +63,7 @@ class AdMain extends \yii\db\ActiveRecord
             'ad_style_id' => Yii::t('app', 'Ad Style'),
             'phone_temp_ad' => Yii::t('app', 'Phone for temp ad'),
             'checked' => Yii::t('app', 'Checked'),
+            'temp' => Yii::t('app', 'Temp'),
             'created_at' => Yii::t('app', 'Created at'),
             'updated_at' => Yii::t('app', 'Updated at'),
         ];

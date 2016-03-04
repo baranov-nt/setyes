@@ -7,7 +7,7 @@ use yii\widgets\ListView;
 /* @var $searchModel common\models\AdRealEstateSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Ad Real Estates');
+$this->title = Yii::t('app', 'Post ad').': '.Yii::t('references', 'Real Estate');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ad-real-estate-index">

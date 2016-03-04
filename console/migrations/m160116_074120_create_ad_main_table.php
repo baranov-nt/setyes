@@ -72,6 +72,7 @@ class m160116_074120_create_ad_main_table extends Migration
             'phone_temp_ad' => $this->string(32),
             'link_temp_ad' => $this->string(255),
             'checked' => $this->boolean()->defaultValue('0'),       // Поля для флага модерации
+            'temp' => $this->boolean()->defaultValue('1'),       // временная запись или нет
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);

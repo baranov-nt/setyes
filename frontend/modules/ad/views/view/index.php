@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     } elseif(Yii::$app->controller->action->id == 'one') {
         $this->title = Yii::t('app', 'Related ads');
     } else {
-        $this->title = Yii::t('app', 'List of ads');
+        $this->title = Yii::t('app', 'List of ads').': '.Yii::$app->placeManager->getCityName();
     }
     ?>
     <h1><?= Html::encode($this->title) ?></h1>

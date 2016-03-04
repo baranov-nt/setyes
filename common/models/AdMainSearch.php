@@ -93,7 +93,7 @@ class AdMainSearch extends AdMain
             'ad_style_id' => $this->ad_style_id,
             'ad_real_estate.deal_type' => $this->deal_type,
             'place_region.id' => $this->region_id,
-            'ad_real_estate.temp' => '0',
+            'temp' => '0',
         ]);
 
         return $dataProvider;
@@ -110,12 +110,8 @@ class AdMainSearch extends AdMain
     {
         $query = AdMain::find()
             ->joinWith('adCategory')
-            ->joinWith([
-                'adCategory.ad' => function ($query) {
-                    $query->andWhere(['temp' => 0]);
-                },
-            ])
             ->joinWith('adFavorites')
+            ->where(['temp' => 0 ])
             ->andWhere([AdFavorite::tableName().'.user_id' => Yii::$app->user->id])
             ->orderBy([
                 'updated_at' => SORT_DESC]);
@@ -123,7 +119,6 @@ class AdMainSearch extends AdMain
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
 
         return $dataProvider;
     }

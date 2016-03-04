@@ -499,5 +499,10 @@ class PlaceManager extends Object
         return $city;
     }
 
+    public function getCityName() {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        return $mainCityPlaceId = Yii::$app->request->cookies->getValue('_city');
+    }
+
     public function testBrowser() {}
 }

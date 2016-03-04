@@ -203,7 +203,6 @@ class m160116_094903_create_real_estate_tables extends Migration
             'images_label' => $this->smallInteger(2)->defaultValue(1), // метка изображения (1 - для недвижимости)
             'video_link' => $this->string(), // метка изображения (1 - для недвижимости)
             'model_scenario' => $this->string(255),             // метка изображения (1 - для недвижимости)
-            'temp' => $this->boolean()->defaultValue('1'),       // временная запись или нет
         ]);
 
         $this->addforeignKey('ad_real_estate_category', 'ad_category', 'ad_id', 'ad_real_estate', 'id');

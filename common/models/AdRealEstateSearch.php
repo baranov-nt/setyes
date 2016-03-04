@@ -75,7 +75,6 @@ class AdRealEstateSearch extends AdRealEstate
             'pets_allowed' => $this->pets_allowed,
             'condition' => $this->condition,
             'images_label' => $this->images_label,
-            'temp' => $this->temp,
         ]);
 
         return $dataProvider;

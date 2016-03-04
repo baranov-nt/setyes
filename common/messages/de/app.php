@@ -231,6 +231,7 @@ return [
     'Step 1' => 'Schritt 1',
     'Step 2' => 'Schritt 2',
     'Step 3' => 'Schritt 3',
+    'Step 4' => 'Schritt 4',
     'Street Name' => 'Straßenname',
     'System Measure' => 'System messen',
     'Temp' => '',

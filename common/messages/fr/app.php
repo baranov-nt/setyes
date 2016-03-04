@@ -230,6 +230,7 @@ return [
     'Step 1' => 'Étape 1',
     'Step 2' => 'Étape 2',
     'Step 3' => 'Étape 3',
+    'Step 4' => 'Étape 4',
     'Street Name' => 'Nom de rue',
     'System Measure' => 'Mesure du système',
     'Temp' => '',

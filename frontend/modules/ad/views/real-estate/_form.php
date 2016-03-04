@@ -23,7 +23,6 @@ CropperAsset::register($this);
 
 $user = Yii::$app->user->identity;
 ?>
-
 <div class="col-md-6 col-md-offset-3">
     <div class="ad-real-estate-form">
         <div class="row">
@@ -35,7 +34,7 @@ $user = Yii::$app->user->identity;
             ]); ?>
 
             <?php
-            d($modelAdRealEstate->scenario);
+            //d($modelAdRealEstate->scenario);
             ?>
 
             <?= $form->field($modelAdRealEstate, 'property')->hiddenInput()->label(false) ?>

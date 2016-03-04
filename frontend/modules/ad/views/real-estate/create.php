@@ -5,13 +5,12 @@ use yii\widgets\MaskedInput;
 use common\widgets\StepsNavigation\StepsNavigation;
 use yii\helpers\Url;
 use common\widgets\Chosen\ChosenAsset;
+use yii\bootstrap\Html;
 
 /* @var $this yii\web\View */
 /* @var $modelAdRealEstate common\models\AdRealEstate */
 /* @var $realEstateProperty common\models\AdRealEstateReference */
 /* @var $pjaxUrl string */
-
-$this->title = Yii::t('app', 'Create Ad Real Estate');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -20,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 Pjax::begin([
     //'enablePushState' => false,
 ]);
+$this->title = Yii::t('app', 'Step 2').': '.Yii::t('app', 'Post ad').' - '.Yii::t('references', 'Real Estate');
 ChosenAsset::register($this);
 MaskedInput::widget([
     'name' => 'masked-input_init',
@@ -28,9 +28,7 @@ MaskedInput::widget([
     ],
 ]);
 ?>
-
     <div class="col-md-12 text-center">
-
     <?php
 echo StepsNavigation::widget([
     'targetStep1' => '#confirm-step1',
@@ -59,8 +57,9 @@ echo StepsNavigation::widget([
     'classContentStep3' => 'tab-pane',
     'classContentStep4' => 'tab-pane',
 ]);
-//
-echo Nav::widget([
+?>
+        <h1 class="text-center" style="margin-bottom: 40px;"><?= Html::encode($this->title) ?></h1>
+<?= Nav::widget([
     'items' => $modelAdRealEstate->realEstatePropertyList,
     'activateParents' => true,
     'encodeLabels' => false,

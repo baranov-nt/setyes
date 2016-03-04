@@ -12,7 +12,7 @@ use common\widgets\AdWidget\AdWidget;
 /* @var $user common\models\User */
 /* @var $radioClass string */
 
-$this->title = Yii::t('app', 'Step 3').': '.Yii::t('references', $modelAdRealEstate->dealType->reference_name);
+$this->title = Yii::t('app', 'Step 4').': '.Yii::t('app', 'Publish ad');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -157,7 +157,17 @@ JS;
     </div>
     <div class="col-md-12 text-center">
         <?= Html::hiddenInput('cityString', $modelAdRealEstate->getCity($modelAdRealEstate)) ?>
-        <?= Html::submitButton(Yii::t('app', 'Publish ad'), ['class' => 'btn btn-success']) ?>
+        <?php
+        if($modelAdRealEstate->adCategory->adMain->temp == 1):
+            ?>
+            <?= Html::submitButton(Yii::t('app', 'Publish ad'), ['class' => 'btn btn-success']) ?>
+            <?php
+        else:
+            ?>
+            <?= Html::submitButton(Yii::t('app', 'Edit ad'), ['class' => 'btn btn-primary']) ?>
+            <?php
+        endif;
+        ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

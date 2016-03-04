@@ -421,7 +421,9 @@ class RealEstateController extends BehaviorsController
         $modelAdRealEstate = $this->findModel($id);
 
         if (Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain])) {
-                $modelAdRealEstate->temp = 0;
+
+            $modelAdRealEstate->adCategory->adMain->temp = 0;
+            $modelAdRealEstate->adCategory->adMain->save();
 
                 if($modelAdRealEstate->save()) {
                     return $this->redirect(['/main/select-city', 'place' => Yii::$app->request->post('cityString')]);
@@ -447,6 +449,23 @@ class RealEstateController extends BehaviorsController
     {
         if (($modelAdRealEstate = AdRealEstate::findOne($id)) !== null) {
             return $modelAdRealEstate;
+        } else {
+            //throw new NotFoundHttpException('The requested page does not exist.');
+            return $this->redirect(['/ad/default/index']);
+        }
+    }
+
+    /**
+     * Finds the AdRealEstate model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return AdRealEstate the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelAdMain($id)
+    {
+        if (($modelAdMain = AdMain::findOne($id)) !== null) {
+            return $modelAdMain;
         } else {
             //throw new NotFoundHttpException('The requested page does not exist.');
             return $this->redirect(['/ad/default/index']);

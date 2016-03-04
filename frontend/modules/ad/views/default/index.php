@@ -6,10 +6,11 @@ use common\widgets\Chosen\ChosenAsset;
 use common\widgets\FontAwesome\AssetBundle;
 use yii\widgets\MaskedInput;
 use yii\helpers\Url;
+use yii\bootstrap\Html;
 /* @var $this yii\web\View */
 /* @var $modelAdMain common\models\AdMain */
 
-$this->title = Yii::t('app', 'Ad Real Estates');
+$this->title = Yii::t('app', 'Post ad').': '.Yii::t('app', 'Select Category');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container" style="margin-top: 0 !important; padding-top: 0 !important;">
@@ -53,6 +54,7 @@ MaskedInput::widget([
         'classContentStep3' => 'tab-pane',
         'classContentStep4' => 'tab-pane',
     ]); ?>
+    <h1 class="text-center" style="margin-bottom: 40px;"><?= Html::encode($this->title) ?></h1>
     <div class="col-md-12 text-center">
         <?php
         echo Nav::widget([

@@ -11,7 +11,7 @@ use yii\bootstrap\Html;
 /* @var $user common\models\User */
 $user = Yii::$app->user->identity;
 
-$this->title = Yii::t('app', 'Step 3').': '.Yii::t('references', $modelAdRealEstate->dealType->reference_name);
+$this->title = Yii::t('app', 'Step 3').': '.Yii::t('app', 'Add photos');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Ad Real Estates'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //
         ?>
     </div>
+        <h1 class="text-center" style="margin-bottom: 40px;"><?= Html::encode($this->title) ?></h1>
     <div class="col-md-6" style="margin-top: 0 !important; padding-top: 0 !important; padding-bottom: 20px;">
         <div class="row">
             <div class="col-md-12">

@@ -32,7 +32,6 @@ use yii\db\Exception;
  * @property integer $condition
  * @property integer $images_label
  * @property string $model_scenario
- * @property integer $temp
  * @property integer $model_is
  *
  * @property AdRealEstate[] $columnList
@@ -186,7 +185,6 @@ class AdRealEstate extends ActiveRecord
             'place_street' => Yii::t('app', 'Street Name'),
             'place_house' => Yii::t('app', 'House'),
             'place_address' => Yii::t('app', 'Address'),
-            'temp' => Yii::t('app', 'Temp'),
             'style' => Yii::t('app', 'Style'),
             'phone_temp_ad' => Yii::t('app', 'Phone for temp ad'),
             'link_temp_ad' => Yii::t('app', 'Link from temp ad'),
@@ -1113,7 +1111,6 @@ class AdRealEstate extends ActiveRecord
 
     public function getAttributesArray($attributes)
     {
-
         unset(
             $attributes['id'],
             $attributes['area_of_property'],
@@ -1121,9 +1118,6 @@ class AdRealEstate extends ActiveRecord
             $attributes['price'],
             $attributes['images_label']
         );
-
-        /* Ищем повтор только у опубликованных объявлений */
-        $attributes['temp'] = 0;
 
         return $attributes;
     }

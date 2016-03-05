@@ -81,6 +81,8 @@ class m160304_170506_create_cars_tables extends Migration
 
     public function safeDown()
     {
-        $this->dropTable('cars_tables');
+        echo "m160304_170506_create_cars_tables cannot be reverted.\n";
+
+        return false;
     }
 }

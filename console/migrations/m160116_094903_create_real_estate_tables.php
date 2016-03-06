@@ -205,7 +205,7 @@ class m160116_094903_create_real_estate_tables extends Migration
             'model_scenario' => $this->string(255),             // использованный сценарий для создания записи
         ]);
 
-        $this->addforeignKey('ad_real_estate_category', 'ad_category', 'ad_id', 'ad_real_estate', 'id');
+        //$this->addforeignKey('ad_real_estate_category', 'ad_category', 'ad_id', 'ad_real_estate', 'id');
         $this->addforeignKey('ad_real_estate_property_reference', 'ad_real_estate', 'property', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_type_of_property_reference', 'ad_real_estate', 'type_of_property', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_deal_type_reference', 'ad_real_estate', 'deal_type', 'ad_real_estate_reference', 'id');
@@ -223,7 +223,6 @@ class m160116_094903_create_real_estate_tables extends Migration
         $this->addforeignKey('ad_real_estate_pets_allowed_reference', 'ad_real_estate', 'pets_allowed', 'ad_real_estate_reference', 'id');
         $this->addforeignKey('ad_real_estate_condition_reference', 'ad_real_estate', 'condition', 'ad_real_estate_reference', 'id');
 
-        /* Создаем таблицу  ad_real_estate_appliances, в которой будет хранится бытовая техника, имеющаяся в квартире. Используется для раздела аренды. */
         $this->createTable('ad_real_estate_appliances', [
             'id' => $this->primaryKey(),
             'reference_id' => $this->integer()->notNull(),                   // Номер справочного раздела

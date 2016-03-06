@@ -13,7 +13,7 @@ use yii\db\ActiveRecord;
  * @property integer $ad_id
  *
  * @property AdMainReference $category0
- * @property AdRealEstate $ad
+ * @property AdRealEstate $adRealEstate
  * @property AdMain $adMain
  */
 class AdCategory extends ActiveRecord
@@ -60,7 +60,7 @@ class AdCategory extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAd()
+    public function getAdRealEstate()
     {
         return $this->hasOne(AdRealEstate::className(), ['id' => 'ad_id']);
     }

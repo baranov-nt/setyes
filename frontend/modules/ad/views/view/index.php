@@ -67,9 +67,10 @@ $this->params['breadcrumbs'][] = $this->title;
         echo ListView::widget([
             'dataProvider' => $dataProvider,
             'id' => 'my-listview-id',
-            'itemView' => function ($model, $key, $index, $widget) {                // альтернативный способ передать данные в представление
-                return $this->render('_category_'.$model->adCategory->category,[
-                    'model' => $model->adCategory->ad,
+            'itemView' => function ($modelAdMain, $key, $index, $widget) {                // альтернативный способ передать данные в представление
+                // $var $model \common\models\AdMain
+                return $this->render('_item' ,[
+                    'modelAdMain' => $modelAdMain,
                     'key' => $key,
                     'index' => $index,
                     'widget' => $widget

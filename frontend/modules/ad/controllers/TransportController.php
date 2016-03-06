@@ -5,14 +5,14 @@ namespace frontend\modules\ad\controllers;
 use Yii;
 use common\models\AdTransport;
 use common\models\AdTransportSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use frontend\controllers\BehaviorsController;
 
 /**
  * TransportController implements the CRUD actions for AdTransport model.
  */
-class TransportController extends Controller
+class TransportController extends BehaviorsController
 {
     public function behaviors()
     {

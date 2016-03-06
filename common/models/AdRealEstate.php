@@ -356,16 +356,6 @@ class AdRealEstate extends ActiveRecord
         return Yii::$app->user->identity;
     }
 
-    public function getAddress($modelAdRealEstate) {
-        if ($modelAdRealEstate->placeAddress) {
-            /* Получает строку адреса */
-            return Yii::$app->placeManager->getAddress($modelAdRealEstate);
-        } else {
-            /* Получает строку города */
-            return Yii::$app->placeManager->getCity($modelAdRealEstate);
-        }
-    }
-
     public function getCity($modelAdRealEstate) {
         return Yii::$app->placeManager->getCity($modelAdRealEstate);
     }
@@ -498,53 +488,6 @@ class AdRealEstate extends ActiveRecord
         return $items;
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContentList()
-    {
-        $modelAdRealEstate = new AdRealEstate();
-        $items = '';
-        if($this->type_of_property)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('type_of_property').':</strong> '.Yii::t('references', $this->typeOfProperty->reference_name).'</p>';
-        if($this->area_of_property)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_property').':</strong> '.Yii::t('references', $this->area_of_property).' '.Yii::t('references', $this->measurementOfProperty->reference_name).'</p>';
-        if($this->area_of_land)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('area_of_land').':</strong> '.Yii::t('references', $this->area_of_land).' '.Yii::t('references', $this->measurementOfLand->reference_name).'</p>';
-        if($this->rooms_in_the_apartment)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('rooms_in_the_apartment').':</strong> '.Yii::t('references', $this->roomsInTheApartment->reference_name).'</p>';
-        if($this->material_housing)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('material_housing').':</strong> '.Yii::t('references', $this->materialHousing->reference_name).'</p>';
-        if($this->floor)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('floor').':</strong> '.Yii::t('references', $this->floor0->reference_name).'</p>';
-        if($this->floors_in_the_house)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('floors_in_the_house').':</strong> '.Yii::t('references', $this->floorsInTheHouse->reference_name).'</p>';
-        if($this->lease_term)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('lease_term').':</strong> '.Yii::t('references', $this->leaseTerm->reference_name).'</p>';
-        if($this->price)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('price').':</strong> '.
-                Yii::$app->formatter->asCurrency(Yii::t('references', $this->price), $this->user->country->currency)
-                .'</p>';
-        if($this->price_for_the_period)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('price_for_the_period').':</strong> '.Yii::t('references', $this->priceForThePeriod->reference_name).'</p>';
-        if($this->necessary_furniture)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('necessary_furniture').':</strong> '.Yii::t('references', $this->necessaryFurniture->reference_name).'</p>';
-        if($this->internet)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('internet').':</strong> '.Yii::t('references', $this->internet0->reference_name).'</p>';
-        if($this->pets_allowed)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('pets_allowed').':</strong> '.Yii::t('references', $this->petsAllowed->reference_name).'</p>';
-        if($this->adRealEstateAppliances) {
-            $itemsDiv = '';
-            $items .= '<p class="content-elem"><strong>' . $modelAdRealEstate->getAttributeLabel('appliances') . ':</strong> ';
-            foreach ($this->adRealEstateAppliances as $one) {
-                $items .= $itemsDiv . Yii::t('references', $one->reference->reference_name);
-                $itemsDiv = ', ';
-            }
-        }
-        if($this->condition)
-            $items .= '<p class="content-elem"><strong>'.$modelAdRealEstate->getAttributeLabel('condition').':</strong> '.Yii::t('references', $this->condition0->reference_name).'</p>';
-        return $items;
-    }
     /**
      * Returns the array of possible user status values.
      *

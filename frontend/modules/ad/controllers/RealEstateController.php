@@ -32,66 +32,6 @@ class RealEstateController extends BehaviorsController
         ]);
     }
 
-    public function actionComplite($id)
-    {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
-        $modelAdRealEstate = $this->findModel($id);
-
-        if (Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain])) {
-
-            if ($modelAdRealEstate->placeAddress) {
-                /* Устанавливаем поля в модели в соответствии с адресом */
-                $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
-            } else {
-                /* Устанавливаем поля в модели в соответствии с городом */
-                $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
-            }
-
-            if ($modelAdRealEstate->load(Yii::$app->request->post())) {
-
-                $modelAdRealEstate->compliteAd($modelAdRealEstate);
-                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
-                if ($modelAdRealEstate->errors) {
-                    return $this->render('create', [
-                        'modelAdRealEstate' => $modelAdRealEstate,
-                    ]);
-                } else {
-                    //dd('OK!!!');
-                    return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
-                }
-            }
-
-            return $this->render('complite', [
-                'modelAdRealEstate' => $modelAdRealEstate,
-            ]);
-
-        } else {
-            throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
-        }
-    }
-
-    public function actionSelectStyle($id)
-    {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
-        /* @var $modelAdMain \common\models\AdMain */
-        $modelAdRealEstate = $this->findModel($id);
-        $modelAdMain = AdMain::findOne($modelAdRealEstate->adCategory->adMain->id);
-
-        if (Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain])) {
-
-            if ($modelAdMain->load(Yii::$app->request->post()) && $modelAdMain->save()) {
-                $modelAdRealEstate = $this->findModel($id);
-            }
-
-            return $this->render('complite', [
-                'modelAdRealEstate' => $modelAdRealEstate,
-            ]);
-
-        } else {
-            throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
-        }
-    }
-
     /**
      * Displays a single AdRealEstate model.
      * @param integer $id
@@ -183,7 +123,7 @@ class RealEstateController extends BehaviorsController
             if($modelAdRealEstate->errors) {
                 if(isset($modelAdRealEstate->errors['model_is']) && $modelAdRealEstate->errors['model_is']) {
                     Yii::$app->session->setFlash('info', Yii::t('app', 'You already have such an ad.'));
-                    return $this->redirect(['complite', 'id' => $modelAdRealEstate->id]);
+                    return $this->redirect(['/ad/view/complite', 'id' => $modelAdRealEstate->adCategory->adMain->id]);
                 }
                 return $this->render('create', [
                     'modelAdRealEstate' => $modelAdRealEstate,
@@ -413,29 +353,6 @@ class RealEstateController extends BehaviorsController
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
-    }
-
-    public function actionPublish($id)
-    {
-        /* @var $modelAdRealEstate \common\models\AdRealEstate */
-        $modelAdRealEstate = $this->findModel($id);
-
-        if (Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain])) {
-
-            $modelAdRealEstate->adCategory->adMain->temp = 0;
-            $modelAdRealEstate->adCategory->adMain->save();
-
-                if($modelAdRealEstate->save()) {
-                    return $this->redirect(['/main/select-city', 'place' => Yii::$app->request->post('cityString')]);
-                }
-
-            return $this->render('complite', [
-                'modelAdRealEstate' => $modelAdRealEstate,
-            ]);
-
-        } else {
-            throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
-        }
     }
 
     /**

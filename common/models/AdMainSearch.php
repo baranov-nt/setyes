@@ -47,12 +47,12 @@ class AdMainSearch extends AdMain
 
         $query = AdMain::find()
             ->joinWith('adCategory')
-            ->joinWith([
+            /*->joinWith([
                 'adCategory.ad' => function ($query) {
                     //$query->andWhere(['temp' => 0]);
                     //$query->andWhere($this->deal_query);
                 },
-            ])
+            ])*/
             ->joinWith([
                 'placeCity.region' => function ($query) {
                     //$query->andWhere(['temp' => 0]);

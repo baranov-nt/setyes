@@ -1,4 +1,11 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: phpNT
+ * Date: 06.03.2016
+ * Time: 17:15
+ */
+
 use common\widgets\StepsNavigation\StepsNavigation;
 use yii\helpers\Url;
 use yii\bootstrap\Html;
@@ -8,7 +15,7 @@ use yii\widgets\Pjax;
 use common\widgets\AdWidget\AdWidget;
 
 /* @var $this yii\web\View */
-/* @var $modelAdRealEstate common\models\AdRealEstate */
+/* @var $modelAdMain common\models\AdMain */
 /* @var $user common\models\User */
 /* @var $radioClass string */
 
@@ -23,9 +30,9 @@ $user = Yii::$app->user->identity;
         <?php
         echo StepsNavigation::widget([
             'targetStep1' => '#confirm-step1',
-            'urlStep1' => Url::to(['/ad/default/index', 'id' => $modelAdRealEstate->id]),
-            'urlStep2' => Url::to(['/ad/real-estate/update', 'id' => $modelAdRealEstate->id]),
-            'urlStep3' => Url::to(['/ad/real-estate/view', 'id' => $modelAdRealEstate->id]),
+            'urlStep1' => $modelAdMain->getUrlStep1(),
+            'urlStep2' => $modelAdMain->getUrlStep2(),
+            'urlStep3' => $modelAdMain->getUrlStep3(),
             'urlStep4' => Url::to(['/#']),
             'titleStep1' => Yii::t('app', 'Step 1'),
             'titleStep2' => Yii::t('app', 'Step 2'),
@@ -55,42 +62,42 @@ $user = Yii::$app->user->identity;
         <h1><?= Yii::t('app', 'Template') ?></h1>
     </div>
     <div class="style_forms">
-    <?php
-    Pjax::begin([
-        'id' => 'style_forms',
-        'enablePushState' => true
-    ]);
-    $js=<<<JS
+        <?php
+        Pjax::begin([
+            'id' => 'style_forms',
+            'enablePushState' => true
+        ]);
+        $js=<<<JS
     /*$("#style_forms").on("pjax:complete", function() {
         $("#style_form").attr("tabindex",-1).focus();
     });*/
 JS;
-    $this->registerJS($js);
-    echo AdWidget::widget([
-        'template' => true,
-        'id' => $modelAdRealEstate->adCategory->adMain->id,
-        'author' => Yii::$app->user->can('Автор', ['model' => $modelAdRealEstate->adCategory->adMain]),
-        'main_container_class' => $modelAdRealEstate->adCategory->adMain->adStyle->main_container_class.' col-md-3 col-md-offset-3',
-        'favorite' => $modelAdRealEstate->adCategory->adMain->getFavorite($modelAdRealEstate->adCategory->adMain->id),
-        'favorite_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->favorite_icon,
-        'complain' => $modelAdRealEstate->adCategory->adMain->getComplain($modelAdRealEstate->adCategory->adMain->id),
-        'complain_icon' => $modelAdRealEstate->adCategory->adMain->adStyle->complain_icon,
-        'header' => $modelAdRealEstate->dealType->reference_name,
-        'address' => $modelAdRealEstate->getAddress($modelAdRealEstate),
-        'address_map' => $modelAdRealEstate->place_address_id ? true : false,
-        'phone_temp_ad' => $modelAdRealEstate->adCategory->adMain->phone_temp_ad,
-        'images' => $modelAdRealEstate->imagesOfObjects,
-        'content' => $modelAdRealEstate->contentList,
-        'quick_view_class' => $modelAdRealEstate->adCategory->adMain->adStyle->quick_view_class
-    ]);
-    ?>
-    <?php
-    Pjax::end();
-    ?>
+        $this->registerJS($js);
+        echo AdWidget::widget([
+            'template' => true,
+            'id' => $modelAdMain->id,
+            'author' => Yii::$app->user->can('Автор', ['model' => $modelAdMain]),
+            'main_container_class' => $modelAdMain->adStyle->main_container_class.' col-md-3 col-md-offset-3',
+            'favorite' => $modelAdMain->getFavorite($modelAdMain->id),
+            'favorite_icon' => $modelAdMain->adStyle->favorite_icon,
+            'complain' => $modelAdMain->getComplain($modelAdMain->id),
+            'complain_icon' => $modelAdMain->adStyle->complain_icon,
+            'header' => $modelAdMain->getHeader(),
+            'address' => $modelAdMain->getAddress(),
+            'address_map' => $modelAdMain->getAddressMap(),
+            'phone_temp_ad' => $modelAdMain->phone_temp_ad,
+            'images' => $modelAdMain->getImagesOfObjects(),
+            'content' => $modelAdMain->getContentList(),
+            'quick_view_class' => $modelAdMain->adStyle->quick_view_class
+        ]);
+        ?>
+        <?php
+        Pjax::end();
+        ?>
     </div>
 
     <?php $form = ActiveForm::begin([
-        'action' => Url::to(['/ad/real-estate/publish', 'id' => $modelAdRealEstate->id]),
+        'action' => Url::to(['/ad/view/publish', 'id' => $modelAdMain->id]),
         'method' => 'post',
         'fieldClass' => ActiveField::className(),
         'id' => 'style_form',
@@ -98,13 +105,13 @@ JS;
     ]); ?>
     <div class="col-md-3" style="">
         <?php
-        //dd($modelAdRealEstate->adCategory->adMain->adStyle->id);
-        echo $form->field($modelAdRealEstate->adCategory->adMain, 'ad_style_id')->radioList($modelAdRealEstate->adCategory->adMain->adStyle->styleList,
+        //dd($modelAdMain->adCategory->adMain->adStyle->id);
+        echo $form->field($modelAdMain->adCategory->adMain, 'ad_style_id')->radioList($modelAdMain->adStyle->styleList,
             [
                 'onchange' => '
                 $.pjax({
                     type: "POST",
-                    url: "'.Url::to(['/ad/real-estate/select-style', 'id' => $modelAdRealEstate->id]).'",
+                    url: "'.Url::to(['/ad/view/select-style', 'id' => $modelAdMain->id]).'",
                     data: jQuery("#style_form").serialize(),
                     container: "#style_forms",
                     push: false
@@ -156,9 +163,9 @@ JS;
 
     </div>
     <div class="col-md-12 text-center">
-        <?= Html::hiddenInput('cityString', $modelAdRealEstate->getCity($modelAdRealEstate)) ?>
+        <?= Html::hiddenInput('cityString', $modelAdMain->getCity()) ?>
         <?php
-        if($modelAdRealEstate->adCategory->adMain->temp == 1):
+        if($modelAdMain->adCategory->adMain->temp == 1):
             ?>
             <?= Html::submitButton(Yii::t('app', 'Publish ad'), ['class' => 'btn btn-success']) ?>
             <?php
@@ -171,5 +178,3 @@ JS;
     </div>
     <?php ActiveForm::end(); ?>
 </div>
-
-

@@ -7,6 +7,7 @@ use common\models\PlaceCity;
 use Yii;
 use common\models\AdMain;
 use common\models\AdMainSearch;
+use yii\web\MethodNotAllowedHttpException;
 use yii\web\NotFoundHttpException;
 use frontend\controllers\BehaviorsController;
 use common\models\AdFavorite;
@@ -67,45 +68,27 @@ class ViewController extends BehaviorsController
     {
         $modelAdMain = $this->findModel($id);
 
-        $model = '';
-
-        if($modelAdMain->adCategory->category == 1) {
-            $model = $modelAdMain->adCategory->ad;
-        }
-
-        $items = $modelAdMain->getLargeImagesList($model->imagesOfObjects);
-
-        $modalWindow = true;
-
-        /* Фильтр для объявлений */
-        $searchModel = new AdMainSearch();
-        //$searchModel->id = $id;
-        $searchModel->deal_type = $model->deal_type;
-        $searchModel->place_city_id = $model->adCategory->adMain->place_city_id;
-        /* Объявления не владельца */
-        $searchModel->not_owner = true;
-        $searchModel->not_this = true;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $items = $modelAdMain->getLargeImagesList($modelAdMain->getImagesOfObjects());
 
         return $this->render('view',
             [
-                'modalWindow' => $modalWindow,
+                'modalWindow' => false,
                 'user' => Yii::$app->user->identity,
                 'template' => false,
                 'id' => $id,
-                'author' => Yii::$app->user->can('Автор', ['model' => $model->adCategory->adMain]),
-                'main_container_class' => $model->adCategory->adMain->adStyle->main_container_class,
-                'favorite' => $model->adCategory->adMain->getFavorite($model->adCategory->adMain->id),
-                'favorite_icon' => $model->adCategory->adMain->adStyle->favorite_icon,
-                'header' => $model->dealType->reference_name,
-                'address' => $model->getAddress($model),
-                'address_map' => $model->place_address_id ? true : false,
-                'phone_temp_ad' => $model->adCategory->adMain->phone_temp_ad,
+                'author' => Yii::$app->user->can('Автор', ['model' => $modelAdMain]),
+                'main_container_class' =>$modelAdMain->adStyle->main_container_class,
+                'favorite' => $modelAdMain->getFavorite($modelAdMain->id),
+                'favorite_icon' => $modelAdMain->adStyle->favorite_icon,
+                'header' => $modelAdMain->getHeader(),
+                'address' => $modelAdMain->getAddress(),
+                'address_map' => $modelAdMain->getAddressMap(),
+                'phone_temp_ad' => $modelAdMain->phone_temp_ad,
                 'items' => $items,
-                'content' => $model->contentList,
-                'quick_view_class' => $model->adCategory->adMain->adStyle->quick_view_class,
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
+                'content' => $modelAdMain->getContentList(),
+                'quick_view_class' => $modelAdMain->adStyle->quick_view_class,
+                'background_color' => $modelAdMain->adStyle->background_color,
+                'text_color' => $modelAdMain->adStyle->text_color
             ]);
     }
 
@@ -154,15 +137,7 @@ class ViewController extends BehaviorsController
 
         $modelAdMain = $this->findModel($id);
 
-        //dd($modelAdMain->adStyle);
-
-        $model = '';
-
-        if($modelAdMain->adCategory->category == 1) {
-            $model = $modelAdMain->adCategory->ad;
-        }
-
-        $items = $modelAdMain->getLargeImagesList($model->imagesOfObjects);
+        $items = $modelAdMain->getLargeImagesList($modelAdMain->getImagesOfObjects());
 
         $modalWindow = true;
 
@@ -172,19 +147,19 @@ class ViewController extends BehaviorsController
                 'user' => Yii::$app->user->identity,
                 'template' => false,
                 'id' => $id,
-                'author' => Yii::$app->user->can('Автор', ['model' => $model->adCategory->adMain]),
-                'main_container_class' => $model->adCategory->adMain->adStyle->main_container_class,
-                'favorite' => $model->adCategory->adMain->getFavorite($model->adCategory->adMain->id),
-                'favorite_icon' => $model->adCategory->adMain->adStyle->favorite_icon,
-                'header' => $model->dealType->reference_name,
-                'address' => $model->getAddress($model),
-                'address_map' => $model->place_address_id ? true : false,
-                'phone_temp_ad' => $model->adCategory->adMain->phone_temp_ad,
+                'author' => Yii::$app->user->can('Автор', ['model' => $modelAdMain]),
+                'main_container_class' =>$modelAdMain->adStyle->main_container_class,
+                'favorite' => $modelAdMain->getFavorite($modelAdMain->id),
+                'favorite_icon' => $modelAdMain->adStyle->favorite_icon,
+                'header' => $modelAdMain->getHeader(),
+                'address' => $modelAdMain->getAddress(),
+                'address_map' => $modelAdMain->getAddressMap(),
+                'phone_temp_ad' => $modelAdMain->phone_temp_ad,
                 'items' => $items,
-                'content' => $model->contentList,
-                'quick_view_class' => $model->adCategory->adMain->adStyle->quick_view_class,
-                'background_color' => $model->adCategory->adMain->adStyle->background_color,
-                'text_color' => $model->adCategory->adMain->adStyle->text_color
+                'content' => $modelAdMain->getContentList(),
+                'quick_view_class' => $modelAdMain->adStyle->quick_view_class,
+                'background_color' => $modelAdMain->adStyle->background_color,
+                'text_color' => $modelAdMain->adStyle->text_color
             ]);
     }
 
@@ -279,6 +254,88 @@ class ViewController extends BehaviorsController
                 'id' => Yii::$app->request->post('id'),
                 'icon' => Yii::$app->request->post('icon'),
             ]);
+    }
+
+    public function actionComplite($id)
+    {
+        /* @var $modelAdMain \common\models\AdMain */
+        $modelAdMain = $this->findModel($id);
+
+        //dd($modelAdMain);
+
+        if (Yii::$app->user->can('Автор', ['model' => $modelAdMain])) {
+
+            /*if ($modelAdRealEstate->placeAddress) {
+                // Устанавливаем поля в модели в соответствии с адресом
+                $modelAdRealEstate = Yii::$app->placeManager->setAddress($modelAdRealEstate);
+            } else {
+                // Устанавливаем поля в модели в соответствии с городом
+                $modelAdRealEstate = Yii::$app->placeManager->setCity($modelAdRealEstate);
+            }
+
+            if ($modelAdRealEstate->load(Yii::$app->request->post())) {
+
+                $modelAdRealEstate->compliteAd($modelAdRealEstate);
+                $modelAdRealEstate = $modelAdRealEstate->checkForm($scenario = $modelAdRealEstate->model_scenario, $modelAdRealEstate);
+                if ($modelAdRealEstate->errors) {
+                    return $this->render('create', [
+                        'modelAdRealEstate' => $modelAdRealEstate,
+                    ]);
+                } else {
+                    //dd('OK!!!');
+                    return $this->redirect(['view', 'id' => $modelAdRealEstate->id]);
+                }
+            }*/
+
+            return $this->render('complite', [
+                'modelAdMain' => $modelAdMain,
+            ]);
+
+        } else {
+            throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
+        }
+    }
+
+    public function actionSelectStyle($id)
+    {
+        /* @var $modelAdRealEstate \common\models\AdRealEstate */
+        /* @var $modelAdMain \common\models\AdMain */
+        $modelAdMain = $this->findModel($id);
+
+        if (Yii::$app->user->can('Автор', ['model' => $modelAdMain])) {
+
+            if($modelAdMain->adCategory->category == 1) {
+                if ($modelAdMain->load(Yii::$app->request->post()) && $modelAdMain->save()) {
+                    return $this->render('complite', [
+                        'modelAdMain' => $modelAdMain
+                    ]);
+                }
+            }
+        }
+        throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
+    }
+
+    public function actionPublish($id)
+    {
+        /* @var $modelAdMain \common\models\AdMain */
+        $modelAdMain = $this->findModel($id);
+
+        if (Yii::$app->user->can('Автор', ['model' => $modelAdMain])) {
+
+            $modelAdMain->temp = 0;
+            $modelAdMain->save();
+
+            if($modelAdMain->adCategory->adRealEstate->save()) {
+                return $this->redirect(['/main/select-city', 'place' => Yii::$app->request->post('cityString')]);
+            }
+
+            return $this->render('complite', [
+                'model' => $modelAdMain->adCategory->adRealEstate
+            ]);
+
+        } else {
+            throw new MethodNotAllowedHttpException(Yii::t('app', 'You are not allowed to access this page.'));
+        }
     }
 
     public function actionAddToComplains () {

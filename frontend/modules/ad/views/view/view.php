@@ -21,6 +21,8 @@
 /* @var $searchModel common\models\AdMainSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+$this->title = Yii::t('references', $header).' '.$address;
+
 use yii\bootstrap\Carousel;
 use common\widgets\ShowMapModal\ShowMapModal;
 use common\widgets\iGrowl\AssetBundle;
@@ -106,8 +108,3 @@ AssetBundle::register($this);
         </div>
     </div>
 </div>
-<?php
-echo $this->render('index', [
-    'searchModel' => $searchModel,
-    'dataProvider' => $dataProvider,
-]);

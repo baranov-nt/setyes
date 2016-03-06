@@ -15,15 +15,22 @@ use Yii;
  * @property integer $measurement_of_mileage
  * @property integer $price
  * @property integer $price_for_the_period
+ * @property integer $equipment
+ * @property integer $exterior_color
+ * @property integer $interior_color
  * @property integer $condition
  * @property integer $images_label
  * @property string $video_link
  * @property string $model_scenario
  *
- * @property AdCategory[] $adCategories
+ * @property AdTransportReference $condition0
+ * @property AdTransportReference $equipment0
+ * @property AdTransportReference $exteriorColor
+ * @property AdTransportReference $interiorColor
  * @property CarModel $idCarModel
  * @property AdTransportReference $dealType
  * @property AdTransportReference $measurementOfMileage
+ * @property AdTransportReference $priceForThePeriod
  * @property AdTransportReference $transport0
  */
 class AdTransport extends \yii\db\ActiveRecord
@@ -43,7 +50,7 @@ class AdTransport extends \yii\db\ActiveRecord
     {
         return [
             [['transport', 'deal_type', 'id_car_model'], 'required'],
-            [['transport', 'deal_type', 'id_car_model', 'mileage', 'measurement_of_mileage', 'price', 'price_for_the_period', 'condition', 'images_label'], 'integer'],
+            [['transport', 'deal_type', 'id_car_model', 'mileage', 'measurement_of_mileage', 'price', 'price_for_the_period', 'equipment', 'exterior_color', 'interior_color', 'condition', 'images_label'], 'integer'],
             [['video_link', 'model_scenario'], 'string', 'max' => 255]
         ];
     }
@@ -62,6 +69,9 @@ class AdTransport extends \yii\db\ActiveRecord
             'measurement_of_mileage' => Yii::t('app', 'Measurement Of Mileage'),
             'price' => Yii::t('app', 'Price'),
             'price_for_the_period' => Yii::t('app', 'Price For The Period'),
+            'equipment' => Yii::t('app', 'Equipment'),
+            'exterior_color' => Yii::t('app', 'Exterior Color'),
+            'interior_color' => Yii::t('app', 'Interior Color'),
             'condition' => Yii::t('app', 'Condition'),
             'images_label' => Yii::t('app', 'Images Label'),
             'video_link' => Yii::t('app', 'Video Link'),
@@ -72,9 +82,33 @@ class AdTransport extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAdCategories()
+    public function getCondition0()
     {
-        return $this->hasMany(AdCategory::className(), ['ad_id' => 'id']);
+        return $this->hasOne(AdTransportReference::className(), ['id' => 'condition']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEquipment0()
+    {
+        return $this->hasOne(AdTransportReference::className(), ['id' => 'equipment']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExteriorColor()
+    {
+        return $this->hasOne(AdTransportReference::className(), ['id' => 'exterior_color']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInteriorColor()
+    {
+        return $this->hasOne(AdTransportReference::className(), ['id' => 'interior_color']);
     }
 
     /**
@@ -99,6 +133,14 @@ class AdTransport extends \yii\db\ActiveRecord
     public function getMeasurementOfMileage()
     {
         return $this->hasOne(AdTransportReference::className(), ['id' => 'measurement_of_mileage']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPriceForThePeriod()
+    {
+        return $this->hasOne(AdTransportReference::className(), ['id' => 'price_for_the_period']);
     }
 
     /**

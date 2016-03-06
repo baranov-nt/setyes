@@ -70,16 +70,17 @@ class BehaviorsController extends Controller {
                     ],
                     [
                         'allow' => true,
-                        'controllers' => ['ad/real-estate'],
+                        'controllers' => ['ad/real-estate', 'ad/transport'],
                         'actions' => ['index', 'create', 'view', 'update', 'delete',
                             'create-rooms', 'create-apartrments', 'create-houses-cottages', 'create-land-plot', 'create-garages-parking', 'create-property-abroad', 'create-commercial-property',
-                            'select-deal', 'complite', 'select-style', 'publish'],
+                            'select-deal'],
                         'roles' => ['Администратор']
                     ],
                     [
                         'allow' => true,
                         'controllers' => ['ad/view'],
-                        'actions' => ['all', 'one', 'add-to-favorites', 'delete-from-favorites', 'add-to-complains', 'delete-from-complains', 'favorites', 'my', 'update', 'delete', 'open-in-modal', 'show-in-region'],
+                        'actions' => ['all', 'one', 'add-to-favorites', 'delete-from-favorites', 'add-to-complains', 'delete-from-complains', 'favorites', 'my', 'update',
+                            'delete', 'open-in-modal', 'show-in-region', 'complite', 'select-style', 'publish'],
                         'roles' => ['Администратор']
                     ],
                     [

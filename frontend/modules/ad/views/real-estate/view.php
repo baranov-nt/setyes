@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
         echo StepsNavigation::widget([
             'targetStep1' => '#confirm-step1',
-            'urlStep1' => Url::to(['/ad/default/index', 'id' => $modelAdRealEstate->id]),
+            'urlStep1' => Url::to(['/ad/default/index', 'id' => $modelAdRealEstate->adCategory->adMain->id]),
             'urlStep2' => Url::to(['/ad/real-estate/update', 'id' => $modelAdRealEstate->id]),
             'urlStep3' => Url::to(['/#']),
             'urlStep4' => Url::to(['/#']),
@@ -126,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <div class="col-md-12 text-center">
-        <?= Html::a(Yii::t('app', 'Continue'), ['/ad/real-estate/complite', 'id' => $modelAdRealEstate->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app', 'Continue'), ['/ad/view/complite', 'id' => $modelAdRealEstate->adCategory->adMain->id], ['class' => 'btn btn-primary']) ?>
     </div>
 </div>
 

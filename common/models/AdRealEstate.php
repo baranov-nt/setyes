@@ -209,7 +209,11 @@ class AdRealEstate extends ActiveRecord
      */
     public function getAdCategory()
     {
-        return $this->hasOne(AdCategory::className(), ['ad_id' => 'id']);
+        return $this->hasOne(AdCategory::className(),
+            [
+                'ad_id' => 'id',
+                'category' => 'images_label',
+            ]);
     }
 
     /**

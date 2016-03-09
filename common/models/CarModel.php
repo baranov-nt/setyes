@@ -5,15 +5,16 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "car_serie".
+ * This is the model class for table "car_model".
  *
- * @property integer $id_car_serie
  * @property integer $id_car_model
+ * @property integer $id_car_make
  * @property string $name
- * @property integer $id_car_generation
  *
- * @property CarGeneration $idCarGeneration
- * @property CarModel $idCarModel
+ * @property AdTransport[] $adTransports
+ * @property CarGeneration[] $carGenerations
+ * @property CarMake $idCarMake
+ * @property CarSerie[] $carSeries
  * @property CarTrim[] $carTrims
  */
 class CarModel extends \yii\db\ActiveRecord
@@ -23,7 +24,7 @@ class CarModel extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'car_serie';
+        return 'car_model';
     }
 
     /**
@@ -32,7 +33,7 @@ class CarModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_car_model', 'id_car_generation'], 'integer'],
+            [['id_car_make'], 'integer'],
             [['name'], 'string', 'max' => 255]
         ];
     }
@@ -43,27 +44,42 @@ class CarModel extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_car_serie' => Yii::t('app', 'Id Car Serie'),
             'id_car_model' => Yii::t('app', 'Id Car Model'),
+            'id_car_make' => Yii::t('app', 'Id Car Make'),
             'name' => Yii::t('app', 'Name'),
-            'id_car_generation' => Yii::t('app', 'Id Car Generation'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCarGeneration()
+    public function getAdTransports()
     {
-        return $this->hasOne(CarGeneration::className(), ['id_car_generation' => 'id_car_generation']);
+        return $this->hasMany(AdTransport::className(), ['id_car_model' => 'id_car_model']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCarModel()
+    public function getCarGenerations()
     {
-        return $this->hasOne(CarModel::className(), ['id_car_model' => 'id_car_model']);
+        return $this->hasMany(CarGeneration::className(), ['id_car_model' => 'id_car_model']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdCarMake()
+    {
+        return $this->hasOne(CarMake::className(), ['id_car_make' => 'id_car_make']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCarSeries()
+    {
+        return $this->hasMany(CarSerie::className(), ['id_car_model' => 'id_car_model']);
     }
 
     /**
@@ -71,6 +87,6 @@ class CarModel extends \yii\db\ActiveRecord
      */
     public function getCarTrims()
     {
-        return $this->hasMany(CarTrim::className(), ['id_car_serie' => 'id_car_serie']);
+        return $this->hasMany(CarTrim::className(), ['id_car_model' => 'id_car_model']);
     }
 }

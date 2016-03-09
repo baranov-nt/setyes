@@ -16,7 +16,24 @@ class m160305_050145_create_ad_transport_tables extends Migration
         /* Добавляем основные свойства */
         $this->batchInsert('ad_transport_reference', ['id', 'reference_id', 'reference_name'],
             [
-                [1, 8, Yii::t('references', 'Passenger car')],
+                [1, 16, Yii::t('references', 'Passenger car')],
+                [2, 0, ''],
+                [3, 0, ''],
+                [4, 0, ''],
+                [5, 0, ''],
+                [6, 0, ''],
+                [7, 0, ''],
+                [8, 0, ''],
+                [9, 0, ''],
+                [10, 0, ''],
+                [11, 0, ''],
+                [12, 0, ''],
+                [13, 0, ''],
+                [14, 0, ''],
+                [15, 0, ''],
+                [16, 1, 'sell a passenger car'],
+                [17, 1, 'buy a passenger car'],
+                [18, 1, 'taxi service'],
             ]);
 
         /* Создаем таблицу  ad_transport, в которой будут храниться объявления категории “Транпорт” */

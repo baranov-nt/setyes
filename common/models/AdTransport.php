@@ -197,7 +197,7 @@ class AdTransport extends ActiveRecord
             switch ($key) {
                 case 1:
                     $items[] = [
-                        'label' => Yii::t('references', $value),
+                        'label' => Yii::t('transport', $value),
                         'url' => ['/ad/transport/create-passenger-car'],
                     ];
                     break;
@@ -221,7 +221,7 @@ class AdTransport extends ActiveRecord
                     ->all(), 'id', 'reference_name');
                 $items = [];
                 foreach($transport_operations as $key => $value) {
-                    $items[$key] = Yii::t('references', $value);
+                    $items[$key] = Yii::t('transport', $value);
                 }
                 return $items;
         }
@@ -239,7 +239,7 @@ class AdTransport extends ActiveRecord
             ->all(), 'id_car_make', 'name');
         $items = [];
         foreach($transport_operations as $key => $value) {
-            $items[$key] = Yii::t('references', $value);
+            $items[$key] = Yii::t('transport', $value);
         }
         return $items;
     }
@@ -256,7 +256,7 @@ class AdTransport extends ActiveRecord
             ->all(), 'id_car_model', 'name');
         $items = [];
         foreach($transport_operations as $key => $value) {
-            $items[$key] = Yii::t('references', $value);
+            $items[$key] = Yii::t('transport', $value);
         }
         return $items;
     }
@@ -273,7 +273,7 @@ class AdTransport extends ActiveRecord
             ->all(), 'id_car_generation', 'name');
         $items = [];
         foreach($transport_operations as $key => $value) {
-            $items[$key] = Yii::t('references', $value);
+            $items[$key] = Yii::t('transport', $value);
         }
         return $items;
     }
@@ -290,7 +290,7 @@ class AdTransport extends ActiveRecord
             ->all(), 'id_car_serie', 'name');
         $items = [];
         foreach($transport_operations as $key => $value) {
-            $items[$key] = Yii::t('references', $value);
+            $items[$key] = Yii::t('transport', $value);
         }
         return $items;
     }
@@ -307,7 +307,7 @@ class AdTransport extends ActiveRecord
             ->all(), 'id_car_trim', 'name');
         $items = [];
         foreach($transport_operations as $key => $value) {
-            $items[$key] = Yii::t('references', $value);
+            $items[$key] = Yii::t('transport', $value);
         }
         return $items;
     }

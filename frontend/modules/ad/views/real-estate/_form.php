@@ -34,7 +34,7 @@ $user = Yii::$app->user->identity;
             ]); ?>
 
             <?php
-            //d($modelAdRealEstate->scenario);
+            d($modelAdRealEstate->scenario);
             ?>
 
             <?= $form->field($modelAdRealEstate, 'property')->hiddenInput()->label(false) ?>

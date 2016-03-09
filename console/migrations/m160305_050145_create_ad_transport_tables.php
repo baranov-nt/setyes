@@ -16,7 +16,7 @@ class m160305_050145_create_ad_transport_tables extends Migration
         /* Добавляем основные свойства */
         $this->batchInsert('ad_transport_reference', ['id', 'reference_id', 'reference_name'],
             [
-                [1, 16, Yii::t('references', 'Passenger car')],
+                [1, 16, Yii::t('transport', 'Passenger car')],
                 [2, 0, ''],
                 [3, 0, ''],
                 [4, 0, ''],
@@ -31,9 +31,9 @@ class m160305_050145_create_ad_transport_tables extends Migration
                 [13, 0, ''],
                 [14, 0, ''],
                 [15, 0, ''],
-                [16, 1, 'sell a passenger car'],
-                [17, 1, 'buy a passenger car'],
-                [18, 1, 'taxi service'],
+                [16, 1, Yii::t('transport', 'sell a passenger car')],
+                [17, 1, Yii::t('transport', 'buy a passenger car')],
+                [18, 1, Yii::t('transport', 'taxi service')],
             ]);
 
         /* Создаем таблицу  ad_transport, в которой будут храниться объявления категории “Транпорт” */
@@ -42,6 +42,9 @@ class m160305_050145_create_ad_transport_tables extends Migration
             'transport' => $this->integer()->notNull(),                 // Транспорт (легковой, грузовой). Связана с таблицей ad_transport_reference
             'deal_type' => $this->integer()->notNull(),                 // Тип операции. Связана с таблицей ad_transport_reference
             'id_car_model' => $this->integer()->notNull(),              // Модель авто
+            'id_car_generation' => $this->integer(),                    // Поколение
+            'id_car_serie' => $this->integer(),                         // Серия
+            'id_car_trim' => $this->integer(),                          // Модификация
             'mileage' => $this->integer(),                              // Пробег
             'measurement_of_mileage' => $this->integer(),               // Единицы измерения пробега (километры или мили)
             'price' => $this->integer(),                                // Цена
@@ -59,6 +62,9 @@ class m160305_050145_create_ad_transport_tables extends Migration
         $this->addforeignKey('ad_transport_transport_reference', 'ad_transport', 'transport', 'ad_transport_reference', 'id');
         $this->addforeignKey('ad_transport_deal_type_reference', 'ad_transport', 'deal_type', 'ad_transport_reference', 'id');
         $this->addforeignKey('ad_transport_car_model', 'ad_transport', 'id_car_model', 'car_model', 'id_car_model');
+        $this->addforeignKey('ad_transport_car_generation', 'ad_transport', 'id_car_generation', 'car_generation', 'id_car_generation');
+        $this->addforeignKey('ad_transport_car_serie', 'ad_transport', 'id_car_serie', 'car_serie', 'id_car_serie');
+        $this->addforeignKey('ad_transport_car_trim', 'ad_transport', 'id_car_trim', 'car_trim', 'id_car_trim');
         $this->addforeignKey('ad_transport_measurement_of_mileage_reference', 'ad_transport', 'measurement_of_mileage', 'ad_transport_reference', 'id');
         $this->addforeignKey('ad_transport_price_for_the_period_reference', 'ad_transport', 'price_for_the_period', 'ad_transport_reference', 'id');
         $this->addforeignKey('ad_equipment_reference', 'ad_transport', 'equipment', 'ad_transport_reference', 'id');

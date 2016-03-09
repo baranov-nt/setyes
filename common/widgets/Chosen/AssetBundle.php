@@ -19,13 +19,6 @@ class AssetBundle extends \yii\web\AssetBundle
      */
     public $sourcePath = '@common/widgets/Chosen';
 
-    /**
-     * @inherit
-     */
-    public $js = [
-        'app-chosen-select.js',
-    ];
-
     public $depends = [
         'common\widgets\Chosen\ChosenAsset',
     ];

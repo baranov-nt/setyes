@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "69db40175b0263340186b0ea290f77d3",
-    "content-hash": "7636b62a24b43c98ed735c496861e0d6",
+    "hash": "27427c526024f2e09192cef69c175f6d",
+    "content-hash": "d21a628e6e0bd33cd6484086c3505c9b",
     "packages": [
         {
             "name": "alexander-suter/yii2-browser-info",
@@ -169,16 +169,16 @@
         },
         {
             "name": "bower-asset/chosen",
-            "version": "v1.4.2",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harvesthq/bower-chosen.git",
-                "reference": "d7eba35cf214d2416fabee25c5d4619542a23d8d"
+                "reference": "e0d29eab0d1ea12535cf1933eba4c47df099f846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harvesthq/bower-chosen/zipball/d7eba35cf214d2416fabee25c5d4619542a23d8d",
-                "reference": "d7eba35cf214d2416fabee25c5d4619542a23d8d",
+                "url": "https://api.github.com/repos/harvesthq/bower-chosen/zipball/e0d29eab0d1ea12535cf1933eba4c47df099f846",
+                "reference": "e0d29eab0d1ea12535cf1933eba4c47df099f846",
                 "shasum": ""
             },
             "require": {
@@ -187,10 +187,8 @@
             "type": "bower-asset-library",
             "extra": {
                 "bower-asset-main": [
-                    "chosen.jquery.min.js",
-                    "chosen.css",
-                    "chosen-sprite@2x.png",
-                    "chosen-sprite.png"
+                    "chosen.jquery.js",
+                    "chosen.css"
                 ],
                 "bower-asset-ignore": []
             },
@@ -200,7 +198,7 @@
                     "url": "https://github.com/harvesthq/chosen/blob/master/LICENSE.md"
                 }
             ],
-            "description": "Chosen is a JavaScript plugin that makes long, unwieldy select boxes much more user-friendly. It is currently available in both jQuery and Prototype flavors.",
+            "description": "Chosen is a JavaScript plugin that makes select boxes user-friendly. It is currently available in both jQuery and Prototype flavors.",
             "keywords": [
                 "dropdown",
                 "form",
@@ -486,16 +484,16 @@
         },
         {
             "name": "bower-asset/jquery",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jquery/jquery-dist.git",
-                "reference": "6fc01e29bdad0964f62ef56d01297039cdcadbe5"
+                "reference": "788eaba2f83e7b7445c7a83a50c81c0704423874"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/6fc01e29bdad0964f62ef56d01297039cdcadbe5",
-                "reference": "6fc01e29bdad0964f62ef56d01297039cdcadbe5",
+                "url": "https://api.github.com/repos/jquery/jquery-dist/zipball/788eaba2f83e7b7445c7a83a50c81c0704423874",
+                "reference": "788eaba2f83e7b7445c7a83a50c81c0704423874",
                 "shasum": ""
             },
             "type": "bower-asset-library",
@@ -1009,16 +1007,16 @@
         },
         {
             "name": "bower-asset/yii2-pjax",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/jquery-pjax.git",
-                "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67"
+                "reference": "60728da6ade5879e807a49ce59ef9a72039b8978"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/6818718408086db6bdcf33649cecb86b6b4f9b67",
-                "reference": "6818718408086db6bdcf33649cecb86b6b4f9b67",
+                "url": "https://api.github.com/repos/yiisoft/jquery-pjax/zipball/60728da6ade5879e807a49ce59ef9a72039b8978",
+                "reference": "60728da6ade5879e807a49ce59ef9a72039b8978",
                 "shasum": ""
             },
             "require": {
@@ -1031,6 +1029,7 @@
                     ".travis.yml",
                     "Gemfile",
                     "Gemfile.lock",
+                    "CONTRIBUTING.md",
                     "vendor/",
                     "script/",
                     "test/"
@@ -1156,16 +1155,16 @@
         },
         {
             "name": "codemix/yii2-localeurls",
-            "version": "1.4.0",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codemix/yii2-localeurls.git",
-                "reference": "cfdb9b6b0ae12b4e55fbb43eff9c25aa25055320"
+                "reference": "ff3cfcc9fdcc310038625849f3bad9f8d21341da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codemix/yii2-localeurls/zipball/cfdb9b6b0ae12b4e55fbb43eff9c25aa25055320",
-                "reference": "cfdb9b6b0ae12b4e55fbb43eff9c25aa25055320",
+                "url": "https://api.github.com/repos/codemix/yii2-localeurls/zipball/ff3cfcc9fdcc310038625849f3bad9f8d21341da",
+                "reference": "ff3cfcc9fdcc310038625849f3bad9f8d21341da",
                 "shasum": ""
             },
             "require": {
@@ -1193,7 +1192,7 @@
                 "locale",
                 "yii2"
             ],
-            "time": "2016-02-05 12:46:45"
+            "time": "2016-02-27 10:08:17"
         },
         {
             "name": "cybercog/yii2-google-analytics",
@@ -1238,16 +1237,16 @@
         },
         {
             "name": "donatj/phpuseragentparser",
-            "version": "v0.5.0",
+            "version": "v0.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/donatj/PhpUserAgent.git",
-                "reference": "1acea75664179c8f0dcd57ced7e75a01af86bfa8"
+                "reference": "b00392786281877db6a51d0e48dee7296c7ba4f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/1acea75664179c8f0dcd57ced7e75a01af86bfa8",
-                "reference": "1acea75664179c8f0dcd57ced7e75a01af86bfa8",
+                "url": "https://api.github.com/repos/donatj/PhpUserAgent/zipball/b00392786281877db6a51d0e48dee7296c7ba4f8",
+                "reference": "b00392786281877db6a51d0e48dee7296c7ba4f8",
                 "shasum": ""
             },
             "require": {
@@ -1256,7 +1255,7 @@
             "require-dev": {
                 "camspiers/json-pretty": "0.1.*",
                 "donatj/drop": "*",
-                "phpunit/phpunit": "4.*"
+                "phpunit/phpunit": ">=4.8"
             },
             "type": "library",
             "autoload": {
@@ -1285,7 +1284,7 @@
                 "user agent",
                 "useragent"
             ],
-            "time": "2015-09-22 21:04:13"
+            "time": "2016-03-07 17:14:32"
         },
         {
             "name": "ezyang/htmlpurifier",

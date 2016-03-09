@@ -47,14 +47,14 @@ class CarTrim extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_car_trim' => Yii::t('app', 'Id Car Trim'),
-            'id_car_serie' => Yii::t('app', 'Id Car Serie'),
-            'id_car_model' => Yii::t('app', 'Id Car Model'),
-            'name' => Yii::t('app', 'Name'),
-            'start_production_year' => Yii::t('app', 'Start Production Year'),
-            'end_production_year' => Yii::t('app', 'End Production Year'),
-            'price_min' => Yii::t('app', 'Price Min'),
-            'price_max' => Yii::t('app', 'Price Max'),
+            'id_car_trim' => Yii::t('transport', 'Id Car Trim'),
+            'id_car_serie' => Yii::t('transport', 'Id Car Serie'),
+            'id_car_model' => Yii::t('transport', 'Id Car Model'),
+            'name' => Yii::t('transport', 'Name'),
+            'start_production_year' => Yii::t('transport', 'Start Production Year'),
+            'end_production_year' => Yii::t('transport', 'End Production Year'),
+            'price_min' => Yii::t('transport', 'Price Min'),
+            'price_max' => Yii::t('transport', 'Price Max'),
         ];
     }
 

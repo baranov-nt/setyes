@@ -44,9 +44,9 @@ class CarModel extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_car_model' => Yii::t('app', 'Id Car Model'),
-            'id_car_make' => Yii::t('app', 'Id Car Make'),
-            'name' => Yii::t('app', 'Name'),
+            'id_car_model' => Yii::t('transport', 'Id Car Model'),
+            'id_car_make' => Yii::t('transport', 'Id Car Make'),
+            'name' => Yii::t('transport', 'Name'),
         ];
     }
 

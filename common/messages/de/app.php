@@ -162,6 +162,7 @@ return [
     'Not translated' => '',
     'Numcode' => '',
     'Obsolete messages:' => 'Veraltete Nachrichten:',
+    'Passenger car' => 'Personenkraftwagen',
     'Password' => 'Passwort',
     'Path Image' => 'Bild Pfad',
     'Path Small Image' => '',

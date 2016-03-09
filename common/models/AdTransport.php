@@ -9,31 +9,37 @@ use yii\db\ActiveRecord;
 /**
  * This is the model class for table "ad_transport".
  *
- * @transport integer $id
- * @transport integer $transport
- * @transport integer $deal_type
- * @transport integer $id_car_model
- * @transport integer $mileage
- * @transport integer $measurement_of_mileage
- * @transport integer $price
- * @transport integer $price_for_the_period
- * @transport integer $equipment
- * @transport integer $exterior_color
- * @transport integer $interior_color
- * @transport integer $condition
- * @transport integer $images_label
- * @transport string $video_link
- * @transport string $model_scenario
+ * @property integer $id
+ * @property integer $transport
+ * @property integer $deal_type
+ * @property integer $id_car_model
+ * @property integer $id_car_generation
+ * @property integer $id_car_serie
+ * @property integer $id_car_trim
+ * @property integer $mileage
+ * @property integer $measurement_of_mileage
+ * @property integer $price
+ * @property integer $price_for_the_period
+ * @property integer $equipment
+ * @property integer $exterior_color
+ * @property integer $interior_color
+ * @property integer $condition
+ * @property integer $images_label
+ * @property string $video_link
+ * @property string $model_scenario
  *
- * @transport AdTransportReference $condition0
- * @transport AdTransportReference $equipment0
- * @transport AdTransportReference $exteriorColor
- * @transport AdTransportReference $interiorColor
- * @transport CarModel $idCarModel
- * @transport AdTransportReference $dealType
- * @transport AdTransportReference $measurementOfMileage
- * @transport AdTransportReference $priceForThePeriod
- * @transport AdTransportReference $transport0
+ * @property AdTransportReference $condition0
+ * @property AdTransportReference $equipment0
+ * @property AdTransportReference $exteriorColor
+ * @property AdTransportReference $interiorColor
+ * @property CarGeneration $idCarGeneration
+ * @property CarModel $idCarModel
+ * @property CarSerie $idCarSerie
+ * @property CarTrim $idCarTrim
+ * @property AdTransportReference $dealType
+ * @property AdTransportReference $measurementOfMileage
+ * @property AdTransportReference $priceForThePeriod
+ * @property AdTransportReference $transport0
  * @transport AdTransport[] $transporttransportTypeList
  * @transport AdTransport[] $transportOperationTypeList
  * @transport AdTransport[] $passengerCarsMarksList
@@ -47,10 +53,6 @@ class AdTransport extends ActiveRecord
     public $place_city_id;
     public $place_city_validate;
     public $mark;
-    public $model;
-    public $generation;
-    public $serie;
-    public $trim;
 
     /**
      * @inheritdoc
@@ -67,8 +69,8 @@ class AdTransport extends ActiveRecord
     {
         return [
             [['transport', 'deal_type', 'id_car_model'], 'required'],
-            [['transport', 'deal_type', 'id_car_model', 'mileage', 'measurement_of_mileage', 'price', 'price_for_the_period', 'equipment', 'exterior_color',
-                'interior_color', 'condition', 'images_label', 'mark', 'model', 'generation', 'serie', 'trim'], 'integer'],
+            [['transport', 'deal_type', 'id_car_model', 'id_car_generation', 'id_car_serie', 'id_car_trim', 'mileage', 'measurement_of_mileage', 'price',
+                'price_for_the_period', 'equipment', 'exterior_color', 'interior_color', 'condition', 'images_label', 'mark'], 'integer'],
             [['video_link', 'model_scenario'], 'string', 'max' => 255]
         ];
     }
@@ -79,21 +81,25 @@ class AdTransport extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'transport' => Yii::t('app', 'Transport'),
-            'deal_type' => Yii::t('app', 'Deal Type'),
-            'id_car_model' => Yii::t('app', 'Id Car Model'),
-            'mileage' => Yii::t('app', 'Mileage'),
-            'measurement_of_mileage' => Yii::t('app', 'Measurement Of Mileage'),
-            'price' => Yii::t('app', 'Price'),
-            'price_for_the_period' => Yii::t('app', 'Price For The Period'),
-            'equipment' => Yii::t('app', 'Equipment'),
-            'exterior_color' => Yii::t('app', 'Exterior Color'),
-            'interior_color' => Yii::t('app', 'Interior Color'),
-            'condition' => Yii::t('app', 'Condition'),
-            'images_label' => Yii::t('app', 'Images Label'),
-            'video_link' => Yii::t('app', 'Video Link'),
-            'model_scenario' => Yii::t('app', 'Model Scenario'),
+            'id' => Yii::t('transport', 'ID'),
+            'transport' => Yii::t('transport', 'Transport'),
+            'deal_type' => Yii::t('transport', 'Deal Type'),
+            'id_car_model' => Yii::t('transport', 'Model'),
+            'id_car_generation' => Yii::t('transport', 'Generation'),
+            'id_car_serie' => Yii::t('transport', 'Serie'),
+            'id_car_trim' => Yii::t('transport', 'Modification'),
+            'mileage' => Yii::t('transport', 'Mileage'),
+            'measurement_of_mileage' => Yii::t('transport', 'Measurement Of Mileage'),
+            'price' => Yii::t('transport', 'Price'),
+            'price_for_the_period' => Yii::t('transport', 'Price For The Period'),
+            'equipment' => Yii::t('transport', 'Equipment'),
+            'exterior_color' => Yii::t('transport', 'Exterior Color'),
+            'interior_color' => Yii::t('transport', 'Interior Color'),
+            'condition' => Yii::t('transport', 'Condition'),
+            'images_label' => Yii::t('transport', 'Images Label'),
+            'video_link' => Yii::t('transport', 'Video Link'),
+            'model_scenario' => Yii::t('transport', 'Model Scenario'),
+            'mark' => Yii::t('transport', 'Mark'),
         ];
     }
 
@@ -144,9 +150,33 @@ class AdTransport extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getIdCarGeneration()
+    {
+        return $this->hasOne(CarGeneration::className(), ['id_car_generation' => 'id_car_generation']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getIdCarModel()
     {
         return $this->hasOne(CarModel::className(), ['id_car_model' => 'id_car_model']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdCarSerie()
+    {
+        return $this->hasOne(CarSerie::className(), ['id_car_serie' => 'id_car_serie']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIdCarTrim()
+    {
+        return $this->hasOne(CarTrim::className(), ['id_car_trim' => 'id_car_trim']);
     }
 
     /**
@@ -269,7 +299,7 @@ class AdTransport extends ActiveRecord
     public function getPassengerCarsGenerationList()
     {
         $transport_operations = ArrayHelper::map(CarGeneration::find()
-            ->where(['id_car_model' => $this->model])
+            ->where(['id_car_model' => $this->id_car_model])
             ->all(), 'id_car_generation', 'name');
         $items = [];
         foreach($transport_operations as $key => $value) {
@@ -286,7 +316,7 @@ class AdTransport extends ActiveRecord
     public function getPassengerCarsSerieList()
     {
         $transport_operations = ArrayHelper::map(CarSerie::find()
-            ->where(['id_car_model' => $this->model])
+            ->where(['id_car_model' => $this->id_car_model])
             ->all(), 'id_car_serie', 'name');
         $items = [];
         foreach($transport_operations as $key => $value) {
@@ -303,7 +333,7 @@ class AdTransport extends ActiveRecord
     public function getPassengerCarsTrimList()
     {
         $transport_operations = ArrayHelper::map(CarTrim::find()
-            ->where(['id_car_model' => $this->model])
+            ->where(['id_car_model' => $this->id_car_model])
             ->all(), 'id_car_trim', 'name');
         $items = [];
         foreach($transport_operations as $key => $value) {

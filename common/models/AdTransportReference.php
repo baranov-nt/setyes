@@ -43,9 +43,9 @@ class AdTransportReference extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'reference_id' => Yii::t('app', 'Reference ID'),
-            'reference_name' => Yii::t('app', 'Reference Name'),
+            'id' => Yii::t('transport', 'ID'),
+            'reference_id' => Yii::t('transport', 'Reference ID'),
+            'reference_name' => Yii::t('transport', 'Reference Name'),
         ];
     }
 

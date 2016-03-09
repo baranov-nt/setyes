@@ -98,7 +98,7 @@ $user = Yii::$app->user->identity;
             </div>
 
             <div class="col-md-12">
-                <?= $form->field($modelAdTransport, 'model')->dropDownList($modelAdTransport->passengerCarsModelsList, [
+                <?= $form->field($modelAdTransport, 'id_car_model')->dropDownList($modelAdTransport->passengerCarsModelsList, [
                     'class'  => 'form-control chosen-select',
                     'prompt' => Yii::t('app', '---'),
                     'onChange' => '
@@ -114,21 +114,21 @@ $user = Yii::$app->user->identity;
             </div>
 
             <div class="col-md-12">
-                <?= $form->field($modelAdTransport, 'generation')->dropDownList($modelAdTransport->passengerCarsGenerationList, [
+                <?= $form->field($modelAdTransport, 'id_car_generation')->dropDownList($modelAdTransport->passengerCarsGenerationList, [
                     'class'  => 'form-control chosen-select',
                     'prompt' => Yii::t('app', '---'),
                 ]) ?>
             </div>
 
             <div class="col-md-12">
-                <?= $form->field($modelAdTransport, 'serie')->dropDownList($modelAdTransport->passengerCarsSerieList, [
+                <?= $form->field($modelAdTransport, 'id_car_serie')->dropDownList($modelAdTransport->passengerCarsSerieList, [
                     'class'  => 'form-control chosen-select',
                     'prompt' => Yii::t('app', '---'),
                 ]) ?>
             </div>
 
             <div class="col-md-12">
-                <?= $form->field($modelAdTransport, 'trim')->dropDownList($modelAdTransport->passengerCarsTrimList, [
+                <?= $form->field($modelAdTransport, 'id_car_trim')->dropDownList($modelAdTransport->passengerCarsTrimList, [
                     'class'  => 'form-control chosen-select',
                     'prompt' => Yii::t('app', '---'),
                 ]) ?>

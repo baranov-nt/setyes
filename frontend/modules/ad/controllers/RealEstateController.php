@@ -337,6 +337,7 @@ class RealEstateController extends BehaviorsController
     protected function setScenario($dealType, $property, $scenario)
     {
         $modelAdRealEstate = new AdRealEstate();
+        //dd($modelAdRealEstate->addNewScenario($dealType, $property, $scenario));
         return $this->render('create', [
             'modelAdRealEstate' => $modelAdRealEstate->addNewScenario($dealType, $property, $scenario),
         ]);

@@ -160,6 +160,7 @@ return [
     'Not translated' => '',
     'Numcode' => '',
     'Obsolete messages:' => 'Устаревшие сообщения:',
+    'Passenger car' => 'Легковой автомобиль',
     'Password' => 'Пароль',
     'Path Image' => 'Путь изображения',
     'Path Small Image' => '',

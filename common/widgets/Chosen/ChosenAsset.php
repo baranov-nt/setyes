@@ -23,14 +23,14 @@ class ChosenAsset extends \yii\web\AssetBundle
      * @inherit
      */
     public $css = [
-        'chosen.min.css',
+        'chosen.css',
     ];
 
     /**
      * @inherit
      */
     public $js = [
-        'chosen.jquery.min.js',
+        'chosen.jquery.js',
     ];
 
     public function init()
@@ -42,8 +42,8 @@ class ChosenAsset extends \yii\web\AssetBundle
     protected function registerJs()
     {
         $js = <<<SCRIPT
-    /*$(".chosen-select").chosen();*/
-    $(".chosen-select").chosen({disable_search_threshold: 10});
+        /*$(".chosen-select").chosen();*/
+        $(".chosen-select").chosen({disable_search_threshold: 10});
 SCRIPT;
         Yii::$app->view->registerJs($js, \yii\web\View::POS_READY);
         return $this;

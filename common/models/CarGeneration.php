@@ -43,11 +43,11 @@ class CarGeneration extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_car_generation' => Yii::t('app', 'Id Car Generation'),
-            'name' => Yii::t('app', 'Name'),
-            'id_car_model' => Yii::t('app', 'Id Car Model'),
-            'year_begin' => Yii::t('app', 'Year Begin'),
-            'year_end' => Yii::t('app', 'Year End'),
+            'id_car_generation' => Yii::t('transport', 'Id Car Generation'),
+            'name' => Yii::t('transport', 'Name'),
+            'id_car_model' => Yii::t('transport', 'Id Car Model'),
+            'year_begin' => Yii::t('transport', 'Year Begin'),
+            'year_end' => Yii::t('transport', 'Year End'),
         ];
     }
 

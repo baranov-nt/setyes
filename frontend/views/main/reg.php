@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use frontend\assets\ChosenAsset;
@@ -7,7 +6,6 @@ use yii\widgets\Pjax;
 use yii\authclient\widgets\AuthChoice;
 use yii\widgets\MaskedInput;
 use yii\helpers\Url;
-
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\RegForm */

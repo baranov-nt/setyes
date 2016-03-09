@@ -161,6 +161,7 @@ return [
     'Not translated' => '',
     'Numcode' => '',
     'Obsolete messages:' => 'Les messages obsolètes:',
+    'Passenger car' => 'Voiture de voyageur',
     'Password' => 'Mot de passe',
     'Path Image' => 'Chemin image',
     'Path Small Image' => '',

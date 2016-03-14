@@ -41,7 +41,9 @@
         "himiklab/yii2-recaptcha-widget": "^1.0",
         "justinvoelker/yii2-awesomebootstrapcheckbox": "^1.0",
         "alexander-suter/yii2-browser-info": "^2.0",
-        "nmdimas/yii2-user-agent-parser": "^1.0"
+        "nmdimas/yii2-user-agent-parser": "^1.0",
+        "guzzlehttp/guzzle": "~6.0",
+        "electrolinux/phpquery": "^0.9.6"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

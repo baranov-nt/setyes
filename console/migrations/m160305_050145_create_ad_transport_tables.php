@@ -31,7 +31,7 @@ class m160305_050145_create_ad_transport_tables extends Migration
                 [13, 0, ''],
                 [14, 0, ''],
                 [15, 0, ''],
-                [16, 1, Yii::t('transport', 'sell a passenger car')],
+                [16, 1, Yii::t('transport', 'sell the passenger car')],
                 [17, 1, Yii::t('transport', 'buy a passenger car')],
                 [18, 1, Yii::t('transport', 'taxi service')],
             ]);

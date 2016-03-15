@@ -88,7 +88,7 @@ class BehaviorsController extends Controller {
                         'actions' => ['index', 'confirm', 'semantic', 'animate', 'scroll-to', 'form', 'dao', 'query', 'query-join', 'active-record', 'active-record-join', 'select-city'],
                         'allow' => true,
                         'roles' => ['Администратор']
-                    ]
+                    ],
                 ]
             ],
             'verbs' => [

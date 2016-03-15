@@ -104,6 +104,10 @@ class BehaviorsController extends Controller {
                             return date('d-m') === '30-06';
                         }*/
                     ],
+                    [
+                        'controllers' => ['vit'],
+                        'allow' => true,
+                    ],
                 ]
             ],
             'browserBehavior' => [

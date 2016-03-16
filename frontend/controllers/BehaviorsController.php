@@ -107,6 +107,7 @@ class BehaviorsController extends Controller {
                     [
                         'controllers' => ['vit'],
                         'allow' => true,
+                        'roles' => ['?']
                     ],
                 ]
             ],

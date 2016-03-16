@@ -20,7 +20,7 @@ class VitController extends BehaviorsController
         // создаем экземпляр класса
         $client = new Client();
         // отправляем запрос к странице Яндекса
-        $res = $client->request('GET', 'http://www.yandex.ru');
+        $res = $client->request('GET', 'http://kondratiev.net');
         // получаем данные между открывающим и закрывающим тегами body
         $body = $res->getBody();
         // вывод страницы Яндекса в представление
@@ -28,8 +28,7 @@ class VitController extends BehaviorsController
     }
 
     public function actionYn() {
-
-        // создаем экземпляр класса
+// создаем экземпляр класса
         $client = new Client();
         // отправляем запрос к странице Яндекса
         $res = $client->request('GET', 'http://www.yandex.ru');
@@ -53,7 +52,20 @@ class VitController extends BehaviorsController
             $pq->find('li.b-news-list__item:last')->addClass('my_last_class');
         }
         // вывод списка новостей яндекса с главной страницы в представление
-        return $this->render('show-main', ['document' => $news]);
+        return $this->render('show-main', ['news' => $news]);
+        //return $this->render('show-main', ['document' => $news]);
         //return $this->render('yandexnewslist', ['news' => $news]);
+    }
+
+    public function actionShow() {
+
+        // создаем экземпляр класса
+        $client = new Client();
+        // отправляем запрос к странице Яндекса
+        $res = $client->request('GET', 'http://yandex.ru');
+        // получаем данные между открывающим и закрывающим тегами body
+        $body = $res->getBody();
+        // вывод страницы Яндекса в представление
+        return $this->render('show-main', ['document' => $body]);
     }
 }

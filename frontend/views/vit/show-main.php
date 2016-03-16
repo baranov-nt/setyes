@@ -5,7 +5,8 @@
  * Date: 15.03.2016
  * Time: 10:22
  */
-d($document);
+//d($document);
 ?>
-
+123
+<?= $news ?>
 <?= $document ?>

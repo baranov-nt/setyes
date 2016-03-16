@@ -127,7 +127,6 @@ class MainController extends BehaviorsController
 
         if ($modelReg->load(Yii::$app->request->post())):
             $phoneMask = $modelReg->getPhoneMask();
-            d($phoneMask);
             return $this->render(
                 'reg',
                 [

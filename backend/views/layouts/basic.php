@@ -65,6 +65,29 @@ $this->beginPage();
             ];
             $menuItems[] =
                 [
+                    'label' => 'Парсер',
+                    'items' => [
+
+                        [
+                            'label' => 'Парсер index',
+                            'url' => ['/parser/index']
+                        ],
+                       /* [
+                            'label' => 'Semantic UI.',
+                            'url' => ['/bootstrap/semantic']
+                        ],
+                        [
+                            'label' => 'Animate.css',
+                            'url' => ['/bootstrap/animate']
+                        ],
+                        [
+                            'label' => 'Scroll To',
+                            'url' => ['/bootstrap/scroll-to']
+                        ],*/
+                    ]
+                ];
+            $menuItems[] =
+                [
                     'label' => 'Bootstrap <span class="glyphicon glyphicon-cog"></span>',
                     'items' => [
 

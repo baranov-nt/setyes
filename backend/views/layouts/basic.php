@@ -72,6 +72,18 @@ $this->beginPage();
                             'label' => 'Парсер index',
                             'url' => ['/parser/index']
                         ],
+                        [
+                            'label' => 'Яндекс новости',
+                            'url' => ['/parser/ya-news']
+                        ],
+                        [
+                            'label' => 'Работа с Яндекс новостями',
+                            'url' => ['/parser/ya-news-list']
+                        ],
+                        [
+                            'label' => 'kondratiev.net (Галерея)',
+                            'url' => ['/parser/k-net']
+                        ],
                        /* [
                             'label' => 'Semantic UI.',
                             'url' => ['/bootstrap/semantic']

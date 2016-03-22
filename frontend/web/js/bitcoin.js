@@ -1,12 +1,12 @@
 /**
  * Created by phpNT on 22.03.2016.
  */
-var deposite = parseFloat(0.000001050),          // депозит старта
+var deposite = parseFloat(0.00001830),          // депозит старта
     riskPercentage = 0.20,                      // риск в процентах
     maxWait = 1000;                             // таймаут в милисекундах
 
 /* вычисляем ставку и округляем до 8 знака после нуля */
-var startValue = parseFloat((deposite / 1000).toFixed(8));      // ставка
+var startValue = parseFloat((deposite / 1000)).toFixed(8);      // ставка
 
 /* Кнопки */
 var $loButton = $('#double_your_btc_bet_lo_button'),
@@ -58,7 +58,7 @@ $('#double_your_btc_bet_win').unbind();
 $('#double_your_btc_bet_lose').bind("DOMSubtreeModified",function(event){
     if( $(event.currentTarget).is(':contains("lose")') )
     {
-        console.info('Проигрыш!');
+        console.info('Проигрыш. Ставка равна ' + parseFloat($('#double_your_btc_stake').val()).toFixed(8) + '.');
         multiply();
         if(iHaveEnoughMoni()) {
             setTimeout(function () {
@@ -74,11 +74,6 @@ $('#double_your_btc_bet_win').bind("DOMSubtreeModified",function(event){
         if(iHaveEnoughMoni()) {
             console.info('Выигрыш!');
             reset();
-            if( stopped )
-            {
-                stopped = false;
-                return false;
-            }
         }
         setTimeout(function(){
             $loButton.trigger('click');
@@ -88,4 +83,5 @@ $('#double_your_btc_bet_win').bind("DOMSubtreeModified",function(event){
 var balance = parseFloat($('#balance').text());          // баланс
 var profit = parseFloat((deposite + (deposite * riskPercentage)).toFixed(8));
 var loss = parseFloat((deposite - (deposite * riskPercentage)).toFixed(8));
-console.info('Закрываемся если цена больше ' + parseFloat((profit)).toFixed(8) + ' BTC, или меньше ' + parseFloat((loss)).toFixed(8) + ' BTC. Минимальная ставка: ' + startValue);
+console.info('Закрываемся если цена больше ' + parseFloat((profit)).toFixed(8) + ' BTC, или меньше ' + parseFloat((loss)).toFixed(8) + ' BTC. Минимальная ставка: ' + (deposite / 1000).toFixed(8));
+$loButton.trigger('click');

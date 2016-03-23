@@ -1,7 +1,7 @@
 /**
  * Created by phpNT on 22.03.2016.
  */
-var deposite = parseFloat(0.00001830),          // депозит старта
+var deposite = parseFloat(0.00002150),          // депозит старта
     riskPercentage = 0.20,                      // риск в процентах
     maxWait = 1000;                             // таймаут в милисекундах
 

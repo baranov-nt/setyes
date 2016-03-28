@@ -1,12 +1,13 @@
 /**
  * Created by phpNT on 22.03.2016.
  */
-var deposite = parseFloat(0.00002150),          // депозит старта
+var deposite = parseFloat(0.00001200),          // депозит старта
     riskPercentage = 0.20,                      // риск в процентах
     maxWait = 1000;                             // таймаут в милисекундах
 
 /* вычисляем ставку и округляем до 8 знака после нуля */
 var startValue = parseFloat((deposite / 1000)).toFixed(8);      // ставка
+$('#double_your_btc_stake').val(startValue);
 
 /* Кнопки */
 var $loButton = $('#double_your_btc_bet_lo_button'),

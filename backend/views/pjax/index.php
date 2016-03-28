@@ -10,6 +10,9 @@ use yii\bootstrap\Html;
 use yii\widgets\Pjax;
 use yii\bootstrap\ActiveForm;
 use common\widgets\PjaxWidgetForm\PjaxWidgetForm;
+use common\widgets\FontAwesome\AssetBundle;
+
+AssetBundle::register($this);
 ?>
 <h1>Pjax средстами Yii2</h1>
 
@@ -106,6 +109,66 @@ JS;
 
 <div style="border: 1px solid #0000ff; padding: 20px; margin-top: 20px;">
     <?php Pjax::begin([
+        //'timeout' => 9000,
+        // enablePushState - не меняет ссылку при получении данных
+        'id' => 'pjax-events',
+        'enablePushState' => false
+    ]); ?>
+    <h3 style="text-decoration: underline">События Pjax</h3>
+    <h1>Сейчас:
+        <?php
+        if(isset($time)):
+            ?>
+            <?= $time ?>
+            <?php
+        endif;
+        ?>
+    </h1>
+    <?= Html::a('Получить время с сервера <span id="loading" class="fa fa-spinner fa-spin" style="display: none;"></span>', ['/pjax/get-time'], [
+        'class' => 'btn btn-sm btn-success',
+    ]);?>
+    <?php Pjax::end(); ?>
+    <?php
+    $script = <<< JS
+        $("document").ready(function(){
+            $("#pjax-events").on("pjax:start", function() {
+                //alert('Начало обновления');
+            });
+            $("#pjax-events").on("pjax:end", function() {
+                //alert('Конец обновления');
+            });
+            /*$("#pjax-events").on('pjax:complete', function() {
+                $.pjax.reload({container:"#gettime"});
+            })*/
+            /* События с отображением анимации загрузки */
+            $("#pjax-events").on('pjax:send', function() {
+                $('#loading').show();
+            });
+            $("#pjax-events").on('pjax:complete', function() {
+                $('#loading').hide();
+            });
+            /* Обновление другого блока после загрузки первого */
+            $("#pjax-events").on("pjax:end", function() {
+                $.pjax.reload({
+                    type       : 'GET',
+                    url        : 'get-time',
+                    container  : '#notes',
+                    data       : {},
+                    push       : false,
+                    replace    : false,
+                    timeout    : 10000,
+                    "scrollTo" : false
+                });
+            });
+        });
+JS;
+    $this->registerJs($script);
+    ?>
+</div>
+
+<div style="border: 1px solid #0000ff; padding: 20px; margin-top: 20px;">
+    <?php Pjax::begin([
+        'id' => 'notes',
         // enablePushState - не меняет ссылку при получении данных
         'enablePushState' => false
     ]); ?>

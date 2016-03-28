@@ -15,7 +15,9 @@ use yii\web\Controller;
 class PjaxController  extends Controller
 {
     public function actionIndex() {
-        return $this->render('index', []);
+        return $this->render('index', [
+            'time' => date('H:i:s')
+        ]);
     }
 
     public function actionGetTime() {

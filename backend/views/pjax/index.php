@@ -9,8 +9,31 @@
 use yii\bootstrap\Html;
 use yii\widgets\Pjax;
 use yii\bootstrap\ActiveForm;
+use common\widgets\PjaxWidgetForm\PjaxWidgetForm;
 ?>
 <h1>Pjax средстами Yii2</h1>
+
+<div style="border: 1px solid #0000ff; padding: 20px; margin-top: 20px;">
+    <?php Pjax::begin([
+        'id' => 'pjax-widget-form',
+        // enablePushState - не меняет ссылку при получении данных
+        'enablePushState' => false
+    ]); ?>
+    <?php
+    if(isset($modelProfile)):
+        ?>
+        <?= PjaxWidgetForm::widget([
+        'modelProfile' => $modelProfile
+    ]); ?>
+        <?php
+    else:
+        ?>
+            <?= PjaxWidgetForm::widget([]); ?>
+        <?php
+    endif;
+    ?>
+    <?php Pjax::end(); ?>
+</div>
 
 <div style="border: 1px solid #0000ff; padding: 20px; margin-top: 20px;">
     <?php Pjax::begin([

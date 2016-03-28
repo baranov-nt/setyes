@@ -9,7 +9,7 @@
 namespace common\widgets\PjaxField;
 
 use yii\base\Widget;
-use common\models\Profile;
+use common\models\UserProfile;
 use common\models\User;
 
 class PjaxFieldWidget extends Widget

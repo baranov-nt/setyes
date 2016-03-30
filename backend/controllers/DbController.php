@@ -15,6 +15,16 @@ class DbController extends BehaviorsController
     /**
      * @return string
      */
+    /* $TTerminal = TTerminal::find()
+    ->joinWith([
+     'tAdvShedules' => function ($query) {
+      $query->leftJoin(TAdv::tablename().' adv', 'adv.period = '.$_POST['selectTime']);
+      $query->andWhere('t_advShedule.status IN (-2, 1) AND startdate <= '.$_POST['start_date'].' AND enddate >= '.$_POST['end_date']);
+     }
+    ])
+    ->where($sql)
+    ->orderBy('id_terminal ASC')
+    ->all(); */
     public function actionActiveRecordJoin()
     {
         // Работа с Active Record используя Join

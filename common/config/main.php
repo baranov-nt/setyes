@@ -30,7 +30,27 @@ return [
             'secret' => '6LcWAxMTAAAAAEZCbXGi-azhHhA8kYRq5WmY9pLg',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            //'class' => 'yii\caching\FileCache',
+            'class' => 'yii\redis\Cache',
+            'redis' => [
+                'hostname' => 'localhost',
+                'port' => 6379,
+                'database' => 0,
+            ],
+        ],
+        'redis' => [
+            'class' => \yii\redis\Connection::className(),
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
+        ],
+        'session' => [
+            'class' => 'yii\redis\Session',
+            'redis' => [
+                'hostname' => 'localhost',
+                'port' => 6379,
+                'database' => 0,
+            ],
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
@@ -89,6 +109,7 @@ return [
                 ],
             ],
         ],
+
         'placeManager' => [
             'class' => \common\components\PlaceManager::className(),
         ],

@@ -151,6 +151,10 @@ $this->beginPage();
                 'label' => 'Pjax средствами Yii2',
                 'url' => ['/pjax/index']
             ];
+            $menuItems[] = [
+                'label' => 'Работа с Redis',
+                'url' => ['/redis/index']
+            ];
             $menuItems[] =
                 [
                     'label' => Yii::t('app', 'Managing the application').' <span class="glyphicon glyphicon-cog"></span>',

@@ -12,7 +12,7 @@ use common\models\UserProfile;
 use Yii;
 use yii\web\Controller;
 
-class PjaxController  extends Controller
+class PjaxController extends Controller
 {
     public function actionIndex() {
         return $this->render('index', [

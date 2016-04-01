@@ -30,7 +30,7 @@ class RedisModel extends \yii\redis\ActiveRecord
     /**
      * Defines a scope that modifies the `$query` to return only active(status = 1) customers
      */
-    public static function active($query)
+    public function active($query)
     {
         $query->andWhere(['status' => 10]);
     }

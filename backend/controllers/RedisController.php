@@ -8,7 +8,7 @@
 
 namespace backend\controllers;
 
-//use backend\models\RedisModel;
+use backend\models\RedisModel;
 use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -17,23 +17,23 @@ use Redis;
 class RedisController extends Controller
 {
     public function actionIndex() {
-        return Yii::$app->redis->executeCommand('PUBLISH', [
+        /*return Yii::$app->redis->executeCommand('PUBLISH', [
             'channel' => 'notification',
             'message' => Json::encode(['name' => 'asdasdasd', 'message' => 'ffffffffff'])
-        ]);
-        /*$modelRedisModel = new RedisModel();
+        ]);*/
+        $modelRedisModel = new RedisModel();
         $modelRedisModel->name = 'Test';
         $modelRedisModel->address = 'Test';
         $modelRedisModel->registration_date = 'Test';
         $modelRedisModel->save();
-        echo $modelRedisModel->id; // id will automatically be incremented if not set explicitly*/
+        echo $modelRedisModel->id; // id will automatically be incremented if not set explicitly
 
-        /*$query1 = RedisModel::find()->where(['name' => 'test'])->one(); // find by query
-        $query2 = RedisModel::find()->active()->all(); // find all by query (using the `active` scope)*/
+        $query1 = RedisModel::find()->where(['phone' => '79221301879'])->one(); // find by query
+        //$query2 = RedisModel::find()->active()->all(); // find all by query (using the `active` scope)
 
         return $this->render('index', [
-            /*'query1' => $query1,
-            'query2' => $query2*/
+            'query1' => $query1,
+            //'query2' => $query2
         ]);
     }
 }

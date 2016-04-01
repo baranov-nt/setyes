@@ -22,17 +22,20 @@ class RedisController extends Controller
             'message' => Json::encode(['name' => 'asdasdasd', 'message' => 'ffffffffff'])
         ]);*/
         $modelRedisModel = new RedisModel();
-        $modelRedisModel->name = 'Test';
-        $modelRedisModel->address = 'Test';
-        $modelRedisModel->registration_date = 'Test';
+        $modelRedisModel->name = 'Test name';
+        $modelRedisModel->address = 'Test addres';
+        $modelRedisModel->registration_date = 'Test date';
         $modelRedisModel->save();
-        echo $modelRedisModel->id; // id will automatically be incremented if not set explicitly
+        //echo $modelRedisModel->id; // id will automatically be incremented if not set explicitly
 
-        $query1 = RedisModel::find()->where(['phone' => '79221301879'])->one(); // find by query
-        //$query2 = RedisModel::find()->active()->all(); // find all by query (using the `active` scope)
+        Yii::$app->cache->set('cacheElem', '30 second', 30); // срок жизни в кэше 30 секунд
+        Yii::$app->session->set('sessionElem', '30 second'); // срок жизни в сессии в конфиге (30 секунд)
+
+        //$query1 = RedisModel::find()->where(['phone' => '79221301879'])->one(); // find by query
+        $query2 = RedisModel::find()->all(); // find all by query (using the `active` scope)
 
         return $this->render('index', [
-            'query1' => $query1,
+            'query1' => $query2,
             //'query2' => $query2
         ]);
     }

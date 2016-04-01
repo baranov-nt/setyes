@@ -1155,16 +1155,16 @@
         },
         {
             "name": "codemix/yii2-localeurls",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/codemix/yii2-localeurls.git",
-                "reference": "ff3cfcc9fdcc310038625849f3bad9f8d21341da"
+                "reference": "342ffbd5f5d9a1264a82f21ccc669ebcc3102703"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/codemix/yii2-localeurls/zipball/ff3cfcc9fdcc310038625849f3bad9f8d21341da",
-                "reference": "ff3cfcc9fdcc310038625849f3bad9f8d21341da",
+                "url": "https://api.github.com/repos/codemix/yii2-localeurls/zipball/342ffbd5f5d9a1264a82f21ccc669ebcc3102703",
+                "reference": "342ffbd5f5d9a1264a82f21ccc669ebcc3102703",
                 "shasum": ""
             },
             "require": {
@@ -1192,7 +1192,7 @@
                 "locale",
                 "yii2"
             ],
-            "time": "2016-02-27 10:08:17"
+            "time": "2016-03-21 21:06:23"
         },
         {
             "name": "cybercog/yii2-google-analytics",
@@ -1372,16 +1372,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.1.1",
+            "version": "6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c"
+                "reference": "d094e337976dff9d8e2424e8485872194e768662"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/c6851d6e48f63b69357cbfa55bca116448140e0c",
-                "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/d094e337976dff9d8e2424e8485872194e768662",
+                "reference": "d094e337976dff9d8e2424e8485872194e768662",
                 "shasum": ""
             },
             "require": {
@@ -1397,7 +1397,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.1-dev"
+                    "dev-master": "6.2-dev"
                 }
             },
             "autoload": {
@@ -1430,7 +1430,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-11-23 00:47:50"
+            "time": "2016-03-21 20:02:09"
         },
         {
             "name": "guzzlehttp/promises",

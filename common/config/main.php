@@ -29,28 +29,31 @@ return [
             'siteKey' => '6LcWAxMTAAAAAD2teUNSJdJ8OwfQuqIUyJJDW79j',
             'secret' => '6LcWAxMTAAAAAEZCbXGi-azhHhA8kYRq5WmY9pLg',
         ],
+        'redis' => [
+            'class' => \yii\redis\Connection::className(),
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
+            'dataTimeout' => 30
+        ],
         'cache' => [
             //'class' => 'yii\caching\FileCache',
             'class' => 'yii\redis\Cache',
             'redis' => [
                 'hostname' => 'localhost',
                 'port' => 6379,
-                'database' => 0,
+                'database' => 1,
             ],
-        ],
-        'redis' => [
-            'class' => \yii\redis\Connection::className(),
-            'hostname' => 'localhost',
-            'port' => 6379,
-            'database' => 0,
         ],
         'session' => [
             'class' => 'yii\redis\Session',
             'redis' => [
                 'hostname' => 'localhost',
                 'port' => 6379,
-                'database' => 0,
+                'database' => 2,
             ],
+            'timeout' => 30,
+            //'cookieParams' => ['httponly' => true, 'lifetime' => 3600 * 4],
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',

@@ -193,13 +193,147 @@ class RedisController extends Controller
          *  Задача 7, создать множество, продемонстрировать основные операции над множествами.
          */
 
+        /* создание множества */
+        Yii::$app->redis->executeCommand('SADD', ['folder:test:fruits', 'banana']);
+        Yii::$app->redis->executeCommand('SADD', ['folder:test:fruits', 'apple']);
+        Yii::$app->redis->executeCommand('SADD', ['folder:test:fruits', 'strawberry']);
+        Yii::$app->redis->executeCommand('SADD', ['folder:test:yellowThings', 'banana']);
+        Yii::$app->redis->executeCommand('SADD', ['folder:test:yellowThings', 'apple']);
+        Yii::$app->redis->executeCommand('SADD', ['folder:test:redThings', 'strawberry']);
+        /* получение количества элементов множества */
+        $haveElements = Yii::$app->redis->executeCommand('SCARD', ['folder:test:fruits']);
+        /* сравнение элементов множества (вернет различие) */
+        $haveDiff = Yii::$app->redis->executeCommand('SDIFF', ['folder:test:fruits', 'folder:test:yellowThings']);
+        /* записывает различие в новый ключ noYellowFruits */
+        Yii::$app->redis->executeCommand('SDIFFSTORE', ['folder:test:noYellowFruits', 'folder:test:fruits', 'folder:test:yellowThings']);
+        /* сравнение элементов множества (вернет входящие) */
+        $haveInter = Yii::$app->redis->executeCommand('SINTER', ['folder:test:fruits', 'folder:test:yellowThings']);
+        /* находит элемент в множестве (1 - найден, 0 - нет) */
+        Yii::$app->redis->executeCommand('SISMEMBER', ['folder:test:fruits', 'banana']);
+        Yii::$app->redis->executeCommand('SISMEMBER', ['folder:test:fruits', 'tomato']);
+        /* перемещает элемент (1 - да, 0 - нет) */
+        Yii::$app->redis->executeCommand('SMOVE', ['folder:test:yellowThings', 'folder:test:redThings', 'apple']);
+        /* возвращает элементы множества */
+        $haveMembers = Yii::$app->redis->executeCommand('SMEMBERS', ['folder:test:redThings']);
+        /* удаляет случайный элемент множества */
+        Yii::$app->redis->executeCommand('SADD', ['folder:test:redThings', 'tomato']);
+        $deleteMember = Yii::$app->redis->executeCommand('SPOP', ['folder:test:redThings']);
+        $deleteMember2 = Yii::$app->redis->executeCommand('SRANDMEMBER', ['folder:test:redThings']);
+        $haveMembers2 = Yii::$app->redis->executeCommand('SMEMBERS', ['folder:test:redThings']);
+        /* удалить заданный элемент (1 - да, 0 - нет) */
+        Yii::$app->redis->executeCommand('SADD', ['folder:test:yellowThings', 'melon']);
+        Yii::$app->redis->executeCommand('SREM', ['folder:test:yellowThings', 'banana']);
+        /* возвращает входящие (не повторяющиеся) элементы */
+        $unionElements = Yii::$app->redis->executeCommand('SUNION', ['folder:test:yellowThings', 'folder:test:redThings', 'folder:test:fruits']);
+        /* сохраняет входящие (не повторяющиеся) элементы в отдельно множество */
+        $unionElements2 = Yii::$app->redis->executeCommand('SUNIONSTORE', ['folder:test:allThings', 'folder:test:yellowThings', 'folder:test:redThings', 'folder:test:fruits']);
+
         d([
             'Задача 7',
-
+            $haveElements,
+            $haveDiff,
+            $haveInter,
+            $haveMembers,
+            $deleteMember,
+            $deleteMember2,
+            $haveMembers2,
+            $unionElements,
+            $unionElements2
         ]);
 
-        Yii::$app->cache->set('cacheElem', '30 second', 30);
-        Yii::$app->session->set('sessionElem', '30 second');
+        /**
+         *  Задача 8, создать упорядоченное множество и продемонстрировано основные операции над ним.
+         * В упорядоченном множестве элементы сравниваются по дополнительному параметру «score».
+         */
+        /* создание элементов (год - параметр score) */
+        Yii::$app->redis->executeCommand('ZADD', ['folder:test:hackers', 1953, "Richard Stallman"]);
+        Yii::$app->redis->executeCommand('ZADD', ['folder:test:hackers', 1940, "Alan Kay"]);
+        Yii::$app->redis->executeCommand('ZADD', ['folder:test:hackers', 1965, "Yukihiro Matsumoto"]);
+        Yii::$app->redis->executeCommand('ZADD', ['folder:test:hackers', 1916, "Claude Shannon"]);
+        Yii::$app->redis->executeCommand('ZADD', ['folder:test:hackers', 1969, "Linus Torvalds"]);
+        Yii::$app->redis->executeCommand('ZADD', ['folder:test:hackers', 1912, "Alan Turing"]);
+        /* возвращает элементы по row (ZRANGE key start stop [WITHSCORES]) (если stop = -1 до последнего) */
+        $haveElements = Yii::$app->redis->executeCommand('ZRANGE', ['folder:test:hackers', 0, -1]);
+        /* возвращает элементы по row в обратном порядке (ZREVRANGE key start stop [WITHSCORES]) (если stop = -1 до последнего) */
+        $haveRevElements = Yii::$app->redis->executeCommand('ZREVRANGE', ['folder:test:hackers', 0, -1]);
+        /* возвращает элементы по score ( -inf - меньше, или диапозон) */
+        $haveRangeLessElements = Yii::$app->redis->executeCommand('ZRANGEBYSCORE', ['folder:test:hackers', '-inf', 1950]);
+        $haveRangeMoreElements = Yii::$app->redis->executeCommand('ZRANGEBYSCORE', ['folder:test:hackers', 1940, 2000]);
+
+        d([
+            'Задача 8',
+            $haveElements,
+            $haveRevElements,
+            $haveRangeLessElements,
+            $haveRangeMoreElements,
+        ]);
+
+        /**
+         *  Задача 9, Создать хеш-таблицу и продемонстрировать основные операции над хешами.
+         */
+
+        /* создание колонки */
+        Yii::$app->redis->executeCommand('HSET', ['folder:test:users:1', 'name', 'Andrew']);
+        Yii::$app->redis->executeCommand('HSET', ['folder:test:users:1', 'email', 'andrew@example.com']);
+        /* получение ключей */
+        $hkeys = Yii::$app->redis->executeCommand('HKEYS', ['folder:test:users:1']);
+        /* получение значений */
+        $hvals = Yii::$app->redis->executeCommand('HVALS', ['folder:test:users:1']);
+        /* получение ключей - значений */
+        $hgetall = Yii::$app->redis->executeCommand('HGETALL', ['folder:test:users:1']);
+        /* прибавление */
+        Yii::$app->redis->executeCommand('HSET', ['folder:test:users:1', 'test', 25]);
+        Yii::$app->redis->executeCommand('HINCRBY', ['folder:test:users:1', 'test', 25]);
+        /* удаление */
+        Yii::$app->redis->executeCommand('HDEL', ['folder:test:users:1', 'test']);
+
+        d([
+            'Задача 9',
+            $hkeys,
+            $hvals,
+            $hgetall,
+        ]);
+
+        /**
+         *  Задача 10, подписаться на сообщения на одном клиенте и отправить сообщение из другого.
+        Приведем окна двух клиентов, в первом окне совершается подписка на сообщения и видно отправленное из второго окна сообщение.
+        redis 127.0.0.1:6379> SUBSCRIBE messages
+        Reading messages... (press Ctrl-C to quit)
+        1) "subscribe"
+        2) "messages"
+        3) (integer) 1
+        1) "message"
+        2) "messages"
+        3) "Hello world!"
+         *
+        redis 127.0.0.1:6379> PUBLISH messages "Hello world!"
+        (integer) 1
+         *
+         */
+
+        /* (1 - успешно, 0 - нет) */
+        $publish = Yii::$app->redis->executeCommand('PUBLISH', [
+            'channel' => 'mes',
+            'message' => Json::encode(['name' => 'Petia', 'message' => 'УРА!!! РАБОТАЕТ!!!!'])
+        ]);
+
+        d([
+            'Задача 10',
+            $publish
+        ]);
+
+        /**
+         *  Задача 11
+         */
+
+        /*$publish = Yii::$app->redis->executeCommand('PSUBSCRIBE', [
+            'folder:test:fruits:*'
+        ]);*/
+
+        d([
+            'Задача 11',
+            $publish
+        ]);
 
         //$query1 = RedisModel::find()->where(['phone' => '79221301879'])->one(); // find by query
         $query2 = RedisModel::find()->all(); // find all by query (using the `active` scope)

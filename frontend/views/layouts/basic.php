@@ -30,14 +30,14 @@ $this->beginPage();
     <head>
         <?= Html::csrfMetaTags() ?>
         <meta charset="<?= Yii::$app->charset ?>">
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="<?= Yii::$app->controller->titleMeta ?>" />
-        <meta property="og:site_name" content="<?= Yii::$app->controller->siteNameMeta ?>"/>
-        <meta property="og:description" content="<?= Yii::$app->controller->descriptionMeta ?>" />
-        <meta property="og:image" content="<?= Yii::$app->controller->imageMeta ?>" />
-        <meta property="og:url" content="<?= Yii::$app->controller->urlMeta ?>" />
-        <meta property="og:locale" content="<?= Yii::$app->language ?>" />
-        <meta property="fb:app_id" content="<?= Yii::$app->controller->appFbIdMeta ?>" />
+        <!--<meta property="og:type" content="website" />
+        <meta property="og:title" content="<?/*= Yii::$app->controller->titleMeta */?>" />
+        <meta property="og:site_name" content="<?/*= Yii::$app->controller->siteNameMeta */?>"/>
+        <meta property="og:description" content="<?/*= Yii::$app->controller->descriptionMeta */?>" />
+        <meta property="og:image" content="<?/*= Yii::$app->controller->imageMeta */?>" />
+        <meta property="og:url" content="<?/*= Yii::$app->controller->urlMeta */?>" />
+        <meta property="og:locale" content="<?/*= Yii::$app->language */?>" />
+        <meta property="fb:app_id" content="<?/*= Yii::$app->controller->appFbIdMeta */?>" />-->
         <?php $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1']); ?>
         <?= GATracking::widget(
             [
@@ -45,6 +45,7 @@ $this->beginPage();
             ]
         ) ?>
         <title><?= $this->title ?></title>
+        <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
         <?php $this->head() ?>
     </head>
     <body>

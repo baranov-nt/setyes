@@ -26,7 +26,8 @@ class AppAsset extends AssetBundle
         'css/fonts.css',
     ];
     public $js = [
-        'js/main.js'
+        'js/main.js',
+        'js/notification.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

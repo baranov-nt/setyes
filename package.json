@@ -1,0 +1,11 @@
+{
+  "name": "setyes",
+  "description": "setyes desc",
+  "author": "phpNT",
+  "dependencies": {
+    "express": "*",
+    "socket.io": "*",
+    "redis": "*"
+  },
+  "engine": "node 0.4.1"
+}

@@ -1,9 +1,15 @@
 cd boyar
 composer install
+npm install
 php init
 yii migrate
 yii rbac/init
 php yii i18n/import @common/messages
+
+redis-server.exe
+redis-cli
+node server.js
+
 (сделать Rescan)
 php yii i18n/export @common/messages (app)
 чистим кеш

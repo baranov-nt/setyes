@@ -8,10 +8,10 @@
 
 namespace frontend\controllers;
 
-use yii\web\Controller;
+use frontend\controllers\BehaviorsController;
 use yii\helpers\Json;
 
-class ChatController extends Controller
+class ChatController extends BehaviorsController
 {
     public function actionIndex()
     {

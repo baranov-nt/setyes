@@ -66,6 +66,12 @@ class BehaviorsController extends Controller {
                         'allow' => true,
                     ],
                     [
+                        'allow' => true,
+                        'controllers' => ['node/test'],
+                        'actions' => ['index'],
+                        'verbs' => ['GET', 'POST'],
+                    ],
+                    [
                         'controllers' => ['carousel', 'product', 'user'],
                         'actions' => ['index', 'view', 'create', 'update' , 'delete', 'save-image', 'autoload-image', 'delete-image'],
                         'allow' => true,

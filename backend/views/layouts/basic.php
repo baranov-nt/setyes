@@ -1,5 +1,5 @@
 <?php
-use frontend\assets\AppAsset;
+use backend\assets\AppAsset;
 use yii\bootstrap\NavBar;
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
@@ -30,6 +30,7 @@ $this->beginPage();
         <meta charset="<?= Yii::$app->charset ?>">
         <?php $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1']); ?>
         <title><?= Yii::$app->name ?></title>
+        <!--<script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>-->
         <?php $this->head() ?>
     </head>
     <body>

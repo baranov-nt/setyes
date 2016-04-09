@@ -19,7 +19,10 @@ return [
             'controllerMap' => [
                 'default' => \backend\controllers\TranslatePanelController::className(),
             ],
-        ]
+        ],
+        'node' => [
+            'class' => 'backend\modules\node\Module',
+        ],
     ],
     'components' => [
         'request' => [

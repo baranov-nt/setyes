@@ -38,7 +38,7 @@ class ChatController extends BehaviorsController
         if ($modelChatForm->load(\Yii::$app->request->post())) {
             \Yii::$app->redis->executeCommand('PUBLISH', [
                 'channel' => 'notification',
-                'message' => Json::encode(['name' => $modelChatForm->name, 'message' => $modelChatForm->message])
+                'message' => Json::encode(['name' => $modelChatForm->name, 'message' => $modelChatForm->message, 'time' => \Yii::$app->formatter->asDatetime(time(), 'medium')])
             ]);
             $modelChatForm->message = '';
         }

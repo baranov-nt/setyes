@@ -112,7 +112,6 @@ class BehaviorsController extends Controller {
                     [
                         'controllers' => ['chat'],
                         'allow' => true,
-                        'roles' => ['?']
                     ],
                 ]
             ],

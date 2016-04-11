@@ -1,23 +1,23 @@
 /**
  * Created by User on 09.04.2016.
  */
-/*
-var http = require('http');
-var server = http.createServer(function(req, res) {
-    res.writeHead(200);
-    res.end('Hello Http');
-});
+var http = require("http");
 
-server.listen(8080);*/
-var http = require('http');
+function start() {
+    function onRequest(request, response) {
+        console.log("Request received.");
+        response.writeHead(200, {"Content-Type": "text/plain"});
+        response.write("Hello World");
+        response.end();
+    }
 
-var server = http.createServer(function(request, response) {
-    // magic happens here!
-});
-server.listen(8080);
-/*var express = require('express');
-var app = express();
+    http.createServer(onRequest).listen(8080);
+    console.log("Server has started.");
+}
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
-});*/
+function testConsole() {
+    console.log("Server has tested.");
+}
+
+exports.start = start;
+exports.testConsole = testConsole;

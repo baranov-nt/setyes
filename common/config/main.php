@@ -52,7 +52,7 @@ return [
                 'port' => 6379,
                 'database' => 2,
             ],
-            'timeout' => 30,
+            //'timeout' => 30,
             //'cookieParams' => ['httponly' => true, 'lifetime' => 3600 * 4],
         ],
         'authManager' => [

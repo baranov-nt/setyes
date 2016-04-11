@@ -5,7 +5,6 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var redis = require('redis');
-var http = require('http');
 
 server.listen(8890);
 

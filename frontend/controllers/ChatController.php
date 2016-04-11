@@ -8,25 +8,44 @@
 
 namespace frontend\controllers;
 
-use frontend\controllers\BehaviorsController;
 use yii\helpers\Json;
+use frontend\models\ChatForm;
 
 class ChatController extends BehaviorsController
 {
     public function actionIndex()
     {
-        if (\Yii::$app->request->post()) {
+        $modelChatForm = new ChatForm();
 
-            $name = \Yii::$app->request->post('name');
-            $message = \Yii::$app->request->post('message');
-
-            return \Yii::$app->redis->executeCommand('PUBLISH', [
+        if ($modelChatForm->load(\Yii::$app->request->post())) {
+            \Yii::$app->redis->executeCommand('PUBLISH', [
                 'channel' => 'notification',
-                'message' => Json::encode(['name' => $name, 'message' => $message])
+                'message' => Json::encode(['name' => $modelChatForm->name, 'message' => $modelChatForm->message])
             ]);
-
+            $modelChatForm->message = '';
         }
 
-        return $this->render('index');
+        return $this->render('index',
+            [
+                'modelChatForm' => $modelChatForm
+            ]);
+    }
+
+    public function actionVer2()
+    {
+        $modelChatForm = new ChatForm();
+
+        if ($modelChatForm->load(\Yii::$app->request->post())) {
+            \Yii::$app->redis->executeCommand('PUBLISH', [
+                'channel' => 'notification',
+                'message' => Json::encode(['name' => $modelChatForm->name, 'message' => $modelChatForm->message])
+            ]);
+            $modelChatForm->message = '';
+        }
+
+        return $this->render('ver2',
+            [
+                'modelChatForm' => $modelChatForm
+            ]);
     }
 }

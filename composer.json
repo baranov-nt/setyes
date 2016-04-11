@@ -36,6 +36,7 @@
         "bower-asset/jquery.scrollTo": "*",
         "bower-asset/jquery-cookie": "*",
         "bower-asset/masonry": "*",
+        "bower-asset/draggable": "*",
         "bower-asset/jquery-infinite-scroll": "v2.0.2",
         "cybercog/yii2-google-analytics": "^0.3.1",
         "himiklab/yii2-recaptcha-widget": "^1.0",
@@ -62,3 +63,4 @@
         }
     }
 }
+

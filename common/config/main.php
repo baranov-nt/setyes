@@ -65,10 +65,11 @@ return [
         ],
         'formatter' => [                                            // выводит данные в заданом формате
             'defaultTimeZone' => 'UTC',
-            'dateFormat' => 'full',                               // объем информации о дате (short, medium, long, full)
+            //'dateFormat' => 'full',                               // объем информации о дате (short, medium, long, full)
             //'dateFormat' => 'dd-MM-yyyy',                         // ICU format
             //'dateFormat' => 'php:d mm Y',                           // PHP date()-format
-            'datetimeFormat' => 'full',
+            'datetimeFormat' => 'php:d.mm.Y H:s',
+            //'datetimeFormat' => 'full',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'RUB',

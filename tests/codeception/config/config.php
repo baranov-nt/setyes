@@ -14,13 +14,18 @@ return [
     ],
     'components' => [
         'db' => [
-            'dsn' => 'mysql:host=localhost;dbname=yii2_advanced_tests',
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=setyes',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
         ],
         'mailer' => [
             'useFileTransport' => true,
         ],
         'urlManager' => [
-            'showScriptName' => true,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false
         ],
     ],
 ];

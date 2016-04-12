@@ -1,0 +1,45 @@
+http://krivochenko.ru/blog/post/introduction-to-testing-yii2
+
+Установка глобально
+
+    composer global require "codeception/codeception=2.0.*"
+    composer global require "codeception/specify=*"
+    composer global require "codeception/verify=*"
+
+    composer global require se/selenium-server-standalone
+
+Для se/selenium-server-standalone установить путь глобально
+
+    C:\Users\123\AppData\Roaming\Composer\vendor\bin
+
+Создание хоста для тестов
+
+    <VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot "c:/Server/data/htdocs/setyes.dev/www/setyes/frontend/web"
+        ServerName test.setyes.dev
+        ServerAlias www.test.setyes.dev
+        ErrorLog "c:/Server/data/htdocs/setyes.dev/www/logs/localhost-error.log"
+        CustomLog "c:/Server/data/htdocs/setyes.dev/www/logs/localhost-access.log" common
+        <Directory />
+        	Options FollowSymLinks
+        	AllowOverride All
+        </Directory>
+        <Directory "c:/Server/data/htdocs/setyes.dev/www/setyes/frontend/web">
+        	Options All
+        	AllowOverride All
+        	Order allow,deny
+        	allow from all
+        	RewriteRule . index-test.php
+        </Directory>
+    </VirtualHost>
+
+Правим
+
+    tests\codeception\config\config.php
+
+Устанавливаем яву jdk (если нужно)
+
+    http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+Устанавливаем драйвер хром и помещаем его в C:\Users\123\AppData\Roaming\Composer\vendor\bin

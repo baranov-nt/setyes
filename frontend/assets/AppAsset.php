@@ -27,7 +27,8 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/main.js',
-        'js/notification.js'
+        'js/notification.js',
+        //'js/liveStream.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
@@ -35,3 +36,4 @@ class AppAsset extends AssetBundle
         'justinvoelker\awesomebootstrapcheckbox\Asset',
     ];
 }
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="eb83399f-4a6d-4b18-9316-51a3ead1e95a" name="setyes" url="http://setyes.com">
+        <fileTransfer host="setyes.com" port="21" rootFolder="/www/setyes.com" username="phpnt">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

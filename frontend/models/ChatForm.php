@@ -15,12 +15,14 @@ class ChatForm extends Model
 {
     public $name;
     public $message;
+    public $active = 1;
 
     public function rules()
     {
         return [
             [['name', 'message'], 'required'],
             [['name', 'message'], 'string'],
+            ['active', 'integer']
         ];
     }
 
@@ -29,6 +31,7 @@ class ChatForm extends Model
         return [
             'name' => 'Имя',
             'message' => 'Сообщение',
+            'active' => 'Звуковой сигнал'
         ];
     }
 }

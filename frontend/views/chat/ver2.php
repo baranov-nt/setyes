@@ -5,36 +5,12 @@
  * Date: 11.04.2016
  * Time: 17:53
  */
+/* @var $modelChatForm \frontend\models\ChatForm */
 use yii\helpers\Html;
 use yii\widgets\Pjax;
-use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Modal;
-use common\widgets\Draggable\AssetBundle;
+use yii\widgets\ActiveForm;
 use yii\jui\Draggable;
 
-
-/* @var $this yii\web\View */
-/* @var $modelChatForm frontend\models\ChatForm */
-//AssetBundle::register($this);
-
-
-$this->title = 'Чат Node JS + Redis';
-
-
-/*$this->registerCss("
-.modal
-{
-    overflow: hidden !important;
-}
-.modal-dialog{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
- ");*/
-/*$js = <<<JS
-JS;
-$this->registerJs($js, \yii\web\View::POS_READY)*/
 $script = <<< JS
     $('.modal.draggable>.modal-dialog').draggable({
         cursor: 'move',
@@ -52,19 +28,6 @@ $('.modal.draggable>.modal-dialog>.modal-content>.modal-header').css('cursor', '
 JS;
 $this->registerJs($script);
 ?>
-<style>
-    /*.modal
-    {
-        overflow: hidden !important;
-        z-index: 0 !important;
-    }
-    .modal-dialog{
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-    }*/
-</style>
 <div class="container">
     <?= Html::button('Написать сообщение',
         [
@@ -113,6 +76,7 @@ Draggable::begin([
                 ?>
                 <?= $form->field($modelChatForm, 'name') ?>
                 <?= $form->field($modelChatForm, 'message') ?>
+                <?= $form->field($modelChatForm, 'active')->checkbox() ?>
                 <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary']) ?>
                 <?php ActiveForm::end(); ?>
             </div>
@@ -124,4 +88,4 @@ Draggable::begin([
 <?php
 Draggable::end();
 ?>
-</div>
+<audio id="audiotag1" src="http://www.storiesinflight.com/html5/audio/flute_c_long_01.wav" preload="auto"></audio>

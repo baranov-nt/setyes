@@ -43,9 +43,13 @@
         "justinvoelker/yii2-awesomebootstrapcheckbox": "^1.0",
         "alexander-suter/yii2-browser-info": "^2.0",
         "nmdimas/yii2-user-agent-parser": "^1.0",
-        "guzzlehttp/guzzle": "~6.0",
         "electrolinux/phpquery": "^0.9.6",
-        "yiisoft/yii2-redis": "^2.0"
+        "yiisoft/yii2-redis": "^2.0",
+        "codeception/codeception": "2.0.*",
+        "codeception/specify": "*",
+        "codeception/verify": "*",
+        "fzaninotto/faker": "*",
+        "guzzlehttp/guzzle": "5.3.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

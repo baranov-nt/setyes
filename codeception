@@ -24,23 +24,24 @@ http://krivochenko.ru/blog/post/introduction-to-testing-yii2
 
 Установка глобально
 
-    composer global require "codeception/codeception=2.0.*"
-    composer global require "codeception/specify=*"
-    composer global require "codeception/verify=*"
-
     composer global require se/selenium-server-standalone
 
-Устанавливаем локально "codeception/codeception": "*" и  faker
+Устанавливаем яву jdk (если нужно)
 
-    composer require --dev yiisoft/yii2-faker:*
+    http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+
+Устанавливаем драйвер хром и помещаем его в C:\Users\123\AppData\Roaming\Composer\vendor\bin
 
 Установить путь глобально
 
     C:\Users\123\AppData\Roaming\Composer\vendor\bin
 
-Устанавливаем директорию глобально
+Устанавливаем локально
 
-    composer global status
+    composer require "codeception/codeception=2.0.*"
+    composer require "codeception/specify=*"
+    composer require "codeception/verify=*"
+    composer require "fzaninotto/faker=*"
 
 Правим (db)
 
@@ -51,8 +52,4 @@ http://krivochenko.ru/blog/post/introduction-to-testing-yii2
     codecept build
     codecept run
 
-Устанавливаем яву jdk (если нужно)
 
-    http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-
-Устанавливаем драйвер хром и помещаем его в C:\Users\123\AppData\Roaming\Composer\vendor\bin

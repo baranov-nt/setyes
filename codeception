@@ -1,17 +1,5 @@
 http://krivochenko.ru/blog/post/introduction-to-testing-yii2
 
-Установка глобально
-
-    composer global require "codeception/codeception=2.0.*"
-    composer global require "codeception/specify=*"
-    composer global require "codeception/verify=*"
-
-    composer global require se/selenium-server-standalone
-
-Для se/selenium-server-standalone установить путь глобально
-
-    C:\Users\123\AppData\Roaming\Composer\vendor\bin
-
 Создание хоста для тестов
 
     <VirtualHost *:80>
@@ -34,9 +22,34 @@ http://krivochenko.ru/blog/post/introduction-to-testing-yii2
         </Directory>
     </VirtualHost>
 
-Правим
+Установка глобально
+
+    composer global require "codeception/codeception=2.0.*"
+    composer global require "codeception/specify=*"
+    composer global require "codeception/verify=*"
+
+    composer global require se/selenium-server-standalone
+
+Устанавливаем локально "codeception/codeception": "*" и  faker
+
+    composer require --dev yiisoft/yii2-faker:*
+
+Установить путь глобально
+
+    C:\Users\123\AppData\Roaming\Composer\vendor\bin
+
+Устанавливаем директорию глобально
+
+    composer global status
+
+Правим (db)
 
     tests\codeception\config\config.php
+
+Переходим в папку tests и создаем запускаем тесты
+
+    codecept build
+    codecept run
 
 Устанавливаем яву jdk (если нужно)
 

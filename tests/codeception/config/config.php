@@ -16,16 +16,12 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=setyes',
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8',
         ],
         'mailer' => [
             'useFileTransport' => true,
         ],
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false
+            'showScriptName' => true,
         ],
     ],
 ];

@@ -5,6 +5,6 @@ modules:
         - WebDriver
     config:
         WebDriver:
-            url: test.setyes.dev
+            url: http://test.setyes.dev
             browser: chrome
             restart: false

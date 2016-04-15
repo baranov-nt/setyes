@@ -74,16 +74,9 @@ return [
             'thousandSeparator' => ' ',
             'currencyCode' => 'RUB',
         ],
-        'urlManager' => [
-            'class' => 'codemix\localeurls\UrlManager',
-            'languages' => ['ru', 'en', 'de', 'fr'],
-            /*'rules' => [
-                [
-                    'class' => 'common\components\CityUrlRule',
-                    'connectionID' => 'db'
-                ]
-            ]*/
-        ],
+        /*'urlManager' => [
+            
+        ],*/
         'i18n' => [
             'class'      => common\widgets\yii2TranslatePanel\components\I18N::className(),
             'languages' => ['ru', 'de', 'fr'],
@@ -112,10 +105,6 @@ return [
                     'cachingDuration' => 60 * 60 * 2, // cache on 2 hours
                 ],
             ],
-        ],
-
-        'placeManager' => [
-            'class' => \common\components\PlaceManager::className(),
         ],
     ],
 ];

@@ -8,9 +8,11 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model common\models\LoginForm  */
 /* @var $form ActiveForm */
+$this->title = Yii::t('app', 'Login');
 ?>
 <div class="container">
     <div class="main-login">
+        <h1 class="title"><?= $this->title ?></h1>
         <?php $form = ActiveForm::begin(); ?>
         <div class="row">
             <div class="col-md-4 col-md-offset-4">

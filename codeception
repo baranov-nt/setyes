@@ -52,4 +52,23 @@ http://krivochenko.ru/blog/post/introduction-to-testing-yii2
     codecept build
     codecept run
 
+--------------------------------------------------------------------------------------------------------------------
+Работа с тестами:
+
+Создание функционального теста (не может выполнять яваскрипт) в папке frontend
+
+    $ _cept generate:cept functional EmployeeIndexCept
+
+Создание приемочного теста (может выполнять яваскрипт) в папке frontend
+
+    $ _cept generate:cept acceptance FillLogin
+
+    создание шагов к тесту FillLogin
+
+        $ _cept generate:stepobject acceptance FillLoginSteps
+
+
+
+
+
 

@@ -1,7 +1,10 @@
+# нэймспейс
 namespace: tests\codeception\frontend
 actor: Tester
 paths:
+    # папка для тестов текущая
     tests: .
+    # папка для логов в текущей
     log: _output
     data: _data
     helpers: _support

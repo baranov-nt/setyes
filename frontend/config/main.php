@@ -30,6 +30,8 @@ return [
             'baseUrl' => '',
         ],
         'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+            'languages' => ['ru', 'en', 'de', 'fr'],
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => true,
@@ -127,6 +129,9 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'main/error',
+        ],
+        'placeManager' => [
+            'class' => \common\components\PlaceManager::className(),
         ],
     ],
     'params' => $params,

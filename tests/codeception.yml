@@ -1,11 +1,12 @@
+# -- подключение codeception.yml в папках
 include:
-  - codeception/common
-  - codeception/console
-  - codeception/backend
+#  - codeception/common
+#  - codeception/console
+#  - codeception/backend
   - codeception/frontend
-
 paths:
+  # -- Общий вывод логов
   log: codeception/_output
-
 settings:
+  # -- цвет в консоли
   colors: true

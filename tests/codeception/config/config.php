@@ -14,14 +14,14 @@ return [
     ],
     'components' => [
         'db' => [
-            'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=setyes',
         ],
         'mailer' => [
             'useFileTransport' => true,
         ],
         'urlManager' => [
-            'showScriptName' => true,
+            'enablePrettyUrl' => true,
+            'showScriptName' => false
         ],
     ],
 ];

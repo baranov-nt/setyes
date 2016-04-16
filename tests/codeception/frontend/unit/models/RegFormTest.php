@@ -13,9 +13,15 @@ class RegFormTest extends DbTestCase
 
     use Specify;
 
-    public function testCorrectSignup()
+    public function testCorrectFindUser()
     {
-        $model = new RegForm([
+        // @var $modelUser \common\models\User
+        $modelUser = User::find()->count();
+    }
+
+    //public function testCorrectSignup()
+    //{
+        /*$model = new RegForm([
             'phone' => '79333333333',
             'email' => 'some_email@example.com',
             'password' => 'some_password',
@@ -24,14 +30,14 @@ class RegFormTest extends DbTestCase
             'country_id' => 182
         ]);
 
-        $user = $model->reg();
+        $user = $model->reg();*/
 
         /*$this->assertInstanceOf('common\models\User', $user, 'user should be valid');
 
         expect('phone should be correct', $user->phone)->equals('79333333333');
         expect('email should be correct', $user->email)->equals('some_email@example.com');
         expect('password should be correct', $user->validatePassword('some_password'))->true();*/
-    }
+    //}
 
     /*public function testNotCorrectSignup()
     {
@@ -47,9 +53,9 @@ class RegFormTest extends DbTestCase
         expect('phone and email are in use, user should not be created', $model->reg())->null();
     }*/
 
-    public function testCorrectDeleteUser()
+    /*public function testCorrectDeleteUser()
     {
-        /* @var $modelUser \common\models\User */
+        // @var $modelUser \common\models\User
         $modelUser = User::findOne([
             'phone' => '79333333333',
             'email' => 'some_email@example.com',
@@ -58,7 +64,7 @@ class RegFormTest extends DbTestCase
         if($modelUser) {
             $modelUser->deleteUser($modelUser);
         }
-    }
+    }*/
 
     public function fixtures()
     {

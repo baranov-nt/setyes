@@ -13,6 +13,8 @@ return [
         'secret_key' => 'RkD_Jw0_8HEedzLk7MM-ZKEFfYR7VbMr_1392559490',
         'created_at' => '1392559490',
         'updated_at' => '1392559490',
+        'userPrivilege.premium' => 0,
+        'userProfile.first_name' => 'Вася',
     ],
     [
         'phone' => '79222222225',
@@ -26,5 +28,7 @@ return [
         'secret_key' => 'RkD_Jw0_8HEedzLk7MM-ZKEFfYR7VbMr_1392559490',
         'created_at' => '1392559490',
         'updated_at' => '1392559490',
+        'userPrivilege.premium' => 0,
+        'userProfile.first_name' => 'Вася',
     ],
 ];

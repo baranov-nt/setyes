@@ -3,7 +3,6 @@ use tests\codeception\frontend\FunctionalTester;
 use tests\codeception\frontend\_pages\SiteLoginPage;
 
 $I = new FunctionalTester($scenario);
-$I->wantTo('выполнять действия (функциональный тест) и увидеть результат');
-$I->wantTo('убедится, что страница логин открывается');
+$I->wantTo('Войти на страницу входа пользователя.');
 SiteLoginPage::openBy($I);
-$I->see(Yii::t('app', 'Login'), '.title');
+$I->seeElement('.main-login');

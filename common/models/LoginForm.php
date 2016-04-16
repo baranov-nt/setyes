@@ -25,7 +25,7 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            ['username', 'required'],
+            [['username', 'password'], 'required'],
             ['rememberMe', 'boolean'],
             ['password', 'validatePassword'],
             [['reCaptcha'], \himiklab\yii2\recaptcha\ReCaptchaValidator::className(),

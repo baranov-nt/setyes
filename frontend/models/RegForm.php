@@ -45,6 +45,9 @@ class RegForm extends Model
             //[['phone'], 'integer'],
             [['country_id'], 'integer'],
             ['email', 'email'],
+            ['phone', 'unique',
+                'targetClass' => User::className(),
+                'message' => Yii::t('app', 'This phone is already registered.')],
             ['email', 'unique',
                 'targetClass' => User::className(),
                 'message' => Yii::t('app', 'This email is already registered.')],
@@ -125,29 +128,6 @@ class RegForm extends Model
             $modelUser->generateSecretKey();
             $modelUser->validate();
             $modelUser->save();
-            return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
-        endif;
-        return false;
-    }
-
-    public function reg()
-    {
-        $modelUser = new User();
-        $modelUser->phone = $this->getPhoneNumber();
-        $modelUser->email = $this->email;
-        $modelUser->status = $this->status;
-        $modelUser->country_id = $this->country_id;
-        $modelUser->setPassword($this->password);
-        $modelUser->generateAuthKey();
-
-        if($this->scenario === 'emailActivation')
-            $modelUser->generateSecretKey();
-
-        if($modelUser->save()):
-            $modelUserProfile = new UserProfile();
-            $modelUserProfile->link('user', $modelUser);
-            $modelUserPrivilege = new UserPrivilege();
-            $modelUserPrivilege->link('user', $modelUser);
             return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
         endif;
         return false;
@@ -235,5 +215,31 @@ class RegForm extends Model
         $phoneMask = '';
         $phonePlaceholder = '';
         return [$phoneMask, $phonePlaceholder];
+    }
+
+    public function reg()
+    {
+        if($this->validate()) {
+            $modelUser = new User();
+            $modelUser->phone = $this->getPhoneNumber();
+            $modelUser->email = $this->email;
+            $modelUser->status = $this->status;
+            $modelUser->country_id = $this->country_id;
+            $modelUser->setPassword($this->password);
+            $modelUser->generateAuthKey();
+
+            if ($this->scenario === 'emailActivation') {
+                $modelUser->generateSecretKey();
+            }
+
+            if ($modelUser->save()):
+                $modelUserProfile = new UserProfile();
+                $modelUserProfile->link('user', $modelUser);
+                $modelUserPrivilege = new UserPrivilege();
+                $modelUserPrivilege->link('user', $modelUser);
+                return RbacHelper::assignRole($modelUser->getId()) ? $modelUser : null;
+            endif;
+        }
+        return false;
     }
 }

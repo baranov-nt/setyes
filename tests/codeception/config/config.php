@@ -3,6 +3,7 @@
  * Application configuration shared by all applications and test types
  */
 return [
+    'language' => 'ru',
     'controllerMap' => [
         'fixture' => [
             'class' => 'yii\faker\FixtureController',
@@ -17,6 +18,10 @@ return [
         ],
         'mailer' => [
             'useFileTransport' => true,
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false
         ],
     ],
 ];

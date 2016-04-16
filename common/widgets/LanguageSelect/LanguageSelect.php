@@ -60,7 +60,6 @@ class LanguageSelect extends Widget
     public function run(){
         $languages = $this->languages;
         $current = $languages[Yii::$app->language];
-
         unset($languages[Yii::$app->language]);
 
         $items = [];

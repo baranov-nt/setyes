@@ -16,6 +16,15 @@ class SiteLoginSteps extends \tests\codeception\frontend\AcceptanceTester
         ], 30);*/
     }
 
+    public function getTitlePage()
+    {
+        $I = $this;
+        echo \Yii::t('app', 'Login');
+        //dd($val);
+
+        //$I->amOnPage($val);
+    }
+
     /**
      * Return a empty array
      */
@@ -38,10 +47,15 @@ class SiteLoginSteps extends \tests\codeception\frontend\AcceptanceTester
     /**
      * Submit the employee data form.
      */
-    function submitEmployeeDataForm()
+    function submitLoginDataForm()
     {
         $I = $this;
-        $I->click('Create');
+        $form = [
+            'LoginForm[username]' => '',
+            'LoginForm[password]' => '',
+        ];
+        $I->seeInFormFields('//form[@id=my-form]', $form);
+        //$I->submitForm('//form[@id=loginForm]', $form, 'submitButton');
     }
 
     /**

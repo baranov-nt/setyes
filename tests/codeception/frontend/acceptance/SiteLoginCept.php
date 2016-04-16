@@ -1,12 +1,28 @@
 <?php
 use tests\codeception\frontend\AcceptanceTester;
-$I = new AcceptanceTester($scenario);
-$I->wantTo('выполнять действия (приемочный тест) и увидеть результат');
-$I = new AcceptanceTester\SiteLoginSteps($scenario);
-$I->wantTo('Убедится, что вход пользователя работает');
+use tests\codeception\frontend\_pages\SiteLoginPage;
 
-$I->amGoingTo('Отправить пустую форму');
-//$I->see(Yii::t('app', 'Login'), '.title');
+$I = new AcceptanceTester($scenario);
+$I->comment('Проверка авторизации пользователей');
+$loginPage = SiteLoginPage::openBy($I);
+$I->seeInTitle(Yii::t('app', 'Login'));
+$I->seeElement('.main-login');
+$I = new AcceptanceTester\SiteLoginSteps($scenario);
+$I->comment('Отправка пустой формы');
+$loginPage->login('', '');
+$I->wait(1);
+$I->see(Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $loginPage->getLoginFormAttribute('username')]), '.help-block');
+$I->see(Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $loginPage->getLoginFormAttribute('password')]), '.help-block');
+$I->comment('Отправка невнрных данных');
+$loginPage->login('some', 'some');
+$I->wait(1);
+$I->see(Yii::t('app', 'Wrong phone, email or password.'), '.help-block');
+//$I->see('Необходимо заполнить «Пароль».', '.help-block');
+//$I->submitLoginDataForm();
+
+/*$I->amGoingTo('Отправить пустую форму');
+$I->seeInTitle('Войти');
+$I->seeInTitle(Yii::t('app', 'Login'));*/
 /*$I->amInCreateEmployeeUi();
 $I->see('Create Employee');
 $emptyEmployee = $I->emptyEmployee();

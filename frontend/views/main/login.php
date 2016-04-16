@@ -12,16 +12,16 @@ $this->title = Yii::t('app', 'Login');
 ?>
 <div class="container">
     <div class="main-login">
-        <h1 class="title"><?= $this->title ?></h1>
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin([
+            'id' => 'loginForm'
+        ]); ?>
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
                 <?= $form->field($model, 'username') ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-success']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-success', 'name' => 'login-button']) ?>
                     <?= Html::a(Yii::t('app', 'Registration'), Url::to(['/main/reg']), ['class' => 'btn btn-primary']) ?>
                 </div>
                 <?= Html::a(Yii::t('app', 'Forgot your password?'), ['/main/send-email']) ?>

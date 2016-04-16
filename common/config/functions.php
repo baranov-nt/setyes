@@ -37,3 +37,14 @@ function dd($var)
     d($var,$caller);
     die();
 }
+
+function pd($var,$caller=null)
+{
+    VarDumper::dump($var, 10, false);
+}
+
+function pdd($var,$caller=null)
+{
+    VarDumper::dump($var, 10, false);
+    die();
+}

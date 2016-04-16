@@ -39,6 +39,7 @@ class LanguageSelect extends Widget
 
         $cookies = Yii::$app->response->cookies;
         $languageNew = Yii::$app->request->get('_language');
+
         if($languageNew)
         {
             if(isset($this->languages[$languageNew]))
@@ -58,8 +59,6 @@ class LanguageSelect extends Widget
 
     public function run(){
         $languages = $this->languages;
-        print_r($languages);
-        die();
         $current = $languages[Yii::$app->language];
 
         unset($languages[Yii::$app->language]);

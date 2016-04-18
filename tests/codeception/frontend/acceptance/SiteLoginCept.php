@@ -5,10 +5,12 @@ use tests\codeception\frontend\_pages\SiteLoginPage;
 $I = new AcceptanceTester($scenario);
 $I->comment('Проверка авторизации пользователей');
 $loginPage = SiteLoginPage::openBy($I);
+$I->wait(5);
 $I->seeInTitle(Yii::t('app', 'Login'));
 $I->seeElement('.main-login');
 $I = new AcceptanceTester\SiteLoginSteps($scenario);
 $I->comment('Отправка пустой формы');
+
 $loginPage->login('', '');
 $I->wait(1);
 $I->see(Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $loginPage->getLoginFormAttribute('username')]), '.help-block');

@@ -28,7 +28,7 @@ class m150527_004737_create_user_table extends Migration
             'images_num' => $this->smallInteger()->defaultValue(5),               // количество изображений по умолчанию
             'phones' => $this->smallInteger()->defaultValue(1),                   // количество телефонов по умолчанию
             'vip_style' => $this->boolean()->defaultValue(false),                 // доступ к дополнительным стилям
-            'time_privilege' => $this->boolean()->defaultValue(false),            // время привелегий (если установлен флаг premium)
+            'time_privilege' => $this->string(32)->defaultValue(false),            // время привелегий (если установлен флаг premium)
         ]);
 
         $this->addForeignKey('privilege_user', 'user_privilege', 'user_id', 'user', 'id', 'CASCADE');

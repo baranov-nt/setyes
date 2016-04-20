@@ -5,6 +5,6 @@ return [
     'supportEmail' => 'support@setyes.com',
     'user.passwordResetTokenExpire' => 3600,
     'secretKeyExpire' => 60 * 60,                       // время хранения ключа
-    'emailActivation' => true,                         // активация через емайл
+    'emailActivation' => false,                         // активация через емайл
     'loginWithEmail' => true,                           // вход через емайл
 ];

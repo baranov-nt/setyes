@@ -2,9 +2,11 @@
 
 namespace tests\codeception\frontend\unit\models;
 
+use common\models\AuthAssignment;
 use frontend\models\RegForm;
+use tests\codeception\common\fixtures\AuthAssignmentFixture;
+use tests\codeception\common\fixtures\UserPrivilegeFixture;
 use tests\codeception\frontend\unit\DbTestCase;
-use tests\codeception\common\fixtures\UserFixture;
 use Codeception\Specify;
 use common\models\User;
 
@@ -15,8 +17,22 @@ class RegFormTest extends DbTestCase
 
     public function testCorrectFindUser()
     {
-        // @var $modelUser \common\models\User
-        $modelUser = User::find()->count();
+        // @var $modelRegForm \common\models\RegForm
+        $modelRegForm = new RegForm([
+            'country_id' => 182,
+            'phone' => '79883332211',
+            'email' => 'some_email@example.com',
+            'password' => 'some_password',
+            'password_repeat' => 'some_password'
+        ]);
+
+        $user = $modelRegForm->reg();
+
+        $this->assertInstanceOf('common\models\User', $user, 'user should be valid');
+
+        expect('username should be correct', $user->phone)->equals('79883332211');
+        expect('email should be correct', $user->email)->equals('some_email@example.com');
+        expect('password should be correct', $user->validatePassword('some_password'))->true();
     }
 
     //public function testCorrectSignup()
@@ -70,8 +86,7 @@ class RegFormTest extends DbTestCase
     {
         return [
             'user' => [
-                'class' => UserFixture::className(),
-                'dataFile' => '@tests/codeception/frontend/unit/fixtures/data/models/user.php',
+                'class' => AuthAssignmentFixture::className(),
             ],
         ];
     }

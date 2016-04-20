@@ -98,6 +98,14 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getAuthAssignments()
+    {
+        return $this->hasOne(AuthAssignment::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getCountry()
     {
         return $this->hasOne(PlaceCountry::className(), ['id' => 'country_id']);

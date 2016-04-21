@@ -1,7 +1,7 @@
 <?php
 return [
     'name' => 'setYes',
-    'language' => 'en',
+    'language' => 'ru',
     'charset' => 'UTF-8',
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [

@@ -69,7 +69,7 @@ class TranslatePanelController extends BehaviorsController
     {
         // ---------------------- CHECK IS AJAX REQUEST ------------------------
         if ( !Yii::$app->getRequest()->isAjax ) {
-            return $this->redirect(['/translations']);
+            return $this->redirect(['/translate-panel/index']);
         }
 
         // ------------------ SET JSON FORMAT FOR RESPONSE ---------------------

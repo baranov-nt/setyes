@@ -111,33 +111,33 @@ class SiteController extends Controller
                     // Полученные данные заносим в переменные
                     /* @var $email string */
                     /* @var $first_name string */
-                    /* @var $second_name string */
+                    /* @var $last_name string */
                     if(Yii::$app->request->get('authclient') == 'google'):
                         $first_name = $attributes['name']['givenName'];
-                        $second_name = $attributes['name']['familyName'];
+                        $last_name = $attributes['name']['familyName'];
                         $email = $attributes['emails'][0]['value'];
                     elseif(Yii::$app->request->get('authclient') == 'yandex'):
                         $first_name = $attributes['first_name'];
-                        $second_name = $attributes['last_name'];
+                        $last_name = $attributes['last_name'];
                         $email = $attributes['default_email'];
                     elseif(Yii::$app->request->get('authclient') == 'facebook'):
                         $names = explode(' ', $attributes['name']);
                         $first_name = $names[0];
-                        $second_name = $names[1];
+                        $last_name = $names[1];
                         $email = $attributes['email'];
                     elseif(Yii::$app->request->get('authclient') == 'vkontakte'):
                         $first_name = $attributes['first_name'];
-                        $second_name = $attributes['last_name'];
+                        $last_name = $attributes['last_name'];
                         $email = false;
                     elseif(Yii::$app->request->get('authclient') == 'twitter'):
                         $names = $attributes['name'];
                         $names = explode(' ', $names);
                         $first_name = $names[0];
-                        $second_name = $names[1];
+                        $last_name = $names[1];
                         $email = false;
                     elseif(Yii::$app->request->get('authclient') == 'linkedin'):
                         $first_name = $attributes['first_name'];
-                        $second_name = $attributes['last_name'];
+                        $last_name = $attributes['last_name'];
                         $email = $attributes['email'];
                     endif;
 
@@ -169,7 +169,7 @@ class SiteController extends Controller
                             $modelProfile = new UserProfile();
                             $modelProfile->user_id = $user->id;
                             $modelProfile->first_name = $first_name;
-                            $modelProfile->second_name = $second_name;
+                            $modelProfile->last_name = $last_name;
                             if($modelProfile->save()):
                                 if(RbacHelper::assignRole($user->id)) {
                                     $modelUserPrivilege = new UserPrivilege();

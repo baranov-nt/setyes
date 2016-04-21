@@ -20,4 +20,11 @@ return [
         'vip_style' => 1,
         'time_privilege' => '27200',
     ],
+    'user3' => [
+        'premium' => 1,
+        'images_num' => 10,
+        'phones' => 1,
+        'vip_style' => 1,
+        'time_privilege' => '27200',
+    ],
 ];

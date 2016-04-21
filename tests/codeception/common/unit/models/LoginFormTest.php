@@ -67,8 +67,8 @@ class LoginFormTest extends DbTestCase
     {
 
         $model = new LoginForm([
-            'username' => 'bayer.hudson',
-            'password' => 'password_0',
+            'username' => 'v@v.com',
+            'password' => '$2y$13$Jpkp5Aibej7Luvys6im9CO3WpYeWRkBpJ4VW5xlFUu3.FiF6K/Skm',
         ]);
 
         $this->specify('user should be able to login with correct credentials', function () use ($model) {

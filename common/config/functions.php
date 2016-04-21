@@ -38,12 +38,12 @@ function dd($var)
     die();
 }
 
-function pd($var,$caller=null)
+function p($var,$caller=null)
 {
     VarDumper::dump($var, 10, false);
 }
 
-function pdd($var,$caller=null)
+function pd($var,$caller=null)
 {
     VarDumper::dump($var, 10, false);
     die();

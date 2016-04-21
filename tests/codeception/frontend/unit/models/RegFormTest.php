@@ -2,7 +2,6 @@
 
 namespace tests\codeception\frontend\unit\models;
 
-use common\models\AuthAssignment;
 use frontend\models\RegForm;
 use tests\codeception\common\fixtures\AuthAssignmentFixture;
 use tests\codeception\common\fixtures\UserFixture;
@@ -10,7 +9,6 @@ use tests\codeception\common\fixtures\UserPrivilegeFixture;
 use tests\codeception\common\fixtures\UserProfileFixture;
 use tests\codeception\frontend\unit\DbTestCase;
 use Codeception\Specify;
-use common\models\User;
 
 class RegFormTest extends DbTestCase
 {
@@ -36,12 +34,12 @@ class RegFormTest extends DbTestCase
 
     public function testCorrectFindUser()
     {
-        pdd(array(
+        /*pd(array(
             $this->user('user1'),
             $this->userProfile('user1'),
             $this->userPrivilege('user1'),
             $this->authAssignment('user1')
-        ));
+        ));*/
         // @var $modelRegForm \common\models\RegForm
         $modelRegForm = new RegForm([
             'country_id' => 182,
@@ -59,26 +57,6 @@ class RegFormTest extends DbTestCase
         expect('email should be correct', $user->email)->equals('some_email@example.com');
         expect('password should be correct', $user->validatePassword('some_password'))->true();
     }
-
-    //public function testCorrectSignup()
-    //{
-        /*$model = new RegForm([
-            'phone' => '79333333333',
-            'email' => 'some_email@example.com',
-            'password' => 'some_password',
-            'password_repeat' => 'some_password',
-            'status' => 10,
-            'country_id' => 182
-        ]);
-
-        $user = $model->reg();*/
-
-        /*$this->assertInstanceOf('common\models\User', $user, 'user should be valid');
-
-        expect('phone should be correct', $user->phone)->equals('79333333333');
-        expect('email should be correct', $user->email)->equals('some_email@example.com');
-        expect('password should be correct', $user->validatePassword('some_password'))->true();*/
-    //}
 
     /*public function testNotCorrectSignup()
     {

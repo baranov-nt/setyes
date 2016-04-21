@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
  * @property integer $images_num
  * @property string $images_label
  * @property string $first_name
- * @property string $second_name
+ * @property string $last_name
  * @property string $middle_name
  * @property integer $the_second_phone
  * @property integer $the_third_phone
@@ -39,7 +39,7 @@ class UserProfile extends ActiveRecord
     {
         return [
             [['images_num', 'the_second_phone', 'the_third_phone', 'birthday', 'images_label', 'gender'], 'integer'],
-            [['first_name', 'second_name', 'middle_name'], 'string', 'max' => 32]
+            [['first_name', 'last_name', 'middle_name'], 'string', 'max' => 32]
         ];
     }
 
@@ -53,7 +53,7 @@ class UserProfile extends ActiveRecord
             'images_num' => Yii::t('app', 'Images Num'),
             'images_label' => Yii::t('app', 'Images Label'),
             'first_name' => Yii::t('app', 'First Name'),
-            'second_name' => Yii::t('app', 'Last Name'),
+            'last_name' => Yii::t('app', 'Last Name'),
             'middle_name' => Yii::t('app', 'Middle Name'),
             'the_second_phone' => Yii::t('app', 'The Second Phone'),
             'the_third_phone' => Yii::t('app', 'The Third Phone'),
@@ -97,7 +97,7 @@ class UserProfile extends ActiveRecord
         $modelUserProfile = ($modelUserProfile = UserProfile::findOne(Yii::$app->user->id)) ? $modelUserProfile : new UserProfile();
         $modelUserProfile->user_id = Yii::$app->user->id;
         $modelUserProfile->first_name = $this->first_name;
-        $modelUserProfile->second_name = $this->second_name;
+        $modelUserProfile->last_name = $this->last_name;
         $modelUserProfile->middle_name = $this->middle_name;
         if($modelUserProfile->save()):
             return $modelUserProfile;

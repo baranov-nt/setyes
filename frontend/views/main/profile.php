@@ -97,7 +97,7 @@ use common\widgets\SocialLinks\ShareBar;
                 echo PjaxFieldWidget::widget([
                     'route' => '/main/profile',
                     'model' => $modelUserProfile,
-                    'attribute' => 'second_name',
+                    'attribute' => 'last_name',
                 ]);
                 echo PjaxFieldWidget::widget([
                     'route' => '/main/profile',

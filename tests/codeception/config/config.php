@@ -14,7 +14,7 @@ return [
     ],
     'components' => [
         'db' => [
-            'dsn' => 'mysql:host=localhost;dbname=setyes_test',
+            'dsn' => 'mysql:host=localhost;dbname=setyes',
         ],
         'mailer' => [
             'useFileTransport' => true,

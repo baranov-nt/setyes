@@ -21,6 +21,8 @@ class m150527_004737_create_user_table extends Migration
             'updated_at' => Schema::TYPE_INTEGER.' NOT NULL',
         ]);
 
+        $this->addForeignKey('auth_assignment_user', 'auth_assignment', 'user_id', 'user', 'id', 'CASCADE');
+
         /* Таблица для сделок категории комнаты */
         $this->createTable('user_privilege', [
             'user_id' => $this->primaryKey(),

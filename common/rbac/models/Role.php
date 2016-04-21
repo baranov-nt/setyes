@@ -59,6 +59,6 @@ class Role extends ActiveRecord
     public function getUser()
     {
         // Role has_many User via User.id -> user_id
-        return $this->hasMany(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

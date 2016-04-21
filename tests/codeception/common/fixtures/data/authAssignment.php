@@ -8,8 +8,10 @@
 return [
     'user1' => [
         'item_name' => 'Создатель',
+        'created_at' => 1461215200
     ],
     'user2' => [
         'item_name' => 'Пользователь',
+        'created_at' => 1461215618
     ],
 ];

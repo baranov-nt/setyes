@@ -5,18 +5,43 @@ namespace tests\codeception\frontend\unit\models;
 use common\models\AuthAssignment;
 use frontend\models\RegForm;
 use tests\codeception\common\fixtures\AuthAssignmentFixture;
+use tests\codeception\common\fixtures\UserFixture;
 use tests\codeception\common\fixtures\UserPrivilegeFixture;
+use tests\codeception\common\fixtures\UserProfileFixture;
 use tests\codeception\frontend\unit\DbTestCase;
 use Codeception\Specify;
 use common\models\User;
 
 class RegFormTest extends DbTestCase
 {
-
     use Specify;
+
+    public function fixtures()
+    {
+        return [
+            'user' => [
+                'class' => UserFixture::className(),
+            ],
+            'userProfile' => [
+                'class' => UserProfileFixture::className(),
+            ],
+            'userPrivilege' => [
+                'class' => UserPrivilegeFixture::className(),
+            ],
+            'authAssignment' => [
+                'class' => AuthAssignmentFixture::className(),
+            ],
+        ];
+    }
 
     public function testCorrectFindUser()
     {
+        pdd(array(
+            $this->user('user1'),
+            $this->userProfile('user1'),
+            $this->userPrivilege('user1'),
+            $this->authAssignment('user1')
+        ));
         // @var $modelRegForm \common\models\RegForm
         $modelRegForm = new RegForm([
             'country_id' => 182,
@@ -81,13 +106,4 @@ class RegFormTest extends DbTestCase
             $modelUser->deleteUser($modelUser);
         }
     }*/
-
-    public function fixtures()
-    {
-        return [
-            'user' => [
-                'class' => AuthAssignmentFixture::className(),
-            ],
-        ];
-    }
 }

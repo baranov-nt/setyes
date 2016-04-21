@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\rbac\models\AuthItem;
 use Yii;
 use yii\web\IdentityInterface;
 use yii\behaviors\TimestampBehavior;
@@ -23,7 +24,12 @@ use common\rbac\models\Role;
  * @property integer $created_at
  * @property integer $updated_at
  *
+ * @property AdComplains[] $adComplains
+ * @property AdFavorite[] $adFavorites
+ * @property AdMain[] $adMains
  * @property Auth[] $auths
+ * @property AuthAssignment[] $authAssignments
+ * @property AuthItem[] $itemNames
  * @property PlaceCountry $country
  * @property UserPrivilege $userPrivilege
  * @property UserProfile $userProfile
@@ -98,7 +104,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthAssignments()
+    public function getAuthAssignment()
     {
         return $this->hasOne(AuthAssignment::className(), ['user_id' => 'id']);
     }

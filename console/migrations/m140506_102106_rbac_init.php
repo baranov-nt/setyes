@@ -71,12 +71,14 @@ class m140506_102106_rbac_init extends \yii\db\Migration
         ], $tableOptions);
 
         $this->createTable($authManager->assignmentTable, [
+            'user_id' => $this->primaryKey(),
             'item_name' => $this->string(64)->notNull(),
-            'user_id' => $this->string(64)->notNull(),
             'created_at' => $this->integer(),
-            'PRIMARY KEY (item_name, user_id)',
-            'FOREIGN KEY (item_name) REFERENCES ' . $authManager->itemTable . ' (name) ON DELETE CASCADE ON UPDATE CASCADE',
+            //'PRIMARY KEY (item_name)',
+            //'FOREIGN KEY (item_name) REFERENCES ' . $authManager->itemTable . ' (name) ON DELETE CASCADE ON UPDATE CASCADE',
         ], $tableOptions);
+
+        $this->addForeignKey('auth_assignment_item_name', 'auth_assignment', 'item_name', 'auth_item', 'name', 'CASCADE', 'CASCADE');
     }
 
     public function down()

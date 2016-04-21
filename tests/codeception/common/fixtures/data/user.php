@@ -6,7 +6,6 @@ return [
         'balance' => 0,
         // password_0
         'password_hash' => '$2y$13$nJ1WDlBaGcbCdbNC5.5l4.sgy.OMEKCqtDQOdQ2OWpgiKRWYyzzne',
-        'password_hash' => '$2y$13$nJ1WDlBaGcbCdbNC5.5l4.sgy.OMEKCqtDQOdQ2OWpgiKRWYyzzne',
         'status' => 10,
         'country_id' => 182,
         'auth_key' => 'tUu1qHcde0diwUol3xeI-18MuHkkprQI',

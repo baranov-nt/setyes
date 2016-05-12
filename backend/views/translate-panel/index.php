@@ -9,18 +9,22 @@ use common\widgets\yii2TranslatePanel\components\grid\ActionColumn;
 use common\widgets\yii2TranslatePanel\components\grid\DataColumn;
 use common\widgets\yii2TranslatePanel\models\search\SourceMessageSearch;
 use common\widgets\yii2TranslatePanel\assets\AppTranslateAsset;
-use common\widgets\ScrollToTop\ScrollToTop;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 $searchModel = SourceMessageSearch::getInstance();
 
 $this->title = Yii::t('app', 'Translations');
 $this->params['breadcrumbs'][] = $this->title;
 
-AppTranslateAsset::register($this);
+Pjax::begin([
+    'id' => 'translationGrid',
+    //'timeout' => false
+]);
+//AppTranslateAsset::register($this);
 ?>
 
 <div class="translations-index">
@@ -176,18 +180,10 @@ AppTranslateAsset::register($this);
             // --------------------------- ACTIONS -----------------------------
             [
                 'class' => ActionColumn::className(),
-                'template' => '{save} {fullscreen} {delete}',
+                'template' => '{save}{fullscreen}{delete}',
                 'buttons' => [
                     'save' => function ($url, $model, $key) {
-                        return Html::a('<i class="glyphicon glyphicon-download"></i> ' . Yii::t('app', 'Save'), $url, [
-                            'class'                 => 'btn btn-xs btn-success btn-translation-save',
-                            'action'                => 'translation-save',
-                            'title'                 => Yii::t('app', 'Save'),
-                            'before-send-title'     => Yii::t('app', 'Request sent'),
-                            'before-send-message'   => Yii::t('app', 'Please, wait...'),
-                            'success-title'         => Yii::t('app', 'Server Response'),
-                            'success-message'       => Yii::t('app', 'Message successfully saved.'),
-                        ]);
+                        return Html::a(Yii::t('app', 'Save'), Url::to($url), ['data-pjax' => true]);
                     },
                     'delete' => function ($url, $model, $key) {
                         if ( strstr($model->message, '@@') ) {
@@ -244,4 +240,5 @@ AppTranslateAsset::register($this);
         ],
     ]); ?>
 </div>
-<?php echo ScrollToTop::widget();
+<?php
+Pjax::begin();

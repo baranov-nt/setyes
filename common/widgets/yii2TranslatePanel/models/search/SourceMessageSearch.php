@@ -394,6 +394,7 @@ class SourceMessageSearch extends SourceMessage
      */
     public function saveMessagesToDb($messages, $db, $sourceMessageTable, $messageTable, $removeUnused, $languages)
     {
+
         $q = new \yii\db\Query;
         $current = [];
 
@@ -433,7 +434,10 @@ class SourceMessageSearch extends SourceMessage
         $columnNames = $db->getTableSchema($sourceMessageTable)->columnNames;
         $hasLocationColumn = in_array('location', $columnNames) ?: false;
 
+        d($hasLocationColumn);
+
         foreach ($new as $category => $msgs) {
+            d([$category, $msgs]);
             foreach ($msgs as $m) {
                 $savedFlag  = true;
                 $msgHash    = md5($m);
@@ -449,9 +453,13 @@ class SourceMessageSearch extends SourceMessage
                     ->insert($sourceMessageTable, $sourceMessageData)
                     ->execute()
                 ;
+
                 $lastID = ($db->driverName == 'pgsql')
                         ? $db->getLastInsertID($sourceMessageTable . '_id_seq')
                         : $db->getLastInsertID();
+
+                dd($lastID);
+
                 foreach ($languages as $language) {
                     $messageData = [
                         'id'        => $lastID,

@@ -350,18 +350,4 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->role->item_name;
     }
-
-    public function deleteUser($modelUser)
-    {
-        /* @var $modelUser \common\models\User */
-        if($modelUser->userProfile->delete()) {
-            if($modelUser->userPrivilege->delete()) {
-                if($modelUser->delete()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
 }
